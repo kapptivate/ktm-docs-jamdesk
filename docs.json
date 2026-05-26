@@ -3,6 +3,7 @@
   "name": "Documentation",
   "description": "Your documentation site powered by Jamdesk",
   "theme": "jam",
+  "tabsPosition": "top",
   "colors": {
     "primary": "#635BFF",
     "light": "#7C75FF",
