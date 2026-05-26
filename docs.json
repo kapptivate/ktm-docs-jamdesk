@@ -33,6 +33,12 @@
       "href": "/introduction"
     }
   },
+  "seo": {
+    "metatags": {
+      "robots": "noindex, nofollow",
+      "googlebot": "noindex, nofollow"
+    }
+  },
   "navigation": {
     "tabs": [
       {
