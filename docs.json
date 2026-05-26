@@ -63,7 +63,38 @@
             ]
           },
           {
-            "group": "API Pages",
+            "group": "Components",
+            "icon": "puzzle-piece",
+            "pages": [
+              "components/cards",
+              "components/callouts",
+              "components/tabs-and-accordions",
+              "components/steps"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "CLI",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "CLI Reference",
+            "icon": "terminal",
+            "pages": [
+              "cli/overview",
+              "cli/commands",
+              "cli/configuration"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "icon": "plug",
+        "groups": [
+          {
+            "group": "API Reference",
             "icon": "plug",
             "pages": [
               {
@@ -76,17 +107,44 @@
         ]
       },
       {
-        "tab": "Components",
-        "icon": "puzzle-piece",
+        "tab": "Guides",
+        "icon": "compass",
         "groups": [
           {
-            "group": "Built-In Components",
-            "icon": "puzzle-piece",
+            "group": "Guides",
+            "icon": "compass",
             "pages": [
-              "components/cards",
-              "components/callouts",
-              "components/tabs-and-accordions",
-              "components/steps"
+              "guides/overview",
+              "guides/first-integration",
+              "guides/ci-cd"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Learn",
+        "icon": "graduation-cap",
+        "groups": [
+          {
+            "group": "Learn",
+            "icon": "graduation-cap",
+            "pages": [
+              "learn/overview",
+              "learn/getting-started",
+              "learn/best-practices"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "icon": "clock-rotate-left",
+        "groups": [
+          {
+            "group": "Changelog",
+            "icon": "clock-rotate-left",
+            "pages": [
+              "changelog/overview"
             ]
           }
         ]
