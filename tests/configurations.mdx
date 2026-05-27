@@ -1,0 +1,111 @@
+---
+title: Configurations & variables
+description: Manage environment variables and variable groups used across your tests.
+sidebarTitle: Configurations
+icon: code
+---
+
+Configurations let you parameterize tests with variables and switch between environments (dev, staging, production) using variable groups and variants. Instead of hardcoding URLs, usernames, or API keys in your tests, use variables to inject them at runtime. Variable groups let you run the same test with different values for each environment.
+
+## Global variables
+
+A global variable is available to all tests in your product. Create a global variable for values that don't change per environment (e.g., a static URL path).
+
+**Create a global variable:**
+1. Go to Configurations
+2. Click Create Variable
+3. Enter a name, type, and default value
+4. Set public/private visibility
+5. Save
+
+You can reuse the same variable across multiple tests. If you change the variable's value, all tests using it pick up the change.
+
+## Variable groups
+
+A variable group is a named collection of related variables with multiple variants (environments). Use groups to test the same flow across dev, staging, and production without editing your tests.
+
+**Example:** Create a group called "API Endpoint" with variants:
+- **dev** — `https://dev-api.example.com`
+- **staging** — `https://staging-api.example.com`
+- **production** — `https://api.example.com`
+
+Your test uses `{{API Endpoint}}` in its steps. At runtime, you select which variant to use, and the test injects the correct URL.
+
+**Create a variable group:**
+1. Click Create Variable Group
+2. Enter a group name
+3. Create at least one variant (default is required)
+4. Add variables to the group
+
+**Add variants to a group:**
+1. Open the group
+2. Click Edit Group
+3. Add new variants by name
+4. Mark one as default (used if no variant is selected at runtime)
+
+Each variant can have different values for the same variable. For example, the "username" variable might be `admin@dev` in dev and `admin@prod` in production.
+
+## Variable types
+
+**Regular** — Plain text. Use for URLs, form data, API paths, or any string value.
+
+**Choice** — A dropdown list. The variable has predefined options; tests select one at runtime. Useful for feature flags (`on` / `off`) or environment names.
+
+**Owner** — A device identifier (SIM, Smartphone, or Web agent). Use this to specify which device a test should run on without editing the test itself.
+
+**Secret** — Sensitive data like API keys or passwords. Stored encrypted; displayed as masked input in the UI.
+
+## Using variables in tests
+
+Reference a variable in your test steps with double braces: `{{variable_name}}`.
+
+**In step fields:**
+- **Web test:** Type `{{username}}` in a form field step
+- **Smartphone test:** Type `{{pin}}` in a text input step
+- **URL:** Use `https://api.example.com/{{endpoint}}` in a Navigate step
+
+When you run the test, Kapptivate replaces `{{variable_name}}` with its value.
+
+## Set values per variant
+
+When you add a variable to a group, set its value for each variant. If a variant has no value, the variable's default value is used as a fallback.
+
+**Edit variant values:**
+1. Open the variable group
+2. Select the variant from the dropdown
+3. Click Edit or modify values inline
+4. Save
+
+A table shows all variants and their values, making it easy to compare configurations across environments.
+
+## Search and manage
+
+The Configurations page shows all variables and groups in one place.
+
+- **Search** — Find variables and groups by name
+- **Duplicate** — Clone a variable to quickly create a similar one
+- **Delete** — Remove a global variable or variable group
+- **Usage tracking** — See which tests depend on a variable (helps assess the impact of changes)
+
+## Tips for organizing variables
+
+**Use descriptive names** — `api_endpoint` is better than `url1`; `admin_username` is better than `user`.
+
+**Group related variables** — Keep `api_endpoint`, `api_key`, and `api_version` in the same group if they belong to the same service.
+
+**Mark secrets** — Use the Secret type for anything sensitive (passwords, tokens, API keys).
+
+**Set a default** — Every global variable needs a default value (used if no variant is selected). Make it a safe, non-destructive value (e.g., a dev URL, a test account).
+
+**Avoid hardcoding** — Replace hardcoded values in test steps with variables. Future you will thank you when you need to test a different environment.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Tests overview" icon="vial" href="/tests/overview">
+    Return to the test list to run tests with your variables.
+  </Card>
+  <Card title="Continuous monitoring" icon="gauge" href="/monitoring/create">
+    Use variables in monitoring jobs to test across environments.
+  </Card>
+</Columns>

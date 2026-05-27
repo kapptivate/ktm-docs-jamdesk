@@ -1,0 +1,81 @@
+---
+title: Navigating Kapptivate
+description: Find your way around the sidebar, switch between workspaces and products, and use page tabs.
+sidebarTitle: Navigating
+icon: compass
+---
+
+The Kapptivate interface is organized around a left sidebar with three sections — Overview, By Product, and Equipment. Learn how to navigate, switch between Workspaces and Products, and customize the interface to your workflow.
+
+## The sidebar
+
+The left sidebar is your main navigation hub. Click the Kapptivate logo at the top to return home.
+
+**Overview** — Links to high-level dashboards:
+- Realtime Status — See all monitors and their current health.
+- Overview — A summary view (appears only when monitoring is enabled for the Workspace).
+- Incidents — Alerts triggered by monitor failures (appears only when monitoring is enabled).
+- Analytics — Performance and trend data (appears only when monitoring is enabled).
+
+**By Product** — Tools for testing and development:
+- **Product Selector** — Shows the current Product. Click to switch to another Product in the Workspace.
+- Live Session — Open an interactive shell to manually control a device and record steps.
+- Tests — Create, edit, and manage tests.
+- Executions — View past test runs and their results.
+- Monitors — Set up continuous monitoring (appears only when monitoring is enabled for the Product).
+- Configurations — Define environment variables and variants (Dev, Staging, Production, etc.).
+
+**Equipment** — Infrastructure and browser settings:
+- Device Lab — View available devices and their status (appears only if your Workspace supports Smartphones or SIM devices).
+- Browser Presets — Configure browser profiles for web testing.
+- Agents — View and manage the agents that run your tests.
+
+## Switching Workspaces
+
+Click the Workspace logo and name at the top of the sidebar to open the Workspace dropdown. A list shows all Workspaces you have access to, sorted by active status and your default Workspace (marked with a star icon).
+
+Search for a Workspace by name using the search box in the dropdown. Click any Workspace to switch to it.
+
+If you have access to many Workspaces, click "View All" to see the full Workspace choice screen, which displays all active and archived Workspaces as large cards.
+
+When you switch Workspaces, the platform preserves context where possible. If you are on a product-specific page (Tests, Executions), you are taken to the product choice screen to select which Product to work with next.
+
+## Switching and setting default Products
+
+Below the Workspace selector, the sidebar shows a **Product Selector** in the "By Product" section. Click the Product icon and name to see a dropdown of all Products in the current Workspace, sorted alphabetically.
+
+Click any Product to switch to it. The sidebar and all content will refresh to show that Product's tests, executions, devices, and configurations.
+
+**Set a default Product** — In the Product dropdown, look for a pin icon next to a Product name. Click the pin to set that Product as your default for this Workspace. The next time you enter the Workspace, the platform will jump directly to your default Product instead of showing a choice screen. Each Workspace can have its own default Product.
+
+## Collapsing the sidebar
+
+Click the chevron icon next to the Kapptivate logo to toggle the sidebar between expanded (full names and labels) and collapsed (icons only). When collapsed, the sidebar takes up less space, giving you more room for content.
+
+Navigation icons remain visible at all times. Hover over an icon in the collapsed view to see a tooltip with the section or page name.
+
+## Page tabs
+
+Some pages use horizontal tabs below the header to switch between sections without losing your place. For example, the Executions details page has tabs for Overview, Steps, Variables, Screenshots, and Video.
+
+Tabs show icons and labels. Inactive tabs can be scrolled into view by clicking them or using horizontal arrow navigation. The active tab is highlighted with distinct styling.
+
+If a tab is disabled (greyed out), hover over it to see why. For example, the Video tab might be disabled if no video was recorded for that execution.
+
+## Notes and tips
+
+- **Search and filter** — Use search boxes on Tests, Executions, and other list pages to narrow results by name, status, or creator.
+- **Breadcrumb navigation** — Collection and execution names appear in a breadcrumb trail at the top of detail pages. Click to navigate back to the list.
+- **Favorite tests** — Star a test to mark it as a favorite, making it easier to find frequently used tests.
+- **Keyboard shortcuts** — Press ESC to deselect multiple items in lists, or to close dropdown menus.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Explore the Tests module" icon="vial" href="/tests/overview">
+    Learn how to browse, create, and organize tests.
+  </Card>
+  <Card title="View and analyze executions" icon="chart-line" href="/executions/overview">
+    Understand the Executions list and dive into test results.
+  </Card>
+</Columns>

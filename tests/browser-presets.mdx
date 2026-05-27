@@ -1,0 +1,88 @@
+---
+title: Browser presets
+description: Reusable browser configurations for your web tests.
+sidebarTitle: Browser presets
+icon: chrome
+---
+
+A browser preset bundles browser settings—user agent, language, headers, cookies, proxy, geolocation, timezone—into a reusable configuration. Instead of hardcoding these values in each test, apply a preset to run the same test under different conditions without editing it.
+
+## Why presets matter
+
+Testing across different configurations is common: desktop vs. mobile viewport, different languages, authenticated vs. anonymous sessions. Presets let you:
+
+- **Reuse the same test** with different browser setups
+- **Test geolocation features** by setting latitude and longitude
+- **Simulate proxy traffic** through a corporate network
+- **Include auth cookies** so tests start logged in
+- **Add custom headers** for API testing or feature flags
+
+## Create a preset
+
+Click Create Preset in the Presets list. Fill in the About tab, then configure optional settings.
+
+**About section** — Required:
+- **Preset name** — A clear name (e.g., "Mobile Safari", "Authenticated User", "US Location")
+- **Device type** — Desktop, Mobile, or Tablet
+- **Browser** — Chrome, Firefox, or Edge
+
+Optional:
+- **Version** — Browser version (if needed)
+
+**Headers section** — Add HTTP headers (not available on Firefox).
+- Key-value pairs
+- Examples: `X-Feature-Flag: new-feature`, `Authorization: Bearer token`
+
+**Cookies section** — Add cookies that the browser will include in requests.
+- Cookie name (required)
+- Value
+- Path, domain, secure flag, http-only flag
+- Reuse an add/edit modal for individual cookies
+
+**Proxy section** — Enable proxy and configure the URL.
+- Proxy type (HTTP)
+- Proxy URL (e.g., `http://proxy.company.com:8080`)
+
+**Additional settings** (available across all sections):
+- **Timezone** — Set the browser's timezone (searchable list)
+- **Language** — Select from available languages with display names (e.g., "en-US - English")
+- **Geolocation** — Set latitude and longitude for location-based testing
+- **User agent suffix** — Append text to the browser's user agent (not available on Edge or mobile/tablet)
+- **Screen size** — Preset options (1920×1080, 768×1024, etc.) or custom width × height
+
+## View and edit presets
+
+The Presets list shows all presets in a table with columns: Name, Browser, Device, Language, Screen size, Timezone, and Actions.
+
+**System presets** (provided by Kapptivate) are marked as default. You can view and duplicate them, but cannot edit or delete them.
+
+**Custom presets** can be edited by clicking the preset and modifying any field. Changes save immediately.
+
+## Apply a preset to a test
+
+When creating or editing a web test, choose a browser preset in the test's configuration. The test will run with all the settings you defined in the preset—no need to reconfigure each time.
+
+## Browser-specific limitations
+
+- **Firefox** — Custom headers are not supported; location and language settings are cleared on save.
+- **Edge** — User agent suffix is not supported; custom user agent is cleared on save.
+- **Mobile and Tablet** — User agent suffix is not supported.
+
+These limitations are enforced by the browser vendor. Other settings (cookies, proxy, geolocation, timezone) work on all browsers.
+
+## Duplicate and search
+
+**Duplicate a preset** — Click the menu and select Duplicate. A copy is created with "(copy)" appended to the name. Duplicates are independent; editing one does not affect the original.
+
+**Search presets** — Type in the search bar to find presets by name. Filtering is instant.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a test" icon="plus" href="/tests/create">
+    Apply a browser preset when you create a web test.
+  </Card>
+  <Card title="Test steps" icon="list-check" href="/tests/steps">
+    Write steps for your tests.
+  </Card>
+</Columns>

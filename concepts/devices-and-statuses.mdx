@@ -1,0 +1,152 @@
+---
+title: Devices & statuses
+description: The devices Kapptivate manages and what each status means.
+sidebarTitle: Devices & statuses
+icon: mobile-screen
+---
+
+Agents host devices: smartphones, SIM cards, and web agents. Each device type reports its own operational status. Understanding device statuses helps you identify which devices are available for testing and diagnose connectivity issues.
+
+## Device types
+
+### Smartphones
+
+Real or virtual Android and iOS devices connected to a Smartphone agent.
+
+**Key properties:**
+- UUID (unique identifier)
+- Name (optional, defaults to manufacturer and model)
+- Device type (Android or iOS)
+- Manufacturer, model, SDK version, screen resolution
+- Gateway: The agent controlling this smartphone
+- Roaming status per installed SIM
+- Installed apps list
+- 24-hour CPU and network usage
+
+**Statuses:**
+
+| Status | Meaning |
+|--------|---------|
+| **Available** | Device is ready and can accept tests |
+| **Configuration** | Device is being set up or updated |
+| **Unavailable** | Device is offline, not responding, or unreachable |
+| **Disconnected** | Device lost connection to its agent |
+| **Degraded** | Device is partially functional (e.g., high resource usage, intermittent connection) |
+| **Archived** | Device has been retired and is no longer in use |
+| **Test-only** | Device is reserved for non-production test runs |
+
+### SIM cards
+
+Physical GSM/3G/4G/5G SIM cards installed in a Cellular agent's slots.
+
+**Key properties:**
+- IMSI (International Mobile Subscriber Identity)
+- Phone numbers (national and international)
+- Slot position in the agent
+- Firmware version
+- Registration status on the network (e.g., REGISTERED, ROAMING, SEARCHING)
+- Signal strength (Low, Marginal, OK, Good, Excellent)
+- APN (Access Point Name) configuration
+- Telecom operator
+- Gateway: The agent controlling this SIM
+- 24-hour test usage percentage
+
+**Statuses:**
+
+| Status | Meaning |
+|--------|---------|
+| **Available** | SIM is registered and ready for testing |
+| **Configuration** | SIM is being configured or activated |
+| **Unavailable** | SIM is not registered or has no signal |
+| **Disconnected** | SIM lost connection to its agent |
+| **Degraded** | SIM has reduced functionality (e.g., poor signal, limited service) |
+| **Archived** | SIM has been retired and is no longer in use |
+| **Test-only** | SIM is reserved for non-production test runs |
+
+**Registration status** (for SIMs on the network):
+
+| Status | Meaning |
+|--------|---------|
+| **REGISTERED** | SIM is registered on home network |
+| **REGISTERED (ROAMING)** | SIM is registered on a partner network |
+| **SEARCHING** | SIM is searching for an available network |
+| **NOT REGISTERED** | SIM is not registered (no signal or out of service) |
+| **DENIED** | Network denied registration |
+| **PIN REQUIRED** | SIM is locked; PIN code needed to unlock |
+| **PUK REQUIRED** | SIM is locked; PUK (unlock code) needed |
+| **LIMITED SERVICE** | SIM has emergency or limited service only |
+| **UNKNOWN** | Registration status cannot be determined |
+
+### Web agents
+
+Machines or servers running Kapptivate's browser automation engine.
+
+**Key properties:**
+- UUID (unique identifier)
+- Hostname (FQDN or IP address)
+- Display name
+- Agent version
+- Parallel test capacity
+- Network configuration
+- Scheduling: Automatic reboot and update times (timezone, cron expression)
+- Tags (optional metadata)
+
+**Statuses:**
+
+| Status | Meaning |
+|--------|---------|
+| **Online** | Agent is reachable and operational |
+| **Offline** | Agent is unreachable or stopped |
+| **Rebooting** | Agent is currently rebooting |
+| **Maintenance** | Agent is in maintenance mode |
+| **Waiting for Config** | Agent initialized but needs setup (hostname, credentials, etc.) |
+| **Test-only** | Agent is reserved for test-only runs |
+
+## Usage status
+
+Kapptivate tracks your devices' 24-hour resource utilization to help you spot capacity issues:
+
+| Status | Usage Range | Meaning |
+|--------|-------------|---------|
+| **Not Used** | 0% | Device has not run tests in the past 24 hours |
+| **Healthy** | 0–60% | Device is running normally with available capacity |
+| **Stressed** | 60–85% | Device is approaching capacity; consider load balancing |
+| **Overused** | >85% | Device is at or exceeding capacity; tests may queue or timeout |
+| **Unavailable** | — | Device is offline and cannot run tests |
+
+## Device availability rules
+
+A device is considered available for testing when:
+
+1. Its status is "Available"
+2. Its agent is online
+3. For SIMs: The SIM is registered on a network (REGISTERED or REGISTERED ROAMING)
+
+Optional additional checks:
+- Device must not be in configuration
+- Device must not be rebooting
+- Device must not be in maintenance mode
+
+## Cellular agent slots
+
+A Cellular agent contains multiple slots, each capable of holding one SIM card:
+
+**Slot structure:**
+- Slot ID (e.g., `agent-uuid-0`, `agent-uuid-1`)
+- Position (numeric index: 0, 1, 2, etc.)
+- Current SIM (null if empty, or the installed SIM)
+- Active flag (is this slot currently operational)
+- Firmware version
+
+Each slot reports the status and registration status of its installed SIM independently.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Manage devices" icon="gear" href="/equipment/devices-lab">
+    Set up and monitor devices in your equipment lab
+  </Card>
+  <Card title="Agent management" icon="robot" href="/equipment/agents">
+    Configure agents and view their settings
+  </Card>
+</Columns>

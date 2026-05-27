@@ -1,0 +1,108 @@
+---
+title: Roles
+description: Define what users can see and do with permission-based roles.
+sidebarTitle: Roles
+icon: user-shield
+---
+
+Roles define what users and teams can see and do across the platform. Kapptivate provides default system roles and lets you create custom roles tailored to your workspace needs.
+
+## Understand permission groups
+
+Roles organize permissions into logical groups that control access to features:
+
+- **Administration** — View and edit the admin panel, manage users, teams, and products
+- **Events** — View event logs and admin-level event access
+- **Testing** — View and create manual and automated tests
+- **Monitoring** — View monitoring dashboards, analytics, and incident management
+- **Beta Features** — Access experimental features
+
+Each permission group usually has a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically — granting Edit access always includes View access.
+
+## View default roles
+
+Default roles are system-provided and read-only. All workspaces have the same default roles available.
+
+To view default roles:
+
+1. Go to Administration > Roles
+2. Scroll through the list to see both default and custom roles
+3. Default roles display a read-only indicator when you try to edit them
+
+Default roles cannot be modified, but you can use them as a reference when creating custom roles.
+
+## Create a custom role
+
+Custom roles let you define exactly which permissions users and teams should have. You can assign permissions in any combination that makes sense for your workspace.
+
+To create a custom role:
+
+1. Go to Administration > Roles
+2. Click "Create role"
+3. Enter a role name
+4. In the Permissions section:
+   - Review each permission group: Administration, Events, Testing, Monitoring, Beta Features
+   - Check the "View" permissions for features users should see
+   - Check the "Edit" permissions for features users should modify
+5. Click "Create"
+
+Remember that Edit implies View — you don't need to manually check both. When you check Edit, View is automatically enabled.
+
+## Understand permission dependencies
+
+The system enforces permission logic automatically:
+
+- **Edit implies View** — If you grant Edit access to a feature, View is automatically enabled
+- **Cascading dependencies** — Unchecking View automatically unchecks the corresponding Edit permission
+- **Disabled permissions** — Permissions you don't have are shown as disabled checkboxes with a tooltip explaining why
+
+This ensures role permissions are always consistent and follow a logical hierarchy.
+
+## Restrict permissions you don't have
+
+You can only assign permissions that you yourself already have. Permissions you don't have are shown as disabled checkboxes.
+
+For example, if you have "View Operator Admin" but not "Edit Operator Admin", you can create roles with View but not Edit for that permission.
+
+Super administrators can assign any permission without restrictions.
+
+## Edit a custom role
+
+You can modify the permissions of any custom role you've created. Default roles cannot be edited.
+
+To edit a custom role:
+
+1. Go to Administration > Roles
+2. Click the role name to open the editor
+3. Update the permissions as needed
+4. Click "Save"
+
+Your changes take effect immediately for all users and teams with that role.
+
+<Warning>
+If you uncheck a View permission, the corresponding Edit permission is automatically unchecked. Consider the impact on users before removing permissions from a role.
+</Warning>
+
+## Assign roles to users and teams
+
+Once you've created custom roles, you assign them to users and teams in the Users and Teams administration pages.
+
+To assign a role:
+
+1. Go to Administration > Users or Administration > Teams
+2. Open a user or team for editing
+3. In the access section, select one or more roles from the dropdown
+4. Save changes
+
+Users and teams can have multiple roles, and their effective permissions are the union of all assigned roles.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Users" icon="users" href="/administration/users">
+    Assign roles to users to control what they can access and modify in your workspace.
+  </Card>
+  <Card title="Security Policies" icon="lock" href="/administration/security-policies">
+    Set password and authentication requirements for your workspace and individual users.
+  </Card>
+</Columns>

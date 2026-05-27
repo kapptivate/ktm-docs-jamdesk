@@ -1,0 +1,47 @@
+---
+title: Devices lab
+description: Browse and manage the SIMs and smartphones available in your workspace.
+sidebarTitle: Devices lab
+icon: mobile-screen-button
+---
+
+The Devices Lab shows all the physical SIM cards and smartphones connected to your agents in one searchable view. Use this area to find devices, check their status, and see which products use them.
+
+## View your devices
+
+The Devices Lab displays two tabs: one for SIM cards and one for smartphones. Each tab shows a table of devices with their identifiers, names, assigned products, and status.
+
+**SIMs** — Lists SIM cards connected to Cellular agents, identified by IMSI (the SIM's unique identifier) and MSISDN (phone number). You can search by any of these identifiers or by hostname.
+
+**Smartphones** — Lists smartphones connected to Smartphone agents, identified by phone number or device name.
+
+## Search and filter devices
+
+When devices exist, you have access to several filters:
+
+**Search** — Find devices by name, IMSI (for SIMs), MSISDN (national or international phone number format), or hostname. Results update as you type.
+
+**Active/Archived toggle** — Choose to view Active devices (in use) or Archived devices (that have been removed). By default, you see only active devices.
+
+**Products filter** — Multi-select dropdown to filter devices by the product(s) they are assigned to. This shows you which devices are being used for which products.
+
+## Empty states
+
+If no agents of a type exist (for example, no Cellular agents), you see a message suggesting you contact sales if you need agents, with a link to the agent installation guide.
+
+If agents exist but no devices have been configured, you see a prompt to configure devices with a link to the SIM card configuration guide.
+
+## View device details
+
+Click a device in the table to view its full details and related information, such as which agents it is connected to and which tests or monitors use it.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Manage your agents" icon="robot" href="/equipment/agents">
+    View and maintain the Cellular, Smartphone, Web, and Passive agents that run your tests.
+  </Card>
+  <Card title="Learn about devices and statuses" icon="signal" href="/concepts/devices-and-statuses">
+    Understand how device status affects test execution and monitoring.
+  </Card>
+</Columns>

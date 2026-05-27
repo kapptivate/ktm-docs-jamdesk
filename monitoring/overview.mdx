@@ -1,0 +1,76 @@
+---
+title: Monitors overview
+description: Promote tests to continuous production supervision and track their health.
+sidebarTitle: Overview
+icon: gauge
+---
+
+A Monitor is an automated test promoted from the Tests workspace to continuous production supervision. Monitors run on a recurring schedule with real-time status tracking and alert capability. Use the monitors list to view all monitors, their health, and recent execution results.
+
+## The monitors list
+
+The monitors list shows every monitor in your Product with its current status, last execution result, scheduling frequency, and assigned devices. You can search by monitor name or filter by test.
+
+From the list, you can run a monitor immediately, pause or resume it, edit its configuration, duplicate it, or delete it. Use multi-select to pause, resume, update scheduling, or change devices for multiple monitors at once.
+
+## Health summary cards
+
+Four counter cards at the top of the monitors list provide an instant health snapshot:
+
+| Card | What it shows |
+|------|---------------|
+| **Active** | Total monitors with active status (not paused) |
+| **Up** | Monitors whose last execution succeeded |
+| **Device Issue** | Monitors with unavailable or misconfigured devices (value is always 0 for now) |
+| **Down** | Monitors whose last execution failed |
+| **Paused** | Monitors currently paused and not running |
+
+## Monitor statuses
+
+Each monitor displays a single status that reflects its health and activity state:
+
+| Status | Meaning |
+|--------|---------|
+| **up** | Monitor is active and the last execution succeeded |
+| **degraded** | Monitor is active but the last execution had warnings or minor issues |
+| **down** | Monitor is active and the last execution failed |
+| **paused** | Monitor is paused (inactive) and not executing on its schedule |
+| **running** | Monitor is currently executing a test |
+| **scheduled** | Monitor is active and waiting for its next scheduled execution |
+
+## Row actions
+
+Each monitor row has a three-dot menu with these actions:
+
+| Action | What it does |
+|--------|--------------|
+| **Details** | Open the monitor's detail page to view analytics and execution history |
+| **Configure** | Open the form to edit the monitor's name, test, devices, scheduling, and options |
+| **Duplicate** | Clone the monitor; you can rename it and reassign devices before saving |
+| **Edit related test** | Navigate to the test this monitor is based on |
+| **Update frequency** | Change the monitor's schedule without editing the full form |
+| **Update device** | Change the assigned device (only available for monitors with a single device) |
+| **Pause / Unpause** | Temporarily disable or re-enable the monitor |
+| **Run** | Execute the monitor immediately, regardless of its schedule |
+| **Delete** | Remove the monitor permanently |
+
+## Bulk actions
+
+Enable multi-select mode and check the monitors you want to act on. A banner appears at the bottom with these actions:
+
+- **Edit Frequency** — Update the schedule for all selected monitors at once
+- **Edit Device** — Change the assigned device (only if all selected monitors use exactly one device each of the same type)
+- **Pause** — Pause all selected monitors
+- **Unpause** — Resume all selected monitors
+- **Delete** — Remove all selected monitors
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a monitor" icon="plus" href="/monitoring/create">
+    Turn a test into a monitor and set its schedule, devices, and variables.
+  </Card>
+  <Card title="Monitor analytics & results" icon="chart-line" href="/monitoring/analytics">
+    View availability, execution time, and daily failures for a monitor.
+  </Card>
+</Columns>

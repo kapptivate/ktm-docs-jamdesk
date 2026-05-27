@@ -1,0 +1,91 @@
+---
+title: Executions overview
+description: Browse the history of every test run and filter to what matters.
+sidebarTitle: Overview
+icon: play
+---
+
+Every time a test runs it produces an execution. View all executions in a paginated list, filter by status or creator, search by name, and take bulk actions like tagging, re-running, and exporting.
+
+## The executions list
+
+The executions list shows all your past test runs. Each row displays the execution name, test summary, who ran it, and quick actions.
+
+**List columns:**
+- **Execution name** — Shows the execution name with a status icon (success, failed, warning, running, canceled, and others).
+- **About** — Shows the test count as "X/Y" (X passed, Y total).
+- **Ran by** — The username of whoever triggered the execution.
+- **Tests** — The first three test tags, with "+X more" if additional tests exist.
+- **Actions** — A button to re-run, plus a menu for other actions.
+
+Executions are grouped by creation date with day separators between them. The list auto-refreshes every 9 seconds to show updated statuses.
+
+## Filter executions
+
+You can narrow down the list with multiple filters.
+
+**By search** — Search for executions by name in the search bar.
+
+**By status** — Filter by execution status: success, failed, warning, or running. Other statuses (pending, canceled, scheduled, timed out) can also be filtered when applicable.
+
+**By creator** — Select a user from the dropdown to see only executions they ran.
+
+**By date** — Use the date range picker to set a start and end date. Select your timezone so the dates match your local time.
+
+**Multi-select mode** — Click the checkbox button to enable multi-selection. Select one or more executions and then use the bulk actions. Press Esc to clear the selection.
+
+## Actions
+
+### Single execution
+
+From the action menu next to an execution:
+
+- **Re-run** — Queue the execution to run again.
+- **Rename** — Change the execution's display name.
+- **Add tags** — Label the execution for organization.
+- **Re-run failed tests** — Run only the tests that failed in this execution.
+- **Cancel** (running executions only, V2 only) — Stop the execution in progress.
+- **Create monitor** (single-test executions only) — Create a continuous monitor from this test.
+- **Delete** — Remove the execution.
+- **Export** — Download a report of the execution.
+
+### Multiple executions
+
+When multi-select is enabled, select one or more executions and use the bulk action menu:
+
+- **Delete** — Remove all selected executions.
+- **Export** — Download a combined report.
+- **Re-run** — Queue all selected executions to run again.
+
+Click on an execution row to open its full details and results.
+
+## Execution status
+
+An execution's status reflects the outcome of its tests. The possible statuses are:
+
+- **success** — All tests passed.
+- **failed** — One or more tests failed.
+- **warning** — All tests passed but with warnings.
+- **pending** — Queued, waiting to start.
+- **ongoing** — Currently running.
+- **canceled** — User canceled the execution.
+- **blocked** — Blocked by another process.
+- **scheduled** — Scheduled for a future run.
+- **timed out** — Execution exceeded the timeout.
+
+Scheduled executions show a tag with the scheduled run date and time instead of individual test details.
+
+## Live test monitoring
+
+When a test is running (V2 executions only), you can click on the execution to watch it live. The execution detail view shows a live preview of the device screen and updates the steps in real-time as the test progresses. See [Live session](/tests/live-session) for details.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Viewing results" icon="magnifying-glass-chart" href="/executions/results">
+    See the detailed breakdown of a single execution, including steps, screenshots, video, and variables
+  </Card>
+  <Card title="Continuous monitoring" icon="gauge" href="/monitoring/overview">
+    Set up monitors to run your tests on a schedule and track performance over time
+  </Card>
+</Columns>

@@ -1,0 +1,53 @@
+---
+title: Supervision overview
+description: See high-level product health with uptime metrics and execution timelines.
+sidebarTitle: Supervision
+icon: eye
+---
+
+Supervision overview gives you a high-level summary of monitoring status across all your products. You see uptime counters, execution counts, and a status timeline showing how each product has performed over your chosen time range.
+
+## Overview summary
+
+The overview displays all your monitored products with status indicators. Four counter cards at the top show key metrics:
+
+- **Products monitored** — Number of products with active monitors.
+- **Tests running** — Total count of tests currently active.
+- **Current uptime** — Percentage of successful executions.
+- **Day-over-day change** — How metrics compare to the previous 24 hours.
+
+These counters update as you change the time range or select a product. Click any product in the list to drill into detailed metrics and a status timeline.
+
+## Product details view
+
+Select a product to see its detailed metrics. The product details view shows:
+
+- **Counter cards** for the selected product (uptime %, execution count, error count).
+- **Day-over-day comparison** showing the same metrics from the previous 24-hour period, with change indicators.
+- **Status timeline** visualizing execution status segments chronologically. Each colored segment represents a period with its status (success, failed, running, pending, or no results).
+- **Status legend** as a reference guide for timeline colors and icons.
+
+Use the breadcrumb to navigate back to the overview list.
+
+## Time range controls
+
+Choose a start and end date for your view. The default is the last 24 hours. Metrics for the previous 24-hour period are fetched automatically for comparison; you don't need to configure this separately.
+
+Aggregation interval controls how data is bucketed in the timeline (default: 30 minutes). Smaller intervals show more detail; larger intervals smooth out short fluctuations.
+
+Optionally filter by test to focus on a specific test within the selected product.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Realtime status" icon="wave-pulse" href="/monitoring/realtime-status">
+
+    Build custom live views with grouping, filtering, and different display formats.
+
+</Card>
+  <Card title="Dashboards" icon="chart-pie" href="/monitoring/dashboards">
+
+    Create analytics dashboards to visualize and share your monitoring data.
+
+</Card>
+</Columns>

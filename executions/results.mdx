@@ -1,0 +1,89 @@
+---
+title: Viewing results
+description: Read a single execution result: steps, screenshots, video, and metadata.
+sidebarTitle: Results
+icon: magnifying-glass-chart
+---
+
+An execution result shows exactly what happened during a test run. Click on any execution to view its detailed results including step-by-step breakdown, screenshots, video recordings, variables, and timing data.
+
+## Opening an execution
+
+From the [executions overview](/executions/overview) list, click on any execution row to open its full result view. You will see:
+
+- **Breadcrumb navigation** — A back button to return to the executions list and the execution name (click the pencil icon to rename it).
+- **Header** — The execution name and, for running executions, a progress bar showing completion percentage.
+- **Sidebar** (multi-test executions) — A list of all tests in the execution with their status icons.
+- **Content area** — Tabs for Overview, Steps, Variables, Screenshots, and Video.
+
+## Execution overview
+
+The Overview tab shows a high-level summary of all tests in the execution.
+
+For each test you see:
+- Test name and status icon
+- Timing information (how long the test took)
+- A summary of pass/fail breakdown
+
+This view is useful to quickly understand whether all tests passed and how long the execution took overall.
+
+## Steps
+
+The Steps tab displays the full step-by-step breakdown of what the test did. Each step shows:
+
+- Step number and description
+- Status (passed, failed, or skipped)
+- Duration and timestamp
+- Any error messages if the step failed
+
+Expand a step to see more detail, including the action that was performed and the result.
+
+## Variables
+
+The Variables tab displays all test variables and their values during execution. This is useful for debugging when you need to see what data the test was working with.
+
+## Screenshots
+
+The Screenshots tab shows all screenshots captured during the test run. Each screenshot is labeled with the step that captured it, so you can correlate visual state with test steps. Click a screenshot to view it at full size.
+
+## Video
+
+If a video recording is available, the Video tab shows a playback of the entire test run. This lets you see the full execution in motion without stepping through individual steps.
+
+## Execution metadata
+
+At the top of the result view, you can see:
+
+- **Execution name** — Click the pencil icon to rename it.
+- **Status** — The overall result (success, failed, warning, or other).
+- **Timing** — How long the execution took.
+- **Created** — When the execution was triggered.
+- **Created by** — Which user ran the test.
+
+## Actions
+
+From the action menu (three dots) in the result view:
+
+- **Add tags** — Label the execution for organization.
+- **Rename** — Change the execution's display name.
+- **Create monitor** (single-test executions only) — Turn this test into a continuous monitor.
+- **Re-run failed tests** — Run only the tests that failed.
+- **Cancel** (running executions only, V2 only) — Stop the execution in progress.
+- **Delete** — Remove the execution and all its results.
+
+## Re-running
+
+You can re-run an execution from the action menu. This queues the same tests to run again using the current test configuration.
+
+If you only want to re-run the tests that failed, select "Re-run failed tests" instead. This will queue only the failed tests, not the entire execution.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test steps" icon="vial" href="/tests/steps">
+    Learn how to create and configure the individual steps that make up a test
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="/monitoring/analytics">
+    Track execution metrics and trends over time with continuous monitors
+  </Card>
+</Columns>

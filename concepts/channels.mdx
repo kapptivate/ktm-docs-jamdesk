@@ -1,0 +1,90 @@
+---
+title: Channels & test types
+description: The channels you can test — Web, Smartphone, and Cellular — and how each maps to an agent.
+sidebarTitle: Channels
+icon: shuffle
+---
+
+A channel is the kind of target you test. Kapptivate supports Web (browser), Smartphone (native Android/iOS apps), and Cellular tests run on real SIMs (which cover USSD and SMS flows). Each channel runs on a matching agent type and gives you access to different device types and test capabilities.
+
+## Web channel
+
+Run browser-based tests against websites and web applications. Web tests automate user interactions like clicking, typing, navigating, and checking page elements.
+
+**Agent type:** Ethernet (Web)
+
+**Devices:** Web agents running on machines or servers with network access
+
+**Browser options you can configure:**
+- Browser type
+- Custom user agent
+- Language/locale
+- Window size (default 1920x1080)
+
+**Test starting point:** You provide a URL template. Tests launch the browser, navigate to that URL, and execute your steps from there.
+
+**Common actions:** Click elements, type text, navigate to pages, wait for elements, check that elements exist or contain specific text, scroll, hover, and retrieve element properties.
+
+## Smartphone channel
+
+Test native mobile apps running on real Android or iOS devices. Smartphone tests interact with apps just as a user would—tapping buttons, typing into fields, swiping, and verifying UI elements.
+
+**Agent type:** Smartphone (or Mono Agent for combined Web + Smartphone)
+
+**Devices:** Real Android or iOS devices
+
+**App starting point:** You specify the app by its package name (Android) or bundle ID (iOS), along with metadata like app name and version.
+
+**Device properties available:**
+- Manufacturer
+- Model
+- SDK version
+- Screen resolution
+- Roaming status per installed SIM
+
+**App management:** Kapptivate can enumerate installed apps and reset an app before each test run.
+
+**Common actions:** Tap elements, type text, swipe, wait for elements, check text or elements exist, open or close apps, and navigate app screens.
+
+## Cellular channel
+
+Test cellular networks, USSD flows, and SMS messaging on real SIM cards. Cellular tests run on physical SIMs inside your on-premise cellular agent.
+
+<Info>
+  Cellular covers data communication, USSD menu flows, and SMS send/receive. These are all part of one channel, not separate test types.
+</Info>
+
+**Agent type:** Cellular
+
+**Devices:** Physical SIM cards in your agent's SIM slots
+
+**Key properties:**
+- IMSI (International Mobile Subscriber Identity)
+- Phone numbers (national and international format)
+- Registration status on the carrier network
+- Signal strength
+- APN (Access Point Name) configuration
+- Telecom operator
+
+**Common actions:** Send and receive SMS, navigate USSD menus, check network registration and signal, and test data connectivity.
+
+## Choosing a channel
+
+| Need | Channel | Agent |
+|------|---------|-------|
+| Test a website or web app | Web | Ethernet (Web) |
+| Test an Android or iOS app | Smartphone | Smartphone |
+| Test combined web + mobile on one device | Smartphone | Mono Agent |
+| Test SMS, USSD, or data on real networks | Cellular | Cellular |
+| Monitor services without active testing | — | Passive (monitoring only) |
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Agents" icon="robot" href="/concepts/agents">
+    Learn about agent types and how they run on-premise at your locations
+  </Card>
+  <Card title="Create a test" icon="code" href="/tests/create">
+    Start writing a test for any channel
+  </Card>
+</Columns>

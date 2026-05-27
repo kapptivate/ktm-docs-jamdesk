@@ -1,0 +1,58 @@
+---
+title: Incidents
+description: Track and manage incidents raised by your monitors with filtering and bulk actions.
+sidebarTitle: Incidents
+icon: bell
+---
+
+Incidents are alerts raised when your monitors detect problems. The incidents page shows a list of all incidents with filtering by status and date, bulk selection for batch actions, and a summary of incident counts.
+
+## Incident list
+
+The incident table shows each incident as a row with day separators between groups of incidents by creation date. Columns include:
+
+- **Type** — Visual indicator of incident type (error, warning, etc.).
+- **Name** — Incident title with a link to details.
+- **Status** — Colored tag showing OPEN (red), CLOSED (green), MANUALLY_CLOSED (green), or other states (grey).
+- **Tags** — User-assigned categories for the incident.
+- **Alert name** — Name of the parent alert that triggered the incident.
+- **Actions** — Dropdown menu with options to edit, view details, update status, or delete.
+
+Click a row to open the incident details or use the dropdown menu for actions.
+
+## Status and severity
+
+Incidents are grouped by status. The default view shows OPEN incidents (those actively needing attention). Filter by status to see CLOSED or MANUALLY_CLOSED incidents, or clear the filter to show all.
+
+Status tags use color coding: red for open (active), green for closed or manually closed (resolved), and grey for other states.
+
+## Filtering and date range
+
+Filter incidents by status using the dropdown menu (OPEN, CLOSED, MANUALLY_CLOSED). The status filter is applied immediately and persists in your view.
+
+Select a date range to show only incidents created within that period. The date picker is timezone-aware and remembers your timezone preference across sessions.
+
+Counter cards above the table show incident counts broken down by status (open, closed, manually closed) for a quick summary.
+
+## Bulk selection and actions
+
+Enable multi-select mode using the toggle button to select multiple incidents. When enabled, checkboxes appear on each row. Select the incidents you want to batch-modify, and a floating banner shows the count of selected items with action buttons.
+
+Only OPEN incidents can be selected for bulk actions. Closed incidents show disabled checkboxes. Press ESC to clear all selections and exit multi-select mode.
+
+Batch actions let you change status, delete, or close multiple incidents at once. Confirm any irreversible actions.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Dashboards" icon="chart-pie" href="/monitoring/dashboards">
+
+    Create analytics dashboards to visualize incident data and monitoring trends.
+
+</Card>
+  <Card title="Notifications" icon="bell" href="/administration/notifications">
+
+    Configure where and how you receive incident alerts and notifications.
+
+</Card>
+</Columns>

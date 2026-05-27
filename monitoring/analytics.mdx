@@ -1,0 +1,89 @@
+---
+title: Monitor analytics & results
+description: Read availability, execution time, and daily failures for a monitor.
+sidebarTitle: Analytics & results
+icon: chart-line
+---
+
+A monitor's detail page shows its configuration (scheduling, devices, agents, locations) alongside analytics that track availability, performance, and failures. Use these insights to understand how your monitor is performing in production.
+
+## Open a monitor's detail page
+
+From the Monitors list, click a monitor's three-dot menu and select **Details**, or click the monitor row directly if it opens the detail view.
+
+## Information cards
+
+Four cards at the top display the monitor's configuration:
+
+| Card | Shows |
+|------|-------|
+| **Devices** | SIM, Smartphone, or Ethernet agent running the test; browser preset (if applicable) |
+| **Agents** | Device hostnames and types |
+| **Locations** | Geographic zone or region for each device |
+| **Scheduling** | Frequency (e.g., "Every 5 minutes") or "custom" for advanced schedules; hover for full details |
+
+## Availability analytics
+
+**Weekly global availability** shows the percentage of successful executions in the last 7 days as a stacked bar chart.
+
+- **Passing Percent** — Percentage of executions that succeeded.
+- **Total Executions** — How many times the monitor ran.
+- **Failed Executions** — Count of failed runs.
+
+Click a bar in the chart to drill into that date's results and see what went wrong.
+
+## Execution time analytics
+
+**Weekly execution time average** shows how long the test takes to run each day.
+
+- **Average** — Mean duration across all runs.
+- **Minimum** — Fastest run in the week.
+- **Maximum** — Slowest run in the week.
+
+Bars are colored by deviation from the average:
+- **Green** — Runs within 30% of average.
+- **Orange** — Runs 30–50% above average (slower).
+- **Red** — Runs more than 50% above average (significantly slower).
+
+Click a bar to view the results from that day.
+
+## Daily failures
+
+**Daily failures** card on the right shows failures and warnings in the last 4 days.
+
+- Select a date by clicking on a day cell.
+- The card lists each failure with its error reason and count.
+- No failures on a date? The card displays "No failures" for that day.
+
+Hover over a failure message to see the full text. Use this to identify patterns (e.g., "all failures happen at 2 AM") and decide whether to adjust the schedule or fix a test step.
+
+## View a single execution result
+
+Click a bar or point in the analytics charts to open a detailed view of that execution. The result page shows:
+
+- **Steps** — Each test step, its status (pass/fail/skip), and duration.
+- **Screenshots** — Captured screenshots during execution (if applicable).
+- **Video** — Recording of the test run (if enabled).
+- **Metadata** — Execution start/end time, device used, browser/OS, test ID, and error reason (if failed).
+
+From the result page, you can edit the associated test or return to the monitor's detail page.
+
+## Device unavailability banner
+
+If a device (SIM, Smartphone, or Ethernet agent) is unavailable or misconfigured, a banner appears above the analytics with troubleshooting steps:
+
+- Check your device's status in the **Devices** workspace.
+- Verify network connectivity.
+- For web agents: refer to the network troubleshooting guide.
+- Click **Send help request** to contact support with device details.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Monitor incidents" icon="alert-circle" href="/monitoring/incidents">
+    Set up alerts and review incident history.
+  </Card>
+  <Card title="Real-time status" icon="zap" href="/monitoring/realtime-status">
+    Track your monitors' current status and recent execution activity.
+  </Card>
+</Columns>

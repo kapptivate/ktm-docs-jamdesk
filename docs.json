@@ -1,13 +1,13 @@
 {
   "$schema": "https://jamdesk.com/docs.json",
-  "name": "Documentation",
-  "description": "Your documentation site powered by Jamdesk",
+  "name": "Kapptivate",
+  "description": "Kapptivate product documentation",
   "theme": "jam",
   "tabsPosition": "top",
   "colors": {
-    "primary": "#635BFF",
-    "light": "#7C75FF",
-    "dark": "#4F46E5"
+    "primary": "#1C4A47",
+    "light": "#2E6B66",
+    "dark": "#123330"
   },
   "api": {
     "openapi": [
@@ -47,30 +47,79 @@
         "icon": "book-open",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Get started",
             "icon": "rocket",
             "pages": [
               "introduction",
-              "quickstart"
+              "quickstart",
+              "concepts/core-concepts",
+              "concepts/interface"
             ]
           },
           {
-            "group": "Writing Content",
-            "icon": "pen",
+            "group": "Key concepts",
+            "icon": "lightbulb",
             "pages": [
-              "writing/pages",
-              "writing/components",
-              "writing/code-blocks"
+              "concepts/channels",
+              "concepts/agents",
+              "concepts/devices-and-statuses"
             ]
           },
           {
-            "group": "Components",
-            "icon": "puzzle-piece",
+            "group": "Authoring tests",
+            "icon": "vial",
             "pages": [
-              "components/cards",
-              "components/callouts",
-              "components/tabs-and-accordions",
-              "components/steps"
+              "tests/overview",
+              "tests/create",
+              "tests/steps",
+              "tests/live-session",
+              "tests/browser-presets",
+              "tests/configurations"
+            ]
+          },
+          {
+            "group": "Running tests",
+            "icon": "play",
+            "pages": [
+              "executions/overview",
+              "executions/results"
+            ]
+          },
+          {
+            "group": "Continuous monitoring",
+            "icon": "gauge",
+            "pages": [
+              "monitoring/overview",
+              "monitoring/create",
+              "monitoring/scheduling",
+              "monitoring/analytics",
+              "monitoring/realtime-status",
+              "monitoring/supervision",
+              "monitoring/incidents",
+              "monitoring/dashboards"
+            ]
+          },
+          {
+            "group": "Equipment",
+            "icon": "server",
+            "pages": [
+              "equipment/agents",
+              "equipment/devices-lab"
+            ]
+          },
+          {
+            "group": "Administration",
+            "icon": "gear",
+            "pages": [
+              "administration/account",
+              "administration/products",
+              "administration/users",
+              "administration/teams",
+              "administration/roles",
+              "administration/notifications",
+              "administration/api-keys",
+              "administration/security-policies",
+              "administration/event-log"
             ]
           }
         ]

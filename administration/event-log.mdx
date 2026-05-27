@@ -1,0 +1,77 @@
+---
+title: Event log
+description: Audit system events across your workspace.
+sidebarTitle: Event log
+icon: clock-rotate-left
+---
+
+The event log records all system events in your workspace — user logins, policy changes, API key creation, and more. Use it to audit user activity and track changes to your workspace configuration.
+
+<Info>
+You must have the appropriate event viewing permission to access this page. If you see a "No Access" message, contact your workspace administrator.
+</Info>
+
+## View the event log
+
+Go to **Administration** > **Event log** to see all events in your workspace. The table shows the most recent events first, with pagination to browse older events (30 events per page).
+
+Each event displays:
+
+- **Time**: When the event occurred (formatted in your selected timezone)
+- **Type**: The kind of event (e.g., "user_login", "policy_change")
+- **Source**: What triggered the event (e.g., "user@example.com" or a specific resource)
+- **Metadata**: Additional details about the event (on large screens shown inline; on smaller screens, click "View More")
+
+## Filter events by date
+
+Use the **Date Range Picker** (top right) to narrow results to a specific time period.
+
+1. Click the date picker
+2. Select a start date and an end date
+3. The table updates automatically
+
+All dates are displayed in the timezone you select in the date picker. Your timezone choice is saved in your browser.
+
+## Filter by event type
+
+Use the **Type** dropdown filter to show only specific kinds of events (e.g., only login events). Select one or multiple types, or leave blank to show all types.
+
+## Filter by user
+
+Use the **User** dropdown filter to show only events triggered by a specific user. Select one or multiple users, or leave blank to show all users.
+
+Filters can be combined. For example, filter by type "user_login" and user "john@example.com" to see when that user last logged in.
+
+## View event details
+
+Events may display additional metadata inline. For complete details, click the **View More** button to open the event details drawer.
+
+The drawer shows:
+
+- **Time**: The formatted event timestamp
+- **Type**: The event type
+- **Source**: Full source information
+- **Details**: The complete metadata and event data in key-value format
+
+Click the close button to dismiss the drawer.
+
+## Export events
+
+Click the **Export Events** button (top right) to download filtered events as a CSV file. The export includes:
+
+- All events matching your current filters (date range, type, user)
+- All columns shown in the table
+- Timestamps in your selected timezone
+
+You can import the CSV into spreadsheet or business intelligence tools for further analysis.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Users" icon="user" href="/administration/users">
+    Manage workspace members and their access
+  </Card>
+  <Card title="Security policies" icon="shield-halved" href="/administration/security-policies">
+    View policy changes and enforcement in the event log
+  </Card>
+</Columns>

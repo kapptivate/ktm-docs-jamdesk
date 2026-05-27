@@ -1,0 +1,64 @@
+---
+title: Tests overview
+description: Organize, search, and manage your automated tests.
+sidebarTitle: Overview
+icon: vial
+---
+
+Tests are automated scenarios that verify your Web, Smartphone, or Cellular channels. This page shows how to organize tests into collections, search and filter them, and run bulk actions on multiple tests at once.
+
+## Collections
+
+Tests live in collections—folders organized hierarchically under a root collection. Navigate through collections using the breadcrumb at the top of the page. Create sub-collections to keep related tests grouped together.
+
+Collections appear in a tree view in the sidebar. Tests in an empty collection show a prompt to create your first test. When you delete a test, it moves to a trash collection where you can restore or permanently remove it.
+
+## Finding tests
+
+Use the search bar to find tests by name. Results update as you type. Filter tests by status (Draft, In Progress, Approved, or Deprecated), tags, or creator. All filters persist in the URL, so you can save and share filtered views.
+
+## Test table
+
+The test list shows columns for name, status, last updated, and creator. The name column displays:
+
+- A star icon to favorite a test (useful for pinning important tests)
+- Status badge (Draft, In Progress, Approved, or Deprecated)
+- Lock icon if another user is editing the test
+- Validity icons (red circle if the test itself is invalid; red triangle if it depends on an invalid test)
+- Color-coded tags
+
+Click a test name to edit it. Disabled or grayed out names indicate you cannot edit that test (usually because another user has locked it).
+
+## Bulk actions
+
+Select one or more tests by clicking the checkbox next to each name. A blue banner appears at the top with actions:
+
+- **Change Status** — Set all selected tests to Draft, In Progress, Approved, or Deprecated. Disabled if any test is locked.
+- **Duplicate** — Create copies of the selected tests in the same collection.
+- **Copy to Product** — Export tests to another product. Disabled if any test is a reusable component.
+- **Move** — Relocate selected tests to a different collection. Disabled if any test is locked.
+- **Favorite / Unfavorite** — Toggle favorite status on all selected tests.
+- **Create Monitors** — Convert selected tests into monitoring jobs. Single test navigates directly; multiple tests open a modal to choose which to monitor.
+- **Delete** — Send selected tests to trash. Disabled if locked.
+- **Add to Run Queue** — Queue selected tests for immediate execution. Disabled if any test is invalid.
+
+Press ESC to clear your selection.
+
+## Test validity and dependencies
+
+A red circle icon next to a test name means the test itself has an issue (invalid step, missing configuration). A red triangle means the test depends on another test that is invalid. Tests with validity issues cannot be run—the Run button is disabled.
+
+## Lock status
+
+When you open a test for editing, it becomes locked to prevent simultaneous edits by multiple users. A lock icon appears next to the test name, and a tooltip shows who locked it. Other users cannot edit, move, duplicate, or change the status of a locked test until you close the editor.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a test" icon="plus" href="/tests/create">
+    Start building a new test for your channel.
+  </Card>
+  <Card title="Running tests" icon="play" href="/executions/overview">
+    Run your tests and review the results.
+  </Card>
+</Columns>

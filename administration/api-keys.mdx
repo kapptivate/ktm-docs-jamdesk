@@ -1,0 +1,72 @@
+---
+title: API keys
+description: Create and manage API keys for external integrations.
+sidebarTitle: API keys
+icon: key
+---
+
+API keys authenticate external applications and integrations — such as CI/CD pipelines and third-party services — with your Kapptivate workspace. This page covers creating, refreshing, and revoking keys.
+
+<Info>
+Only workspace administrators can create, edit, and revoke API keys.
+</Info>
+
+## Create an API key
+
+1. Go to **Administration** > **API keys**
+2. Click **Create API key** (top right)
+3. Enter an application name — this helps you identify what the key is for
+4. Select the teams the key should have access to from the **Teams** dropdown
+5. Click **Create**
+
+After creation, a modal displays the generated token. Copy this token immediately — it displays only once. If you lose it, you'll need to refresh the token to generate a new one.
+
+Store the token securely in your application or CI/CD environment as an environment variable or secret. Never commit API keys to version control.
+
+## View and manage API keys
+
+The API keys list shows all keys created in your workspace. Each row displays:
+
+- **Name**: The application name you provided
+- **Teams**: The teams the key has access to
+- **Actions**: Edit and Revoke buttons (if you have edit permissions)
+
+### Search API keys
+
+Use the search box to filter keys by application name. Search is case-insensitive and updates in real time.
+
+### Edit an API key
+
+Click the key name or the **Edit** button to open the edit drawer. You can:
+
+- Change the application name
+- Modify team assignments and permissions
+- Revoke the key (from the edit drawer)
+
+Click **Save** to apply changes.
+
+### Refresh a token
+
+If you need a new token for an existing key, click the key to edit it, then click **Refresh Token**. Kapptivate generates a new token and displays it in a modal. The old token becomes invalid immediately.
+
+### Revoke an API key
+
+Revoking permanently disables a key. Any applications using it will fail to authenticate.
+
+To revoke:
+
+1. Click **Revoke** on the key row (or edit the key and click **Revoke** in the drawer)
+2. Confirm the revocation in the dialog
+
+This action cannot be undone.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Users" icon="user" href="/administration/users">
+    Manage workspace members and permissions
+  </Card>
+  <Card title="Security policies" icon="shield-halved" href="/administration/security-policies">
+    Enforce password and authentication rules
+  </Card>
+</Columns>

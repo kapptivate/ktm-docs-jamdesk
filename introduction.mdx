@@ -1,49 +1,60 @@
 ---
-title: Introduction
-description: "Starter project with example pages, components, and API reference. Edit MDX, customize your theme, and ship docs in minutes — preview locally or auto-deploy from GitHub."
+title: Introduction to Kapptivate
+description: Discover what Kapptivate is and how one automated test serves your whole delivery lifecycle.
+sidebarTitle: Introduction
+icon: rocket
 ---
 
-Welcome to your Jamdesk starter project. Everything you need to ship a polished documentation site is in this repo — edit the MDX files, tweak `docs.json`, and you're live.
+Kapptivate is an end-to-end test automation platform for web, mobile, and cellular (SIM) channels. The same automated test you author once can run as a one-off check, inside your CI/CD pipeline, during a go-live, and — promoted to a monitor — continuously in production. This guide introduces the platform and points you to your first test.
 
-<Tip>
-**Built-in AI search.** Click the sparkles button in the top-right corner of the header — chat is grounded on this site's pages and works out of the box.
-</Tip>
+## One test, whole lifecycle
 
-## What's included
+Traditional testing keeps separate scripts for regression, go-live, and production monitoring. Kapptivate unifies them. You author a test once in the Tests module, then reuse it across your entire delivery pipeline:
+
+- **Non-regression** — Run the test manually or on-demand against a device to verify a feature still works.
+- **Go-live** — Execute the test as part of your launch checklist to confirm the system is ready.
+- **CI/CD** — Queue the test to run automatically in your pipeline, catching breaks early.
+- **Production supervision** — Promote the test to a Monitor, which runs on schedule and alerts you to failures in real time.
+
+Each test execution produces detailed results: screenshots, step logs, and timing metrics. No need to rewrite or translate tests between phases.
+
+## Three channels
+
+Kapptivate runs tests on three distinct channels, each with its own device types and agents:
+
+**Web** — Automated browser testing on desktop and mobile browsers. Run against live web applications, validate UI interactions, and capture screenshots across browsers.
+
+**Smartphone** — Native mobile app testing on iOS and Android devices. Test app flows, touch interactions, and mobile-specific behaviors like notifications and permissions.
+
+**Cellular (SIM)** — Test applications that depend on cellular connectivity, SMS, USSD, or other telecom features. Validate features that can only be tested with a real SIM card and network.
+
+A single test can include actions for any combination of these channels. For example, a test might log in via the web app, switch to Smartphone to verify a push notification, then use Cellular to confirm SMS delivery.
+
+## How it works
+
+Kapptivate operates in three phases:
+
+**Author** — Create a test in the Tests module. Define a sequence of actions (click, type, navigate, check) for your chosen channel(s). Tests can include parameterized inputs, validation checks, and reusable components. You can write by hand or record steps interactively in a Live Session.
+
+**Run** — Queue a test for execution on one or more agents. The platform runs the test automatically and produces a detailed result with screenshots, logs, and status. Run on-demand, on a schedule, or as part of a CI/CD job. Multiple tests run in sequence as part of a test suite.
+
+**Monitor** — Take a test that works and promote it to a Monitor. Monitors run on a recurring schedule (hourly, daily, weekly) and alert you if the status changes. Use monitors to supervise critical user journeys in production and catch issues before your users do.
+
+## Terminology
+
+A **Workspace** is your organization's operational unit — it contains all your products, devices, tests, and users. A **Product** is a specific app or service within a Workspace (for example, a mobile banking app or a web portal).
+
+**Tests** are reusable and defined at the Product level. An **Execution** is a single run of one or more tests against specific devices, producing detailed results. A **Monitor** is a test that runs on a schedule in production, with alerting.
+
+An **Agent** is the infrastructure that executes tests — physical or virtual hardware running WebDriver, app automation, or SIM testing tools. **Devices** are the endpoints you test: browsers (Web agent), physical/virtual phones (Smartphone agent), or SIM cards (Cellular agents).
+
+## What's Next?
 
 <Columns cols={2}>
-  <Card title="Ready-made pages" icon="file-lines">
-    Example pages for getting started, writing content, and API references.
+  <Card title="Build your first test" icon="bolt" href="/quickstart">
+    Walk through creating a test, running it, and reading the result.
   </Card>
-  <Card title="50+ components" icon="puzzle-piece" href="/components/cards">
-    Cards, callouts, tabs, steps, code groups, accordions — no imports needed.
-  </Card>
-  <Card title="OpenAPI rendering" icon="plug" href="/api-reference/openapi-example">
-    Auto-generate endpoint pages from a YAML or JSON spec.
-  </Card>
-  <Card title="Auto-deploy" icon="rocket">
-    Push to GitHub and your docs build and deploy in seconds.
-  </Card>
-</Columns>
-
-## A minimal Jamdesk project
-
-```text
-my-docs/
-├── docs.json          # Site config: theme, colors, navigation
-├── introduction.mdx   # This page
-└── quickstart.mdx     # Your getting-started guide
-```
-
-That's all you need. Add more `.mdx` files to add more pages — the file path becomes the URL.
-
-## Next steps
-
-<Columns cols={2}>
-  <Card title="Quickstart" icon="play" href="/quickstart">
-    Edit pages locally, customize, and deploy.
-  </Card>
-  <Card title="Components" icon="puzzle-piece" href="/components/cards">
-    Browse every built-in component with live examples.
+  <Card title="Learn core concepts" icon="diagram-project" href="/concepts/core-concepts">
+    Understand Workspaces, Products, Tests, Executions, Monitors, and how they work together.
   </Card>
 </Columns>

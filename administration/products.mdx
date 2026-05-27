@@ -1,0 +1,107 @@
+---
+title: Products
+description: Create and configure the products tested in your workspace.
+sidebarTitle: Products
+icon: box
+---
+
+A product is an app, website, or service you test within your workspace. This page covers creating and editing products, assigning teams and devices to them, and configuring product-level settings.
+
+## Create a product
+
+Products serve as the top-level container for all testing and monitoring activity. When you create a product, you can assign teams and devices right away.
+
+To create a new product:
+
+1. From the workspace navigation, go to Administration > Products
+2. Click "Create product"
+3. In the About panel:
+   - Select an icon from the predefined set (50+ icons available)
+   - Choose an icon color from the palette
+   - Enter a product name
+   - The slug is auto-generated from your product name in kebab-case and cannot be changed
+4. Optionally add teams and devices now (you can also add them later when editing)
+5. Click "Create"
+
+Your new product appears immediately in the products list and is ready for testing.
+
+## Edit a product
+
+You can edit any product to update its details, add or remove teams and devices, or configure monitoring settings.
+
+To edit a product:
+
+1. Go to Administration > Products
+2. Click the product name to open the edit page
+3. Make your changes in the relevant sections:
+   - **About** — Change the icon, color, or product name
+   - **Teams** — Add or remove teams with access to this product
+   - **Devices** — Associate smartphones, SIM cards, and ethernet agents with the product
+   - **Settings** — Enable monitoring and set the aggregation interval
+
+4. Click "Save Changes"
+
+<Info>
+Your product slug is set when you create the product and cannot be changed. The slug is a URL-friendly identifier used in product-specific URLs.
+</Info>
+
+## Assign teams to a product
+
+Team members need product access to work with a product. You can assign teams to grant all members access at once.
+
+1. Open the product for editing
+2. Scroll to the Teams section
+3. Click "Add teams"
+4. In the modal, select one or more teams
+5. Click "Confirm"
+6. Click "Save Changes"
+
+Team members inherit this product access automatically.
+
+## Add devices to a product
+
+Devices are the phones, SIM cards, and agents you use for testing. Linking a device to a product makes it available for tests on that product.
+
+1. Open the product for editing
+2. Scroll to the Devices section
+3. Click "Add devices"
+4. In the modal, select devices from the list (search by name or ID to find them faster)
+5. Click "Confirm"
+6. Click "Save Changes"
+
+You can assign smartphones, SIM cards, and ethernet agents (web devices) to the same product.
+
+## Configure product monitoring
+
+Device monitoring captures system health and performance metrics for devices assigned to your product. You can enable or disable monitoring and set how frequently data is aggregated.
+
+1. Open the product for editing
+2. Scroll to Settings (visible only when editing an existing product)
+3. Toggle monitoring on or off
+4. Set the aggregation interval in minutes (e.g., 5, 15, or 30)
+5. Click "Save Changes"
+
+The aggregation interval determines how often monitoring data is rolled up. Smaller intervals provide more frequent updates but may require more computational resources.
+
+## View products and filters
+
+The products list shows all active products in your workspace. Archived products appear at the end of the list but are still accessible.
+
+The list displays:
+- **Product name** — Clickable to edit the product
+- **Slug** — The read-only URL-friendly identifier
+- **Active monitors** — Count of devices currently being monitored for this product
+- **Actions** — Edit button to open the product
+
+You can sort the product list (archived products automatically move to the end) and export all products to CSV.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Teams" icon="people-group" href="/administration/teams">
+    Create teams and assign products to them so all team members inherit the same access.
+  </Card>
+  <Card title="Tests" icon="flask" href="/tests/overview">
+    Create and run tests on your products using the devices you've assigned.
+  </Card>
+</Columns>

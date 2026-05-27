@@ -1,0 +1,80 @@
+---
+title: Creating a test
+description: Author a test for Web, Smartphone, or Cellular and add its steps.
+sidebarTitle: Create a test
+icon: plus
+---
+
+Creating a test starts with choosing a channel (Web, Smartphone, or Cellular), then setting a starting point and device. After creation, you add steps to define what the test does. This page walks through the setup flow for each channel.
+
+## Start a new test
+
+Click the Create button in your collection and select your test type.
+
+<Tabs>
+  <Tab title="Web">
+    Web tests run automated interactions in a browser—clicking links, filling forms, checking content.
+
+    **Starting point:** Enter a URL template (e.g., `https://example.com/login`) where the test begins.
+
+    **Browser options:**
+    - **Browser type** — Chrome, Firefox, or Edge
+    - **User agent** — Use the default or add a custom suffix
+    - **Language** — Default or a specific locale (e.g., en-US)
+    - **Window size** — Default 1920×1080 or custom dimensions
+
+    **Device type:** Web tests always run on a web agent. No device selection needed.
+
+    **Browser preset (optional):** Choose a saved configuration that includes headers, cookies, proxy, geolocation, and timezone. Browser presets let you run the same test under different conditions without editing the test itself.
+
+  </Tab>
+  <Tab title="Smartphone">
+    Smartphone tests automate mobile app interactions—tapping buttons, filling fields, navigating screens.
+
+    **Starting point:** Select an installed app.
+    - **Android** — Choose the app by package name. Kapptivate shows metadata like kind, name, and version.
+    - **iOS** — Choose the app by bundle ID.
+
+    **Device properties available when building steps:**
+    - Manufacturer (Android only)
+    - Model
+    - SDK version
+    - Resolution
+    - Roaming status per SIM
+
+    **App reset:** You can configure the test to reset the app (clear data and cache) before each run to start from a clean state.
+
+  </Tab>
+  <Tab title="Cellular">
+    Cellular tests interact with SIM devices to test USSD menus and SMS workflows on real phone networks.
+
+    **Starting point:** Specify the SIM to dial (USSD menu code) or the recipient for SMS.
+
+    **Note:** This feature may require additional setup. Verify that your workspace has cellular agents and SIM devices configured.
+
+  </Tab>
+</Tabs>
+
+## Test properties
+
+After choosing your channel and starting point, fill in:
+
+- **Test name** — A clear, descriptive name
+- **Description** (optional) — Notes about what the test does
+- **Collection** — Which folder to place the test in
+- **Tags** (optional) — Color-coded labels to organize and filter tests
+
+## Next: Add steps
+
+Once you create the test, the editor opens. You are ready to add steps that define the test's actions. See [Test steps](/tests/steps) to learn the available step types for your channel.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test steps" icon="list-check" href="/tests/steps">
+    Add clicks, taps, checks, and other actions to your test.
+  </Card>
+  <Card title="Configurations" icon="code" href="/tests/configurations">
+    Use variables to parameterize tests and switch environments.
+  </Card>
+</Columns>

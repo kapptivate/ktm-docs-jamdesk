@@ -1,0 +1,69 @@
+---
+title: Realtime status
+description: Create live status views of your products and monitors with custom grouping and filtering.
+sidebarTitle: Realtime status
+icon: wave-pulse
+---
+
+Realtime status displays live monitoring results across your workspace with customizable views, multiple display formats, and advanced filtering. You can organize results by product, test, or monitoring resource, switch between card and list layouts, and adjust which metrics you see.
+
+## Views and tabs
+
+Create multiple views to organize your monitoring data for different purposes. Each view remembers your settings—display format, grouping, filters, and time range—so you can switch between them instantly.
+
+You can create, rename, duplicate, and delete views from the view tab menu. One view is marked as default and loads automatically when you open the realtime status page. Set a new default by right-clicking a tab and selecting "Set as default".
+
+Tab order persists in your settings. Drag tabs to reorder them for easier navigation. Copy the current view's URL with the share button to send the exact view to a teammate.
+
+## Display formats
+
+Switch between two layouts to suit your workflow.
+
+**Cards** show one summary card per grouping (product, test, or monitoring). Each card displays the status, uptime percentage, and a stacked bar chart showing availability across the selected time period. This layout makes it easy to scan many items at a glance.
+
+**List** shows a table with rows per grouping, including columns for status, frequency, associated product, location, and agent. Hide columns you don't need.
+
+## Grouping and organization
+
+Choose how to organize your results: by product, by test, or by monitoring resource. Change the grouping to restructure the entire view instantly. You can also adjust the number of columns in card view to fit your screen.
+
+## Time range and execution mode
+
+The time range picker lets you select preset ranges (2 hours, 4 hours, 12 hours, 24 hours, 48 hours, 7 days, 30 days, 90 days, or 365 days) or define a custom range. This controls the data shown in cards and uptime charts.
+
+Toggle between two execution modes. **Time-based mode** analyzes results over the selected time range and displays the time range picker. **Count-based mode** analyzes a fixed number of recent executions (10–90) without needing a time range. The count range selector appears only in count-based mode.
+
+## Uptime charts
+
+The stacked bar chart in each card visualizes availability over the selected period. Choose between stacked bars (showing each status segment) or full-width stacked bars (normalized to 100%). Toggle "Show empty periods" to include or hide time ranges with no executions.
+
+## Filtering and search
+
+Filter by product, monitoring, test, device type (smartphone, SIM, web agent), and execution status (success, failed, running, pending, no results).
+
+When you apply filters, a banner shows which filters are active and the count of results (for example, "3 of 12 monitors"). Click "Save" in the filter banner to remember your filters with the view, or "Discard" to clear them without saving.
+
+The filter badge on devices shows live status indicators—green for reachable, red for unreachable—so you know the current state when filtering.
+
+## Details drawer
+
+Click any card or row to open a details drawer showing the full hierarchy: product → test → monitoring result. Browse execution history, logs, and error details without leaving the view. The drawer reflects your current filters and grouping.
+
+## Refresh and controls
+
+Press the refresh button to manually update data. View settings remain until you change them; leaving without saving will prompt a confirmation if you modified filters or settings.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Supervision overview" icon="eye" href="/monitoring/supervision">
+
+    See a high-level summary of product health across your workspace with uptime counters and status timelines.
+
+</Card>
+  <Card title="Incidents" icon="bell" href="/monitoring/incidents">
+
+    View and manage incidents raised by your monitors with filtering and bulk actions.
+
+</Card>
+</Columns>

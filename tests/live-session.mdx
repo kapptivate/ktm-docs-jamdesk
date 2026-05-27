@@ -1,0 +1,80 @@
+---
+title: Live session
+description: Drive a real device interactively and record actions into a test.
+sidebarTitle: Live session
+icon: wand-magic-sparkles
+---
+
+A live session gives you interactive control of a real device—SIM, Smartphone, or Web agent—from your browser. Use live sessions to explore an app, debug an issue, record a workflow, or create a test by capturing your actions.
+
+## Tabs and device types
+
+The session interface shows tabs for each available device type: SIMs, Smartphones, and Web agents. Your workspace admin controls which tabs are visible. If only one type is available, tabs are hidden to simplify the UI.
+
+Click a tab to switch between device types, then select a specific device from the sidebar list.
+
+## Command tab
+
+The main Command tab is where you interact with the device.
+
+**Select a device** from the sidebar. The device status (connected, idle, busy) appears in real time. A polling mechanism keeps the status in sync with the actual device.
+
+**Configure parameters** based on the device type:
+  - **SIM** — USSD menu code, SMS recipient/message
+  - **Smartphone** — App action, tap coordinates, text input
+  - **Web agent** — URL, element selector, text to type
+
+**Execute the command** and view the result immediately. The device responds with output (menu response, message confirmation, page HTML, etc.).
+
+## History tab
+
+The History tab shows all commands you (and others) have executed in a time window.
+
+**Filter** by creator (who ran the action) and device MSISDN. **Set a custom date range** (default: last 3 hours) to view older or newer actions.
+
+**Select actions** from the history list. Use checkboxes to pick multiple actions.
+
+**Create Test** — Convert selected actions into a new test. Your commands become test steps automatically.
+
+**Report** — Generate a formatted report from selected actions (see Report tab).
+
+## Report tab
+
+The Report tab shows a formatted table of selected actions with columns: Action, Result, Duration.
+
+**Copy to Clipboard** — Copy the entire report as text to paste into documentation or share with teammates.
+
+This tab is only active after you select actions from the History tab.
+
+## Macro recording
+
+Macros let you save and replay sequences of commands. Macros are available for SIM and Web agent devices.
+
+**Record** — Start capturing actions as you interact with the device. Each action is logged.
+
+**Playback** — Select a saved macro and run it again. Useful for repeating setup steps or common workflows.
+
+**Edit** — Modify a macro's sequence.
+
+**Organize** — Group macros in folders for easy discovery.
+
+## Tips for live sessions
+
+**Start simple** — A few commands help you understand the device before automating full tests.
+
+**Capture complex workflows** — For intricate user journeys, recording in a live session is faster than manually authoring steps.
+
+**Debug failures** — Run a failed test in a live session to see exactly where it breaks and what the device actually returns.
+
+**Build reusable macros** — Common setup sequences (login, navigation) can be recorded once as a macro and replayed in tests.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a test" icon="plus" href="/tests/create">
+    Use live session recordings to jumpstart a new test.
+  </Card>
+  <Card title="Equipment" icon="server" href="/equipment/agents">
+    Learn about agents that power your live sessions.
+  </Card>
+</Columns>
