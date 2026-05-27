@@ -1,3 +1,6 @@
 node_modules/
 .next/
 .DS_Store
+
+# Source repo used as reference for writing docs (not part of the docs site)
+.reference/
