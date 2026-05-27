@@ -4,3 +4,6 @@ node_modules/
 
 # Source repo used as reference for writing docs (not part of the docs site)
 .reference/
+
+# Obsidian knowledge vault used while writing docs (local only)
+knowledge/
