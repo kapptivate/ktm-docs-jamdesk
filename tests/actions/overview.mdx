@@ -1,41 +1,44 @@
 ---
-title: Actions overview
-description: The complete catalog of test actions, organized by where they apply — Shared, Web, Smartphone, and Cellular.
-sidebarTitle: Overview
+title: Actions reference
+description: The complete catalog of test actions, organized by scenario — Shared, Web, Smartphone, SIM, and API.
+sidebarTitle: Actions reference
 icon: list-check
 ---
 
 An **action** (also called a step) is a single instruction inside a test — click a button, type text, wait for an element, assert a value, send a USSD code. A test is an ordered list of actions executed top-to-bottom on the device assigned to it.
 
-Kapptivate's catalog is organized by **scope** — which kind of test can use the action.
+Actions are grouped by **scenario** — which kind of test uses them. Pick a scenario below to see the actions it supports.
 
-## Browse by scope
+## Browse by scenario
 
 <Columns cols={2}>
-  <Card title="Shared actions" icon="shapes" href="/tests/actions/shared/overview">
-    Flow control, assertions, extraction, AI checks, and common interactions that work across multiple test types (Web + Smartphone).
+  <Card title="Shared actions" icon="shapes" href="/tests/actions/shared/pause">
+    Flow control and external verification used in any test type — pause, waitfor, setvariable, customstep, createmetric, and email/SMS code retrieval.
   </Card>
-  <Card title="Web actions" icon="globe" href="/tests/actions/web/overview">
-    Browser-specific actions — mouse-driven (click, hover, double-click), tabs, dropdowns, and file pickers.
+  <Card title="Web scenarios" icon="globe" href="/tests/actions/web/click">
+    Actions for browser-based tests — mouse interactions, navigation, tabs, forms, plus the cross-channel actions documented per scope.
   </Card>
-  <Card title="Smartphone actions" icon="mobile-screen" href="/tests/actions/smartphone/overview">
-    Mobile app actions on real Android and iOS devices — touch-based (tap, long press), app launch, keyboard.
+  <Card title="Smartphone scenarios" icon="mobile-screen" href="/tests/actions/smartphone/tap">
+    Actions for native mobile apps on Android and iOS — touch interactions, app management, keyboard, plus the cross-channel actions.
   </Card>
-  <Card title="Cellular actions" icon="sim-card" href="/tests/actions/cellular/overview">
-    Cellular tests on real SIM cards — USSD menu flows, SMS receive, and unsolicited USSD pushes.
+  <Card title="SIM scenarios" icon="sim-card" href="/tests/cellular">
+    Actions for cellular tests on real SIM cards — USSD flows, SMS receive, and unsolicited USSD pushes.
   </Card>
 </Columns>
 
+<Note>
+  API scenarios are also documented — see [API scenarios](/tests/actions/api/overview). API steps live inside web or mobile tests today; a standalone API channel is on the roadmap.
+</Note>
+
 ## How actions are scoped
 
-Each action page lists the channels it applies to. The headline rules:
+- **Shared** — works identically in any test type. Pure infrastructure: `pause`, `waitfor`, `setvariable`, `customstep`, `createmetric`, plus the AI mail/SMS code retrieval actions that query external systems.
+- **Web** — interactions and assertions for browser tests. Includes channel-specific actions like `hover`, `rightclick`, `switchwindow`, `uploadfile`, and cross-channel actions like `input`, `scroll`, `assertdisplayed` documented under the Web scope.
+- **Smartphone** — touch-based interactions and mobile-specific actions: `tap`, `longpress`, `hidekeyboard`, plus the cross-channel actions documented under the Smartphone scope.
+- **SIM (Cellular)** — only inside V1 cellular tests: `ussd`, `sms`, `ussd-push`. See [Cellular tests](/tests/cellular) for the workflow.
+- **API** — HTTP requests inside web or mobile tests today. See [API scenarios](/tests/actions/api/overview).
 
-- **Shared** — works in both Web and Smartphone tests. Example: `pause`, `waitfor`, `assertdisplayed`, all the AI verification actions (`aispellcheck`, `aivisualassert`, `aigetmailcode`, `aigetmaillink`, `aigetsmscode`).
-- **Web-specific** — only makes sense in browser tests. Example: `hover`, `rightclick`, `switchwindow`, `uploadfile`.
-- **Smartphone-specific** — only on a real mobile device. Example: `tap`, `longpress`, `hidekeyboard`.
-- **Cellular** — runs on a real SIM, separate from the Web/Smartphone V2 builder. Example: `ussd`, `sms`, `ussd-push`.
-
-A few actions blur the lines — `click` works on both Web and Smartphone (it maps to a tap on touch screens). Pages mention these caveats explicitly in their **Channels** section.
+A few actions exist in both Web and Smartphone scopes (e.g., `input`, `scroll`, `assertdisplayed`). They share the same parameters and behavior; each scope has its own page so you can find the action from the scenario you are working on.
 
 ## Step lifecycle
 
@@ -43,7 +46,7 @@ Every action goes through the same lifecycle when it runs:
 
 <Steps>
   <Step title="Resolve">
-    The action's selector or input is resolved against the current device (DOM, accessibility tree, screenshot, or cellular session).
+    The action's selector or input is resolved against the current device — DOM, accessibility tree, screenshot, or cellular session.
   </Step>
   <Step title="Execute">
     The platform issues the action on the device (click, tap, type, USSD send, etc.).

@@ -1,0 +1,55 @@
+---
+title: API scenarios
+description: Test REST and HTTP services directly. Available today as steps inside web and mobile tests; a first-class API channel is on the way.
+sidebarTitle: Overview
+icon: plug
+tag: Coming soon
+---
+
+API testing in Kapptivate covers REST and HTTP services — methods, headers, JSON bodies, response assertions, variable extraction, and detailed per-request timing. Today it lives as steps inside web or mobile tests; a dedicated API channel — like the Web channel — is being promoted as a first-class scenario.
+
+## What you can do today
+
+HTTP API actions are available inside existing tests:
+
+- **Inside a web test** — add HTTP requests alongside browser steps. Action identifier: `ETH_HTTP_API`.
+- **Inside a mobile test** — add HTTP requests alongside smartphone steps. Action identifier: `DATA_API_HTTP`.
+
+Both share the same request configuration and response assertion model, with a few channel-specific differences in routing.
+
+## Request configuration
+
+- **HTTP methods**: `GET`, `POST`, `PUT`, `PATCH`, `DELETE` (additional methods to confirm).
+- **URL** with templated variables.
+- **Custom headers** with autocompletion for standard ones.
+- **Body**: JSON or raw payload.
+- **Routing**: DNS override, proxy, SSL bypass, cookie preservation, redirect handling.
+
+## Response validation
+
+- **Status code** checks.
+- **Body** and **header** assertions.
+- **Variable extraction** from the response for use in later steps.
+
+## Per-request metrics
+
+Each HTTP request emits a detailed timing breakdown — DNS lookup, TCP connection, TLS handshake, content generation, transfer, and total — so you can spot performance regressions, not just functional failures.
+
+## What's coming
+
+A standalone **API channel** alongside Web, Smartphone, and Cellular is on the roadmap. API-only tests will live in their own test type with a dedicated builder, suites, and monitors — no browser or device required.
+
+<Note>
+  Until the API channel ships, author API steps inside a web or mobile test. The action and metrics are identical; only the surrounding test type differs.
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Channels" icon="shuffle" href="/concepts/channels">
+    The full channel landscape — Web, API, Smartphone, Cellular — and how each maps to an agent.
+  </Card>
+  <Card title="Test builder" icon="pen" href="/tests/builder">
+    Where you add HTTP API steps today, inside web or mobile tests.
+  </Card>
+</Columns>
