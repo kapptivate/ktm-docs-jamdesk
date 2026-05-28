@@ -1,19 +1,36 @@
 ---
 title: Dashboards
-description: Create, organize, and share analytics dashboards for monitoring data.
+description: Create, organize, and share custom dashboards for visualizing and monitoring data.
 sidebarTitle: Dashboards
 icon: chart-pie
 ---
 
-Dashboards (Analytics) let you create custom visualizations of your monitoring data, organize them into collections, and share them with your team. You can build dashboards from scratch, favorite frequently-used ones, and control who has access.
+Build custom dashboards to visualize your monitoring data exactly how you need it. Organize dashboards into collections, share them with your team, mark favorites, and lock dashboards to prevent accidental changes.
 
-## Creating dashboards
+## Building custom dashboards
 
 Click the "Create dashboard" button to open the creation dialog. Name your dashboard, select the products (sources) to include, and add a description. Dashboards use global filters based on the products you select, so you can focus on specific data.
 
-Once created, the dashboard opens in edit mode. Build your visualization by adding charts, tables, and metrics from your monitoring data.
+Once created, the dashboard opens in edit mode. Add widgets by selecting metrics from your monitoring data, configuring charts, and customizing time ranges and filters.
 
-## Dashboard organization
+### Dashboard widgets and metrics
+
+Each dashboard widget displays a specific metric or visualization. Configure widgets with:
+- **Metrics** — Select from available KPIs, performance data, and monitoring metrics
+- **Time ranges** — Set the default date range for the widget
+- **Filters** — Apply additional scope filters by test or product
+
+### Dashboard variables and filters
+
+Create custom variables (text fields, dropdowns, multi-select lists) to let dashboard viewers filter data dynamically. Variables can reference global scope (tests, products) and support default values. All widgets using a variable update when the viewer changes its value.
+
+Global filters apply to all widgets on the dashboard and are set during dashboard creation.
+
+## Auto-generated dashboards
+
+Tests with monitoring enabled automatically generate dashboards showing metrics and performance data. These auto-generated dashboards help you quickly visualize test results without manual setup. Find auto-generated dashboards in the **Auto Dashboards** section, searchable and filterable by test and product.
+
+## Organizing dashboards
 
 Organize dashboards into nested collections (folders) to keep related dashboards together. Use the breadcrumb navigation to move through collections. Create a new collection at any level to group dashboards by team, project, or purpose.
 
@@ -29,9 +46,13 @@ Filter dashboards by **source** (products used in their global filters) or by **
 
 Mark frequently-used dashboards as favorites by clicking the star icon. Favorites appear at the top of the list and are saved in your user preferences, making them easy to find.
 
-## Sharing and access control
+## Sharing dashboards
 
-Share a dashboard with team members or publicly. Click the share action in the dashboard menu to open the sharing dialog. Generate a shareable link and optionally protect it with a password. Deactivate sharing at any time to revoke access.
+Share a dashboard with team members or publicly. Click the share action in the dashboard menu to open the sharing dialog.
+
+**Internal sharing** — Grant access to team members who have Kapptivate accounts.
+
+**Public sharing** — Generate a publicly shareable link with optional password protection. Public dashboards are read-only and don't require login. Visitors can interact with date ranges, timezones, aggregation, and variables, but cannot modify the underlying dashboard.
 
 View the owner of each dashboard (the creator) in the table. The "Last modified" column shows when the dashboard was last updated with a relative timestamp (e.g., "2 hours ago").
 
@@ -43,17 +64,21 @@ Lock a dashboard to prevent accidental edits. Locked dashboards show a lock icon
 
 Delete a dashboard using the actions menu. Deleted dashboards move to the trash collection and can be restored or permanently deleted. Access the trash by navigating to the trash collection if you need to recover a dashboard.
 
+## Sharing and collaboration
+
+Use the dashboard table to quickly see who owns each dashboard and when it was last modified. Favorite frequently-used dashboards for quick access. Lock dashboards to prevent accidental edits, and move deleted dashboards to trash for recovery.
+
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Supervision overview" icon="eye" href="/monitoring/supervision">
+  <Card title="Public dashboards" icon="share-nodes" href="/monitoring/public-dashboards">
 
-    View high-level product health with uptime metrics and execution timelines.
+    Share dashboards publicly without login, with optional password protection.
 
-</Card>
-  <Card title="Executions" icon="play" href="/executions/overview">
+  </Card>
+  <Card title="Email reports & exports" icon="envelope" href="/monitoring/reports">
 
-    Explore detailed execution history and results for your tests.
+    Schedule email reports and export data in Excel or CSV formats.
 
-</Card>
+  </Card>
 </Columns>

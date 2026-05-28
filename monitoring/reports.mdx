@@ -1,0 +1,137 @@
+---
+title: Email reports & exports
+description: Schedule dashboard email reports and export monitoring data to Excel or CSV.
+icon: envelope
+---
+
+Distribute dashboard data to your team and stakeholders automatically via email, or export raw data for offline analysis in Excel or CSV format.
+
+## Email reports
+
+Schedule recurring email reports that send dashboard snapshots to your team on a cadence that works for you.
+
+<Tabs>
+  <Tab title="Email reports">
+
+### Creating an email report
+
+Navigate to **Analytics > Mail Reports** and click create report. Fill in the required fields:
+
+**Report details**
+- **Report name** — A descriptive name for internal reference
+- **Dashboard** — Select the dashboard to send
+
+**Frequency and timing**
+- **Frequency** — Choose daily, weekly, monthly, or last 24 hours
+- **Send time** — Set the hour and minute when the report sends
+- **Day of week** — For weekly reports, select which day (Monday–Sunday)
+
+**Data settings**
+- **Data aggregation** — Choose the granularity: 15 minutes, 1 hour, 4 hours, or 1 day
+- **Timezone for sending** — The timezone used to interpret the send time (separate from viewing timezone)
+
+**Recipients and display**
+- **Timezone** — The timezone for how recipients view dates in the report
+- **Email recipients** — Add one or more email addresses to receive the report
+- **Active status** — Toggle to enable or disable sending
+
+### Dashboard variables in reports
+
+If your dashboard uses variables, you can override their values in each email report. This lets you send customized reports to different recipient groups without creating duplicate dashboards.
+
+### Managing email reports
+
+From the Mail Reports list, you can:
+- **Edit** — Update frequency, send time, recipients, or active status
+- **Duplicate** — Copy an existing report and modify it
+- **Delete** — Remove the report (archives it)
+- **View last sent** — See when the report was last delivered
+
+Reports are sent at the scheduled time to all active recipients. View the last send timestamp to confirm delivery.
+
+  </Tab>
+  <Tab title="Excel exports">
+
+### Creating an Excel export
+
+Click the **Export to Excel** button on any dashboard or from the analytics section. Configure your export:
+
+**Data range**
+- **Start and end date** — Pick the date range for your export
+- **Timezone** — The timezone used to interpret the dates
+
+**Data selection**
+- **Products** — Export all products or select specific ones
+- **Time grouping** — Choose the aggregation: 30 minutes, 1 hour, 4 hours, 1 day, or custom intervals
+
+### Excel file format
+
+Your export is generated asynchronously and aggregated by product and time period. Each row contains:
+- Timestamp (start of the time period)
+- Product name
+- Aggregated metrics (success rates, latency, performance KPIs)
+
+The file is automatically downloaded when ready, or you can retrieve it from your exports list.
+
+### Excel export management
+
+Exports are stored in your account and available for download anytime. Click an export to download it again, or delete it to remove it from your account. Each export includes metadata about when it was created and who requested it.
+
+  </Tab>
+  <Tab title="CSV exports">
+
+### Creating a CSV export
+
+Click the **Export to CSV** button to configure your export:
+
+**Data range**
+- **Start and end date** — Pick the date range
+
+**Filtering**
+- **Products** — Select which products to include
+- **Tags** — Filter by tags applied to your tests or metrics
+
+### CSV file format
+
+Your CSV export includes all raw data points (unaggregated) matching your filters. Columns typically include:
+- Timestamp
+- Product
+- Test name
+- Metric values
+- Tags
+
+This format is ideal for importing into spreadsheets, data analysis tools, or custom dashboards.
+
+### CSV export management
+
+Like Excel exports, your CSV files are stored and available for download anytime. Delete exports you no longer need to keep your account clean.
+
+  </Tab>
+</Tabs>
+
+## Alert summaries
+
+Track alert status across your products in real-time or review historical alert activity.
+
+### Open alerts
+
+View all currently active alerts. Open alerts show up in real-time and indicate conditions that need your attention. Filter by date if needed to see when alerts first opened.
+
+### Closed alerts
+
+Review alerts that have been resolved. The closed alert summary shows historical alert activity within your selected date range. Use this to track incident response and identify patterns over time.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Dashboards" icon="chart-pie" href="/monitoring/dashboards">
+
+    Build and customize dashboards for your monitoring data.
+
+  </Card>
+  <Card title="Incidents" icon="triangle-exclamation" href="/monitoring/incidents">
+
+    Investigate and manage alert incidents across your tests.
+
+  </Card>
+</Columns>

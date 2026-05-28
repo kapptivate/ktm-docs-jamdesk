@@ -1,0 +1,99 @@
+---
+title: Navigation & app start
+description: Launch URLs, start apps, switch windows, and navigate mid-test.
+icon: location-arrow
+---
+
+Navigation actions move your test between pages, apps, and browser contexts. They typically mark the start of your test (via `startingurl` or `startingapp` at step 0) or navigate to a new URL/app mid-test.
+
+## Web navigation
+
+### startingurl
+
+Set the starting URL for a web test. This is always step 0 and blocks until the page loads.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `url` | string (templated) | Yes | The URL to navigate to. Supports variables and template functions. |
+| `enable_requests_interception` | boolean | No | If true, intercept and mock HTTP requests. |
+
+**Applies to**: Web only
+
+**Step-level checks available**: `url`, `loading_time`, `step_duration`
+
+### url (navigate-to-url)
+
+Navigate to a URL during the test.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `url` | string (templated) | Yes | The destination URL. Supports variables and template functions. |
+| `enable_requests_interception` | boolean | No | If true, intercept and mock HTTP requests. |
+
+**Applies to**: Web only
+
+**Step-level checks available**: `url`, `loading_time`, `step_duration`
+
+Use `navigate-to-url` to move between pages after the test has started, or to navigate to dynamically constructed URLs using test variables.
+
+### switchwindow
+
+Switch focus to another open browser window or tab.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `matcher` | string (templated regex) | Yes | Pattern to match the target window's URL or title. |
+
+**Applies to**: Web only
+
+**Step-level checks available**: `step_duration`
+
+Use this when your test opens a new window (via a link or popup) and you need to switch focus to interact with it. The matcher is a regex pattern, so you can use `.*checkout.*` to match any URL containing "checkout".
+
+## Smartphone navigation
+
+### startingapp
+
+Set the starting app for a smartphone test. This is always step 0.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `app` | string (templated) | Yes | App name or package identifier. |
+| `meta` | object | No | App metadata (kind, name, label, package, version, display_name). |
+
+**Applies to**: Smartphone only (Android and iOS)
+
+**Step-level checks available**: `step_duration`
+
+The `meta` object includes:
+- `kind`: "User" or "System" app
+- `label`: Display label (user-friendly name)
+- `package`: Android package ID or iOS bundle ID
+- `version`: App version
+- `display_name`: Optional user-friendly name
+
+### app (launch/switch app)
+
+Launch or switch to an app during the test.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `app` | string (templated) | Yes | App name or package identifier. |
+| `meta` | object | No | App metadata (kind, name, label, package, version, display_name). |
+
+**Applies to**: Smartphone only (Android and iOS)
+
+**Step-level checks available**: `step_duration`
+
+Use this to switch between apps mid-test, for example to check an email in the default mail app, then return to the app under test.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Interaction actions" icon="hand-pointer" href="/tests/actions/interaction">
+    Click, type, scroll, and perform other user gestures.
+  </Card>
+  <Card title="Test configurations" icon="gear" href="/tests/configurations">
+    Set up devices, browsers, and test-level settings.
+  </Card>
+</Columns>

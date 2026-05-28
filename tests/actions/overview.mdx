@@ -1,0 +1,46 @@
+---
+title: Actions overview
+description: Understand what test actions are, how they form tests, and the action categories available.
+icon: list-check
+---
+
+An action (also called a step) is a single operation in your test—a click, an assertion, a pause, or a variable assignment. Your test is simply an ordered list of actions that execute sequentially on the target channel. Each action receives inputs (a locator, a value, a timeout), executes on the device (browser or smartphone), and produces a result (pass/fail, extracted data, or a state change).
+
+Actions fall into five categories:
+
+<Columns cols={2}>
+  <Card title="Navigation & app start" icon="location-arrow" href="/tests/actions/navigation">
+    Move the app or browser: launch URLs, switch apps, navigate to URLs, or switch between windows.
+  </Card>
+  <Card title="Interaction actions" icon="hand-pointer" href="/tests/actions/interaction">
+    Perform user gestures: click, type, select, scroll, tap, long-press, and more.
+  </Card>
+  <Card title="Assertions & extraction" icon="circle-check" href="/tests/actions/assertions">
+    Verify state and extract data: assert elements are visible, get text or values, find elements.
+  </Card>
+  <Card title="AI-powered actions" icon="wand-magic-sparkles" href="/tests/actions/ai">
+    Leverage AI to extract codes from emails, check spelling, and make visual assertions.
+  </Card>
+  <Card title="Data & flow control" icon="code-branch" href="/tests/actions/data-flow">
+    Manage test variables, pause execution, wait for conditions, and hook into test lifecycle events.
+  </Card>
+</Columns>
+
+## How actions work
+
+Every action follows the same lifecycle: it receives inputs (a selector, a value, a timeout), executes on your device, and produces a result. Many actions also support **step-level checks**—optional verifications like "the URL contains /success" or "the page loaded in under 2 seconds"—that run after the action completes. These checks can be marked as errors (fail the step) or warnings (log but continue).
+
+Some actions support **templating**, which means you can use variables, globals, or template functions like `${NOW()}` or `${UUID()}` in values. You can also set test variables with one action and reference them in later steps.
+
+The test framework supports both Web (desktop browsers, tablets) and Smartphone (Android, iOS) channels, but not all actions apply to both. For example, you can only `hover` on the Web, and you can only `tap` or `longpress` on smartphones.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a test" icon="plus" href="/tests/create">
+    Set up and structure your first test.
+  </Card>
+  <Card title="Test Builder" icon="hammer" href="/tests/builder">
+    Use the visual editor to build and debug tests in real time.
+  </Card>
+</Columns>

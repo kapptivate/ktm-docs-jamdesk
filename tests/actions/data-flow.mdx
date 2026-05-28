@@ -1,0 +1,231 @@
+---
+title: Data & flow control
+description: Set variables, pause execution, wait for conditions, and hook into test lifecycle.
+icon: code-branch
+---
+
+Data and flow control actions let you manage test state, pause execution, wait for dynamic conditions, and inject custom logic. They also include hooks that run at specific lifecycle events (before/after test, before/after step).
+
+## Variable management
+
+### setvariable
+
+Set a test variable for use in subsequent steps.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `name` | string | Yes | Variable name (no spaces). |
+| `value` | string (templated) | Yes | Value to store. Can use literals, test variables, globals, or template functions. |
+
+**Applies to**: Web, Smartphone
+
+Stores a value in a test variable that persists for the entire test lifetime. The value can be:
+- A literal string: `"hello"`
+- A test variable reference: `${previous_var}`
+- A global variable: `${GLOBAL_EMAIL}`
+- A template function: `${NOW()}`, `${UUID()}`, `${RANDOM()}`
+- A combination: `${GLOBAL_USER}_${NOW()}`
+
+Reference the variable in later steps using `${variable_name}`.
+
+**Example**: Store an email address for later use:
+```json
+{
+  "action": "setvariable",
+  "name": "test_email",
+  "value": "${GLOBAL_TEST_EMAIL}"
+}
+```
+
+## Execution timing
+
+### pause
+
+Pause test execution for a specified duration.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `duration` | number (ms, templated) | Yes | Time to pause in milliseconds (e.g., 2000 = 2 seconds). |
+
+**Applies to**: Web, Smartphone
+
+An explicit wait, as opposed to implicit `wait_for` conditions. Use it to:
+- Wait for animations to complete
+- Allow backend processing time
+- Debug (inspect page state mid-test)
+
+The duration can be dynamic: `${WAIT_TIME}` (from a variable).
+
+### waitfor
+
+Wait for specific element conditions (advanced wait, available as step modifier on most actions).
+
+| Parameter | Type | Notes |
+|-----------|------|-------|
+| `clickable` | object | Wait until element is visible and clickable (not disabled). Include `timeout` (ms). |
+| `displayed` | object | Wait until element is visible. Include `timeout` (ms). |
+| `enabled` | object | Wait until element is enabled (not disabled). Include `timeout` (ms). |
+| `exist` | object | Wait until element exists in DOM (visible or hidden). Include `timeout` (ms) and optional `reverse: true` to wait for element absence. |
+
+**Applies to**: Web, Smartphone
+
+The `wait_for` parameter is built into most actions (click, input, assertion, etc.) so you can specify conditions before/after the action. For example:
+
+```json
+{
+  "action": "click",
+  "locator": "#submit",
+  "wait_for": {
+    "clickable": { "timeout": 5000 }
+  }
+}
+```
+
+This waits up to 5 seconds for the submit button to be clickable, then clicks it.
+
+**Reverse waits**: Use `"reverse": true` to wait for element absence:
+
+```json
+{
+  "wait_for": {
+    "exist": {
+      "timeout": 5000,
+      "reverse": true
+    }
+  }
+}
+```
+
+This waits up to 5 seconds for an element to disappear (useful for waiting for a loading spinner to vanish).
+
+## Custom logic
+
+### customstep
+
+Execute custom code (JavaScript for web, Python or JavaScript for mobile).
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `script` | string | Yes | Code to execute. Has access to test variables, page DOM (web), and native APIs (mobile). |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Use custom steps to implement complex logic, conditionals, loops, or interactions not covered by standard actions.
+
+**Web example** (JavaScript):
+```javascript
+// Extract count of items
+const items = document.querySelectorAll('.item');
+const count = items.length;
+test.setVariable('item_count', count.toString());
+```
+
+**Smartphone example** (Python):
+```python
+# Custom mobile logic
+element = find_element('button')
+element.click()
+test.sleep(1000)
+```
+
+## Performance monitoring
+
+### createmetric
+
+Record a custom performance metric for monitoring and alerting.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `measurement` | string | Yes | Metric name (e.g., "page_load_time", "api_response_ms"). |
+| `fields` | object | Yes | Key-value pairs of numeric/boolean values. |
+| `tags` | object | No | Key-value pairs for grouping/filtering (e.g., test_name, user_type, region). |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Records metrics in InfluxDB-compatible format for aggregation and monitoring. Fields are the measured values; tags are dimensions for grouping.
+
+**Example**:
+```json
+{
+  "action": "createmetric",
+  "measurement": "form_submit_time",
+  "fields": {
+    "duration_ms": 1234,
+    "success": true
+  },
+  "tags": {
+    "form_type": "login",
+    "browser": "Chrome"
+  }
+}
+```
+
+## Test lifecycle hooks
+
+Hooks are special step groups that execute at specific lifecycle events. They contain actions just like normal steps, but run automatically at before/after boundaries.
+
+### Hook types
+
+- **before_test**: Runs once before the first step (good for login, setup)
+- **before_step**: Runs before each step (except hook steps themselves)
+- **after_step**: Runs after each step (except hook steps themselves)
+- **after_test**: Runs once after the last step, even if the test failed (good for cleanup, logout)
+
+### Structure
+
+Hooks are step groups with:
+- `name`: Hook identifier
+- `steps`: Array of actions
+- `use_capabilities`: Boolean; inherit device capabilities
+- `capabilities`: Device capabilities (if not inherited)
+
+### Common use cases
+
+**before_test**: Log in to the app or navigate to the starting page
+```json
+{
+  "name": "before_test",
+  "steps": [
+    { "action": "startingurl", "url": "https://example.com/login" },
+    { "action": "input", "locator": "#email", "value": "${GLOBAL_TEST_EMAIL}" },
+    { "action": "input", "locator": "#password", "value": "${GLOBAL_TEST_PASSWORD}" },
+    { "action": "click", "locator": "#login" }
+  ]
+}
+```
+
+**after_test**: Logout and cleanup
+```json
+{
+  "name": "after_test",
+  "steps": [
+    { "action": "click", "locator": ".user-menu" },
+    { "action": "click", "locator": "#logout" }
+  ]
+}
+```
+
+**after_step**: Take a screenshot after each step (for debugging)
+```json
+{
+  "name": "after_step",
+  "steps": [
+    { "action": "customstep", "script": "test.takeScreenshot()" }
+  ]
+}
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test configurations" icon="gear" href="/tests/configurations">
+    Set up devices, browsers, and test-level settings.
+  </Card>
+  <Card title="Test Builder" icon="hammer" href="/tests/builder">
+    Visually edit your test, inspect selectors, and debug in real time.
+  </Card>
+</Columns>

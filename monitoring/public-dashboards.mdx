@@ -1,0 +1,74 @@
+---
+title: Public dashboards
+description: Share dashboards publicly without requiring login, with optional password protection.
+icon: share-nodes
+---
+
+Share your dashboards with external stakeholders, partners, or the public without requiring users to log in. Public dashboards are read-only, shareable links that render your dashboard visualizations with full interactivity.
+
+## Making a dashboard public
+
+From your dashboard, click the share action in the menu to open the sharing dialog. Enter an optional password to protect the shared link—visitors will need this password to view the dashboard. Click create to generate your public link.
+
+Your shareable URL follows the pattern `public/dashboard/:link`, where `:link` is a unique identifier. Share this URL via email, messaging, or embed it on your website.
+
+## Password protection
+
+Passwords are optional but recommended for sensitive data. When a visitor accesses a password-protected dashboard:
+
+1. They land on a password entry page
+2. After entering the password, they're redirected to the dashboard view
+3. Their session is maintained for the duration of their browser session
+
+Password attempts are rate-limited to prevent brute-force attacks. You can update or remove the password at any time from the dashboard sharing settings. If you need to change the password, deactivate the current link and create a new one.
+
+## What visitors can interact with
+
+Visitors to your public dashboard can adjust several controls without modifying the underlying dashboard:
+
+### Date ranges
+Select from predefined ranges like the last 24 hours, last 7 days, or this month. You can also set custom absolute date ranges that are fixed to specific dates. Relative date ranges update automatically—"past 24h" always means the last 24 hours.
+
+### Timezone
+Pick any timezone from a searchable dropdown. All dates and charts display in the selected timezone automatically. The dashboard defaults to the visitor's browser timezone.
+
+### Data aggregation
+Control chart granularity by selecting aggregation intervals: auto, 1 minute, 5 minutes, 10 minutes, 30 minutes, 1 hour, 6 hours, 12 hours, or 1 day.
+
+### Auto-refresh
+When using relative or real-time date ranges, visitors can turn on auto-refresh to update the dashboard every 10 seconds to 10 minutes. Manual refresh is always available. Auto-refresh is off by default.
+
+### Dashboard variables
+If the original dashboard has variables (text fields, dropdowns, or multi-select filters), visitors can adjust them to filter the data. Variable values are applied to all charts on the dashboard.
+
+### Global filters
+Color-coded tags show the scope of the dashboard: blue for products, purple for variable groups, and orange for tests. These are set by you and cannot be changed by visitors.
+
+## Creating and managing public links
+
+### Create a new public link
+From the dashboard sharing dialog, set an optional password and click create. The system generates a unique link and provides a shareable URL.
+
+### View and update existing links
+Access the sharing settings to see all active public links for the dashboard. Update the password, reactivate a deactivated link, or deactivate it to revoke access.
+
+### Deactivate a link
+Deactivating a link immediately revokes public access. Visitors who try to access it will see a "not found" error. You can reactivate a deactivated link anytime.
+
+### Send via email
+Optionally send the public link and password directly to visitors via email. Recipients get the shareable URL and password in a single email.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Dashboards" icon="chart-pie" href="/monitoring/dashboards">
+
+    Build custom dashboards with widgets, metrics, and variables for your monitoring data.
+
+  </Card>
+  <Card title="Email reports & exports" icon="envelope" href="/monitoring/reports">
+
+    Schedule email reports and export data in Excel or CSV formats.
+
+  </Card>
+</Columns>

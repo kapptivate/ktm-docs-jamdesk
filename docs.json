@@ -66,19 +66,39 @@
             ]
           },
           {
-            "group": "Authoring tests",
+            "group": "Test",
             "icon": "vial",
             "pages": [
               "tests/overview",
               "tests/create",
-              "tests/steps",
-              "tests/live-session",
-              "tests/browser-presets",
-              "tests/configurations"
+              {
+                "group": "Authoring",
+                "icon": "pen",
+                "pages": [
+                  "tests/builder",
+                  "tests/live-session",
+                  "tests/configurations",
+                  "tests/browser-presets"
+                ]
+              },
+              {
+                "group": "Actions",
+                "icon": "list-check",
+                "pages": [
+                  "tests/actions/overview",
+                  "tests/actions/navigation",
+                  "tests/actions/interaction",
+                  "tests/actions/assertions",
+                  "tests/actions/ai",
+                  "tests/actions/data-flow"
+                ]
+              },
+              "tests/cellular",
+              "tests/suites"
             ]
           },
           {
-            "group": "Running tests",
+            "group": "Run",
             "icon": "play",
             "pages": [
               "executions/overview",
@@ -86,17 +106,31 @@
             ]
           },
           {
-            "group": "Continuous monitoring",
+            "group": "Monitor",
             "icon": "gauge",
             "pages": [
               "monitoring/overview",
               "monitoring/create",
               "monitoring/scheduling",
               "monitoring/analytics",
+              "monitoring/incidents"
+            ]
+          },
+          {
+            "group": "Production supervision",
+            "icon": "eye",
+            "pages": [
               "monitoring/realtime-status",
               "monitoring/supervision",
-              "monitoring/incidents",
-              "monitoring/dashboards"
+              {
+                "group": "Dashboards & reports",
+                "icon": "chart-pie",
+                "pages": [
+                  "monitoring/dashboards",
+                  "monitoring/public-dashboards",
+                  "monitoring/reports"
+                ]
+              }
             ]
           },
           {
@@ -112,14 +146,26 @@
             "icon": "gear",
             "pages": [
               "administration/account",
-              "administration/products",
-              "administration/users",
-              "administration/teams",
-              "administration/roles",
-              "administration/notifications",
-              "administration/api-keys",
-              "administration/security-policies",
-              "administration/event-log"
+              {
+                "group": "Workspace",
+                "icon": "building",
+                "pages": [
+                  "administration/products",
+                  "administration/users",
+                  "administration/teams",
+                  "administration/roles"
+                ]
+              },
+              {
+                "group": "Settings",
+                "icon": "sliders",
+                "pages": [
+                  "administration/notifications",
+                  "administration/api-keys",
+                  "administration/security-policies",
+                  "administration/event-log"
+                ]
+              }
             ]
           }
         ]

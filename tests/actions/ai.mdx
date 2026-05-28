@@ -1,0 +1,125 @@
+---
+title: AI-powered actions
+description: Use AI to extract codes from emails and SMS, check spelling, and make visual assertions.
+icon: wand-magic-sparkles
+---
+
+AI-powered actions combine Kapptivate's AI capabilities with integrations (email, SMS) and visual analysis to automate complex verifications and data extraction that would be difficult with selectors alone.
+
+## Email & SMS code extraction
+
+### aigetmailcode
+
+Extract a verification or OTP code from an email using AI.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `mailbox` | string (templated) | Yes | Email address or mailbox identifier. |
+| `variable` | string | No | Test variable name to store the extracted code. |
+| `mocked_response` | JSON | No | Mock response for testing (bypasses email lookup). |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Use this in flows where the app sends a verification code via email. The action retrieves emails from the mailbox, and AI identifies and extracts the OTP/code.
+
+### aigetmaillink
+
+Extract an action link from an email using AI.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `mailbox` | string (templated) | Yes | Email address or mailbox identifier. |
+| `intent` | string (templated) | Yes | Purpose/context (e.g., "password reset", "email verification"). |
+| `variable` | string | No | Test variable name to store the extracted URL. |
+| `mocked_response` | JSON | No | Mock response for testing. |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Use this when the app sends an action link (password reset, email verification) via email. The `intent` parameter helps AI understand the context and identify the correct link.
+
+### aigetsmscode
+
+Extract an SMS verification code using AI.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `phone_number` | string (templated) | Yes | Phone number to retrieve SMS messages for. |
+| `variable` | string | No | Test variable name to store the SMS code. |
+| `mocked_response` | JSON | No | Mock response for testing. |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Use this in SMS-based 2FA or OTP verification flows. The action retrieves SMS messages for the phone number and AI extracts the verification code.
+
+### mail
+
+Retrieve or check emails from a mailbox.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `mailbox` | string (templated) | Yes | Email address or mailbox identifier. |
+| `from_address` | string (templated) | No | Filter emails from a specific sender. |
+| `from_date` | string (ISO 8601, templated) | No | Filter emails after this date. |
+| `to_date` | string (ISO 8601, templated) | No | Filter emails before this date. |
+| `timeout` | number (ms, templated) | No | Wait up to this duration for emails to arrive (default ~30–60 seconds). |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+This action connects to Kapptivate's mail service and retrieves matching emails. Use it with `aigetmailcode` and `aigetmaillink` to extract codes and links from emails, or standalone to verify email arrival.
+
+## Visual & content checks
+
+### aivisualassert
+
+Make an AI-powered visual assertion using natural language.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `assertion` | string (templated) | Yes | Free-text description of what you expect to see (e.g., "the checkout button is green and says 'Pay Now'"). |
+| `mocked_response` | JSON | No | Mock response for testing. |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+Instead of hunting for selectors, describe what you expect to see in natural language. AI captures the current screenshot and evaluates whether the visual state matches your assertion.
+
+Examples:
+- "the login form is visible with email and password fields"
+- "there are no error messages on the page"
+- "the success banner is green"
+- "the product image is centered and at least 200 pixels wide"
+
+### aispellcheck
+
+Validate spelling and grammar on the page using AI.
+
+| Parameter | Type | Required | Notes |
+|-----------|------|----------|-------|
+| `language` | string | Yes | Language code (e.g., "en" for English, "fr" for French). |
+| `mocked_response` | JSON | No | Mock response for testing. |
+
+**Applies to**: Web, Smartphone
+
+**Step-level checks available**: `step_duration`
+
+AI captures page text and checks spelling/grammar for the specified language. The step fails if issues are found, or passes depending on your configuration. Use this to validate user-facing copy before launch or in content management flows.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Assertions & extraction" icon="circle-check" href="/tests/actions/assertions">
+    Verify state and extract data without AI.
+  </Card>
+  <Card title="Test Builder" icon="hammer" href="/tests/builder">
+    Record and edit AI actions visually in the editor.
+  </Card>
+</Columns>

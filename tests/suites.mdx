@@ -1,0 +1,187 @@
+---
+title: Test suites & campaigns
+description: Group tests, override parameters per test, run them in batch, and monitor results from a single suite.
+icon: layer-group
+---
+
+Test suites (also called campaigns) let you run multiple tests together, share execution settings, override variables and URLs per test, and track results as a batch. Use suites to test complete user journeys, combine related features into a single execution, or run smoke tests across environments.
+
+## What is a test suite?
+
+A test suite is a named collection of tests with shared execution context. Each test in the suite can have:
+
+- **Position/order** — Controls execution sequence
+- **Variable overrides** — Different values for global variables per test
+- **Execution overrides** — Unique starting URL or browser preset per test
+- **Custom name** — Optional display name (overrides test name)
+
+Suites live in collections (folders) just like individual tests, so you can organize them by feature, sprint, or environment.
+
+## Creating a test suite
+
+<Steps>
+  <Step title="Open the Campaigns list">
+    Navigate to **Testing > Campaigns** and select your collection.
+  </Step>
+  <Step title="Click Create Suite">
+    Fill in the suite name (required) and description (optional).
+  </Step>
+  <Step title="Add tests">
+    Click **Add Test**. A modal shows available tests filtered by name and type. Select one or more tests. Each gets a default position, device assignment, and empty variable overrides.
+  </Step>
+  <Step title="Configure per-test parameters">
+    Click a test to expand its details and set:
+    - **Global variables** — Override values for this test only
+    - **Starting URL** — Different entry point than the test default
+    - **Browser preset** — Alternate browser configuration
+  </Step>
+  <Step title="Save the suite">
+    Click **Save Campaign**. The suite is validated (name required, at least one test, all tests valid) and persisted to the backend.
+  </Step>
+</Steps>
+
+## Managing tests in a suite
+
+### Reordering tests
+
+Tests execute in their position order. Drag tests up and down in the left sidebar to reorder them. The order persists when you save.
+
+### Removing tests
+
+Click the **Remove** button on a test. It is removed from the suite (the test itself is not deleted—just the reference).
+
+### Duplicating tests
+
+Right-click a test to duplicate it within the suite. The copy gets a unique position and retains the variable overrides from the original.
+
+### Replacing a test
+
+Right-click and select **Replace**. A modal shows compatible replacement tests (same device type, similar structure). Choose a replacement and it substitutes the old test. Variable overrides are reset to defaults.
+
+## Parameterizing tests
+
+### Global variables
+
+Each test in your suite can use different values for global variables:
+
+1. Click a test to see its **Variables** section
+2. Choose a global variable from the list
+3. Enter a specific value for this test (overrides the global default)
+4. Templates are supported—mix text and variables (e.g., `https://{env}.example.com/{userId}`)
+
+### Execution overrides
+
+Override how a test runs without editing the test itself:
+
+- **Starting URL** — Use a different entry point (e.g., staging vs. production)
+- **Browser preset** — Apply a different browser configuration (headers, cookies, proxy, geolocation, timezone)
+
+These overrides are stored per-test in the suite, so the original test definition never changes. Multiple suites can reference the same test with different overrides.
+
+## Running a test suite
+
+### Start the run
+
+Click **Run Campaign** (or select multiple tests and click **Run**). The suite queues for execution.
+
+### Run queue
+
+The run queue shows:
+
+- Suite name and description
+- Test count
+- Last run status (pass/fail count)
+- Estimated runtime
+
+Click a suite card to expand and see individual test runs.
+
+### Monitoring execution
+
+While tests run, you can:
+
+- View real-time status
+- Pause or resume the suite
+- Cancel individual tests or the entire run
+- Jump to the **Live Browser** tab to watch a test in progress
+
+Results are aggregated and stored separately from the original suite definition.
+
+## Collections and organization
+
+Test suites are organized in collections (folder hierarchies) just like individual tests. Each product has a root `test_campaigns_root_collection_uid`.
+
+### Moving a suite
+
+1. Click **Move** on the suite card
+2. A folder picker modal appears
+3. Navigate to the desired folder and click **Move**
+
+The suite updates its `collection_uid` and appears in the new location.
+
+### Trash and deletion
+
+1. Click **Delete** on a suite card
+2. Confirm in the alert
+3. The suite moves to trash (soft delete)
+4. In the trash collection, click **Restore** to move it back, or **Delete Permanently** to remove it
+
+## Monitoring tests from a suite
+
+Monitors are scheduled test executions. While monitors are not created directly within the suite editor, you can:
+
+1. Select one or more tests in the suite
+2. Click **Create Monitors**
+3. A modal opens with scheduling options (frequency, timezone, variable selection)
+4. New monitors are created and run on a schedule independent of the suite
+
+To see monitors already attached to a test, click the **Monitors** button on the test row.
+
+## Handling archived or invalid tests
+
+### Invalid tests
+
+If a test in your suite becomes invalid (e.g., missing device, broken steps), a warning banner appears. The test cannot run until fixed.
+
+You can:
+
+- **Exclude** archived tests from the suite view (default)
+- **Restore** an archived test by right-clicking and selecting **Restore**
+- **Permanently delete** an archived test
+
+### Validation on save
+
+When you save a suite, the backend validates:
+
+- Suite name is not empty
+- At least one test is included
+- All referenced tests are valid (not archived, not broken)
+
+If validation fails, error messages guide you to fix the issues.
+
+## Draft saves and unsaved changes
+
+### Unsaved changes
+
+The suite form tracks modifications. When you have unsaved changes, a warning banner appears:
+
+- Click **Save Campaign** to persist
+- Click elsewhere to discard (you'll be prompted to confirm)
+
+### Keyboard shortcut
+
+Press `Cmd+S` (Mac) or `Ctrl+S` (Windows) to save quickly.
+
+## Viewing suite execution history
+
+Click the **History** tab (or **Executions** tab) to see all past runs of this suite, sorted by date. Click a run to view detailed results: which tests passed/failed, timings, and step-by-step progress.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Executions" icon="trending-up" href="/executions/overview">
+    Run suites and review detailed test results.
+  </Card>
+  <Card title="Monitoring" icon="clock" href="/monitoring/create">
+    Set up scheduled suite and test runs.
+  </Card>
+</Columns>
