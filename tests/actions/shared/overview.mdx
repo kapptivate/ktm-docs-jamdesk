@@ -1,0 +1,74 @@
+---
+title: Shared actions
+description: Actions usable across multiple test types (Web and Smartphone).
+icon: shapes
+---
+
+Shared actions are test steps that work across both Web and Smartphone test types. They include common interactions, assertions, data extraction, flow control, and AI-powered checks. All shared actions are available for use in both web and mobile tests unless explicitly noted otherwise.
+
+## Flow control
+
+Control test execution flow and store data for dynamic testing.
+
+| Action | Purpose |
+|--------|---------|
+| [Pause](/tests/actions/shared/pause) | Wait for a fixed duration in milliseconds. |
+| [Wait for](/tests/actions/shared/waitfor) | Wait for element conditions (clickable, displayed, enabled, exist). |
+| [Set variable](/tests/actions/shared/setvariable) | Store a value in a test variable for later use. |
+| [Custom step](/tests/actions/shared/customstep) | Execute custom JavaScript or Python code. |
+| [Create metric](/tests/actions/shared/createmetric) | Record a custom performance metric. |
+
+## Assertions & extraction
+
+Verify element states and extract data from the page.
+
+| Action | Purpose |
+|--------|---------|
+| [Assert displayed](/tests/actions/web/assertdisplayed) | Verify an element is visible on the page. |
+| [Assert not displayed](/tests/actions/web/assertnotdisplayed) | Verify an element is hidden or absent. |
+| [Get text](/tests/actions/web/gettext) | Extract text content from an element. |
+| [Get value](/tests/actions/web/getvalue) | Extract value from a form field. |
+| [Get text or value](/tests/actions/web/gettextorvalue) | Extract text with fallback to value. |
+| [Find](/tests/actions/web/find) | Locate an element without performing an action. |
+
+## Common interactions
+
+Interact with UI elements available across Web and Smartphone.
+
+| Action | Purpose |
+|--------|---------|
+| [Input](/tests/actions/web/input) | Type text into an input field. |
+| [Scroll](/tests/actions/web/scroll) | Scroll page or element into view. |
+| [Checkbox](/tests/actions/web/checkbox) | Check or uncheck a checkbox. |
+| [Press keys](/tests/actions/web/keys) | Press keyboard keys and key combinations. |
+
+## AI & external verification
+
+Use AI and external services for advanced validation and verification.
+
+| Action | Purpose |
+|--------|---------|
+| [AI spell check](/tests/actions/web/aispellcheck) | Validate spelling and grammar on the page. |
+| [AI visual assert](/tests/actions/web/aivisualassert) | Use AI to validate visual state. |
+| [AI get mail code](/tests/actions/shared/aigetmailcode) | Extract OTP code from email. |
+| [AI get mail link](/tests/actions/shared/aigetmaillink) | Extract action link from email. |
+| [AI get SMS code](/tests/actions/shared/aigetsmscode) | Extract verification code from SMS. |
+
+## Channel support
+
+All shared actions support Web and Smartphone test types. Some actions have platform-specific behavior noted in their documentation.
+
+- **Web** — Desktop browsers (Chrome, Firefox, Safari, Edge)
+- **Smartphone** — Android and iOS apps and mobile browsers
+- **Cellular** — Specialized cellular/USSD testing
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Web actions" icon="globe" href="/tests/actions/web/overview">
+    Actions available only in Web tests (click, hover, navigate).
+  </Card>
+  <Card title="Smartphone actions" icon="mobile" href="/tests/actions/smartphone/overview">
+    Actions available only in Smartphone tests (tap, long press, app launch).
+  </Card>
+</Columns>

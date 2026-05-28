@@ -1,0 +1,64 @@
+---
+title: Upload file
+description: Upload a file via an HTML file input element.
+icon: file-down
+---
+
+Upload a file by selecting it through an HTML `<input type="file">` element. You provide the URL to the file resource, and the framework handles the file upload.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ❌ Smartphone
+- ❌ Cellular
+
+File upload is web-only; mobile file uploads follow different patterns.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector or XPath for the `<input type="file">` element. |
+| locator.selector | String | No | CSS selector (e.g., `.file-input`, `#upload`). |
+| locator.description | String | No | Human-readable description for AI-driven locating. |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| url | Template (string) | Yes | URL to the file to upload. Can be Kapptivate-hosted or external. Supports templating. |
+| wait_for | Condition | No | Wait for a condition before or after upload (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if file input not found. |
+
+## Example
+
+```json
+{
+  "type": "upload-file",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "#file-upload" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "url": [{ "type": "value", "data": { "value": "https://example.com/sample.pdf" } }]
+  }
+}
+```
+
+## Notes
+
+- The file URL should point to an accessible file resource (Kapptivate-hosted, CDN, or publicly accessible URL).
+- The browser security model allows WebDriver to set file input values directly; no manual file picker interaction is needed.
+- URLs support [templating](/concepts/core-concepts) for dynamic file paths.
+- A `change` event may be triggered on the file input element after upload.
+- Desktop browsers only; file upload is not applicable to mobile devices.
+- Step-level checks (step_duration) are available.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="hand-pointer" href="/tests/actions/web/click">
+    Interact with elements after file upload.
+  </Card>
+  <Card title="Input" icon="keyboard" href="/tests/actions/web/input">
+    Type text into form fields.
+  </Card>
+</Columns>

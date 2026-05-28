@@ -1,0 +1,62 @@
+---
+title: Long Press
+description: Long-press an element to trigger context actions or menus.
+icon: hand-pointer-click
+---
+
+Long-press (hold down touch) an element on a smartphone app. Long-press is useful for triggering context menus, enabling edit mode, or activating other long-press-specific app behaviors.
+
+## Channels
+
+- ❌ Web
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Long Press is smartphone-specific.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Object | Yes | Element locator (selector or description). |
+| locator.selector | Template (string) | No | CSS selector or XPath for the target element. |
+| locator.description | Template (string) | No | Human-readable element description. |
+| duration | Template (ms) | No | Duration to hold touch in milliseconds. Defaults to 500–1000 ms. Supports templating. |
+| wait_for | Object | No | Condition to wait for before/after long-press (clickable, displayed, enabled, exist). |
+
+## Example
+
+```json
+{
+  "type": "long-press",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": "//cell[@identifier='message_cell_0']",
+      "description": "First message in list"
+    },
+    "duration": "1000"
+  }
+}
+```
+
+## Notes
+
+- Long-press holds touch for the specified duration before releasing.
+- Duration is configurable and can be dynamic via [variables](/concepts/core-concepts) (e.g., `${HOLD_TIME}`).
+- Used to trigger context menus (right-click equivalent on mobile), edit mode, or app-specific long-press gestures.
+- Long-press can include optional [wait conditions](/tests/actions/shared/waitfor) to ensure the element is ready before pressing.
+- If the element is not found, the step fails.
+- Step-level checks (step_duration) are available after long-press completes.
+- Long-press is a mobile-only action with no direct web equivalent.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Tap elements" icon="hand-pointer" href="/tests/actions/smartphone/tap">
+    Standard single tap for regular element interactions.
+  </Card>
+  <Card title="Hide keyboard" icon="keyboard" href="/tests/actions/smartphone/hidekeyboard">
+    Dismiss the virtual keyboard after text input.
+  </Card>
+</Columns>

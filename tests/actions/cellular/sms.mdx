@@ -1,0 +1,75 @@
+---
+title: SMS (receive)
+description: Wait for and verify an incoming SMS message on a real SIM.
+icon: message
+---
+
+Wait for an incoming SMS message on a real SIM card and verify its content. This action (also known as `SMS_GET`, `GET_SMS`, `SMS_NEW`, or `NEW SMS`) is used to test SMS-based flows such as OTP delivery, SMS notifications, and verification codes.
+
+## Channels
+
+- ✅ Cellular only
+
+SMS reception testing is specific to cellular networks on real SIM cards (V1 TestingHouse system).
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| optional_reception | Boolean | No | If true, test passes even if no SMS arrives. If false, test fails if SMS does not arrive. Defaults to false. |
+
+## Assertions
+
+Verify the incoming SMS using any of the following assertion sources:
+
+| Source | Type | Description |
+|--------|------|-------------|
+| sms_sender | String | Phone number of the SMS sender. Use string comparisons: `==`, `contains`, `starts_with`, `ends_with`. |
+| message | String | SMS text content. Use string comparisons to validate the message body. |
+| concatenated_sms | Number | Count of SMS parts (for multi-part/concatenated messages). Use numeric comparisons: `==`, `<`, `>`. |
+| variable | String | Extract and store a value from the SMS (e.g., OTP code) for use in subsequent steps. |
+
+## Example
+
+```json
+{
+  "type": "SMS_GET",
+  "owner": "sim1",
+  "optional_reception": false,
+  "expected_result": {
+    "sender": "+1234567890",
+    "message": "Your verification code is: 123456"
+  },
+  "assertions": [
+    {
+      "source": "sms_sender",
+      "compare": "==",
+      "value": "+1234567890"
+    },
+    {
+      "source": "message",
+      "compare": "contains",
+      "value": "verification code is: 123456"
+    }
+  ]
+}
+```
+
+## Notes
+
+- **Timeouts:** SMS reception timeouts are configurable at run time (not per action). Common timeouts: 30–120 seconds.
+- **Optional reception:** Set `optional_reception: true` if the SMS is not guaranteed to arrive (e.g., optional 2FA path). The test will pass regardless of whether the SMS arrives.
+- **Multi-part SMS:** Use the `concatenated_sms` assertion to verify that multi-part messages arrive with the expected number of parts.
+- **Variable extraction:** Extract values such as OTP codes or confirmation links from SMS text using `variable` assertions for dynamic flows.
+- **Reception delay:** Configure a per-run SMS observation delay to allow time for the SMS to be delivered before checking.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="USSD" icon="phone" href="/tests/actions/cellular/ussd">
+    Send USSD menu codes and verify responses.
+  </Card>
+  <Card title="USSD push" icon="phone" href="/tests/actions/cellular/ussd-push">
+    Handle unsolicited USSD messages from the network.
+  </Card>
+</Columns>

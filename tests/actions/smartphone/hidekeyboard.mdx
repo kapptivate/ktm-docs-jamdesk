@@ -1,0 +1,48 @@
+---
+title: Hide Keyboard
+description: Dismiss the virtual keyboard on a mobile device.
+icon: keyboard
+---
+
+Dismiss the virtual keyboard (soft keyboard) on a smartphone. This is useful after text input when you need to interact with elements below the keyboard or verify that the keyboard was hidden.
+
+## Channels
+
+- ❌ Web
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Hide Keyboard is smartphone-specific.
+
+## Parameters
+
+This action has no parameters.
+
+## Example
+
+```json
+{
+  "type": "hide-keyboard",
+  "version": "v1.0.0",
+  "inputs": {}
+}
+```
+
+## Notes
+
+- Hide Keyboard is a no-op if the keyboard is already hidden; the step always passes.
+- Useful when text input causes the keyboard to cover interactive elements.
+- After calling [input](/tests/actions/smartphone/input) to type text, use Hide Keyboard to dismiss the keyboard and interact with elements below.
+- Mobile-specific action with no web equivalent (web has no virtual keyboard).
+- Step-level checks (step_duration) are available after keyboard dismissal.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Input text" icon="keyboard" href="/tests/actions/smartphone/input">
+    Type text into fields; often followed by Hide Keyboard.
+  </Card>
+  <Card title="Tap elements" icon="hand-pointer" href="/tests/actions/smartphone/tap">
+    Interact with elements now visible after keyboard is hidden.
+  </Card>
+</Columns>

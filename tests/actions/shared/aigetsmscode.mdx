@@ -1,0 +1,67 @@
+---
+title: AI get SMS code
+description: Extract a verification code from SMS using AI.
+icon: message
+---
+
+Use AI to extract verification codes from SMS messages received at a specified phone number. This integrates with Kapptivate's SMS service to retrieve and parse SMS messages for OTP codes, verification PINs, and other numeric identifiers.
+
+## Channels
+
+- ✅ Web
+- ✅ Smartphone (Android/iOS)
+- ✅ Cellular
+
+All channels support SMS code extraction equally.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| phone_number | Template | Yes | Phone number to retrieve SMS for. Supports templating (e.g., `${TEST_PHONE}`). |
+| variable | String | No | Variable name to store extracted code. If omitted, code is only logged. |
+| mocked_response | Object | No | Mock response for testing (JSON). Use in development/testing only. |
+
+## Example
+
+```json
+{
+  "type": "aigetsmscode",
+  "version": "v1.0.0",
+  "inputs": {
+    "phone_number": "+1-555-0123",
+    "variable": "sms_code"
+  }
+}
+```
+
+Using a test variable for phone number:
+
+```json
+{
+  "type": "aigetsmscode",
+  "inputs": {
+    "phone_number": "${VERIFICATION_PHONE}",
+    "variable": "two_factor_sms"
+  }
+}
+```
+
+## Notes
+
+- Retrieves SMS messages from the specified phone number.
+- Uses AI to identify and extract numeric verification codes.
+- Extracted code is stored in the variable for use in subsequent steps.
+- Requires SMS service integration to be configured.
+- Common uses: complete SMS-based 2FA, test SMS verification flows, validate OTP authentication.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="AI get mail code" icon="envelope-open" href="/tests/actions/shared/aigetmailcode">
+    Extract codes from emails.
+  </Card>
+  <Card title="Input text" icon="keyboard" href="/tests/actions/web/input">
+    Enter extracted codes into forms.
+  </Card>
+</Columns>

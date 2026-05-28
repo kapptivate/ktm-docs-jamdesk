@@ -1,0 +1,65 @@
+---
+title: Set variable
+description: Store a value in a test variable for use in subsequent steps.
+icon: tag
+---
+
+Set a test variable to store data for use in later steps. Variables can be literal strings, computed from other variables, or generated from template functions like `NOW()` or `UUID()`.
+
+## Channels
+
+- ✅ Web
+- ✅ Smartphone (Android/iOS)
+- ✅ Cellular
+
+All channels support variable storage equally.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| name | String | Yes | Variable identifier (no spaces). Used as `${variable_name}` in subsequent steps. |
+| value | Template | Yes | Value to store. Supports literals, variables, globals, and template functions. |
+
+## Example
+
+```json
+{
+  "type": "setvariable",
+  "version": "v1.0.0",
+  "inputs": {
+    "name": "login_email",
+    "value": "${ADMIN_EMAIL}"
+  }
+}
+```
+
+Using a template function:
+
+```json
+{
+  "type": "setvariable",
+  "inputs": {
+    "name": "test_run_id",
+    "value": "${UUID()}"
+  }
+}
+```
+
+## Notes
+
+- Variable names are case-sensitive. Use lowercase with underscores: `user_email`, `order_id`.
+- Values support templating: reference test variables (`${var_name}`), globals (`${GLOBAL_VAR}`), and functions (`${NOW()}`, `${RANDOM()}`).
+- Variables persist for the test lifetime and can be referenced in any subsequent step.
+- Common uses: store extracted data, set dynamic test inputs, track user IDs or transaction IDs.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Extract text from element" icon="type" href="/tests/actions/web/gettext">
+    Extract text and store in a variable.
+  </Card>
+  <Card title="Input text into field" icon="keyboard" href="/tests/actions/web/input">
+    Use variables as input values.
+  </Card>
+</Columns>

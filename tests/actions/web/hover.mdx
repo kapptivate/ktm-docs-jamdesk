@@ -1,0 +1,65 @@
+---
+title: Hover
+description: Move the mouse over an element to trigger hover states.
+icon: pointer
+---
+
+Hover the mouse over an element to trigger CSS `:hover` pseudo-classes and mouse-over event handlers. This is useful for testing hover states, tooltips, and menu expansions.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ❌ Smartphone
+- ❌ Cellular
+
+Hover is web-only; mobile devices do not have mouse hover.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
+| locator.selector | String | No | CSS selector (e.g., `.menu-item`, `.dropdown-trigger`). |
+| locator.description | String | No | Human-readable description for AI-driven locating. |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". |
+| wait_for | Condition | No | Wait for a condition before or after hover (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if element not found. |
+| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+
+## Example
+
+```json
+{
+  "type": "hover",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": ".dropdown-menu" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  }
+}
+```
+
+## Notes
+
+- Hover emits `mouseover` and `mouseenter` events.
+- Triggers CSS `:hover` pseudo-class styles.
+- Common use cases: test tooltip display, menu expansion, reveal hidden elements.
+- Not available on smartphones or cellular channels.
+- Step-level checks (url, loading_time, step_duration) are available.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="hand-pointer" href="/tests/actions/web/click">
+    Interact with elements after hover states appear.
+  </Card>
+  <Card title="Assert displayed" icon="circle-check" href="/tests/actions/web/assertdisplayed">
+    Verify that hover-triggered elements are visible.
+  </Card>
+</Columns>

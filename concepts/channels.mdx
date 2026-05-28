@@ -1,11 +1,11 @@
 ---
 title: Channels & test types
-description: The channels you can test — Web, Smartphone, and Cellular — and how each maps to an agent.
+description: The channels you can test — Web, API, Smartphone, and Cellular — and how each maps to an agent.
 sidebarTitle: Channels
 icon: shuffle
 ---
 
-A channel is the kind of target you test. Kapptivate supports Web (browser), Smartphone (native Android/iOS apps), and Cellular tests run on real SIMs (which cover USSD and SMS flows). Each channel runs on a matching agent type and gives you access to different device types and test capabilities.
+A channel is the kind of target you test. Kapptivate supports Web (browser), API (HTTP services), Smartphone (native Android/iOS apps), and Cellular tests run on real SIMs (which cover USSD and SMS flows). Each channel gives you access to different actions and, where physical equipment is needed, runs on a matching on-premise agent.
 
 ## Web channel
 
@@ -24,6 +24,30 @@ Run browser-based tests against websites and web applications. Web tests automat
 **Test starting point:** You provide a URL template. Tests launch the browser, navigate to that URL, and execute your steps from there.
 
 **Common actions:** Click elements, type text, navigate to pages, wait for elements, check that elements exist or contain specific text, scroll, hover, and retrieve element properties.
+
+## API channel
+
+Test REST and HTTP services directly, without a browser or device. API tests are useful for backend validation, contract checks, and end-to-end flows that mix UI and direct backend calls.
+
+<Note>
+  HTTP API steps are available today inside Web and Mobile tests (action identifiers `ETH_HTTP_API` on Web agents, `DATA_API_HTTP` on Mobile). API is being promoted to a first-class channel like Web — with a dedicated test type in an upcoming release.
+</Note>
+
+**Agent type:** runs on the agent of the host test — Ethernet (Web) for Web tests, Smartphone (or Mono Agent) for mobile tests.
+
+**Request configuration:**
+- HTTP methods: GET, POST, PUT, PATCH, DELETE (and additional methods to confirm)
+- URL with templated variables
+- Custom headers
+- Body: JSON or raw payload
+- DNS override, proxy routing, SSL handling, redirects and cookies
+
+**Response validation:**
+- Status code checks
+- Body and header assertions
+- Variable extraction from the response for use in later steps
+
+**Per-request metrics:** detailed timing breakdown (DNS lookup, TCP connection, TLS handshake, content generation, transfer, total) for performance analysis.
 
 ## Smartphone channel
 
@@ -77,6 +101,7 @@ Test cellular networks, USSD flows, and SMS messaging on real SIM cards. Cellula
 | Need | Channel | Agent |
 |------|---------|-------|
 | Test a website or web app | Web | Ethernet (Web) |
+| Test a REST / HTTP API | API (as a step in Web or Mobile) | Ethernet (Web) or Smartphone |
 | Test an Android or iOS app | Smartphone | Smartphone |
 | Test combined web + mobile on one device | Smartphone | Mono Agent |
 | Test SMS, USSD, or data on real networks | Cellular | Cellular |

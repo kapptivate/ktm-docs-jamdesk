@@ -1,0 +1,67 @@
+---
+title: USSD push
+description: Wait for an unsolicited USSD message from the network.
+icon: phone
+---
+
+Wait for an unsolicited USSD push message from the network (server-initiated, without sending a command). USSD pushes are used by carriers to send notifications, balance alerts, promotional messages, or subscription reminders to subscribers.
+
+## Channels
+
+- ✅ Cellular only
+
+USSD push testing is specific to cellular networks on real SIM cards (V1 TestingHouse system).
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| optional_reception | Boolean | No | If true, test passes even if no USSD push arrives. If false, test fails if push does not arrive. Defaults to false. |
+
+## Assertions
+
+Verify the incoming USSD push using any of the following assertion sources:
+
+| Source | Type | Description |
+|--------|------|-------------|
+| session_status | String | Session state after the push arrives: `alive` (menu active), `close` (session closed). Use string comparisons to validate the state. |
+| variable | String | Extract and store a value from the push message for use in subsequent steps. |
+
+## Example
+
+```json
+{
+  "type": "USSD_PUSH",
+  "owner": "sim1",
+  "optional_reception": false,
+  "command": {
+    "options": {}
+  },
+  "assertions": [
+    {
+      "source": "session_status",
+      "compare": "==",
+      "value": "close"
+    }
+  ]
+}
+```
+
+## Notes
+
+- **No command sent:** Unlike USSD actions, USSD_PUSH does not send any command. The action waits passively for a message from the network.
+- **Timeouts:** USSD push reception timeouts are configurable at run time (not per action). Pushes may arrive at any time during the test; common wait times: 30–120 seconds.
+- **Optional reception:** Set `optional_reception: true` if the push is not guaranteed to arrive (e.g., depends on carrier timing or conditions). The test will pass regardless.
+- **Session closure:** USSD pushes often close the session immediately (e.g., balance notification). Plan your assertions for the expected session state.
+- **Variable extraction:** Extract data from push messages (e.g., balance, offer details) using `variable` assertions for dynamic flows.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="USSD" icon="phone" href="/tests/actions/cellular/ussd">
+    Send USSD menu codes and verify responses.
+  </Card>
+  <Card title="SMS (receive)" icon="message" href="/tests/actions/cellular/sms">
+    Wait for and verify incoming SMS messages.
+  </Card>
+</Columns>

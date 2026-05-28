@@ -1,0 +1,81 @@
+---
+title: Wait for
+description: Wait for conditional element states before or after actions.
+icon: stopwatch
+---
+
+Wait for elements to reach specific states: clickable, displayed, enabled, or existing in the DOM. This is available as a step modifier on most actions, not a direct action itself. Use it to add smart conditional waits to interactions and assertions.
+
+## Channels
+
+- ✅ Web
+- ✅ Smartphone (Android/iOS)
+- ✅ Cellular
+
+All channels support wait conditions equally.
+
+## Parameters
+
+Wait for conditions can be applied to any action with a `wait_for` field. Supported conditions:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| clickable | Object | Wait until element is visible and clickable (not disabled). Has `timeout` (ms). |
+| displayed | Object | Wait until element is visible on the page. Has `timeout` (ms). |
+| enabled | Object | Wait until element is enabled (not disabled). Has `timeout` (ms). |
+| exist | Object | Wait until element exists in DOM (visible or not). Has `timeout` (ms) and optional `reverse` (bool). |
+
+## Example
+
+```json
+{
+  "type": "click",
+  "inputs": {
+    "locator": {
+      "selector": "#submit-button"
+    },
+    "wait_for": {
+      "clickable": {
+        "timeout": 5000
+      }
+    }
+  }
+}
+```
+
+Reverse wait (wait for element to NOT exist):
+
+```json
+{
+  "type": "assertdisplayed",
+  "inputs": {
+    "locator": {
+      "selector": ".loading-spinner"
+    },
+    "wait_for": {
+      "exist": {
+        "timeout": 10000,
+        "reverse": true
+      }
+    }
+  }
+}
+```
+
+## Notes
+
+- `wait_for` is integrated into most actions (click, input, tap, assertions, extractions). Specify it as a modifier on the action, not as a standalone step.
+- Timeouts are in milliseconds; typical values are 5000–10000 ms.
+- `reverse: true` on `exist` waits for element absence (useful for spinners, modals that disappear).
+- If no timeout is specified, a default timeout applies (typically 10 seconds).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Pause for explicit wait" icon="hourglass" href="/tests/actions/shared/pause">
+    Unconditional pause for fixed durations.
+  </Card>
+  <Card title="Assert element displayed" icon="eye" href="/tests/actions/web/assertdisplayed">
+    Verify element visibility with automatic waits.
+  </Card>
+</Columns>

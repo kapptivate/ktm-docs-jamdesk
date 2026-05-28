@@ -5,13 +5,13 @@ sidebarTitle: Introduction
 icon: rocket
 ---
 
-Kapptivate is a test automation platform for **web**, **mobile**, and **cellular (SIM)** applications. Author a test once and reuse it across the whole delivery lifecycle — non-regression, go-live, CI/CD, and continuous production supervision — on real devices running on-premise.
+Kapptivate is a test automation platform for **web**, **mobile**, **API**, and **cellular (SIM)** applications. Author a test once and reuse it across the whole delivery lifecycle — non-regression, go-live, CI/CD, and continuous production supervision — on real devices running on-premise.
 
 ## Three things Kapptivate does
 
 <Columns cols={3}>
   <Card title="Test" icon="vial" href="/tests/overview">
-    Author end-to-end tests for web, smartphone, and cellular channels using a visual builder, a live recorder, and an action catalog of 30+ step types.
+    Author end-to-end tests for web, smartphone, API, and cellular channels using a visual builder, a live recorder, and an action catalog of 30+ step types.
   </Card>
   <Card title="Run" icon="play" href="/executions/overview">
     Execute tests on demand, in a suite, or from your CI/CD pipeline. Every run produces a detailed result with screenshots, video, steps, and metrics.
@@ -51,9 +51,12 @@ Most platforms force you to keep separate test suites for QA, CI, and production
 
 ## Channels
 
-<Columns cols={3}>
+<Columns cols={2}>
   <Card title="Web" icon="globe" href="/concepts/channels">
     Browser automation with configurable [browser presets](/tests/browser-presets) — user agent, language, window size, headers, cookies, and proxy.
+  </Card>
+  <Card title="API (HTTP)" icon="plug" href="/concepts/channels">
+    Test REST and HTTP services directly — methods (GET / POST / PUT / PATCH / DELETE), custom headers, JSON or raw bodies, response assertions, variable extraction, and per-request timing breakdown.
   </Card>
   <Card title="Smartphone" icon="mobile-screen" href="/concepts/channels">
     Native app testing on real Android and iOS devices with full access to taps, gestures, keyboard, and device properties.
@@ -62,6 +65,10 @@ Most platforms force you to keep separate test suites for QA, CI, and production
     Tests run on physical SIMs — data, USSD flows, and SMS — over real cellular networks.
   </Card>
 </Columns>
+
+<Note>
+  HTTP API steps are available today inside web and mobile tests. API is being promoted to a first-class channel alongside Web — with its own dedicated test type in an upcoming release.
+</Note>
 
 ## Use cases
 

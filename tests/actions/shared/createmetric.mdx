@@ -1,0 +1,63 @@
+---
+title: Create metric
+description: Record a custom performance metric during test execution.
+icon: chart-line
+---
+
+Record custom performance metrics during your test. Metrics are stored in InfluxDB format and can be used for performance monitoring, alerting, and trend analysis across test runs.
+
+## Channels
+
+- ✅ Web
+- ✅ Smartphone (Android/iOS)
+- ✅ Cellular
+
+All channels support metric recording equally.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| measurement | String | Yes | Metric name (e.g., `form_submit_time`, `api_response_ms`). |
+| fields | Object | Yes | Key-value pairs of numeric or boolean values (the actual measurements). |
+| tags | Object | No | Key-value pairs for grouping/filtering metrics (e.g., test name, user type, region). |
+
+## Example
+
+```json
+{
+  "type": "createmetric",
+  "version": "v1.0.0",
+  "inputs": {
+    "measurement": "checkout_duration",
+    "fields": {
+      "duration_ms": 1234,
+      "items_count": 3,
+      "success": true
+    },
+    "tags": {
+      "user_type": "premium",
+      "payment_method": "credit_card"
+    }
+  }
+}
+```
+
+## Notes
+
+- `measurement` is the metric name (e.g., "page_load_time").
+- `fields` contain the actual numeric values or booleans to record.
+- `tags` are optional dimensions for filtering and grouping metrics in dashboards.
+- Metrics are aggregated across test runs for trend analysis and alerting.
+- Common uses: track custom timings, record success/failure flags, measure business outcomes.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Custom step" icon="code" href="/tests/actions/shared/customstep">
+    Compute metric values with custom logic.
+  </Card>
+  <Card title="Test overview" icon="flask" href="/tests/overview">
+    Monitor test performance across runs.
+  </Card>
+</Columns>

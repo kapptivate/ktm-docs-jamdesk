@@ -1,0 +1,64 @@
+---
+title: Double-click
+description: Double-click on an element to trigger double-click handlers.
+icon: hand-pointer
+---
+
+Double-click an element (two rapid clicks). This is useful for triggering double-click event handlers, selecting text, or activating edit modes on elements.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Double-click works on both web and mobile, though it is more commonly used on desktop.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
+| locator.selector | String | No | CSS selector (e.g., `.editable-cell`, `#text-field`). |
+| locator.description | String | No | Human-readable description for AI-driven locating. |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". |
+| wait_for | Condition | No | Wait for a condition before or after double-click (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if element not found. |
+| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+
+## Example
+
+```json
+{
+  "type": "doubleclick",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": ".editable-text" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  }
+}
+```
+
+## Notes
+
+- Double-click emits a `dblclick` event on the target element.
+- Common use cases: text selection, activating inline edit mode, opening editors.
+- On touch devices, double-click may be emulated; behavior depends on the device/browser.
+- Step-level checks (url, loading_time, step_duration) are available.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="hand-pointer" href="/tests/actions/web/click">
+    Single-click elements for standard interactions.
+  </Card>
+  <Card title="Right-click" icon="hand-pointer" href="/tests/actions/web/rightclick">
+    Trigger context menus with a right-click.
+  </Card>
+</Columns>

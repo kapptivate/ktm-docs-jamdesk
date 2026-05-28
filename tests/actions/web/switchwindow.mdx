@@ -1,0 +1,55 @@
+---
+title: Switch window
+description: Switch between open browser windows or tabs.
+icon: square-arrow-out-up-right
+---
+
+Switch the WebDriver context to a different browser window or tab. Use a regex pattern to match the window by URL or title.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ❌ Smartphone
+- ❌ Cellular
+
+Switch window is web-only and applies to multi-window/tab scenarios.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| matcher | Template (regex) | Yes | Regex pattern to match the target window URL or title. Supports templating. |
+| ignore_errors | Boolean | No | If true, step passes even if no matching window is found. |
+
+## Example
+
+```json
+{
+  "type": "switch-window",
+  "version": "v1.0.0",
+  "inputs": {
+    "matcher": "https://example\\.com/dashboard",
+    "ignore_errors": false
+  }
+}
+```
+
+## Notes
+
+- The matcher is a regex pattern that matches against open window URLs or titles.
+- For example, `checkout` matches any window with "checkout" in the URL or title.
+- Case-sensitive by default. Use `(?i)` prefix for case-insensitive matching: `(?i)checkout`.
+- The step fails if no matching window is found (unless `ignore_errors` is true).
+- Common use case: test OAuth flows, payment gateways, or other scenarios requiring interaction with popup windows.
+- Step-level checks (step_duration) are available.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="hand-pointer" href="/tests/actions/web/click">
+    Interact with elements in the switched window.
+  </Card>
+  <Card title="Starting URL" icon="globe" href="/tests/actions/web/startingurl">
+    Navigate to a URL in the switched window.
+  </Card>
+</Columns>

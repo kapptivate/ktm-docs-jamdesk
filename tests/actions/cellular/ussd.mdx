@@ -1,0 +1,79 @@
+---
+title: USSD
+description: Send a USSD menu code and wait for the network response.
+icon: phone
+---
+
+Send a USSD (Unstructured Supplementary Service Data) menu code (e.g., `*150#`) and wait for the response from the network gateway. USSD actions form the basis of menu-driven flows; chain multiple actions together to simulate navigating a carrier's USSD menu system.
+
+## Channels
+
+- ✅ Cellular only
+
+USSD testing is specific to cellular networks on real SIM cards (V1 TestingHouse system).
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| input | String | Yes | USSD code to send (e.g., `*150#`, `#100#`, `1`). |
+| access_technology | String | No | Network technology preference: `GSM`, `GPRS`, `EDGE`, `HSPA`, `UMTS`, `LTE`, `AUTO`. Defaults to `AUTO`. |
+
+## Assertions
+
+Verify the USSD response using any of the following assertion sources:
+
+| Source | Type | Description |
+|--------|------|-------------|
+| message | String | Response text from the USSD gateway. Use string comparisons: `==`, `contains`, `starts_with`, `ends_with`, regex match. |
+| session_status | String | Session state after response: `alive` (menu active), `close` (session closed), `Ussd session closed by operator (+CUSD:2)`, `Unsupported Operation (+CUSD:4)`, `Network Timeout (+CUSD:5)`. |
+| duration | Number | Response time in seconds. Use numeric comparisons: `==`, `<`, `>`, `<=`, `>=`. |
+| access_technology | String | Network technology active during the request: `GSM`, `GPRS`, `EDGE`, `HSPA`, `UMTS`, `LTE`. Verify the technology stayed consistent or switched as expected. |
+| variable | String | Extract and store a value from the response for use in subsequent steps. |
+
+## Example
+
+```json
+{
+  "type": "USSD",
+  "owner": "sim1",
+  "command": {
+    "input": "*150#",
+    "access_technology": "AUTO"
+  },
+  "expected_result": {
+    "message": "Balance: $50.00\n1. Top-up\n2. History"
+  },
+  "assertions": [
+    {
+      "source": "message",
+      "compare": "==",
+      "value": "Balance: $50.00\n1. Top-up\n2. History"
+    },
+    {
+      "source": "session_status",
+      "compare": "==",
+      "value": "alive"
+    }
+  ]
+}
+```
+
+## Notes
+
+- **Menus:** USSD tests typically chain multiple actions to simulate user navigation. Send an initial code (e.g., `*150#`), receive a menu, send a selection (e.g., `1`), and verify the next menu.
+- **Timeouts:** Response timeouts are configurable at run time (not per action). Common timeouts: 30–120 seconds.
+- **Session states:** A response can signal that the session has closed (operator-initiated), the operation is unsupported, or the network timed out. Plan your assertions accordingly.
+- **Access technology:** Verify that requests use the expected network technology. Assertions can enforce that the technology remains constant or allow switching.
+- **Variable extraction:** Extract specific data from responses (e.g., balance, option numbers) using `variable` assertions for dynamic test flows.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="SMS (receive)" icon="message" href="/tests/actions/cellular/sms">
+    Wait for and verify incoming SMS messages on a real SIM.
+  </Card>
+  <Card title="USSD push" icon="phone" href="/tests/actions/cellular/ussd-push">
+    Handle unsolicited USSD messages from the network.
+  </Card>
+</Columns>

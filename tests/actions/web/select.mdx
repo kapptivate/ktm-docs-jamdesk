@@ -1,0 +1,70 @@
+---
+title: Select
+description: Select an option from a dropdown or select list.
+icon: chevrons-up-down
+---
+
+Select an option from a `<select>` dropdown or list element. You can select by visible text, by index, or by matching an attribute.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Select works on both web and mobile devices.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector or XPath for the `<select>` element. |
+| locator.selector | String | No | CSS selector (e.g., `#country-dropdown`, `.form-select`). |
+| locator.description | String | No | Human-readable description for AI-driven locating. |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| by | String | Yes | Selection mode: `visible_text`, `index`, or `attribute`. |
+| visible_text | Object | No | Required if `by` is `visible_text`. Contains `value` (the option text to match). |
+| index | Object | No | Required if `by` is `index`. Contains `value` (0-based option index). |
+| attribute | Object | No | Required if `by` is `attribute`. Contains `name` (attribute name) and `value` (attribute value to match). |
+| wait_for | Condition | No | Wait for a condition before or after select (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if option not found. |
+
+## Example
+
+```json
+{
+  "type": "select",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "#country" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "by": "visible_text",
+    "visible_text": {
+      "value": [{ "type": "value", "data": { "value": "United States" } }]
+    }
+  }
+}
+```
+
+## Notes
+
+- **visible_text mode**: Selects the option with matching visible text (e.g., "Choose Option A").
+- **index mode**: Selects the option at the specified 0-based index (e.g., index 2 = third option).
+- **attribute mode**: Selects the option with a matching attribute (e.g., `data-value="opt1"`).
+- Only one selection mode can be active per step.
+- Step-level checks (step_duration) are available.
+- The `change` event is triggered on the select element after selection.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Input" icon="keyboard" href="/tests/actions/web/input">
+    Type text into input fields.
+  </Card>
+  <Card title="Checkbox" icon="square-check" href="/tests/actions/web/checkbox">
+    Check or uncheck checkboxes.
+  </Card>
+</Columns>

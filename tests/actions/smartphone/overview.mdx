@@ -1,0 +1,72 @@
+---
+title: Smartphone actions
+description: Actions specific to native mobile app tests on Android and iOS.
+icon: mobile-screen
+---
+
+Smartphone actions provide touch-driven interactions and mobile-specific operations for testing native apps on Android and iOS devices. Each action supports both platforms with platform-specific implementations.
+
+## All smartphone actions
+
+| Action | Purpose | Android | iOS | Notes |
+|--------|---------|---------|-----|-------|
+| [Starting App](/tests/actions/smartphone/startingapp) | Set the starting mobile app for your test | ✅ | ✅ | Specifies initial app context via package ID (Android) or bundle ID (iOS). Step 0 in smartphone tests. |
+| [App](/tests/actions/smartphone/app) | Launch or switch to a mobile app mid-test | ✅ | ✅ | Launches a new app or switches between apps during test execution. |
+| [Tap](/tests/actions/smartphone/tap) | Tap an element on the screen | ✅ | ✅ | Selector-based or coordinate-based approach for touch interactions. |
+| [Long Press](/tests/actions/smartphone/longpress) | Long-press an element to trigger context actions | ✅ | ✅ | Configurable duration; triggers long-press menus or native actions. |
+| [Hide Keyboard](/tests/actions/smartphone/hidekeyboard) | Dismiss the virtual keyboard | ✅ | ✅ | Mobile-specific; no parameters required. |
+
+## Platform-specific metadata
+
+### Starting App and App actions
+
+Both `startingapp` and `app` include metadata describing the application:
+
+| Field | Platform | Description | Example |
+|-------|----------|-------------|---------|
+| **package** | Android | Package identifier for the Android app | `com.android.chrome` |
+| **bundle_id** | iOS | Bundle identifier for the iOS app | `com.apple.mobilesafari` |
+| **name** | Both | Internal app name | "Chrome" |
+| **label** | Both | Display label | "Google Chrome" |
+| **version** | Both | App version | "120.0.6099.193" |
+
+### Starting App metadata example
+
+```json
+{
+  "kind": "User",
+  "name": "Chrome",
+  "label": "Google Chrome",
+  "package": "com.android.chrome",
+  "version": "120.0.6099.193"
+}
+```
+
+## Touch vs. Web interactions
+
+Touch actions (tap, longpress) are mobile-specific and work only on smartphones. Their web equivalents differ:
+
+- **Tap** (smartphone) — Touch gesture; native app response
+- **Click** (web) — Mouse click; JavaScript click event
+
+Touch actions use WebDriver's touch actions API to simulate real touch events on mobile devices.
+
+## Shared capabilities
+
+All smartphone actions support these inherited features:
+
+- **Locators**: CSS selector, XPath, or AI-driven element descriptions
+- **Wait conditions**: `wait_for` parameter for pre/post-action waits (clickable, displayed, enabled, exist)
+- **Timeouts**: Configurable element lookup timeout
+- **AI locators**: Enable AI-assisted element matching when selectors are unreliable
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Shared actions" icon="layers" href="/tests/actions/shared/overview">
+    Cross-channel actions (pause, assert, extract) used in all test types.
+  </Card>
+  <Card title="Web actions" icon="globe" href="/tests/actions/web/overview">
+    Desktop and browser-specific actions (click, hover, upload).
+  </Card>
+</Columns>

@@ -1,0 +1,65 @@
+---
+title: Click
+description: Click on an element using a selector or AI-driven locator.
+icon: hand-pointer
+---
+
+Click on an element on the page. You can locate the element using a CSS selector, XPath, or an AI-driven description of what you want to click.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Click works on both web and mobile devices.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
+| locator.selector | String | No | CSS selector (e.g., `.button-primary`, `#submit`). |
+| locator.description | String | No | Human-readable description for AI-driven locating (e.g., "the big red submit button"). |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". Defaults to "inherit". |
+| wait_for | Condition | No | Wait for a condition before or after click (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if element not found. |
+| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+
+## Example
+
+```json
+{
+  "type": "click",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": ".submit-button" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  }
+}
+```
+
+## Notes
+
+- Selector strategies: CSS (`.class`, `#id`, `[data-testid="value"]`) or XPath (`//button[text()="Click me"]`).
+- AI locating works best with descriptive phrases like "the green Save button in the footer".
+- `wait_for` conditions allow you to wait until the element is clickable, displayed, enabled, or exists before clicking.
+- Step-level checks (url, loading_time, step_duration) are available.
+- If `ignore_errors` is true, the step passes silently if the element is not found.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Double-click" icon="hand-pointer" href="/tests/actions/web/doubleclick">
+    Click an element twice in rapid succession.
+  </Card>
+  <Card title="Right-click" icon="hand-pointer" href="/tests/actions/web/rightclick">
+    Trigger a context menu with a right-click.
+  </Card>
+</Columns>

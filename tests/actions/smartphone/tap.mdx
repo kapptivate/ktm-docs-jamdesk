@@ -1,0 +1,108 @@
+---
+title: Tap
+description: Tap an element on a mobile app screen.
+icon: hand-pointer
+---
+
+Tap an element on a smartphone app. Tap supports two approaches: element-based (using a selector) or coordinate-based (using pixel coordinates). This is the mobile equivalent of the [click](/tests/actions/web/click) action on web.
+
+## Channels
+
+- ❌ Web
+- ✅ Smartphone (Android/iOS)
+- ❌ Cellular
+
+Tap is smartphone-specific.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Object | Yes | Locator configuration. See below. |
+| locator.approach | Number | No | 0 = selector-based (default), 1 = coordinate-based. |
+| locator.selector | Template (string) | Conditional | CSS selector or XPath. Required if approach=0. |
+| locator.description | Template (string) | No | Human-readable element description for AI or intent. |
+| locator.coordinates | Object | Conditional | {x, y} pixel coordinates. Required if approach=1. |
+| wait_for | Object | No | Condition to wait for before/after tap (clickable, displayed, enabled, exist). |
+
+## Example
+
+<Tabs>
+<Tab label="Selector-based (approach 0)">
+
+```json
+{
+  "type": "tap",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "approach": 0,
+      "selector": "//button[contains(@text, 'Login')]",
+      "description": "Login button"
+    }
+  }
+}
+```
+
+</Tab>
+<Tab label="Coordinate-based (approach 1)">
+
+```json
+{
+  "type": "tap",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "approach": 1,
+      "coordinates": {
+        "x": 320,
+        "y": 680
+      },
+      "description": "Login button"
+    }
+  }
+}
+```
+
+</Tab>
+</Tabs>
+
+## Locator approaches
+
+### Approach 0: Selector-based (default)
+
+Tap the center of an element matched by CSS selector or XPath.
+
+- **selector**: XPath or CSS selector matching a single element
+- **description**: Optional human-readable name for test reports
+- Most reliable for stable UI elements
+
+### Approach 1: Coordinate-based
+
+Tap at absolute pixel coordinates on the screen.
+
+- **coordinates**: {x, y} pixel positions
+- **description**: Optional label describing what is being tapped
+- Useful when selectors are unstable or unavailable
+- Coordinates are relative to device screen resolution
+
+## Notes
+
+- Tap uses native WebDriver touch actions to simulate real touch events on the device.
+- The center of the element is tapped when using approach 0; coordinates are tapped directly for approach 1.
+- Tap can include optional [wait conditions](/tests/actions/shared/waitfor) (e.g., wait for element to be clickable before tapping).
+- If the element is not found (approach 0) or coordinates are off-screen (approach 1), the step fails.
+- Coordinates and selectors support [templating](/concepts/core-concepts) for dynamic positioning.
+- Step-level checks (step_duration) are available after tap completes.
+- Tap is similar to [click](/tests/actions/web/click) on web but uses touch events instead of mouse clicks.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Long-press" icon="hand-pointer-click" href="/tests/actions/smartphone/longpress">
+    Hold down a touch to trigger context menus or native actions.
+  </Card>
+  <Card title="Assert element" icon="circle-check" href="/tests/actions/smartphone/assertdisplayed">
+    Verify elements are visible after tapping.
+  </Card>
+</Columns>

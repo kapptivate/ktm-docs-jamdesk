@@ -1,0 +1,58 @@
+---
+title: Web actions
+description: Actions specific to browser and web-based tests.
+icon: globe
+---
+
+Web actions are interactions, navigations, and assertions designed for desktop and tablet browsers. They enable you to test web applications by clicking elements, typing text, navigating URLs, and verifying page state.
+
+## Starting & navigation
+
+| Action | Purpose |
+|--------|---------|
+| [Starting URL](/tests/actions/web/startingurl) | Navigate to a URL at the start of a web test. Always the first step. |
+| [Switch window](/tests/actions/web/switchwindow) | Switch the WebDriver context between open browser windows or tabs. |
+
+## Mouse interactions
+
+| Action | Purpose |
+|--------|---------|
+| [Click](/tests/actions/web/click) | Click on an element using a selector or AI-driven locator. |
+| [Double-click](/tests/actions/web/doubleclick) | Double-click an element to trigger double-click event handlers. |
+| [Right-click](/tests/actions/web/rightclick) | Right-click an element to open a context menu. |
+| [Hover](/tests/actions/web/hover) | Move the mouse over an element to trigger hover states. |
+
+## Forms & input
+
+| Action | Purpose |
+|--------|---------|
+| [Select](/tests/actions/web/select) | Select an option from a dropdown or select list. |
+| [Upload file](/tests/actions/web/uploadfile) | Upload a file via an HTML file input element. |
+
+## Shared actions
+
+Web tests also support [shared actions](/tests/actions/shared/overview) for data extraction, assertions, variables, pausing, and custom code. Examples include [input](/tests/actions/web/input) (type text), [checkbox](/tests/actions/web/checkbox) (toggle checkboxes), [assertdisplayed](/tests/actions/web/assertdisplayed) (verify elements), [gettext](/tests/actions/web/gettext) (extract text), and many more.
+
+## Channel support summary
+
+| Action | Web | Smartphone | Cellular |
+|--------|-----|-----------|----------|
+| Starting URL | ✅ | — | — |
+| Click | ✅ | ✅ | — |
+| Double-click | ✅ | ✅ | — |
+| Right-click | ✅ | — | — |
+| Hover | ✅ | — | — |
+| Switch window | ✅ | — | — |
+| Select | ✅ | ✅ | — |
+| Upload file | ✅ | — | — |
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Shared actions" icon="list-check" href="/tests/actions/shared/overview">
+    Input text, extract data, assert elements, and more.
+  </Card>
+  <Card title="Smartphone actions" icon="smartphone" href="/tests/actions/smartphone/overview">
+    Actions for mobile and touch-based testing.
+  </Card>
+</Columns>

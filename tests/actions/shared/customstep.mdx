@@ -1,0 +1,65 @@
+---
+title: Custom step
+description: Execute custom code (JavaScript or Python) during test execution.
+icon: code
+---
+
+Execute arbitrary code in the test context to perform complex logic, conditional branching, or specialized interactions that aren't available via standard actions. Web tests run JavaScript; mobile tests can run JavaScript or Python.
+
+## Channels
+
+- ✅ Web (JavaScript)
+- ✅ Smartphone (JavaScript or Python)
+- ✅ Cellular
+
+All channels support custom code execution.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| script | String | Yes | JavaScript (web) or Python/JavaScript (mobile) code to execute. |
+
+## Example
+
+Web (JavaScript) — extract data via DOM query:
+
+```json
+{
+  "type": "customstep",
+  "version": "v1.0.0",
+  "inputs": {
+    "script": "const items = document.querySelectorAll('.item'); const count = items.length; test.setVariable('item_count', count.toString());"
+  }
+}
+```
+
+Mobile (Python) — conditional logic:
+
+```json
+{
+  "type": "customstep",
+  "inputs": {
+    "script": "element = find_element('button'); if element.is_displayed(): element.click(); test.set_variable('button_clicked', 'true')"
+  }
+}
+```
+
+## Notes
+
+- Web scripts have access to the DOM, page globals, and `test` object methods.
+- Mobile scripts have access to native element APIs and `test` object methods.
+- Unhandled exceptions in the script will fail the step.
+- Use `test.setVariable(name, value)` to store results for later steps.
+- Custom steps are powerful but harder to debug than standard actions—use them as a last resort.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create performance metric" icon="chart-line" href="/tests/actions/shared/createmetric">
+    Record metrics alongside custom logic.
+  </Card>
+  <Card title="Set a variable" icon="tag" href="/tests/actions/shared/setvariable">
+    Store data for use in subsequent steps.
+  </Card>
+</Columns>

@@ -1,0 +1,64 @@
+---
+title: Right-click
+description: Right-click an element to trigger a context menu.
+icon: hand-pointer
+---
+
+Right-click on an element to open a context menu. This triggers the `contextmenu` event, which is commonly used to display custom menus or options.
+
+## Channels
+
+- ✅ Web (desktop/tablet browsers)
+- ❌ Smartphone
+- ❌ Cellular
+
+Right-click is web-only; smartphones typically use long-press instead.
+
+## Parameters
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
+| locator.selector | String | No | CSS selector (e.g., `.menu-item`, `#table-row`). |
+| locator.description | String | No | Human-readable description for AI-driven locating. |
+| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
+| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". |
+| wait_for | Condition | No | Wait for a condition before or after right-click (clickable, displayed, enabled, exist). |
+| ignore_errors | Boolean | No | If true, step passes even if element not found. |
+| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+
+## Example
+
+```json
+{
+  "type": "rightclick",
+  "version": "v1.0.0",
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": ".table-row" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  }
+}
+```
+
+## Notes
+
+- Right-click emits a `contextmenu` event.
+- The context menu state must be verified separately using [assertdisplayed](/tests/actions/web/assertdisplayed) or similar.
+- Step-level checks (url, loading_time, step_duration) are available.
+- Not available on smartphones or cellular channels.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="hand-pointer" href="/tests/actions/web/click">
+    Perform standard single-clicks on elements.
+  </Card>
+  <Card title="Switch window" icon="square-arrow-out-up-right" href="/tests/actions/web/switchwindow">
+    Switch between open browser windows or tabs.
+  </Card>
+</Columns>
