@@ -2,12 +2,29 @@
   "$schema": "https://jamdesk.com/docs.json",
   "name": "Kapptivate",
   "description": "Kapptivate product documentation",
-  "theme": "jam",
+  "theme": "pulsar",
   "tabsPosition": "top",
   "colors": {
-    "primary": "#1C4A47",
-    "light": "#2E6B66",
-    "dark": "#123330"
+    "primary": "#ED7846",
+    "light": "#F4986D",
+    "dark": "#D96A3A"
+  },
+  "background": {
+    "decoration": "none",
+    "color": {
+      "light": "#FFFFFF",
+      "dark": "#1C1812"
+    }
+  },
+  "fonts": {
+    "heading": { "family": "Geist" },
+    "body": { "family": "Geist" }
+  },
+  "favicon": "/images/favicon.svg",
+  "logo": {
+    "light": "/images/logo-dark.svg",
+    "dark": "/images/logo-light.svg",
+    "href": "https://kapptivate.com"
   },
   "api": {
     "openapi": [
@@ -49,6 +66,7 @@
           {
             "group": "Get started",
             "icon": "rocket",
+            "expanded": true,
             "pages": [
               "introduction",
               "quickstart",
@@ -58,6 +76,7 @@
           {
             "group": "Concepts",
             "icon": "lightbulb",
+            "expanded": false,
             "pages": [
               "concepts/core-concepts",
               "concepts/channels",
@@ -68,6 +87,7 @@
           {
             "group": "Test",
             "icon": "vial",
+            "expanded": false,
             "pages": [
               "tests/overview",
               "tests/create",
@@ -162,6 +182,7 @@
           {
             "group": "Run",
             "icon": "play",
+            "expanded": false,
             "pages": [
               "executions/overview",
               "executions/results"
@@ -170,6 +191,7 @@
           {
             "group": "Monitor",
             "icon": "gauge",
+            "expanded": false,
             "pages": [
               "monitoring/overview",
               "monitoring/create",
@@ -180,6 +202,7 @@
           {
             "group": "Production supervision",
             "icon": "eye",
+            "expanded": false,
             "pages": [
               "monitoring/realtime-status",
               "monitoring/supervision",
@@ -198,6 +221,7 @@
           {
             "group": "Equipment",
             "icon": "server",
+            "expanded": false,
             "pages": [
               "equipment/agents",
               "equipment/devices-lab"
@@ -206,6 +230,7 @@
           {
             "group": "Administration",
             "icon": "gear",
+            "expanded": false,
             "pages": [
               "administration/account",
               "administration/products",
