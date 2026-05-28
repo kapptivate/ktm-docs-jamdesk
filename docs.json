@@ -52,7 +52,6 @@
             "pages": [
               "introduction",
               "quickstart",
-              "concepts/core-concepts",
               "concepts/interface"
             ]
           },
@@ -60,6 +59,7 @@
             "group": "Concepts",
             "icon": "lightbulb",
             "pages": [
+              "concepts/core-concepts",
               "concepts/channels",
               "concepts/agents",
               "concepts/devices-and-statuses"
