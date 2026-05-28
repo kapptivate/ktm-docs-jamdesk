@@ -251,6 +251,19 @@
         ]
       },
       {
+        "tab": "MCP",
+        "icon": "robot",
+        "groups": [
+          {
+            "group": "MCP",
+            "icon": "robot",
+            "pages": [
+              "mcp/overview"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "CLI",
         "icon": "terminal",
         "groups": [
