@@ -11,9 +11,10 @@ The Kapptivate MCP server exposes test automation, monitoring, and platform data
 
 The Kapptivate MCP server is hosted at:
 
-```
-https://mcp.kapptivate.com/mcp
-```
+<div className="url-banner" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', borderRadius: '8px', fontSize: '14px' }}>
+  <i className="fa-light fa-link" style={{ flexShrink: 0 }} />
+  <span style={{ fontFamily: 'Geist Mono, monospace' }}>https://mcp.kapptivate.com/mcp</span>
+</div>
 
 Authentication uses a personal access token tied to your Kapptivate account.
 
@@ -30,9 +31,10 @@ Authentication uses a personal access token tied to your Kapptivate account.
   </Step>
 </Steps>
 
-<Warning>
-  Your personal token grants the same access as your Kapptivate account. Treat it like a password — never commit it to a repository or share it in plain text.
-</Warning>
+<div className="url-banner" style={{ display: 'flex', alignItems: 'baseline', gap: '12px', padding: '12px 16px', borderRadius: '8px', fontSize: '14px' }}>
+  <i className="fa-light fa-lock" style={{ flexShrink: 0 }} />
+  <span>Your personal token grants the same access as your Kapptivate account. Treat it like a password — never commit it to a repository or share it in plain text.</span>
+</div>
 
 ## Coming soon
 

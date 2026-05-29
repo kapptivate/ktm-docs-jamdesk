@@ -1,0 +1,117 @@
+/* Custom styles for Kapptivate docs */
+
+/* ===== DARK MODE — Kapptivate warm brown tokens ===== */
+.dark {
+  /* Surfaces */
+  --color-bg-primary: #15110D;
+  --color-bg-secondary: #25201A;
+  --color-bg-tertiary: #2E2620;
+  --color-bg-hover: #382F23;
+
+  /* Borders */
+  --color-border: #382F23;
+  --color-border-hover: #4A3D2D;
+
+  /* Text — warm cream axis */
+  --color-text-primary: #F2EDE0;
+  --color-text-secondary: #C4B092;
+  --color-text-tertiary: #897354;
+  --color-text-muted: #897354;
+  --color-marker: #897354;
+
+  /* Accent — brand orange */
+  --color-accent: #ED7846;
+  --color-accent-hover: #D26334;
+  --color-accent-light: rgba(237, 120, 70, 0.10);
+  --color-accent-text: #ED7846;
+
+  /* Code blocks — inline */
+  --color-code-bg: #25201A;
+  --color-code-border: #382F23;
+  --color-code-text: #F2EDE0;
+
+  /* Code panels — container chrome */
+  --code-panel-bg: #1C1812;
+  --code-panel-header-bg: #25201A;
+  --code-panel-border: #4A3D2D;
+  --code-panel-text: #F2EDE0;
+  --code-panel-text-muted: #897354;
+  --code-panel-tab-active-bg: #1C1812;
+  --code-panel-tab-hover-bg: #2E2620;
+
+  /* Semantic — Warning */
+  --color-warning-bg: rgba(237, 120, 70, 0.10);
+  --color-warning-border: rgba(237, 120, 70, 0.25);
+  --color-warning-text: #F2EDE0;
+
+  /* Semantic — Error (lifted for dark) */
+  --color-error-bg: rgba(232, 87, 81, 0.10);
+  --color-error-border: rgba(232, 87, 81, 0.30);
+  --color-error-text: #E85751;
+
+  /* Semantic — Success (lifted for dark) */
+  --color-success-bg: rgba(43, 199, 150, 0.12);
+  --color-success-border: rgba(43, 199, 150, 0.30);
+  --color-success-text: #2BC796;
+
+  /* Semantic — Info */
+  --color-info-bg: rgba(188, 174, 152, 0.08);
+  --color-info-border: rgba(188, 174, 152, 0.22);
+  --color-info-text: #C4B092;
+
+  /* Semantic — Note (blue) */
+  --color-note-bg: rgba(59, 130, 246, 0.10);
+  --color-note-border: rgba(59, 130, 246, 0.25);
+  --color-note-text: #93c5fd;
+}
+
+/* Force dark warning/banner text on all children */
+.dark div[class*="warning-bg"] .callout-content,
+.dark div[class*="warning-bg"] .callout-content *,
+.dark div[class*="warning-bg"] i {
+  color: #F2EDE0 !important;
+}
+
+/* ===== LIGHT MODE — Warning callout override ===== */
+:root {
+  --color-warning-bg: #FFF4EB !important;
+  --color-warning-border: #FBD6C2 !important;
+  --color-warning-text: #B14B1F !important;
+}
+
+/* Force light warning text on all children */
+div[class*="warning-bg"] .callout-content,
+div[class*="warning-bg"] .callout-content *,
+div[class*="warning-bg"] i {
+  color: #B14B1F !important;
+}
+
+/* ===== Active tab ===== */
+.nav-tab-link[class*="font-semibold"] {
+  background-color: rgba(237, 120, 70, 0.12) !important;
+  box-shadow: inset 0 0 0 0.5px rgba(237, 120, 70, 0.2) !important;
+}
+
+.dark .nav-tab-link[class*="font-semibold"] {
+  background-color: rgba(237, 120, 70, 0.15) !important;
+  box-shadow: inset 0 0 0 0.5px rgba(237, 120, 70, 0.25) !important;
+}
+
+/* ===== URL banner ===== */
+.url-banner {
+  background-color: rgba(177, 75, 31, 0.08);
+  border: 1px solid rgba(177, 75, 31, 0.18);
+  color: #B14B1F;
+}
+
+.dark .url-banner {
+  background-color: rgba(237, 120, 70, 0.10);
+  border: 1px solid rgba(237, 120, 70, 0.25);
+  color: #F2EDE0;
+}
+
+/* ===== Code blocks — override Shiki inline blue background ===== */
+.dark pre.shiki,
+.dark .shiki {
+  background-color: #1C1812 !important;
+}
