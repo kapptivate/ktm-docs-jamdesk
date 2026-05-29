@@ -19,8 +19,8 @@
   "styling": {
     "codeblocks": {
       "theme": {
-        "dark": "catppuccin-mocha",
-        "light": "catppuccin-latte"
+        "dark": "vitesse-dark",
+        "light": "vitesse-light"
       }
     }
   },

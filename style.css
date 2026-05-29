@@ -59,10 +59,10 @@
   --color-info-border: rgba(188, 174, 152, 0.22);
   --color-info-text: #C4B092;
 
-  /* Semantic — Note (blue) */
-  --color-note-bg: rgba(59, 130, 246, 0.10);
-  --color-note-border: rgba(59, 130, 246, 0.25);
-  --color-note-text: #93c5fd;
+  /* Semantic — Note (warm) */
+  --color-note-bg: rgba(237, 120, 70, 0.10);
+  --color-note-border: rgba(237, 120, 70, 0.25);
+  --color-note-text: #F2EDE0;
 }
 
 /* Force dark warning/banner text on all children */
@@ -86,6 +86,19 @@
 .light pre.shiki,
 .light .shiki {
   background-color: #FAF5EE !important;
+}
+
+/* ===== LIGHT MODE — Note callout override ===== */
+:root {
+  --color-note-bg: #FFF4EB !important;
+  --color-note-border: #FBD6C2 !important;
+  --color-note-text: #B14B1F !important;
+}
+
+div[class*="note-bg"] .callout-content,
+div[class*="note-bg"] .callout-content *,
+div[class*="note-bg"] i {
+  color: #B14B1F !important;
 }
 
 /* ===== LIGHT MODE — Info callout override ===== */
@@ -141,15 +154,60 @@ div[class*="warning-bg"] i {
 }
 
 /* ===== Sidebar border full height ===== */
-nav[class*="sidebar"],
-aside[class*="sidebar"] {
-  border-right: 1px solid var(--color-border, #E5DACE);
-  min-height: 100vh;
+#sidebar,
+nav,
+aside,
+[class*="sidebar"],
+[class*="Sidebar"] {
+  border-right: none !important;
+}
+
+main {
+  border-left: 1px solid var(--color-border, #E5DACE);
+}
+
+/* ===== Smooth hover transitions ===== */
+a,
+button,
+[role="button"],
+[class*="sidebar"] a,
+[class*="sidebar"] button,
+nav a,
+nav button {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
 /* ===== Remove browser focus outline on links ===== */
 a:focus-visible {
   outline: none;
+}
+
+/* ===== Inline code inside callouts — no white background ===== */
+div[class*="callout"] code,
+div[class*="-bg"] code {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  color: inherit !important;
+}
+
+.dark div[class*="callout"] code,
+.dark div[class*="-bg"] code {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: inherit !important;
+}
+
+/* ===== Steps — reduce gap between title and content ===== */
+[style*="font-weight:600"][style*="line-height:28px"],
+[style*="font-weight: 600"][style*="line-height: 28px"] {
+  margin-bottom: 0 !important;
+}
+
+[style*="font-weight:600"][style*="line-height:28px"] + p,
+[style*="font-weight: 600"][style*="line-height: 28px"] + p,
+[style*="font-weight:600"][style*="line-height:28px"] + div,
+[style*="font-weight: 600"][style*="line-height: 28px"] + div {
+  margin-top: 0.25rem !important;
 }
 
 /* ===== Code blocks — override Shiki inline blue background ===== */
