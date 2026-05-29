@@ -1,23 +1,23 @@
 /* Custom styles for Kapptivate docs */
 
-/* ===== DARK MODE — Kapptivate warm brown tokens ===== */
+/* ===== DARK MODE — Kapptivate neutral charcoal tokens ===== */
 .dark {
-  /* Surfaces */
-  --color-bg-primary: #15110D;
-  --color-bg-secondary: #25201A;
-  --color-bg-tertiary: #2E2620;
-  --color-bg-hover: #382F23;
+  /* Surfaces — neutral charcoal, warm whisper (R > B by 0-4) */
+  --color-bg-primary: #0D0D0C;
+  --color-bg-secondary: #131312;
+  --color-bg-tertiary: #1A1A19;
+  --color-bg-hover: #1A1A19;
 
-  /* Borders */
-  --color-border: #382F23;
-  --color-border-hover: #4A3D2D;
+  /* Borders — 3 levels: subtle / standard / emphasis */
+  --color-border: #262625;
+  --color-border-hover: #494846;
 
   /* Text — warm cream axis */
   --color-text-primary: #F2EDE0;
-  --color-text-secondary: #C4B092;
-  --color-text-tertiary: #897354;
-  --color-text-muted: #897354;
-  --color-marker: #897354;
+  --color-text-secondary: #B5AC95;
+  --color-text-tertiary: #80776A;
+  --color-text-muted: #80776A;
+  --color-marker: #80776A;
 
   /* Accent — brand orange */
   --color-accent: #ED7846;
@@ -26,18 +26,18 @@
   --color-accent-text: #ED7846;
 
   /* Code blocks — inline */
-  --color-code-bg: #25201A;
-  --color-code-border: #382F23;
+  --color-code-bg: #1A1A19;
+  --color-code-border: #383735;
   --color-code-text: #F2EDE0;
 
   /* Code panels — container chrome */
-  --code-panel-bg: #1C1812;
-  --code-panel-header-bg: #25201A;
-  --code-panel-border: #4A3D2D;
+  --code-panel-bg: #090908;
+  --code-panel-header-bg: #131312;
+  --code-panel-border: #383735;
   --code-panel-text: #F2EDE0;
-  --code-panel-text-muted: #897354;
-  --code-panel-tab-active-bg: #1C1812;
-  --code-panel-tab-hover-bg: #2E2620;
+  --code-panel-text-muted: #80776A;
+  --code-panel-tab-active-bg: #090908;
+  --code-panel-tab-hover-bg: #1A1A19;
 
   /* Semantic — Warning */
   --color-warning-bg: rgba(237, 120, 70, 0.10);
@@ -55,9 +55,9 @@
   --color-success-text: #2BC796;
 
   /* Semantic — Info */
-  --color-info-bg: rgba(188, 174, 152, 0.08);
-  --color-info-border: rgba(188, 174, 152, 0.22);
-  --color-info-text: #C4B092;
+  --color-info-bg: rgba(181, 172, 149, 0.08);
+  --color-info-border: rgba(181, 172, 149, 0.22);
+  --color-info-text: #B5AC95;
 
   /* Semantic — Note (warm) */
   --color-note-bg: rgba(237, 120, 70, 0.10);
@@ -166,6 +166,62 @@ main {
   border-left: 1px solid var(--color-border, #E5DACE);
 }
 
+/* ===== Cards — full redesign ===== */
+
+/* Description text */
+.card-content,
+.card-content * {
+  font-size: 0.75rem !important;
+  line-height: 1.35 !important;
+  opacity: 0.7 !important;
+}
+
+div.card-content[style] {
+  font-size: 0.75rem !important;
+}
+
+/* Inner container (parent of card-content) */
+.card-content,
+.card-content ~ *,
+.card-content + * {
+  margin: 0 !important;
+}
+
+/* Target card containers via :has(.card-content) */
+:has(> .card-content) {
+  padding: 0.625rem 0.75rem !important;
+  gap: 0.125rem !important;
+}
+
+/* Icon inside card */
+:has(> .card-content) > i {
+  font-size: 0.875rem !important;
+  margin-bottom: 0.125rem !important;
+  opacity: 0.7 !important;
+}
+
+/* Title inside card */
+:has(> .card-content) > div[style*="font-size"] {
+  font-size: 0.8125rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Card link wrapper */
+a:has(.card-content) {
+  border-radius: 8px !important;
+  transition: border-color 0.15s ease, background-color 0.15s ease !important;
+}
+
+a:has(.card-content):hover {
+  border-color: var(--color-accent, #ED7846) !important;
+  background: rgba(237, 120, 70, 0.04) !important;
+}
+
+.dark a:has(.card-content):hover {
+  border-color: #ED7846 !important;
+  background: rgba(237, 120, 70, 0.08) !important;
+}
+
 /* ===== Smooth hover transitions ===== */
 a,
 button,
@@ -213,5 +269,5 @@ div[class*="-bg"] code {
 /* ===== Code blocks — override Shiki inline blue background ===== */
 .dark pre.shiki,
 .dark .shiki {
-  background-color: #1C1812 !important;
+  background-color: #090908 !important;
 }
