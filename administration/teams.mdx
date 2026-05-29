@@ -1,129 +1,16 @@
 ---
 title: Teams
 description: Group users and grant access to products through roles.
-sidebarTitle: Teams
-icon: people-group
+sidebarTitle: Overview
 ---
 
-Teams group users together and assign products and roles that all team members automatically inherit. This streamlines access management by letting you control permissions at the team level instead of assigning each user individually.
+Teams group users together and assign products and roles that all team members automatically inherit. Instead of managing access for each user individually, you set it once at the team level and every member gets the same permissions.
 
-## Create a team
+## What you can do
 
-When you create a team, you add members, assign products, and set roles that everyone in the team will have.
+- **[Create a team](/administration/teams/create)** — Set up a new team with members, products, and roles in one step.
+- **[Edit a team](/administration/teams/edit)** — Update team details, add or remove members, or change access assignments.
+- **[Members and access](/administration/teams/access)** — Add members and assign products and roles so everyone inherits the right permissions.
+- **[Search and manage](/administration/teams/manage)** — Find teams, view details, duplicate existing teams, or delete teams you no longer need.
 
-To create a team:
-
-1. Go to Administration > Teams
-2. Click "Create team"
-3. In the About section:
-   - Enter a team name
-   - The slug is auto-generated in kebab-case and cannot be changed
-4. In the Members section:
-   - Click "Add members" to select users from a modal picker
-   - Search by name or email to find members faster
-5. In the Manage Access section:
-   - Select one or more roles from the dropdown
-   - Select one or more products from the dropdown
-6. Click "Create"
-
-All members you add inherit the roles and products you assign to the team.
-
-## Edit a team
-
-You can update team details, add or remove members, or change product and role assignments.
-
-To edit a team:
-
-1. Go to Administration > Teams
-2. Click the team card to open its edit page
-3. Make your changes:
-   - **About** — Update the team name (slug cannot be changed)
-   - **Members** — Add or remove team members
-   - **Access** — Change assigned products or roles
-4. Click "Save Changes"
-
-Changes take effect immediately. Members instantly inherit any new products or roles you assign.
-
-## Add members to a team
-
-Members you add to a team inherit all the team's product access and roles.
-
-1. Open the team for editing
-2. Scroll to Members
-3. Click "Add members"
-4. In the modal, search for and select one or more users
-5. Click "Confirm"
-6. Click "Save Changes"
-
-The new members can now access all products assigned to the team with their inherited roles.
-
-## Assign products to a team
-
-Products assigned to a team become accessible to all team members. You can assign multiple products.
-
-1. Open the team for editing
-2. Scroll to Manage Access
-3. In the "Select products" dropdown, choose one or more products
-4. Click "Save Changes"
-
-All current and future team members inherit access to these products.
-
-## Assign roles to a team
-
-Roles assigned to a team define what permissions members have. You can assign multiple roles.
-
-1. Open the team for editing
-2. Scroll to Manage Access
-3. In the "Select roles" dropdown, choose one or more roles
-4. Click "Save Changes"
-
-All team members inherit these roles and the permissions they grant.
-
-## Duplicate a team
-
-You can clone an existing team to create a new one with the same members, products, and roles, then customize it as needed.
-
-1. Go to Administration > Teams
-2. Hover over a team card to reveal the action menu
-3. Click "Duplicate"
-4. The system creates a new team with a slightly modified name (e.g., "Team Copy")
-5. Edit the new team to customize its name, members, or access
-
-Duplicating is useful when you need a team with a similar structure but different scope.
-
-## Delete a team
-
-Deleting a team removes it permanently and cancels its product access for all members. This action cannot be undone.
-
-1. Go to Administration > Teams
-2. Hover over a team card to reveal the action menu
-3. Click "Delete"
-4. Confirm in the alert dialog
-
-Members lose access to products they inherited from the deleted team. They retain access if they have direct product assignments or belong to other teams.
-
-## Filter and search teams
-
-The teams list is displayed as a card grid with options to search.
-
-- **Search** — Enter a team name to filter (updates in real-time)
-- **Card display** — Shows team name, member count, and product icons with a tooltip showing full product list
-
-## View team details
-
-Each team card displays:
-- **Team name** — Click to edit
-- **Member count** — Icon and number of members
-- **Products** — Icon list showing assigned products; hover to see full names if truncated
-- **Action menu** — Edit, Duplicate, Delete options
-
-## What's Next?
-
-<Columns cols={2}>
-  <Card title="Roles" icon="user-shield" href="/administration/roles">
-    Create custom roles with specific permissions that you can assign to teams and users.
-  </Card>
-  <Card title="Products" icon="box" href="/administration/products">
-    Create and manage products so you can assign them to teams for member access.
-  </Card>
-</Columns>
+Teams work together with [Roles](/administration/roles) and [Products](/administration/products) to form your access management structure. Define what permissions exist in Roles, define what resources exist in Products, and use Teams to tie them together for groups of users.

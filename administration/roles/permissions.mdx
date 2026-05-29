@@ -1,0 +1,36 @@
+---
+title: Permissions
+description: Learn how permission groups, dependencies, and restrictions work when configuring roles.
+---
+
+Roles organize permissions into logical groups that control access to platform features. Understanding how these groups and dependencies work helps you build roles that give users exactly the access they need.
+
+## Permission groups
+
+Each role is built from five permission groups:
+
+- **Administration** — View and edit the admin panel, manage users, teams, and products
+- **Events** — View event logs and admin-level event access
+- **Testing** — View and create manual and automated tests
+- **Monitoring** — View monitoring dashboards, analytics, and incident management
+- **Beta Features** — Access experimental features
+
+Each permission group usually has a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically — granting Edit access always includes View access.
+
+## Permission dependencies
+
+The system enforces permission logic automatically:
+
+- **Edit implies View** — If you grant Edit access to a feature, View is automatically enabled
+- **Cascading dependencies** — Unchecking View automatically unchecks the corresponding Edit permission
+- **Disabled permissions** — Permissions you don't have are shown as disabled checkboxes with a tooltip explaining why
+
+This ensures role permissions are always consistent and follow a logical hierarchy.
+
+## Permission restrictions
+
+You can only assign permissions that you yourself already have. Permissions you don't have are shown as disabled checkboxes.
+
+For example, if you have "View Operator Admin" but not "Edit Operator Admin", you can create roles with View but not Edit for that permission.
+
+Super administrators can assign any permission without restrictions.

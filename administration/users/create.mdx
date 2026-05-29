@@ -1,0 +1,38 @@
+---
+title: Create a user
+description: Add new users to your workspace with a profile, team assignments, and product access.
+---
+
+When you create a user, you set their basic profile, assign them to teams, and optionally grant them direct product access.
+
+## Create a new user
+
+<Steps>
+  <Step title="Open the creation form">
+    Go to **Administration > Users** and click **Create user**.
+  </Step>
+  <Step title="Fill in the profile">
+    In the Profile section:
+    - Enter a username (must be unique; the system validates as you type)
+    - Enter first and last name
+    - Enter an email address (must be unique)
+  </Step>
+  <Step title="Assign teams">
+    In the Teams section, click **Add teams** and select one or more teams.
+  </Step>
+  <Step title="Grant product access (optional)">
+    In the Product Access section, select products to give the user direct access. If you select a product, assign a role for that product.
+
+    Users inherit product access from team memberships automatically, so you don't always need to assign products directly.
+  </Step>
+  <Step title="Set the security policy">
+    In the Security Policy section, choose a security policy. This defaults to your workspace's default policy.
+  </Step>
+  <Step title="Save">
+    Click **Create** to add the user.
+  </Step>
+</Steps>
+
+<Info>
+The system detects if you're adding a user who already exists in your workspace. If their username or email matches an existing user, the form switches to "add to operator" mode and auto-fills their profile from the system.
+</Info>

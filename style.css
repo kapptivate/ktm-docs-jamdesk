@@ -72,6 +72,36 @@
   color: #F2EDE0 !important;
 }
 
+/* ===== LIGHT MODE — Code panels warm beige ===== */
+:root {
+  --code-panel-bg: #FAF5EE;
+  --code-panel-header-bg: #F3ECE2;
+  --code-panel-border: #E5DACE;
+  --code-panel-text: #3D3229;
+  --code-panel-text-muted: #897354;
+  --code-panel-tab-active-bg: #FAF5EE;
+  --code-panel-tab-hover-bg: #F0E8DC;
+}
+
+.light pre.shiki,
+.light .shiki {
+  background-color: #FAF5EE !important;
+}
+
+/* ===== LIGHT MODE — Info callout override ===== */
+:root {
+  --color-info-bg: #FFF4EB !important;
+  --color-info-border: #FBD6C2 !important;
+  --color-info-text: #B14B1F !important;
+}
+
+/* Force light info text on all children */
+div[class*="info-bg"] .callout-content,
+div[class*="info-bg"] .callout-content *,
+div[class*="info-bg"] i {
+  color: #B14B1F !important;
+}
+
 /* ===== LIGHT MODE — Warning callout override ===== */
 :root {
   --color-warning-bg: #FFF4EB !important;
@@ -108,6 +138,18 @@ div[class*="warning-bg"] i {
   background-color: rgba(237, 120, 70, 0.10);
   border: 1px solid rgba(237, 120, 70, 0.25);
   color: #F2EDE0;
+}
+
+/* ===== Sidebar border full height ===== */
+nav[class*="sidebar"],
+aside[class*="sidebar"] {
+  border-right: 1px solid var(--color-border, #E5DACE);
+  min-height: 100vh;
+}
+
+/* ===== Remove browser focus outline on links ===== */
+a:focus-visible {
+  outline: none;
 }
 
 /* ===== Code blocks — override Shiki inline blue background ===== */

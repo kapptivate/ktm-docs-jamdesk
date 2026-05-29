@@ -1,0 +1,52 @@
+---
+title: Create and edit roles
+description: View default roles, create custom roles with specific permissions, and edit existing roles.
+---
+
+Kapptivate provides default system roles you can reference, and lets you create custom roles with any combination of permissions that fits your workspace.
+
+## View default roles
+
+Default roles are system-provided and read-only. All workspaces have the same default roles available.
+
+To view default roles:
+
+1. Go to Administration > Roles
+2. Scroll through the list to see both default and custom roles
+3. Default roles display a read-only indicator when you try to edit them
+
+Default roles cannot be modified, but you can use them as a reference when creating custom roles.
+
+## Create a custom role
+
+Custom roles let you define exactly which permissions users and teams should have. You can assign permissions in any combination that makes sense for your workspace.
+
+To create a custom role:
+
+1. Go to Administration > Roles
+2. Click "Create role"
+3. Enter a role name
+4. In the Permissions section:
+   - Review each permission group: Administration, Events, Testing, Monitoring, Beta Features
+   - Check the "View" permissions for features users should see
+   - Check the "Edit" permissions for features users should modify
+5. Click "Create"
+
+Remember that Edit implies View — you don't need to manually check both. When you check Edit, View is automatically enabled.
+
+## Edit a custom role
+
+You can modify the permissions of any custom role you've created. Default roles cannot be edited.
+
+To edit a custom role:
+
+1. Go to Administration > Roles
+2. Click the role name to open the editor
+3. Update the permissions as needed
+4. Click "Save"
+
+Your changes take effect immediately for all users and teams with that role.
+
+<Warning>
+If you uncheck a View permission, the corresponding Edit permission is automatically unchecked. Consider the impact on users before removing permissions from a role.
+</Warning>

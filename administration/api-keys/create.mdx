@@ -1,0 +1,24 @@
+---
+title: Create an API key
+description: Generate a new API key and assign it to teams.
+---
+
+API keys authenticate external applications -- such as CI/CD pipelines and third-party services -- with your Kapptivate workspace. Each key is scoped to specific teams and generates a token you use for authentication.
+
+## Create a key
+
+1. Go to **Administration** > **API keys**
+2. Click **Create API key** (top right)
+3. Enter an application name -- this helps you identify what the key is for
+4. Select the teams the key should have access to from the **Teams** dropdown
+5. Click **Create**
+
+After creation, a modal displays the generated token. Copy this token immediately -- it displays only once. If you lose it, you'll need to refresh the token to generate a new one.
+
+## Store the token securely
+
+Store the token in your application or CI/CD environment as an environment variable or secret. Never commit API keys to version control.
+
+<Warning>
+The token is shown only once at creation time. If you close the modal without copying it, you must refresh the token to get a new one.
+</Warning>

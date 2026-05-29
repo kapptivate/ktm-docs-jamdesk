@@ -1,136 +1,16 @@
 ---
 title: Users
 description: Invite users and control their access to teams and products.
-sidebarTitle: Users
-icon: users
+sidebarTitle: Overview
 ---
 
-Users are workspace members who access tests, monitoring, and administration features. This page covers creating and editing users, assigning them to teams and products, setting their roles, and managing their account status.
+Users are workspace members who access tests, monitoring, and administration features. You control who can access your workspace by creating user accounts, assigning them to teams, and setting their roles and security policies.
 
-## Create a user
+## What you can do
 
-When you create a user, you set their basic profile, assign them to teams, and optionally grant them direct product access.
+- **[Create a user](/administration/users/create)** -- add new members to your workspace with a profile, team assignments, and optional product access.
+- **[Edit a user](/administration/users/edit)** -- update any user's profile, teams, product access, roles, or security policy.
+- **[Manage access](/administration/users/access)** -- assign users to teams, grant direct product roles, and apply security policies to control what each user can reach.
+- **[Search and manage](/administration/users/manage)** -- find users with filters and search, deactivate or reactivate accounts, and export user data to CSV.
 
-To create a new user:
-
-1. Go to Administration > Users
-2. Click "Create user"
-3. In the Profile section:
-   - Enter a username (must be unique; the system validates as you type)
-   - Enter first and last name
-   - Enter an email address (must be unique)
-4. In the Teams section:
-   - Click "Add teams" and select one or more teams
-5. In the Product Access section:
-   - Optionally select products to give the user direct access
-   - If you select a product directly, assign a role to them for that product
-6. In the Security Policy section:
-   - Choose a security policy (defaults to your workspace's default policy)
-7. Click "Create"
-
-Users inherit product access from team memberships automatically, so you don't always need to assign products directly. Explicit product roles are optional.
-
-<Info>
-The system detects if you're adding a user who already exists in your workspace. If their username or email matches an existing user, the form switches to "add to operator" mode and auto-fills their profile from the system.
-</Info>
-
-## Edit a user
-
-You can update any user's profile, teams, products, roles, and security policy.
-
-To edit a user:
-
-1. Go to Administration > Users
-2. Click the user's name in the table to open their edit page
-3. Update their information as needed
-4. Click "Save Changes"
-
-You can make individual changes without affecting other properties.
-
-## Assign users to teams
-
-Users in a team inherit that team's product access and roles. This is the most efficient way to control access for multiple users at once.
-
-1. Open a user for editing
-2. Scroll to the Teams section
-3. Click "Add teams" to select one or more teams
-4. Click "Save Changes"
-
-The user now has access to all products assigned to those teams.
-
-## Grant product access with roles
-
-You can assign users directly to products and specify a role for each product. This supplements team-based access.
-
-1. Open a user for editing
-2. Scroll to Product Access
-3. Click "Add products"
-4. Select the products and assign a role to each one
-5. Click "Save Changes"
-
-A user's access to a product can come from team membership, direct product assignment, or both.
-
-## Apply security policies
-
-Security policies control password requirements and authentication rules per user. You set the policy when creating a user and can update it later.
-
-1. Open a user for editing
-2. Scroll to Security Policy
-3. Choose a policy from the dropdown
-4. Click "Save Changes"
-
-If you're adding an existing user to your workspace, the security policy is set to the workspace default and cannot be changed (to confirm).
-
-## Filter and search users
-
-The users list supports multiple ways to find the users you need:
-
-- **Search** — Enter a name, email, or username to filter (updates as you type)
-- **Status** — Filter by Active or Disabled users
-- **Teams** — Select one or more teams to show only their members
-
-The list shows user name and email, teams, products they can access, and their last login time.
-
-## Deactivate a user
-
-Deactivating a user disables their account while preserving all their data. They cannot log in, but you can reactivate them anytime.
-
-1. Go to Administration > Users
-2. Click the user's name or use the Actions menu
-3. Click "Deactivate"
-4. Confirm in the alert dialog
-
-Disabled users appear in the users list with a ban icon. Their team and product access information is hidden until you reactivate them.
-
-## Reactivate a user
-
-You can reactivate any deactivated user to restore their account access.
-
-1. Go to Administration > Users
-2. Filter by "Disabled" status to show deactivated users
-3. Click the user's name or use the Actions menu
-4. Click "Reactivate"
-5. Confirm in the alert dialog
-
-The user can now log in again with their existing credentials.
-
-## Export users to CSV
-
-You can download a list of all users in your workspace with their profile data, teams, and access details.
-
-1. Go to Administration > Users
-2. Click the export button in the table header
-3. Save the CSV file to your computer
-
-The export includes name, email, teams, and product access information for all users.
-
-## What's Next?
-
-<Columns cols={2}>
-  <Card title="Teams" icon="people-group" href="/administration/teams">
-    Create teams and assign products to them so users inherit access based on team membership.
-  </Card>
-  <Card title="Roles" icon="user-shield" href="/administration/roles">
-    Define custom roles with specific permissions to control what users can see and do.
-  </Card>
-</Columns>
+Users inherit product access from their [teams](/administration/teams), so team membership is the most efficient way to manage access at scale. For finer control, assign [roles](/administration/roles) directly to individual users on specific products.

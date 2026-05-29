@@ -1,0 +1,37 @@
+---
+title: View and manage API keys
+description: Search, edit, refresh, and revoke API keys in your workspace.
+---
+
+The API keys list shows all keys created in your workspace. Each row displays the application name, assigned teams, and action buttons for editing and revoking.
+
+## Search API keys
+
+Use the search box to filter keys by application name. Search is case-insensitive and updates in real time.
+
+## Edit an API key
+
+Click the key name or the **Edit** button to open the edit drawer. You can:
+
+- Change the application name
+- Modify team assignments and permissions
+- Revoke the key (from the edit drawer)
+
+Click **Save** to apply changes.
+
+## Refresh a token
+
+If you need a new token for an existing key, click the key to edit it, then click **Refresh Token**. Kapptivate generates a new token and displays it in a modal. The old token becomes invalid immediately.
+
+Copy the new token before closing the modal -- it will not be shown again.
+
+## Revoke an API key
+
+Revoking permanently disables a key. Any applications using it will fail to authenticate.
+
+To revoke:
+
+1. Click **Revoke** on the key row (or edit the key and click **Revoke** in the drawer)
+2. Confirm the revocation in the dialog
+
+This action cannot be undone.

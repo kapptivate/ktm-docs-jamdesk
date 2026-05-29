@@ -16,6 +16,14 @@
       "dark": "#1C1812"
     }
   },
+  "styling": {
+    "codeblocks": {
+      "theme": {
+        "dark": "catppuccin-mocha",
+        "light": "catppuccin-latte"
+      }
+    }
+  },
   "fonts": {
     "heading": { "family": "Geist" },
     "body": { "family": "Geist" }
@@ -24,7 +32,7 @@
   "logo": {
     "light": "/images/logo-dark.svg",
     "dark": "/images/logo-light.svg",
-    "href": "https://kapptivate.com"
+    "href": "/"
   },
   "api": {
     "openapi": [
@@ -231,19 +239,104 @@
             ]
           },
           {
+            "group": "My account",
+            "icon": "user",
+            "expanded": false,
+            "pages": [
+              "administration/account",
+              "administration/account/profile",
+              "administration/account/password",
+              "administration/account/preferences"
+            ]
+          },
+          {
             "group": "Administration",
             "icon": "gear",
             "expanded": false,
             "pages": [
-              "administration/account",
-              "administration/products",
-              "administration/users",
-              "administration/teams",
-              "administration/roles",
-              "administration/notifications",
-              "administration/api-keys",
-              "administration/security-policies",
-              "administration/event-log"
+              {
+                "group": "Products",
+                "icon": "box",
+                "pages": [
+                  "administration/products",
+                  "administration/products/create",
+                  "administration/products/edit",
+                  "administration/products/teams",
+                  "administration/products/devices",
+                  "administration/products/monitoring",
+                  "administration/products/view"
+                ]
+              },
+              {
+                "group": "Users",
+                "icon": "users",
+                "pages": [
+                  "administration/users",
+                  "administration/users/create",
+                  "administration/users/edit",
+                  "administration/users/access",
+                  "administration/users/manage"
+                ]
+              },
+              {
+                "group": "Teams",
+                "icon": "people-group",
+                "pages": [
+                  "administration/teams",
+                  "administration/teams/create",
+                  "administration/teams/edit",
+                  "administration/teams/access",
+                  "administration/teams/manage"
+                ]
+              },
+              {
+                "group": "Roles",
+                "icon": "user-shield",
+                "pages": [
+                  "administration/roles",
+                  "administration/roles/permissions",
+                  "administration/roles/create",
+                  "administration/roles/assign"
+                ]
+              },
+              {
+                "group": "Notifications",
+                "icon": "bell",
+                "pages": [
+                  "administration/notifications",
+                  "administration/notifications/availability",
+                  "administration/notifications/channels"
+                ]
+              },
+              {
+                "group": "API keys",
+                "icon": "key",
+                "pages": [
+                  "administration/api-keys",
+                  "administration/api-keys/create",
+                  "administration/api-keys/manage"
+                ]
+              },
+              {
+                "group": "Security policies",
+                "icon": "shield-halved",
+                "pages": [
+                  "administration/security-policies",
+                  "administration/security-policies/create",
+                  "administration/security-policies/password",
+                  "administration/security-policies/authentication",
+                  "administration/security-policies/manage"
+                ]
+              },
+              {
+                "group": "Event log",
+                "icon": "clock-rotate-left",
+                "pages": [
+                  "administration/event-log",
+                  "administration/event-log/browse",
+                  "administration/event-log/export"
+                ]
+              }
             ]
           }
             ]

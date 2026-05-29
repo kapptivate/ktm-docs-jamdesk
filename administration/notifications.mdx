@@ -1,68 +1,14 @@
 ---
 title: Notifications
 description: Configure how and where Kapptivate alerts you.
-sidebarTitle: Notifications
-icon: bell
+sidebarTitle: Overview
 ---
 
-Notifications alert you when robots become unavailable. This page covers configuring alert detection periods and enabling notification channels — email, SMS, Slack, Teams, and webhooks.
+Notifications alert you when robots become unavailable. Configure alert detection periods and choose where to receive alerts -- email, SMS, Slack, Teams, or webhooks.
 
-## Enable robot availability monitoring
+## What you can do
 
-Robot availability monitoring tracks when robots go offline. The toggle under **Robot Availability** enables this feature for your workspace.
+- [**Enable robot availability monitoring**](/administration/notifications/availability) -- track when robots go offline and set how long they can be down before triggering an alert.
+- [**Configure notification channels**](/administration/notifications/channels) -- set up email, SMS, Slack, Teams, and webhook delivery for your alerts.
 
-Once enabled, you set the **alert detection period** — how long a robot can be offline before Kapptivate sends an alert. You can choose from 5 to 30 minutes in 5-minute increments.
-
-When enabled, you must configure at least one notification channel, or you cannot save your settings.
-
-## Configure notification channels
-
-Each channel can be toggled on or off independently. Enable the channels you need and fill in their required settings.
-
-### Email
-
-Send alerts to one or more email addresses. Select email recipients from the list of available addresses in your workspace.
-
-### SMS
-
-Receive alerts as text messages. Provide the phone numbers of SMS recipients. Requires a valid phone number format.
-
-### Slack
-
-Integrate with Slack to receive alerts in your workspace. Provide a Slack webhook URL. Kapptivate will post a message to the channel you configure in your Slack app.
-
-### Microsoft Teams
-
-Integrate with Microsoft Teams to receive alerts. Provide a Microsoft Teams webhook URL. Kapptivate will post a message to the Teams channel you configure.
-
-### Webhook
-
-Send alerts to a custom HTTP endpoint you control. Provide a webhook URL that Kapptivate will POST to when a robot becomes unavailable.
-
-## Save and validation
-
-Click **Save** to apply your notification settings. The save button is disabled if no changes have been made or if your configuration is invalid.
-
-Validation requires:
-
-- If robot availability monitoring is on, at least one notification channel must be enabled
-- Email recipients must be valid email addresses
-- SMS recipients must be provided (phone number format)
-- Slack, Teams, and webhook URLs must be valid URLs
-
-If validation fails, Kapptivate shows which field has the error. Fix the issue and save again.
-
-<Info>
-Unsaved changes trigger a confirmation if you navigate away from the page.
-</Info>
-
-## What's Next?
-
-<Columns cols={2}>
-  <Card title="Incidents" icon="alert-circle" href="/monitoring/incidents">
-    View incidents triggered by robot availability alerts
-  </Card>
-  <Card title="API keys" icon="key" href="/administration/api-keys">
-    Authenticate external integrations
-  </Card>
-</Columns>
+Once monitoring is enabled, Kapptivate requires at least one active channel before you can save. For details on the incidents these alerts generate, see [incidents](/monitoring/incidents). To authenticate the external services your channels connect to, see [API keys](/administration/api-keys).
