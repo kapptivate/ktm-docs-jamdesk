@@ -1,0 +1,13 @@
+{
+  "name": "ktm-docs-plugins",
+  "owner": {
+    "name": "Kapptivate Docs Team"
+  },
+  "plugins": [
+    {
+      "name": "doc",
+      "source": "./.claude/plugins/doc",
+      "description": "Turn product demo videos into Jamdesk documentation: extract features + screenshots with Gemini, then scan the docs, propose changes, and write the pages."
+    }
+  ]
+}

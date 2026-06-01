@@ -1,0 +1,8 @@
+{
+  "name": "doc",
+  "displayName": "Docs from videos",
+  "version": "0.1.0",
+  "description": "Turn product demo videos into documentation: extract features and screenshots with Gemini, then integrate them into a docs site.",
+  "author": { "name": "Kapptivate" },
+  "license": "MIT"
+}
