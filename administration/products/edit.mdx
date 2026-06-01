@@ -3,6 +3,8 @@ title: Edit a product
 description: Update product details, manage team access, associate devices, and configure monitoring settings.
 ---
 
+![The product edit page on the About tab, with the icon picker open showing the color palette and icon set](/images/product-edit.webp)
+
 You can edit any product to update its details, add or remove teams and devices, or configure monitoring settings.
 
 ## Edit a product
@@ -11,12 +13,22 @@ You can edit any product to update its details, add or remove teams and devices,
 2. Click the product name to open the edit page
 3. Make your changes in the relevant sections:
    - **About**: change the icon, color, or product name
-   - **Teams**: add or remove teams with access to this product
-   - **Devices**: associate smartphones, SIM cards, and web agents with the product
+   - **Team access**: add or remove teams with access to this product
+   - **Allocated devices**: associate smartphones, SIM cards, and web agents with the product
    - **Settings**: enable monitoring and set the aggregation interval
-
-4. Click "Save Changes"
+4. Click "Save changes"
 
 <Info>
 Your product slug is set when you create the product and cannot be changed. The slug is a URL-friendly identifier used in product-specific URLs.
 </Info>
+
+## Archive or delete a product
+
+The **Settings** tab has two actions at the bottom for removing a product from active use:
+
+- **Archive product**: keeps the product and its data but moves it out of the active list. Archived products drop to the end of the products list and stay accessible, so you can restore or reference them later. Use this when a product is no longer tested but you want to keep its history.
+- **Delete product**: permanently removes the product. Use this only when you're sure the product and its configuration are no longer needed.
+
+<Warning>
+Deleting a product is permanent and cannot be undone. Archive instead if you might need the product or its data again.
+</Warning>
