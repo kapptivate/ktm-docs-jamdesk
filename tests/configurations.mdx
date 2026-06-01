@@ -25,9 +25,9 @@ You can reuse the same variable across multiple tests. If you change the variabl
 A variable group is a named collection of related variables with multiple variants (environments). Use groups to test the same flow across dev, staging, and production without editing your tests.
 
 **Example:** Create a group called "API Endpoint" with variants:
-- **dev** — `https://dev-api.example.com`
-- **staging** — `https://staging-api.example.com`
-- **production** — `https://api.example.com`
+- **dev**: `https://dev-api.example.com`
+- **staging**: `https://staging-api.example.com`
+- **production**: `https://api.example.com`
 
 Your test uses `{{API Endpoint}}` in its steps. At runtime, you select which variant to use, and the test injects the correct URL.
 
@@ -47,13 +47,13 @@ Each variant can have different values for the same variable. For example, the "
 
 ## Variable types
 
-**Regular** — Plain text. Use for URLs, form data, API paths, or any string value.
+**Regular**: plain text. Use for URLs, form data, API paths, or any string value.
 
-**Choice** — A dropdown list. The variable has predefined options; tests select one at runtime. Useful for feature flags (`on` / `off`) or environment names.
+**Choice**: a dropdown list. The variable has predefined options; tests select one at runtime. Useful for feature flags (`on` / `off`) or environment names.
 
-**Owner** — A device identifier (SIM, Smartphone, or Web agent). Use this to specify which device a test should run on without editing the test itself.
+**Owner**: a device identifier (SIM, Smartphone, or Web agent). Use this to specify which device a test should run on without editing the test itself.
 
-**Secret** — Sensitive data like API keys or passwords. Stored encrypted; displayed as masked input in the UI.
+**Secret**: sensitive data like API keys or passwords. Stored encrypted; displayed as masked input in the UI.
 
 ## Using variables in tests
 
@@ -82,19 +82,19 @@ A table shows all variants and their values, making it easy to compare configura
 
 The Configurations page shows all variables and groups in one place.
 
-- **Search** — Find variables and groups by name
-- **Duplicate** — Clone a variable to quickly create a similar one
-- **Delete** — Remove a global variable or variable group
-- **Usage tracking** — See which tests depend on a variable (helps assess the impact of changes)
+- **Search**: find variables and groups by name
+- **Duplicate**: clone a variable to quickly create a similar one
+- **Delete**: remove a global variable or variable group
+- **Usage tracking**: see which tests depend on a variable (helps assess the impact of changes)
 
 ## Tips for organizing variables
 
-**Use descriptive names** — `api_endpoint` is better than `url1`; `admin_username` is better than `user`.
+**Use descriptive names**: `api_endpoint` is better than `url1`; `admin_username` is better than `user`.
 
-**Group related variables** — Keep `api_endpoint`, `api_key`, and `api_version` in the same group if they belong to the same service.
+**Group related variables**: keep `api_endpoint`, `api_key`, and `api_version` in the same group if they belong to the same service.
 
-**Mark secrets** — Use the Secret type for anything sensitive (passwords, tokens, API keys).
+**Mark secrets**: use the Secret type for anything sensitive (passwords, tokens, API keys).
 
-**Set a default** — Every global variable needs a default value (used if no variant is selected). Make it a safe, non-destructive value (e.g., a dev URL, a test account).
+**Set a default**: every global variable needs a default value (used if no variant is selected). Make it a safe, non-destructive value (e.g., a dev URL, a test account).
 
-**Avoid hardcoding** — Replace hardcoded values in test steps with variables. Future you will thank you when you need to test a different environment.
+**Avoid hardcoding**: replace hardcoded values in test steps with variables. Future you will thank you when you need to test a different environment.

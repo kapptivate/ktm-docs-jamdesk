@@ -7,6 +7,21 @@ icon: shuffle
 
 A channel is the kind of target you test. Kapptivate supports Web (browser), API (HTTP services), Smartphone (native Android/iOS apps), and Cellular tests run on real SIMs (which cover USSD and SMS flows). Each channel gives you access to different actions and, where physical equipment is needed, runs on a matching on-premise agent.
 
+<Columns cols={2}>
+  <Card title="Web" icon="globe" href="#web-channel">
+    Browser-based tests against websites and web applications.
+  </Card>
+  <Card title="API (HTTP)" icon="plug" href="#api-channel">
+    REST and HTTP service testing without a browser or device.
+  </Card>
+  <Card title="Smartphone" icon="mobile-screen" href="#smartphone-channel">
+    Native app testing on real Android and iOS devices.
+  </Card>
+  <Card title="Cellular" icon="sim-card" href="#cellular-channel">
+    USSD flows, SMS messaging, and data tests on real SIMs.
+  </Card>
+</Columns>
+
 ## Web channel
 
 Run browser-based tests against websites and web applications. Web tests automate user interactions like clicking, typing, navigating, and checking page elements.
@@ -30,10 +45,10 @@ Run browser-based tests against websites and web applications. Web tests automat
 Test REST and HTTP services directly, without a browser or device. API tests are useful for backend validation, contract checks, and end-to-end flows that mix UI and direct backend calls.
 
 <Warning>
-  HTTP API steps are available today inside Web and Mobile tests (action identifiers `ETH_HTTP_API` on Web agents, `DATA_API_HTTP` on Mobile). API is being promoted to a first-class channel like Web — with a dedicated test type in an upcoming release.
+  HTTP API steps are available today inside Web and Mobile tests (action identifiers `ETH_HTTP_API` on Web agents, `DATA_API_HTTP` on Mobile). API is being promoted to a first-class channel like Web, with a dedicated test type in an upcoming release.
 </Warning>
 
-**Agent type:** runs on the agent of the host test — Ethernet (Web) for Web tests, Smartphone (or Mono Agent) for mobile tests.
+**Agent type:** runs on the agent of the host test: Ethernet (Web) for Web tests, Smartphone (or Mono Agent) for mobile tests.
 
 **Request configuration:**
 - HTTP methods: GET, POST, PUT, PATCH, DELETE (and additional methods to confirm)

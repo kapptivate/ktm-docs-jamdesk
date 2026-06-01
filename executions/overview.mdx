@@ -12,11 +12,11 @@ Every time a test runs it produces an execution. View all executions in a pagina
 The executions list shows all your past test runs. Each row displays the execution name, test summary, who ran it, and quick actions.
 
 **List columns:**
-- **Execution name** — Shows the execution name with a status icon (success, failed, warning, running, canceled, and others).
-- **About** — Shows the test count as "X/Y" (X passed, Y total).
-- **Ran by** — The username of whoever triggered the execution.
-- **Tests** — The first three test tags, with "+X more" if additional tests exist.
-- **Actions** — A button to re-run, plus a menu for other actions.
+- **Execution name**: shows the execution name with a status icon (success, failed, warning, running, canceled, and others).
+- **About**: shows the test count as "X/Y" (X passed, Y total).
+- **Ran by**: the username of whoever triggered the execution.
+- **Tests**: the first three test tags, with "+X more" if additional tests exist.
+- **Actions**: a button to re-run, plus a menu for other actions.
 
 Executions are grouped by creation date with day separators between them. The list auto-refreshes every 9 seconds to show updated statuses.
 
@@ -24,15 +24,15 @@ Executions are grouped by creation date with day separators between them. The li
 
 You can narrow down the list with multiple filters.
 
-**By search** — Search for executions by name in the search bar.
+**By search**: search for executions by name in the search bar.
 
-**By status** — Filter by execution status: success, failed, warning, or running. Other statuses (pending, canceled, scheduled, timed out) can also be filtered when applicable.
+**By status**: filter by execution status: success, failed, warning, or running. Other statuses (pending, canceled, scheduled, timed out) can also be filtered when applicable.
 
-**By creator** — Select a user from the dropdown to see only executions they ran.
+**By creator**: select a user from the dropdown to see only executions they ran.
 
-**By date** — Use the date range picker to set a start and end date. Select your timezone so the dates match your local time.
+**By date**: use the date range picker to set a start and end date. Select your timezone so the dates match your local time.
 
-**Multi-select mode** — Click the checkbox button to enable multi-selection. Select one or more executions and then use the bulk actions. Press Esc to clear the selection.
+**Multi-select mode**: click the checkbox button to enable multi-selection. Select one or more executions and then use the bulk actions. Press Esc to clear the selection.
 
 ## Actions
 
@@ -40,22 +40,22 @@ You can narrow down the list with multiple filters.
 
 From the action menu next to an execution:
 
-- **Re-run** — Queue the execution to run again.
-- **Rename** — Change the execution's display name.
-- **Add tags** — Label the execution for organization.
-- **Re-run failed tests** — Run only the tests that failed in this execution.
-- **Cancel** (running executions only, V2 only) — Stop the execution in progress.
-- **Create monitor** (single-test executions only) — Create a continuous monitor from this test.
-- **Delete** — Remove the execution.
-- **Export** — Download a report of the execution.
+- **Re-run**: queue the execution to run again.
+- **Rename**: change the execution's display name.
+- **Add tags**: label the execution for organization.
+- **Re-run failed tests**: run only the tests that failed in this execution.
+- **Cancel** (running executions only, V2 only): stop the execution in progress.
+- **Create monitor** (single-test executions only): create a continuous monitor from this test.
+- **Delete**: remove the execution.
+- **Export**: download a report of the execution.
 
 ### Multiple executions
 
 When multi-select is enabled, select one or more executions and use the bulk action menu:
 
-- **Delete** — Remove all selected executions.
-- **Export** — Download a combined report.
-- **Re-run** — Queue all selected executions to run again.
+- **Delete**: remove all selected executions.
+- **Export**: download a combined report.
+- **Re-run**: queue all selected executions to run again.
 
 Click on an execution row to open its full details and results.
 
@@ -63,15 +63,15 @@ Click on an execution row to open its full details and results.
 
 An execution's status reflects the outcome of its tests. The possible statuses are:
 
-- **success** — All tests passed.
-- **failed** — One or more tests failed.
-- **warning** — All tests passed but with warnings.
-- **pending** — Queued, waiting to start.
-- **ongoing** — Currently running.
-- **canceled** — User canceled the execution.
-- **blocked** — Blocked by another process.
-- **scheduled** — Scheduled for a future run.
-- **timed out** — Execution exceeded the timeout.
+- **success**: all tests passed.
+- **failed**: one or more tests failed.
+- **warning**: all tests passed but with warnings.
+- **pending**: queued, waiting to start.
+- **ongoing**: currently running.
+- **canceled**: user canceled the execution.
+- **blocked**: blocked by another process.
+- **scheduled**: scheduled for a future run.
+- **timed out**: execution exceeded the timeout.
 
 Scheduled executions show a tag with the scheduled run date and time instead of individual test details.
 

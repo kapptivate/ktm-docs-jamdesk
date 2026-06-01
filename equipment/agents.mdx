@@ -5,19 +5,19 @@ sidebarTitle: Agents
 icon: robot
 ---
 
-The Agents area lets you manage and monitor all your testing equipment — Cellular agents (with SIM slots), Smartphone agents, Web agents, and Passive agents — in one place. You can search and filter agents, check their status and capacity, and perform maintenance tasks like reboots and updates.
+The Agents area lets you manage and monitor all your testing equipment, Cellular agents (with SIM slots), Smartphone agents, Web agents, and Passive agents, in one place. You can search and filter agents, check their status and capacity, and perform maintenance tasks like reboots and updates.
 
 ## Agent types
 
 Kapptivate supports four agent types, each shown in its own tab:
 
-**Cellular** — Agents with SIM card slots. These run tests on cellular networks, SMS, USSD, and SIM-dependent flows. Each agent shows how many SIM slots are active and configured.
+**Cellular**: agents with SIM card slots. These run tests on cellular networks, SMS, USSD, and SIM-dependent flows. Each agent shows how many SIM slots are active and configured.
 
-**Smartphone** — Agents that run native iOS and Android app tests. Shows device slots and phone status for each agent.
+**Smartphone**: agents that run native iOS and Android app tests. Shows device slots and phone status for each agent.
 
-**Web** — Network-connected agents that run browser-based tests. Display capacity and active connection counts.
+**Web**: network-connected agents that run browser-based tests. Display capacity and active connection counts.
 
-**Passive** — Read-only agents that report monitoring data without executing tests. No reboot or maintenance controls available; simpler interface focused on monitoring.
+**Passive**: read-only agents that report monitoring data without executing tests. No reboot or maintenance controls available; simpler interface focused on monitoring.
 
 ## Browse and filter agents
 
@@ -25,33 +25,33 @@ When you open the Agents area, you see a list of agents for the current tab (Cel
 
 To find a specific agent, use the search box to filter by hostname or UUID. For Cellular, Smartphone, and Web agents, you can also:
 
-- **Filter by Status** — Select one or more statuses (Online, Offline, Waiting for config, Maintenance, etc.) to show only agents in that state.
-- **Filter by Zone** — Choose a zone or location to see agents in that area. Zones are automatically populated from your agents; only zones with agents appear in the list.
+- **Filter by Status**: select one or more statuses (Online, Offline, Waiting for config, Maintenance, etc.) to show only agents in that state.
+- **Filter by Zone**: choose a zone or location to see agents in that area. Zones are automatically populated from your agents; only zones with agents appear in the list.
 
-Passive agents support search only — status and zone filters are not available for them.
+Passive agents support search only: status and zone filters are not available for them.
 
 ## Agent card details
 
 Each agent card displays:
 
-- **Status badge** — Visual indicator (green for Online, red for Offline, yellow for Maintenance, gray for Waiting for config, etc.)
-- **Agent name** — The display name or hostname
-- **Zone/location** — The agent's configured zone (Cellular, Smartphone, Web agents only)
-- **Slot tags** — Number of active and total slots (Cellular and Smartphone agents only)
-- **Issue indicators** — A flag if any slot has a problem (Cellular agents only)
-- **Version info** — Software version with an update indicator if an update is available or if the agent is running an older version
-- **Action menu** — Three-dot menu with options to edit, set maintenance mode, reboot, or delete
+- **Status badge**: visual indicator (green for Online, red for Offline, yellow for Maintenance, gray for Waiting for config, etc.)
+- **Agent name**: the display name or hostname
+- **Zone/location**: the agent's configured zone (Cellular, Smartphone, Web agents only)
+- **Slot tags**: number of active and total slots (Cellular and Smartphone agents only)
+- **Issue indicators**: a flag if any slot has a problem (Cellular agents only)
+- **Version info**: software version with an update indicator if an update is available or if the agent is running an older version
+- **Action menu**: three-dot menu with options to edit, set maintenance mode, reboot, or delete
 
 ## View and manage an agent
 
 Click an agent card to open its detail page. The detail page includes:
 
-- **General tab** — Agent metadata: status, version, software version, hardware details
-- **Connected Devices tab** — (Cellular and Smartphone agents) List of SIM cards or phones in each slot, with their status and any issues
-- **Monitors tab** — (Cellular, Smartphone, Web agents) List of monitors currently running on this agent
-- **Events tab** — Activity log and events for the agent
-- **Usage tab** — (Cellular, Smartphone, Web agents) Storage capacity and slot usage metrics
-- **Settings tab** — Agent configuration and advanced options:
+- **General tab**: agent metadata: status, version, software version, hardware details
+- **Connected Devices tab**: (Cellular and Smartphone agents) List of SIM cards or phones in each slot, with their status and any issues
+- **Monitors tab**: (Cellular, Smartphone, Web agents) List of monitors currently running on this agent
+- **Events tab**: activity log and events for the agent
+- **Usage tab**: (Cellular, Smartphone, Web agents) Storage capacity and slot usage metrics
+- **Settings tab**: agent configuration and advanced options:
   - Reset or change the agent password
   - Enable automatic reboot scheduling
   - Configure network settings (IP, gateway, DNS)
@@ -60,17 +60,17 @@ Click an agent card to open its detail page. The detail page includes:
 
 ### Common actions
 
-**Edit an agent** — Admins can update the agent's name and other settings from the General tab or via the edit option in the action menu.
+**Edit an agent**: admins can update the agent's name and other settings from the General tab or via the edit option in the action menu.
 
-**Reboot an agent** — Use the Reboot option in the action menu or on the Settings tab. You will see a confirmation and a success or error notification. Reboots time out after 3 minutes.
+**Reboot an agent**: use the Reboot option in the action menu or on the Settings tab. You will see a confirmation and a success or error notification. Reboots time out after 3 minutes.
 
-**Set maintenance mode** — From the action menu, choose Set Maintenance to temporarily disable the agent. It remains visible in the list but will not run tests. Only admins can toggle maintenance mode.
+**Set maintenance mode**: from the action menu, choose Set Maintenance to temporarily disable the agent. It remains visible in the list but will not run tests. Only admins can toggle maintenance mode.
 
-**Check for updates** — The agent card shows an update indicator if a newer version is available. Visit the Settings tab on the detail page to view update details and control update behavior.
+**Check for updates**: the agent card shows an update indicator if a newer version is available. Visit the Settings tab on the detail page to view update details and control update behavior.
 
-**Enable test-only mode** — Web agents can be set to test-only mode (admin only), which limits their use to testing only.
+**Enable test-only mode**: web agents can be set to test-only mode (admin only), which limits their use to testing only.
 
-**Delete an agent** — Super admins can delete an agent via the action menu. A confirmation dialog will appear. Deletion is permanent.
+**Delete an agent**: super admins can delete an agent via the action menu. A confirmation dialog will appear. Deletion is permanent.
 
 ## Empty states
 

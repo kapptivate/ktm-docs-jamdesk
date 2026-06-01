@@ -49,10 +49,10 @@
   --color-error-border: rgba(232, 87, 81, 0.30);
   --color-error-text: #E85751;
 
-  /* Semantic — Success (lifted for dark) */
-  --color-success-bg: rgba(43, 199, 150, 0.12);
-  --color-success-border: rgba(43, 199, 150, 0.30);
-  --color-success-text: #2BC796;
+  /* Semantic — Success / Tip (dark forest green) */
+  --color-success-bg: rgba(34, 87, 54, 0.15);
+  --color-success-border: rgba(34, 87, 54, 0.35);
+  --color-success-text: #6BAF7B;
 
   /* Semantic — Info */
   --color-info-bg: rgba(181, 172, 149, 0.08);
@@ -88,44 +88,33 @@
   background-color: #FAF5EE !important;
 }
 
-/* ===== LIGHT MODE — Note callout override ===== */
-:root {
+/* ===== LIGHT MODE — Callout overrides (scoped to .light) ===== */
+.light {
   --color-note-bg: #FFF4EB !important;
   --color-note-border: #FBD6C2 !important;
   --color-note-text: #B14B1F !important;
-}
-
-div[class*="note-bg"] .callout-content,
-div[class*="note-bg"] .callout-content *,
-div[class*="note-bg"] i {
-  color: #B14B1F !important;
-}
-
-/* ===== LIGHT MODE — Info callout override ===== */
-:root {
   --color-info-bg: #FFF4EB !important;
   --color-info-border: #FBD6C2 !important;
   --color-info-text: #B14B1F !important;
-}
-
-/* Force light info text on all children */
-div[class*="info-bg"] .callout-content,
-div[class*="info-bg"] .callout-content *,
-div[class*="info-bg"] i {
-  color: #B14B1F !important;
-}
-
-/* ===== LIGHT MODE — Warning callout override ===== */
-:root {
   --color-warning-bg: #FFF4EB !important;
   --color-warning-border: #FBD6C2 !important;
   --color-warning-text: #B14B1F !important;
+
+  /* Success / Tip — dark forest green */
+  --color-success-bg: #EEF4EF !important;
+  --color-success-border: #C0D4C4 !important;
+  --color-success-text: #2A5A3A !important;
 }
 
-/* Force light warning text on all children */
-div[class*="warning-bg"] .callout-content,
-div[class*="warning-bg"] .callout-content *,
-div[class*="warning-bg"] i {
+.light div[class*="note-bg"] .callout-content,
+.light div[class*="note-bg"] .callout-content *,
+.light div[class*="note-bg"] i,
+.light div[class*="info-bg"] .callout-content,
+.light div[class*="info-bg"] .callout-content *,
+.light div[class*="info-bg"] i,
+.light div[class*="warning-bg"] .callout-content,
+.light div[class*="warning-bg"] .callout-content *,
+.light div[class*="warning-bg"] i {
   color: #B14B1F !important;
 }
 
@@ -166,60 +155,80 @@ main {
   border-left: 1px solid var(--color-border, #E5DACE);
 }
 
-/* ===== Cards — full redesign ===== */
+/* ===== Cards — refined design ===== */
 
-/* Description text */
-.card-content,
-.card-content * {
-  font-size: 0.75rem !important;
-  line-height: 1.35 !important;
-  opacity: 0.7 !important;
+/* Card wrapper */
+.group:has(.card-content) {
+  border-radius: 10px !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-div.card-content[style] {
-  font-size: 0.75rem !important;
+.group:has(.card-content):hover {
+  border-color: var(--color-accent, #ED7846) !important;
+  background: rgba(237, 120, 70, 0.03) !important;
+  box-shadow: 0 1px 4px rgba(237, 120, 70, 0.08) !important;
 }
 
-/* Inner container (parent of card-content) */
-.card-content,
-.card-content ~ *,
-.card-content + * {
+.dark .group:has(.card-content):hover {
+  border-color: #ED7846 !important;
+  background: rgba(237, 120, 70, 0.06) !important;
+  box-shadow: 0 1px 6px rgba(237, 120, 70, 0.12) !important;
+}
+
+/* Card inner padding */
+.group:has(.card-content) > div {
+  padding: 1.25rem 1.125rem !important;
+}
+
+/* Icon wrapper — light orange square */
+.group:has(.card-content) > div > div:first-child {
+  width: 2rem !important;
+  height: 2rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: rgba(237, 120, 70, 0.10) !important;
+  border-radius: 6px !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.dark .group:has(.card-content) > div > div:first-child {
+  background-color: rgba(237, 120, 70, 0.15) !important;
+}
+
+/* Icon — filled, orange, smaller */
+.group:has(.card-content) i[class*="fa-"] {
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  color: #ED7846 !important;
+  opacity: 1 !important;
+  line-height: 1 !important;
+}
+
+/* Title — bigger */
+.card-content ~ div[style*="font-size"],
+div[style*="font-size"]:has(~ .card-content) {
+  font-size: 0.9375rem !important;
+}
+
+/* Description text — readable */
+.card-content {
+  font-size: 0.8125rem !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+  color: var(--color-text-secondary) !important;
   margin: 0 !important;
 }
 
-/* Target card containers via :has(.card-content) */
-:has(> .card-content) {
-  padding: 0.625rem 0.75rem !important;
-  gap: 0.125rem !important;
-}
-
-/* Icon inside card */
-:has(> .card-content) > i {
-  font-size: 0.875rem !important;
-  margin-bottom: 0.125rem !important;
-  opacity: 0.7 !important;
-}
-
-/* Title inside card */
-:has(> .card-content) > div[style*="font-size"] {
+.card-content * {
   font-size: 0.8125rem !important;
-  line-height: 1.2 !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+  color: var(--color-text-secondary) !important;
 }
 
-/* Card link wrapper */
-a:has(.card-content) {
-  border-radius: 8px !important;
-  transition: border-color 0.15s ease, background-color 0.15s ease !important;
-}
-
-a:has(.card-content):hover {
-  border-color: var(--color-accent, #ED7846) !important;
-  background: rgba(237, 120, 70, 0.04) !important;
-}
-
-.dark a:has(.card-content):hover {
-  border-color: #ED7846 !important;
-  background: rgba(237, 120, 70, 0.08) !important;
+.card-content p {
+  margin-bottom: 0 !important;
 }
 
 /* ===== Smooth hover transitions ===== */
@@ -253,17 +262,51 @@ div[class*="-bg"] code {
   color: inherit !important;
 }
 
-/* ===== Steps — reduce gap between title and content ===== */
-[style*="font-weight:600"][style*="line-height:28px"],
-[style*="font-weight: 600"][style*="line-height: 28px"] {
-  margin-bottom: 0 !important;
+/* ===== Steps — number badge in brand orange ===== */
+/* SSR (no spaces) */
+div[style*="width:28px"][style*="height:28px"][style*="border-radius:50%"] {
+  background-color: rgba(237, 120, 70, 0.12) !important;
+  color: #ED7846 !important;
+  font-weight: 600 !important;
+  align-self: flex-start !important;
+  margin-top: 2px !important;
 }
 
-[style*="font-weight:600"][style*="line-height:28px"] + p,
-[style*="font-weight: 600"][style*="line-height: 28px"] + p,
-[style*="font-weight:600"][style*="line-height:28px"] + div,
-[style*="font-weight: 600"][style*="line-height: 28px"] + div {
-  margin-top: 0.25rem !important;
+/* CSR (with spaces) */
+div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
+  background-color: rgba(237, 120, 70, 0.12) !important;
+  color: #ED7846 !important;
+  font-weight: 600 !important;
+  align-self: flex-start !important;
+  margin-top: 2px !important;
+}
+
+.dark div[style*="width:28px"][style*="height:28px"][style*="border-radius:50%"],
+.dark div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
+  background-color: rgba(237, 120, 70, 0.15) !important;
+  color: #F4986D !important;
+}
+
+/* ===== Steps — vertical line thicker + subtle ===== */
+.not-prose.space-y-0 > div > div[style*="position:absolute"][style*="width:1px"] {
+  width: 2px !important;
+  background-color: var(--color-border) !important;
+}
+
+/* ===== Steps — reduce gap between title and content ===== */
+.not-prose.space-y-0 > div > div:last-child {
+  padding-top: 0 !important;
+}
+
+.not-prose.space-y-0 > div > div:last-child > div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.not-prose.space-y-0 > div > div:last-child p {
+  margin-top: 0.125rem !important;
+  margin-bottom: 0.125rem !important;
+  line-height: 1.5 !important;
 }
 
 /* ===== Code blocks — override Shiki inline blue background ===== */

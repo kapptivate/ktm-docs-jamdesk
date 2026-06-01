@@ -5,7 +5,7 @@ sidebarTitle: Live session
 icon: wand-magic-sparkles
 ---
 
-A live session gives you interactive control of a real device—SIM, Smartphone, or Web agent—from your browser. Use live sessions to explore an app, debug an issue, record a workflow, or create a test by capturing your actions.
+A live session gives you interactive control of a real device, SIM, Smartphone, or Web agent, from your browser. Use live sessions to explore an app, debug an issue, record a workflow, or create a test by capturing your actions.
 
 ## Tabs and device types
 
@@ -20,9 +20,9 @@ The main Command tab is where you interact with the device.
 **Select a device** from the sidebar. The device status (connected, idle, busy) appears in real time. A polling mechanism keeps the status in sync with the actual device.
 
 **Configure parameters** based on the device type:
-  - **SIM** — USSD menu code, SMS recipient/message
-  - **Smartphone** — App action, tap coordinates, text input
-  - **Web agent** — URL, element selector, text to type
+  - **SIM**: USSD menu code, SMS recipient/message
+  - **Smartphone**: app action, tap coordinates, text input
+  - **Web agent**: URL, element selector, text to type
 
 **Execute the command** and view the result immediately. The device responds with output (menu response, message confirmation, page HTML, etc.).
 
@@ -34,15 +34,15 @@ The History tab shows all commands you (and others) have executed in a time wind
 
 **Select actions** from the history list. Use checkboxes to pick multiple actions.
 
-**Create Test** — Convert selected actions into a new test. Your commands become test steps automatically.
+**Create Test**: convert selected actions into a new test. Your commands become test steps automatically.
 
-**Report** — Generate a formatted report from selected actions (see Report tab).
+**Report**: generate a formatted report from selected actions (see Report tab).
 
 ## Report tab
 
 The Report tab shows a formatted table of selected actions with columns: Action, Result, Duration.
 
-**Copy to Clipboard** — Copy the entire report as text to paste into documentation or share with teammates.
+**Copy to Clipboard**: copy the entire report as text to paste into documentation or share with teammates.
 
 This tab is only active after you select actions from the History tab.
 
@@ -50,20 +50,20 @@ This tab is only active after you select actions from the History tab.
 
 Macros let you save and replay sequences of commands. Macros are available for SIM and Web agent devices.
 
-**Record** — Start capturing actions as you interact with the device. Each action is logged.
+**Record**: start capturing actions as you interact with the device. Each action is logged.
 
-**Playback** — Select a saved macro and run it again. Useful for repeating setup steps or common workflows.
+**Playback**: select a saved macro and run it again. Useful for repeating setup steps or common workflows.
 
-**Edit** — Modify a macro's sequence.
+**Edit**: modify a macro's sequence.
 
-**Organize** — Group macros in folders for easy discovery.
+**Organize**: group macros in folders for easy discovery.
 
 ## Tips for live sessions
 
-**Start simple** — A few commands help you understand the device before automating full tests.
+**Start simple**: a few commands help you understand the device before automating full tests.
 
-**Capture complex workflows** — For intricate user journeys, recording in a live session is faster than manually authoring steps.
+**Capture complex workflows**: for intricate user journeys, recording in a live session is faster than manually authoring steps.
 
-**Debug failures** — Run a failed test in a live session to see exactly where it breaks and what the device actually returns.
+**Debug failures**: run a failed test in a live session to see exactly where it breaks and what the device actually returns.
 
-**Build reusable macros** — Common setup sequences (login, navigation) can be recorded once as a macro and replayed in tests.
+**Build reusable macros**: common setup sequences (login, navigation) can be recorded once as a macro and replayed in tests.

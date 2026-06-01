@@ -5,7 +5,7 @@ sidebarTitle: Browser presets
 icon: chrome
 ---
 
-A browser preset bundles browser settings—user agent, language, headers, cookies, proxy, geolocation, timezone—into a reusable configuration. Instead of hardcoding these values in each test, apply a preset to run the same test under different conditions without editing it.
+A browser preset bundles browser settings, user agent, language, headers, cookies, proxy, geolocation, timezone, into a reusable configuration. Instead of hardcoding these values in each test, apply a preset to run the same test under different conditions without editing it.
 
 ## Why presets matter
 
@@ -21,34 +21,34 @@ Testing across different configurations is common: desktop vs. mobile viewport, 
 
 Click Create Preset in the Presets list. Fill in the About tab, then configure optional settings.
 
-**About section** — Required:
-- **Preset name** — A clear name (e.g., "Mobile Safari", "Authenticated User", "US Location")
-- **Device type** — Desktop, Mobile, or Tablet
-- **Browser** — Chrome, Firefox, or Edge
+**About section**: required:
+- **Preset name**: a clear name (e.g., "Mobile Safari", "Authenticated User", "US Location")
+- **Device type**: Desktop, Mobile, or Tablet
+- **Browser**: Chrome, Firefox, or Edge
 
 Optional:
-- **Version** — Browser version (if needed)
+- **Version**: browser version (if needed)
 
-**Headers section** — Add HTTP headers (not available on Firefox).
+**Headers section**: add HTTP headers (not available on Firefox).
 - Key-value pairs
 - Examples: `X-Feature-Flag: new-feature`, `Authorization: Bearer token`
 
-**Cookies section** — Add cookies that the browser will include in requests.
+**Cookies section**: add cookies that the browser will include in requests.
 - Cookie name (required)
 - Value
 - Path, domain, secure flag, http-only flag
 - Reuse an add/edit modal for individual cookies
 
-**Proxy section** — Enable proxy and configure the URL.
+**Proxy section**: enable proxy and configure the URL.
 - Proxy type (HTTP)
 - Proxy URL (e.g., `http://proxy.company.com:8080`)
 
 **Additional settings** (available across all sections):
-- **Timezone** — Set the browser's timezone (searchable list)
-- **Language** — Select from available languages with display names (e.g., "en-US - English")
-- **Geolocation** — Set latitude and longitude for location-based testing
-- **User agent suffix** — Append text to the browser's user agent (not available on Edge or mobile/tablet)
-- **Screen size** — Preset options (1920×1080, 768×1024, etc.) or custom width × height
+- **Timezone**: set the browser's timezone (searchable list)
+- **Language**: select from available languages with display names (e.g., "en-US - English")
+- **Geolocation**: set latitude and longitude for location-based testing
+- **User agent suffix**: append text to the browser's user agent (not available on Edge or mobile/tablet)
+- **Screen size**: preset options (1920×1080, 768×1024, etc.) or custom width × height
 
 ## View and edit presets
 
@@ -60,18 +60,18 @@ The Presets list shows all presets in a table with columns: Name, Browser, Devic
 
 ## Apply a preset to a test
 
-When creating or editing a web test, choose a browser preset in the test's configuration. The test will run with all the settings you defined in the preset—no need to reconfigure each time.
+When creating or editing a web test, choose a browser preset in the test's configuration. The test will run with all the settings you defined in the preset, no need to reconfigure each time.
 
 ## Browser-specific limitations
 
-- **Firefox** — Custom headers are not supported; location and language settings are cleared on save.
-- **Edge** — User agent suffix is not supported; custom user agent is cleared on save.
-- **Mobile and Tablet** — User agent suffix is not supported.
+- **Firefox**: custom headers are not supported; location and language settings are cleared on save.
+- **Edge**: user agent suffix is not supported; custom user agent is cleared on save.
+- **Mobile and Tablet**: user agent suffix is not supported.
 
 These limitations are enforced by the browser vendor. Other settings (cookies, proxy, geolocation, timezone) work on all browsers.
 
 ## Duplicate and search
 
-**Duplicate a preset** — Click the menu and select Duplicate. A copy is created with "(copy)" appended to the name. Duplicates are independent; editing one does not affect the original.
+**Duplicate a preset**: click the menu and select Duplicate. A copy is created with "(copy)" appended to the name. Duplicates are independent; editing one does not affect the original.
 
-**Search presets** — Type in the search bar to find presets by name. Filtering is instant.
+**Search presets**: type in the search bar to find presets by name. Filtering is instant.

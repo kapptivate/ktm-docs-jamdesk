@@ -10,8 +10,8 @@ The test builder is where you design your test's behavior step-by-step. You can 
 
 When you create a new test, the builder opens with a starting page group that defines your entry point:
 
-- **Web tests** — Enter a URL template (e.g., `https://example.com/login`)
-- **Smartphone tests** — The app you selected during creation
+- **Web tests**: enter a URL template (e.g., `https://example.com/login`)
+- **Smartphone tests**: the app you selected during creation
 
 The starting page also holds pre-test assertions: checks that verify the initial state before any steps run.
 
@@ -41,25 +41,25 @@ To add a step without recording:
 
 1. Click **Add Step** in a step group or the canvas
 2. Browse or search for a step type from the catalog (100+ available)
-3. Configure the step inputs—locator, value, assertions, or other properties
+3. Configure the step inputs: locator, value, assertions, or other properties
 4. The step appears inline in your canvas
 
 You can edit, duplicate, or delete any step from its context menu.
 
 ## Step canvas and organization
 
-Your test's steps are displayed in the **step canvas**—a visual layout organized by step groups.
+Your test's steps are displayed in the **step canvas**, a visual layout organized by step groups.
 
 ### Step groups
 
 Step groups are named containers that hold sequential steps. Use them to organize your test by feature, user flow, or validation phase:
 
-- **Add a group** — Name it and optionally add a description
-- **Reorder** — Drag groups up and down to change execution order
-- **Collapse/expand** — Click the group header to hide or show its steps
-- **Duplicate** — Create a copy with unique step and variable names
-- **Split** — Break a group at a specific step into two separate groups
-- **Delete** — Remove all steps in the group (with confirmation)
+- **Add a group**: name it and optionally add a description
+- **Reorder**: drag groups up and down to change execution order
+- **Collapse/expand**: click the group header to hide or show its steps
+- **Duplicate**: create a copy with unique step and variable names
+- **Split**: break a group at a specific step into two separate groups
+- **Delete**: remove all steps in the group (with confirmation)
 
 ### Individual steps
 
@@ -73,7 +73,7 @@ Reorder steps within a group or move them between groups by dragging.
 
 ### Starting page group
 
-The special starting page group at the top defines your test's entry point (URL or app). It's immutable—you cannot delete or rename it—but you can add pre-test assertions to verify the page loaded correctly.
+The special starting page group at the top defines your test's entry point (URL or app). It's immutable, you cannot delete or rename it, but you can add pre-test assertions to verify the page loaded correctly.
 
 ## Assertions and checks
 
@@ -85,11 +85,11 @@ Checks let you verify that your test behaves as expected at any step.
 2. Open the **Step Details** panel on the right
 3. Click **Add Check**
 4. Configure:
-   - **Entity** — What to check: `url`, `loading_time`, `step_duration`, or custom assertions
-   - **Operator** — How to compare: `=`, `!=`, `>`, `<`, `contains`, etc.
-   - **Value** — The expected result (can include variables and functions)
-   - **Status** — `error` (fail the test) or `warning` (log but continue)
-   - **Logical operator** — How to combine with other checks: `and` or `or`
+   - **Entity**: what to check: `url`, `loading_time`, `step_duration`, or custom assertions
+   - **Operator**: how to compare: `=`, `!=`, `>`, `<`, `contains`, etc.
+   - **Value**: the expected result (can include variables and functions)
+   - **Status**: `error` (fail the test) or `warning` (log but continue)
+   - **Logical operator**: how to combine with other checks: `and` or `or`
 
 ### Nested checks
 
@@ -123,7 +123,7 @@ Shared across all tests in your product. Managed in **Configurations > Variables
 
 Generate dynamic values on the fly:
 
-- **`random_text`** — Generate a random string with customizable options (length, character types, numerical/special character minimums)
+- **`random_text`**: generate a random string with customizable options (length, character types, numerical/special character minimums)
 
 ### Using variables
 
@@ -137,16 +137,16 @@ The builder includes AI to help find elements reliably, especially on dynamic or
 
 Set on individual steps via the **AI Selector** option:
 
-- **Smart** (default) — AI helps if the regular selector fails
-- **Always** — Force AI to find the element even if a regular selector works
+- **Smart** (default): AI helps if the regular selector fails
+- **Always**: force AI to find the element even if a regular selector works
 
 ### AI strategy (test-level)
 
 Set globally for your entire test in the **Settings** tab:
 
-- **Smart** (default) — Use AI selectively where helpful
-- **Always** — Always use AI for every selector lookup
-- **On-demand** — Manually request AI for individual steps when needed
+- **Smart** (default): use AI selectively where helpful
+- **Always**: always use AI for every selector lookup
+- **On-demand**: manually request AI for individual steps when needed
 
 AI selectors work by matching visual elements or DOM patterns when CSS/XPath selectors are unreliable.
 
@@ -156,10 +156,10 @@ Hooks are special step groups that run at specific points in your test lifecycle
 
 ### Hook types
 
-- **`before_test`** — Runs once, before all steps (e.g., login flow)
-- **`before_step`** — Runs before each step (e.g., wait for stability)
-- **`after_step`** — Runs after each step (e.g., take screenshot)
-- **`after_test`** — Runs once, after all steps (e.g., logout, cleanup)
+- **`before_test`**: runs once, before all steps (e.g., login flow)
+- **`before_step`**: runs before each step (e.g., wait for stability)
+- **`after_step`**: runs after each step (e.g., take screenshot)
+- **`after_test`**: runs once, after all steps (e.g., logout, cleanup)
 
 Configure hooks in the **Settings** tab. You can select from a library of predefined hooks and reorder them to suit your test flow.
 
@@ -185,10 +185,10 @@ Tests can be saved as **reusable components** (`kind=2`) and imported into other
 
 Imported step groups can be:
 
-- **Detached** — Convert to regular steps in place
-- **Deleted** — Remove the entire imported block
-- **Moved** — Reorder relative to other step groups
-- **Updated** — If the component is republished, your import reflects the latest version (unless you detach it)
+- **Detached**: convert to regular steps in place
+- **Deleted**: remove the entire imported block
+- **Moved**: reorder relative to other step groups
+- **Updated**: if the component is republished, your import reflects the latest version (unless you detach it)
 
 If a reusable component has dependent tests, saving breaking changes (deleting a step, changing inputs) triggers a publish notification to alert users.
 
@@ -200,8 +200,8 @@ The builder tracks all modifications. When you have unsaved changes, the main bu
 
 ### Undo/redo
 
-- **Undo** — `Ctrl+Z` / `Cmd+Z`
-- **Redo** — `Ctrl+Shift+Z` / `Cmd+Shift+Z`
+- **Undo**: `Ctrl+Z` / `Cmd+Z`
+- **Redo**: `Ctrl+Shift+Z` / `Cmd+Shift+Z`
 - Up to a configurable history limit
 
 ### Restoring a previous version
@@ -212,19 +212,19 @@ If you are viewing a past version of your test, a **Restore** banner appears. Cl
 
 ### Environment tab
 
-- **Global Variables Table** — Read-only reference of all available global variables
-- **Test Variables Table** — Create and edit test-level variables
-- **Variable Groups** — See which groups are available
+- **Global Variables Table**: read-only reference of all available global variables
+- **Test Variables Table**: create and edit test-level variables
+- **Variable Groups**: see which groups are available
 
 ### Settings tab
 
-- **AI Section** — Enable/disable AI; choose strategy (smart, always, on-demand)
-- **Delays & Timeouts** — Customize `selector` timeout (max wait for element) and `step` delay (pause between steps)
-- **Hooks Section** — Add and reorder before/after hooks
+- **AI Section**: enable/disable AI; choose strategy (smart, always, on-demand)
+- **Delays & Timeouts**: customize `selector` timeout (max wait for element) and `step` delay (pause between steps)
+- **Hooks Section**: add and reorder before/after hooks
 - **Advanced**:
-  - **App reset** — Reset app state between steps (smartphone only)
-  - **Accept insecure certificates** — Bypass SSL verification
-  - **Use capabilities** — Enable custom user agent, geolocation, timezone, etc.
+  - **App reset**: reset app state between steps (smartphone only)
+  - **Accept insecure certificates**: bypass SSL verification
+  - **Use capabilities**: enable custom user agent, geolocation, timezone, etc.
 
 ### History tab
 

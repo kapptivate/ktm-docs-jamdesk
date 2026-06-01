@@ -11,8 +11,8 @@ A monitor's schedule determines when and how often it runs. You can choose simpl
 
 Simple scheduling runs the monitor at a fixed interval: every X seconds, minutes, or hours.
 
-- **Every** — Set the number and unit (seconds, minutes, or hours). Minimum is 10 seconds.
-- **Default** — Every 5 minutes.
+- **Every**: set the number and unit (seconds, minutes, or hours). Minimum is 10 seconds.
+- **Default**: every 5 minutes.
 
 Choose this mode for monitors that should run continuously on a regular cadence with no time-of-day or day-of-week restrictions.
 
@@ -24,9 +24,9 @@ Advanced scheduling lets you control which days the monitor runs and what time w
 
 Choose how the monitor repeats:
 
-**Defined Frequency** — Repeats every X seconds, minutes, or hours within optional time windows. Use this when you want regular intervals but only during business hours or certain parts of the day.
+**Defined Frequency**: repeats every X seconds, minutes, or hours within optional time windows. Use this when you want regular intervals but only during business hours or certain parts of the day.
 
-**Specific Times** — Runs at exact times (up to 12 per day). Use this when you want to run at 9:00 AM, 12:00 PM, 3:00 PM, etc.
+**Specific Times**: runs at exact times (up to 12 per day). Use this when you want to run at 9:00 AM, 12:00 PM, 3:00 PM, etc.
 
 ### Days of the week
 
@@ -34,8 +34,8 @@ Choose **Every day** (all 7 days) or **Specific days** (select individual weekda
 
 ### Start and end dates
 
-- **Start date** — When the schedule begins (defaults to today).
-- **End date** (optional) — When the schedule stops. Leave blank for "forever."
+- **Start date**: when the schedule begins (defaults to today).
+- **End date** (optional): when the schedule stops. Leave blank for "forever."
 
 The monitor runs at 23:59:59 on the end date and then stops.
 
@@ -43,8 +43,8 @@ The monitor runs at 23:59:59 on the end date and then stops.
 
 If you choose Defined Frequency, you can set one or more time windows. The monitor will run every X seconds/minutes/hours only between these times.
 
-- **Default** — 00:00 to 23:59 (all day).
-- **Example** — Run every 5 minutes between 9:00 AM and 5:00 PM, then again between 9:00 PM and 6:00 AM.
+- **Default**: 00:00 to 23:59 (all day).
+- **Example**: run every 5 minutes between 9:00 AM and 5:00 PM, then again between 9:00 PM and 6:00 AM.
 
 You can add or remove time windows.
 
@@ -52,8 +52,8 @@ You can add or remove time windows.
 
 Select the timezone that applies to the schedule. Times (specific times, time windows, start/end dates) are interpreted in this timezone.
 
-- **Default** — Your system's current timezone (auto-detected when you switch to advanced mode).
-- **Supported** — Any IANA timezone (e.g., UTC, America/New_York, Europe/London).
+- **Default**: your system's current timezone (auto-detected when you switch to advanced mode).
+- **Supported**: any IANA timezone (e.g., UTC, America/New_York, Europe/London).
 
 ## Update scheduling only
 

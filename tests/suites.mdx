@@ -10,10 +10,10 @@ Test suites (also called campaigns) let you run multiple tests together, share e
 
 A test suite is a named collection of tests with shared execution context. Each test in the suite can have:
 
-- **Position/order** — Controls execution sequence
-- **Variable overrides** — Different values for global variables per test
-- **Execution overrides** — Unique starting URL or browser preset per test
-- **Custom name** — Optional display name (overrides test name)
+- **Position/order**: controls execution sequence
+- **Variable overrides**: different values for global variables per test
+- **Execution overrides**: unique starting URL or browser preset per test
+- **Custom name**: optional display name (overrides test name)
 
 Suites live in collections (folders) just like individual tests, so you can organize them by feature, sprint, or environment.
 
@@ -31,9 +31,9 @@ Suites live in collections (folders) just like individual tests, so you can orga
   </Step>
   <Step title="Configure per-test parameters">
     Click a test to expand its details and set:
-    - **Global variables** — Override values for this test only
-    - **Starting URL** — Different entry point than the test default
-    - **Browser preset** — Alternate browser configuration
+    - **Global variables**: override values for this test only
+    - **Starting URL**: different entry point than the test default
+    - **Browser preset**: alternate browser configuration
   </Step>
   <Step title="Save the suite">
     Click **Save Campaign**. The suite is validated (name required, at least one test, all tests valid) and persisted to the backend.
@@ -48,7 +48,7 @@ Tests execute in their position order. Drag tests up and down in the left sideba
 
 ### Removing tests
 
-Click the **Remove** button on a test. It is removed from the suite (the test itself is not deleted—just the reference).
+Click the **Remove** button on a test. It is removed from the suite (the test itself is not deleted, just the reference).
 
 ### Duplicating tests
 
@@ -67,14 +67,14 @@ Each test in your suite can use different values for global variables:
 1. Click a test to see its **Variables** section
 2. Choose a global variable from the list
 3. Enter a specific value for this test (overrides the global default)
-4. Templates are supported—mix text and variables (e.g., `https://{env}.example.com/{userId}`)
+4. Templates are supported: mix text and variables (e.g., `https://{env}.example.com/{userId}`)
 
 ### Execution overrides
 
 Override how a test runs without editing the test itself:
 
-- **Starting URL** — Use a different entry point (e.g., staging vs. production)
-- **Browser preset** — Apply a different browser configuration (headers, cookies, proxy, geolocation, timezone)
+- **Starting URL**: use a different entry point (e.g., staging vs. production)
+- **Browser preset**: apply a different browser configuration (headers, cookies, proxy, geolocation, timezone)
 
 These overrides are stored per-test in the suite, so the original test definition never changes. Multiple suites can reference the same test with different overrides.
 

@@ -9,21 +9,21 @@ Roles organize permissions into logical groups that control access to platform f
 
 Each role is built from five permission groups:
 
-- **Administration** — View and edit the admin panel, manage users, teams, and products
-- **Events** — View event logs and admin-level event access
-- **Testing** — View and create manual and automated tests
-- **Monitoring** — View monitoring dashboards, analytics, and incident management
-- **Beta Features** — Access experimental features
+- **Administration**: view and edit the admin panel, manage users, teams, and products
+- **Events**: view event logs and admin-level event access
+- **Testing**: view and create manual and automated tests
+- **Monitoring**: view monitoring dashboards, analytics, and incident management
+- **Beta Features**: access experimental features
 
-Each permission group usually has a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically — granting Edit access always includes View access.
+Each permission group usually has a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically, granting Edit access always includes View access.
 
 ## Permission dependencies
 
 The system enforces permission logic automatically:
 
-- **Edit implies View** — If you grant Edit access to a feature, View is automatically enabled
-- **Cascading dependencies** — Unchecking View automatically unchecks the corresponding Edit permission
-- **Disabled permissions** — Permissions you don't have are shown as disabled checkboxes with a tooltip explaining why
+- **Edit implies View**: if you grant Edit access to a feature, View is automatically enabled
+- **Cascading dependencies**: unchecking View automatically unchecks the corresponding Edit permission
+- **Disabled permissions**: permissions you don't have are shown as disabled checkboxes with a tooltip explaining why
 
 This ensures role permissions are always consistent and follow a logical hierarchy.
 

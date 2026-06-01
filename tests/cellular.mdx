@@ -5,16 +5,16 @@ sidebarTitle: Cellular
 icon: sim-card
 ---
 
-Author and run tests that execute on real SIM cards over real cellular networks. Cellular tests let you navigate USSD menus, send and receive SMS messages, and verify network behavior — all from within your on-premise cellular agents.
+Author and run tests that execute on real SIM cards over real cellular networks. Cellular tests let you navigate USSD menus, send and receive SMS messages, and verify network behavior, all from within your on-premise cellular agents.
 
 ## When to use a cellular test
 
 Run a cellular test when you need to:
 
-- **Navigate USSD menus** — Send menu codes (e.g., `#100#`) and verify responses, then chain selections through multi-step menus to test balance queries, activation flows, or customer service menus.
-- **Test SMS flows** — Wait for incoming SMS messages and verify sender, content, and multi-part message counts. Useful for testing OTP delivery, notifications, or two-factor authentication.
-- **Handle network-initiated USSD pushes** — Wait for unsolicited USSD messages (pushes) that the network sends to the SIM without your test sending a command.
-- **Test data connectivity** — Verify that your SIMs can establish data connections and maintain registration on the carrier network.
+- **Navigate USSD menus**: send menu codes (e.g., `#100#`) and verify responses, then chain selections through multi-step menus to test balance queries, activation flows, or customer service menus.
+- **Test SMS flows**: wait for incoming SMS messages and verify sender, content, and multi-part message counts. Useful for testing OTP delivery, notifications, or two-factor authentication.
+- **Handle network-initiated USSD pushes**: wait for unsolicited USSD messages (pushes) that the network sends to the SIM without your test sending a command.
+- **Test data connectivity**: verify that your SIMs can establish data connections and maintain registration on the carrier network.
 
 ## Cellular action types
 
@@ -31,11 +31,11 @@ Send a USSD command and wait for the network to return a menu or response.
 4. Your test verifies the response against expected results
 
 **Assertions available:**
-- `message` — The response text from the USSD menu (string match, regex, contains, starts with, ends with)
-- `session_status` — The session state: `alive` (menu active), `close` (closed), or CUSD errors like `Ussd session closed by operator (+CUSD:2)`
-- `duration` — Response time in seconds (numeric comparison)
-- `access_technology` — The network technology in use (GSM, GPRS, EDGE, HSPA, UMTS, LTE)
-- `variable` — Capture text from the response into a custom variable for use in later actions
+- `message`: the response text from the USSD menu (string match, regex, contains, starts with, ends with)
+- `session_status`: the session state: `alive` (menu active), `close` (closed), or CUSD errors like `Ussd session closed by operator (+CUSD:2)`
+- `duration`: response time in seconds (numeric comparison)
+- `access_technology`: the network technology in use (GSM, GPRS, EDGE, HSPA, UMTS, LTE)
+- `variable`: capture text from the response into a custom variable for use in later actions
 
 **Example:** To test a balance check, send `#100#`, then assert that the response message contains "Balance: $" and the session is alive.
 
@@ -49,10 +49,10 @@ Wait for an incoming SMS message and verify its sender and content.
 3. Your test checks the sender phone number, message text, and other properties
 
 **Assertions available:**
-- `sms_sender` — The phone number that sent the SMS (string match)
-- `message` — The SMS body text (string match, regex, contains, starts with, ends with)
-- `concatenated_sms` — The number of SMS parts, for multi-part messages (numeric comparison)
-- `variable` — Capture text from the SMS into a custom variable for later use
+- `sms_sender`: the phone number that sent the SMS (string match)
+- `message`: the SMS body text (string match, regex, contains, starts with, ends with)
+- `concatenated_sms`: the number of SMS parts, for multi-part messages (numeric comparison)
+- `variable`: capture text from the SMS into a custom variable for later use
 
 **Example:** To test OTP delivery, wait for an SMS from "+1234567890", assert the message contains "code:", and capture the code value into a variable.
 
@@ -66,8 +66,8 @@ Wait for a network-initiated (unsolicited) USSD message. Your test does not send
 3. Your test verifies the message and session state
 
 **Assertions available:**
-- `session_status` — The state after the push arrives (e.g., `close`, `alive`)
-- `variable` — Capture text into a custom variable
+- `session_status`: the state after the push arrives (e.g., `close`, `alive`)
+- `variable`: capture text into a custom variable
 
 **Example:** To test a network-initiated balance notification, wait for a USSD push and assert that it contains "balance".
 
@@ -109,10 +109,10 @@ A **suite** (or campaign) groups multiple tests and lets you run them together w
 
 **Suite features:**
 
-- **Test list** — Order the tests to run
-- **Variable overrides** — Set input variable values for all tests in the suite (override test defaults)
-- **Owner overrides** — Assign which SIM runs each action across all tests in the suite (override test owner assignments)
-- **Execution options** — Control timeouts, SMS observation delay, and optional reception flags for each test
+- **Test list**: order the tests to run
+- **Variable overrides**: set input variable values for all tests in the suite (override test defaults)
+- **Owner overrides**: assign which SIM runs each action across all tests in the suite (override test owner assignments)
+- **Execution options**: control timeouts, SMS observation delay, and optional reception flags for each test
 
 **Example:** You have three tests (balance check, top-up, history) and two SIMs (prod, staging). Create a suite, add all three tests, override the owner to `staging`, then run once. Later, override the owner to `prod` and run again on production SIMs.
 
@@ -129,21 +129,21 @@ A **suite** (or campaign) groups multiple tests and lets you run them together w
      - USSD timeout: 30–120 seconds (how long to wait for a USSD response)
      - SMS timeout: 30–120 seconds (how long to wait for an incoming SMS)
    - **SMS observation delay**: 0–60 seconds (delay before checking for SMS after an action that might trigger one)
-   - **Optional reception flags** — Mark SMS or USSD push actions as optional if it's acceptable for them not to arrive
+   - **Optional reception flags**: mark SMS or USSD push actions as optional if it's acceptable for them not to arrive
 
 ### Run modes
 
-- **Run all** — Execute all steps from start to finish
-- **Replay from step N** — Resume from a specific action (useful if a later action failed and you want to retry without re-running everything)
-- **Replay only this step** — Execute a single action for debugging
+- **Run all**: execute all steps from start to finish
+- **Replay from step N**: resume from a specific action (useful if a later action failed and you want to retry without re-running everything)
+- **Replay only this step**: execute a single action for debugging
 
 ## Reviewing results
 
 After your test runs, Kapptivate captures:
 
-- **Action-by-action outcomes** — Each USSD response, each SMS received, timestamps, and whether assertions passed
-- **Network data** — Cellular network traces, AT command logs, signal strength, and registration status
-- **Variables captured** — Any values you extracted via `variable` assertions
+- **Action-by-action outcomes**: each USSD response, each SMS received, timestamps, and whether assertions passed
+- **Network data**: cellular network traces, AT command logs, signal strength, and registration status
+- **Variables captured**: any values you extracted via `variable` assertions
 
 ### Bulk fixing expected results
 
@@ -154,10 +154,10 @@ If a test fails because you provided the wrong expected value (e.g., the USSD re
 3. Click **Update** to enter the correct expected value
 4. Kapptivate finds all tests that use the same old expected value
 5. Select the tests you want to fix
-6. Click **Update** — all selected tests are corrected at once
+6. Click **Update**. All selected tests are corrected at once
 
 This works for:
 
-- **USSD messages** — Fix the expected response text across multiple tests
-- **SMS messages** — Fix the expected SMS text or sender across multiple tests
-- **USSD push messages** — Fix the expected push message text across multiple tests
+- **USSD messages**: fix the expected response text across multiple tests
+- **SMS messages**: fix the expected SMS text or sender across multiple tests
+- **USSD push messages**: fix the expected push message text across multiple tests
