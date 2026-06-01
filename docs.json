@@ -65,6 +65,24 @@
       "googlebot": "noindex, nofollow"
     }
   },
+  "redirects": [
+    {
+      "source": "/concepts/core-concepts",
+      "destination": "/concepts/workspace"
+    },
+    {
+      "source": "/concepts/channels",
+      "destination": "/agents-devices/web-api"
+    },
+    {
+      "source": "/concepts/agents",
+      "destination": "/agents-devices/web-api"
+    },
+    {
+      "source": "/concepts/devices-and-statuses",
+      "destination": "/agents-devices/statuses"
+    }
+  ],
   "navigation": {
     "tabs": [
       {
@@ -89,10 +107,28 @@
             "icon": "lightbulb",
             "expanded": false,
             "pages": [
-              "concepts/core-concepts",
-              "concepts/channels",
-              "concepts/agents",
-              "concepts/devices-and-statuses"
+              "concepts/workspace",
+              "concepts/product",
+              "concepts/test",
+              "concepts/execution",
+              "concepts/monitor",
+              "concepts/metric",
+              "concepts/agent",
+              "concepts/device",
+              "concepts/channel",
+              "concepts/how-it-connects"
+            ]
+          },
+          {
+            "group": "Agents & Devices",
+            "icon": "server",
+            "expanded": false,
+            "pages": [
+              "agents-devices/web-api",
+              "agents-devices/smartphone",
+              "agents-devices/sim",
+              "agents-devices/passive",
+              "agents-devices/statuses"
             ]
           },
           {
@@ -107,87 +143,7 @@
               "tests/configurations",
               "tests/browser-presets",
               "tests/suites",
-              "tests/actions/overview",
-              {
-                "group": "Shared actions",
-                "icon": "shapes",
-                "pages": [
-                  "tests/actions/shared/pause",
-                  "tests/actions/shared/waitfor",
-                  "tests/actions/shared/setvariable",
-                  "tests/actions/shared/customstep",
-                  "tests/actions/shared/createmetric",
-                  "tests/actions/shared/aigetmailcode",
-                  "tests/actions/shared/aigetmaillink",
-                  "tests/actions/shared/aigetsmscode"
-                ]
-              },
-              {
-                "group": "Web scenarios",
-                "icon": "globe",
-                "pages": [
-                  "tests/actions/web/startingurl",
-                  "tests/actions/web/click",
-                  "tests/actions/web/doubleclick",
-                  "tests/actions/web/rightclick",
-                  "tests/actions/web/hover",
-                  "tests/actions/web/switchwindow",
-                  "tests/actions/web/select",
-                  "tests/actions/web/uploadfile",
-                  "tests/actions/web/input",
-                  "tests/actions/web/scroll",
-                  "tests/actions/web/checkbox",
-                  "tests/actions/web/keys",
-                  "tests/actions/web/find",
-                  "tests/actions/web/gettext",
-                  "tests/actions/web/getvalue",
-                  "tests/actions/web/gettextorvalue",
-                  "tests/actions/web/assertdisplayed",
-                  "tests/actions/web/assertnotdisplayed",
-                  "tests/actions/web/aispellcheck",
-                  "tests/actions/web/aivisualassert"
-                ]
-              },
-              {
-                "group": "Smartphone scenarios",
-                "icon": "mobile-screen",
-                "pages": [
-                  "tests/actions/smartphone/startingapp",
-                  "tests/actions/smartphone/app",
-                  "tests/actions/smartphone/tap",
-                  "tests/actions/smartphone/longpress",
-                  "tests/actions/smartphone/hidekeyboard",
-                  "tests/actions/smartphone/input",
-                  "tests/actions/smartphone/scroll",
-                  "tests/actions/smartphone/checkbox",
-                  "tests/actions/smartphone/keys",
-                  "tests/actions/smartphone/find",
-                  "tests/actions/smartphone/gettext",
-                  "tests/actions/smartphone/getvalue",
-                  "tests/actions/smartphone/gettextorvalue",
-                  "tests/actions/smartphone/assertdisplayed",
-                  "tests/actions/smartphone/assertnotdisplayed",
-                  "tests/actions/smartphone/aispellcheck",
-                  "tests/actions/smartphone/aivisualassert"
-                ]
-              },
-              {
-                "group": "SIM scenarios",
-                "icon": "sim-card",
-                "pages": [
-                  "tests/cellular",
-                  "tests/actions/cellular/ussd",
-                  "tests/actions/cellular/sms",
-                  "tests/actions/cellular/ussd-push"
-                ]
-              },
-              {
-                "group": "API scenarios",
-                "icon": "plug",
-                "pages": [
-                  "tests/actions/api/overview"
-                ]
-              }
+              "tests/reusable-components"
             ]
           },
           {
@@ -339,6 +295,98 @@
               }
             ]
           }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Steps Reference",
+        "icon": "bolt",
+        "groups": [
+          {
+            "group": "Steps Reference",
+            "pages": [
+              "tests/actions/overview",
+              {
+                "group": "Shared steps",
+                "icon": "shapes",
+                "pages": [
+                  "tests/actions/shared/pause",
+                  "tests/actions/shared/waitfor",
+                  "tests/actions/shared/setvariable",
+                  "tests/actions/shared/customstep",
+                  "tests/actions/shared/createmetric",
+                  "tests/actions/shared/aigetmailcode",
+                  "tests/actions/shared/aigetmaillink",
+                  "tests/actions/shared/aigetsmscode"
+                ]
+              },
+              {
+                "group": "Web steps",
+                "icon": "globe",
+                "pages": [
+                  "tests/actions/web/startingurl",
+                  "tests/actions/web/click",
+                  "tests/actions/web/doubleclick",
+                  "tests/actions/web/rightclick",
+                  "tests/actions/web/hover",
+                  "tests/actions/web/switchwindow",
+                  "tests/actions/web/select",
+                  "tests/actions/web/uploadfile",
+                  "tests/actions/web/input",
+                  "tests/actions/web/scroll",
+                  "tests/actions/web/checkbox",
+                  "tests/actions/web/keys",
+                  "tests/actions/web/find",
+                  "tests/actions/web/gettext",
+                  "tests/actions/web/getvalue",
+                  "tests/actions/web/gettextorvalue",
+                  "tests/actions/web/assertdisplayed",
+                  "tests/actions/web/assertnotdisplayed",
+                  "tests/actions/web/aispellcheck",
+                  "tests/actions/web/aivisualassert"
+                ]
+              },
+              {
+                "group": "Smartphone steps",
+                "icon": "mobile-screen",
+                "pages": [
+                  "tests/actions/smartphone/startingapp",
+                  "tests/actions/smartphone/app",
+                  "tests/actions/smartphone/tap",
+                  "tests/actions/smartphone/longpress",
+                  "tests/actions/smartphone/hidekeyboard",
+                  "tests/actions/smartphone/input",
+                  "tests/actions/smartphone/scroll",
+                  "tests/actions/smartphone/checkbox",
+                  "tests/actions/smartphone/keys",
+                  "tests/actions/smartphone/find",
+                  "tests/actions/smartphone/gettext",
+                  "tests/actions/smartphone/getvalue",
+                  "tests/actions/smartphone/gettextorvalue",
+                  "tests/actions/smartphone/assertdisplayed",
+                  "tests/actions/smartphone/assertnotdisplayed",
+                  "tests/actions/smartphone/aispellcheck",
+                  "tests/actions/smartphone/aivisualassert"
+                ]
+              },
+              {
+                "group": "SIM steps",
+                "icon": "sim-card",
+                "pages": [
+                  "tests/cellular",
+                  "tests/actions/cellular/ussd",
+                  "tests/actions/cellular/sms",
+                  "tests/actions/cellular/ussd-push"
+                ]
+              },
+              {
+                "group": "API steps",
+                "icon": "plug",
+                "pages": [
+                  "tests/actions/api/overview"
+                ]
+              }
             ]
           }
         ]

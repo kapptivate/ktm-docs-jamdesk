@@ -1,0 +1,24 @@
+---
+title: Reusable components
+description: Build a test once and reuse it as a building block inside other tests.
+sidebarTitle: Reusable components
+icon: shapes
+---
+
+A **reusable component** is a test you build once and drop into other tests as a building block — a login flow, a cookie-consent dismissal, a navigation sequence. Instead of copying the same steps into every test, you maintain them in one place and reference them everywhere.
+
+## How they work
+
+A reusable component is authored like any other test, but it lives in its own **Reusable components** tab alongside Tests and Test campaigns. When another test references a component, the component's steps run inline as part of that test.
+
+Update a component once and every test that uses it picks up the change — fix a login flow in one place and all dependent tests stay correct.
+
+## Creating one
+
+Open the **Reusable components** tab in the test list and create it like a normal test: pick a channel, set a starting point, and add steps. Once saved, it's available to insert into other tests in the same product.
+
+## Reuse and dependencies
+
+- **Reuse tracking:** each component shows how many tests reference it, so you can gauge the impact of a change before you make it.
+- **Validity propagation:** if a component becomes invalid, every test that depends on it is flagged as invalid until the component is fixed. In the test list, a red triangle marks a test whose dependency is broken.
+- **Product scope:** reusable components belong to a single product. A test that contains a reusable component can't be copied to another product.

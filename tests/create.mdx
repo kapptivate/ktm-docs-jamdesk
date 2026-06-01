@@ -1,11 +1,11 @@
 ---
 title: Creating a test
-description: Author a test for Web, Smartphone, or Cellular and add its steps.
+description: Author a test for Web, Smartphone, Cellular, or API and add its steps.
 sidebarTitle: Create a test
 icon: plus
 ---
 
-Creating a test starts with choosing a channel (Web, Smartphone, or Cellular), then setting a starting point and device. After creation, you add steps to define what the test does. This page walks through the setup flow for each channel.
+Creating a test starts with choosing a channel (Web, Smartphone, Cellular, or API), then setting a starting point and device. After creation, you add steps to define what the test does. This page walks through the setup flow for each channel.
 
 ## Start a new test
 
@@ -51,6 +51,16 @@ Click the Create button in your collection and select your test type.
     **Starting point:** Specify the SIM to dial (USSD menu code) or the recipient for SMS.
 
     **Note:** This feature may require additional setup. Verify that your workspace has cellular agents and SIM devices configured.
+
+  </Tab>
+  <Tab title="API">
+    API tests send HTTP requests directly to a service, without a browser or device.
+
+    **Starting point:** the request endpoint — an HTTP method (GET, POST, PUT, PATCH, DELETE) and a URL, with optional headers and body.
+
+    **Device type:** API tests run on a web agent. No device selection needed.
+
+    API steps can also be added inside Web and Smartphone tests to mix UI actions with direct backend calls.
 
   </Tab>
 </Tabs>

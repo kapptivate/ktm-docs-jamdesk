@@ -1,0 +1,40 @@
+---
+title: Smartphone
+description: Native Android and iOS app testing on real devices, run by the Smartphone agent.
+sidebarTitle: Smartphone
+icon: mobile-screen
+---
+
+The Smartphone channel tests native mobile apps on real Android and iOS devices. Tests interact with apps just as a user would — tapping, typing, swiping, and verifying UI elements. They run on the **Smartphone agent**, a controller that manages the connected devices.
+
+## Smartphone tests
+
+![The smartphone test builder: a Launch app action followed by a step group of tap, fill-input, and assert-displayed steps, with a reference screenshot and element selector for the selected step](/images/smartphone-test-builder.webp)
+
+**Starting point:** specify the app by its package name (Android) or bundle ID (iOS), along with metadata like app name and version.
+
+**App management:** Kapptivate can enumerate installed apps and reset an app before each test run.
+
+**Common actions:** tap elements, type text, swipe, wait for elements, check text or elements exist, open or close apps, and navigate app screens.
+
+## Devices
+
+Real or virtual Android and iOS devices connected to a Smartphone agent. Each device reports:
+
+- UUID and name (defaults to manufacturer and model)
+- Device type (Android or iOS)
+- Manufacturer, model, SDK version, screen resolution
+- Gateway (the agent controlling it)
+- Roaming status per installed SIM
+- Installed apps
+- 24-hour CPU and network usage
+
+## The Smartphone agent
+
+A controller that manages real Android and iOS devices.
+
+- Runs tests against native Android and iOS apps
+- Captures device properties (manufacturer, model, SDK version, screen resolution)
+- Can reset apps before each test run
+
+See [Statuses](/agents-devices/statuses) for agent and device states, plus 24-hour usage tracking.

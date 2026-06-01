@@ -1,0 +1,58 @@
+---
+title: SIM (Cellular)
+description: USSD, SMS, network, and data tests on real SIM cards, run by the Cellular agent.
+sidebarTitle: SIM
+icon: sim-card
+---
+
+The Cellular channel tests cellular networks, USSD flows, and SMS messaging on real SIM cards. Tests run on physical SIMs inside your on-premise **Cellular agent**.
+
+<Info>
+  Cellular covers data communication, USSD menu flows, and SMS send/receive. These are all part of one channel, not separate test types.
+</Info>
+
+<Tip>
+  See [Cellular tests (USSD & SMS)](/tests/cellular) for a complete guide to authoring USSD menus, SMS flows, and handling network-initiated USSD pushes.
+</Tip>
+
+## Cellular tests
+
+**Common actions:** send and receive SMS, navigate USSD menus, check network registration and signal, and test data connectivity.
+
+## SIM cards
+
+Physical GSM/3G/4G/5G SIM cards installed in the Cellular agent's slots. Each SIM reports:
+
+- IMSI (International Mobile Subscriber Identity)
+- Phone numbers (national and international format)
+- Slot position in the agent
+- Firmware version
+- Registration status on the network
+- Signal strength
+- APN (Access Point Name) configuration
+- Telecom operator
+- Gateway (the agent controlling it)
+- 24-hour test usage
+
+See [Statuses](/agents-devices/statuses) for SIM statuses, network registration states, and signal levels.
+
+## The Cellular agent
+
+A specialized device that holds multiple SIM cards and runs tests on real cellular networks.
+
+- Executes tests on physical SIM cards
+- Handles USSD menu flows and SMS messaging
+- Monitors network registration and signal strength
+- Manages APN configurations for each SIM
+
+### SIM slots
+
+A Cellular agent contains multiple slots, each holding one SIM card:
+
+- Slot ID (e.g. `agent-uuid-0`, `agent-uuid-1`)
+- Position (numeric index: 0, 1, 2, etc.)
+- Current SIM (empty, or the installed SIM)
+- Active flag (is the slot currently operational)
+- Firmware version
+
+Each slot reports the status and registration status of its installed SIM independently.

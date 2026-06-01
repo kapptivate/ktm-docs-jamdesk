@@ -1,0 +1,54 @@
+---
+title: Web & API
+description: Browser-based web tests and HTTP API tests, both run by the Web agent.
+sidebarTitle: Web & API
+icon: globe
+---
+
+The Web channel runs browser-based tests against websites and web apps. API tests hit HTTP services directly, without a browser. Both run on the **Web agent** — a machine or server with network access at a specific location.
+
+## Web tests
+
+Web tests automate user interactions like clicking, typing, navigating, and checking page elements.
+
+![The web test builder: a Navigate to starting page action followed by a Fill Form step group with hover, click, and fill-input steps, plus a Preview/Run panel and recent executions](/images/web-test-builder.webp)
+
+**Starting point:** you provide a URL template. Tests launch the browser, navigate to that URL, and run your steps from there.
+
+**Browser options you can configure:**
+- Browser type
+- Custom user agent
+- Language/locale
+- Window size (default 1920×1080)
+
+**Common actions:** click elements, type text, navigate, wait for elements, check that elements exist or contain text, scroll, hover, and read element properties.
+
+## API tests
+
+Test REST and HTTP services directly — useful for backend validation, contract checks, and end-to-end flows that mix UI and direct backend calls.
+
+**Request configuration:**
+- HTTP methods: GET, POST, PUT, PATCH, DELETE
+- URL with templated variables
+- Custom headers
+- Body: JSON or raw payload
+- DNS override, proxy routing, SSL handling, redirects, and cookies
+
+**Response validation:**
+- Status code checks
+- Body and header assertions
+- Variable extraction from the response for use in later steps
+
+**Per-request metrics:** detailed timing breakdown (DNS lookup, TCP connection, TLS handshake, content generation, transfer, total) for performance analysis.
+
+## The Web agent
+
+A server or machine that runs browser-based tests from a specific network location.
+
+- Automates website and web application testing
+- Launches browsers and executes test steps
+- Supports multiple simultaneous tests
+
+**Configuration:** hostname or IP address, parallel test capacity, automatic reboot and update scheduling, network configuration, and credentials for authentication.
+
+Web agents report their own operational states — see [Statuses](/agents-devices/statuses), including the setup-only "Waiting for Config" state unique to web agents.

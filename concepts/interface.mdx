@@ -9,30 +9,46 @@ The Kapptivate interface is organized around a left sidebar with three sections:
 
 ## The sidebar
 
-The left sidebar is your main navigation hub. Click the Kapptivate logo at the top to return home.
+The left sidebar is your main navigation hub. Click the Kapptivate logo at the top to return home. It's organized into three sections: Overview, By Product, and Equipment.
 
-**Overview**: links to high-level dashboards:
-- Realtime Status: see all monitors and their current health.
-- Overview: a summary view (appears only when monitoring is enabled for the Workspace).
-- Incidents: alerts triggered by monitor failures (appears only when monitoring is enabled).
-- Analytics: performance and trend data (appears only when monitoring is enabled).
+### Overview
 
-**By Product**: tools for testing and development:
-- **Product Selector**: shows the current Product. Click to switch to another Product in the Workspace.
-- Live Session: open an interactive shell to manually control a device and record steps.
-- Tests: create, edit, and manage tests.
-- Executions: view past test runs and their results.
-- Monitors: set up continuous monitoring (appears only when monitoring is enabled for the Product).
-- Configurations: define environment variables and variants (Dev, Staging, Production, etc.).
+Workspace-wide health and reporting:
 
-**Equipment**: infrastructure and browser settings:
-- Device Lab: view available devices and their status (appears only if your Workspace supports Smartphones or SIM devices).
-- Browser Presets: configure browser profiles for web testing.
-- Agents: view and manage the agents that run your tests.
+- **[Realtime Status](/monitoring/realtime-status)**: see all monitors and their current health, and build detailed views of how your products are doing.
+- **[Incidents](/monitoring/incidents)**: review every incident across your monitors, configure alerts, and see which alerts are currently active.
+- **[Analytics](/monitoring/analytics)**: build custom or ready-made [dashboards](/monitoring/dashboards) to explore the data Kapptivate collects.
+
+### By Product
+
+Everything scoped to a single Product. The **Product Selector** at the top lets you pick a Product space — the place that groups all the tests, variables, and executions for one product (an Apple mobile app, a website, and so on). A Workspace can hold several Products.
+
+- **[Live Session](/tests/live-session)**: manually drive a smartphone, SIM, or browser device in real time.
+- **[Tests](/tests/overview)**: create and edit tests and test campaigns.
+- **[Executions](/executions/overview)**: see the results of every run carried out for this Product space.
+- **[Monitors](/monitoring/overview)**: create monitors — tests scheduled to run at a set frequency.
+- **[Configurations](/tests/configurations)**: define environments, variables, and variants.
+
+### Equipment
+
+Manage the hardware and browser setup behind your tests:
+
+- **[Device Lab](/equipment/devices-lab)**: manage your device lab and check the status of every SIM card and phone.
+- **[Agents](/equipment/agents)**: view the agents that control your SIM cards, phones, and browsers, and check their status.
+- **[Browser Presets](/tests/browser-presets)**: configure browser profiles — everything related to browser setup for web testing.
 
 ## Switching Workspaces
 
-Click the Workspace logo and name at the top of the sidebar to open the Workspace dropdown. A list shows all Workspaces you have access to, sorted by active status and your default Workspace (marked with a star icon).
+Click the Workspace logo and name at the top of the sidebar to open the Workspace menu. It contains:
+
+- **Settings**: open the current Workspace's settings.
+- **Switch workspace**: expand the list of Workspaces you can access.
+- **Signed in as**: the account you're logged in with, along with your role badge (for example, Super admin).
+- **Logout**: sign out of Kapptivate.
+
+![Workspace menu opened from the sidebar, showing Settings, Switch workspace, the signed-in account with a Super admin badge, and Logout](/images/workspace-menu.webp)
+
+Choose **Switch workspace** to see all Workspaces you have access to, sorted by active status and your default Workspace (marked with a star icon).
 
 Search for a Workspace by name using the search box in the dropdown. Click any Workspace to switch to it.
 
@@ -45,6 +61,8 @@ When you switch Workspaces, the platform preserves context where possible. If yo
 Below the Workspace selector, the sidebar shows a **Product Selector** in the "By Product" section. Click the Product icon and name to see a dropdown of all Products in the current Workspace, sorted alphabetically.
 
 Click any Product to switch to it. The sidebar and all content will refresh to show that Product's tests, executions, devices, and configurations.
+
+![Product Selector dropdown listing the Workspace's Products, with a pin icon and Set as default tooltip on the hovered Product](/images/product-selector.webp)
 
 **Set a default Product**: in the Product dropdown, look for a pin icon next to a Product name. Click the pin to set that Product as your default for this Workspace. The next time you enter the Workspace, the platform will jump directly to your default Product instead of showing a choice screen. Each Workspace can have its own default Product.
 
