@@ -1,100 +1,111 @@
 ---
 title: Configurations & variables
 description: Manage environment variables and variable groups used across your tests.
-sidebarTitle: Configurations
+sidebarTitle: Configuration & Variables
 icon: code
 ---
 
-Configurations let you parameterize tests with variables and switch between environments (dev, staging, production) using variable groups and variants. Instead of hardcoding URLs, usernames, or API keys in your tests, use variables to inject them at runtime. Variable groups let you run the same test with different values for each environment.
+Hardcoding identifiers, passwords, or email addresses into each test makes scenarios brittle and hard to maintain. Variables let you store those values once and reuse them everywhere, so a single change updates every test that depends on it. Kapptivate organizes them in two ways: **simple variables** with one global value, and **variable groups** that hold different values per variant.
 
-## Global variables
+Variables live in a product space. The Configurations page lists them all in a table showing each variable's name, value, and `Usage` — the tests that currently reference it.
 
-A global variable is available to all tests in your product. Create a global variable for values that don't change per environment (e.g., a static URL path).
+## Simple variables
 
-**Create a global variable:**
-1. Go to Configurations
-2. Click Create Variable
-3. Enter a name, type, and default value
-4. Set public/private visibility
-5. Save
+A simple variable belongs to a product space and holds a single value used everywhere it's referenced. Pick a variable type when you create it.
 
-You can reuse the same variable across multiple tests. If you change the variable's value, all tests using it pick up the change.
+<Tabs>
+  <Tab title="Single value">
+    A fixed value (text, number, key) that doesn't change. Use it for things like a client ID or a public key.
+  </Tab>
+  <Tab title="Secret">
+    For sensitive data such as passwords or API tokens. The value is encoded in both the UI and the database.
 
-## Variable groups
+    Once saved, the value is **never shown again**. To change it, the field appears empty and you must re-enter the full new value to overwrite the old one.
+  </Tab>
+  <Tab title="Choice">
+    A predefined list of values (Choice 1, Choice 2, Choice 3…). Whoever uses the variable picks one of the options.
+  </Tab>
+</Tabs>
 
-A variable group is a named collection of related variables with multiple variants (environments). Use groups to test the same flow across dev, staging, and production without editing your tests.
+**Create a simple variable:**
 
-**Example:** Create a group called "API Endpoint" with variants:
-- **dev**: `https://dev-api.example.com`
-- **staging**: `https://staging-api.example.com`
-- **production**: `https://api.example.com`
+<Steps>
+  <Step title="Open the creation form">
+    Click **Create variable**.
+  </Step>
+  <Step title="Name it">
+    Enter a name with no spaces or special characters.
+  </Step>
+  <Step title="Choose a type">
+    Select **Single value**, **Secret**, or **Choice**.
+  </Step>
+  <Step title="Describe it">
+    Add a description. Optional, but recommended so teammates know what the variable is for.
+  </Step>
+  <Step title="Set the value">
+    Enter the value, or the list of values for a Choice variable, then click **Create**.
+  </Step>
+</Steps>
 
-Your test uses `{{API Endpoint}}` in its steps. At runtime, you select which variant to use, and the test injects the correct URL.
+## Variable groups and variants
+
+A variable group bundles several variables under one entity and gives each one a different value per **variant**. Switching the variant swaps every value in the group at once.
+
+This is ideal for distinct user profiles, separate environments (staging, production), or complex test datasets. For example, a `User Profiles` group with variants *Alexandre*, *Marc*, and *Julie* lets you run the same scenario as a different person without touching the test.
 
 **Create a variable group:**
-1. Click Create Variable Group
-2. Enter a group name
-3. Create at least one variant (default is required)
-4. Add variables to the group
 
-**Add variants to a group:**
-1. Open the group
-2. Click Edit Group
-3. Add new variants by name
-4. Mark one as default (used if no variant is selected at runtime)
+<Steps>
+  <Step title="Open the group form">
+    Click **Create variable group**.
+  </Step>
+  <Step title="Name the group">
+    For example, `User Profiles`.
+  </Step>
+  <Step title="Define the variants">
+    Add each variant — for user profiles that might be *Alexandre*, *Marc*, *Julie*. Mark one as the `Default`.
+  </Step>
+  <Step title="Add variables">
+    Add the variables the group needs, such as `email` and `password`.
+  </Step>
+  <Step title="Set a value per variant">
+    For each variable, fill in the value for every variant. For `email`: Alexandre → `alexandre@mail.com`, Marc → `marc@mail.com`.
+  </Step>
+</Steps>
 
-Each variant can have different values for the same variable. For example, the "username" variable might be `admin@dev` in dev and `admin@prod` in production.
-
-## Variable types
-
-**Regular**: plain text. Use for URLs, form data, API paths, or any string value.
-
-**Choice**: a dropdown list. The variable has predefined options; tests select one at runtime. Useful for feature flags (`on` / `off`) or environment names.
-
-**Owner**: a device identifier (SIM, Smartphone, or Web agent). Use this to specify which device a test should run on without editing the test itself.
-
-**Secret**: sensitive data like API keys or passwords. Stored encrypted; displayed as masked input in the UI.
+Switching variants from the group's dropdown updates all of its values at once to reflect the selected profile.
 
 ## Using variables in tests
 
-Reference a variable in your test steps with double braces: `{{variable_name}}`.
+Once your variables are set up, inject them straight into your test steps.
 
-**In step fields:**
-- **Web test:** Type `{{username}}` in a form field step
-- **Smartphone test:** Type `{{pin}}` in a text input step
-- **URL:** Use `https://api.example.com/{{endpoint}}` in a Navigate step
+**Inject a variable into a step:**
 
-When you run the test, Kapptivate replaces `{{variable_name}}` with its value.
+<Steps>
+  <Step title="Open the injection menu">
+    While creating or editing a step (a **Click** action, a text entry, etc.), click the context menu icon next to the target field.
+  </Step>
+  <Step title="Go to the Variables tab">
+    Open the **Variables** tab in the menu.
+  </Step>
+  <Step title="Pick the variable">
+    Browse the tree (for example `User Profiles` > `email`) and select the variable to insert it into the step.
+  </Step>
+</Steps>
 
-## Set values per variant
+### Switch variant while configuring the test
 
-When you add a variable to a group, set its value for each variant. If a variant has no value, the variable's default value is used as a fallback.
+In the test editor's side panel, the **Environment** tab lists your variable groups. Use the dropdown to change the variant the test uses. Switch from *Alexandre* to *Marc* and the test runs with Marc's data.
 
-**Edit variant values:**
-1. Open the variable group
-2. Select the variant from the dropdown
-3. Click Edit or modify values inline
-4. Save
+### Switch variant at run time
 
-A table shows all variants and their values, making it easy to compare configurations across environments.
+On the final **Run confirmation** screen, Kapptivate shows the variables the run will use. This is your last chance to change the variant from a dropdown, so you can run the same scenario with a completely different profile or dataset on the fly.
 
 ## Search and manage
 
-The Configurations page shows all variables and groups in one place.
+The Configurations page keeps every variable and group in one place.
 
-- **Search**: find variables and groups by name
-- **Duplicate**: clone a variable to quickly create a similar one
-- **Delete**: remove a global variable or variable group
-- **Usage tracking**: see which tests depend on a variable (helps assess the impact of changes)
-
-## Tips for organizing variables
-
-**Use descriptive names**: `api_endpoint` is better than `url1`; `admin_username` is better than `user`.
-
-**Group related variables**: keep `api_endpoint`, `api_key`, and `api_version` in the same group if they belong to the same service.
-
-**Mark secrets**: use the Secret type for anything sensitive (passwords, tokens, API keys).
-
-**Set a default**: every global variable needs a default value (used if no variant is selected). Make it a safe, non-destructive value (e.g., a dev URL, a test account).
-
-**Avoid hardcoding**: replace hardcoded values in test steps with variables. Future you will thank you when you need to test a different environment.
+- **Search** — Find variables and groups by name
+- **Usage tracking** — See which tests depend on a variable before you change it
+- **Duplicate** — Clone a variable to create a similar one
+- **Delete** — Remove a variable or variable group
