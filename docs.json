@@ -98,6 +98,7 @@
             "expanded": true,
             "pages": [
               "introduction",
+              "concepts/how-it-connects",
               "quickstart",
               "concepts/interface"
             ]
@@ -115,8 +116,7 @@
               "concepts/metric",
               "concepts/agent",
               "concepts/device",
-              "concepts/channel",
-              "concepts/how-it-connects"
+              "concepts/channel"
             ]
           },
           {
@@ -174,15 +174,9 @@
               "monitoring/realtime-status",
               "monitoring/supervision",
               "monitoring/incidents",
-              {
-                "group": "Dashboards & reports",
-                "icon": "chart-pie",
-                "pages": [
-                  "monitoring/dashboards",
-                  "monitoring/public-dashboards",
-                  "monitoring/reports"
-                ]
-              }
+              "monitoring/dashboards",
+              "monitoring/public-dashboards",
+              "monitoring/reports"
             ]
           },
           {
