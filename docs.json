@@ -469,15 +469,7 @@
       {
         "tab": "Changelog",
         "icon": "clock-rotate-left",
-        "groups": [
-          {
-            "group": "Changelog",
-            "icon": "clock-rotate-left",
-            "pages": [
-              "changelog/overview"
-            ]
-          }
-        ]
+        "href": "https://product.kapptivate.com/changelog"
       }
     ]
   }
