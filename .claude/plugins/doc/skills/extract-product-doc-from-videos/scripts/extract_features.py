@@ -27,6 +27,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -142,28 +143,79 @@ def guess_mime(video: Path) -> str:
     return mime or "video/mp4"
 
 
-def inline_video_part(video: Path, fps: int | None, quiet: bool):
-    """Build an inline video Part (used on Vertex AI, where the File API isn't available)."""
+def inline_video_part(video: Path, fps: int | None, max_mb: float, quiet: bool):
+    """Build an inline video Part for Vertex AI (which has no File API).
+
+    Vertex caps the request size, so if the video is larger than max_mb we send a
+    downscaled temporary copy *for analysis only*. Screenshots are grabbed elsewhere
+    from the original file, so they keep full resolution.
+    """
+    upload = video
     size_mb = video.stat().st_size / 1_000_000
-    if size_mb > 20:
-        log(
-            f"  warning: sending {size_mb:.0f} MB inline — Vertex AI caps request size. "
-            "If this fails, use a shorter clip, or run in API-key mode (File API handles big files).",
-            quiet,
+    if size_mb > max_mb:
+        tmp = Path(tempfile.gettempdir()) / f"{video.stem}-analysis-1280p.mp4"
+        log(f"  {size_mb:.0f} MB exceeds the ~{max_mb:.0f} MB inline cap; downscaling a temp "
+            "copy for analysis (screenshots stay full-res)...", quiet)
+        subprocess.run(
+            [ffmpeg_exe(), "-y", "-i", str(video), "-vf", "scale=1280:-2",
+             "-c:v", "libx264", "-crf", "32", "-preset", "veryfast", "-an",
+             str(tmp), "-loglevel", "error"],
+            capture_output=True,
         )
-    part = types.Part(inline_data=types.Blob(data=video.read_bytes(), mime_type=guess_mime(video)))
+        if tmp.exists() and tmp.stat().st_size > 0:
+            upload = tmp
+            log(f"  analysis copy: {tmp.stat().st_size / 1_000_000:.0f} MB", quiet)
+        else:
+            log("  downscale failed; sending the original (may exceed the cap).", quiet)
+    part = types.Part(inline_data=types.Blob(data=upload.read_bytes(), mime_type=guess_mime(video)))
     if fps:
         part.video_metadata = types.VideoMetadata(fps=fps)
     return part
 
 
+def upload_to_gcs(video: Path, bucket: str, quiet: bool) -> str | None:
+    """Upload the full-quality video to GCS and return its gs:// URI.
+
+    Vertex AI has no File API, so a Cloud Storage URI is how you send a large video
+    at full quality (no compression). Returns None on failure so the caller can fall
+    back to an inline upload.
+    """
+    uri = f"gs://{bucket}/video-feature-extractor/{video.name}"
+    log(f"  uploading full-quality video to {uri} ...", quiet)
+    result = subprocess.run(
+        ["gcloud", "storage", "cp", str(video), uri], capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        log(f"  GCS upload failed ({result.stderr.strip()}); falling back to inline.", quiet)
+        return None
+    return uri
+
+
+def delete_gcs(uri: str, quiet: bool) -> None:
+    subprocess.run(["gcloud", "storage", "rm", uri], capture_output=True)
+
+
 def analyze(video: Path, model: str, fps: int | None, project: str | None,
-            location: str | None, quiet: bool) -> list[Feature]:
+            location: str | None, max_upload_mb: float, bucket: str | None,
+            quiet: bool) -> list[Feature]:
     client, use_vertex = make_client(project, location, quiet)
 
+    gcs_uri = None
     if use_vertex:
-        video_part = inline_video_part(video, fps, quiet)
+        # Full quality via a GCS URI when a bucket is configured; otherwise inline
+        # (auto-downscaled past the size cap).
+        if bucket:
+            gcs_uri = upload_to_gcs(video, bucket, quiet)
+        if gcs_uri:
+            video_part = types.Part(
+                file_data=types.FileData(file_uri=gcs_uri, mime_type=guess_mime(video))
+            )
+            if fps:
+                video_part.video_metadata = types.VideoMetadata(fps=fps)
+        else:
+            video_part = inline_video_part(video, fps, max_upload_mb, quiet)
     else:
+        # Gemini Developer API: the File API handles full-quality uploads up to 2 GB.
         uploaded = upload_and_wait(client, video, quiet)
         if fps:
             video_part = types.Part(
@@ -173,31 +225,32 @@ def analyze(video: Path, model: str, fps: int | None, project: str | None,
         else:
             video_part = uploaded
 
-    log(f"Analyzing with {model} ...", quiet)
-    response = client.models.generate_content(
-        model=model,
-        contents=[video_part, PROMPT],
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema=list[Feature],
-        ),
-    )
-
-    usage = getattr(response, "usage_metadata", None)
-    if usage:
-        log(
-            f"Tokens: prompt={usage.prompt_token_count} "
-            f"output={usage.candidates_token_count} total={usage.total_token_count}",
-            quiet,
+    try:
+        log(f"Analyzing with {model} ...", quiet)
+        response = client.models.generate_content(
+            model=model,
+            contents=[video_part, PROMPT],
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                response_schema=list[Feature],
+            ),
         )
-
-    features = response.parsed
-    if not features:
-        try:
+        usage = getattr(response, "usage_metadata", None)
+        if usage:
+            log(
+                f"Tokens: prompt={usage.prompt_token_count} "
+                f"output={usage.candidates_token_count} total={usage.total_token_count}",
+                quiet,
+            )
+        features = response.parsed
+        if not features:
             features = [Feature(**item) for item in json.loads(response.text or "[]")]
-        except Exception:
-            sys.exit("Gemini returned no parseable features:\n" + (response.text or "<empty>"))
-    return features
+        return features
+    except Exception as exc:
+        sys.exit(f"Gemini analysis failed: {exc}")
+    finally:
+        if gcs_uri:
+            delete_gcs(gcs_uri, quiet)
 
 
 def ffmpeg_exe() -> str:
@@ -248,18 +301,32 @@ def main() -> None:
                     help="Sampling FPS sent to Gemini (default: model default, ~1)")
     ap.add_argument("--format", choices=["png", "webp"], default="png",
                     help="Screenshot format (default: png). Use webp for docs sites.")
+    ap.add_argument("--screenshot-source", type=Path,
+                    help="Video to grab screenshots from (default: the analyzed video). Point at "
+                         "the original full-res file if analysis runs on a downscaled copy.")
+    ap.add_argument("--gcs-bucket", default=os.environ.get("GEMINI_VIDEO_BUCKET"),
+                    help="GCS bucket name for full-quality upload on Vertex AI (no compression). "
+                         "Defaults to $GEMINI_VIDEO_BUCKET. Without it, large videos fall back to "
+                         "a downscaled inline upload.")
+    ap.add_argument("--max-upload-mb", type=float, default=18.0,
+                    help="Vertex inline size cap (only used when no --gcs-bucket); larger videos "
+                         "are auto-downscaled for analysis only, never for screenshots (default: 18).")
     ap.add_argument("--quiet", action="store_true", help="Suppress progress output")
     args = ap.parse_args()
 
     if not args.video.exists():
         sys.exit(f"Video not found: {args.video}")
     ffmpeg = ffmpeg_exe()
+    shot_src = args.screenshot_source or args.video
+    if not shot_src.exists():
+        sys.exit(f"Screenshot source not found: {shot_src}")
 
     out_dir = args.output or (Path.cwd() / f"{args.video.stem}-features")
     shots_dir = out_dir / "screenshots"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    features = analyze(args.video, args.model, args.fps, args.project, args.location, args.quiet)
+    features = analyze(args.video, args.model, args.fps, args.project, args.location,
+                       args.max_upload_mb, args.gcs_bucket, args.quiet)
     log(f"Found {len(features)} features.", args.quiet)
 
     records = []
@@ -271,7 +338,7 @@ def main() -> None:
                 log(f"  skipping unparseable timestamp: {ts!r}", args.quiet)
                 continue
             fname = f"{index:02d}-{slugify(feat.name)}-{ts.replace(':', '-')}.{args.format}"
-            if grab_frame(ffmpeg, args.video, seconds, shots_dir / fname, args.quiet):
+            if grab_frame(ffmpeg, shot_src, seconds, shots_dir / fname, args.quiet):
                 shots.append({"timestamp": ts, "path": f"screenshots/{fname}"})
         records.append({
             "name": feat.name,

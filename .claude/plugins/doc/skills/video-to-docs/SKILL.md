@@ -51,6 +51,12 @@ uv run "${CLAUDE_PLUGIN_ROOT}/skills/extract-product-doc-from-videos/scripts/ext
   --format webp --output /tmp/video-to-docs-extract
 ```
 
+Pass the **original** video — don't pre-downscale it. For the best analysis on
+Vertex (no API key), set `$GEMINI_VIDEO_BUCKET` (or add `--gcs-bucket <name>`) so
+the full-quality video is uploaded to Cloud Storage rather than downscaled. Either
+way the extractor always grabs screenshots from the original, so they stay full
+resolution — if you shrink the input yourself, the screenshots come out pixelated.
+
 Read `/tmp/video-to-docs-extract/features.md` and `features.json`. These are the
 **candidate** features and screenshots — a draft, not ground truth.
 
