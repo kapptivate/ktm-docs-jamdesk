@@ -202,7 +202,8 @@
               "administration/account",
               "administration/account/profile",
               "administration/account/password",
-              "administration/account/preferences"
+              "administration/account/preferences",
+              "administration/account/delete"
             ]
           },
           {
