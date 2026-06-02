@@ -67,9 +67,12 @@ prints a `manifest.json` mapping each target path to its candidate files.
 
 For each target, look at the candidate frames (read the image files). A timestamp
 can land mid-transition, which is why there are two — choose the clean,
-fully-rendered one. Recommend the better candidate, but let the user make the call
-when it matters. If a target got **no** candidates, Gemini didn't find that screen
-in the new video — tell the user, don't substitute something wrong.
+fully-rendered one. Each candidate is already nudged to the least-motion moment
+near its timestamp so the mouse pointer is at rest, but still check: reject any
+frame with a blurry, mid-movement cursor. Recommend the better candidate, but let
+the user make the call when it matters. If a target got **no** candidates, Gemini
+didn't find that screen in the new video — tell the user, don't substitute
+something wrong.
 
 ### 4. Overwrite in place
 

@@ -10,15 +10,21 @@ The event log table shows the most recent events first, with pagination to brows
 Each event displays:
 
 - **Time**: When the event occurred (formatted in your selected timezone)
-- **Type**: The kind of event (e.g., "user_login", "policy_change")
+- **Type**: The kind of event (e.g., `user_logged_in`, `smartphone_connected`, `service_credentials_created`)
 - **Source**: What triggered the event (e.g., "user@example.com" or a specific resource)
 - **Metadata**: Additional details about the event (on large screens shown inline; on smaller screens, click "View More")
 
 ## Filter events by date
 
-Use the **Date Range Picker** (top right) to narrow results to a specific time period.
+Two controls at the top right narrow results to a time period. Pick a quick range for common windows, or set an exact range with the date picker.
 
-1. Click the date picker
+The quick-range dropdown covers the most common windows: Past 1h, 2h, 6h, 12h, 24h, or 48h, plus Today, Yesterday, Last 7 days, and Last 30 days.
+
+![The quick-range dropdown open, showing presets from Past 1h through Last 30 days](/images/event-log-date-range.webp)
+
+For an exact window, use the date range field next to it:
+
+1. Click the date range field
 2. Select a start date and an end date
 3. The table updates automatically
 
@@ -28,6 +34,8 @@ All dates are displayed in the timezone you select in the date picker. Your time
 
 Use the **Type** dropdown filter to show only specific kinds of events (e.g., only login events). Select one or multiple types, or leave blank to show all types.
 
+![The Type filter open, listing selectable event types such as group_created and monitoring_created](/images/event-log-type-filter.webp)
+
 ## Filter by user
 
 Use the **User** dropdown filter to show only events triggered by a specific user. Select one or multiple users, or leave blank to show all users.
@@ -36,13 +44,15 @@ Filters can be combined. For example, filter by type "user_login" and user "john
 
 ## View event details
 
-Events may display additional metadata inline. For complete details, click the **View More** button to open the event details drawer.
+Events may display additional metadata inline. For complete details, click the **View More** button to open the **Details** panel.
 
-The drawer shows:
+The panel shows:
 
-- **Time**: The formatted event timestamp
 - **Type**: The event type
 - **Source**: Full source information
-- **Details**: The complete metadata and event data in key-value format
+- **Time**: The formatted event timestamp
+- **Metadata**: The complete event data, with structured payloads shown as formatted JSON
 
-Click the close button to dismiss the drawer.
+![The Details panel showing an event's type, source, time, and JSON metadata](/images/event-log-details.webp)
+
+Click the close button to dismiss the panel.

@@ -8,17 +8,21 @@ API keys authenticate external applications, such as CI/CD pipelines and third-p
 ## Create a key
 
 1. Go to **Administration** > **API keys**
-2. Click **Create API key** (top right)
-3. Enter an application name. This helps you identify what the key is for
-4. Select the teams the key should have access to from the **Teams** dropdown
+2. Click **Create API Key** (top right)
+3. Enter a **Name**. This helps you identify what the key is for
+4. Under **Select teams allowed to use this key**, choose the teams the key should have access to
 5. Click **Create**
 
-After creation, a modal displays the generated token. Copy this token immediately. It displays only once. If you lose it, you'll need to refresh the token to generate a new one.
+![The Create a new API Key modal with the name field and team selector](/images/api-key-create.webp)
+
+After creation, a modal confirms *"Your new token has been generated"* and displays the token. Copy it immediately with the copy button — it's only visible this one time. If you lose it, you'll need to [rotate the token](/administration/api-keys/manage#rotate-a-token) to generate a new one.
+
+![The generated token shown once with a copy button](/images/api-key-token.webp)
 
 ## Store the token securely
 
 Store the token in your application or CI/CD environment as an environment variable or secret. Never commit API keys to version control.
 
 <Warning>
-The token is shown only once at creation time. If you close the modal without copying it, you must refresh the token to get a new one.
+The token is shown only once at creation time. If you close the modal without copying it, you must rotate the token to get a new one.
 </Warning>

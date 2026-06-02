@@ -3,6 +3,8 @@ title: Create and edit roles
 description: View default roles, create custom roles with specific permissions, and edit existing roles.
 ---
 
+![The Roles list showing the default roles Administrator, Beta tester, Reporter, Supervisor, and Tester, with a Create role button](/images/roles-list.webp)
+
 Kapptivate provides default system roles you can reference, and lets you create custom roles with any combination of permissions that fits your workspace.
 
 ## View default roles
@@ -13,7 +15,7 @@ To view default roles:
 
 1. Go to Administration > Roles
 2. Scroll through the list to see both default and custom roles
-3. Default roles display a read-only indicator when you try to edit them
+3. Click a default role to open it; its permissions are shown in a read-only side panel with the note "This is a default role and cannot be edited"
 
 Default roles cannot be modified, but you can use them as a reference when creating custom roles.
 
@@ -24,13 +26,15 @@ Custom roles let you define exactly which permissions users and teams should hav
 To create a custom role:
 
 1. Go to Administration > Roles
-2. Click "Create role"
+2. Click "Create role" to open the creation modal
 3. Enter a role name
-4. In the Permissions section:
-   - Review each permission group: Administration, Events, Testing, Monitoring, Beta Features
+4. In the permissions list:
+   - Expand each group — Operator Admin, Events, Manual Testing, Automated Testing, Supervision, Analytics, Beta Features
    - Check the "View" permissions for features users should see
    - Check the "Edit" permissions for features users should modify
-5. Click "Create"
+5. Click "Create role"
+
+![The Create new role modal with collapsible permission groups, their View and Edit checkboxes, and a Create role button](/images/role-create.webp)
 
 Remember that Edit implies View, you don't need to manually check both. When you check Edit, View is automatically enabled.
 

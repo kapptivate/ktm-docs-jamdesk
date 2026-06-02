@@ -83,6 +83,10 @@ The script prints the output directory path on stdout when done.
 - Gemini samples ~1 frame per second, so a timestamp can land a beat early or
   late and a screenshot may catch a transition. Skim the frames; re-grab a
   nearby second or raise `--fps` if one missed.
+- **Steady cursor.** Each frame is grabbed at the *least-motion* moment within a
+  short window of the timestamp, so the mouse pointer is at rest rather than a
+  blurry, mid-movement smear. Still skim the results — if a pointer looks blurry,
+  re-grab a nearby second or pass `--no-steady` to grab exactly on the timestamp.
 - **Full-quality upload.** API-key mode uses the File API (up to 2 GB, no
   compression). On Vertex (ADC), set `--gcs-bucket` (or `$GEMINI_VIDEO_BUCKET`) to
   upload the original to Cloud Storage and analyze it at full quality — this gives

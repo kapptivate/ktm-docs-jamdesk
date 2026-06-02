@@ -9,6 +9,16 @@ Jamdesk docs project. Pages are MDX (Markdown + React components). Config is in 
 - `images/`: static assets. Always use `.webp` format.
 - `snippets/`: reusable MDX fragments. Import with `<Snippet file="name.mdx" />`.
 
+## Running the Dev Server (avoid leaking processes)
+
+`jamdesk dev` does not reliably reap its child `next-server` processes. Stacking servers pegs the CPU and can take the Mac down. Follow these rules:
+
+- **Never start a second server blindly.** Before launching, run `pgrep -fl next-server`. If anything is already running, reuse it — don't start another.
+- **Only restart when new image *files* are added** to `images/` (they sync at startup, not hot reload). MDX, `docs.json`, and content edits hot-reload — no restart needed.
+- **When you must restart, kill first, then start one.** Run `pkill -f "jamdesk dev"; pkill -f next-server` and confirm with `pgrep -fl next-server` (expect nothing) before starting a single new server.
+- **Don't leave a server running for hours.** The leak accumulates over long-lived sessions. Start it for review, then stop it.
+- Prefer asking the user to run `! npx jamdesk dev` themselves over launching a long-lived background process.
+
 ## Page Template
 
 Every page follows this structure:

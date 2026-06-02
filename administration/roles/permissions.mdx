@@ -3,19 +3,23 @@ title: Permissions
 description: Learn how permission groups, dependencies, and restrictions work when configuring roles.
 ---
 
+![A role's permissions shown as collapsible groups, each expanding to View and Edit checkboxes, with a note that default roles cannot be edited](/images/role-edit.webp)
+
 Roles organize permissions into logical groups that control access to platform features. Understanding how these groups and dependencies work helps you build roles that give users exactly the access they need.
 
 ## Permission groups
 
-Each role is built from five permission groups:
+Permissions are organized into groups, one per feature area. Expand a group to see its individual permissions:
 
-- **Administration**: view and edit the admin panel, manage users, teams, and products
-- **Events**: view event logs and admin-level event access
-- **Testing**: view and create manual and automated tests
-- **Monitoring**: view monitoring dashboards, analytics, and incident management
+- **Operator Admin**: view and edit the admin panel — users, teams, products, and other administration settings
+- **Events**: view the event log, with an additional admin-level view for operator events
+- **Manual Testing**: view and edit manual tests
+- **Automated Testing**: view and edit automated tests
+- **Supervision**: view and manage production supervision and incidents
+- **Analytics**: view and manage monitoring analytics and dashboards
 - **Beta Features**: access experimental features
 
-Each permission group usually has a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically, granting Edit access always includes View access.
+Most groups expose a View permission (read-only access) and an Edit permission (create, modify, or delete). Edit implies View automatically, granting Edit access always includes View access.
 
 ## Permission dependencies
 

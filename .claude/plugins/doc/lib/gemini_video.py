@@ -158,8 +158,49 @@ def video_part(client, use_vertex: bool, video: Path, fps: int | None,
     return _inline_part(video, fps, max_mb, quiet), None
 
 
-def grab_frame(ffmpeg: str, video: Path, seconds: float, out: Path, quiet: bool) -> bool:
+def steadiest_second(ffmpeg: str, video: Path, target: float, quiet: bool,
+                     window: float = 0.5, fps: int = 12) -> float:
+    """Find the moment near `target` with the least motion, so the on-screen cursor
+    is at rest rather than mid-movement (a moving cursor grabs as a blurry smear).
+
+    Scans a short window centred on `target`, measuring frame-to-frame change with
+    ffmpeg (tblend difference + signalstats). Returns the second with the lowest
+    change. Falls back to `target` unchanged if scoring fails for any reason, so the
+    worst case is the old single-grab behaviour.
+    """
+    start = max(0.0, target - window / 2)
+    vf = (f"fps={fps},scale=480:-2,tblend=all_mode=difference,"
+          "signalstats,metadata=print:file=-")
+    cmd = [
+        ffmpeg, "-hide_banner", "-ss", f"{start:.3f}", "-t", f"{window:.3f}",
+        "-i", str(video), "-an", "-vf", vf, "-f", "null", "-",
+    ]
+    try:
+        res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    except Exception:
+        return target
+
+    best_t, best_v, cur_t = None, None, None
+    for line in (res.stdout + "\n" + res.stderr).splitlines():
+        m = re.search(r"pts_time:([0-9.]+)", line)
+        if m:
+            cur_t = float(m.group(1))
+            continue
+        m = re.search(r"signalstats\.YAVG=([0-9.]+)", line)
+        if m and cur_t is not None and (best_v is None or float(m.group(1)) < best_v):
+            best_v, best_t = float(m.group(1)), cur_t
+    if best_t is None:
+        return target
+    # Input seeking usually rebases timestamps to ~0; if they came back absolute
+    # (already near target), use them directly instead of re-adding `start`.
+    return best_t if best_t > window + 0.05 else start + best_t
+
+
+def grab_frame(ffmpeg: str, video: Path, seconds: float, out: Path, quiet: bool,
+               steady: bool = True) -> bool:
     out.parent.mkdir(parents=True, exist_ok=True)
+    if steady:
+        seconds = steadiest_second(ffmpeg, video, seconds, quiet)
     quality = ["-quality", "90"] if out.suffix == ".webp" else ["-q:v", "2"]
     cmd = [
         ffmpeg, "-y", "-ss", str(seconds), "-i", str(video),

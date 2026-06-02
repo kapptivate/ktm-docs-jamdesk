@@ -41,6 +41,8 @@ Below is a numbered list of screenshots, each described by what it must clearly 
 For EACH item, return its index and up to {n} timestamps (format MM:SS, best first)
 where that exact screen or state is most clearly and cleanly visible. Prefer steady,
 fully-rendered frames — avoid blurry frames, mid-transition moments, and animations.
+Favour moments when the mouse cursor is at rest (resting on or just after clicking an
+element) over moments mid-movement, since a moving cursor captures as a blurry smear.
 If an item never appears in the video, return an empty timestamps list for it.
 
 Screenshots:
@@ -64,6 +66,9 @@ def main() -> None:
     ap.add_argument("--max-upload-mb", type=float, default=18.0)
     ap.add_argument("--project")
     ap.add_argument("--location")
+    ap.add_argument("--no-steady", action="store_true",
+                    help="Grab exactly at the located timestamp instead of nudging to the "
+                         "nearest still moment (the default avoids a blurry, mid-move cursor).")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -111,7 +116,8 @@ def main() -> None:
             if seconds is None:
                 continue
             out = args.staging / f"{stem}__{ts.replace(':', '-')}.webp"
-            if gv.grab_frame(ffmpeg, args.video, seconds, out, args.quiet):
+            if gv.grab_frame(ffmpeg, args.video, seconds, out, args.quiet,
+                             steady=not args.no_steady):
                 candidates.append({"timestamp": ts, "file": str(out)})
         manifest.append({
             "path": target["path"],

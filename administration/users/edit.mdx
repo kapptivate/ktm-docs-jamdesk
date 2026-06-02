@@ -3,24 +3,24 @@ title: Edit a user
 description: Update a user's profile, team assignments, product access, roles, and security policy.
 ---
 
-You can update any user's profile, teams, products, roles, and security policy at any time. Changes take effect immediately.
+![The user edit page on the Access tab, with a left-hand menu for Profile, User Teams, Access, Security policy, and Account & Password](/images/user-edit.webp)
 
-## Update user details
+You can update any user's profile, teams, products, roles, and security policy at any time. Changes take effect immediately once you save.
 
-<Steps>
-  <Step title="Open the user">
-    Go to **Administration > Users** and click the user's name in the table to open their edit page.
-  </Step>
-  <Step title="Make your changes">
-    Update any combination of:
-    - **Profile**: username, name, email
-    - **Teams**: add or remove team memberships
-    - **Product access**: add or remove direct product assignments and roles
-    - **Security policy**: switch to a different policy
-  </Step>
-  <Step title="Save">
-    Click **Save Changes** to apply your updates.
-  </Step>
-</Steps>
+## Open a user
 
-You can make individual changes without affecting other properties. For example, updating a user's email does not change their team assignments.
+Go to **Administration > Users** and click the user's name in the table. Their edit page opens with a left-hand menu that splits the account into tabs:
+
+- **Profile**: username, first and last name, email
+- **User Teams**: the teams the user belongs to, with the products and member count each one grants
+- **Access**: direct product access and the role on each product
+- **Security policy**: the security policy applied to the account
+- **Account & Password**: account actions — [reset the user's password](/administration/users/manage#reset-a-user-s-password) and deactivate the account
+
+## Make your changes
+
+Open the tab you want and edit it. Each tab is independent, so updating one property leaves the others untouched — changing a user's email doesn't affect their team assignments.
+
+On the **Access** tab, each product shows its role and an **access source**: **Manually added** for direct assignments, or **From [team]** when the access is inherited from a team. A product the user reaches through several teams or roles shows **Multiple**.
+
+Click **Save changes** to apply your updates.

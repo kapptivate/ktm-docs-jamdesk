@@ -81,6 +81,14 @@
     {
       "source": "/concepts/devices-and-statuses",
       "destination": "/agents-devices/statuses"
+    },
+    {
+      "source": "/administration/notifications/availability",
+      "destination": "/administration/notifications"
+    },
+    {
+      "source": "/administration/notifications/channels",
+      "destination": "/administration/notifications"
     }
   ],
   "navigation": {
@@ -250,15 +258,7 @@
                   "administration/roles/assign"
                 ]
               },
-              {
-                "group": "Notifications",
-                "icon": "bell",
-                "pages": [
-                  "administration/notifications",
-                  "administration/notifications/availability",
-                  "administration/notifications/channels"
-                ]
-              },
+              "administration/notifications",
               {
                 "group": "API keys",
                 "icon": "key",
@@ -295,11 +295,11 @@
         ]
       },
       {
-        "tab": "Steps Reference",
+        "tab": "Actions Library",
         "icon": "bolt",
         "groups": [
           {
-            "group": "Steps Reference",
+            "group": "Actions Library",
             "pages": [
               "tests/actions/overview",
               {

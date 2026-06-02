@@ -3,12 +3,20 @@ title: Configure authentication settings
 description: Set up two-factor authentication and login policies.
 ---
 
-Authentication settings control how users prove their identity when logging in. Configure two-factor authentication and login policies in the collapsible panels within a security policy.
+Authentication settings control how users prove their identity when logging in. They live in the **Two Factor Authentication** and **Login Policy** sections of the policy form.
 
 ## Two-factor authentication
 
-Expand the **Two Factor Authentication** panel to require 2FA for users assigned to this policy. When enabled, users must provide a second verification factor in addition to their password each time they log in.
+Tick **Enable two factor authentication** to require a second verification factor for users assigned to this policy. Enabling it reveals these options:
 
-## Login policies
+- **Token expiration duration** — how long a verification token stays valid (for example, 10 minutes).
+- **Limit number of attempts** — cap how many times a user can enter the second factor before the account is locked.
+- **Lock account indefinitely after max attempts** — keep the account locked until an admin intervenes. When off, set an **Account lock duration** (for example, 1 hour) after which the account unlocks automatically.
+- **Warn before account lock** — notify the user before their account is locked.
 
-Expand the **Login Policy** panel to set rules for how users can log in, such as allowed login methods and IP restrictions.
+## Login policy
+
+In the **Login Policy** section:
+
+- **Limit number of login attempts** — restrict how many times a user can fail to log in before being blocked.
+- **Prevent multiple sessions** — stop the same account from being signed in from more than one session at a time.

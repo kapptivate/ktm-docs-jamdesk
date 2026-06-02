@@ -3,19 +3,19 @@ title: View and create security policies
 description: Browse existing policies and create custom security policies for your workspace.
 ---
 
-Security policies live under **Administration** > **Security policies**. The table shows built-in default policies and any custom policies you've created, with each policy's name, type (custom or default environment), and status.
+Security policies live under **Administration** > **Security policies**. The table lists every policy with its **Name** (and description) and when it was **Last Updated**. The workspace default is marked with a **Default** badge.
 
 ## View security policies
 
-Go to **Administration** > **Security policies** to see all policies in your workspace. The table shows built-in default policies and any custom policies you've created.
-
-Each policy shows its name, type (custom or default environment), and status.
+Go to **Administration** > **Security policies** to see all policies in your workspace, including the built-in default and any custom policies you've created. Use the **⋮** menu on a policy's row to edit, clone, or delete it.
 
 ## Create a custom policy
 
-1. Click **Create Policy** (top right)
-2. Fill in the **Policy Name**
-3. Configure each security requirement in the collapsible panels below
-4. Click **Save**
+1. Click **Create security policy** (top right)
+2. In the **About** section, enter a **Name** (required) and an optional **Description**
+3. Configure each section below — Password Policy, Password history, Password life, Two Factor Authentication, Login Policy, and Users
+4. Click **Create security policy** at the bottom
 
-After creating a policy, configure its [password rules](/administration/security-policies/password), [authentication settings](/administration/security-policies/authentication), and [user assignments](/administration/security-policies/manage).
+Each section is a card on the form. Within Password, history, life, and login sections, tick a rule's checkbox to reveal its inputs — nothing is enforced unless its box is checked.
+
+After creating a policy, fine-tune its [password rules](/administration/security-policies/password), [authentication settings](/administration/security-policies/authentication), and [user assignments](/administration/security-policies/manage).

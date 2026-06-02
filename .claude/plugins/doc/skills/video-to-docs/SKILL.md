@@ -118,6 +118,8 @@ Implement, deferring to the project's conventions (its `CLAUDE.md` and any
 
 - **The extraction is a draft, not truth.** Verify timestamps against the
   screenshots; a mis-timed frame can show a transition — re-grab or raise `--fps`.
+  Frames are auto-nudged to the steadiest nearby moment so the cursor isn't a
+  blurry mid-move smear, but still reject any screenshot with a blurry pointer.
 - **Read before you overwrite.** If the video contradicts current docs, surface
   the discrepancy and let the user decide; don't silently replace content.
 - **Respect internal-only concepts** the user flags — keep them out of the docs.

@@ -39,6 +39,11 @@ try:
 except ImportError as exc:  # pragma: no cover - dependency hint
     sys.exit(f"Missing dependency: {exc}\nInstall with: pip install google-genai pydantic")
 
+# Frame-grabbing helpers (incl. steadiest-frame selection) are shared with the
+# update-screenshots skill — see doc/lib/gemini_video.py.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "lib"))
+import gemini_video as gv  # noqa: E402
+
 
 class Feature(BaseModel):
     name: str
@@ -60,8 +65,10 @@ For each feature, return:
 - source: "voice" if only described in audio, "visual" if only shown on screen, "both".
 - timestamps: one or more moments (format MM:SS, or HH:MM:SS for long videos) where the
   feature is best SHOWN on screen — these are used to grab screenshots. Pick the clearest
-  frame(s). Include several if the feature unfolds across multiple screens; one is fine
-  if a single frame captures it.
+  frame(s): the UI fully rendered, no mid-transition animation, and the mouse cursor at
+  rest (resting on or just after clicking an element) rather than mid-movement, since a
+  moving cursor captures as a blurry smear. Include several if the feature unfolds across
+  multiple screens; one is fine if a single frame captures it.
 
 Order features by when they first appear. Every timestamp must fall within the video."""
 
@@ -69,17 +76,6 @@ Order features by when they first appear. Every timestamp must fall within the v
 def log(msg: str, quiet: bool) -> None:
     if not quiet:
         print(msg, file=sys.stderr)
-
-
-def parse_timestamp(ts: str) -> float | None:
-    """Convert 'SS', 'MM:SS', or 'HH:MM:SS' to seconds. None if unparseable."""
-    ts = ts.strip()
-    if not re.fullmatch(r"\d{1,2}(:\d{1,2}){0,2}", ts):
-        return None
-    seconds = 0
-    for part in ts.split(":"):
-        seconds = seconds * 60 + int(part)
-    return float(seconds)
 
 
 def slugify(text: str) -> str:
@@ -157,7 +153,7 @@ def inline_video_part(video: Path, fps: int | None, max_mb: float, quiet: bool):
         log(f"  {size_mb:.0f} MB exceeds the ~{max_mb:.0f} MB inline cap; downscaling a temp "
             "copy for analysis (screenshots stay full-res)...", quiet)
         subprocess.run(
-            [ffmpeg_exe(), "-y", "-i", str(video), "-vf", "scale=1280:-2",
+            [gv.ffmpeg_exe(), "-y", "-i", str(video), "-vf", "scale=1280:-2",
              "-c:v", "libx264", "-crf", "32", "-preset", "veryfast", "-an",
              str(tmp), "-loglevel", "error"],
             capture_output=True,
@@ -253,35 +249,6 @@ def analyze(video: Path, model: str, fps: int | None, project: str | None,
             delete_gcs(gcs_uri, quiet)
 
 
-def ffmpeg_exe() -> str:
-    """Locate ffmpeg: prefer one on PATH, else the binary bundled with imageio-ffmpeg."""
-    from shutil import which
-
-    found = which("ffmpeg")
-    if found:
-        return found
-    try:
-        import imageio_ffmpeg
-        return imageio_ffmpeg.get_ffmpeg_exe()
-    except Exception:
-        sys.exit("No ffmpeg available. Run via `uv run` so imageio-ffmpeg is installed.")
-
-
-def grab_frame(ffmpeg: str, video: Path, seconds: float, out: Path, quiet: bool) -> bool:
-    out.parent.mkdir(parents=True, exist_ok=True)
-    # webp is encoded with libwebp's quality scale; png/jpeg use -q:v.
-    quality = ["-quality", "85"] if out.suffix == ".webp" else ["-q:v", "2"]
-    cmd = [
-        ffmpeg, "-y", "-ss", str(seconds), "-i", str(video),
-        "-frames:v", "1", *quality, str(out), "-loglevel", "error",
-    ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0 or not out.exists():
-        log(f"  ffmpeg could not grab a frame at {seconds:.0f}s: {result.stderr.strip()}", quiet)
-        return False
-    return True
-
-
 def main() -> None:
     ap = argparse.ArgumentParser(
         description="Extract features + screenshots from a video via the Gemini API."
@@ -311,12 +278,15 @@ def main() -> None:
     ap.add_argument("--max-upload-mb", type=float, default=18.0,
                     help="Vertex inline size cap (only used when no --gcs-bucket); larger videos "
                          "are auto-downscaled for analysis only, never for screenshots (default: 18).")
+    ap.add_argument("--no-steady", action="store_true",
+                    help="Grab exactly at the chosen timestamp instead of nudging to the "
+                         "nearest still moment (the default avoids a blurry, mid-move cursor).")
     ap.add_argument("--quiet", action="store_true", help="Suppress progress output")
     args = ap.parse_args()
 
     if not args.video.exists():
         sys.exit(f"Video not found: {args.video}")
-    ffmpeg = ffmpeg_exe()
+    ffmpeg = gv.ffmpeg_exe()
     shot_src = args.screenshot_source or args.video
     if not shot_src.exists():
         sys.exit(f"Screenshot source not found: {shot_src}")
@@ -333,12 +303,13 @@ def main() -> None:
     for index, feat in enumerate(features, 1):
         shots = []
         for ts in feat.timestamps:
-            seconds = parse_timestamp(ts)
+            seconds = gv.parse_timestamp(ts)
             if seconds is None:
                 log(f"  skipping unparseable timestamp: {ts!r}", args.quiet)
                 continue
             fname = f"{index:02d}-{slugify(feat.name)}-{ts.replace(':', '-')}.{args.format}"
-            if grab_frame(ffmpeg, shot_src, seconds, shots_dir / fname, args.quiet):
+            if gv.grab_frame(ffmpeg, shot_src, seconds, shots_dir / fname,
+                             args.quiet, steady=not args.no_steady):
                 shots.append({"timestamp": ts, "path": f"screenshots/{fname}"})
         records.append({
             "name": feat.name,
