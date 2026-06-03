@@ -2,78 +2,145 @@
 title: Agents
 description: Manage your SIM, smartphone, web, and passive agents.
 sidebarTitle: Agents
-icon: robot
 ---
 
-The Agents area lets you manage and monitor all your testing equipment, Cellular agents (with SIM slots), Smartphone agents, Web agents, and Passive agents, in one place. You can search and filter agents, check their status and capacity, and perform maintenance tasks like reboots and updates.
+![The Agents area on the Smartphone Agents tab, with SIM, Smartphone, Web, and Passive tabs, a search box, Status and Zone filters, and an agent card](/images/agents-list.webp)
+
+The Agents area lets you manage and monitor all your testing equipment, Cellular agents (with SIM slots), Smartphone agents, Web agents, and Passive agents, in one place. You can search and filter agents, open an agent to inspect its devices and monitors, and run maintenance tasks like reboots, updates, and maintenance mode.
 
 ## Agent types
 
-Kapptivate supports four agent types, each shown in its own tab:
+Kapptivate groups agents into four types, each shown in its own tab. The tab labels show how many agents of each type you have.
 
-**Cellular**: agents with SIM card slots. These run tests on cellular networks, SMS, USSD, and SIM-dependent flows. Each agent shows how many SIM slots are active and configured.
+**SIM** (also called Cellular): agents with SIM card slots. These run tests on cellular networks, SMS, USSD, and SIM-dependent flows. Each agent shows how many SIM slots are active and configured.
 
-**Smartphone**: agents that run native iOS and Android app tests. Shows device slots and phone status for each agent.
+**Smartphone**: agents that run native iOS and Android app tests. Each shows its connected phones and their status.
 
-**Web**: network-connected agents that run browser-based tests. Display capacity and active connection counts.
+**Web**: agents that run browser-based tests. They expose a configurable parallel-test capacity and a usage heatmap instead of a device list.
 
-**Passive**: read-only agents that report monitoring data without executing tests. No reboot or maintenance controls available; simpler interface focused on monitoring.
+**Passive**: read-only agents that report monitoring data without executing tests. They have a simpler interface focused on monitoring, with no reboot or maintenance controls.
 
 ## Browse and filter agents
 
-When you open the Agents area, you see a list of agents for the current tab (Cellular, Smartphone, Web, or Passive). Each agent appears as a card showing its name, zone, status, and available slots.
+When you open the Agents area, you see the agents for the current tab as cards, each showing its name, zone, status, and slots. Use **Create agent** (top right) to add a new one.
 
-To find a specific agent, use the search box to filter by hostname or UUID. For Cellular, Smartphone, and Web agents, you can also:
+To narrow the list:
 
-- **Filter by Status**: select one or more statuses (Online, Offline, Waiting for config, Maintenance, etc.) to show only agents in that state.
-- **Filter by Zone**: choose a zone or location to see agents in that area. Zones are automatically populated from your agents; only zones with agents appear in the list.
+- **Search** by hostname or UUID. Results update as you type.
+- **Filter by Status**: Online, Offline, Maintenance, Waiting for configuration, or Test-only.
+- **Filter by Zone**: choose a zone or location. Zones are populated from your agents, so only zones that actually have agents appear.
 
-Passive agents support search only: status and zone filters are not available for them.
+Passive agents support search only; the Status and Zone filters don't apply to them.
+
+![The Status filter open on the agents list, showing Online, Offline, Maintenance, Waiting for configuration, and Test-only options](/images/agent-status-filter.webp)
 
 ## Agent card details
 
 Each agent card displays:
 
-- **Status badge**: visual indicator (green for Online, red for Offline, yellow for Maintenance, gray for Waiting for config, etc.)
-- **Agent name**: the display name or hostname
-- **Zone/location**: the agent's configured zone (Cellular, Smartphone, Web agents only)
-- **Slot tags**: number of active and total slots (Cellular and Smartphone agents only)
-- **Issue indicators**: a flag if any slot has a problem (Cellular agents only)
-- **Version info**: software version with an update indicator if an update is available or if the agent is running an older version
-- **Action menu**: three-dot menu with options to edit, set maintenance mode, reboot, or delete
+- **Status badge**: Online, Offline, Maintenance, Waiting for configuration, or Test-only
+- **Name**: the display name or hostname
+- **Zone**: the agent's configured location (SIM, Smartphone, and Web agents)
+- **Slot tags**: number of active and total slots (SIM and Smartphone agents)
+- **Version**: the software version, with an indicator when an update is available
+- **Action menu**: a three-dot menu to edit, reboot, set maintenance, or delete the agent
 
-## View and manage an agent
+For what each status means, see [Statuses](/equipment/statuses).
 
-Click an agent card to open its detail page. The detail page includes:
+## Open an agent
 
-- **General tab**: agent metadata: status, version, software version, hardware details
-- **Connected Devices tab**: (Cellular and Smartphone agents) List of SIM cards or phones in each slot, with their status and any issues
-- **Monitors tab**: (Cellular, Smartphone, Web agents) List of monitors currently running on this agent
-- **Events tab**: activity log and events for the agent
-- **Usage tab**: (Cellular, Smartphone, Web agents) Storage capacity and slot usage metrics
-- **Settings tab**: agent configuration and advanced options:
-  - Reset or change the agent password
-  - Enable automatic reboot scheduling
-  - Configure network settings (IP, gateway, DNS)
-  - Manage software updates
-  - Danger zone: reset or delete the agent
+![An agent's General tab showing hostname, location, version, and UUID, with Reboot agent and Set agent in maintenance actions in the top right](/images/agent-general.webp)
 
-### Common actions
+Click an agent card to open its detail page. The tabs depend on the agent type:
 
-**Edit an agent**: admins can update the agent's name and other settings from the General tab or via the edit option in the action menu.
+- **SIM and Smartphone agents**: General, Connected devices, Monitors, Settings, Event logs
+- **Web agents**: General, Usage, Capacity, Monitors, Settings, Event logs
 
-**Reboot an agent**: use the Reboot option in the action menu or on the Settings tab. You will see a confirmation and a success or error notification. Reboots time out after 3 minutes.
+The agent's name and status sit at the top, with **Reboot agent**, **Set agent in maintenance**, and (for SIM, Smartphone, and Web agents) **Test-only mode** actions in the top right.
 
-**Set maintenance mode**: from the action menu, choose Set Maintenance to temporarily disable the agent. It remains visible in the list but will not run tests. Only admins can toggle maintenance mode.
+### General
 
-**Check for updates**: the agent card shows an update indicator if a newer version is available. Visit the Settings tab on the detail page to view update details and control update behavior.
+Basic information about the agent: hostname, location, software version, and UUID. Use **Edit agent** to change the name and other editable details.
 
-**Enable test-only mode**: web agents can be set to test-only mode (admin only), which limits their use to testing only.
+### Connected devices
 
-**Delete an agent**: super admins can delete an agent via the action menu. A confirmation dialog will appear. Deletion is permanent.
+![A Cellular agent's Connected devices tab listing SIM slots with status, network, health, and monitor counts](/images/agent-connected-devices.webp)
+
+Shown for SIM and Smartphone agents.
+
+- **SIM agents** list each slot with the SIM's number, status, network, a health badge (hover it for the weekly-average usage), the number of access entries, and active monitors.
+- **Smartphone agents** list each phone with its model, status, UUID, usage badge, and monitor count.
+
+![A Smartphone agent's Connected devices tab listing connected phones with status, UUID, usage, access, and monitor counts](/images/agent-smartphone-devices.webp)
+
+Device and health statuses are explained in [Statuses](/equipment/statuses).
+
+### Monitors
+
+Shown for SIM, Smartphone, and Web agents. Lists the monitors running on the agent, grouped by suite, with each monitor's status, frequency, and location. Pause an individual monitor from its row menu, or use **Pause all monitors** to pause every monitor on the agent.
+
+![An agent's Monitors tab listing monitors grouped by suite, each showing status, frequency, location, and device, with a Pause all monitors action](/images/agent-monitors.webp)
+
+### Settings
+
+A left sub-navigation groups the agent's configuration:
+
+![The agent Settings tab with its sub-navigation (About, Software update, Automatic reboot, Agent credentials, Network configuration, Danger zone) and the automatic-reboot toggle and agent credentials](/images/agent-settings.webp)
+
+- **About**: general information about the agent
+- **Software update**: enable automatic software updates
+- **Automatic reboot**: turn on scheduled reboots (we recommend rebooting at least once a week)
+- **Agent credentials**: the agent's ID and password, with a **Reset password** action. Use these to configure the robot.
+- **Network configuration**: a read-only JSON view of the agent's network interfaces, IP addresses, and MAC addresses (available for all agent types)
+- **Danger zone**: delete the agent
+
+![The Network configuration section of an agent's Settings, showing a read-only JSON view of network interfaces with their addresses and MAC addresses](/images/agent-network-config.webp)
+
+### Event logs
+
+A per-agent history of events, with the same Type and User filters, time-range picker, and **Export CSV** action as the workspace-wide [event log](/administration/event-log). Use the time-range picker to refine results.
+
+![An agent's Event logs tab with Type and User filters, a time-range picker, and an Export CSV action above the Time, Type, Source, and Metadata columns](/images/agent-event-logs.webp)
+
+### Usage (Web agents)
+
+Web agents have a **Usage** tab showing a weekly-average utilization heatmap, the agent's busy percentage hour by hour across the days of the week. Use it to spot when an agent runs hot and to balance load.
+
+![A Web agent's Usage tab showing a weekly-average utilization heatmap, with hours as rows and days as columns shaded by busy percentage](/images/agent-web-usage.webp)
+
+### Capacity (Web agents)
+
+![The Capacity tab of a Web agent, selecting the number of parallel tests from a dropdown of 1 to 10](/images/agent-web-capacity.webp)
+
+The **Capacity** tab sets how many tests a Web agent runs simultaneously, from 1 to 10 parallel tests. The maximum is determined by your licence; raising it makes more browsers available for web testing.
+
+## Maintenance and test-only modes
+
+**Maintenance mode**: use **Set agent in maintenance** (top right) to temporarily take an agent out of service. It stays visible in the list but stops running scheduled scenarios and monitors until you **Remove from maintenance**. Only admins can toggle maintenance.
+
+![An agent in Maintenance status, with a Maintenance badge by its name and a Remove from maintenance action in the top right](/images/agent-maintenance.webp)
+
+**Test-only mode**: available for SIM, Smartphone, and Web agents. Activating it pauses all active monitors on the agent and reserves its capacity for manual tests. A confirmation dialog appears before activation, and the button stays highlighted while the mode is active.
+
+![The confirmation dialog for activating test-only mode, warning that all active monitors on the device will be paused](/images/agent-test-only.webp)
+
+## Reboot and delete
+
+**Reboot an agent** from the **Reboot agent** button or the card's action menu. You'll see a confirmation and then a success or error notification; reboots time out after 3 minutes.
+
+**Delete an agent** from the action menu or the Settings **Danger zone**. A confirmation dialog appears, and deletion is permanent.
 
 ## Empty states
 
-If no agents exist on a tab, you see an empty state with a message and no filters. Once agents are added, filters appear and you can begin searching and filtering.
+If no agents exist on a tab, you see an empty state with no filters. Once agents are added, the filters appear. If filters are applied but nothing matches, a card shows which filters are active so you can clear them.
 
-If filters are applied but no agents match, a collapsed card appears showing which filters are active so you can clear them.
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Statuses" icon="list-check" href="/equipment/statuses">
+    Decode every agent, device, and SIM status you see on these screens
+  </Card>
+  <Card title="Devices lab" icon="mobile-screen-button" href="/equipment/devices-lab">
+    Browse the SIMs and smartphones connected across all your agents
+  </Card>
+</Columns>

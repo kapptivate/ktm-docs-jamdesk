@@ -25,8 +25,12 @@
     }
   },
   "fonts": {
-    "heading": { "family": "Geist" },
-    "body": { "family": "Geist" }
+    "heading": {
+      "family": "Geist"
+    },
+    "body": {
+      "family": "Geist"
+    }
   },
   "favicon": "/images/favicon.svg",
   "logo": {
@@ -80,7 +84,15 @@
     },
     {
       "source": "/concepts/devices-and-statuses",
-      "destination": "/agents-devices/statuses"
+      "destination": "/equipment/statuses"
+    },
+    {
+      "source": "/agents-devices/statuses",
+      "destination": "/equipment/statuses"
+    },
+    {
+      "source": "/agents-devices/passive",
+      "destination": "/equipment/passive"
     },
     {
       "source": "/administration/notifications/availability",
@@ -98,102 +110,109 @@
         "icon": "book-open",
         "groups": [
           {
-            "group": "Documentation",
-            "pages": [
-          {
-            "group": "Get started",
+            "group": "Get Started",
             "icon": "rocket",
             "expanded": true,
             "pages": [
               "introduction",
               "concepts/how-it-connects",
-              "quickstart",
-              "concepts/interface"
+              {
+                "group": "Quickstart",
+                "expanded": false,
+                "pages": [
+                  "quickstart",
+                  "quickstart/web",
+                  "quickstart/smartphone",
+                  "quickstart/apis",
+                  "quickstart/sims",
+                  "concepts/interface"
+                ]
+              },
+              {
+                "group": "Concepts",
+                "expanded": false,
+                "pages": [
+                  "concepts/workspace",
+                  "concepts/product",
+                  "concepts/test",
+                  "concepts/execution",
+                  "concepts/monitor",
+                  "concepts/metric",
+                  "concepts/agent",
+                  "concepts/device",
+                  "concepts/channel",
+                  {
+                    "group": "Supported Channels",
+                    "expanded": false,
+                    "pages": [
+                      "agents-devices/web-api",
+                      "agents-devices/smartphone",
+                      "agents-devices/sim"
+                    ]
+                  }
+                ]
+              }
             ]
           },
           {
-            "group": "Concepts",
-            "icon": "lightbulb",
-            "expanded": false,
+            "group": "Writing tests",
+            "icon": "pen-to-square",
+            "expanded": true,
             "pages": [
-              "concepts/workspace",
-              "concepts/product",
-              "concepts/test",
-              "concepts/execution",
-              "concepts/monitor",
-              "concepts/metric",
-              "concepts/agent",
-              "concepts/device",
-              "concepts/channel"
-            ]
-          },
-          {
-            "group": "Agents & Devices",
-            "icon": "server",
-            "expanded": false,
-            "pages": [
-              "agents-devices/web-api",
-              "agents-devices/smartphone",
-              "agents-devices/sim",
-              "agents-devices/passive",
-              "agents-devices/statuses"
-            ]
-          },
-          {
-            "group": "Test",
-            "icon": "vial",
-            "expanded": false,
-            "pages": [
-              "tests/overview",
-              "tests/create",
-              "tests/builder",
-              "tests/live-session",
-              "tests/configurations",
-              "tests/browser-presets",
-              "tests/suites",
-              "tests/reusable-components"
-            ]
-          },
-          {
-            "group": "Run",
-            "icon": "play",
-            "expanded": false,
-            "pages": [
-              "executions/overview",
-              "executions/results"
-            ]
-          },
-          {
-            "group": "Monitor",
-            "icon": "gauge",
-            "expanded": false,
-            "pages": [
-              "monitoring/overview",
-              "monitoring/create",
-              "monitoring/scheduling",
-              "monitoring/analytics"
-            ]
-          },
-          {
-            "group": "Production supervision",
-            "icon": "eye",
-            "expanded": false,
-            "pages": [
-              "monitoring/realtime-status",
-              "monitoring/supervision",
-              "monitoring/incidents",
-              "monitoring/dashboards",
-              "monitoring/public-dashboards",
-              "monitoring/reports"
-            ]
-          },
-          {
-            "group": "Equipment",
-            "icon": "server",
-            "expanded": false,
-            "pages": [
-              "equipment/agents",
-              "equipment/devices-lab"
+              {
+                "group": "Test",
+                "expanded": false,
+                "pages": [
+                  "tests/overview",
+                  "tests/create",
+                  "tests/builder",
+                  "tests/live-session",
+                  "tests/configurations",
+                  "tests/browser-presets",
+                  "tests/suites",
+                  "tests/reusable-components"
+                ]
+              },
+              {
+                "group": "Run",
+                "expanded": false,
+                "pages": [
+                  "executions/overview",
+                  "executions/results"
+                ]
+              },
+              {
+                "group": "Monitor",
+                "expanded": false,
+                "pages": [
+                  "monitoring/overview",
+                  "monitoring/create",
+                  "monitoring/scheduling",
+                  "monitoring/analytics"
+                ]
+              },
+              {
+                "group": "Production supervision",
+                "expanded": false,
+                "pages": [
+                  "monitoring/realtime-status",
+                  "monitoring/supervision",
+                  "monitoring/incidents",
+                  "monitoring/dashboards",
+                  "monitoring/public-dashboards",
+                  "monitoring/reports"
+                ]
+              },
+              {
+                "group": "Equipment",
+                "expanded": false,
+                "pages": [
+                  "equipment/agents",
+                  "equipment/devices-lab",
+                  "equipment/passive",
+                  "equipment/statuses"
+                ]
+              }
             ]
           },
           {
@@ -215,7 +234,6 @@
             "pages": [
               {
                 "group": "Products",
-                "icon": "box",
                 "pages": [
                   "administration/products",
                   "administration/products/create",
@@ -228,7 +246,6 @@
               },
               {
                 "group": "Users",
-                "icon": "users",
                 "pages": [
                   "administration/users",
                   "administration/users/create",
@@ -239,7 +256,6 @@
               },
               {
                 "group": "Teams",
-                "icon": "people-group",
                 "pages": [
                   "administration/teams",
                   "administration/teams/create",
@@ -250,7 +266,6 @@
               },
               {
                 "group": "Roles",
-                "icon": "user-shield",
                 "pages": [
                   "administration/roles",
                   "administration/roles/permissions",
@@ -261,7 +276,6 @@
               "administration/notifications",
               {
                 "group": "API keys",
-                "icon": "key",
                 "pages": [
                   "administration/api-keys",
                   "administration/api-keys/create",
@@ -270,7 +284,6 @@
               },
               {
                 "group": "Security policies",
-                "icon": "shield-halved",
                 "pages": [
                   "administration/security-policies",
                   "administration/security-policies/create",
@@ -281,15 +294,12 @@
               },
               {
                 "group": "Event log",
-                "icon": "clock-rotate-left",
                 "pages": [
                   "administration/event-log",
                   "administration/event-log/browse",
                   "administration/event-log/export"
                 ]
               }
-            ]
-          }
             ]
           }
         ]
@@ -304,7 +314,6 @@
               "tests/actions/overview",
               {
                 "group": "Shared steps",
-                "icon": "shapes",
                 "pages": [
                   "tests/actions/shared/pause",
                   "tests/actions/shared/waitfor",
@@ -318,7 +327,6 @@
               },
               {
                 "group": "Web steps",
-                "icon": "globe",
                 "pages": [
                   "tests/actions/web/startingurl",
                   "tests/actions/web/click",
@@ -344,7 +352,6 @@
               },
               {
                 "group": "Smartphone steps",
-                "icon": "mobile-screen",
                 "pages": [
                   "tests/actions/smartphone/startingapp",
                   "tests/actions/smartphone/app",
@@ -367,7 +374,6 @@
               },
               {
                 "group": "SIM steps",
-                "icon": "sim-card",
                 "pages": [
                   "tests/cellular",
                   "tests/actions/cellular/ussd",
@@ -377,7 +383,6 @@
               },
               {
                 "group": "API steps",
-                "icon": "plug",
                 "pages": [
                   "tests/actions/api/overview"
                 ]

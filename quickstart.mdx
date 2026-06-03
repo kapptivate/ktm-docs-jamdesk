@@ -1,39 +1,61 @@
 ---
 title: Quickstart
-description: Create your first test, run it, and see the result in a few minutes.
-icon: bolt
+description: Create your first test, run it, and read the result — then pick the channel you want to start with.
+sidebarTitle: Options
 ---
 
-This quickstart walks you through creating a test, running it on an agent, and reading the result. By the end you will understand the author → run → result loop that everything else in Kapptivate builds on.
+Every test in Kapptivate follows the same loop: author a test, run it on an agent, read the result. This page shows that loop, then points you to a channel-specific guide so you can start with the kind of test you care about.
+
+## The loop
 
 <Steps>
   <Step>
-    **Create a test.** Navigate to the **Tests** section in the sidebar for your Product. Click **Create**, select your channel (Web, Smartphone, Cellular, or API), and confirm. The test editor opens. Give your test a name and description, then confirm the action (device type and starting point: for example, a URL for web or an app bundle for mobile).
+    **Create a test.** Open the **Tests** section for your product, click **Create**, pick a channel, and name the test.
   </Step>
   <Step>
-    **Add steps.** Inside the action, add steps to define what the test does. Each step is an action like clicking an element, typing text, navigating to a URL, waiting for content, or checking that something is on the page. For a web test, you might click a login button, type credentials, then check for a welcome message. Save the test.
+    **Add steps.** Define what the test does, clicks, input, navigation, and checks.
   </Step>
   <Step>
-    **Run the test.** Click the **Run** button on your test (in the test list) or inside the editor. Choose one or more agents to run against (for example, a Chrome browser for web, or a specific Smartphone device). The platform queues the test and starts execution. You can watch the run in real time from the **Executions** section.
+    **Run it.** Click **Run** and choose one or more agents. Watch execution live under **Executions**.
   </Step>
   <Step>
-    **View the result.** Once the test finishes, navigate to **Executions** in the sidebar. Find your test execution in the list and click into it. You will see:
-
-    - **Status**: did the test pass, fail, or warn?
-    - **Steps**: a breakdown of each action the test performed.
-    - **Screenshots**: captures from each step, showing the state of the application.
-    - **Timing**: how long each step took.
-    - **Variables**: any input or output values used during the run.
-
-    If a step failed, the screenshot and error message show you exactly where things went wrong.
+    **Read the result.** Open the execution to see status, per-step screenshots, timing, and variables.
   </Step>
 </Steps>
 
-## Next steps
+## Pick your channel
 
-Now that you have run a test, explore the platform further:
+<Columns cols={2}>
+  <Card title="Web" icon="globe" href="/quickstart/web">
+    Automate a browser test against a website or web app
+  </Card>
+  <Card title="Smartphone" icon="mobile-screen" href="/quickstart/smartphone">
+    Test a native Android or iOS app on a real device
+  </Card>
+  <Card title="APIs" icon="plug" href="/quickstart/apis">
+    Validate an HTTP endpoint without a browser
+  </Card>
+  <Card title="SIMs" icon="sim-card" href="/quickstart/sims">
+    Run USSD and SMS flows on a real SIM card
+  </Card>
+</Columns>
 
-- **Organize tests**: use [collections](/tests/overview) to folder your tests by feature or team.
-- **Parameterize tests**: add [input variables](/tests/create) so you can run the same test with different data.
-- **Run on a schedule**: [create a monitor](/monitoring/create) to run your test continuously in production and alert you to failures.
-- **Integrate with CI/CD**: use [API keys](/administration/api-keys) to trigger test runs from your pipeline.
+## Go further
+
+Once you've run a test:
+
+- **Organize tests** into [collections](/tests/overview) by feature or team.
+- **Parameterize tests** with [input variables](/tests/create) to run the same test with different data.
+- **Run on a schedule** by [creating a monitor](/monitoring/create) that runs continuously and alerts you to failures.
+- **Integrate with CI/CD** using [API keys](/administration/api-keys) to trigger runs from your pipeline.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Navigating" icon="compass" href="/concepts/interface">
+    Find your way around the sidebar, workspaces, and products
+  </Card>
+  <Card title="Concepts" icon="lightbulb" href="/concepts/workspace">
+    Understand workspaces, products, tests, executions, and monitors
+  </Card>
+</Columns>

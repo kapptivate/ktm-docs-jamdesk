@@ -2,35 +2,99 @@
 title: Devices lab
 description: Browse and manage the SIMs and smartphones available in your workspace.
 sidebarTitle: Devices lab
-icon: mobile-screen-button
 ---
 
-The Devices Lab shows all the physical SIM cards and smartphones connected to your agents in one searchable view. Use this area to find devices, check their status, and see which products use them.
+![The Devices lab on the SIMs tab, listing SIM cards with status, network, usage, access, monitors, and host columns, plus search and filters](/images/devices-lab-sims.webp)
+
+The Devices lab is the central place to manage every test device in your workspace. It shows all the physical SIM cards and smartphones connected to your agents in one searchable view, where you can check a device's status, control which products use it, and open it to inspect usage, monitors, and settings.
 
 ## View your devices
 
-The Devices Lab displays two tabs: one for SIM cards and one for smartphones. Each tab shows a table of devices with their identifiers, names, assigned products, and status.
+The Devices lab has two tabs: **SIMs** and **Smartphones**. Each lists its devices in a table.
 
-**SIMs**: lists SIM cards connected to Cellular agents, identified by IMSI (the SIM's unique identifier) and MSISDN (phone number). You can search by any of these identifiers or by hostname.
+**SIMs** lists the SIM cards connected to your SIM (Cellular) agents. Columns show the SIM's name and number, status, network and signal, usage, access count, monitors, and host agent (with its slot). Use **Learn how to setup a SIM** for the installation guide.
 
-**Smartphones**: lists smartphones connected to Smartphone agents, identified by phone number or device name.
+**Smartphones** lists the phones connected to your Smartphone agents, with their model, status, UUID, usage, access, monitors, and host. Use **Learn how to setup a new device** for the installation guide.
+
+![The Smartphones tab listing connected phones with model, status, UUID, usage, access, monitors, and host](/images/devices-lab-smartphones.webp)
+
+For what each status and usage badge means, see [Statuses](/equipment/statuses).
 
 ## Search and filter devices
 
-When devices exist, you have access to several filters:
+Above each table:
 
-**Search**: find devices by name, IMSI (for SIMs), MSISDN (national or international phone number format), or hostname. Results update as you type.
+- **Search** by name, IMSI or MSISDN (for SIMs) or by name or UUID (for smartphones). Results update as you type.
+- **Status filter**: choose **Active** (in use) or **Archived** (retired). Active is the default.
+- **Products filter**: a multi-select dropdown that limits the list to devices assigned to the product(s) you pick.
 
-**Active/Archived toggle**: choose to view Active devices (in use) or Archived devices (that have been removed). By default, you see only active devices.
+## Open a device
 
-**Products filter**: multi-select dropdown to filter devices by the product(s) they are assigned to. This shows you which devices are being used for which products.
+Click a device row to open its detail page. The tabs are **General**, **Usage**, **Monitors**, **Settings**, and **Event logs**, with the device name and status at the top.
+
+Three actions sit in the top right:
+
+- **Reboot slot** (SIM cards): remotely reboots the SIM's slot on its agent.
+- **Test-only mode**: pauses all monitors on the device and reserves it for manual testing.
+- **Launch live session**: opens an interactive [live session](/tests/live-session) with the device.
+
+![A SIM card's detail page on the Settings tab, with Reboot slot, Test-only mode, and Launch live session actions in the top right](/images/device-controls.webp)
+
+### General
+
+The General tab shows the device's core information (for a SIM: slot, host agent, IMSI, location, network, and usage) and a **Products** section that controls which products may use the device.
+
+Leave **This device can be used by all the products** on to grant access to every product, or turn it off and use **Add product** to restrict access to a selected list.
+
+![A SIM's General tab showing its details and the Products access section with an 'add product' control](/images/device-product-access.webp)
+
+### Usage
+
+The Usage tab shows a weekly-average utilization heatmap, the device's busy percentage hour by hour across the days of the week. Use it to spot usage patterns and balance load across devices.
+
+![A device's Usage tab showing a weekly-average utilization heatmap with hours as rows and days as columns](/images/device-usage.webp)
+
+### Monitors
+
+The Monitors tab lists the monitors currently using the device, grouped by suite, with each monitor's status, frequency, and location. Pause an individual monitor from its row, or use **Pause all monitors**.
+
+![A device's Monitors tab listing the monitors that use it, grouped by suite, each with status, frequency, and location](/images/device-monitors.webp)
+
+### Settings
+
+Settings group the device's editable fields and read-only technical details in a left sub-navigation.
+
+**For a SIM card:**
+
+- **About**: edit the national and international MSISDN and the device name, then **Save changes**.
+- **SIM Details**: read-only technical information, IMSI, ICCID, type, ISO code, country, operator, registered network name and PLMN, and modem firmware.
+- **Default APN**: the SIM's default access point configuration.
+
+![A SIM's Settings tab on SIM Details, showing read-only IMSI, ICCID, country, operator, and network fields](/images/device-sim-details.webp)
+
+**For a smartphone:**
+
+- **About**: rename the device.
+- **Smartphone Details**: connection details, UUID, URL, type, and model.
+- **Props**: a JSON object of device-specific properties such as screen resolution, manufacturer, and OS build versions.
+
+![A smartphone's Settings tab showing Smartphone Details and a Props JSON block of device properties](/images/device-smartphone-props.webp)
+
+### Event logs
+
+A per-device history of events, with the same Type and User filters, time-range picker, and **Export CSV** action as the workspace-wide [event log](/administration/event-log).
 
 ## Empty states
 
-If no agents of a type exist (for example, no Cellular agents), you see a message suggesting you contact sales if you need agents, with a link to the agent installation guide.
+If no agents of a type exist (for example, no SIM agents), you see a message suggesting you contact sales, with a link to the agent installation guide. If agents exist but no devices are configured yet, you see a prompt to configure devices with a link to the setup guide.
 
-If agents exist but no devices have been configured, you see a prompt to configure devices with a link to the SIM card configuration guide.
+## What's Next?
 
-## View device details
-
-Click a device in the table to view its full details and related information, such as which agents it is connected to and which tests or monitors use it.
+<Columns cols={2}>
+  <Card title="Statuses" icon="list-check" href="/equipment/statuses">
+    Decode every device, SIM, signal, and usage status shown in these tables
+  </Card>
+  <Card title="Agents" icon="robot" href="/equipment/agents">
+    Manage the agents these SIMs and smartphones are connected to
+  </Card>
+</Columns>
