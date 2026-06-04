@@ -64,6 +64,11 @@ resolution — if you shrink the input yourself, the screenshots come out pixela
 Read `/tmp/video-to-docs-extract/features.md` and `features.json`. These are the
 **candidate** features and screenshots — a draft, not ground truth.
 
+If the project keeps a reference inventory (e.g. a `references/` folder holding
+the source videos and one markdown per video), also copy `features.md` there as
+`<video-stem>.md`: replace the image embeds with their timestamps and note which
+docs the gap analysis ran against, so the inventory stays complete.
+
 ### 2. Learn the existing docs
 
 Read `docs.json` to understand the site's structure (tabs, groups, pages) and

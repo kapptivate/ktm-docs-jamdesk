@@ -16,8 +16,17 @@ Update a component once and every test that uses it picks up the change: fix a l
 
 Open the **Reusable components** tab in the test list and create it like a normal test: pick a channel, set a starting point, and add steps. Once saved, it's available to insert into other tests in the same product.
 
+## The components list
+
+The Reusable components tab lists each component with a **Usage** chip ("Used in X tests") and a **Steps** count. The connection icon next to the name is color-coded: purple when the component is actively used, grey when nothing references it yet.
+
+![The Reusable components tab with usage chips, step counts, and color-coded connection icons](/images/components-list.webp)
+
+Click a component's usage chip to open the **Used in tests** modal: it lists every dependent test with its creator and an **Edit** shortcut straight into that test's builder, so you can assess the blast radius of a change before making it.
+
+![The Used in tests modal listing dependent tests with Edit shortcuts](/images/component-usage.webp)
+
 ## Reuse and dependencies
 
-- **Reuse tracking:** each component shows how many tests reference it, so you can gauge the impact of a change before you make it.
 - **Validity propagation:** if a component becomes invalid, every test that depends on it is flagged as invalid until the component is fixed. In the test list, a red triangle marks a test whose dependency is broken.
 - **Product scope:** reusable components belong to a single product. A test that contains a reusable component can't be copied to another product.

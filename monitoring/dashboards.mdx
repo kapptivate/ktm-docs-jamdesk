@@ -1,68 +1,65 @@
 ---
 title: Dashboards
-description: Create, organize, and share custom dashboards for visualizing and monitoring data.
+description: Build, organize, and share custom dashboards for your monitoring data.
 sidebarTitle: Dashboards
 ---
 
-Build custom dashboards to visualize your monitoring data exactly how you need it. Organize dashboards into collections, share them with your team, mark favorites, and lock dashboards to prevent accidental changes.
+![The Dashboards tab of the Analytics area, with collection folders, the dashboard list with source tags and favorites, and the Create buttons](/images/analytics-dashboards.webp)
 
-## Building custom dashboards
+The same monitoring data answers different questions for different people: an executive wants a weekly service health view, an engineer wants error counts per test. Dashboards let you compose exactly the view each audience needs and keep it one click away. They live in the **Analytics** area, alongside [tests metrics](/monitoring/tests-metrics), [email reports](/monitoring/mail-reports), and [exports](/monitoring/exports).
 
-Click the "Create dashboard" button to open the creation dialog. Name your dashboard, select the products (sources) to include, and add a description. Dashboards use global filters based on the products you select, so you can focus on specific data.
+## The dashboards list
 
-Once created, the dashboard opens in edit mode. Add widgets by selecting metrics from your monitoring data, configuring charts, and customizing time ranges and filters.
+The Dashboards tab lists every dashboard in the workspace:
 
-### Dashboard widgets and metrics
+- **Name**, with a star to mark favorites; favorites sort to the top and are saved in your preferences.
+- **Source**: colored tags showing which products feed the dashboard (or "All products").
+- **Last update**: when it was last modified, as a relative time.
+- **Creator**: who owns it.
 
-Each dashboard widget displays a specific metric or visualization. Configure widgets with:
-- **Metrics**: select from available KPIs, performance data, and monitoring metrics
-- **Time ranges**: set the default date range for the widget
-- **Filters**: apply additional scope filters by test or product
+Search dashboards by name with the search bar. Collection folders sit above the list, with **Trash**, **Create collection**, and **+ Create dashboard** in the top right.
 
-### Dashboard variables and filters
+## Organize with collections
 
-Create custom variables (text fields, dropdowns, multi-select lists) to let dashboard viewers filter data dynamically. Variables can reference global scope (tests, products) and support default values. All widgets using a variable update when the viewer changes its value.
+Collections are folders that group related dashboards by team, project, or purpose. Click **Create collection** to add one, open a folder card to browse it, and use **Move dashboard** from a row's menu to file a dashboard into a collection.
 
-Global filters apply to all widgets on the dashboard and are set during dashboard creation.
+Deleted dashboards go to the **Trash** collection, where they can be restored or permanently deleted.
 
-## Auto-generated dashboards
+## Row actions
 
-Tests with monitoring enabled automatically generate dashboards showing metrics and performance data. These auto-generated dashboards help you quickly visualize test results without manual setup. Find auto-generated dashboards in the **Auto Dashboards** section, searchable and filterable by test and product.
+Each dashboard row has a menu with:
 
-## Organizing dashboards
+- **Edit**: open the dashboard in edit mode.
+- **Put in favorites / Remove from favorites**: toggle the star.
+- **Lock**: prevent accidental edits; locked dashboards show a lock icon.
+- **Duplicate**: copy the dashboard as a starting point.
+- **Move dashboard**: file it into a collection.
+- **Share public link**: open the sharing dialog.
+- **Delete**: move it to the trash.
 
-Organize dashboards into nested collections (folders) to keep related dashboards together. Use the breadcrumb navigation to move through collections. Create a new collection at any level to group dashboards by team, project, or purpose.
+![A dashboard row's menu open, with Edit, favorites, Lock, Duplicate, Move dashboard, Share public link, and Delete](/images/dashboard-actions.webp)
 
-Drag and drop dashboards between collections to reorganize them. Move a dashboard to a different collection using the move modal in the dashboard actions menu.
+## Create a dashboard
 
-## Finding dashboards
+Click **+ Create dashboard**, then give it a **Dashboard name** and select the **Bucket** that supplies its data. Open **Options** for advanced settings, then click **Add**.
 
-Search across all dashboards by name and metadata using the full-text search bar. Search results appear instantly as you type.
+![The Add new dashboard form with the name field, bucket selector, and options](/images/dashboard-create.webp)
 
-Filter dashboards by **source** (products used in their global filters) or by **owner** (who created the dashboard) using the multi-select dropdown filters. Combine filters to narrow down results further.
+The dashboard opens in edit mode, where you compose it from widgets:
 
-## Favorite dashboards
+- **Widget types**: Title, Counter, Pie, Area range, Line / Bar, Percentage area, Histogram, Table, and Custom Display, all available from the toolbar.
+- **Edit-mode bar**: set the aggregation interval, timezone, and time range (for example "Past 48h (Realtime)"), toggle the legend, then **Save** or **Cancel**.
+- **Variables**: create text fields, dropdowns, or multi-select lists so viewers can filter the data dynamically; every widget using a variable updates when its value changes.
 
-Mark frequently-used dashboards as favorites by clicking the star icon. Favorites appear at the top of the list and are saved in your user preferences, making them easy to find.
+![A dashboard in edit mode with the widget toolbar showing the available visualization types](/images/dashboard-widgets.webp)
 
-## Sharing dashboards
+## Share a dashboard
 
-Share a dashboard with team members or publicly. Click the share action in the dashboard menu to open the sharing dialog.
+Share a dashboard with people who don't have a Kapptivate account. Choose **Share public link** from the row menu:
 
-**Internal sharing**: grant access to team members who have Kapptivate accounts.
+- **Public link**: set a password (at least 8 characters, required), then click **Generate share link** and send the link yourself.
+- **Send by email**: enter the recipient's address and the password, and Kapptivate sends the protected link directly.
 
-**Public sharing**: generate a publicly shareable link with optional password protection. Public dashboards are read-only and don't require login. Visitors can interact with date ranges, timezones, aggregation, and variables, but cannot modify the underlying dashboard.
+Visitors get a read-only view; see [Public dashboards](/monitoring/public-dashboards) for what they can and can't do.
 
-View the owner of each dashboard (the creator) in the table. The "Last modified" column shows when the dashboard was last updated with a relative timestamp (e.g., "2 hours ago").
-
-## Locking dashboards
-
-Lock a dashboard to prevent accidental edits. Locked dashboards show a lock icon in the table. Unlock a dashboard from the actions menu when you need to make changes.
-
-## Deleting and trash
-
-Delete a dashboard using the actions menu. Deleted dashboards move to the trash collection and can be restored or permanently deleted. Access the trash by navigating to the trash collection if you need to recover a dashboard.
-
-## Sharing and collaboration
-
-Use the dashboard table to quickly see who owns each dashboard and when it was last modified. Favorite frequently-used dashboards for quick access. Lock dashboards to prevent accidental edits, and move deleted dashboards to trash for recovery.
+![The Share dashboard modal on the Public link tab, with the required password field and Generate share link button](/images/dashboard-share.webp)

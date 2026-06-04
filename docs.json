@@ -101,6 +101,14 @@
     {
       "source": "/administration/notifications/channels",
       "destination": "/administration/notifications"
+    },
+    {
+      "source": "/monitoring/analytics",
+      "destination": "/monitoring/monitor-details"
+    },
+    {
+      "source": "/monitoring/reports",
+      "destination": "/monitoring/mail-reports"
     }
   ],
   "navigation": {
@@ -188,7 +196,7 @@
                   "monitoring/overview",
                   "monitoring/create",
                   "monitoring/scheduling",
-                  "monitoring/analytics"
+                  "monitoring/monitor-details"
                 ]
               },
               {
@@ -199,9 +207,17 @@
                   "monitoring/supervision",
                   "monitoring/incidents",
                   "monitoring/alerts",
-                  "monitoring/dashboards",
-                  "monitoring/public-dashboards",
-                  "monitoring/reports"
+                  {
+                    "group": "Analytics",
+                    "expanded": false,
+                    "pages": [
+                      "monitoring/dashboards",
+                      "monitoring/tests-metrics",
+                      "monitoring/public-dashboards",
+                      "monitoring/mail-reports",
+                      "monitoring/exports"
+                    ]
+                  }
                 ]
               },
               {

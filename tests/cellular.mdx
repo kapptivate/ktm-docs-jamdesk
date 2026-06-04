@@ -94,32 +94,32 @@ Wait for a network-initiated (unsolicited) USSD message. Your test does not send
 
 ### Test variables
 
-**Input variables** are parameters you pass to your test. You can fill them with product-level defaults or override them at suite level.
+**Input variables** are parameters you pass to your test. You can fill them with product-level defaults or override them at campaign level.
 
-**Owner variables** specify which SIM runs which action. You can override owner assignments at suite level, so the same test can run on different SIMs in different campaigns.
+**Owner variables** specify which SIM runs which action. You can override owner assignments at campaign level, so the same test can run on different SIMs in different campaigns.
 
 ### Version history
 
 Every time you save your test, Kapptivate creates an automatic version snapshot. You can browse the version history, see who made changes and when, and restore any past version. Restored tests are marked as restored and include a record of any variables that were removed.
 
-## Organizing tests into suites
+## Organizing tests into campaigns
 
-A **suite** (or campaign) groups multiple tests and lets you run them together with shared configuration.
+A **campaign** (also called a suite) groups multiple tests and lets you run them together with shared configuration.
 
-**Suite features:**
+**Campaign features:**
 
 - **Test list**: order the tests to run
-- **Variable overrides**: set input variable values for all tests in the suite (override test defaults)
-- **Owner overrides**: assign which SIM runs each action across all tests in the suite (override test owner assignments)
+- **Variable overrides**: set input variable values for all tests in the campaign (override test defaults)
+- **Owner overrides**: assign which SIM runs each action across all tests in the campaign (override test owner assignments)
 - **Execution options**: control timeouts, SMS observation delay, and optional reception flags for each test
 
-**Example:** You have three tests (balance check, top-up, history) and two SIMs (prod, staging). Create a suite, add all three tests, override the owner to `staging`, then run once. Later, override the owner to `prod` and run again on production SIMs.
+**Example:** You have three tests (balance check, top-up, history) and two SIMs (prod, staging). Create a campaign, add all three tests, override the owner to `staging`, then run once. Later, override the owner to `prod` and run again on production SIMs.
 
 ## Running tests
 
 ### Configure the run
 
-1. Select your test or suite
+1. Select your test or campaign
 2. Click **Run**
 3. In the run form, confirm or override:
    - **SIM assignments** (which physical SIM slots to use)

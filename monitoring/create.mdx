@@ -10,7 +10,7 @@ Create a monitor from the Tests workspace or directly from the Monitors list. A 
 
 <Steps>
 <Step>
-Open **Monitors** and click the **Create** button, or open a test, select it in the context menu, and choose **Create Monitors**.
+Open **Monitors** and click the **Create** button, or open a test, select it in the context menu, and choose **Create Monitors**. You can also promote a run you've just reviewed: on an execution result page, click **Create a monitor** (top right) and the form opens pre-filled with the test's details.
 </Step>
 
 <Step>
@@ -43,7 +43,7 @@ Select the test you want to monitor. Once selected, the form loads with the test
 
 <Step>
 **Options** (optional)
-- Enable auto-retry (1–3 retries) if the test fails.
+- Enable auto-retry (1–3 retries) if the test fails. A warning notes that retries can be delayed when the agent's parallel capacity is full.
 - Enable **Ignore errors** to mark the test as passed even if assertions fail.
 - Set SMS timeout (in seconds) if the test waits for SMS.
 </Step>
@@ -73,7 +73,7 @@ Select one or more tests (they must all be the same type), open the context menu
 
 1. Select a single device that all monitors will use.
 2. Configure the schedule.
-3. Click **Create {count} Monitors**.
+3. Click **Create X Monitors**, where X is the number of selected tests.
 
 The system creates one monitor per test with the shared device and schedule. Each monitor uses the test's default variables and configuration.
 

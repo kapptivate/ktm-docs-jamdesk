@@ -4,23 +4,25 @@ description: Promote tests to continuous production supervision and track their 
 sidebarTitle: Overview
 ---
 
+![The Monitors list with health counter cards, last 5 runs squares, frequency, and device chips](/images/monitors-list.webp)
+
 A Monitor is an automated test promoted from the Tests workspace to continuous production supervision. Monitors run on a recurring schedule with real-time status tracking and alert capability. Use the monitors list to view all monitors, their health, and recent execution results.
 
 ## The monitors list
 
-The monitors list shows every monitor in your Product with its current status, last execution result, scheduling frequency, and assigned devices. You can search by monitor name or filter by test.
+The monitors list shows every monitor in your Product. Each row displays the monitor's **ID**, **Status**, **Last 5 runs**, **Frequency**, and **Device**; hover a device chip to see its host machine and browser version. Search by monitor name or ID, or filter by test.
 
-From the list, you can run a monitor immediately, pause or resume it, edit its configuration, duplicate it, or delete it. Use multi-select to pause, resume, update scheduling, or change devices for multiple monitors at once.
+From the list, you can run a monitor immediately, pause or resume it, edit its configuration, or duplicate it. Use multi-select to pause, resume, update scheduling, change devices, or delete multiple monitors at once.
 
 ## Health summary cards
 
-Four counter cards at the top of the monitors list provide an instant health snapshot:
+Counter cards at the top of the monitors list provide an instant health snapshot:
 
 | Card | What it shows |
 |------|---------------|
-| **Active** | Total monitors with active status (not paused) |
+| **Daily active monitors** | Total monitors with active status (not paused) |
 | **Up** | Monitors whose last execution succeeded |
-| **Device Issue** | Monitors with unavailable or misconfigured devices (value is always 0 for now) |
+| **Device issue** | Monitors with unavailable or misconfigured devices |
 | **Down** | Monitors whose last execution failed |
 | **Paused** | Monitors currently paused and not running |
 
@@ -37,21 +39,31 @@ Each monitor displays a single status that reflects its health and activity stat
 | **running** | Monitor is currently executing a test |
 | **scheduled** | Monitor is active and waiting for its next scheduled execution |
 
+## Last 5 runs
+
+The **Last 5 runs** column shows the most recent executions as colored squares, green for success and red for failure. Click a square to open the "Monitoring results" modal: it shows the run's outcome, its **Steps** (with durations) and **Video** tabs, plus **Open details** to jump to the full result and **Edit related test** to fix the scenario.
+
+![The Monitoring results modal opened from a last-5-runs square, with the Steps tab and Open details action](/images/monitor-results-modal.webp)
+
 ## Row actions
 
 Each monitor row has a three-dot menu with these actions:
 
 | Action | What it does |
 |--------|--------------|
-| **Details** | Open the monitor's detail page to view analytics and execution history |
-| **Configure** | Open the form to edit the monitor's name, test, devices, scheduling, and options |
+| **View analytics** | Open the monitor's detail page to view analytics and execution history |
+| **Edit monitor** | Open the form to edit the monitor's name, devices, scheduling, and options |
 | **Duplicate** | Clone the monitor; you can rename it and reassign devices before saving |
 | **Edit related test** | Navigate to the test this monitor is based on |
-| **Update frequency** | Change the monitor's schedule without editing the full form |
-| **Update device** | Change the assigned device (only available for monitors with a single device) |
+| **Edit frequency** | Change the monitor's schedule without editing the full form |
+| **Edit device** | Change the assigned device (only available for monitors with a single device) |
 | **Pause / Unpause** | Temporarily disable or re-enable the monitor |
-| **Run** | Execute the monitor immediately, regardless of its schedule |
-| **Delete** | Remove the monitor permanently |
+| **Force run** | Execute the monitor immediately, regardless of its schedule |
+| **Activate test-only mode** | Suspend the automated schedule while still allowing manual triggers from the UI or CI/CD |
+
+To delete monitors, use multi-select and the bulk actions banner.
+
+![A monitor row's three-dot menu with View analytics, Edit monitor, Duplicate, Edit related test, Edit frequency, Edit device, Pause, Force run, and Activate test-only mode](/images/monitor-row-actions.webp)
 
 ## Bulk actions
 
