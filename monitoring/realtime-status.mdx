@@ -4,50 +4,110 @@ description: Create live status views of your products and monitors with custom 
 sidebarTitle: Realtime status
 ---
 
+![The Realtime status page in card layout, showing one card per product with an uptime bar chart, uptime percentage, and Up status badge over the last 12 hours](/images/realtime-status-overview.webp)
+
 Realtime status displays live monitoring results across your workspace with customizable views, multiple display formats, and advanced filtering. You can organize results by product, test, or monitoring resource, switch between card and list layouts, and adjust which metrics you see.
 
 ## Views and tabs
 
-Create multiple views to organize your monitoring data for different purposes. Each view remembers your settings—display format, grouping, filters, and time range—so you can switch between them instantly.
+The same monitoring data serves different purposes: a status wall for the team, a focused view for one product, a debugging session on a few flaky monitors. Views let you save one configuration per purpose and switch between them instantly instead of rebuilding filters every time.
 
-You can create, rename, duplicate, and delete views from the view tab menu. One view is marked as default and loads automatically when you open the realtime status page. Set a new default by right-clicking a tab and selecting "Set as default".
+Each view is a tab at the top of the page and remembers its own settings:
 
-Tab order persists in your settings. Drag tabs to reorder them for easier navigation. Copy the current view's URL with the share button to send the exact view to a teammate.
+- **Display settings**: layout, grouping, and chart options.
+- **Filters**: each view keeps its own filter rules, so one tab can show everything while another focuses on a single product.
+- **Time range**: each view keeps its own period, preset or custom.
+
+From the view tabs you can:
+
+- **Create** a new view with the add view button.
+- **Rename, duplicate, or delete** a view from its tab menu.
+- **Set a default**: one view loads automatically when you open the page. Right-click a tab and select "Set as default" to change it.
+- **Reorder**: drag tabs to rearrange them; the order persists in your settings.
+- **Share**: copy the current view's URL with the share button to send the exact view to a teammate.
 
 ## Display formats
 
-Switch between two layouts to suit your workflow.
+How you read the data depends on what you're doing: cards make status visible at a glance, even from across the room, while the list packs many more monitors onto one screen.
 
-**Cards** show one summary card per grouping (product, test, or monitoring). Each card displays the status, uptime percentage, and a stacked bar chart showing availability across the selected time period. This layout makes it easy to scan many items at a glance.
+Open the **Display** menu to choose the layout and adjust how results are shown:
 
-**List** shows a table with rows per grouping, including columns for status, frequency, associated product, location, and agent. Hide columns you don't need.
+- **Cards or List**: switch between the two layouts.
+- **Grouping**: organize results by product, test, or monitoring resource.
+- **Columns**: adjust the number of columns to fit your screen.
+- **Show execution by**: analyze results over a time range or by execution count.
+- **Bar chart**: standard stacked or 100% stacked bars.
+- **Show period without executions**: include or hide periods with no runs.
+- **Show**: display each item's status or its availability percentage.
 
-## Grouping and organization
+![The Display menu open over the card layout, with Cards selected and options for grouping, columns, execution mode, bar chart style, and empty periods](/images/realtime-status-display.webp)
 
-Choose how to organize your results: by product, by test, or by monitoring resource. Change the grouping to restructure the entire view instantly. You can also adjust the number of columns in card view to fit your screen.
+**Cards** show one summary card per grouping. Each card displays:
+
+- **Status badge**: Up, Partial outage, or Down. Items with no executions in the period show grayed-out bars.
+- **Uptime percentage** over the selected period.
+- **Stacked bar chart** of availability, with the period start and end as labels.
+
+**List** shows a condensed multi-column list. Each row displays:
+
+- **Status icon and name** of the monitor.
+- **Status chip**: Up or Paused.
+- **Execution dots** for the most recent runs, green for success and red for failure.
+
+Adjust the column count to fit more rows on screen. It's a compact way to scan many monitors at once. For the full monitor table with scheduling and device details, see the [monitors list](/monitoring/overview).
+
+![The list layout showing three condensed columns of monitors, each row with a status icon and colored dots for recent executions](/images/realtime-status-list.webp)
 
 ## Time range and execution mode
 
-The time range picker lets you select preset ranges (2 hours, 4 hours, 12 hours, 24 hours, 48 hours, 7 days, 30 days, 90 days, or 365 days) or define a custom range. This controls the data shown in cards and uptime charts.
+Whether you're checking the last few hours after a deploy or reviewing a quarter of history, the analyzed period is yours to set. The time range picker lets you select preset ranges (2 hours, 4 hours, 12 hours, 24 hours, 48 hours, 7 days, 30 days, 90 days, or 12 months) or define a custom range with a precise start and end. This controls the data shown in cards and uptime charts.
 
-Toggle between two execution modes. **Time-based mode** analyzes results over the selected time range and displays the time range picker. **Count-based mode** analyzes a fixed number of recent executions (10–90) without needing a time range. The count range selector appears only in count-based mode.
+![The time range dropdown open, listing presets from Last 2h to Last 12 months](/images/realtime-status-time-presets.webp)
+
+Toggle between two execution modes with **Show execution by** in the Display menu:
+
+- **Time-based mode** analyzes results over the selected time range and displays the time range picker. Chart labels show the period start and end.
+- **Count-based mode** analyzes a fixed number of recent executions (30, 60, or 90) without needing a time range. The time range picker is replaced by a count selector, and chart labels switch to "Oldest execution" and "Most recent".
+
+In time-based mode you can also zoom directly on a chart: click and drag across the bars to narrow the view to that period. The time range picker switches to "Custom", and you can keep zooming until you isolate the moment you're after.
 
 ## Uptime charts
 
 The stacked bar chart in each card visualizes availability over the selected period. Choose between stacked bars (showing each status segment) or full-width stacked bars (normalized to 100%). Toggle "Show empty periods" to include or hide time ranges with no executions.
 
-## Filtering and search
+Hover over any bar to see the exact time period it covers and a breakdown of successful, failed, and unexecuted runs. Empty periods show "No tests played during this period".
 
-Filter by product, monitoring, test, device type (smartphone, SIM, web agent), and execution status (success, failed, running, pending, no results).
+![A custom time range applied, with a tooltip over one bar showing the period and its success, failed, and unexecuted counts](/images/realtime-status-custom-range.webp)
 
-When you apply filters, a banner shows which filters are active and the count of results (for example, "3 of 12 monitors"). Click "Save" in the filter banner to remember your filters with the view, or "Discard" to clear them without saving.
+## Filtering
 
-The filter badge on devices shows live status indicators—green for reachable, red for unreachable—so you know the current state when filtering.
+A workspace can hold far more monitors than any one person watches. Filters narrow the view down to exactly the ones you care about, from a simple "only this product" to logic like "everything in this product except these three tests".
+
+Click **Filter** to open the filter builder. The badge on the Filter button shows how many rules are active. Each rule combines:
+
+- **A parameter**: product, monitor, test, device, or status.
+- **An operator**: "is exactly", "not exactly", "contains", "does not contain", "starts with", or "ends with".
+- **A value**: picked from a searchable dropdown of your products, tests, or devices.
+
+Build more complex logic by combining rules:
+
+- **Chain rules** with "and"/"or" operators.
+- **Add groups** to nest conditions: for example, show everything in one product except three specific tests, or everything from two products.
+- **Manage rules and groups** from their menus: duplicate, convert, or delete them.
+
+![The Edit filters dialog with an If rule on product, three chained "and" rules excluding tests, and two "or" groups matching products exactly](/images/realtime-status-filters.webp)
+
+Save the filters to apply them to the current view, or cancel to leave the view unchanged.
+
+## Refresh
+
+A status page is only useful while it's current, so the view updates itself. A countdown next to the time range shows the time until the next automatic refresh.
+
+- **Pause or resume** automatic refresh with the pause button.
+- **Change the refresh interval** from the countdown dropdown.
+
+View settings remain until you change them; leaving without saving will prompt a confirmation if you modified filters or settings.
 
 ## Details drawer
 
 Click any card or row to open a details drawer showing the full hierarchy: product → test → monitoring result. Browse execution history, logs, and error details without leaving the view. The drawer reflects your current filters and grouping.
-
-## Refresh and controls
-
-Press the refresh button to manually update data. View settings remain until you change them; leaving without saving will prompt a confirmation if you modified filters or settings.
