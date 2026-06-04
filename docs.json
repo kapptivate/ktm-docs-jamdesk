@@ -149,15 +149,9 @@
                   "concepts/agent",
                   "concepts/device",
                   "concepts/channel",
-                  {
-                    "group": "Supported Channels",
-                    "expanded": false,
-                    "pages": [
-                      "agents-devices/web-api",
-                      "agents-devices/smartphone",
-                      "agents-devices/sim"
-                    ]
-                  }
+                  "agents-devices/web-api",
+                  "agents-devices/smartphone",
+                  "agents-devices/sim"
                 ]
               }
             ]
@@ -233,22 +227,20 @@
             ]
           },
           {
-            "group": "My account",
-            "icon": "user",
-            "expanded": false,
-            "pages": [
-              "administration/account",
-              "administration/account/profile",
-              "administration/account/password",
-              "administration/account/preferences",
-              "administration/account/delete"
-            ]
-          },
-          {
-            "group": "Administration",
+            "group": "Workspace management",
             "icon": "gear",
             "expanded": false,
             "pages": [
+              {
+                "group": "My account",
+                "pages": [
+                  "administration/account",
+                  "administration/account/profile",
+                  "administration/account/password",
+                  "administration/account/preferences",
+                  "administration/account/delete"
+                ]
+              },
               {
                 "group": "Products",
                 "pages": [
@@ -281,15 +273,6 @@
                   "administration/teams/manage"
                 ]
               },
-              {
-                "group": "Roles",
-                "pages": [
-                  "administration/roles",
-                  "administration/roles/permissions",
-                  "administration/roles/create",
-                  "administration/roles/assign"
-                ]
-              },
               "administration/notifications",
               {
                 "group": "API keys",
@@ -297,6 +280,22 @@
                   "administration/api-keys",
                   "administration/api-keys/create",
                   "administration/api-keys/manage"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Security & audit",
+            "icon": "shield-halved",
+            "expanded": false,
+            "pages": [
+              {
+                "group": "Roles",
+                "pages": [
+                  "administration/roles",
+                  "administration/roles/permissions",
+                  "administration/roles/create",
+                  "administration/roles/assign"
                 ]
               },
               {
