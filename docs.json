@@ -421,23 +421,6 @@
         ]
       },
       {
-        "tab": "API",
-        "icon": "plug",
-        "groups": [
-          {
-            "group": "API Reference",
-            "icon": "plug",
-            "pages": [
-              {
-                "page": "api-reference/openapi-example",
-                "title": "OpenAPI Example"
-              },
-              "api-reference/request-response-examples"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "Guides",
         "icon": "compass",
         "groups": [
@@ -448,21 +431,6 @@
               "guides/overview",
               "guides/first-integration",
               "guides/ci-cd"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Learn",
-        "icon": "graduation-cap",
-        "groups": [
-          {
-            "group": "Learn",
-            "icon": "graduation-cap",
-            "pages": [
-              "learn/overview",
-              "learn/getting-started",
-              "learn/best-practices"
             ]
           }
         ]

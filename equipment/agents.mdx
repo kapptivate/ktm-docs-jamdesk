@@ -68,8 +68,8 @@ Basic information about the agent: hostname, location, software version, and UUI
 
 Shown for SIM and Smartphone agents.
 
-- **SIM agents** list each slot with the SIM's number, status, network, a health badge (hover it for the weekly-average usage), the number of access entries, and active monitors.
-- **Smartphone agents** list each phone with its model, status, UUID, usage badge, and monitor count.
+- **SIM agents** list each slot with the SIM's number, status, network, a health badge (hover it for the weekly-average usage), an access count (hover it for the products that can use the SIM), and active monitors.
+- **Smartphone agents** list each phone with its model, status, UUID, usage badge, access count, and monitor count.
 
 ![A Smartphone agent's Connected devices tab listing connected phones with status, UUID, usage, access, and monitor counts](/images/agent-smartphone-devices.webp)
 
@@ -88,8 +88,8 @@ A left sub-navigation groups the agent's configuration:
 ![The agent Settings tab with its sub-navigation (About, Software update, Automatic reboot, Agent credentials, Network configuration, Danger zone) and the automatic-reboot toggle and agent credentials](/images/agent-settings.webp)
 
 - **About**: general information about the agent
-- **Software update**: enable automatic software updates
-- **Automatic reboot**: turn on scheduled reboots (we recommend rebooting at least once a week)
+- **Software update**: enable automatic software updates and choose when they run (every day at a set time)
+- **Automatic reboot**: turn on scheduled reboots and set their schedule (we recommend rebooting at least once a week)
 - **Agent credentials**: the agent's ID and password, with a **Reset password** action. Use these to configure the robot.
 - **Network configuration**: a read-only JSON view of the agent's network interfaces, IP addresses, and MAC addresses (available for all agent types)
 - **Danger zone**: delete the agent
@@ -120,7 +120,7 @@ The **Capacity** tab sets how many tests a Web agent runs simultaneously, from 1
 
 ![An agent in Maintenance status, with a Maintenance badge by its name and a Remove from maintenance action in the top right](/images/agent-maintenance.webp)
 
-**Test-only mode**: available for SIM, Smartphone, and Web agents. Activating it pauses all active monitors on the agent and reserves its capacity for manual tests. A confirmation dialog appears before activation, and the button stays highlighted while the mode is active.
+**Test-only mode**: available for SIM, Smartphone, and Web agents. Activating it pauses all active monitors on the agent and reserves its capacity for manual tests. A confirmation dialog appears before activation. While the mode is active, an indicator shows next to the agent's name and the header button becomes **Exit test-only mode**; exiting opens a dialog confirming that the paused monitors will be resumed.
 
 ![The confirmation dialog for activating test-only mode, warning that all active monitors on the device will be paused](/images/agent-test-only.webp)
 
