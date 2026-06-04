@@ -44,11 +44,15 @@ they're what keep the output trustworthy.
 
 ### 1. Extract the video
 
-Run the sibling extractor, asking for web-ready screenshots:
+Run the sibling extractor, asking for web-ready screenshots. If the video clearly
+maps to existing page(s) — the filename or the user's request names a feature the
+docs already cover — pass those pages with `--docs`: Gemini then tags each feature
+with a coverage verdict (`new` / `covered` / `outdated`) and a gap note, which
+catches stale doc claims you'd otherwise have to diff by hand.
 
 ```bash
 uv run "${CLAUDE_PLUGIN_ROOT}/skills/extract-product-doc-from-videos/scripts/extract_features.py" <video> \
-  --format webp --output /tmp/video-to-docs-extract
+  --format webp --output /tmp/video-to-docs-extract [--docs <related-page.mdx> ...]
 ```
 
 Pass the **original** video — don't pre-downscale it. For the best analysis on
@@ -73,9 +77,13 @@ feature → the page(s) that already cover it, or "no coverage".
 ### 3. Propose a change set
 
 Classify each feature as one of: **NEW page**, **NEW section** in an existing
-page, **UPDATE** existing content, or **SKIP** (already well covered). Present a
-concise table to the user — feature → action → target path → one-line rationale —
-and note which screenshots you'd use. This is the first gate.
+page, **UPDATE** existing content, or **SKIP** (already well covered). Seed the
+classification from the extractor's coverage verdicts when `--docs` was used, but
+verify them — they're a draft like everything else. Present a concise table to the
+user — feature → action → target path → one-line rationale — and note which
+screenshots you'd use. Call out **discrepancies** explicitly: where the video
+contradicts a doc claim (changed UI, renamed options, removed behavior), quote the
+stale claim so the user can rule on it. This is the first gate.
 
 ### 4. Interview to resolve ambiguity
 
@@ -103,6 +111,9 @@ Implement, deferring to the project's conventions (its `CLAUDE.md` and any
 
 - Author MDX with correct frontmatter (`title`, `description`) and only real,
   documented components — never invent components.
+- Open each major section with one or two sentences on what the feature is *for*
+  (the user value), then detail the capabilities — unless the project's
+  conventions say otherwise.
 - Copy the chosen screenshots from the extract dir into the project's image
   directory as `.webp`; embed them as plain markdown images (these stay zoomable)
   unless the project's conventions say otherwise.
@@ -120,6 +131,11 @@ Implement, deferring to the project's conventions (its `CLAUDE.md` and any
   screenshots; a mis-timed frame can show a transition — re-grab or raise `--fps`.
   Frames are auto-nudged to the steadiest nearby moment so the cursor isn't a
   blurry mid-move smear, but still reject any screenshot with a blurry pointer.
+- **Verify concrete values on-screen before writing them.** Exact option lists
+  (operators, presets, statuses, counts) are the easiest thing for the extraction
+  to gloss over or hallucinate from narration. Read them off the screenshots; if a
+  value isn't visible in any frame, ask the user instead of guessing. Grab extra
+  frames from the video when a menu or dropdown wasn't captured open.
 - **Read before you overwrite.** If the video contradicts current docs, surface
   the discrepancy and let the user decide; don't silently replace content.
 - **Respect internal-only concepts** the user flags — keep them out of the docs.

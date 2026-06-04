@@ -52,16 +52,34 @@ class Feature(BaseModel):
     timestamps: list[str]  # one or more "MM:SS" moments where the feature is shown
 
 
-PROMPT = """You are analyzing a product demo / screen-recording video to build documentation.
+class FeatureGap(Feature):
+    """Feature plus gap analysis against existing docs (only when --docs is given)."""
+    coverage: str  # "new" | "covered" | "outdated"
+    gap: str       # what the docs miss or get wrong; "" when covered
 
-Identify every distinct product feature or capability in the video — whether it is
-SPOKEN about in the narration/audio, SHOWN on screen, or both. Be exhaustive but do
-not list the same feature twice.
+
+PROMPT = """You are an expert technical writer and product analyst for a B2B SaaS /
+DevTools company, analyzing a product demo / screen-recording video to build user
+documentation.
+
+Identify every distinct product feature, UI interaction, and customization option in
+the video — whether it is SPOKEN about in the narration/audio, SHOWN on screen, or
+both. Be exhaustive but do not list the same feature twice.
+
+Be specific about what the user clicks, toggles, drags, or adjusts. Do not stop at
+screen-level features: a settings menu, a filter dialog, a hover tooltip, a
+drag-to-zoom gesture, or a pause/auto-refresh control are each worth capturing. When
+a menu or dropdown is opened, enumerate the exact option values it shows (e.g.
+operators "is exactly / not exactly / contains / starts with", presets "Last 2h …
+Last 12 months") — these concrete values are the substance of good documentation and
+the easiest thing to miss. Mention status/state values visible on screen (badges,
+chips, empty states) in the description of the feature they belong to.
 
 For each feature, return:
 - name: a short, specific title (e.g. "Secret variables", not "a feature").
 - description: a thorough explanation of what it does and how it is used, written so a
-  reader who has not seen the video understands it. Fold in details from the narration.
+  reader who has not seen the video understands it. Fold in details from the narration
+  and the exact option values read off the screen.
 - source: "voice" if only described in audio, "visual" if only shown on screen, "both".
 - timestamps: one or more moments (format MM:SS, or HH:MM:SS for long videos) where the
   feature is best SHOWN on screen — these are used to grab screenshots. Pick the clearest
@@ -71,6 +89,27 @@ For each feature, return:
   multiple screens; one is fine if a single frame captures it.
 
 Order features by when they first appear. Every timestamp must fall within the video."""
+
+GAP_PROMPT = """
+
+EXISTING DOCUMENTATION
+
+The current documentation for this area follows below. Compare each extracted feature
+against it and additionally return:
+- coverage: "new" if the docs do not mention the feature, "covered" if the docs
+  describe it accurately, "outdated" if the docs describe it differently from what the
+  video shows (changed UI, renamed options, removed or different behavior).
+- gap: one or two sentences on exactly what the docs are missing or getting wrong,
+  precise enough to act on ("docs list only two operators; the video shows six").
+  Use "" when coverage is "covered".
+
+Judge only against the documentation provided here — do not assume other pages exist.
+Report features the docs describe but the video CONTRADICTS as "outdated", quoting the
+stale claim in the gap.
+
+<existing-docs>
+{docs}
+</existing-docs>"""
 
 
 def log(msg: str, quiet: bool) -> None:
@@ -193,7 +232,7 @@ def delete_gcs(uri: str, quiet: bool) -> None:
 
 def analyze(video: Path, model: str, fps: int | None, project: str | None,
             location: str | None, max_upload_mb: float, bucket: str | None,
-            quiet: bool) -> list[Feature]:
+            quiet: bool, docs_text: str | None = None) -> list[Feature]:
     client, use_vertex = make_client(project, location, quiet)
 
     gcs_uri = None
@@ -221,14 +260,20 @@ def analyze(video: Path, model: str, fps: int | None, project: str | None,
         else:
             video_part = uploaded
 
+    prompt = PROMPT
+    schema: type[Feature] = Feature
+    if docs_text:
+        prompt += GAP_PROMPT.format(docs=docs_text)
+        schema = FeatureGap
+
     try:
         log(f"Analyzing with {model} ...", quiet)
         response = client.models.generate_content(
             model=model,
-            contents=[video_part, PROMPT],
+            contents=[video_part, prompt],
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
-                response_schema=list[Feature],
+                response_schema=list[schema],
             ),
         )
         usage = getattr(response, "usage_metadata", None)
@@ -240,7 +285,7 @@ def analyze(video: Path, model: str, fps: int | None, project: str | None,
             )
         features = response.parsed
         if not features:
-            features = [Feature(**item) for item in json.loads(response.text or "[]")]
+            features = [schema(**item) for item in json.loads(response.text or "[]")]
         return features
     except Exception as exc:
         sys.exit(f"Gemini analysis failed: {exc}")
@@ -278,6 +323,14 @@ def main() -> None:
     ap.add_argument("--max-upload-mb", type=float, default=18.0,
                     help="Vertex inline size cap (only used when no --gcs-bucket); larger videos "
                          "are auto-downscaled for analysis only, never for screenshots (default: 18).")
+    ap.add_argument("--docs", type=Path, nargs="+",
+                    help="Existing documentation file(s) for this feature area. When given, "
+                         "Gemini also runs a gap analysis: each feature gets a coverage "
+                         "verdict (new / covered / outdated) and a note on what the docs "
+                         "miss or get wrong.")
+    ap.add_argument("--no-screenshots", action="store_true",
+                    help="Skip frame grabbing; features.md lists the timestamps instead "
+                         "of embedding screenshots (useful for analysis-only passes).")
     ap.add_argument("--no-steady", action="store_true",
                     help="Grab exactly at the chosen timestamp instead of nudging to the "
                          "nearest still moment (the default avoids a blurry, mid-move cursor).")
@@ -295,28 +348,43 @@ def main() -> None:
     shots_dir = out_dir / "screenshots"
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    docs_text = None
+    if args.docs:
+        chunks = []
+        for doc in args.docs:
+            if not doc.exists():
+                sys.exit(f"Docs file not found: {doc}")
+            chunks.append(f"--- {doc.name} ---\n{doc.read_text(encoding='utf-8')}")
+        docs_text = "\n\n".join(chunks)
+
     features = analyze(args.video, args.model, args.fps, args.project, args.location,
-                       args.max_upload_mb, args.gcs_bucket, args.quiet)
+                       args.max_upload_mb, args.gcs_bucket, args.quiet, docs_text)
     log(f"Found {len(features)} features.", args.quiet)
 
     records = []
     for index, feat in enumerate(features, 1):
         shots = []
-        for ts in feat.timestamps:
-            seconds = gv.parse_timestamp(ts)
-            if seconds is None:
-                log(f"  skipping unparseable timestamp: {ts!r}", args.quiet)
-                continue
-            fname = f"{index:02d}-{slugify(feat.name)}-{ts.replace(':', '-')}.{args.format}"
-            if gv.grab_frame(ffmpeg, shot_src, seconds, shots_dir / fname,
-                             args.quiet, steady=not args.no_steady):
-                shots.append({"timestamp": ts, "path": f"screenshots/{fname}"})
-        records.append({
+        if not args.no_screenshots:
+            for ts in feat.timestamps:
+                seconds = gv.parse_timestamp(ts)
+                if seconds is None:
+                    log(f"  skipping unparseable timestamp: {ts!r}", args.quiet)
+                    continue
+                fname = f"{index:02d}-{slugify(feat.name)}-{ts.replace(':', '-')}.{args.format}"
+                if gv.grab_frame(ffmpeg, shot_src, seconds, shots_dir / fname,
+                                 args.quiet, steady=not args.no_steady):
+                    shots.append({"timestamp": ts, "path": f"screenshots/{fname}"})
+        record = {
             "name": feat.name,
             "description": feat.description,
             "source": feat.source,
+            "timestamps": feat.timestamps,
             "screenshots": shots,
-        })
+        }
+        if isinstance(feat, FeatureGap):
+            record["coverage"] = feat.coverage
+            record["gap"] = feat.gap
+        records.append(record)
 
     (out_dir / "features.json").write_text(
         json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -334,11 +402,19 @@ def main() -> None:
             "",
             f"**Source:** {rec['source']}",
             "",
+        ]
+        if rec.get("coverage"):
+            gap = f" — {rec['gap']}" if rec.get("gap") else ""
+            lines += [f"**Docs coverage:** {rec['coverage']}{gap}", ""]
+        lines += [
             rec["description"],
             "",
         ]
-        for shot in rec["screenshots"]:
-            lines.append(f"![{rec['name']} at {shot['timestamp']}]({shot['path']})")
+        if rec["screenshots"]:
+            for shot in rec["screenshots"]:
+                lines.append(f"![{rec['name']} at {shot['timestamp']}]({shot['path']})")
+        elif rec["timestamps"]:
+            lines.append(f"**Timestamps:** {', '.join(rec['timestamps'])}")
         lines.append("")
 
     (out_dir / "features.md").write_text("\n".join(lines), encoding="utf-8")

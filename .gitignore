@@ -1,17 +1,2 @@
+references/*.mp4
 node_modules/
-.next/
-.DS_Store
-
-# Python build artifacts (from the doc plugin scripts)
-__pycache__/
-*.pyc
-
-# Editor/tool backups and local env
-*.bak
-.envrc
-
-# Source repo used as reference for writing docs (not part of the docs site)
-.reference/
-
-# Obsidian knowledge vault used while writing docs (local only)
-knowledge/

@@ -53,7 +53,8 @@ exists).
 
 ```bash
 uv run "${CLAUDE_PLUGIN_ROOT}/skills/extract-product-doc-from-videos/scripts/extract_features.py" <video> \
-  [--model gemini-3.1-pro-preview] [--format webp] [--gcs-bucket NAME] [--output <dir>] [--fps N] [--quiet]
+  [--model gemini-3.1-pro-preview] [--format webp] [--gcs-bucket NAME] [--output <dir>] [--fps N] \
+  [--docs page.mdx ...] [--quiet]
 ```
 
 - `<video>` — path to the video file (mp4, mov, webm, …).
@@ -67,13 +68,23 @@ uv run "${CLAUDE_PLUGIN_ROOT}/skills/extract-product-doc-from-videos/scripts/ext
 - `--output` — output folder. Defaults to `<video-name>-features/`.
 - `--fps` — frames-per-second Gemini samples (default ~1). Raise it for
   fast-moving UIs where 1 FPS misses things.
+- `--docs` — existing documentation file(s) for the feature area shown in the
+  video. When given, Gemini also runs a **gap analysis**: each feature gets a
+  `coverage` verdict (`new` / `covered` / `outdated`) and a `gap` note saying
+  exactly what the docs miss or get wrong (stale claims are quoted). Pass the
+  page(s) you suspect the video updates — this is how stale docs get caught.
+- `--no-screenshots` — skip frame grabbing entirely; `features.md` lists each
+  feature's timestamps instead. Use for analysis-only passes (e.g. building a
+  gap-analysis inventory across many videos); grab frames later from the
+  timestamps when you actually update a page.
 
 The script prints the output directory path on stdout when done.
 
 ## What it produces
 
 - **`features.md`** — one section per feature: title, `source` (voice / visual /
-  both), description, and the embedded screenshot(s).
+  both), docs coverage + gap (with `--docs`), description, and the embedded
+  screenshot(s).
 - **`features.json`** — the same data, structured.
 - **`screenshots/`** — one image per timestamp, named
   `<index>-<feature-slug>-<timestamp>.<png|webp>`.
