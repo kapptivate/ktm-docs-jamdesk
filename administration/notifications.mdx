@@ -7,11 +7,15 @@ description: Alert your team when robots go offline, and choose where the alerts
 
 Notifications alert you when robots become unavailable. You enable monitoring, set how long a robot can be down before Kapptivate raises an alert, and choose where the alerts go: email, Slack, Teams, or webhooks. It's all on one screen under **Administration → Notifications**.
 
+<Note>
+This page covers workspace-wide robot availability alerts. To get notified when a monitor's results degrade, configure notifications per alert in [Alerts](/monitoring/alerts).
+</Note>
+
 ## Robot availability
 
 Robot availability monitoring tracks when robots go offline. Alerts are sent both when a robot is disconnected and when its connection is re-established, so you know when an outage starts and when it clears.
 
-Turn it on with the **Trigger alert after an unavailability of N minutes** toggle, then choose the detection period — how long a robot can be offline before Kapptivate sends an alert, from 5 to 30 minutes in 5-minute increments.
+Turn it on with the **Trigger alert after an unavailability of N minutes** toggle, then choose the detection period: how long a robot can be offline before Kapptivate sends an alert, from 5 to 30 minutes in 5-minute increments.
 
 A shorter period catches issues faster but may trigger alerts during brief, expected downtime (such as restarts). A longer period reduces noise but delays your response to genuine outages.
 
@@ -21,7 +25,7 @@ When monitoring is on, you must enable at least one notification channel before 
 
 ## Notification channels
 
-Channels control where alerts are delivered. Once monitoring is on, each channel can be toggled independently — enable the ones you need and fill in their settings.
+Channels control where alerts are delivered. Once monitoring is on, each channel can be toggled independently: enable the ones you need and fill in their settings.
 
 ### Email
 
@@ -39,7 +43,7 @@ Receive alerts in Microsoft Teams. Enable **Microsoft Teams notifications** and 
 
 Send alerts to a custom HTTP endpoint you control. Enable **Webhook notifications** and provide a **Webhook link** that Kapptivate will POST to when a robot becomes unavailable.
 
-Under **Headers**, click **Add header** to send custom HTTP headers with each request. Enter a key and value for each one — useful for passing an authorization token or routing metadata your endpoint expects.
+Under **Headers**, click **Add header** to send custom HTTP headers with each request. Enter a key and value for each one, useful for passing an authorization token or routing metadata your endpoint expects.
 
 ## Save and validation
 

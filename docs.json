@@ -198,6 +198,7 @@
                   "monitoring/realtime-status",
                   "monitoring/supervision",
                   "monitoring/incidents",
+                  "monitoring/alerts",
                   "monitoring/dashboards",
                   "monitoring/public-dashboards",
                   "monitoring/reports"

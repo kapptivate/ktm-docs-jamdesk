@@ -1,42 +1,46 @@
 ---
 title: Incidents
-description: Track and manage incidents raised by your monitors with filtering and bulk actions.
+description: Track and manage the incidents your alerts raise, with status filtering and bulk actions.
 sidebarTitle: Incidents
 ---
 
-Incidents are alerts raised when your monitors detect problems. The incidents page shows a list of all incidents with filtering by status and date, bulk selection for batch actions, and a summary of incident counts.
+![The Incidents page with counter cards, the status filter set to Ongoing, and the incident list grouped by day](/images/incidents-overview.webp)
+
+When an [alert](/monitoring/alerts) detects a problem, it raises an incident: a tracked record of the outage with its timeline, status, and context. The Incidents page is where you triage them, from spotting what's burning right now to closing what's been resolved.
+
+## Counters
+
+Four counter cards at the top summarize the current state at a glance:
+
+- **Daily active alerts**: how many alerts triggered today.
+- **Critical incident**: open incidents at critical severity.
+- **Warning incident**: open incidents at warning severity.
+- **Closed incident**: incidents that have been resolved.
 
 ## Incident list
 
-The incident table shows each incident as a row with day separators between groups of incidents by creation date. Columns include:
+The table lists incidents grouped by creation date, with day separators between groups. Each row shows:
 
-- **Type**: visual indicator of incident type (error, warning, etc.).
-- **Name**: incident title with a link to details.
-- **Status**: colored tag showing OPEN (red), CLOSED (green), MANUALLY_CLOSED (green), or other states (grey).
-- **Tags**: user-assigned categories for the incident.
-- **Alert name**: name of the parent alert that triggered the incident.
-- **Actions**: dropdown menu with options to edit, view details, update status, or delete.
+- **Type**: a colored icon for the incident severity.
+- **Alert triggered**: the alert name with the incident ID, the trigger timestamp, and how long ago it fired.
+- **Status**: a colored tag: Ongoing (red), Resolved, or Canceled.
+- **Tags**: key-value context such as Zone, Product ID, Product name, Monitoring ID, Monitoring name, Test name, and platform.
 
-Click a row to open the incident details or use the dropdown menu for actions.
-
-## Status and severity
-
-Incidents are grouped by status. The default view shows OPEN incidents (those actively needing attention). Filter by status to see CLOSED or MANUALLY_CLOSED incidents, or clear the filter to show all.
-
-Status tags use color coding: red for open (active), green for closed or manually closed (resolved), and grey for other states.
+Click a row to open the incident details, or use the row's menu for actions.
 
 ## Filtering and date range
 
-Filter incidents by status using the dropdown menu (OPEN, CLOSED, MANUALLY_CLOSED). The status filter is applied immediately and persists in your view.
+A workspace accumulates incidents fast; filters get you to the ones that need attention. The default view shows **Ongoing** incidents, those actively needing attention.
 
-Select a date range to show only incidents created within that period. The date picker is timezone-aware and remembers your timezone preference across sessions.
+- **Status filter**: switch between Ongoing, Resolved, and Canceled, or clear it to show all.
+- **Date range**: show only incidents created within a period. The picker is timezone-aware and remembers your preference across sessions.
 
-Counter cards above the table show incident counts broken down by status (open, closed, manually closed) for a quick summary.
+![The status filter dropdown open with the Ongoing, Resolved, and Canceled options](/images/incidents-status-filter.webp)
 
 ## Bulk selection and actions
 
 Enable multi-select mode using the toggle button to select multiple incidents. When enabled, checkboxes appear on each row. Select the incidents you want to batch-modify, and a floating banner shows the count of selected items with action buttons.
 
-Only OPEN incidents can be selected for bulk actions. Closed incidents show disabled checkboxes. Press ESC to clear all selections and exit multi-select mode.
+Only ongoing incidents can be selected for bulk actions; closed incidents show disabled checkboxes. Press ESC to clear all selections and exit multi-select mode.
 
 Batch actions let you change status, delete, or close multiple incidents at once. Confirm any irreversible actions.
