@@ -2,134 +2,114 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `equipment/agents.mdx`, `equipment/statuses.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `equipment/agents.mdx`, `equipment/statuses.mdx`_
 
 ## 1. Agent category tabs
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** outdated — The docs refer to the first tab as 'SIM', but the UI labels it 'Cellular Agents'.
+**Docs coverage:** covered
 
-Switch between agent types using the tabs at the top of the list: Cellular Agents, Smartphone Agents, Web Agents, and Passive Agents. Each tab displays a count of the connected agents for that category.
+The main Agents screen groups available agents into four tabs: Cellular Agents, Smartphone Agents, Web Agents, and Passive Agents, with the total count displayed next to each category name.
 
-**Timestamps:** 00:00, 00:04, 00:08, 00:12
+**Timestamps:** 00:02
 
 ## 2. Agent list filters
 
 **Source:** visual
 
-**Docs coverage:** covered
+**Docs coverage:** outdated — The docs list the status filter option as "Test-only", but the video shows the option is explicitly named "Test-only mode".
 
-Filter the agent list using a text search for name or tags. You can also apply dropdown filters for Status (Online, Offline, Maintenance, Waiting for configuration, Test-only) and Zone (e.g., custom-zone, Localhost).
+Users can filter the agent list using a search bar, a Zone dropdown for location-based filtering, and a Status dropdown containing the options: Online, Offline, Maintenance, Waiting for configuration, and Test-only mode.
 
-**Timestamps:** 00:22, 00:23, 00:25
+**Timestamps:** 00:23, 00:27
 
-## 3. Cellular Agent: Connected devices table
+## 3. SIM agent connected devices list
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** outdated — The docs state the table includes the 'SIM's number' and 'access entries', but the UI shows columns for Slot, SIM id, Status, Network, Health, and Monitors.
+**Docs coverage:** outdated — The docs state the Access column shows "the number of access entries," but the video shows it displays product/network tags.
 
-Within a Cellular agent's details, the 'Connected devices' tab shows a sortable table of SIM slots. The columns include Slot, SIM id, Status, Network, Health, and Monitors.
-
-**Timestamps:** 00:35
-
-## 4. Cellular Agent: SIM row actions
-
-**Source:** visual
-
-**Docs coverage:** new — The docs do not mention the row actions available for SIM slots.
-
-Clicking the three-dot menu on a SIM slot row in the Connected devices table opens a dropdown with options to 'Remove SIM from slot' and 'Reset SIM'.
-
-**Timestamps:** 00:43
-
-## 5. Cellular Agent: Health and Monitors tooltips
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs incorrectly claim the health badge hover shows 'weekly-average usage' instead of usage in the past 24 hours, and they completely miss the tooltip for the Monitors column.
-
-Hovering over a device's Health badge reveals its usage over the past 24 hours (e.g., 'Usage in past 24 hours: Healthy (0%)'). Hovering over the Monitors column displays the active versus total monitors executed by that specific SIM ID.
+On a SIM agent's Connected devices tab, a list of SIM slots is displayed with columns for the SIM's phone number, status, network provider, health badge (which shows a 7-day usage percentage on hover), Access tags indicating products/networks the SIM belongs to, and monitor count.
 
 **Timestamps:** 00:45, 00:51
 
-## 6. Agent Settings: Toggles and Credentials
+## 4. Agent monitors management
 
-**Source:** visual
-
-**Docs coverage:** new — While the docs mention these settings, they omit the specific UI interactions to view and copy the Agent secret.
-
-In the agent's Settings tab, users can toggle switches for 'Automatic update' (under Software update) and 'Automatic reboot'. In the Agent credentials section, the Agent secret can be revealed by clicking the eye icon and copied to the clipboard.
-
-**Timestamps:** 01:06, 01:11, 01:19, 01:21
-
-## 7. Smartphone Agent: Connected devices table
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs claim the table shows 'model', 'UUID', 'usage badge', and 'access' counts, but the UI shows columns for ID, OS, Status, Health, and Monitors.
-
-For a Smartphone agent, the 'Connected devices' tab displays a table with columns for ID (showing the UUID), OS (with an icon), Status, Health, and Monitors.
-
-**Timestamps:** 01:31
-
-## 8. Smartphone Agent: Reset device connection
-
-**Source:** visual
-
-**Docs coverage:** new — The docs do not document the 'Reset device connection' action.
-
-Next to the Status badge (e.g., 'Available') in the Smartphone agent's connected devices list, there is a plug icon button to 'Reset device connection'.
-
-**Timestamps:** 01:37
-
-## 9. Agent Settings: Network configuration
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-The Network configuration section in the Settings tab provides a scrollable, read-only JSON code block detailing the agent's network interfaces, IP addresses, and MAC addresses.
+The Monitors tab displays a list of active monitors running on the agent. Users can view their statuses and pause them all at once using the "Pause all monitors" button.
+
+**Timestamps:** 00:59
+
+## 5. Agent settings: Automatic updates and reboots
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs mention toggling automatic updates and reboots but omit that users can configure a specific day and time schedule for each.
+
+In the agent's Settings tab, users can toggle "Automatic updates" and "Automatic reboot". When enabled, each setting reveals a dropdown menu to configure a specific schedule (e.g., "Every day at 03:00").
+
+**Timestamps:** 01:08, 01:14
+
+## 6. Read-only network configuration
+
+**Source:** both
+
+**Docs coverage:** covered
+
+The Settings tab includes a Network configuration section that displays a read-only JSON viewer detailing the agent's network interfaces, IP addresses, and MAC addresses.
 
 **Timestamps:** 01:48
 
-## 10. Web Agent: Usage heatmap
+## 7. Smartphone agent connected devices list
+
+**Source:** visual
+
+**Docs coverage:** outdated — The docs miss the "Access" column entirely for smartphone devices.
+
+On a Smartphone agent's Connected devices tab, a list of connected phones is displayed with columns for Model, Status, UUID, Usage badge, Access tags, and Monitors count.
+
+**Timestamps:** 01:38
+
+## 8. Web agent usage heatmap
 
 **Source:** visual
 
 **Docs coverage:** covered
 
-The 'Usage' tab for a Web agent displays a heatmap matrix titled 'Usage percentage average', showing utilization levels with hours of the day as rows and days of the week as columns.
+The Usage tab for Web agents displays a weekly-average utilization heatmap, showing the busy percentage hour-by-hour across the days of the week.
 
-**Timestamps:** 01:59
+**Timestamps:** 02:04
 
-## 11. Web Agent: Parallel tests capacity
-
-**Source:** visual
-
-**Docs coverage:** covered
-
-In a Web agent's 'Capacity' tab, a dropdown menu allows configuring the number of parallel tests the agent can run simultaneously, with options ranging from '1 parallel test' up to '10 parallel tests'.
-
-**Timestamps:** 02:07, 02:08
-
-## 12. Maintenance mode controls
+## 9. Web agent capacity configuration
 
 **Source:** visual
 
 **Docs coverage:** covered
 
-Click 'Set agent in maintenance' at the top right of an agent's details to toggle maintenance mode. After confirming, a 'Maintenance' badge appears by the agent name, and the button changes to 'Remove from maintenance' to reverse the state.
+The Capacity tab for Web agents features a dropdown menu allowing users to select the maximum number of parallel tests the agent can run, with options ranging from 1 to 10 parallel tests.
 
-**Timestamps:** 02:18, 02:22, 02:24
+**Timestamps:** 02:10
 
-## 13. Test-only mode controls
+## 10. Agent maintenance mode
 
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-Click the flask icon button at the top right to activate Test-only mode. A modal asks for confirmation and warns that active monitors will be paused. Once active, the button turns green and is labeled 'Test-only mode'. Clicking it again opens a modal to exit the mode and unpause monitors.
+Users can put an agent into maintenance by clicking "Set agent in maintenance" in the top right. This pauses test executions until the user removes it from maintenance.
 
-**Timestamps:** 02:30, 02:49, 02:54
+**Timestamps:** 02:22
+
+## 11. Test-only mode activation and deactivation
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs describe activating test-only mode but falsely state "the button stays highlighted"—instead, a new indicator chip and an "Exit test-only mode" button appear. The docs also omit the specific deactivation dialog that resumes paused monitors.
+
+Clicking "Test-only mode" opens a confirmation dialog warning that active monitors will be paused. Once activated, the UI shows a blue "Test-only mode activated" indicator and an explicit "Exit test-only mode" button. Clicking exit opens a dialog confirming that paused monitors will be resumed.
+
+**Timestamps:** 02:48, 02:56

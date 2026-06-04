@@ -2,74 +2,64 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `administration/event-log.mdx`, `administration/event-log/browse.mdx`, `administration/event-log/export.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `administration/event-log.mdx`, `administration/event-log/browse.mdx`, `administration/event-log/export.mdx`_
 
-## 1. Event Log Table
+## 1. Event log table
+
+**Source:** both
+
+**Docs coverage:** outdated — The documentation refers to the fourth column as "Metadata", but the video shows it is named "Dimensions".
+
+A paginated table tracing all platform events. It lists the event Time, Type, Source (who performed the action), and Dimensions (technical audit information and inline structured data). The narrator notes it tracks everything that happens on the platform.
+
+**Timestamps:** 00:06
+
+## 2. Raw info toggle
 
 **Source:** visual
+
+**Docs coverage:** new — The documentation does not mention the "Raw info" toggle switch.
+
+A toggle switch located at the top right corner of the interface labeled "Raw info", which can be toggled on or off to change the display of event information.
+
+**Timestamps:** 00:08
+
+## 3. Time range and export menu
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs mention a standalone "quick-range dropdown" and a separate "Export CSV button". The video shows the time presets and "Export as CSV" option are combined into a single three-dot menu.
+
+A three-dot (kebab) menu at the top right that allows users to look at different time periods and export data. It contains quick-range presets (Past 1h, Past 2h, Past 6h, Past 12h, Past 24h, Past 48h, Today, Yesterday, Last 7 days, Last 30 days) and an "Export as CSV" option. To its left are the current date range and a manual refresh button.
+
+**Timestamps:** 00:10
+
+## 4. Type filter
+
+**Source:** both
 
 **Docs coverage:** covered
 
-A paginated table displaying system events with columns for Time, Type, Source, and structured Metadata. Pagination controls are located at the bottom of the table.
+A dropdown menu to filter events by the type of action performed. It includes a "Select all" option and specific types like api_key_created, api_key_deleted, client_updated, group_created, group_deleted, monitoring_created, service_credentials_created, service_credentials_deleted, smartphone_connected, smartphone_disconnected, user_logged_in, and user_robot_maintenance.
 
-**Timestamps:** 00:00, 00:29
+**Timestamps:** 00:14
 
-## 2. Live Data Toggle
+## 5. User filter
 
-**Source:** visual
-
-**Docs coverage:** new — The documentation does not mention the Live Data toggle feature.
-
-A toggle switch located at the top right of the page labeled 'Live Data', used to enable automatic real-time updates of the event log table.
-
-**Timestamps:** 00:09
-
-## 3. Export CSV
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A button in the top right corner that allows users to export the current event log view into a CSV format.
+A dropdown menu next to the Type filter used to filter the event log by the specific user who triggered the action.
 
-**Timestamps:** 00:09
+**Timestamps:** 00:15
 
-## 4. Date Range Presets
+## 6. Event details panel
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** outdated — The docs claim there is a '48h' preset, an exact date range picker, and timezone selection, none of which are shown in the video. The video only displays a single preset dropdown.
+**Docs coverage:** outdated — The documentation states users must "click the View More button" to see details and refers to the event data section as "Metadata". The video shows clicking the row itself opens the panel, and the section is labeled "Dimensions".
 
-A dropdown menu in the top right to filter events by predefined time windows. Available options are 'Past 1h', 'Past 2h', 'Past 6h', 'Past 12h', 'Past 24h', 'Today', 'Yesterday', 'Last 7 days', and 'Last 30 days'.
+Clicking an event row opens a "Details" side panel on the right side of the screen, providing in-depth information for auditing and security. The panel displays the Type, Source, and Time of the event, and a "Dimensions" section containing the structured JSON payload of the action, complete with a copy-to-clipboard button.
 
-**Timestamps:** 00:11
-
-## 5. Dynamic Filter Builder
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs describe static 'Type' and 'User' dropdown filters. The video shows a dynamic filter builder using a '+' button where users select a field ('Type' or 'Source') and then a value.
-
-A filter bar above the table where users can click a '+' icon to add criteria. Available fields to filter by are 'Type' and 'Source'. Selecting 'Type' opens a dropdown list of available system event types (e.g., admin_deleted, device_policy_created).
-
-**Timestamps:** 00:14, 00:16
-
-## 6. Filter by Cell Click
-
-**Source:** visual
-
-**Docs coverage:** new — The docs do not mention the ability to add filters by clicking values directly inside the table cells.
-
-Users can instantly apply a filter by clicking directly on a value within the table. For example, clicking an event type like 'device_policy_deleted' in the Type column automatically creates and applies a filter chip for that specific type.
-
-**Timestamps:** 00:21, 00:22
-
-## 7. Event Details Side Panel
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs instruct users to 'click the View More button', but the video shows clicking the row itself opens the panel. The docs also fail to mention the copy-to-clipboard button on the JSON metadata block.
-
-Clicking an event row opens a 'Details' side panel on the right. It displays the event's Time, Type, Source, and Metadata. The Metadata is formatted as a JSON block with syntax highlighting, line numbers, and a dedicated 'Copy' button in its top right corner.
-
-**Timestamps:** 00:30, 00:32
+**Timestamps:** 00:31

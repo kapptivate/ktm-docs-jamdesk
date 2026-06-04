@@ -2,54 +2,54 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `administration/api-keys.mdx`, `administration/api-keys/create.mdx`, `administration/api-keys/manage.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `administration/api-keys.mdx`, `administration/api-keys/create.mdx`, `administration/api-keys/manage.mdx`_
 
-## 1. API Keys List
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs claim there is a search box to filter keys by name, but no search box is present in the UI. The docs also incorrectly mention a "⋮ menu" at the end of each row.
-
-A list displaying all API keys with columns for Name, Token (showing masked dots and a refresh icon), and Access (showing the number of teams with access). Clicking anywhere on a row opens the Edit panel.
-
-**Timestamps:** 00:05, 01:20
-
-## 2. Edit API Key Panel
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs instruct users to "Open the ⋮ menu on a key's row and choose Edit", but there is no such menu; users click the row directly to open a side panel instead.
-
-Clicking on an API key row opens an "Edit API Key" side panel from the right side of the screen. It allows modifying the key's Name and adjusting the selected teams. The panel also contains a red "Revoke API Key" button at the bottom.
-
-**Timestamps:** 00:50
-
-## 3. Create API Key
+## 1. API keys list
 
 **Source:** visual
 
 **Docs coverage:** covered
 
-Clicking the red "Create API Key" button at the top right opens a modal. Users can input a "Name" and choose from a "Select teams allowed to use this key" dropdown containing options like `kapptivate_employees`, `Super User`, `demo`, `QA`, `Admin Account`, `Support Team`, and `Testing`. Submitting opens a success modal with the generated token and a copy button.
+The main page displays a list of all API keys in the workspace. Each row shows the API Key Name, a masked Token string, and an Access column indicating how many teams the key is assigned to (e.g., '1 team'). A search bar is available at the top to filter the list.
 
-**Timestamps:** 00:53, 01:03, 01:10
+**Timestamps:** 00:03
 
-## 4. Refresh Token
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs refer to this action as "Rotate a token", but the UI labels the modal and button as "Refresh token?".
-
-Clicking the circular arrows (refresh) icon next to the masked token in the list opens a "Refresh token?" confirmation modal. Confirming it generates a new token and displays it in a one-time success modal with a copy button.
-
-**Timestamps:** 01:21, 01:23, 01:26
-
-## 5. Revoke API Key
+## 2. Edit an API key
 
 **Source:** visual
 
-**Docs coverage:** outdated — The docs instruct users to "Open the ⋮ menu on the key's row and choose Revoke", but there is no ⋮ menu; users instead click a trash can icon on the row or use the button in the edit panel.
+**Docs coverage:** outdated — The docs state to open the '⋮ menu' or click anywhere on the row to edit. The video shows clicking a specific pencil icon on the right side of the row, and there is no ⋮ menu.
 
-Clicking the trash can icon on the far right side of a key's row opens a "Revoke API key?" confirmation modal warning that the action cannot be undone. Confirming permanently deletes the key. Revocation can also be initiated from the bottom of the "Edit API Key" side panel.
+Click the pencil icon on the right side of a key's row to open the 'Edit API Key' side panel. From here, you can modify the key's Name, adjust the assigned teams in the 'Select teams allowed to use this key' dropdown, or permanently remove the key using the 'Revoke API Key' button at the bottom of the panel.
 
-**Timestamps:** 01:29, 01:31
+**Timestamps:** 00:48, 00:50
+
+## 3. Create an API key
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Click the '+ Create API Key' button in the top right to open a creation modal. Enter a 'Name' and use the 'Select teams allowed to use this key' dropdown to assign access. Clicking 'Create' opens an 'API Key created' modal that displays the new token with a copy button, warning that for security reasons it will not be displayed again.
+
+**Timestamps:** 00:55, 01:08
+
+## 4. Refresh an API token
+
+**Source:** visual
+
+**Docs coverage:** covered
+
+To generate a new token for an existing key, click the refresh icon located next to the masked token in the list. A 'Refresh Token?' confirmation modal appears, warning that applications will lose access. Confirming by clicking 'Refresh token' opens a one-time view modal displaying the newly generated token.
+
+**Timestamps:** 01:21, 01:25
+
+## 5. Delete an API key
+
+**Source:** visual
+
+**Docs coverage:** outdated — The docs refer to this action as 'Revoke' via a '⋮ menu'. The video shows a trash can icon directly on the row that triggers a 'Delete API Key?' modal with a 'Delete' button.
+
+To permanently remove a key directly from the list, click the trash can icon on its row. This opens a 'Delete API Key?' confirmation modal, warning that applications using the key will lose access to the application. Click the 'Delete' button to confirm.
+
+**Timestamps:** 01:30

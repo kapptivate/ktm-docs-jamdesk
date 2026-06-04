@@ -2,84 +2,84 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `administration/security-policies.mdx`, `administration/security-policies/create.mdx`, `administration/security-policies/password.mdx`, `administration/security-policies/authentication.mdx`, `administration/security-policies/manage.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `administration/security-policies.mdx`, `administration/security-policies/create.mdx`, `administration/security-policies/password.mdx`, `administration/security-policies/authentication.mdx`, `administration/security-policies/manage.mdx`_
 
-## 1. Security policies list
+## 1. View security policies
+
+**Source:** visual
+
+**Docs coverage:** covered
+
+The main page under Administration > Security policies lists existing policies in a table with columns for Name (with description below) and Last Updated. The workspace default policy is indicated by an orange 'Default' badge. A three-dot menu on each row provides additional actions, and a 'Create security policy' button sits at the top right.
+
+**Timestamps:** 00:05
+
+## 2. Create policy & About section
 
 **Source:** both
 
 **Docs coverage:** covered
 
-A table displaying existing security policies. It includes columns for "Name" (with descriptions displayed beneath) and "Last Updated", with a "Default" badge marking the workspace's default policy. A "Create security policy" button is located in the top right.
+Clicking 'Create security policy' opens a form to define a new policy. The first section is 'About', where users must enter a Name (marked as required) and can optionally provide a Description.
 
-**Timestamps:** 00:03
+**Timestamps:** 00:15
 
-## 2. About section
-
-**Source:** both
-
-**Docs coverage:** covered
-
-The first section of the security policy form where users enter fundamental details. It contains a required "Name" input and an optional "Description" input.
-
-**Timestamps:** 00:14
-
-## 3. Password Policy
-
-**Source:** both
-
-**Docs coverage:** covered — Docs state each character rule sets a minimum and maximum, but do not mention the specific input labels ('Min length', 'Max length', 'Min count', 'Max count', 'Max consecutive') shown when rules are checked.
-
-A section to enforce password rules via checkboxes. Checking options reveals specific input fields to define exact limits: "Set min/max length" reveals "Min length" and "Max length"; "Set min/max lowercase characters" and "Set min/max numerical characters" reveal "Min count" and "Max count"; and "Enforce maximum number of equal consecutive characters" reveals "Max consecutive". Other checkboxes forbid usernames or whitespaces in passwords.
-
-**Timestamps:** 00:30
-
-## 4. Password history
+## 3. Password Policy rules
 
 **Source:** both
 
 **Docs coverage:** covered
 
-A section to prevent reuse of past passwords. Checking "Remember previous passwords" reveals a "Number of previous passwords to remember" input. Checkboxes are also available to enforce uniqueness against previous passwords or allow older passwords to be reused.
+A section to enforce password character requirements and restrictions. Checking a rule reveals its specific numeric inputs. Options include 'Set min/max length' (revealing Min length and Max length inputs), and similar min/max checkboxes for lowercase characters, uppercase characters, numerical characters, alphabetic characters, and special characters. Users can also check 'Enforce maximum number of equal consecutive characters' (revealing a Max consecutive input), 'Forbid password equal to username', 'Forbid password containing username', and 'Forbid whitespaces in password'.
 
-**Timestamps:** 00:35
+**Timestamps:** 00:30, 00:34
 
-## 5. Password life
-
-**Source:** both
-
-**Docs coverage:** covered — Docs mention expiration settings are revealed when limiting password lifetime, but fail to name the exact 'Days until password expiration' input shown in the UI.
-
-A section governing password expiration. Checking "Limit password lifetime" reveals a "Days until password expiration" input. Additional checkboxes allow admins to enforce password changes after a reset or after the first login.
-
-**Timestamps:** 00:41
-
-## 6. Two Factor Authentication
-
-**Source:** both
-
-**Docs coverage:** outdated — Docs omit the 'Max attempts' input under 'Limit number of attempts'. They also list 'Token expiration duration' as a configurable option, but the video shows it only as an info label without an input field.
-
-A section to mandate 2FA. Checking "Enable two factor authentication" displays an info label for "Token expiration duration". Checking "Limit number of attempts" reveals a "Max attempts" input and checkboxes for "Lock account indefinitely after max attempts" and "Warn before account lock".
-
-**Timestamps:** 00:45
-
-## 7. Login Policy
+## 4. Password history rules
 
 **Source:** both
 
 **Docs coverage:** covered
 
-A section to govern session security, providing checkboxes to "Limit number of login attempts" and "Prevent multiple sessions".
+Settings to track and restrict reuse of past passwords. Checking 'Remember previous passwords' reveals a 'Number of previous passwords to remember' input field. Additional checkboxes allow enforcing uniqueness against these previous passwords and considering too old passwords as available for reuse.
 
-**Timestamps:** 00:50
+**Timestamps:** 00:38
 
-## 8. Users assignment
+## 5. Password life rules
 
 **Source:** both
 
-**Docs coverage:** outdated — Docs claim the empty state text is "No users assigned to this policy yet.", but the video shows "You haven't assigned any users to this policy yet."
+**Docs coverage:** covered
 
-The final section of the form showing which users the policy applies to. When no users are assigned, it displays an empty state reading "You haven't assigned any users to this policy yet." alongside an "+ Add Users" button.
+Controls when users are forced to change their passwords. Includes checkboxes to 'Enforce password change after reset', 'Enforce password change after first login', and 'Limit password lifetime'.
 
-**Timestamps:** 00:54
+**Timestamps:** 00:40
+
+## 6. Two Factor Authentication settings
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs state that when 'Lock account indefinitely after max attempts' is off, users can set an 'Account lock duration', but this field is not present in the UI when the option is unchecked.
+
+Checking 'Enable two factor authentication' reveals settings to enforce 2FA. Users can configure a 'Token expiration duration' using a numeric input and a unit dropdown (e.g., Minutes), and 'Limit number of attempts' with a numeric input. Additional checkboxes allow admins to 'Lock account indefinitely after max attempts' and 'Warn before account lock'.
+
+**Timestamps:** 00:44
+
+## 7. Login Policy settings
+
+**Source:** both
+
+**Docs coverage:** covered
+
+A section containing checkboxes to restrict login behavior. Options available are 'Limit number of login attempts' and 'Prevent multiple sessions'.
+
+**Timestamps:** 00:52
+
+## 8. Assign users to a policy
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs state a new policy shows 'No users assigned to this policy yet.', but the video shows the text 'You must configure a valid policy to assign users.'
+
+The Users section at the bottom of the form indicates who the policy applies to. When creating a new policy, it displays the message 'You must configure a valid policy to assign users.' alongside an 'Add Users' button. Once finished, clicking the 'Create security policy' button at the bottom saves the form.
+
+**Timestamps:** 00:55

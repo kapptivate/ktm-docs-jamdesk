@@ -2,84 +2,74 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `administration/notifications.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `administration/notifications.mdx`_
 
-## 1. Notifications navigation
+## 1. Robot availability toggle
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-Access the workspace-wide robot notifications page by selecting 'Notifications' under the Administration section in the left sidebar menu.
-
-**Timestamps:** 00:01
-
-## 2. Robot availability toggle
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A toggle labeled 'Trigger alert after an unavailability of [N] minute(s)'. Turning it on enables robot availability monitoring and reveals the notification channel configuration options below it.
+A master switch labeled 'Trigger alert after an unavailability of N minutes' that enables or disables workspace-wide alerts for when robots go offline and when they reconnect.
 
-**Timestamps:** 00:09, 00:10
+**Timestamps:** 00:15
 
-## 3. Unavailability period dropdown
+## 2. Unavailability timeout dropdown
 
 **Source:** visual
+
+**Docs coverage:** outdated — The documentation states the options are "from 5 to 30 minutes in 5-minute increments," but the video shows the options are 1, 3, 5, 10, 15, and 30 minutes.
+
+A dropdown menu to select the duration a robot must be disconnected before an alert is triggered. The available options are 1, 3, 5, 10, 15, and 30 minutes.
+
+**Timestamps:** 00:20
+
+## 3. Email notifications
+
+**Source:** both
+
+**Docs coverage:** outdated — The documentation says to "enter the recipient addresses," but the video shows the user selecting recipients from a multi-select dropdown menu of workspace users.
+
+A toggle to enable sending alerts via email. When enabled, it reveals a 'Select users who should be notified' field, which opens a dropdown menu to select multiple recipients from a list of existing workspace users.
+
+**Timestamps:** 00:29
+
+## 4. Slack notifications
+
+**Source:** both
 
 **Docs coverage:** covered
 
-A dropdown to set how long a robot can be offline before an alert is triggered. The available options are 5, 10, 15, 20, 25, and 30 minutes.
-
-**Timestamps:** 00:23
-
-## 4. Email notifications
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs tell the user to look for 'Select users who should be notified' and 'enter the recipient addresses'; the video shows a 'Select emails...' dropdown where the user searches and selects existing workspace emails.
-
-A toggle to enable email alerts. Once enabled, a 'Select emails...' dropdown appears, allowing you to search and pick existing workspace user email addresses to receive the alerts.
-
-**Timestamps:** 00:26, 00:28
-
-## 5. Slack notifications
-
-**Source:** visual
-
-**Docs coverage:** covered
-
-A toggle to enable Slack alerts. It reveals an input field for the 'Slack webhook link' and provides a helper link labeled 'Create webhook link in Slack' for setup guidance.
+A toggle to enable alerting via Slack. It exposes a text field to input the 'Slack webhook link' and provides a helper link labeled 'Create webhook link in Slack' for setup.
 
 **Timestamps:** 00:30
 
-## 6. Microsoft Teams notifications
+## 5. Microsoft Teams notifications
 
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A toggle to enable Microsoft Teams alerts. It reveals an input field for the 'Microsoft Teams webhook link' and a helper link labeled 'Create webhook link in Microsoft Teams' to assist with configuration.
+A toggle to enable alerting via Microsoft Teams. It includes a text field for the 'Microsoft Teams webhook link' and a helper link labeled 'Create webhook link in Microsoft Teams'.
 
 **Timestamps:** 00:32
 
-## 7. Webhook notifications and custom headers
+## 6. Webhook notifications
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-A toggle to send custom HTTP POST alerts. It includes a 'Webhook link' input and a 'Headers' section. Clicking 'Add header' creates a new row with 'key' and 'value' input fields and a delete (trash) icon, allowing you to pass custom HTTP headers.
-
-**Timestamps:** 00:34, 00:44
-
-## 8. Save changes button
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A 'Save changes' button located in the top right corner of the page, used to persist the configured robot availability rules and notification channels.
+A toggle to send alerts to custom client systems via an HTTP POST. It requires providing a 'Webhook link'.
 
-**Timestamps:** 00:46
+**Timestamps:** 00:35
+
+## 7. Webhook custom headers
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Within the Webhook notifications section, clicking 'Add header' creates a row with 'Key' and 'Value' text inputs to pass custom HTTP headers (such as authorization tokens) with the payload. Each header row has a trash icon to remove it.
+
+**Timestamps:** 00:41

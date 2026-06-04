@@ -2,114 +2,104 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `concepts/workspace.mdx`, `administration/products/view.mdx`, `administration/products/edit.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `concepts/workspace.mdx`, `administration/products/view.mdx`, `administration/products/edit.mdx`_
 
-## 1. Workspace switcher dropdown
+## 1. Workspace Switcher
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** new — The docs describe the concept of a workspace but do not mention the workspace switcher dropdown or its search capability.
+**Docs coverage:** new — The docs mention that users can belong to multiple workspaces and must choose one upon login, but they do not mention the ability to switch workspaces via the Settings menu or the search functionality.
 
-A dropdown menu located in the top-left navigation bar used to switch between workspaces. It includes a search bar to filter the workspace list by name.
+Located in the top header's Settings dropdown menu (cog icon), the workspace switcher allows users to move between different workspaces. It includes a search input field to filter available workspaces by name.
 
 **Timestamps:** 00:08, 00:13
 
-## 2. User profile page
+## 2. Products List
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** new — The docs completely omit the user profile page and its configuration sections.
+**Docs coverage:** outdated — The docs incorrectly claim there is an "Actions" column with an edit button. They also refer to the active monitoring column as "Active monitors," whereas the UI says "Active monitorings."
 
-Accessed by clicking the user avatar in the top right. It displays user details (name, avatar) and includes sections for User Teams, Product Access, and Security & Policy.
-
-**Timestamps:** 00:24
-
-## 3. Products list table
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs list an 'Active monitors' column and an 'Actions' column with an edit button; the video shows the column is named 'Active monitorings' and there is no Actions column.
-
-A view listing all products, displaying columns for the product name (with total count), 'Slug', and 'Active monitorings'. Users can click directly on a row to edit the product.
+Found under Administration > Workspace > Products, this page displays a paginated list of all products. The table columns are "Product" (which shows the total count), "Slug", and "Active monitorings". Clicking a product row navigates to its edit page.
 
 **Timestamps:** 00:29
 
-## 4. Export products CSV dialog
+## 3. Export Products to CSV
 
-**Source:** visual
-
-**Docs coverage:** outdated — The docs state that clicking 'Export .CSV' directly downloads the file, but the video shows it opens a dialog to select a date range.
-
-Clicking the 'Export .CSV' button on the products list opens a modal dialog to select a date range ('From' and 'To' dates) in UTC before generating the file.
-
-**Timestamps:** 00:34
-
-## 5. Product Edit - About section
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-The top section of the product edit page where users can update the product name and customize the product's icon by selecting from a color palette and an icon grid.
+A button labeled "Export .CSV" in the top right corner of the Products list allows users to download the table's data. Clicking it opens the browser's standard file save dialog.
 
-**Timestamps:** 00:48
+**Timestamps:** 00:33
 
-## 6. Product Edit - Teams access
+## 4. Edit Product - About
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-A section displaying the teams with access to the product (e.g., Super User, Administrators) along with their member and access counts. Includes a '+ Add team' button.
-
-**Timestamps:** 00:55
-
-## 7. Product Edit - Allocated devices list
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A searchable table showing devices assigned to the product. It includes columns for device ID, Status (Online, Archived, Available, Configuration), Usage (Healthy, Not used), and Motivation.
+The "About" section of a product's details page allows users to update the "Product name" and choose an icon. The icon picker provides a selection of 25 shapes and 24 colors. The product's "Slug" is displayed as a read-only field.
 
-**Timestamps:** 01:05
+**Timestamps:** 00:46, 00:50
 
-## 8. Add allocated devices modal
+## 5. Edit Product - Teams Access
 
-**Source:** visual
-
-**Docs coverage:** new — The docs mention associating devices but omit the '+ Add device' modal, its categorization into tabs (SIM, Smartphones, Web objects), and the bulk selection features.
-
-Clicking '+ Add device' opens a modal with tabs for 'SIM', 'Smartphones', and 'Web objects'. Users can search for devices and use a 'Select all' toggle to bulk-add them to the product.
-
-**Timestamps:** 01:22, 01:26
-
-## 9. Product Edit - Settings
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-The settings section includes a toggle to 'Allow monitoring for this product' and a field to set the 'Aggregation' interval in minutes. It also contains 'Archive product' and 'Delete product' buttons.
+The "Teams access" section lists the teams assigned to the product, displaying columns for "Teams ID", "Members" (count), and "Access" (number of products). An "+ Add team" button is available to grant access to additional teams.
 
-**Timestamps:** 01:40
+**Timestamps:** 00:57
 
-## 10. Create new product form
+## 6. Edit Product - Allocated Devices List
+
+**Source:** both
+
+**Docs coverage:** covered
+
+The "Allocated devices for this product" section shows a list of associated devices with a search bar. The table columns are "Device", "Status" (e.g., Online, Archived, Available, Offline), "Usage" (e.g., Healthy, Not used, Configuration), and "Node". A trash can icon on each row allows users to remove a device.
+
+**Timestamps:** 01:06, 01:13
+
+## 7. Add Allocated Device Modal
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs incorrectly list the web objects tab as "web agents", whereas the UI is labeled "Web objectifs". The docs also omit the modal interface entirely, missing the tabs, search, filters, and 'Select all' functions.
+
+Clicking the "+ Add device" button opens a modal to assign new devices. The modal is organized into three tabs: "SIMs", "Smartphones", and "Web objectifs". It includes a search bar, a filter dropdown, checkboxes for individual row selection, and a "Select all" button.
+
+**Timestamps:** 01:23, 01:28
+
+## 8. Product Settings (Monitoring & Deletion)
+
+**Source:** both
+
+**Docs coverage:** covered
+
+The "Settings" section at the bottom of the product page includes a toggle to "Allow monitoring for this product" and a "Data aggregation" numeric input (in minutes). Below these are two buttons to "Archive product" and "Delete product".
+
+**Timestamps:** 01:38
+
+## 9. Create New Product
+
+**Source:** both
+
+**Docs coverage:** new — The documentation entirely misses the product creation flow and its dedicated form.
+
+Accessed via the "+ Create product" button on the Products list, this page provides a form to set up a new product. It includes the same sections as the edit view: "About" (icon, name, slug), "Teams access" (+ Add team), and "Allocated devices" (+ Add device), with a "Create a product" submission button at the bottom. The slug auto-populates as the user types the product name.
+
+**Timestamps:** 01:46, 01:50
+
+## 10. Users List
 
 **Source:** visual
 
-**Docs coverage:** new — The docs cover editing, archiving, and deleting products but do not document the product creation process or the '+ Create product' form.
+**Docs coverage:** new — The provided documentation only covers the Workspace overview and Products, completely omitting the Users section and its list.
 
-Accessed via the '+ Create product' button, this page allows users to set up a new product by defining its icon, name, and manually entering a slug, before configuring teams and devices.
-
-**Timestamps:** 01:44, 01:50
-
-## 11. Users list view
-
-**Source:** visual
-
-**Docs coverage:** new — The docs do not cover the user administration section or the users list table.
-
-Under Administration > Users, this table lists all platform users with columns for their name, role badges (Super User, Administrators, Users), product access count, and last login timestamp.
+Located under Workspace > Users in the administration sidebar, this page displays a list of users with a search bar and a "Teams" dropdown filter. The table columns include "User ID", "Teams", "Access" (number of products), and "Last login". It also includes an "Export .CSV" button at the top right.
 
 **Timestamps:** 01:58

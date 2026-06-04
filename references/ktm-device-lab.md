@@ -2,144 +2,104 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `equipment/devices-lab.mdx`, `equipment/statuses.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `equipment/devices-lab.mdx`, `equipment/statuses.mdx`_
 
-## 1. Devices list views
+## 1. Device list search and filters
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-The lab provides two tabs, 'SIMs' and 'Smartphones', listing connected devices in a table. The tables display columns such as Name/number or Model/ID, Status, Network (for SIMs), UUID (for smartphones), Usage, Access, Monitors, and Host.
-
-**Timestamps:** 00:00, 01:00
-
-## 2. Search and filter devices
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-Above the device list, a search input allows finding specific devices. Two dropdowns filter the list: a Status dropdown (options: Active, Archived) and a Products multi-select dropdown to filter by assigned products.
+Above the device tables, you can search and filter the list. The Status filter toggles between 'Active' (default) and 'Archived'. The Products filter is a multi-select dropdown to view devices assigned to specific products (options shown include Absa Bank, Android & iOS App, APIs, Calls & IVR, Carrefour, Cellular data, Demo, devices-availability, E-commerce, Exista).
 
-**Timestamps:** 00:15, 00:20, 00:23
+**Timestamps:** 00:20, 00:22
 
-## 3. Status and Network tooltips
-
-**Source:** visual
-
-**Docs coverage:** new — The documentation does not mention that hovering over the Status or Network badges displays detailed connection data, such as network name, signal strength, or connection timestamps.
-
-Hovering over a device's Status or Network badge displays a tooltip with connection details, such as 'Connected to: [network], Signal: [level]' for SIMs, or a connection timestamp ('Connected since [date]') for smartphones.
-
-**Timestamps:** 00:33, 01:04
-
-## 4. Usage badge tooltip
+## 2. SIM Network and Usage tooltips
 
 **Source:** visual
 
-**Docs coverage:** new — The documentation omits that hovering over the Usage badge shows the exact weekly average percentage.
+**Docs coverage:** new — The documentation describes network and usage statuses but does not mention that hovering over these badges reveals tooltips with the specific network name, signal level, and exact usage percentage.
 
-Hovering over the Usage badge (e.g., 'Healthy' or 'Not used') in the device table reveals a tooltip showing the exact weekly average utilization percentage (e.g., 'Used at 14.77% (weekly average)').
+In the SIMs table, hovering over the Network badge displays a tooltip with the specific connected network name and signal condition (e.g., 'Connected to: kapptivate network', 'Signal: OK'). Hovering over the Usage badge displays a tooltip with the exact weekly average percentage (e.g., 'Used at 10.17% (weekly average)').
 
-**Timestamps:** 00:36, 01:11
+**Timestamps:** 00:31, 00:34
 
-## 5. Access count tooltip
+## 3. Host details popover
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** new — The documentation misses that hovering over the Access count reveals a list of the specific products assigned to the device.
+**Docs coverage:** new — The documentation mentions the host column but does not document the hover popover that displays the agent's status, location, and modem firmware.
 
-Hovering over the numerical Access count in the device list opens a tooltip listing the specific products assigned to that device (e.g., 'Tracing rules, SMS, Banking SMS, Cellular data...').
+In both the SIMs and Smartphones tables, hovering over the agent pill in the Host column opens a popover. This popover displays the agent's Status (e.g., Online), Location (e.g., Europe/France/Bordeaux), and, for SIM cards, the Firmware version of the modem.
 
-**Timestamps:** 00:38
+**Timestamps:** 00:41, 01:13
 
-## 6. Host details tooltip
+## 4. SIM General tab
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** new — The documentation does not mention the tooltips on the Host column that reveal the agent's status, location, or firmware.
+**Docs coverage:** outdated — The documentation states that the SIM General tab displays the 'IMSI', but the video shows it displays the 'Phone number' instead.
 
-Hovering over a device's Host column badge reveals a tooltip that displays either the host agent's status and physical location, or its firmware version.
+Clicking a SIM opens its detail page. The General tab contains an About section showing Name, Hosted on, Phone number, Location, Network, and Usage. A Products section allows you to toggle whether 'This SIM can be used by all the products'; when turned off, you can use an '+ Add product' button to specify allowed products.
 
-**Timestamps:** 00:40, 01:13
+**Timestamps:** 01:22, 01:26
 
-## 7. Device detail top actions
+## 5. Device Usage tab
 
-**Source:** visual
-
-**Docs coverage:** covered — The documentation lists the actions but omits the descriptive hover tooltip on the 'Test-only mode' button.
-
-The top right of a device's detail page provides three action buttons: 'Reboot slot' (for SIMs), 'Test-only mode', and 'Launch live session'. Hovering over 'Test-only mode' shows a tooltip: 'Pause all monitors and make this device available for manual testing'.
-
-**Timestamps:** 01:20, 02:28
-
-## 8. Product access controls
-
-**Source:** visual
-
-**Docs coverage:** covered — The documentation describes restricting access but does not mention the red trash icons used to remove products from the allowed list.
-
-On the General tab, a toggle switch 'This device can be used by all the products' controls broad access. When disabled, the user can manage a specific list of allowed products using a '+ Add product' button and a red trash icon next to each product to revoke its access.
-
-**Timestamps:** 01:25, 01:28
-
-## 9. Usage heatmap
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-The Usage tab displays a weekly-average utilization heatmap, illustrating the device's usage percentage for each hour across the days of the week, alongside a global average usage metric for the past week.
+The Usage tab shows the device's weekly average utilization percentage and a heatmap table titled 'Usage details on last week'. The heatmap columns represent days (Mon-Sun) and rows represent hours (0h-23h), with each cell showing the precise percentage the device was utilized.
 
-**Timestamps:** 01:35
+**Timestamps:** 01:36
 
-## 10. Device monitors list
+## 6. Device Monitors tab
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-The Monitors tab lists the active monitors assigned to the device, indicating each monitor's name, status (e.g., Up, Paused), frequency, and location.
-
-**Timestamps:** 01:43
-
-## 11. SIM Settings
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-The Settings tab for a SIM card includes an 'About' section to edit the device name and MSISDNs, and a 'SIM Details' section showing read-only information like IMSI, ICCID, Type, ISO code, Country, Operator, and network details.
+The Monitors tab lists active monitors assigned to the device, grouped by product or suite. It displays each monitor's Status (e.g., Up, Paused), name, frequency (e.g., 1 min., 15 min.), Location, and Device. Users can pause individual monitors with a row-level toggle or use the 'Pause all monitors' button.
 
-**Timestamps:** 01:54, 02:12
+**Timestamps:** 01:45
 
-## 12. Live session launch
+## 7. SIM Settings tab
 
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-Clicking 'Launch live session' opens an interactive remote control interface for the device, displaying tabs for 'Remote control' and 'History'.
+The Settings tab for a SIM provides an About section to rename the device and set National/International MSISDN numbers. The SIM Details section is read-only and displays the IMSI, ICCID, Type (e.g., 'V' for virtual or 'R' for roaming), ISO code, Country, Operator (e.g., iliad/FREE Mobile), Registered network name, Registered network plmn, and Modem firmware.
 
-**Timestamps:** 02:35, 02:38
+**Timestamps:** 01:59, 02:11
 
-## 13. Smartphone Settings and Props
+## 8. Device Detail top actions
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** covered — The documentation mentions the Props JSON object but omits the 'Copy' button provided to easily copy the JSON text.
+**Docs coverage:** covered
 
-The Settings tab for a smartphone includes 'About' to rename the phone, 'Smartphone Details' for read-only identifiers (UUID, URL, Type, Model), and a 'Props' section displaying device properties in a JSON block, which includes a 'Copy' button.
+At the top right of a device's detail page, three controls are available: a 'Reboot slot' button for SIMs, a 'Test-only mode' toggle that pauses all monitors and reserves the device for manual testing (shown in its hover tooltip), and a 'Launch live session' button that opens the Remote control interface.
 
-**Timestamps:** 03:00, 03:13
+**Timestamps:** 02:29, 02:37
 
-## 14. Workspace switcher
+## 9. Smartphone General tab
 
-**Source:** visual
+**Source:** both
 
-**Docs coverage:** new — The documentation does not mention the workspace switcher in the sidebar.
+**Docs coverage:** new — The documentation does not mention the 'Edit smartphone' button present in the About section of the smartphone General tab.
 
-A dropdown menu located at the top of the left sidebar allows the user to switch the current workspace (e.g., from 'Demo' to 'La Poste - Identité numérique').
+The General tab for a smartphone displays an icon of the phone (Apple or Android) and an About section detailing the Name, Model (e.g., samsung SM-A057G or iPhone 12), Hosted on, and Location. It also features an 'Edit smartphone' button next to the device details.
 
-**Timestamps:** 03:36, 03:41
+**Timestamps:** 02:46, 03:53
+
+## 10. Smartphone Settings tab
+
+**Source:** both
+
+**Docs coverage:** covered
+
+The Settings tab for a smartphone allows renaming the device in the About section. The Smartphone Details section shows read-only values for UUID, URL (e.g., wss://...), Type (android or ios), and Model. The Props section displays a JSON block containing device properties like screen resolution, OS version, and manufacturer, complete with a copy button.
+
+**Timestamps:** 03:10, 04:06

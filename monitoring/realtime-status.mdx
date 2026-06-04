@@ -6,7 +6,7 @@ sidebarTitle: Realtime status
 
 ![The Realtime status page in card layout, showing one card per product with an uptime bar chart, uptime percentage, and Up status badge over the last 12 hours](/images/realtime-status-overview.webp)
 
-Realtime status displays live monitoring results across your workspace with customizable views, multiple display formats, and advanced filtering. You can organize results by product, test, or monitoring resource, switch between card and list layouts, and adjust which metrics you see.
+Realtime status displays live monitoring results across your workspace with customizable views, multiple display formats, and advanced filtering. You can organize results by product, test, or monitor, switch between card and list layouts, and adjust which metrics you see.
 
 ## Views and tabs
 
@@ -33,12 +33,12 @@ How you read the data depends on what you're doing: cards make status visible at
 Open the **Display** menu to choose the layout and adjust how results are shown:
 
 - **Cards or List**: switch between the two layouts.
-- **Grouping**: organize results by product, test, or monitoring resource.
-- **Columns**: adjust the number of columns to fit your screen.
+- **Grouping**: organize results by product, test, or monitor. The List layout adds two more options: location and agent.
+- **Columns**: lay results out in 1, 2, or 3 columns.
 - **Show execution by**: analyze results over a time range or by execution count.
 - **Bar chart**: standard stacked or 100% stacked bars.
 - **Show period without executions**: include or hide periods with no runs.
-- **Show**: display each item's status or its availability percentage.
+- **Show**: display each item's status or its availability percentage. The List layout adds two more metrics: frequency and average execution time.
 
 ![The Display menu open over the card layout, with Cards selected and options for grouping, columns, execution mode, bar chart style, and empty periods](/images/realtime-status-display.webp)
 
@@ -60,7 +60,7 @@ Adjust the column count to fit more rows on screen. It's a compact way to scan m
 
 ## Time range and execution mode
 
-Whether you're checking the last few hours after a deploy or reviewing a quarter of history, the analyzed period is yours to set. The time range picker lets you select preset ranges (2 hours, 4 hours, 12 hours, 24 hours, 48 hours, 7 days, 30 days, 90 days, or 12 months) or define a custom range with a precise start and end. This controls the data shown in cards and uptime charts.
+Whether you're checking the last few hours after a deploy or reviewing a quarter of history, the analyzed period is yours to set. The time range picker lets you select preset ranges (Last 2h, 4h, 12h, 24h, 48h, 7 days, 30 days, 90 days, or 12 months) or define a custom range with a precise start and end. This controls the data shown in cards and uptime charts.
 
 ![The time range dropdown open, listing presets from Last 2h to Last 12 months](/images/realtime-status-time-presets.webp)
 
@@ -69,11 +69,11 @@ Toggle between two execution modes with **Show execution by** in the Display men
 - **Time-based mode** analyzes results over the selected time range and displays the time range picker. Chart labels show the period start and end.
 - **Count-based mode** analyzes a fixed number of recent executions (30, 60, or 90) without needing a time range. The time range picker is replaced by a count selector, and chart labels switch to "Oldest execution" and "Most recent".
 
-In time-based mode you can also zoom directly on a chart: click and drag across the bars to narrow the view to that period. The time range picker switches to "Custom", and you can keep zooming until you isolate the moment you're after.
+In either mode you can also zoom directly on a chart: click and drag across the bars to narrow the view to that period or set of executions. In time-based mode the time range picker switches to "Custom", and you can keep zooming until you isolate the moment you're after.
 
 ## Uptime charts
 
-The stacked bar chart in each card visualizes availability over the selected period. Choose between stacked bars (showing each status segment) or full-width stacked bars (normalized to 100%). Toggle "Show empty periods" to include or hide time ranges with no executions.
+The stacked bar chart in each card visualizes availability over the selected period. Choose between stacked bars (sized by the number of executions in each period) or 100% stacked bars (normalized to the same height to show proportions). Toggle "Show period without executions" to include or hide time ranges with no runs.
 
 Hover over any bar to see the exact time period it covers and a breakdown of successful, failed, and unexecuted runs. Empty periods show "No tests played during this period".
 
@@ -87,7 +87,7 @@ Click **Filter** to open the filter builder. The badge on the Filter button show
 
 - **A parameter**: product, monitor, test, device, or status.
 - **An operator**: "is exactly", "not exactly", "contains", "does not contain", "starts with", or "ends with".
-- **A value**: picked from a searchable dropdown of your products, tests, or devices.
+- **A value**: picked from a searchable dropdown of your products, tests, or devices. Status rules offer Up, Degraded, Down, Paused, Running, or Scheduled.
 
 Build more complex logic by combining rules:
 

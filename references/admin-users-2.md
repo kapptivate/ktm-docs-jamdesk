@@ -2,124 +2,154 @@
 
 _Extracted with gemini-3.1-pro-preview on 2026-06-04._
 
-_Gap analysis against: `administration/users.mdx`, `administration/users/create.mdx`, `administration/users/edit.mdx`, `administration/users/access.mdx`, `administration/users/manage.mdx`_
+_Full-quality (GCS) analysis. Gap analysis against: `administration/users.mdx`, `administration/users/create.mdx`, `administration/users/edit.mdx`, `administration/users/access.mdx`, `administration/users/manage.mdx`_
 
-## 1. User list search
+## 1. User search
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Users can be searched by their username, email address, or last name using the search bar at the top of the user list.
+
+**Timestamps:** 00:08, 00:27
+
+## 2. Filter users by status
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Filter the user list to show either "Active" or "Disabled" users. By default, the list displays active users.
+
+**Timestamps:** 00:30
+
+## 3. Disabled users display
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs claim you can "Click the user's name or use the Actions menu" to reactivate them, but the video shows disabled user rows are completely unclickable and lack an Actions menu.
+
+When viewing disabled users, their rows display a "Disabled user" badge with a crossed-out eye icon instead of their personal details, and the rows cannot be clicked to view or edit their profile. Disabled users cannot log into the platform.
+
+**Timestamps:** 00:36
+
+## 4. Filter users by team
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Use the "Teams" dropdown to filter the list of users based on the teams they belong to.
+
+**Timestamps:** 00:44
+
+## 5. Export users to CSV
+
+**Source:** both
+
+**Docs coverage:** outdated — The docs state that clicking the export button will immediately "Save the CSV file to your computer", but the video shows it opens an "Export users" dialog where the user must first choose a CSV delimiter.
+
+Export the list of users to a CSV file. Clicking the export button opens an "Export users" dialog where you select the CSV delimiter (comma or semicolon) before downloading.
+
+**Timestamps:** 00:49
+
+## 6. Create user profile
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Set up a new user's profile by entering their username, email address, first name, and last name in the Profile section of the creation form.
+
+**Timestamps:** 01:05
+
+## 7. Assign user to teams
+
+**Source:** both
+
+**Docs coverage:** covered — The docs do not mention that the "Add team" dialog includes a search bar, a "Select all" option, and displays the member count for each team.
+
+In the User Teams section, click "+ Add team" to open a modal to assign the user to teams. The modal includes a search bar, a "Select all" button, and lists each team with its current member count.
+
+**Timestamps:** 01:19
+
+## 8. Inherited product access display
+
+**Source:** both
+
+**Docs coverage:** covered
+
+When a user is assigned to a team during creation, the Product Access section automatically lists the products inherited from that team. These products show a role of "Multiple" and an Access source of "From [Team name]", and cannot be removed directly from this list.
+
+**Timestamps:** 01:34
+
+## 9. Add direct product access
+
+**Source:** both
+
+**Docs coverage:** covered — The docs do not mention the search and "Select all" features in the product selection modal, nor the red trash icon used to remove manually added products.
+
+Click "+ Add product" to manually assign products via a selection modal containing a search bar and "Select all" checkbox. Manually added products require selecting a role (Administrator, Beta tester, Reporter, Supervisor, Tester) and display an access source of "Manually added". They can be removed using the red trash icon.
+
+**Timestamps:** 01:47
+
+## 10. Assign security policy
+
+**Source:** both
+
+**Docs coverage:** covered
+
+Select a security policy from a dropdown to enforce login and password rules for the user. Available policies reflect the workspace's configured security policies.
+
+**Timestamps:** 01:51
+
+## 11. Unsaved changes warning
+
+**Source:** visual
+
+**Docs coverage:** new — The docs do not mention the "Leave without saving?" confirmation dialog that appears if you try to navigate away from an unsaved user form.
+
+If you attempt to navigate away from the user creation form without saving, a "Leave without saving?" confirmation dialog appears with "Cancel" and "Leave" options to prevent accidental data loss.
+
+**Timestamps:** 02:02
+
+## 12. Edit user tabs
 
 **Source:** visual
 
 **Docs coverage:** covered
 
-A search input at the top of the users list that filters records by username, email, or name as you type.
+When editing an existing user, their settings are divided into tabs on the left side of the screen: Profile, User Teams, Access, Security policy, and Account & Password.
 
-**Timestamps:** 00:08
+**Timestamps:** 02:06
 
-## 2. User status filter
+## 13. Reset user password
 
-**Source:** visual
-
-**Docs coverage:** covered
-
-A dropdown filter to view users by account status, with options for "Active" and "Disabled". When "Disabled" is selected, deactivated users appear in grayed-out rows with a ban icon, and their team, product, and access details are hidden.
-
-**Timestamps:** 00:16, 00:27
-
-## 3. User teams filter
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-A dropdown menu to filter the list of users by their team assignments. It includes a search bar, a "Select all" button, and checkboxes for available teams (e.g., "Admin-kops", "All Users", "devops", "HR").
+In the Account & Password tab, click "Reset user password" to send the user a reset link. A confirmation dialog warns that the user will no longer be able to log in with their old password.
 
-**Timestamps:** 00:32
+**Timestamps:** 02:20
 
-## 4. User products filter
+## 14. Deactivate user
 
-**Source:** visual
-
-**Docs coverage:** new — The docs list Search, Status, and Teams filters, but completely omit the Products filter.
-
-A dropdown to filter the user list by accessible products. It features a search input, a "Select all" toggle, and checkboxes for individual products (e.g., "Android E2E App", "APIx", "Frontend App", "Payments"). A hover tooltip indicates "Select up to 10".
-
-**Timestamps:** 00:41, 00:43
-
-## 5. Team selection modal
-
-**Source:** visual
+**Source:** both
 
 **Docs coverage:** covered
 
-Clicking "Add team" in the Create User form opens an "ADD USER TO AN EXISTING TEAM(S)..." modal. It provides a search field, a "Select all" option, and a checklist of teams alongside their current member counts.
+Use the "Deactivate user" button in the Account & Password tab to disable an active user's account.
 
-**Timestamps:** 01:18
+**Timestamps:** 02:24
 
-## 6. Inherited product access display
+## 15. Administrator access restriction
 
-**Source:** visual
+**Source:** voice
 
-**Docs coverage:** covered
+**Docs coverage:** new — The docs do not explicitly state that the Administration section and user management features require administrator rights to access.
 
-In the "Product Access" section of the user creation form, adding teams automatically populates the table with the products granted by those teams. These rows display "Always" in the Access column, the inheriting team in the Source column (e.g., "From 'Architecture'"), and feature disabled trash icons since they cannot be removed directly.
+The entire Administration section, including managing users, teams, products, and security policies, is restricted exclusively to users who have administrator rights on the platform.
 
-**Timestamps:** 01:21
-
-## 7. Manual product role assignment
-
-**Source:** visual
-
-**Docs coverage:** covered
-
-Manually adding a product in the Create User form adds it to the "Product Access" table with a "Manually added" Source. An Access dropdown appears to select the user's role: "Beta tester", "Administrator", "Reporter", "Supervisor", or "Tester". These manually added rows have active trash icons for removal.
-
-**Timestamps:** 01:45, 01:48
-
-## 8. Security policy selection
-
-**Source:** visual
-
-**Docs coverage:** covered
-
-A dropdown menu in the "Security & Policy" section of the user creation form to assign a security profile (e.g., "Default Policy", "Security Policy").
-
-**Timestamps:** 01:50
-
-## 9. Create user form validation
-
-**Source:** visual
-
-**Docs coverage:** new — The docs mention that the system validates uniqueness as you type, but do not mention the submission-time format validation or the resulting error banners.
-
-When submitting the "Create a new user" form, the system validates the field formats. If inputs are malformed, red borders appear around the fields and error banners display at the top of the form (e.g., "Username: Does not match the format", "Email: Email has an invalid format").
-
-**Timestamps:** 02:00
-
-## 10. Edit user access tab
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs state the Access tab shows "its role and an access source: Manually added... or From [team]". The video contradicts this: the columns are named "Role" and "Access", with "Role" showing "Multiple" and "Access" showing the role name, and there is no "source" column in this view.
-
-The "Access" tab on a user's edit profile lists their assigned products. The table consists of "Product", "Role", and "Access" columns. For inherited access, the "Role" column displays "Multiple" and the "Access" column displays the actual permission level (e.g., "Administration").
-
-**Timestamps:** 02:08
-
-## 11. Reset user password
-
-**Source:** visual
-
-**Docs coverage:** covered
-
-In the "Account & Password" tab of a user's profile, clicking "Reset user password" opens a confirmation modal. It warns that the user will lose access with their old password and will receive an email link to set a new one.
-
-**Timestamps:** 02:18
-
-## 12. Instant account deactivation and reactivation
-
-**Source:** visual
-
-**Docs coverage:** outdated — The docs claim you must "Confirm in the alert dialog" when deactivating or reactivating a user. The video contradicts this, showing that clicking the buttons in the edit page toggles the account status instantly without any dialog.
-
-In the "Account & Password" tab, clicking "Deactivate user" immediately disables the account and toggles the button text to "Reactivate user". Clicking it again instantly restores the account. Both actions trigger a brief loading spinner on the button without any confirmation modal.
-
-**Timestamps:** 02:23, 02:41
+**Timestamps:** 02:35
