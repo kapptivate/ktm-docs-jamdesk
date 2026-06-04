@@ -7,7 +7,7 @@ Jamdesk docs project. Pages are MDX (Markdown + React components). Config is in 
 - `docs.json`: navigation structure, theme, colors, branding. Pages must be listed here to appear in the sidebar.
 - `*.mdx` files: documentation pages. Every page needs `title` and `description` frontmatter.
 - `images/`: static assets. Always use `.webp` format.
-- `snippets/`: reusable MDX fragments. Import with `<Snippet file="name.mdx" />`.
+- `snippets/`: reusable MDX fragments. Import with `import Content from '/snippets/name.mdx'` after the frontmatter, then place `<Content />` in the body. The `<Snippet>` component is NOT supported by the renderer.
 
 ## Running the Dev Server (avoid leaking processes)
 

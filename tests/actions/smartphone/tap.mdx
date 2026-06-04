@@ -21,7 +21,7 @@ Tap is smartphone-specific.
 | locator.approach | Number | No | 0 = selector-based (default), 1 = coordinate-based. |
 | locator.selector | Template (string) | Conditional | CSS selector or XPath. Required if approach=0. |
 | locator.description | Template (string) | No | Human-readable element description for AI or intent. |
-| locator.coordinates | Object | Conditional | {x, y} pixel coordinates. Required if approach=1. |
+| locator.coordinates | Object | Conditional | `{x, y}` pixel coordinates. Required if approach=1. |
 | wait_for | Object | No | Condition to wait for before/after tap (clickable, displayed, enabled, exist). |
 
 ## Example
@@ -80,7 +80,7 @@ Tap the center of an element matched by CSS selector or XPath.
 
 Tap at absolute pixel coordinates on the screen.
 
-- **coordinates**: {x, y} pixel positions
+- **coordinates**: `{x, y}` pixel positions
 - **description**: Optional label describing what is being tapped
 - Useful when selectors are unstable or unavailable
 - Coordinates are relative to device screen resolution
