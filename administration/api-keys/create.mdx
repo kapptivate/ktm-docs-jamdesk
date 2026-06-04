@@ -15,7 +15,7 @@ API keys authenticate external applications, such as CI/CD pipelines and third-p
 
 ![The Create a new API Key modal with the name field and team selector](/images/api-key-create.webp)
 
-After creation, a modal confirms *"Your new token has been generated"* and displays the token. Copy it immediately with the copy button. It's only visible this one time. If you lose it, you'll need to [rotate the token](/administration/api-keys/manage#rotate-a-token) to generate a new one.
+After creation, a modal confirms *"Your new token has been generated"* and displays the token. Copy it immediately with the copy button. It's only visible this one time. If you lose it, you'll need to [refresh the token](/administration/api-keys/manage#refresh-a-token) to generate a new one.
 
 ![The generated token shown once with a copy button](/images/api-key-token.webp)
 
@@ -24,5 +24,5 @@ After creation, a modal confirms *"Your new token has been generated"* and displ
 Store the token in your application or CI/CD environment as an environment variable or secret. Never commit API keys to version control.
 
 <Warning>
-The token is shown only once at creation time. If you close the modal without copying it, you must rotate the token to get a new one.
+The token is shown only once at creation time. If you close the modal without copying it, you must refresh the token to get a new one.
 </Warning>

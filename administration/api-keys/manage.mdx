@@ -1,11 +1,16 @@
 ---
 title: View and manage API keys
-description: Search, edit, rotate, and revoke API keys in your workspace.
+description: Search, edit, refresh, and revoke API keys in your workspace.
 ---
 
 ![The row actions menu with Edit and Revoke](/images/api-key-actions.webp)
 
-The API keys list shows every key created in your workspace. Each row shows the key's **Name**, a masked **Token** with an inline rotate icon, and an **Access** column listing how many teams can use the key (or `–` if none). The **⋮** menu at the end of each row opens the **Edit** and **Revoke** actions.
+The API keys list shows every key created in your workspace, so you can audit what has access and replace credentials when needed. Each row shows:
+
+- **Name** of the key.
+- **Token**: masked, with an inline refresh icon to generate a new one.
+- **Access**: how many teams can use the key (or `-` if none).
+- **⋮ menu**: the **Edit** and **Revoke** actions.
 
 ## Search API keys
 
@@ -13,13 +18,23 @@ Use the search box to filter keys by name. Search is case-insensitive and update
 
 ## Edit an API key
 
-Open the **⋮** menu on a key's row and choose **Edit**. You can change the name and the teams allowed to use the key. Click **Save** to apply your changes.
+Click anywhere on a key's row, or open its **⋮** menu and choose **Edit**. The "Edit API Key" panel slides in from the right, where you can:
 
-## Rotate a token
+- **Rename** the key.
+- **Adjust the teams** allowed to use it.
+- **Revoke** it, with the red button at the bottom of the panel.
 
-To replace a key's token without changing its name or teams, click the **rotate icon** next to the masked token on the key's row. Kapptivate generates a new token and shows it in a modal. The old token stops working immediately.
+Click **Save** to apply your changes.
+
+![The Edit API Key side panel with the name field, team selector, and Revoke API Key button](/images/api-key-edit-panel.webp)
+
+## Refresh a token
+
+To replace a key's token without changing its name or teams, click the **refresh icon** next to the masked token on the key's row. A "Refresh token?" modal warns that applications using the key will lose access; confirm with **Refresh token**. Kapptivate generates a new token and shows it in a modal. The old token stops working immediately.
 
 Copy the new token before closing the modal. It's only shown once.
+
+![The Refresh token confirmation modal warning that applications using the key lose access](/images/api-key-refresh-modal.webp)
 
 ## Revoke an API key
 
@@ -27,7 +42,7 @@ Revoking permanently disables a key. Any applications using it will fail to auth
 
 To revoke:
 
-1. Open the **⋮** menu on the key's row and choose **Revoke**
+1. Open the **⋮** menu on the key's row and choose **Revoke**, or click **Revoke API Key** at the bottom of the edit panel
 2. Confirm the revocation in the dialog
 
 This action cannot be undone.

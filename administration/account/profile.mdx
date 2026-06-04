@@ -1,26 +1,38 @@
 ---
 title: Manage your profile
-description: Update your name, username, and view your email address.
+description: Update your name and username, review your teams and product access, and copy your personal access token.
 ---
 
 ![The Profile section, editing username, first name, and last name with a read-only email field](/images/account-profile.webp)
 
-Your profile contains your name, username, and email address. You can edit your name and username, but your email is read-only within your profile page.
+Your profile is your identity in the workspace: your name, username, and email, plus what you belong to (teams), what you can reach (products), and the credentials tied to your account. Everything lives on one page, and the anchor menu on the left jumps between sections.
 
-To update your profile:
+To update your identity:
 
-1. Click your user icon at the top right of the sidebar
-2. Select "My account"
-3. Scroll to the Profile section
-4. Edit your first name, last name, or username
-5. Click "Save Changes"
+1. Click your workspace name at the top of the sidebar and select **Settings**
+2. Open **Profile** under My account
+3. Edit your first name, last name, or username (your email is read-only)
+4. Click **Save changes** (top right)
 
 Your username must be unique. The system checks availability as you type, pausing briefly before validating to avoid redundant checks.
 
+## Teams and product access
+
+Two sections show what you have access to and let you extend it:
+
+- **User Teams**: the teams you belong to. Click **+ Add team** to join one.
+- **Product Access**: the products you can work on. Click **+ Add product** to add another.
+
+![The User Teams, Product Access, and Security & Policy sections of the profile page](/images/account-teams-access.webp)
+
+## Security policy
+
+The **Security & Policy** section shows the [security policy](/administration/security-policies) applied to your account, with a dropdown to select one. The workspace default applies unless another policy is selected.
+
 ## Personal access token
 
-Your profile also holds a **personal access token**, a credential tied to your account that authenticates external tools like the [Kapptivate CLI](/cli/overview) and the [MCP server](/mcp/overview). Treat it like a password.
+The **Personal access token** section holds a credential tied to your account that authenticates external tools like the [Kapptivate CLI](/cli/overview) and the [MCP server](/mcp/overview). Treat it like a password.
 
-To use it, open the Profile section, reveal the token, and copy it into the tool you're configuring. The token is regenerated when you log out, so you'll need to copy it again after your next login.
+To use it, click the eye icon to reveal the token and the copy icon to copy it into the tool you're configuring. The token is regenerated when you log out, so you'll need to copy it again after your next login.
 
-![The personal access token field in the Profile section, with a reveal-and-copy control](/images/account-pat.webp)
+![The personal access token field with its reveal and copy controls](/images/account-pat.webp)
