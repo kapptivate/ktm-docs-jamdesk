@@ -1,4 +1,4 @@
-Locate an element using a selector or AI-driven description and wait for specified conditions (clickable, displayed, enabled, exist). Unlike other actions, find does not interact with or extract data from the element—it only verifies that the element is present and in the desired state.
+Locate an element using a selector or AI-driven description and wait for specified conditions (clickable, displayed, enabled, exist). Unlike other actions, find does not interact with or extract data from the element. It only verifies that the element is present and in the desired state.
 
 ## Channels
 
@@ -45,7 +45,7 @@ Locator object fields:
 
 ## Notes
 
-- Find does not interact with the element—use [click](/tests/actions/web/click) or [tap](/tests/actions/smartphone/tap) to interact.
+- Find does not interact with the element. Use [click](/tests/actions/web/click) or [tap](/tests/actions/smartphone/tap) to interact.
 - Useful for element healing in the next step (prefind) or for verification before complex flows.
 - If element is not found within timeout, the step fails.
 - Common uses: verify element exists before click, wait for UI component to be ready, validate dynamic content loads.

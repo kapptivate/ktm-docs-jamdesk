@@ -54,6 +54,8 @@ Use progressive disclosure: a simple example near the top, advanced options tuck
 
 Active voice. "Run this command", not "This command should be run".
 
+No em dashes (—). Rewrite with a comma, colon, period, or parentheses instead.
+
 One idea per paragraph. If you reach for "also" or "additionally", start a new paragraph instead.
 
 Code examples must actually work. Never show partial code or pseudocode. Every block should be complete and copy-pasteable.

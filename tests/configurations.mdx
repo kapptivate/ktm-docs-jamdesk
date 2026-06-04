@@ -6,7 +6,7 @@ sidebarTitle: Configuration & Variables
 
 Hardcoding identifiers, passwords, or email addresses into each test makes scenarios brittle and hard to maintain. Variables let you store those values once and reuse them everywhere, so a single change updates every test that depends on it. Kapptivate organizes them in two ways: **simple variables** with one global value, and **variable groups** that hold different values per variant.
 
-Variables live in a product space. The Configurations page lists them all in a table showing each variable's name, value, and `Usage` — the tests that currently reference it.
+Variables live in a product space. The Configurations page lists them all in a table showing each variable's name, value, and `Usage`, the tests that currently reference it.
 
 ## Simple variables
 
@@ -62,7 +62,7 @@ This is ideal for distinct user profiles, separate environments (staging, produc
     For example, `User Profiles`.
   </Step>
   <Step title="Define the variants">
-    Add each variant — for user profiles that might be *Alexandre*, *Marc*, *Julie*. Mark one as the `Default`.
+    Add each variant: for user profiles that might be *Alexandre*, *Marc*, *Julie*. Mark one as the `Default`.
   </Step>
   <Step title="Add variables">
     Add the variables the group needs, such as `email` and `password`.
@@ -104,7 +104,7 @@ On the final **Run confirmation** screen, Kapptivate shows the variables the run
 
 The Configurations page keeps every variable and group in one place.
 
-- **Search** — Find variables and groups by name
-- **Usage tracking** — See which tests depend on a variable before you change it
-- **Duplicate** — Clone a variable to create a similar one
-- **Delete** — Remove a variable or variable group
+- **Search**: Find variables and groups by name
+- **Usage tracking**: See which tests depend on a variable before you change it
+- **Duplicate**: Clone a variable to create a similar one
+- **Delete**: Remove a variable or variable group
