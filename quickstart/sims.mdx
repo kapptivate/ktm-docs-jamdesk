@@ -8,16 +8,16 @@ Cellular tests run on physical SIM cards inside a Cellular agent, sending and re
 
 <Steps>
   <Step>
-    **Create the test.** Open the **Tests** section for your product, click **Create**, and choose the **Cellular** channel. Name the test.
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, choose **Classic**, and pick the **Cellular** channel. Name the test.
   </Step>
   <Step>
-    **Add steps.** Build the flow with cellular actions, send a USSD command and assert the response, or send and receive an SMS. Save the test.
+    **Add steps.** Build the flow with cellular actions: send a USSD command and assert the response, or send and receive an SMS. Save the test.
   </Step>
   <Step>
-    **Run it on a SIM.** Click **Run** and pick a SIM in a Cellular agent slot. Watch execution live under **Executions**.
+    **Run it on a SIM.** Click **Run** on the test's row, then pick a SIM in a Cellular agent slot on the [run confirmation](/executions/run) page and launch.
   </Step>
   <Step>
-    **Read the result.** Open the execution to see status, the USSD or SMS responses, and timing.
+    **Read the result.** Open the execution under **Executions** to see status, the USSD or SMS responses, and timing.
   </Step>
 </Steps>
 
@@ -25,9 +25,13 @@ Cellular tests run on physical SIM cards inside a Cellular agent, sending and re
 
 <Columns cols={2}>
   <Card title="SIM (Cellular) channel" icon="sim-card" href="/agents-devices/sim">
+
     How the Cellular channel, SIMs, and agent work
-  </Card>
+
+</Card>
   <Card title="Cellular tests (USSD & SMS)" icon="comment-sms" href="/tests/cellular">
+
     The full guide to authoring USSD and SMS flows
-  </Card>
+
+</Card>
 </Columns>

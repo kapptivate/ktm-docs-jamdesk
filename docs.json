@@ -38,24 +38,6 @@
     "dark": "/images/logo-light.svg",
     "href": "/"
   },
-  "api": {
-    "openapi": [
-      "/openapi/example-api.yaml"
-    ],
-    "examples": {
-      "languages": [
-        "curl",
-        "python",
-        "javascript",
-        "go",
-        "ruby",
-        "csharp",
-        "java",
-        "rust",
-        "php"
-      ]
-    }
-  },
   "navbar": {
     "primary": {
       "type": "button",
@@ -69,56 +51,6 @@
       "googlebot": "noindex, nofollow"
     }
   },
-  "redirects": [
-    {
-      "source": "/concepts/core-concepts",
-      "destination": "/concepts/workspace"
-    },
-    {
-      "source": "/concepts/channels",
-      "destination": "/agents-devices/web-api"
-    },
-    {
-      "source": "/concepts/agents",
-      "destination": "/agents-devices/web-api"
-    },
-    {
-      "source": "/concepts/devices-and-statuses",
-      "destination": "/equipment/statuses"
-    },
-    {
-      "source": "/agents-devices/statuses",
-      "destination": "/equipment/statuses"
-    },
-    {
-      "source": "/agents-devices/passive",
-      "destination": "/equipment/passive"
-    },
-    {
-      "source": "/administration/notifications/availability",
-      "destination": "/administration/notifications"
-    },
-    {
-      "source": "/administration/notifications/channels",
-      "destination": "/administration/notifications"
-    },
-    {
-      "source": "/monitoring/analytics",
-      "destination": "/monitoring/monitor-details"
-    },
-    {
-      "source": "/monitoring/reports",
-      "destination": "/monitoring/mail-reports"
-    },
-    {
-      "source": "/monitoring/supervision",
-      "destination": "/monitoring/realtime-status"
-    },
-    {
-      "source": "/guides/ci-cd",
-      "destination": "/executions/ci-cd"
-    }
-  ],
   "navigation": {
     "tabs": [
       {
@@ -131,7 +63,7 @@
             "expanded": true,
             "pages": [
               "introduction",
-              "concepts/how-it-connects",
+              "concepts/core-concepts",
               {
                 "group": "Quickstart",
                 "expanded": false,
@@ -139,24 +71,14 @@
                   "quickstart",
                   "quickstart/web",
                   "quickstart/smartphone",
-                  "quickstart/apis",
                   "quickstart/sims",
                   "concepts/interface"
                 ]
               },
               {
-                "group": "Concepts",
+                "group": "Channels",
                 "expanded": false,
                 "pages": [
-                  "concepts/workspace",
-                  "concepts/product",
-                  "concepts/test",
-                  "concepts/execution",
-                  "concepts/monitor",
-                  "concepts/metric",
-                  "concepts/agent",
-                  "concepts/device",
-                  "concepts/channel",
                   "agents-devices/web-api",
                   "agents-devices/smartphone",
                   "agents-devices/sim"
@@ -173,7 +95,8 @@
                 "group": "Tests management",
                 "expanded": false,
                 "pages": [
-                  "tests/overview"
+                  "tests/overview",
+                  "tests/suites"
                 ]
               },
               {
@@ -193,11 +116,8 @@
                 "expanded": false,
                 "pages": [
                   "executions/run",
-                  "tests/suites",
-                  "executions/ci-cd",
-                  "monitoring/overview",
-                  "monitoring/create",
-                  "monitoring/scheduling"
+                  "executions/run-campaign",
+                  "executions/ci-cd"
                 ]
               },
               {
@@ -205,7 +125,16 @@
                 "expanded": false,
                 "pages": [
                   "executions/overview",
-                  "executions/results",
+                  "executions/results"
+                ]
+              },
+              {
+                "group": "Monitoring",
+                "expanded": false,
+                "pages": [
+                  "monitoring/overview",
+                  "monitoring/create",
+                  "monitoring/scheduling",
                   "monitoring/monitor-details",
                   "monitoring/realtime-status"
                 ]

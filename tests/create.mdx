@@ -1,16 +1,16 @@
 ---
 title: Creating a test
-description: Author a test for Web, Smartphone, Cellular, or API and add its steps.
+description: Author a test for Web, Smartphone, or Cellular and add its steps.
 sidebarTitle: Create a test
 ---
 
-Creating a test starts with choosing a channel (Web, Smartphone, Cellular, or API), then setting a starting point and device. After creation, you add steps to define what the test does. This page walks through the setup flow for each channel.
+Creating a test starts with choosing a channel (Web, Smartphone, or Cellular), then setting a starting point and device. After creation, you add steps to define what the test does. This page walks through the setup flow for each channel.
 
 ## Start a new test
 
 Click **+ Create new test** in your collection. A modal asks which authoring experience to use:
 
-- **Classic**: the established builder, covering all channels (Web, Smartphone, Cellular, and API).
+- **Classic**: the established builder, covering all channels (Web, Smartphone, and Cellular).
 - **Web (New experience)** and **Smartphone (New experience)**: the next-generation builders for those channels.
 
 ![The Create new test modal with the Classic, Web (New experience), and Smartphone (New experience) choices](/images/test-create-modal.webp)
@@ -64,17 +64,12 @@ Then pick your channel and set its starting point:
     **Note:** This feature may require additional setup. Verify that your workspace has cellular agents and SIM devices configured.
 
   </Tab>
-  <Tab title="API">
-    API tests send HTTP requests directly to a service, without a browser or device.
 
-    **Starting point:** the request endpoint, an HTTP method (GET, POST, PUT, PATCH, DELETE) and a URL, with optional headers and body.
-
-    **Device type:** API tests run on a web agent. No device selection needed.
-
-    API steps can also be added inside Web and Smartphone tests to mix UI actions with direct backend calls.
-
-  </Tab>
 </Tabs>
+
+<Note>
+To test an HTTP service, add [API steps](/tests/actions/api/overview) inside a Web or Smartphone test: set the method, URL, headers, and body, then assert on the response and extract values for later steps.
+</Note>
 
 ## Test properties
 

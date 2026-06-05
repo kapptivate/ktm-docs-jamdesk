@@ -10,16 +10,16 @@ Every test in Kapptivate follows the same loop: author a test, run it on an agen
 
 <Steps>
   <Step>
-    **Create a test.** Open the **Tests** section for your product, click **Create**, pick a channel, and name the test.
+    **Create a test.** Open the **Tests** section for your product and click **+ Create new test**. Pick an authoring experience and a channel, then name the test. See [Creating a test](/tests/create) for the full setup flow.
   </Step>
   <Step>
-    **Add steps.** Define what the test does, clicks, input, navigation, and checks.
+    **Add steps.** In the [test builder](/tests/builder), record interactions on a live device or add steps manually, organized into step groups. Save the test.
   </Step>
   <Step>
-    **Run it.** Click **Run** and choose one or more agents. Watch execution live under **Executions**.
+    **Run it.** Click **Run** on the test's row, then review the [run confirmation](/executions/run): adjust the device, variables, and options, and launch.
   </Step>
   <Step>
-    **Read the result.** Open the execution to see status, per-step screenshots, timing, and variables.
+    **Read the result.** Open the execution under **Executions** to see status, per-step screenshots, timing, and variables.
   </Step>
 </Steps>
 
@@ -27,25 +27,32 @@ Every test in Kapptivate follows the same loop: author a test, run it on an agen
 
 <Columns cols={2}>
   <Card title="Web" icon="globe" href="/quickstart/web">
+
     Automate a browser test against a website or web app
-  </Card>
+
+</Card>
   <Card title="Smartphone" icon="mobile-screen" href="/quickstart/smartphone">
+
     Test a native Android or iOS app on a real device
-  </Card>
-  <Card title="APIs" icon="plug" href="/quickstart/apis">
-    Validate an HTTP endpoint without a browser
-  </Card>
+
+</Card>
   <Card title="SIMs" icon="sim-card" href="/quickstart/sims">
+
     Run USSD and SMS flows on a real SIM card
-  </Card>
+
+</Card>
 </Columns>
+
+<Note>
+Need to validate an HTTP endpoint? Add [API steps](/tests/actions/api/overview) inside a web or smartphone test: methods, headers, bodies, response assertions, and per-request timing.
+</Note>
 
 ## Go further
 
 Once you've run a test:
 
 - **Organize tests** into [collections](/tests/overview) by feature or team.
-- **Parameterize tests** with [input variables](/tests/create) to run the same test with different data.
+- **Parameterize tests** with [input variables](/tests/configurations) to run the same test with different data.
 - **Run on a schedule** by [creating a monitor](/monitoring/create) that runs continuously and alerts you to failures.
 - **Integrate with CI/CD** using [API keys](/administration/api-keys) to trigger runs from your pipeline.
 
@@ -53,9 +60,13 @@ Once you've run a test:
 
 <Columns cols={2}>
   <Card title="Navigating" icon="compass" href="/concepts/interface">
+
     Find your way around the sidebar, workspaces, and products
-  </Card>
-  <Card title="Concepts" icon="lightbulb" href="/concepts/workspace">
+
+</Card>
+  <Card title="Core concepts" icon="lightbulb" href="/concepts/core-concepts">
+
     Understand workspaces, products, tests, executions, and monitors
-  </Card>
+
+</Card>
 </Columns>

@@ -1,13 +1,12 @@
 ---
 title: API scenarios
-description: Test REST and HTTP services directly. Available today as steps inside web and mobile tests; a first-class API channel is on the way.
+description: Test REST and HTTP services with API steps inside your web and mobile tests.
 sidebarTitle: Overview
-tag: Coming soon
 ---
 
-API testing in Kapptivate covers REST and HTTP services: methods, headers, JSON bodies, response assertions, variable extraction, and detailed per-request timing. Today it lives as steps inside web or mobile tests; a dedicated API channel, like the Web channel, is being promoted as a first-class scenario.
+API testing in Kapptivate covers REST and HTTP services: methods, headers, JSON bodies, response assertions, variable extraction, and detailed per-request timing. API actions live as steps inside web or mobile tests; the action and metrics are identical in both, only the surrounding test type differs.
 
-## What you can do today
+## API actions
 
 HTTP API actions are available inside existing tests:
 
@@ -18,7 +17,7 @@ Both share the same request configuration and response assertion model, with a f
 
 ## Request configuration
 
-- **HTTP methods**: `GET`, `POST`, `PUT`, `PATCH`, `DELETE` (additional methods to confirm).
+- **HTTP methods**: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
 - **URL** with templated variables.
 - **Custom headers** with autocompletion for standard ones.
 - **Body**: JSON or raw payload.
@@ -33,11 +32,3 @@ Both share the same request configuration and response assertion model, with a f
 ## Per-request metrics
 
 Each HTTP request emits a detailed timing breakdown: DNS lookup, TCP connection, TLS handshake, content generation, transfer, and total. This lets you spot performance regressions, not just functional failures.
-
-## What's coming
-
-A standalone **API channel** alongside Web, Smartphone, and Cellular is on the roadmap. API-only tests will live in their own test type with a dedicated builder, suites, and monitors, no browser or device required.
-
-<Warning>
-  Until the API channel ships, author API steps inside a web or mobile test. The action and metrics are identical; only the surrounding test type differs.
-</Warning>

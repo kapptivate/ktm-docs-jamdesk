@@ -4,20 +4,20 @@ description: Create, run, and read a native app test on a real Android or iOS de
 sidebarTitle: Smartphone
 ---
 
-Smartphone tests drive a real Android or iOS device, tapping, typing, and swiping through a native app just like a user. They run on a Smartphone agent. Here's your first one.
+Smartphone tests drive a real Android or iOS device, tapping, typing, and swiping through a native app just like a user. They run on a device connected to a Smartphone agent. Here's your first one.
 
 <Steps>
   <Step>
-    **Create the test.** Open the **Tests** section for your product, click **Create**, and choose the **Smartphone** channel. Name the test and set the app to launch by its package name (Android) or bundle ID (iOS).
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, and choose **Smartphone (New experience)**. Name the test and select the installed app to launch by its package name (Android) or bundle ID (iOS).
   </Step>
   <Step>
-    **Add steps.** Build the flow with smartphone actions, tap an element, fill an input, swipe, wait, and assert that something is displayed. Save the test.
+    **Add steps.** In the builder, record interactions on the live device or add smartphone actions manually: tap an element, fill an input, swipe, wait, and assert that something is displayed. Save the test.
   </Step>
   <Step>
-    **Run it on a device.** Click **Run** and pick a connected smartphone. Watch execution live under **Executions**.
+    **Run it on a device.** Click **Run** in the builder to watch it live, or **Run** on the test's row, then confirm the device and variables on the [run confirmation](/executions/run) page and launch.
   </Step>
   <Step>
-    **Read the result.** Open the execution to see status, per-step screenshots, and timing.
+    **Read the result.** Open the execution under **Executions** to see status, per-step screenshots, and timing.
   </Step>
 </Steps>
 
@@ -25,9 +25,13 @@ Smartphone tests drive a real Android or iOS device, tapping, typing, and swipin
 
 <Columns cols={2}>
   <Card title="Smartphone channel" icon="mobile-screen" href="/agents-devices/smartphone">
+
     How the Smartphone channel and agent work
-  </Card>
+
+</Card>
   <Card title="Test builder" icon="vial" href="/tests/builder">
+
     Build out more complex mobile flows step by step
-  </Card>
+
+</Card>
 </Columns>

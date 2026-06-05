@@ -8,30 +8,34 @@ Web tests drive a real browser against your site, clicking, typing, navigating, 
 
 <Steps>
   <Step>
-    **Create the test.** Open the **Tests** section for your product, click **Create**, and choose the **Web** channel. Name the test and set the starting URL the browser opens.
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, and choose **Web (New experience)**. Fill in the test name, the default Web agent, and the start URL the browser opens.
   </Step>
   <Step>
-    **Add steps.** Build the flow with web actions, click an element, fill an input, navigate, wait for content, and assert that something is displayed. Save the test.
+    **Add steps.** In the builder, record interactions on the live page or add web actions manually: click an element, fill an input, wait for content, and assert that something is displayed. Save the test.
   </Step>
   <Step>
-    **Run it on a browser.** Click **Run** and pick a Web agent. Watch execution live under **Executions**.
+    **Run it on a browser.** Click **Run** in the builder to watch it live, or **Run** on the test's row, then confirm the agent and variables on the [run confirmation](/executions/run) page and launch.
   </Step>
   <Step>
-    **Read the result.** Open the execution to see status, per-step screenshots, and timing.
+    **Read the result.** Open the execution under **Executions** to see status, per-step screenshots, and timing.
   </Step>
 </Steps>
 
 <Tip>
-Set the browser type, user agent, language, and window size in the test's configuration before you run.
+The browser type, window size, language, and user agent come from the [browser preset](/tests/browser-presets) you pick in the builder's **Environment** tab.
 </Tip>
 
 ## What's Next?
 
 <Columns cols={2}>
   <Card title="Web & API channel" icon="globe" href="/agents-devices/web-api">
+
     How the Web channel and Web agent work
-  </Card>
+
+</Card>
   <Card title="Test builder" icon="vial" href="/tests/builder">
+
     Build out more complex web flows step by step
-  </Card>
+
+</Card>
 </Columns>
