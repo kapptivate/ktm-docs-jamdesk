@@ -1,66 +1,47 @@
 ---
 title: Executions overview
 description: Browse the history of every test run and filter to what matters.
-sidebarTitle: Overview
+sidebarTitle: Executions list
 ---
 
-Every time a test runs it produces an execution. View all executions in a paginated list, filter by status or creator, search by name, and take bulk actions like tagging, re-running, and exporting.
+![The executions list with status icons, failed-count badges, test detail chips, and per-row Run buttons](/images/executions-list.webp)
+
+Every time a test runs it produces an execution. The executions list is the history of all of them: filter to what matters, re-run what failed, and click through to the detailed results.
 
 ## The executions list
 
-The executions list shows all your past test runs. Each row displays the execution name, test summary, who ran it, and quick actions.
+Executions are grouped by day, newest first, and the list refreshes itself to show updated statuses. Each row displays:
 
-**List columns:**
-- **Execution name**: shows the execution name with a status icon (success, failed, warning, running, canceled, and others).
-- **About**: shows the test count as "X/Y" (X passed, Y total).
-- **Ran by**: the username of whoever triggered the execution.
-- **Tests**: the first three test tags, with "+X more" if additional tests exist.
-- **Actions**: a button to re-run, plus a menu for other actions.
-
-Executions are grouped by creation date with day separators between them. The list auto-refreshes every 9 seconds to show updated statuses.
+- **Name**: the execution name with its status icon, run date, duration, and device chip.
+- **About**: a badge with the failed/total test count.
+- **Ran by**: who or what triggered the execution.
+- **Details**: chips naming the tests in the execution, with "View more" when there are many.
+- **Run**: a standalone button to re-run the execution.
 
 ## Filter executions
 
-You can narrow down the list with multiple filters.
+- **Search** for executions by name.
+- **Status**: filter by success, failed, warning, running, and other statuses when applicable.
+- **Creator**: see only executions a specific user ran.
+- **Date range**: pick a preset from the dropdown (Past 1h, 2h, 6h, 12h, 24h, Today, Yesterday, Last 7 days, Last 30 days) or set a custom range.
+- **Multi-select**: enable the checkbox mode for bulk actions; press Esc to clear the selection.
 
-**By search**: search for executions by name in the search bar.
+## Row actions
 
-**By status**: filter by execution status: success, failed, warning, or running. Other statuses (pending, canceled, scheduled, timed out) can also be filtered when applicable.
+Use the **Run** button to re-run an execution as-is. The row's three-dot menu offers:
 
-**By creator**: select a user from the dropdown to see only executions they ran.
-
-**By date**: use the date range picker to set a start and end date. Select your timezone so the dates match your local time.
-
-**Multi-select mode**: click the checkbox button to enable multi-selection. Select one or more executions and then use the bulk actions. Press Esc to clear the selection.
-
-## Actions
-
-### Single execution
-
-From the action menu next to an execution:
-
-- **Re-run**: queue the execution to run again.
-- **Rename**: change the execution's display name.
-- **Add tags**: label the execution for organization.
-- **Re-run failed tests**: run only the tests that failed in this execution.
-- **Cancel** (running executions only, V2 only): stop the execution in progress.
-- **Create monitor** (single-test executions only): create a continuous monitor from this test.
+- **Add tag(s)**: label the execution for organization.
+- **Rerun only failed tests**: queue only the tests that failed.
+- **Rename execution**: change its display name.
 - **Delete**: remove the execution.
-- **Export**: download a report of the execution.
 
-### Multiple executions
+![An execution row's menu with Add tags, Rerun only failed tests, Rename, and Delete](/images/execution-row-menu.webp)
 
-When multi-select is enabled, select one or more executions and use the bulk action menu:
-
-- **Delete**: remove all selected executions.
-- **Export**: download a combined report.
-- **Re-run**: queue all selected executions to run again.
-
-Click on an execution row to open its full details and results.
+Click the row itself to open the full [results view](/executions/results).
 
 ## Execution status
 
-An execution's status reflects the outcome of its tests. The possible statuses are:
+An execution's status reflects the outcome of its tests:
 
 - **success**: all tests passed.
 - **failed**: one or more tests failed.
@@ -76,4 +57,4 @@ Scheduled executions show a tag with the scheduled run date and time instead of 
 
 ## Live test monitoring
 
-When a test is running (V2 executions only), you can click on the execution to watch it live. The execution detail view shows a live preview of the device screen and updates the steps in real-time as the test progresses. See [Live session](/tests/live-session) for details.
+When a test is running, you can watch it live: open the execution to see a live preview of the device screen with the steps updating in real time, or run directly [from the builder](/executions/run#run-from-the-builder) to watch in a modal without leaving the editor.

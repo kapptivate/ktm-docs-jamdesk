@@ -109,6 +109,14 @@
     {
       "source": "/monitoring/reports",
       "destination": "/monitoring/mail-reports"
+    },
+    {
+      "source": "/monitoring/supervision",
+      "destination": "/monitoring/realtime-status"
+    },
+    {
+      "source": "/guides/ci-cd",
+      "destination": "/executions/ci-cd"
     }
   ],
   "navigation": {
@@ -157,48 +165,55 @@
             ]
           },
           {
-            "group": "Writing tests",
-            "icon": "pen-to-square",
+            "group": "End-to-end testing",
+            "icon": "flask",
             "expanded": true,
             "pages": [
               {
-                "group": "Test",
+                "group": "Tests management",
                 "expanded": false,
                 "pages": [
-                  "tests/overview",
+                  "tests/overview"
+                ]
+              },
+              {
+                "group": "Writing tests",
+                "expanded": false,
+                "pages": [
                   "tests/create",
                   "tests/builder",
                   "tests/live-session",
+                  "tests/reusable-components",
                   "tests/configurations",
-                  "tests/browser-presets",
-                  "tests/suites",
-                  "tests/reusable-components"
+                  "tests/browser-presets"
                 ]
               },
               {
-                "group": "Run",
+                "group": "Executing tests",
+                "expanded": false,
+                "pages": [
+                  "executions/run",
+                  "tests/suites",
+                  "executions/ci-cd",
+                  "monitoring/overview",
+                  "monitoring/create",
+                  "monitoring/scheduling"
+                ]
+              },
+              {
+                "group": "Viewing results",
                 "expanded": false,
                 "pages": [
                   "executions/overview",
-                  "executions/results"
-                ]
-              },
-              {
-                "group": "Monitor",
-                "expanded": false,
-                "pages": [
-                  "monitoring/overview",
-                  "monitoring/create",
-                  "monitoring/scheduling",
-                  "monitoring/monitor-details"
+                  "executions/results",
+                  "monitoring/monitor-details",
+                  "monitoring/realtime-status"
                 ]
               },
               {
                 "group": "Production supervision",
                 "expanded": false,
                 "pages": [
-                  "monitoring/realtime-status",
-                  "monitoring/supervision",
                   "monitoring/incidents",
                   "monitoring/alerts",
                   {
@@ -444,8 +459,7 @@
             "icon": "compass",
             "pages": [
               "guides/overview",
-              "guides/first-integration",
-              "guides/ci-cd"
+              "guides/first-integration"
             ]
           }
         ]

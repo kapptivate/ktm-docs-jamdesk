@@ -1,0 +1,45 @@
+---
+title: Run a test
+description: Launch tests on demand, adjust devices and variables, and watch them live.
+sidebarTitle: Manual runs
+---
+
+![The Run confirmation page with the queued tests, their devices, and variable overrides](/images/run-confirmation.webp)
+
+Not every execution waits for a schedule: while authoring, after a fix, or during an investigation, you run tests on demand. A manual run goes through three quick stages: queue the tests, review the run confirmation, and launch.
+
+## Queue the tests
+
+Click **Run** on a test's row to add it to the run queue. Keep clicking Run on other tests to accumulate them: a counter button in the top right tracks how many tests are queued. Click the counter to proceed to the run confirmation.
+
+![Several tests queued for execution, with the run queue counter in the top right](/images/run-queue.webp)
+
+## Review the run confirmation
+
+The Run confirmation page is where you adjust how this specific run executes, without touching the tests themselves:
+
+- **Name**: give the execution a name so it's easy to find in the executions list.
+- **Your tests**: each queued test appears with its **owner** (the device or agent that will run it); change it from the dropdown.
+- **Input variables**: each test shows its variable groups (for example Default, Environment, User). Pick a different variant from a group's dropdown or override individual values for this run only.
+- **Multiplier**: run the same test several times by raising the ×N counter, or remove it from the queue.
+
+## Set the options
+
+The **Options** section controls how the batch behaves:
+
+- **Run later**: schedule the run instead of launching immediately.
+- **Wait between each test**: insert a pause between tests.
+- **Send me results by email / by sms / by call**: get notified when the run finishes.
+- **Ignore errors**: keep going when a step fails.
+- **Add custom capabilities**: pass extra execution capabilities.
+- **Parallel executions**: run web scenarios in parallel.
+
+Click **Run** to launch (or **Cancel** to discard). The run lands in the [executions list](/executions/overview), where you can follow it and [open its results](/executions/results).
+
+![The Options section of the run confirmation with its checkboxes and the Run button](/images/run-options.webp)
+
+## Run from the builder
+
+While authoring, you don't need to leave the editor to try your test: click **Run** in the top right of the builder. A modal opens with a live video feed of the executing test, which you can expand to full screen to watch the run in real time.
+
+![The live run modal opened from the test builder, showing the device screen during execution](/images/run-live-modal.webp)

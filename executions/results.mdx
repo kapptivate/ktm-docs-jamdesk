@@ -4,76 +4,49 @@ description: Read a single execution result: steps, screenshots, video, and meta
 sidebarTitle: Results
 ---
 
-An execution result shows exactly what happened during a test run. Click on any execution to view its detailed results including step-by-step breakdown, screenshots, video recordings, variables, and timing data.
+![An execution result with the Steps, Screenshots, and Video tabs, top-right actions, and the metadata sidebar](/images/execution-details.webp)
 
-## Opening an execution
+An execution result shows exactly what happened during a test run: which steps ran, what the screen looked like at each one, and the conditions it ran under. It's where a red row in the executions list turns into an actionable diagnosis.
 
-From the [executions overview](/executions/overview) list, click on any execution row to open its full result view. You will see:
+## The result view
 
-- **Breadcrumb navigation**: a back button to return to the executions list and the execution name (click the pencil icon to rename it).
-- **Header**: the execution name and, for running executions, a progress bar showing completion percentage.
-- **Sidebar** (multi-test executions): a list of all tests in the execution with their status icons.
-- **Content area**: tabs for Overview, Steps, Variables, Screenshots, and Video.
+Open any execution from the [executions list](/executions/overview). The view is built around:
 
-## Execution overview
+- **Header**: the execution name (click the pencil to rename), its status badge, and an **Add tag(s)** button.
+- **Top-right actions**: **Edit related test** to jump into the builder, **Export** to download a report, **Run again** to re-run, and the trash icon to delete.
+- **Tabs**: Steps, Screenshots, and Video.
+- **Sidebar**: **About** (the tested URL and who ran it), **Execution details** (start, end, and duration), and **Conditions** (the device and browser preset used).
 
-The Overview tab shows a high-level summary of all tests in the execution.
-
-For each test you see:
-- Test name and status icon
-- Timing information (how long the test took)
-- A summary of pass/fail breakdown
-
-This view is useful to quickly understand whether all tests passed and how long the execution took overall.
+Executions with several tests add a test list so you can move between each test's results. *(A detailed walkthrough of multi-test results is coming soon.)*
 
 ## Steps
 
-The Steps tab displays the full step-by-step breakdown of what the test did. Each step shows:
+The Steps tab is the step-by-step account of the run. Each step shows its description, status, and duration; expand it to see the **Result** with an inline screenshot, the interacted element highlighted.
 
-- Step number and description
-- Status (passed, failed, or skipped)
-- Duration and timestamp
-- Any error messages if the step failed
+- **View artifacts** opens a modal with the step's logs and images.
+- Click a screenshot to open a **full-screen carousel** and flip through the run visually, step by step.
+- **Expert mode** (top right of the tab) reveals additional technical detail.
 
-Expand a step to see more detail, including the action that was performed and the result.
-
-## Variables
-
-The Variables tab displays all test variables and their values during execution. This is useful for debugging when you need to see what data the test was working with.
+![An expanded step showing its inline result screenshot, with the View artifacts action](/images/execution-step-artifacts.webp)
 
 ## Screenshots
 
-The Screenshots tab shows all screenshots captured during the test run. Each screenshot is labeled with the step that captured it, so you can correlate visual state with test steps. Click a screenshot to view it at full size.
+The Screenshots tab gathers all screenshots captured during the run, labeled with the step that produced each one, so you can correlate visual state with test steps. Click any screenshot to view it at full size.
 
 ![The Screenshots tab of an execution, with captured screenshots grouped by step group and labeled with the step that produced each one](/images/execution-screenshots.webp)
 
 ## Video
 
-If a video recording is available, the Video tab shows a playback of the entire test run. This lets you see the full execution in motion without stepping through individual steps.
+The Video tab plays back the entire run, so you can watch the full execution in motion without stepping through individual steps. Use the **Download** button to save the recording locally.
 
-## Execution metadata
+![The Video tab with the playback of the run and the Download button](/images/execution-video.webp)
 
-At the top of the result view, you can see:
+## Export a report
 
-- **Execution name**: click the pencil icon to rename it.
-- **Status**: the overall result (success, failed, warning, or other).
-- **Timing**: how long the execution took.
-- **Created**: when the execution was triggered.
-- **Created by**: which user ran the test.
+Click **Export** (top right) to download a report of the execution. A modal lets you pick the format, such as an Excel report, before saving.
 
-## Actions
-
-From the action menu (three dots) in the result view:
-
-- **Add tags**: label the execution for organization.
-- **Rename**: change the execution's display name.
-- **Create monitor** (single-test executions only): turn this test into a continuous monitor.
-- **Re-run failed tests**: run only the tests that failed.
-- **Cancel** (running executions only, V2 only): stop the execution in progress.
-- **Delete**: remove the execution and all its results.
+![The Export modal on an execution result, choosing the report format](/images/execution-export.webp)
 
 ## Re-running
 
-You can re-run an execution from the action menu. This queues the same tests to run again using the current test configuration.
-
-If you only want to re-run the tests that failed, select "Re-run failed tests" instead. This will queue only the failed tests, not the entire execution.
+**Run again** (top right) queues the same tests with the current test configuration. To re-run only what failed, use **Rerun only failed tests** from the row menu in the [executions list](/executions/overview#row-actions).
