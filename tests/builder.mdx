@@ -1,247 +1,197 @@
 ---
 title: Test builder
-description: Author tests visually by recording or manually adding steps, configuring assertions, managing variables, and applying AI-powered selectors.
+description: Author tests visually by recording interactions or adding steps manually, then refine them with checks, AI selectors, and hooks.
 ---
 
-The test builder is where you design your test's behavior step-by-step. You can record user interactions from your device or app, add steps manually from a catalog, organize them into groups, configure assertions and checks, manage variables, and set advanced options like AI selector modes and hooks.
+The test builder is where you design what your test does. Record real interactions from a browser or device, or add steps by hand, then organize them into groups, verify behavior with checks, and tune execution with AI selectors, timeouts, and hooks.
 
-## Starting a test
+## The builder at a glance
 
-When you create a new test, the builder opens with a starting page group that defines your entry point:
+The canvas on the left shows your test: the starting point at the top, followed by step groups containing numbered steps. The panel on the right has four tabs:
 
-- **Web tests**: enter a URL template (e.g., `https://example.com/login`)
-- **Smartphone tests**: the app you selected during creation
+- **Preview**: run feedback and screenshots
+- **Environment**: execution parameters (starting URL, device, browser preset)
+- **Test settings**: description, tags, AI, timeouts, and hooks
+- **Version history**: past versions of the test
 
-The starting page also holds pre-test assertions: checks that verify the initial state before any steps run.
+Selecting a step in the canvas replaces the panel with that step's details.
 
-## Recording vs. manual steps
+## Starting point
 
-### Recording interactions
+The first block in the canvas defines where the test begins. It depends on the channel:
 
-Click the **Start Recording** button to capture live interactions:
+- **Web tests**: **Navigate to starting page** with a URL (e.g., `https://example.com/login`)
+- **Smartphone tests**: **Launch app** with the app you selected at creation
 
-<Steps>
-  <Step title="Start recording">
-    A timer and recording banner appear. The device or browser is now listening for your actions.
-  </Step>
-  <Step title="Interact with your app">
-    Tap, swipe, type, or click as you would normally. Each action is captured in real time.
-  </Step>
-  <Step title="Stop recording">
-    Click the **Stop Recording** button. Interactions are parsed into test steps and appear in your step canvas.
-  </Step>
-</Steps>
+## Recording interactions
 
-The builder converts recorded actions into step objects, extracting element descriptions from XPath selectors, text labels, resource IDs, and other attributes. Keyboard events are filtered out automatically.
+Recording is the fastest way to build a test: interact with your site or app as a user would, and each action becomes a step.
 
-### Adding steps manually
+### Web: the Kompagnon extension
 
-To add a step without recording:
+Web tests record through **Kompagnon**, a Chrome extension. The first time you click **Use recorder**, the builder prompts you to add it to Chrome.
 
-1. Click **Add Step** in a step group or the canvas
-2. Browse or search for a step type from the catalog (100+ available)
-3. Configure the step inputs: locator, value, assertions, or other properties
-4. The step appears inline in your canvas
+With the extension installed, **Use recorder** opens your starting URL in a new tab with the recorder widget overlaid:
 
-You can edit, duplicate, or delete any step from its context menu.
+![The Kompagnon recorder widget capturing actions live on the target site](/images/builder-web-recorder.webp)
 
-## Step canvas and organization
+Browse normally: clicks, inputs, and navigations are captured as steps in real time. When you stop, the recorded steps appear in your step canvas, ready to edit.
 
-Your test's steps are displayed in the **step canvas**, a visual layout organized by step groups.
+### Asserting while recording
 
-### Step groups
+You can add verifications without leaving the recorder. Click the eye icon in the widget to enter assertion mode, then click any element on the page to verify it:
 
-Step groups are named containers that hold sequential steps. Use them to organize your test by feature, user flow, or validation phase:
+![Assertion mode in the recorder widget, selecting an element to verify](/images/builder-recorder-assert.webp)
 
-- **Add a group**: name it and optionally add a description
-- **Reorder**: drag groups up and down to change execution order
-- **Collapse/expand**: click the group header to hide or show its steps
-- **Duplicate**: create a copy with unique step and variable names
-- **Split**: break a group at a specific step into two separate groups
-- **Delete**: remove all steps in the group (with confirmation)
+The assertion is recorded as a step alongside your interactions.
 
-### Individual steps
+### Smartphone: cloud recorder
 
-Each step in the canvas shows:
+Smartphone tests record through a cloud-based recorder instead of a browser extension: you drive the real device from your browser and your taps, inputs, and scrolls become steps.
 
-- The action name (e.g., "Tap", "Input Text", "Assert")
-- Tags for checks, AI mode, and locator approach
-- A context menu to edit, duplicate, delete, or move
+## Adding steps manually
 
-Reorder steps within a group or move them between groups by dragging.
+Click **Add step...** at the bottom of a step group to insert a step without recording. Pick the action from the catalog, then configure its target and value. See the [Actions Library](/tests/actions/overview) for every available step.
 
-### Starting page group
+Each step's context menu lets you edit, duplicate, or delete it, and you can drag steps to reorder them.
 
-The special starting page group at the top defines your test's entry point (URL or app). It's immutable, you cannot delete or rename it, but you can add pre-test assertions to verify the page loaded correctly.
+## Step groups
 
-## Assertions and checks
+Steps are organized into named groups. Use them to structure your test by flow or feature: a login group, a search group, a checkout group.
 
-Checks let you verify that your test behaves as expected at any step.
+The group menu (the **...** button in the group header) offers:
 
-### Adding a check
+- **Move up / Move down**: change execution order
+- **Duplicate**: copy the group and its steps
+- **Create reusable component**: publish the group to the component library
+- **Delete**: remove the group and its steps
+- **Add custom capabilities**: attach capabilities to the group
 
-1. Select a step in the canvas
-2. Open the **Step Details** panel on the right
-3. Click **Add Check**
-4. Configure:
-   - **Entity**: what to check: `url`, `loading_time`, `step_duration`, or custom assertions
-   - **Operator**: how to compare: `=`, `!=`, `>`, `<`, `contains`, etc.
-   - **Value**: the expected result (can include variables and functions)
-   - **Status**: `error` (fail the test) or `warning` (log but continue)
-   - **Logical operator**: how to combine with other checks: `and` or `or`
+![The step group menu with Move, Duplicate, Create reusable component, and Delete actions](/images/builder-group-menu.webp)
 
-### Nested checks
+### Turning a group into a reusable component
 
-Checks can be grouped and nested to express complex conditions. For example: "(URL contains 'dashboard') AND (loading_time < 2000)". Build these hierarchies in the check builder.
+**Create reusable component** saves the group to your product's component library so other tests can use it. The group turns purple to show it's now a shared component. To convert it back to plain steps in this test, use **Detach reusable component**.
 
-### Starting page checks
+Read more in [Reusable components](/tests/reusable-components).
 
-In the **Starting Page Details** tab, add checks that run before any steps. Common examples: verify the URL loaded, check that a page title is correct, or ensure an element is visible.
+## Step details
+
+Select any step to open its details panel, organized in three tabs: **General**, **Checks**, and **Advanced settings**.
+
+### General
+
+- **Selector**: how the step finds its target element (XPath or text). The `{}` button inserts variables.
+- **Timeout**: how long to wait for the element (e.g., 20 seconds)
+- **AI usage**: per-step AI settings (see below)
+
+For smartphone steps that already ran, the panel also shows a **Reference screenshot**: the app's state captured at that step during the last run, so you can see exactly what the step targets. Smartphone selectors offer a **Selector** / **Coords** toggle to target by element or by coordinates.
+
+![A smartphone step with its reference screenshot and selector](/images/builder-smartphone-reference.webp)
+
+### Checks
+
+Checks verify that your test behaves as expected at a given step. Add one from the **Checks** tab and configure:
+
+- **Entity**: what to check, such as `url`, `loading_time`, or `step_duration`
+- **Operator**: how to compare (`=`, `!=`, `>`, `<`, `contains`, and more)
+- **Value**: the expected result, which can include variables
+- **Status**: `error` fails the test, `warning` logs and continues
+- **Logical operator**: combine multiple checks with `and` or `or`
+
+Checks can be grouped and nested for complex conditions, for example "(URL contains 'dashboard') AND (loading_time < 2000)". Steps with checks show a tag in the canvas, like **URL contains**.
+
+### Advanced settings
+
+- **Ignore error on this step**: a failure here doesn't fail the test
+- **Skip during run**: keep the step but don't execute it
+- **Interval**: pause after the step, in milliseconds
+- **Capabilities**: attach custom capabilities to the step
+
+![The Advanced settings tab with execution settings and interval](/images/builder-step-advanced.webp)
+
+## AI selectors
+
+AI helps find elements reliably when selectors are fragile, like on dynamic pages or after UI changes.
+
+Enable **Turn on AI for this step** in the step's General tab. The selector field gets a gradient border, and you choose a strategy:
+
+- **Smart**: uses the AI to find the element on the first run or when the saved selector fails, then caches the result to save time
+- **Always**: forces the AI to redetect the target element on every run, ignoring saved selectors
+
+![Per-step AI usage with the Smart and Always strategies](/images/builder-step-ai.webp)
+
+**Link to test** ties the step to the test-level AI setting instead of a per-step override. The test-level toggle and strategy live in **Test settings > AI**.
+
+## Environment
+
+The **Environment** tab holds the execution parameters:
+
+- **Starting URL**: where the test begins
+- **Device**: the agent or device the test runs on
+- **Browser preset**: the browser configuration for web tests (e.g., "Chrome (Desktop, Chrome 143.0)"). Click it to pick from your saved [browser presets](/tests/browser-presets).
+
+![The Environment tab with starting URL, device, and browser preset](/images/builder-environment.webp)
+
+## Test settings
+
+The **Test settings** tab gathers everything that applies to the whole test:
+
+- **Description**: optional notes about what the test does
+- **Tags**: labels to organize and filter tests
+- **AI**: the test-level AI toggle and strategy
+- **Delays & timeouts**: **Step delay** (pause between steps, in seconds) and **Selector timeout** (max wait for an element, in seconds)
+- **Hooks**: lifecycle step groups (see below)
+- **Advanced**: options like accepting non-secure certificates
+
+![Test settings with Delays & timeouts and Hooks expanded](/images/builder-test-settings.webp)
+
+### Hooks
+
+Hooks run a reusable component at fixed points in the test lifecycle:
+
+- **Before Test**: once, before all steps (e.g., a login flow)
+- **Before Each Step**: before every step
+- **After Each Step**: after every step
+- **After Test**: once, after all steps (e.g., logout or cleanup)
+
+Toggle a hook on and the **Reusable steps group library** opens so you can pick which component runs:
+
+![The Reusable steps group library, picking a component for a hook](/images/builder-component-library.webp)
 
 ## Variables
 
-Variables let you parameterize your test and reuse dynamic values across steps.
+Click the `{}` button in any text field (selector, value, URL) to insert a variable. You can mix literal text and variables in a single field, for example `https://example.com/{userId}`.
 
-### Test variables
+Global variables and variable groups are managed per product in [Configurations & variables](/tests/configurations).
 
-Local to this test only. Create them in the **Environment** tab's **Test Variables** table:
+## Saving and running
 
-- Give them a name (e.g., `userId`, `email`)
-- Optionally set a type (`text`, `number`, or `date`)
-- Define an initial value or use a built-in function
+**Save** stores your changes; **Save and run** also queues an execution immediately (or press `Cmd+Enter` / `Ctrl+Enter`). Undo and redo work with the usual `Cmd+Z` / `Cmd+Shift+Z`.
 
-### Global variables
+The **Version history** tab lists previous versions of the test. Open one and click **Restore** to bring it back.
 
-Shared across all tests in your product. Managed in **Configurations > Variables**, global variables are assigned at the test campaign level (not per individual test). They can have:
+## What's Next?
 
-- Default values
-- Multiple variants (e.g., staging vs. production URLs)
-- Categories called variable groups (e.g., API keys, user credentials)
+<Columns cols={2}>
+  <Card title="Live session" icon="satellite-dish" href="/tests/live-session">
 
-### Built-in functions
+    Drive a real device interactively and record a workflow into a test
 
-Generate dynamic values on the fly:
+</Card>
+  <Card title="Reusable components" icon="puzzle-piece" href="/tests/reusable-components">
 
-- **`random_text`**: generate a random string with customizable options (length, character types, numerical/special character minimums)
+    Build a flow once and share it across your tests
 
-### Using variables
+</Card>
+  <Card title="Run a test" icon="play" href="/executions/run">
 
-Click in any text input (locator, value, assertion) and variables appear as inline pills. You can mix text and variables in a single field, for example: `https://example.com/{userId}?key={apiKey}`.
+    Execute your test manually and read the results
 
-## AI-powered selectors
+</Card>
+  <Card title="Browser presets" icon="globe" href="/tests/browser-presets">
 
-The builder includes AI to help find elements reliably, especially on dynamic or fragile pages.
+    Reusable browser configurations for your web tests
 
-### AI selector modes (per-step)
-
-Set on individual steps via the **AI Selector** option:
-
-- **Smart** (default): AI helps if the regular selector fails
-- **Always**: force AI to find the element even if a regular selector works
-
-### AI strategy (test-level)
-
-Set globally for your entire test in the **Settings** tab:
-
-- **Smart** (default): use AI selectively where helpful
-- **Always**: always use AI for every selector lookup
-- **On-demand**: manually request AI for individual steps when needed
-
-AI selectors work by matching visual elements or DOM patterns when CSS/XPath selectors are unreliable.
-
-## Hooks: Setup and teardown
-
-Hooks are special step groups that run at specific points in your test lifecycle.
-
-### Hook types
-
-- **`before_test`**: runs once, before all steps (e.g., login flow)
-- **`before_step`**: runs before each step (e.g., wait for stability)
-- **`after_step`**: runs after each step (e.g., take screenshot)
-- **`after_test`**: runs once, after all steps (e.g., logout, cleanup)
-
-Configure hooks in the **Settings** tab. You can select from a library of predefined hooks and reorder them to suit your test flow.
-
-## Reusable components
-
-Tests can be saved as **reusable components** (`kind=2`) and imported into other tests as step groups.
-
-### Creating a reusable component
-
-1. Open your test
-2. In the **Settings** tab or via the main button, select **kind=2 (Reusable Component)**
-3. Save the test
-4. It publishes to the "Reusable Components" collection
-
-### Importing a component
-
-1. In another test, click **Add Step** in a step group
-2. Select **Import Reusable Component**
-3. Choose a published component
-4. The component appears as a special step group with import metadata
-
-### Managing imports
-
-Imported step groups can be:
-
-- **Detached**: convert to regular steps in place
-- **Deleted**: remove the entire imported block
-- **Moved**: reorder relative to other step groups
-- **Updated**: if the component is republished, your import reflects the latest version (unless you detach it)
-
-If a reusable component has dependent tests, saving breaking changes (deleting a step, changing inputs) triggers a publish notification to alert users.
-
-## Draft saves and restore
-
-### Unsaved changes
-
-The builder tracks all modifications. When you have unsaved changes, the main button shows **"Save and Run"** instead of **"Run"**.
-
-### Undo/redo
-
-- **Undo**: `Ctrl+Z` / `Cmd+Z`
-- **Redo**: `Ctrl+Shift+Z` / `Cmd+Shift+Z`
-- Up to a configurable history limit
-
-### Restoring a previous version
-
-If you are viewing a past version of your test, a **Restore** banner appears. Click to restore that snapshot, replacing your current form with the selected version.
-
-## Advanced settings
-
-### Environment tab
-
-- **Global Variables Table**: read-only reference of all available global variables
-- **Test Variables Table**: create and edit test-level variables
-- **Variable Groups**: see which groups are available
-
-### Settings tab
-
-- **AI Section**: enable/disable AI; choose strategy (smart, always, on-demand)
-- **Delays & Timeouts**: customize `selector` timeout (max wait for element) and `step` delay (pause between steps)
-- **Hooks Section**: add and reorder before/after hooks
-- **Advanced**:
-  - **App reset**: reset app state between steps (smartphone only)
-  - **Accept insecure certificates**: bypass SSL verification
-  - **Use capabilities**: enable custom user agent, geolocation, timezone, etc.
-
-### History tab
-
-View all previous executions of this test, sorted chronologically. Click any run to see detailed results, timings, and pass/fail status.
-
-## Running and saving your test
-
-### Save and run
-
-Click the main button (top right) to save your test and execute it immediately:
-
-1. The builder validates required fields (device, browser preset for web)
-2. Your test is serialized and saved to the backend
-3. A test run is queued and executed
-4. Results appear in the **Executions** tab
-
-Use the keyboard shortcut `Ctrl+Enter` (Windows) or `Cmd+Enter` (Mac) to quickly save and run.
-
-### Execution state
-
-While your test is running, the save button is disabled. Monitor progress in the **Live Browser** tab, which shows screenshots captured during execution. You can pause, resume, or cancel from there.
+</Card>
+</Columns>

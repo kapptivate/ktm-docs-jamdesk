@@ -21,17 +21,22 @@ Then pick your channel and set its starting point:
   <Tab title="Web">
     Web tests run automated interactions in a browser, clicking links, filling forms, checking content.
 
-    **Starting point:** Enter a URL template (e.g., `https://example.com/login`) where the test begins.
+    In the **Web (New experience)** flow, the creation form asks for:
 
-    **Browser options:**
+    - **Test name**: a clear, descriptive name
+    - **Default agent**: the web agent the test runs on
+    - **Start URL**: where the test begins (e.g., `https://example.com/login`)
+    - **AI usage** (optional): check **Turn on AI for this test** to enable AI-assisted selectors from the start
+
+    ![The Web test creation form with name, default agent, start URL, and AI usage](/images/test-create-web-form.webp)
+
+    The browser configuration (browser type, window size, language, and more) comes from the **browser preset**, which you pick in the builder's Environment tab after creation. See [Browser presets](/tests/browser-presets).
+
+    In the **Classic** flow, you set the browser options directly at creation:
     - **Browser type**: Chrome, Firefox, or Edge
     - **User agent**: use the default or add a custom suffix
     - **Language**: default or a specific locale (e.g., en-US)
     - **Window size**: default 1920×1080 or custom dimensions
-
-    **Device type:** Web tests always run on a web agent. No device selection needed.
-
-    **Browser preset (optional):** Choose a saved configuration that includes headers, cookies, proxy, geolocation, and timezone. Browser presets let you run the same test under different conditions without editing the test itself.
 
   </Tab>
   <Tab title="Smartphone">
@@ -73,7 +78,7 @@ Then pick your channel and set its starting point:
 
 ## Test properties
 
-After choosing your channel and starting point, fill in:
+In the Classic flow, you fill these in at creation. In the new experience, you give the test a name at creation and set the rest later in the builder's **Test settings** tab:
 
 - **Test name**: a clear, descriptive name
 - **Description** (optional): notes about what the test does
