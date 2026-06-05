@@ -12,8 +12,9 @@ Some scenarios only make sense together: a complete user journey, a smoke-test p
 
 The table shows each campaign's name, how many tests it contains, the last update, and its creator. A sidebar filters campaigns by collection, and each row has:
 
-- **Run**: queue the campaign for execution.
+- **Run**: launch the campaign via the run confirmation.
 - A three-dot menu with **Move test campaign** (pick a destination collection) and **Delete** (moves it to trash, where it can be restored).
+- A **checkbox** (hover the left of the row) to select several campaigns and act on them at once from the top bar.
 
 ## Create a campaign
 
@@ -34,7 +35,7 @@ The same test can play different roles in different campaigns. Click a test row 
 
 - **Starting URL**: a different entry point than the test's default (staging vs. production).
 - **Device** and **Browser preset**: pick from dropdowns.
-- **Global variables**: override values for this test only, in this campaign only.
+- **Variables**: pick a preset environment from the dropdown (for example Default, production, dev-1) to populate the test's input variables in one move, or override individual values for this test only, in this campaign only.
 
 Overrides are stored in the campaign, so the original test definition never changes, and several campaigns can reference the same test with different values.
 
@@ -42,7 +43,9 @@ Overrides are stored in the campaign, so the original test definition never chan
 
 ## Run a campaign
 
-Click **Run** from the campaigns table or the editor. The **Run queue** slides out as a right sidebar showing the queued campaign cards; **Clear queue** empties all pending runs after a confirmation. While tests run you can follow their status, and past runs are available from the campaign's execution history.
+Click **Run** from the campaigns table or the editor. The **Run confirmation** page opens for a last review: name the execution (it defaults to the campaign name), adjust each test's owner device and input variables if needed, then click **Confirm run** (top right).
+
+Queued runs appear in the **Run queue** sidebar, where **Clear queue** empties all pending runs after a confirmation. The campaign lands in the [executions list](/executions/overview) and opens as a [multi-test execution](/executions/results#multi-test-executions).
 
 ![The Run queue sidebar with a queued campaign card and the Clear queue action](/images/campaign-run-queue.webp)
 

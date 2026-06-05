@@ -1,18 +1,28 @@
 ---
-title: CI/CD setup
-description: "Run automated checks in your CI pipeline."
+title: CI/CD integration
+description: Run Kapptivate tests from your pipeline and read the results without leaving it.
+sidebarTitle: CI/CD
 ---
 
+![A GitHub Actions run with the Kapptivate Test Results summary table and its View deep links](/images/cicd-github-summary.webp)
+
+Tests that only run when someone remembers to click Run don't protect a release. Driving Kapptivate from your CI/CD pipeline puts the same tests in front of every push, schedule, or deploy, with the results readable directly in the pipeline.
+
+## How it works
+
+Your workflow runs the [Kapptivate CLI](/cli/overview), authenticated with an [API key](/administration/api-keys), to execute a test or campaign. The pipeline then reflects the outcome:
+
+- The job **succeeds or fails** with the run, so a red pipeline means a red test.
+- A **Kapptivate Test Results** summary lands in the run's summary page, one row per test with its **Status**, name, **Duration**, and a **View** link.
+- Each **View** link deep-links to that execution's [results](/executions/results) in the Kapptivate app, screenshots, video, and steps included.
+- The run's report is attached as an **artifact**.
 
 ## GitHub Actions
 
-```yaml
-name: Checks
-on: [push]
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: npx your-cli run
-```
+In GitHub Actions, the summary table renders on the workflow run's Summary page. A typical setup runs a campaign on a schedule (for example `run-kapptivate-suite.yml` with `on: schedule`) or on push, and fails the job when tests fail.
+
+See the [CLI reference](/cli/commands) for the commands and options to use in your workflow.
+
+<Note>
+A complete setup walkthrough with a ready-to-copy workflow file is coming soon.
+</Note>

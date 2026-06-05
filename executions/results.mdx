@@ -17,7 +17,7 @@ Open any execution from the [executions list](/executions/overview). The view is
 - **Tabs**: Steps, Screenshots, and Video.
 - **Sidebar**: **About** (the tested URL and who ran it), **Execution details** (start, end, and duration), and **Conditions** (the device and browser preset used).
 
-Executions with several tests add a test list so you can move between each test's results. *(A detailed walkthrough of multi-test results is coming soon.)*
+Executions with several tests open in the [multi-test view](#multi-test-executions) instead.
 
 ## Steps
 
@@ -46,6 +46,22 @@ The Video tab plays back the entire run, so you can watch the full execution in 
 Click **Export** (top right) to download a report of the execution. A modal lets you pick the format, such as an Excel report, before saving.
 
 ![The Export modal on an execution result, choosing the report format](/images/execution-export.webp)
+
+## Multi-test executions
+
+A [campaign](/tests/suites) run, or any execution with several tests, opens a view built for the batch: first the overall outcome, then each test one click away.
+
+- **Summary counters** at the top: Success executions, Failed executions, Unexecuted, and Total duration (counting up in real time while the run is live).
+- **About** sidebar section: the overview and an **Execution time** chart plotting each test's duration, so the slow tests stand out.
+- **Tests** sidebar section: every test in the execution; click one to open its step-by-step results without leaving the execution.
+
+![A campaign execution with summary counters and the About and Tests sidebar navigation](/images/execution-multi-test.webp)
+
+![The Execution time chart comparing the duration of each test in the campaign](/images/execution-time-chart.webp)
+
+For API tests, a step's details include the HTTP exchange, organized into **Headers**, **Body**, and **Performance** tabs.
+
+![An API test's step results inside a campaign execution, with the HTTP Headers, Body, and Performance tabs](/images/execution-test-http.webp)
 
 ## Re-running
 
