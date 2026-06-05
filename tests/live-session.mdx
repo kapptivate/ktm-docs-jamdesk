@@ -1,68 +1,103 @@
 ---
 title: Live session
-description: Drive a real device interactively and record actions into a test.
+description: Drive a real SIM, smartphone, or web agent interactively, then turn your actions into a test.
 sidebarTitle: Live session
 ---
 
-A live session gives you interactive control of a real device, SIM, Smartphone, or Web agent, from your browser. Use live sessions to explore an app, debug an issue, record a workflow, or create a test by capturing your actions.
+![The live session device picker with the Remote control and History tabs, the SIMs, Smartphones, and Web categories, and the available device cards](/images/live-session-picker.webp)
 
-## Tabs and device types
+A live session gives you interactive control of a real device, a SIM, a smartphone, or a web agent, from your browser. Use it to explore an app, debug a failing flow, or run manual actions and capture them into a test.
 
-The session interface shows tabs for each available device type: SIMs, Smartphones, and Web agents. Your workspace admin controls which tabs are visible. If only one type is available, tabs are hidden to simplify the UI.
+The page has two tabs: **Remote control**, where you drive a device, and **History**, where every manual action is logged and can become a test.
 
-Click a tab to switch between device types, then select a specific device from the sidebar list.
+## Pick a device
 
-## Command tab
+In **Remote control**, switch between the **SIMs**, **Smartphones**, and **Web** categories. The left panel lists the available devices for the selected category, grouped by location:
 
-The main Command tab is where you interact with the device.
+- Each card shows the device's name, its connection status, and its tags: the hosting agent, OS version and SIM slots for smartphones, operator and network technology for SIMs.
+- Use the search bar to filter by name.
+- Select a device to open its session. Until you do, the main area shows **Pick a device to launch session**.
 
-**Select a device** from the sidebar. The device status (connected, idle, busy) appears in real time. A polling mechanism keeps the status in sync with the actual device.
+## SIM sessions
 
-**Configure parameters** based on the device type:
-  - **SIM**: USSD menu code, SMS recipient/message
-  - **Smartphone**: app action, tap coordinates, text input
-  - **Web agent**: URL, element selector, text to type
+Selecting a SIM opens a command interface. The action dropdown at the top groups the manual actions you can run on the SIM:
 
-**Execute the command** and view the result immediately. The device responds with output (menu response, message confirmation, page HTML, etc.).
+- **USSD**: USSD Command
+- **SMS**: Send SMS
+- **Data**: PDP Activation, Ping, TCP Ping, HTTP Ping, DNS Lookup, Download File, HTTP Upload, FTP Download, FTP Upload, Send Mail, API Call, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate, Youtube
+- **Call**: Wait Call, Place Call
 
-## History tab
+![A SIM session with the action dropdown open, listing the USSD, SMS, Data, and Call actions](/images/live-session-sim-actions.webp)
 
-The History tab shows all commands you (and others) have executed in a time window.
+Each action shows its own form. For a **USSD Command**, enter the shortcode and pick the **Access technology** (Default, AUTO, 5G, 4G, 3G, or 2G). For a **Send SMS**, set the destination number and message, optionally a **Wait for delivery report** time in seconds, and a **Change default SMSC** override.
 
-**Filter** by creator (who ran the action) and device MSISDN. **Set a custom date range** (default: last 3 hours) to view older or newer actions.
+![The Send SMS form with access technology, destination number, message, delivery report, and SMSC options](/images/live-session-sim-sms.webp)
 
-**Select actions** from the history list. Use checkboxes to pick multiple actions.
+Results appear in the feed below the form as each action completes, with the response content, status, and timing.
 
-**Create Test**: convert selected actions into a new test. Your commands become test steps automatically.
+## Smartphone sessions
 
-**Report**: generate a formatted report from selected actions (see Report tab).
+Selecting a smartphone streams its screen live. Click and swipe directly on the stream; your gestures are sent to the physical device in real time.
 
-## Report tab
+![A live smartphone session with the mirrored screen, the Information panel, the Control Panel, and Quick Access buttons](/images/live-session-smartphone.webp)
 
-The Report tab shows a formatted table of selected actions with columns: Action, Result, Duration.
+The right panel adds device tooling:
 
-**Copy to Clipboard**: copy the entire report as text to paste into documentation or share with teammates.
+- **Information**: battery, CPU, RAM, storage, hosting agent, model, OS and version, resolution, and how many users are on the phone.
+- **Control Panel**: device-level actions such as restarting the phone, installing an APK, taking a screenshot, recording the screen, rotating it, or grabbing the UI hierarchy with **Get XML**.
+- **Quick Access**: software equivalents of the hardware buttons, Back, Home, Recent apps, Lock, Volume, and Power.
 
-This tab is only active after you select actions from the History tab.
+### Inspect the UI with the XML viewer
 
-## Macro recording
+**Get XML** opens a viewer with the current screen's element hierarchy. Hover a node to highlight the matching element on a screenshot preview, and use **Copy** to take the XML into your selector work.
 
-Macros let you save and replay sequences of commands. Macros are available for SIM and Web agent devices.
+![The XML Viewer with the element tree on the left and the highlighted screenshot preview on the right](/images/live-session-xml-viewer.webp)
 
-**Record**: start capturing actions as you interact with the device. Each action is logged.
+## Web sessions
 
-**Playback**: select a saved macro and run it again. Useful for repeating setup steps or common workflows.
+Selecting a web agent gives you network and web actions run from that agent's location: API Call, DNS Lookup, Send Mail, FTP Download, FTP Upload, Get webpage or file, HTTP Upload, HTTP Ping, Ping, TCP Ping, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate, and Youtube.
 
-**Edit**: modify a macro's sequence.
+An **API Call** takes the endpoint URL with **Headers** and **Body** tabs, plus execution options: custom proxy, DNS override, ignore SSL certificate, preserve cookies, and follow redirection.
 
-**Organize**: group macros in folders for easy discovery.
+![A web agent session with the action dropdown and the API Call configuration options](/images/live-session-web-api-call.webp)
+
+## Macros and spectating
+
+Two controls sit at the top of SIM and web sessions:
+
+- **Record Macro**: capture the sequence of manual actions you run, so a repeated setup or check doesn't have to be rebuilt action by action.
+- **Spectate**: watch the other manual actions being run on the selected device, useful when several people work on the same equipment.
+
+## History
+
+The **History** tab logs every manual action with its status, result, and timestamp. Filter by **Creator** and **Resource**, and adjust the date range (default: past 24 hours).
+
+![The History tab with the Creator and Resource filters, logged Wait SMS actions with results, and the Action List panel](/images/live-session-history.webp)
+
+Click **Add** on the entries you want to keep: they land in the **Action List** panel, where two buttons turn your manual work into assets:
+
+- **Create test**: convert the selected actions into a new test, each action becoming a step.
+- **Report**: generate a formatted report of the selected actions to share.
 
 ## Tips for live sessions
 
 **Start simple**: a few commands help you understand the device before automating full tests.
 
-**Capture complex workflows**: for intricate user journeys, recording in a live session is faster than manually authoring steps.
+**Capture complex workflows**: for intricate user journeys, running them live and converting the history is faster than authoring steps by hand.
 
-**Debug failures**: run a failed test in a live session to see exactly where it breaks and what the device actually returns.
+**Debug failures**: replay a failed test's actions in a live session to see exactly where it breaks and what the device actually returns.
 
-**Build reusable macros**: common setup sequences (login, navigation) can be recorded once as a macro and replayed in tests.
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="vial" href="/tests/builder">
+
+    Refine the test you created from a session, with checks and variables
+
+</Card>
+  <Card title="Devices lab" icon="mobile-screen" href="/equipment/devices-lab">
+
+    Browse and manage the SIMs and smartphones behind your sessions
+
+</Card>
+</Columns>

@@ -1,0 +1,34 @@
+---
+title: AI spell check
+description: Have AI proofread the current page for spelling and grammar as a test step.
+sidebarTitle: AI spell check
+---
+
+Typos ship more easily than bugs: no test fails when a label reads "Confrim". **Verify Spell Check** turns proofreading into a test step: the AI reads the current page and flags spelling and grammar issues, so content quality gets checked on every run, not just when someone happens to look.
+
+## Add the step
+
+In the builder, choose **Add step... > Verifications > Verify Spell Check**. At run time, the AI reviews the visible page content and the step fails when it finds spelling or grammar issues.
+
+## When to use it
+
+- **Content-heavy pages**: landing pages, help centers, checkout flows where copy changes often.
+- **Localized sites**: catch broken translations and encoding issues per locale by running the same test across languages.
+- **Recurring quality gates**: add it to a monitor so production copy stays clean over time.
+
+The JSON reference lives at [aispellcheck](/tests/actions/web/aispellcheck) (and its [smartphone variant](/tests/actions/smartphone/aispellcheck)).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Verify with AI" icon="badge-check" href="/ai/verify-with-ai">
+
+    Assert page states in natural language
+
+</Card>
+  <Card title="Email & SMS testing" icon="envelope" href="/tests/email-sms">
+
+    The AI steps that extract codes and links from real messages
+
+</Card>
+</Columns>

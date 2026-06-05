@@ -7,8 +7,9 @@ description: >-
   from this walkthrough", "turn this recording into doc pages", "add what this
   video shows to the documentation". It extracts the video's features and
   screenshots (via the extract-product-doc-from-videos skill), scans the
-  existing docs, proposes a change set, confirms it with the user, plans, and
-  then writes the pages — following the docs project's own conventions. Prefer
+  existing docs, proposes a change set, confirms it with the user, deep-reads
+  the affected pages and their links, plans, and then writes the pages —
+  following the docs project's own conventions. Prefer
   this over the bare extractor whenever the goal is actual documentation, not
   just a feature list.
 ---
@@ -21,8 +22,9 @@ A demo video is a great source of truth for documentation — but dumping its
 features into a docs site blindly creates duplicates, off-style pages, and
 content in the wrong place. This skill turns a video into *reviewed, well-placed*
 doc changes. The flow is: **extract → understand the existing docs → propose →
-confirm → plan → write**. The human stays in control at the proposal and review
-gates; you never silently rewrite existing docs.
+confirm → deep-read the affected docs → plan → write**. The human stays in
+control at the proposal and review gates; you never silently rewrite existing
+docs.
 
 It builds on `extract-product-doc-from-videos` (the extraction half) and adds the
 judgment: where each feature belongs, what's new vs. already covered, and how to
@@ -103,13 +105,34 @@ Explicitly invite the user to adjust: features the video missed that they want
 documented, features to drop, or different placements. The video is a starting
 point, not the full scope.
 
-### 6. Plan
+### 6. Deep-read the affected docs
 
-Produce a tight, ordered plan: files to create, files to edit (with what
-changes), screenshots to copy into the project's image directory (as webp),
-`docs.json` navigation edits, and redirects if any page moves. Confirm it.
+Once the change set is agreed, explore its whole neighborhood before planning a
+single edit. Step 2's title-and-grep scan was enough to *place* features; it is
+not enough to *write* them compliantly. Read in full:
 
-### 7. Write
+- **The target pages themselves**, plus their siblings in the same nav group —
+  new content must read like the pages around it (structure, components, tone,
+  image captions).
+- **Inbound links**: grep the repo for links to each target path (inline links
+  and "What's Next?" cards). These pages' claims and links may need updating
+  when a page gains sections, moves, or changes meaning.
+- **Outbound links**: where the target pages already send readers, so a new
+  section doesn't duplicate or contradict a linked deep-dive.
+
+For a large neighborhood, fan out Explore subagents. The output is a compliance
+map: per file, what must change, which cross-links and `docs.json` entries are
+affected, and any existing claim the new content would duplicate or contradict.
+Surface contradictions to the user; don't silently fix them.
+
+### 7. Plan
+
+Produce a tight, ordered plan grounded in the deep-read: files to create, files
+to edit (with what changes), cross-link updates (inbound links and "What's
+Next?" cards), screenshots to copy into the project's image directory (as
+webp), `docs.json` navigation edits, and redirects if any page moves. Confirm it.
+
+### 8. Write
 
 Implement, deferring to the project's conventions (its `CLAUDE.md` and any
 `jamdesk` skill present):

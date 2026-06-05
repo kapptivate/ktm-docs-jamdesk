@@ -105,6 +105,8 @@
                 "pages": [
                   "tests/create",
                   "tests/builder",
+                  "tests/variables",
+                  "tests/email-sms",
                   "tests/live-session",
                   "tests/reusable-components",
                   "tests/configurations",
@@ -168,6 +170,17 @@
                   "equipment/statuses"
                 ]
               }
+            ]
+          },
+          {
+            "group": "AI",
+            "icon": "sparkles",
+            "expanded": false,
+            "pages": [
+              "ai/overview",
+              "ai/selectors",
+              "ai/verify-with-ai",
+              "ai/spell-check"
             ]
           },
           {

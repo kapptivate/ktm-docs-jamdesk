@@ -1,0 +1,69 @@
+---
+title: Email & SMS testing
+description: Receive real emails and SMS in your tests, and let AI extract the codes and links your flow needs.
+sidebarTitle: Email & SMS
+---
+
+![A step group chaining Get sms code, Get email code, and Get email link, each exposing its extracted variable](/images/email-sms-steps.webp)
+
+Sign-ups, logins with 2FA, and password resets all leave the browser at some point: a code arrives by SMS, a confirmation link lands in an inbox. Kapptivate closes that loop. Its mail and SMS service receives the real messages, and AI-powered steps extract the code or link into a variable your next steps use, no manual copy-paste, no brittle parsing rules.
+
+## The Email & SMS steps
+
+Add them from **Add step... > Email & SMS** in the builder. Each step extracts one value and stores it in a variable (you can rename the default):
+
+| Step | Input | Default variable | What AI extracts |
+|------|-------|------------------|------------------|
+| **Get sms code** | Phone number to receive code | `SmsCode` | The verification code in the SMS |
+| **Get email code** | Email to receive code | `MailCode` | The OTP or verification code in the email |
+| **Get email link** | Email to receive link | `MailLink` | The link matching your intent |
+
+The steps wait for the message to arrive, then parse it with AI: no format configuration, whatever the sender's wording or layout.
+
+## Target the right link with Intent
+
+An email often carries several links (the action link, but also unsubscribe footers, logos, help pages). Select a **Get email link** step and fill the **Intent** field in its **General** tab to tell the AI which one you mean, in plain language: "The link to activate my account".
+
+![A Get email link step with its Intent field set to "The link to activate my account"](/images/email-sms-intent.webp)
+
+## Use the extracted values
+
+The extracted variables behave like any test variable. Click the `{}` icon in a later step's field and pick them from the **Previous steps** tab: navigate to `MailLink`, type `SmsCode` into the 2FA input, assert on `MailCode`.
+
+See [Variables in tests](/tests/variables) for everything the variable picker can do.
+
+## What the results capture
+
+Each Email & SMS step documents itself in the execution result:
+
+- **Email steps** capture screenshots of the received email rendered in mobile, tablet, and desktop formats, so you also get a visual check of your transactional emails.
+- **SMS steps** capture the raw text of the message alongside the extracted variables.
+
+<Note>
+These steps rely on Kapptivate's mail and SMS service: the mailboxes and phone numbers they watch must be provisioned for your workspace.
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Variables in tests" icon="brackets-curly" href="/tests/variables">
+
+    Reuse the extracted codes and links in later steps
+
+</Card>
+  <Card title="AI in Kapptivate" icon="sparkles" href="/ai/overview">
+
+    The other places AI works for you across the platform
+
+</Card>
+  <Card title="Get email code reference" icon="envelope" href="/tests/actions/shared/aigetmailcode">
+
+    Parameters and JSON format for the email code step
+
+</Card>
+  <Card title="Get sms code reference" icon="comment-sms" href="/tests/actions/shared/aigetsmscode">
+
+    Parameters and JSON format for the SMS code step
+
+</Card>
+</Columns>

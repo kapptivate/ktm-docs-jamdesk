@@ -1,0 +1,42 @@
+---
+title: Verify with AI
+description: Assert what a page should show in natural language instead of brittle exact-match checks.
+sidebarTitle: Verify with AI
+---
+
+Exact-match assertions can't express "the login page is displayed": they check one selector, one value, one pixel. **Verify with AI** evaluates the whole page against a sentence you write in plain language, so the check holds even when the layout shifts.
+
+## Add the step
+
+In the builder, choose **Add step... > Verifications > Verify with AI**, then write what you expect: "The login page is displayed", "The cart shows 2 items", "The checkout button is enabled".
+
+![A Verify with AI step asserting that the login page is displayed, with its reference screenshot](/images/ai-verify-step.webp)
+
+At run time, the AI captures the page state and judges it against your assertion. The step fails when the description isn't met, like any other verification.
+
+## Dynamic assertions with variables
+
+Prompts accept [variables](/tests/variables): click the `{}` icon to insert values from previous steps, random generators, or your configured variables. That makes assertions like "The confirmation page shows the name `{Firstname}`" possible, where `Firstname` was typed (or generated) earlier in the test.
+
+## When to use it
+
+- **Page-level outcomes**: "the dashboard loaded", "the form was submitted successfully", where no single selector captures the state.
+- **Visual states**: button colors, banners, image presence, things exact-match checks struggle with.
+- **Resilient smoke checks**: assertions that should survive redesigns.
+
+For deterministic checks on a specific element or value, prefer the standard [checks](/tests/builder#checks); they're faster and reproducible. The JSON reference lives at [aivisualassert](/tests/actions/web/aivisualassert).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="AI spell check" icon="spell-check" href="/ai/spell-check">
+
+    Proofread the page's content, not just its structure
+
+</Card>
+  <Card title="Variables in tests" icon="brackets-curly" href="/tests/variables">
+
+    Feed dynamic values into your AI prompts
+
+</Card>
+</Columns>

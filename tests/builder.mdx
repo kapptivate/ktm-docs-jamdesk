@@ -51,7 +51,9 @@ Smartphone tests record through a cloud-based recorder instead of a browser exte
 
 ## Adding steps manually
 
-Click **Add step...** at the bottom of a step group to insert a step without recording. Pick the action from the catalog, then configure its target and value. See the [Actions Library](/tests/actions/overview) for every available step.
+Click **Add step...** at the bottom of a step group to insert a step without recording. A searchable menu organizes the actions by category: **Most popular**, **Interactions**, **Email & SMS**, **Verifications**, **Navigation**, **Wait for...**, and **Others**. Pick the action, then configure its target and value. See the [Actions Library](/tests/actions/overview) for every available step.
+
+![The Add step menu with its searchable action categories](/images/builder-step-menu.webp)
 
 Each step's context menu lets you edit, duplicate, or delete it, and you can drag steps to reorder them.
 
@@ -118,10 +120,11 @@ Enable **Turn on AI for this step** in the step's General tab. The selector fiel
 
 - **Smart**: uses the AI to find the element on the first run or when the saved selector fails, then caches the result to save time
 - **Always**: forces the AI to redetect the target element on every run, ignoring saved selectors
+- **On demand**: AI stays off by default; you enable it manually on each step that needs it
 
 ![Per-step AI usage with the Smart and Always strategies](/images/builder-step-ai.webp)
 
-**Link to test** ties the step to the test-level AI setting instead of a per-step override. The test-level toggle and strategy live in **Test settings > AI**.
+**Link to test** ties the step to the test-level AI setting instead of a per-step override. The test-level toggle and strategy live in **Test settings > AI**. For the full picture of what AI does across the platform, see [AI in Kapptivate](/ai/overview).
 
 ## Environment
 
@@ -161,9 +164,9 @@ Toggle a hook on and the **Reusable steps group library** opens so you can pick 
 
 ## Variables
 
-Click the `{}` button in any text field (selector, value, URL) to insert a variable. You can mix literal text and variables in a single field, for example `https://example.com/{userId}`.
+Click the `{}` button in any text field (selector, value, URL) to insert a variable: values from previous steps, random generated data, or your configured variables. You can mix literal text and variables in a single field, for example `https://example.com/{userId}`.
 
-Global variables and variable groups are managed per product in [Configurations & variables](/tests/configurations).
+See [Variables in tests](/tests/variables) for the full picker, and [Configurations & variables](/tests/configurations) for the product-level variables and groups.
 
 ## Saving and running
 

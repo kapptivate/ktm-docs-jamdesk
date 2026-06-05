@@ -1,0 +1,79 @@
+---
+title: Variables in tests
+description: Set, generate, and reuse dynamic values inside a test with the variable picker.
+sidebarTitle: Variables in tests
+---
+
+![The variable picker open on a step field, with the Previous steps, Random, and Variables tabs](/images/variables-picker.webp)
+
+Static test data goes stale: a hardcoded email collides on the second sign-up, a fixed name can't prove the confirmation page shows what you typed. Inside a test, variables keep every step fed with live data, values produced by earlier steps, generated on the fly, or pulled from your product configuration.
+
+## The variable picker
+
+Click the `{}` icon next to any step field to open the variable picker. Selecting an entry inserts it as a pill in the field, where it can mix with literal text. The picker has three tabs:
+
+- **Previous steps**: values produced earlier in the test.
+- **Random**: generated fake data for this run.
+- **Variables**: your product's configured variables and groups.
+
+## Previous steps
+
+Every step that produces a value exports it as a variable, listed with the step that created it (for example `SmsCode`, Step 1). Typical producers: [Email & SMS steps](/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), text-reading actions, and your own **Set variable** steps.
+
+Pick one to chain steps together: navigate to the `MailLink` extracted two steps earlier, or type `SmsCode` into the 2FA field.
+
+### Set variable
+
+The **Set variable** step stores a value of your own mid-test: give it a value and a name, and it appears in the Previous steps tab for every later step. See the [Set variable reference](/tests/actions/shared/setvariable) for the JSON format and template functions.
+
+## Random data
+
+The **Random** tab generates fresh fake data at run time, so each execution uses new values. Presets: **First name**, **Last name**, **City**, and **Street address**.
+
+![The Random tab of the variable picker with its presets](/images/variables-random.webp)
+
+**Custom** opens a format builder when the presets don't fit:
+
+- **Text**: pick the character sets and the length.
+- **Number**: generate a numeric value.
+- **Date**: pick the format, `DD/MM/YYYY`, `MM/DD/YYYY`, `DD/MM`, `MM/DD`, or `M, D Y`, with optional constraints.
+
+![The Custom format dialog generating a date, with the format dropdown open](/images/variables-custom-format.webp)
+
+## Configured variables
+
+The **Variables** tab exposes what's defined in your product's [Configurations](/tests/configurations): standalone variables and variable groups you can expand to pick a specific entry (like a `PASSWORD` inside your default group). Define once, reuse across every test.
+
+## Review everything in the Environment tab
+
+The builder's **Environment** tab summarizes the variables your test touches:
+
+- **Test variables**: everything created inside the test (extracted codes, Set variable steps).
+- **Global variables**: the configured variables and group variants the test references, with secret values masked.
+
+![The Environment tab listing test variables and masked global variables](/images/variables-environment.webp)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Configurations & variables" icon="gear" href="/tests/configurations">
+
+    Define product-level variables, groups, and variants
+
+</Card>
+  <Card title="Email & SMS testing" icon="envelope" href="/tests/email-sms">
+
+    The steps that feed codes and links into your variables
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/tests/builder">
+
+    Where steps, checks, and variables come together
+
+</Card>
+  <Card title="Run a test" icon="play" href="/executions/run">
+
+    Override variables and variants at run time
+
+</Card>
+</Columns>
