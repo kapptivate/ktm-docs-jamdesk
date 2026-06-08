@@ -39,7 +39,6 @@ export function renderCommandPage(item, ctx) {
     escapeProse(o.summary || item.summary || item.name),
   ];
   if (item.aliases) sections.push(`<Note>Aliases: ${escapeProse(item.aliases)}</Note>`);
-  if (item.since) sections.push(`*Available since* \`${item.since}\``);
 
   sections.push(['## Usage', '', codeBlock('bash', item.usage)].join('\n'));
 
