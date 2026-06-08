@@ -24,56 +24,56 @@ Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenti
 ## Configure your client
 
 <Tabs>
-  <Tab title="Claude Code">
-    Register the server with one command:
+<Tab title="Claude Code">
 
-    ```bash
-    claude mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
-      --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
-    ```
+Register the server with one command, then confirm it connected:
 
-    Confirm it connected:
+```bash
+claude mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
+  --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
 
-    ```bash
-    claude mcp list
-    ```
-  </Tab>
-  <Tab title="Cursor">
-    Add Kapptivate to your MCP configuration (Settings, then MCP):
+claude mcp list
+```
 
-    ```json
-    {
-      "mcpServers": {
-        "kapptivate": {
-          "url": "https://mcp.kapptivate.com/mcp",
-          "headers": {
-            "X-Kapptivate-API-Key": "YOUR_KEY"
-          }
-        }
+</Tab>
+<Tab title="Cursor">
+
+Add Kapptivate to your MCP configuration (Settings, then MCP):
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "url": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "YOUR_KEY"
       }
     }
-    ```
-  </Tab>
-  <Tab title="Claude Desktop">
-    Claude Desktop reaches remote servers through `mcp-remote`. Edit `claude_desktop_config.json`:
+  }
+}
+```
 
-    ```json
-    {
-      "mcpServers": {
-        "kapptivate": {
-          "command": "npx",
-          "args": [
-            "-y", "mcp-remote",
-            "https://mcp.kapptivate.com/mcp",
-            "--header", "X-Kapptivate-API-Key:YOUR_KEY"
-          ]
-        }
-      }
+</Tab>
+<Tab title="Claude Desktop">
+
+Claude Desktop reaches remote servers through `mcp-remote`. Edit `claude_desktop_config.json`, then restart Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "command": "npx",
+      "args": [
+        "-y", "mcp-remote",
+        "https://mcp.kapptivate.com/mcp",
+        "--header", "X-Kapptivate-API-Key:YOUR_KEY"
+      ]
     }
-    ```
+  }
+}
+```
 
-    Restart Claude Desktop after saving.
-  </Tab>
+</Tab>
 </Tabs>
 
 ## Verify the connection
