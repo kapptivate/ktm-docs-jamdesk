@@ -4,7 +4,7 @@ description: Set up Claude Code, Cursor, or Claude Desktop against the Kapptivat
 sidebarTitle: Connect
 ---
 
-Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate with the `X-Kapptivate-API-Key` header. This page shows the exact configuration for the most common clients.
+Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate with the `X-Kapptivate-API-Key` header. This page covers the common developer clients (Claude, Cursor, Claude Code). For Microsoft 365 Copilot Studio and Google Gemini, see their dedicated pages in this section.
 
 ## Get your API key
 
@@ -87,13 +87,16 @@ Ask your assistant for something read-only, for example: "List the operators I c
 ## What's Next?
 
 <Columns cols={2}>
+  <Card title="Microsoft Copilot Studio" icon="robot" href="/mcp/integrations/copilot-studio">
+    Connect from Microsoft 365.
+  </Card>
+  <Card title="Google Gemini" icon="sparkles" href="/mcp/integrations/gemini">
+    Connect Gemini, from CLI to enterprise.
+  </Card>
+  <Card title="Example prompts" icon="robot" href="/mcp/examples">
+    What to ask once you are connected.
+  </Card>
   <Card title="Core concepts" icon="sitemap" href="/mcp/concepts">
     Operators, products, variables, and the safety model.
-  </Card>
-  <Card title="Common workflows" icon="diagram-project" href="/mcp/workflows">
-    Recipes for running tests, monitoring, and metrics.
-  </Card>
-  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
-    Every tool the server exposes, by category.
   </Card>
 </Columns>
