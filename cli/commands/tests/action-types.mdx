@@ -1,0 +1,50 @@
+---
+title: "ktm tests action-types"
+description: "List available action types for test creation"
+sidebarTitle: "action-types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List available action types for test creation
+
+## Usage
+
+```bash
+ktm tests action-types [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--kind` | string | — | Filter by owner kind: ethernet, sim, smartphone, ownerless |
+
+## Details
+
+List the catalog of available action types (44 types: 15 ETHERNET, 22 SIM, 3 SMARTPHONE, 4 OWNERLESS) for creating tests.
+
+Each action type has an owner_kind that determines what device it runs on:
+  ETHERNET    — runs on a web agent (hostname)
+  SIM         — runs on a SIM card (MSISDN)
+  SMARTPHONE  — runs on a smartphone (UUID)
+  OWNERLESS   — no device needed (control flow: JAVASCRIPT, WAIT, etc.)
+
+Use --kind to filter by owner kind.
+
+Use the output with 'tests template &lt;type&gt; [type...]' to generate a ready-to-customize test.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

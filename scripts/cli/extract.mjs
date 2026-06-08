@@ -85,7 +85,8 @@ function parseHelp(text) {
   const leafUsage = usageLines.find((u) => u.includes('[flags]')) || usageLines.find((u) => !u.includes('[command]')) || usageLines[0] || '';
   const subs = (sections['Available Commands:'] || [])
     .map((l) => {
-      const m = l.match(/^\s{2,}(\S+)\s{2,}(.*)$/);
+      // Single space is enough: Cobra pads the longest name in a group with just one space.
+      const m = l.match(/^\s{2,}(\S+)\s+(.*)$/);
       return m ? { name: m[1], short: oneLine(m[2]) } : null;
     })
     .filter(Boolean)

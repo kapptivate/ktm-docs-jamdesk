@@ -3,7 +3,7 @@
     "kind": "cli",
     "source": "cli-binary",
     "cliName": "ktm",
-    "count": 123
+    "count": 134
   },
   "globalFlags": [
     {
@@ -74,6 +74,7 @@
     "executions",
     "incidents",
     "metrics",
+    "monitoring-results",
     "monitors",
     "operators",
     "products",
@@ -155,6 +156,7 @@
       "subcommands": [
         "get",
         "list",
+        "maintenance",
         "reboot"
       ]
     },
@@ -226,6 +228,53 @@
           "type": "string",
           "default": null,
           "description": "Filter by zone"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "agents_maintenance",
+      "name": "ktm agents maintenance",
+      "path": [
+        "agents",
+        "maintenance"
+      ],
+      "top": "agents",
+      "slug": "agents/maintenance",
+      "summary": "Toggle maintenance mode for an agent",
+      "description": "Toggle maintenance mode for an agent",
+      "usage": "ktm agents maintenance [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "confirm",
+          "type": "bool",
+          "default": null,
+          "description": "Execute the toggle (without this, shows preview)"
+        },
+        {
+          "short": null,
+          "long": "disable",
+          "type": "bool",
+          "default": null,
+          "description": "Disable maintenance mode"
+        },
+        {
+          "short": null,
+          "long": "enable",
+          "type": "bool",
+          "default": null,
+          "description": "Enable maintenance mode"
+        },
+        {
+          "short": null,
+          "long": "uuid",
+          "type": "string",
+          "default": null,
+          "description": "Agent UUID (required)"
         }
       ],
       "isLeaf": true,
@@ -1038,6 +1087,7 @@
         "edit-widget",
         "get",
         "list",
+        "list-widget-types",
         "remove-widget",
         "update",
         "validate-widget",
@@ -1306,6 +1356,24 @@
           "description": "Items per page (default: 20)"
         }
       ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "dashboards_list-widget-types",
+      "name": "ktm dashboards list-widget-types",
+      "path": [
+        "dashboards",
+        "list-widget-types"
+      ],
+      "top": "dashboards",
+      "slug": "dashboards/list-widget-types",
+      "summary": "List available dashboard widget types with constraints and grid sizes",
+      "description": "List available dashboard widget types with constraints and grid sizes",
+      "usage": "ktm dashboards list-widget-types [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [],
       "isLeaf": true,
       "subcommands": []
     },
@@ -1820,6 +1888,7 @@
         "correlate",
         "peak-usage",
         "query",
+        "resource-usage",
         "slo"
       ]
     },
@@ -2033,6 +2102,60 @@
       "subcommands": []
     },
     {
+      "id": "metrics_resource-usage",
+      "name": "ktm metrics resource-usage",
+      "path": [
+        "metrics",
+        "resource-usage"
+      ],
+      "top": "metrics",
+      "slug": "metrics/resource-usage",
+      "summary": "Get device resource usage broken down by hour and 5-minute intervals",
+      "description": "Get device resource usage broken down by time intervals.\n\nReturns usage percentage per resource, broken down by the specified aggregation\nwindow (default 1h). Use for analyzing device utilization patterns over time.\n\nThis queries the \"resource_usage\" measurement in InfluxDB. Device IDs correspond\nto resources discovered via 'ktm resources list' (SIM: national_msisdn,\nweb-agent: hostname, smartphone: UUID).\n\nMaximum recommended time range: 90 days.",
+      "usage": "ktm metrics resource-usage [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "aggregation",
+          "type": "string",
+          "default": "1h",
+          "description": "Time aggregation bucket (e.g. '1h', '5m')"
+        },
+        {
+          "short": null,
+          "long": "end",
+          "type": "string",
+          "default": null,
+          "description": "End time in ISO 8601 format (e.g. '2024-01-02T00:00:00Z')"
+        },
+        {
+          "short": null,
+          "long": "operator",
+          "type": "string",
+          "default": null,
+          "description": "Operator slug (= InfluxDB database name)"
+        },
+        {
+          "short": null,
+          "long": "resources",
+          "type": "string",
+          "default": null,
+          "description": "Comma-separated device IDs"
+        },
+        {
+          "short": null,
+          "long": "start",
+          "type": "string",
+          "default": null,
+          "description": "Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z')"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
       "id": "metrics_slo",
       "name": "ktm metrics slo",
       "path": [
@@ -2101,6 +2224,132 @@
       "subcommands": []
     },
     {
+      "id": "monitoring-results",
+      "name": "ktm monitoring-results",
+      "path": [
+        "monitoring-results"
+      ],
+      "top": "monitoring-results",
+      "slug": "monitoring-results",
+      "summary": "Monitoring results — run outcomes from scheduled monitors",
+      "description": "Monitoring results — run outcomes from scheduled monitors",
+      "usage": "ktm monitoring-results [command]",
+      "aliases": "",
+      "args": [],
+      "flags": [],
+      "isLeaf": false,
+      "subcommands": [
+        "get",
+        "list"
+      ]
+    },
+    {
+      "id": "monitoring-results_get",
+      "name": "ktm monitoring-results get",
+      "path": [
+        "monitoring-results",
+        "get"
+      ],
+      "top": "monitoring-results",
+      "slug": "monitoring-results/get",
+      "summary": "Get detailed results of a monitoring run",
+      "description": "Fetch a single monitoring result by ID and display its detailed results.\n\nThe response includes:\n  - Monitoring result metadata: name, status, monitoring ID, timestamps\n  - Parsed summary: failure reason, per-test status, per-action status, variables\n  - With --include-actions: raw action results (screenshots, artifacts, logs)\n\nResult IDs come from 'monitoring-results list'. Always scope that command by\n--monitoring-id first (via 'monitors list --operator <slug>') to ensure results\nbelong to the correct operator.\n\nIn table mode, a human-readable summary is shown with failure reason and test/action tables.\nIn JSON mode, the structured detail is returned including the parsed summary.",
+      "usage": "ktm monitoring-results get <id> [flags]",
+      "aliases": "",
+      "args": [
+        {
+          "name": "id",
+          "required": true
+        }
+      ],
+      "flags": [
+        {
+          "short": "a",
+          "long": "include-actions",
+          "type": "bool",
+          "default": null,
+          "description": "Include raw action results (screenshots, artifacts, logs)"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "monitoring-results_list",
+      "name": "ktm monitoring-results list",
+      "path": [
+        "monitoring-results",
+        "list"
+      ],
+      "top": "monitoring-results",
+      "slug": "monitoring-results/list",
+      "summary": "List recent monitoring results",
+      "description": "List monitoring results (run outcomes from scheduled monitors).\n\nEach result represents a single monitor execution with an overall status.\nResults are always lean: the heavy result payload is excluded. Use\n'monitoring-results get <id>' to investigate specific results.\n\nPrerequisite: Without --monitoring-id or --product, results span ALL operators\nthe API key has access to. Always run 'monitors list --operator <slug>' first\nto get monitor IDs, then pass --monitoring-id here to scope results to the\ncorrect operator.\n\nStatus codes: S=success, F=failed, O=ongoing, P=pending, WA=waiting, B=broken, DI=dismissed\n\nFilters:\n  --monitoring-id  filter by monitor ID (from 'monitors list') — required for operator-scoped results\n  --test-id        filter by test ID\n  --product        product slug (format: operator~product)\n  --start          results after this datetime (ISO 8601)\n  --end            results before this datetime (ISO 8601)\n  --ordering       sort: -modified (default) or modified\n  --page           page number (default: 1)\n  --page-size      results per page (default: 20)",
+      "usage": "ktm monitoring-results list [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "end",
+          "type": "string",
+          "default": null,
+          "description": "Results before this datetime (ISO 8601)"
+        },
+        {
+          "short": null,
+          "long": "monitoring-id",
+          "type": "string",
+          "default": null,
+          "description": "Filter by monitor ID (from 'monitors list'). Required for operator-scoped results — without this, results span all operators."
+        },
+        {
+          "short": null,
+          "long": "ordering",
+          "type": "string",
+          "default": null,
+          "description": "Sort: -modified (default) or modified"
+        },
+        {
+          "short": null,
+          "long": "page",
+          "type": "string",
+          "default": null,
+          "description": "Page number (default: 1)"
+        },
+        {
+          "short": null,
+          "long": "page-size",
+          "type": "string",
+          "default": null,
+          "description": "Results per page (default: 20)"
+        },
+        {
+          "short": null,
+          "long": "product",
+          "type": "string",
+          "default": null,
+          "description": "Product slug (format: operator~product)"
+        },
+        {
+          "short": null,
+          "long": "start",
+          "type": "string",
+          "default": null,
+          "description": "Results after this datetime (ISO 8601)"
+        },
+        {
+          "short": null,
+          "long": "test-id",
+          "type": "string",
+          "default": null,
+          "description": "Filter by test ID"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
       "id": "monitors",
       "name": "ktm monitors",
       "path": [
@@ -2116,6 +2365,7 @@
       "flags": [],
       "isLeaf": false,
       "subcommands": [
+        "batch-create",
         "create",
         "edit",
         "force-run",
@@ -2123,6 +2373,46 @@
         "list",
         "toggle"
       ]
+    },
+    {
+      "id": "monitors_batch-create",
+      "name": "ktm monitors batch-create",
+      "path": [
+        "monitors",
+        "batch-create"
+      ],
+      "top": "monitors",
+      "slug": "monitors/batch-create",
+      "summary": "Create multiple monitors from a batch spec file",
+      "description": "Create multiple monitors in a single command from a JSON batch spec file.\nAll monitors must belong to the same product.\n\nThe batch spec file contains a product slug, optional default scheduling/options,\nand an array of monitor specs — each with a test_id, an optional variants\narray (same shape as monitors create), and optional overrides.\n\nThree modes:\n  Preview (default): shows the batch creation plan. Review for empty device\n  slots or missing values before re-running with --confirm.\n  Confirm (--confirm): submits all monitors after reviewing the preview.\n  Force (--force): bypasses preview entirely — auto-builds and submits.\n  Use --force only in CI/CD pipelines and automation scripts.\n\nPartial failure: if some monitors fail to create, successful ones are kept.\nThe output shows which succeeded and which failed.\n\nPin variants per-entry via the variants array (same form as monitors create).\nVariables auto-resolve from variants; overrides remain available to deviate\nfrom variant-stored values. Monitors created with active=false go through a\npost-create toggle so the platform scheduler actually stops them — batch\ncreate alone does not.",
+      "usage": "ktm monitors batch-create [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "confirm",
+          "type": "bool",
+          "default": null,
+          "description": "Submit all monitors after reviewing the preview"
+        },
+        {
+          "short": null,
+          "long": "force",
+          "type": "bool",
+          "default": null,
+          "description": "Bypass preview — auto-build and submit (CI/CD automation only)"
+        },
+        {
+          "short": null,
+          "long": "from-file",
+          "type": "string",
+          "default": null,
+          "description": "Path to JSON batch spec file (required)"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
     },
     {
       "id": "monitors_create",
@@ -3302,6 +3592,7 @@
       "flags": [],
       "isLeaf": false,
       "subcommands": [
+        "action-types",
         "archive",
         "create",
         "delete",
@@ -3319,6 +3610,32 @@
         "undelete",
         "validate"
       ]
+    },
+    {
+      "id": "tests_action-types",
+      "name": "ktm tests action-types",
+      "path": [
+        "tests",
+        "action-types"
+      ],
+      "top": "tests",
+      "slug": "tests/action-types",
+      "summary": "List available action types for test creation",
+      "description": "List the catalog of available action types (44 types: 15 ETHERNET, 22 SIM, 3 SMARTPHONE, 4 OWNERLESS) for creating tests.\n\nEach action type has an owner_kind that determines what device it runs on:\n  ETHERNET    — runs on a web agent (hostname)\n  SIM         — runs on a SIM card (MSISDN)\n  SMARTPHONE  — runs on a smartphone (UUID)\n  OWNERLESS   — no device needed (control flow: JAVASCRIPT, WAIT, etc.)\n\nUse --kind to filter by owner kind.\n\nUse the output with 'tests template <type> [type...]' to generate a ready-to-customize test.",
+      "usage": "ktm tests action-types [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "kind",
+          "type": "string",
+          "default": null,
+          "description": "Filter by owner kind: ethernet, sim, smartphone, ownerless"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
     },
     {
       "id": "tests_archive",
@@ -4048,6 +4365,7 @@
         "duplicate",
         "groups",
         "list",
+        "name-available",
         "set-value",
         "show",
         "update",
@@ -4411,6 +4729,39 @@
       "subcommands": []
     },
     {
+      "id": "variables_name-available",
+      "name": "ktm variables name-available",
+      "path": [
+        "variables",
+        "name-available"
+      ],
+      "top": "variables",
+      "slug": "variables/name-available",
+      "summary": "Pre-flight: check whether a variable name is free under a product",
+      "description": "Returns \"available\" or \"taken\" so you can surface name conflicts client-side\nbefore attempting create. Takes the product's NUMERIC ID (find via 'ktm products\nlist -o table'), not the slug.\n\nImplementation note: the platform's check_variable_exist endpoint is\nunreliable, so the check is performed client-side by listing the product's\nvariables and matching by name.",
+      "usage": "ktm variables name-available [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "name",
+          "type": "string",
+          "default": null,
+          "description": "Variable name to check"
+        },
+        {
+          "short": null,
+          "long": "product-id",
+          "type": "int",
+          "default": null,
+          "description": "Product numeric id (from 'ktm products list')"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
       "id": "variables_set-value",
       "name": "ktm variables set-value",
       "path": [
@@ -4549,8 +4900,10 @@
       "isLeaf": false,
       "subcommands": [
         "add",
+        "copy-values",
         "remove",
-        "rename"
+        "rename",
+        "set-default"
       ]
     },
     {
@@ -4587,6 +4940,45 @@
           "type": "string",
           "default": null,
           "description": "New variant name (required)"
+        }
+      ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "variables_variants_copy-values",
+      "name": "ktm variables variants copy-values",
+      "path": [
+        "variables",
+        "variants",
+        "copy-values"
+      ],
+      "top": "variables",
+      "slug": "variables/variants/copy-values",
+      "summary": "Promote variant values: copy every variable's --from variant into --to across the group",
+      "description": "Power workflow: in one command, copy every variable's source-variant value\ninto the destination variant across the entire group. --from and --to accept\nvariant ids or names. Variables that have no value on the source variant are\nskipped.",
+      "usage": "ktm variables variants copy-values <group-id> [flags]",
+      "aliases": "",
+      "args": [
+        {
+          "name": "group-id",
+          "required": true
+        }
+      ],
+      "flags": [
+        {
+          "short": null,
+          "long": "from",
+          "type": "string",
+          "default": null,
+          "description": "Source variant id or name (required)"
+        },
+        {
+          "short": null,
+          "long": "to",
+          "type": "string",
+          "default": null,
+          "description": "Destination variant id or name (required)"
         }
       ],
       "isLeaf": true,
@@ -4661,6 +5053,34 @@
           "description": "New variant name (required)"
         }
       ],
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "variables_variants_set-default",
+      "name": "ktm variables variants set-default",
+      "path": [
+        "variables",
+        "variants",
+        "set-default"
+      ],
+      "top": "variables",
+      "slug": "variables/variants/set-default",
+      "summary": "Promote a variant to default (demotes the prior default atomically)",
+      "description": "Promote a variant to default (demotes the prior default atomically)",
+      "usage": "ktm variables variants set-default <group-id> <variant-id> [flags]",
+      "aliases": "",
+      "args": [
+        {
+          "name": "group-id",
+          "required": true
+        },
+        {
+          "name": "variant-id",
+          "required": true
+        }
+      ],
+      "flags": [],
       "isLeaf": true,
       "subcommands": []
     }

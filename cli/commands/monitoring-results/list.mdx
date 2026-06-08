@@ -1,0 +1,68 @@
+---
+title: "ktm monitoring-results list"
+description: "List recent monitoring results"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List recent monitoring results
+
+## Usage
+
+```bash
+ktm monitoring-results list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--end` | string | — | Results before this datetime (ISO 8601) |
+| `--monitoring-id` | string | — | Filter by monitor ID (from 'monitors list'). Required for operator-scoped results — without this, results span all operators. |
+| `--ordering` | string | — | Sort: -modified (default) or modified |
+| `--page` | string | — | Page number (default: 1) |
+| `--page-size` | string | — | Results per page (default: 20) |
+| `--product` | string | — | Product slug (format: operator~product) |
+| `--start` | string | — | Results after this datetime (ISO 8601) |
+| `--test-id` | string | — | Filter by test ID |
+
+## Details
+
+List monitoring results (run outcomes from scheduled monitors).
+
+Each result represents a single monitor execution with an overall status.
+Results are always lean: the heavy result payload is excluded. Use
+'monitoring-results get &lt;id&gt;' to investigate specific results.
+
+Prerequisite: Without --monitoring-id or --product, results span ALL operators
+the API key has access to. Always run 'monitors list --operator &lt;slug&gt;' first
+to get monitor IDs, then pass --monitoring-id here to scope results to the
+correct operator.
+
+Status codes: S=success, F=failed, O=ongoing, P=pending, WA=waiting, B=broken, DI=dismissed
+
+Filters:
+  --monitoring-id  filter by monitor ID (from 'monitors list') — required for operator-scoped results
+  --test-id        filter by test ID
+  --product        product slug (format: operator~product)
+  --start          results after this datetime (ISO 8601)
+  --end            results before this datetime (ISO 8601)
+  --ordering       sort: -modified (default) or modified
+  --page           page number (default: 1)
+  --page-size      results per page (default: 20)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

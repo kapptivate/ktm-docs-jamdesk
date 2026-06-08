@@ -22,11 +22,17 @@ ktm variables variants [command]
   <Card title="add" icon="angle-right" href="/cli/commands/variables/variants/add">
     Add a new variant to a variable group
   </Card>
+  <Card title="copy-values" icon="angle-right" href="/cli/commands/variables/variants/copy-values">
+    Promote variant values: copy every variable's --from variant into --to across the group
+  </Card>
   <Card title="remove" icon="angle-right" href="/cli/commands/variables/variants/remove">
     Remove a variant; refuses if any variable holds non-default data unless --force
   </Card>
   <Card title="rename" icon="angle-right" href="/cli/commands/variables/variants/rename">
     Rename a variant in a group atomically
+  </Card>
+  <Card title="set-default" icon="angle-right" href="/cli/commands/variables/variants/set-default">
+    Promote a variant to default (demotes the prior default atomically)
   </Card>
 </Columns>
 

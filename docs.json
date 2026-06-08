@@ -611,6 +611,7 @@
                   "cli/commands/agents",
                   "cli/commands/agents/get",
                   "cli/commands/agents/list",
+                  "cli/commands/agents/maintenance",
                   "cli/commands/agents/reboot"
                 ]
               },
@@ -663,6 +664,7 @@
                   "cli/commands/dashboards/edit-widget",
                   "cli/commands/dashboards/get",
                   "cli/commands/dashboards/list",
+                  "cli/commands/dashboards/list-widget-types",
                   "cli/commands/dashboards/remove-widget",
                   "cli/commands/dashboards/update",
                   "cli/commands/dashboards/validate-widget",
@@ -695,13 +697,23 @@
                   "cli/commands/metrics/correlate",
                   "cli/commands/metrics/peak-usage",
                   "cli/commands/metrics/query",
+                  "cli/commands/metrics/resource-usage",
                   "cli/commands/metrics/slo"
+                ]
+              },
+              {
+                "group": "monitoring-results",
+                "pages": [
+                  "cli/commands/monitoring-results",
+                  "cli/commands/monitoring-results/get",
+                  "cli/commands/monitoring-results/list"
                 ]
               },
               {
                 "group": "monitors",
                 "pages": [
                   "cli/commands/monitors",
+                  "cli/commands/monitors/batch-create",
                   "cli/commands/monitors/create",
                   "cli/commands/monitors/edit",
                   "cli/commands/monitors/force-run",
@@ -771,6 +783,7 @@
                 "group": "tests",
                 "pages": [
                   "cli/commands/tests",
+                  "cli/commands/tests/action-types",
                   "cli/commands/tests/archive",
                   "cli/commands/tests/create",
                   "cli/commands/tests/delete",
@@ -812,13 +825,16 @@
                   "cli/commands/variables/groups/show",
                   "cli/commands/variables/groups/update",
                   "cli/commands/variables/list",
+                  "cli/commands/variables/name-available",
                   "cli/commands/variables/set-value",
                   "cli/commands/variables/show",
                   "cli/commands/variables/update",
                   "cli/commands/variables/variants",
                   "cli/commands/variables/variants/add",
+                  "cli/commands/variables/variants/copy-values",
                   "cli/commands/variables/variants/remove",
-                  "cli/commands/variables/variants/rename"
+                  "cli/commands/variables/variants/rename",
+                  "cli/commands/variables/variants/set-default"
                 ]
               }
             ]
