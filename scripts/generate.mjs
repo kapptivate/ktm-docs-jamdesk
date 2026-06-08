@@ -12,7 +12,7 @@
 import path from 'node:path';
 import { promises as fs } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { readJSON, writeFileEnsured, rmDir, listMdx } from './lib/util.mjs';
+import { readJSON, readJSONOptional, writeFileEnsured, rmDir, listMdx } from './lib/util.mjs';
 import { loadOverlay, attachOverlay } from './lib/overlay.mjs';
 import { applyNav } from './lib/nav.mjs';
 import { introspectMcp, normalizeMcp } from './mcp/introspect.mjs';
@@ -58,7 +58,11 @@ async function buildMcp(args) {
     source: args.mode === 'file' ? 'mcp-file' : 'mcp-live',
   });
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.mcp));
-  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'tools') };
+  const since = await readJSONOptional(path.join(ROOT, 'mcp/.catalog/since.json'), {});
+  const items = attachOverlay(catalog.items, overlay, 'tools').map((it) =>
+    since[it.name] ? { ...it, since: since[it.name] } : it
+  );
+  const renderCatalog = { ...catalog, items };
 
   const files = new Map();
   files.set(CATALOG.mcp, catalogJSON(catalog));
@@ -84,7 +88,11 @@ async function buildCli(args) {
   });
   const { catalog, warnings } = normalizeCli(raw, { source: 'cli-binary' });
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.cli));
-  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'commands') };
+  const since = await readJSONOptional(path.join(ROOT, 'cli/.catalog/since.json'), {});
+  const items = attachOverlay(catalog.items, overlay, 'commands').map((it) =>
+    since[it.id] ? { ...it, since: since[it.id] } : it
+  );
+  const renderCatalog = { ...catalog, items };
 
   const files = new Map();
   files.set(CATALOG.cli, catalogJSON(catalog));

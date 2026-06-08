@@ -39,8 +39,9 @@ export function renderToolPage(item) {
     }),
     BANNER,
     lead,
-    annotationCallout(item.annotations),
   ];
+  if (item.since) sections.push(`*Available since* \`${item.since}\``);
+  sections.push(annotationCallout(item.annotations));
 
   // Parameters
   if (params.rows.length) {
