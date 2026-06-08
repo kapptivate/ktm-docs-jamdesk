@@ -1,0 +1,78 @@
+---
+title: Common workflows
+description: Step-by-step recipes for the most frequent tasks an agent performs over MCP.
+sidebarTitle: Workflows
+---
+
+These recipes show the tool order for the tasks agents run most often. Each step names the tool to call.
+
+<Tip>
+  Before a multi-step task, call `platform_guide` with the relevant topic (for example `test_creation` or `metrics`). It returns the up-to-date sequence and prerequisites straight from the server.
+</Tip>
+
+## Run a test
+
+<Steps>
+  <Step title="Find the test">
+    `list_tests` with a product slug, or `search_collections` to find it in the folder tree.
+  </Step>
+  <Step title="Check what it needs">
+    `get_test_detail` to see required input variables and owners.
+  </Step>
+  <Step title="Build and run a campaign">
+    `build_campaign` to assemble the run (pass a `variants` array to pick an environment), then `run_campaign`.
+  </Step>
+  <Step title="Read the result">
+    `poll_execution` until it finishes, then `get_execution_detail` for per-test pass/fail data.
+  </Step>
+</Steps>
+
+## Create a monitor
+
+<Steps>
+  <Step title="Pick the test and environment">
+    `list_tests` for the test id, and `list_variable_groups` for the variable group that holds your environment.
+  </Step>
+  <Step title="Create the monitor">
+    `create_monitor` with the product, test id, variable group, and schedule.
+  </Step>
+  <Step title="Activate or pause">
+    `toggle_monitors` to turn monitors on or off in bulk.
+  </Step>
+</Steps>
+
+## Query metrics
+
+<Steps>
+  <Step title="Explore the schema">
+    `query_metrics` with `SHOW MEASUREMENTS` and `SHOW FIELD KEYS` to discover what is collected.
+  </Step>
+  <Step title="Query the series">
+    `query_metrics` with a `SELECT` to read KPI time series, then `compute_slo` or `correlate_metrics` for deeper analysis.
+  </Step>
+</Steps>
+
+## Investigate incidents
+
+<Steps>
+  <Step title="Check overall health">
+    `get_incident_counter` for a quick critical / warning / closed count.
+  </Step>
+  <Step title="List and inspect">
+    `list_incidents` filtered by status, then `get_incident` for detail.
+  </Step>
+  <Step title="Resolve">
+    `close_incident` once the underlying issue is handled.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
+    Look up the exact parameters for each tool above.
+  </Card>
+  <Card title="Core concepts" icon="sitemap" href="/mcp/concepts">
+    Variables, variants, edit budgets, and the safety model.
+  </Card>
+</Columns>

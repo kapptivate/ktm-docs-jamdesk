@@ -1,0 +1,99 @@
+---
+title: Connect a client
+description: Set up Claude Code, Cursor, or Claude Desktop against the Kapptivate MCP server.
+sidebarTitle: Connect
+---
+
+Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate with the `X-Kapptivate-API-Key` header. This page shows the exact configuration for the most common clients.
+
+## Get your API key
+
+<Steps>
+  <Step title="Open your profile">
+    Sign in to [Kapptivate](https://app.kapptivate.com) and open your profile.
+  </Step>
+  <Step title="Copy your API key">
+    Copy your personal API key. It carries the same access as your account.
+  </Step>
+</Steps>
+
+<Warning>
+  Treat the key like a password. Prefer an environment variable over pasting it into a config file you might commit.
+</Warning>
+
+## Configure your client
+
+<Tabs>
+  <Tab title="Claude Code">
+    Register the server with one command:
+
+    ```bash
+    claude mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
+      --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
+    ```
+
+    Confirm it connected:
+
+    ```bash
+    claude mcp list
+    ```
+  </Tab>
+  <Tab title="Cursor">
+    Add Kapptivate to your MCP configuration (Settings, then MCP):
+
+    ```json
+    {
+      "mcpServers": {
+        "kapptivate": {
+          "url": "https://mcp.kapptivate.com/mcp",
+          "headers": {
+            "X-Kapptivate-API-Key": "YOUR_KEY"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab title="Claude Desktop">
+    Claude Desktop reaches remote servers through `mcp-remote`. Edit `claude_desktop_config.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "kapptivate": {
+          "command": "npx",
+          "args": [
+            "-y", "mcp-remote",
+            "https://mcp.kapptivate.com/mcp",
+            "--header", "X-Kapptivate-API-Key:YOUR_KEY"
+          ]
+        }
+      }
+    }
+    ```
+
+    Restart Claude Desktop after saving.
+  </Tab>
+</Tabs>
+
+## Verify the connection
+
+Ask your assistant for something read-only, for example: "List the operators I can access." If it returns results, you are connected.
+
+<Tip>
+  If a call fails with an authentication error, re-check the header value. The server accepts `X-Kapptivate-API-Key` only; it does not use `Authorization: Bearer`.
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Core concepts" icon="sitemap" href="/mcp/concepts">
+    Operators, products, variables, and the safety model.
+  </Card>
+  <Card title="Common workflows" icon="diagram-project" href="/mcp/workflows">
+    Recipes for running tests, monitoring, and metrics.
+  </Card>
+  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
+    Every tool the server exposes, by category.
+  </Card>
+</Columns>

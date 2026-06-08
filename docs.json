@@ -370,10 +370,13 @@
         "icon": "robot",
         "groups": [
           {
-            "group": "MCP",
+            "group": "Get started",
             "icon": "robot",
             "pages": [
-              "mcp/overview"
+              "mcp/overview",
+              "mcp/connect",
+              "mcp/concepts",
+              "mcp/workflows"
             ]
           }
         ]
@@ -383,12 +386,14 @@
         "icon": "terminal",
         "groups": [
           {
-            "group": "CLI Reference",
+            "group": "Get started",
             "icon": "terminal",
             "pages": [
               "cli/overview",
-              "cli/commands",
-              "cli/configuration"
+              "cli/installation",
+              "cli/getting-started",
+              "cli/configuration",
+              "cli/ci-cd"
             ]
           }
         ]

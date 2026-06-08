@@ -1,24 +1,46 @@
 ---
-title: CLI Overview
-description: "Reference for the command-line interface: installation, commands, and configuration."
+title: CLI overview
+description: ktm is the Kapptivate command-line interface for running tests in CI, managing resources, and querying the platform from your terminal.
+sidebarTitle: Overview
 ---
 
-The CLI is the primary way to interact with the platform from your terminal.
+`ktm` is the Kapptivate command-line interface. It runs tests in CI/CD pipelines, manages tests, monitors, variables, and collections, and queries the platform API, all from your terminal. Every command returns JSON by default, so it composes cleanly with `jq` and scripts.
 
+## Highlights
 
-## Installation
+- JSON-first output, with table and plain (TSV) formats when you want them
+- A single self-contained binary, no runtime dependencies
+- Built for CI: stable exit codes, JUnit XML, and native GitHub Actions annotations
+- The same API key as the MCP server and the web app
+
+## A quick taste
 
 ```bash
-npm install -g your-cli
+# Discover what you can access
+ktm operators list
+ktm products list --operator my-operator
+
+# List tests for a product, as a table
+ktm tests list --operator my-operator --product my-operator~my-product -o table
 ```
 
-## Next steps
+## Authentication
+
+`ktm` reads your API key from the `KAPPTIVATE_API_KEY` environment variable. Every command except local validation needs it. See [Configuration](/cli/configuration) for the details.
+
+## What's Next?
 
 <Columns cols={2}>
-  <Card title="Commands" icon="terminal" href="/cli/commands">
-    Browse every available command.
+  <Card title="Installation" icon="download" href="/cli/installation">
+    Get the binary onto your PATH and authenticate.
   </Card>
-  <Card title="Configuration" icon="gear" href="/cli/configuration">
-    Customize defaults via the config file.
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    A five-minute tour: discover, list, and run.
+  </Card>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/overview">
+    Every command, flag, and argument.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/cli/ci-cd">
+    Run tests from your pipeline.
   </Card>
 </Columns>
