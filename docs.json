@@ -376,7 +376,16 @@
               "mcp/overview",
               "mcp/connect",
               "mcp/concepts",
-              "mcp/workflows"
+              "mcp/workflows",
+              "mcp/examples"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              "mcp/integrations/copilot-studio",
+              "mcp/integrations/gemini"
             ]
           },
           {
@@ -591,6 +600,17 @@
               "cli/getting-started",
               "cli/configuration",
               "cli/ci-cd"
+            ]
+          },
+          {
+            "group": "Guides",
+            "icon": "compass",
+            "pages": [
+              "cli/guides/cheat-sheet",
+              "cli/guides/create-tests",
+              "cli/guides/run-campaigns",
+              "cli/guides/monitors-incidents",
+              "cli/guides/device-farm"
             ]
           },
           {

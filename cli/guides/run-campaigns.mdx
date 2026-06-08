@@ -1,0 +1,58 @@
+---
+title: Build & run campaigns
+description: Turn tests into a runnable campaign, pin an environment, execute, and read results.
+sidebarTitle: Run campaigns
+---
+
+A campaign is an ephemeral batch of tests you build, fill, and run. The pattern is build, run, read results, and it is identical on your laptop and in CI, which makes it easy to script or hand to an agent.
+
+## Build, run, read
+
+<Steps>
+  <Step title="Build a campaign template">
+    `ktm ci build --test-ids 16480,16838 --product my-operator~my-product > campaign.json`
+  </Step>
+  <Step title="Run it">
+    `ktm ci run --test-config-path campaign.json --junit-file results.xml --output-file summary.json`
+  </Step>
+  <Step title="Read results">
+    `ktm executions get <result-id>` for one run, or `ktm executions list --product my-operator~my-product --status FAILED`.
+  </Step>
+</Steps>
+
+Or do it in one pipe:
+
+```bash
+ktm ci build --test-ids 16480 --product acme~web --variant "API:Staging" | ktm ci run --stdin
+```
+
+## Pin an environment with variants
+
+Pass `--variant` per group (by `group:variant` name or numeric id). Groups you do not pin use their default variant:
+
+```bash
+ktm ci build --test-ids 16480 --product acme~web \
+  --variant "API:Staging" --variant "Database:Replica" > campaign.json
+```
+
+Manage the values those variants hold with `ktm variables`:
+
+```bash
+ktm variables list --product acme~web
+ktm variables set-value <variable-id> --variant Staging --value "https://staging.acme.test"
+```
+
+## In your pipeline
+
+The same two commands power CI, with JUnit output and a non-zero exit code when any test fails. On GitHub Actions, `ktm` also emits native annotations and a job summary. See [CI/CD](/cli/ci-cd).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="CI/CD" icon="gear" href="/cli/ci-cd">
+    Wire build and run into your pipeline.
+  </Card>
+  <Card title="Monitors & incidents" icon="gauge-high" href="/cli/guides/monitors-incidents">
+    Run tests on a schedule and react to failures.
+  </Card>
+</Columns>

@@ -1,0 +1,110 @@
+---
+title: Create tests from the CLI
+description: Scaffold, fill, validate, and create API, web, app, and USSD/SMS tests with ktm.
+sidebarTitle: Create tests
+---
+
+`ktm` creates tests from a JSON definition, so test authoring is scriptable and fits naturally into CI and AI coding agents like Claude Code or Codex. The flow is the same for every channel: scaffold a template for the action types you need, fill in the placeholders, validate, then create.
+
+## The flow
+
+<Steps>
+  <Step title="Browse action types">
+    `ktm tests action-types` lists every type (44 across API, web, smartphone, and SIM) with its channel.
+  </Step>
+  <Step title="Scaffold a template">
+    `ktm tests template <TYPE...> > test.json` writes one action per type, with placeholder `<...>` values.
+  </Step>
+  <Step title="Fill in the placeholders">
+    Set the request/URL, assertions, and each action's `owner` (a device identifier).
+  </Step>
+  <Step title="Validate">
+    `ktm tests validate --from-file test.json` checks the definition without creating it.
+  </Step>
+  <Step title="Create">
+    `ktm tests create --from-file test.json --product my-operator~my-product`.
+  </Step>
+</Steps>
+
+<Tip>
+  An action's `owner` takes a device identifier from `ktm resources list`: web agents by hostname (`--type web-agent`), SIMs by MSISDN (`--type sim`), smartphones by UUID (`--type smartphone`). Ownerless actions (`JAVASCRIPT`, `SLEEP`) use `""`.
+</Tip>
+
+## By channel
+
+Pick the action type that matches the scenario. Browse the full set with `ktm tests action-types`, and author the step details from the [Actions Library](/tests/actions/overview).
+
+<Tabs>
+<Tab title="API (HTTP)">
+
+```bash
+ktm tests template ETH_HTTP_API > api_test.json
+# fill in url, method, assertions...
+ktm tests create --from-file api_test.json --product my-operator~my-product
+```
+
+`ETH_HTTP_API` sends an HTTP request and asserts on status, headers, or JSON body. See [API scenarios](/tests/actions/api/overview).
+
+</Tab>
+<Tab title="Web (browser)">
+
+```bash
+ktm tests template ETH_WEB_SCRIPT_V2 > web_test.json
+ktm tests create --from-file web_test.json --product my-operator~my-product
+```
+
+`ETH_WEB_SCRIPT_V2` is the no-code web automation type (clicks, inputs, assertions). See [Web steps](/tests/actions/web/click).
+
+</Tab>
+<Tab title="Smartphone app">
+
+```bash
+ktm tests template SMARTPHONE_APP_SCRIPT_V2 > app_test.json
+ktm tests create --from-file app_test.json --product my-operator~my-product
+```
+
+`SMARTPHONE_APP_SCRIPT_V2` is the no-code app automation type for Android and iOS (taps, inputs). See [Smartphone steps](/tests/actions/smartphone/tap).
+
+</Tab>
+<Tab title="USSD / SMS">
+
+```bash
+# A USSD flow that waits for a confirmation SMS (3 steps)
+ktm tests template USSD USSD SMS_GET > sim_test.json
+ktm tests create --from-file sim_test.json --product my-operator~my-product
+```
+
+SIM types include `USSD`, `USSD_PUSH`, `SMS_GET`, and `SMS_SEND`. USSD and SMS validate through `expected_result.message` (the literal expected text), not assertions. See [SIM steps](/tests/cellular).
+
+</Tab>
+</Tabs>
+
+## Multi-step tests
+
+Pass several action types to scaffold a sequence that runs top to bottom:
+
+```bash
+# Authenticated API flow: call, process the response, call again
+ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_flow.json
+```
+
+Use a `JAVASCRIPT` action between API calls to build a request body or transform data with `test.variables.get()` / `set()`.
+
+## Pin an environment
+
+Tests resolve each variable's value per variant. Pin a group's variant at create time (others use their default):
+
+```bash
+ktm tests create --from-file test.json --product acme~web --variant API:Staging
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Build & run campaigns" icon="play" href="/cli/guides/run-campaigns">
+    Turn your tests into a runnable campaign and read results.
+  </Card>
+  <Card title="Actions Library" icon="bolt" href="/tests/actions/overview">
+    Author the step details for each channel.
+  </Card>
+</Columns>

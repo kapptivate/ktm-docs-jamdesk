@@ -1,0 +1,55 @@
+---
+title: Microsoft Copilot Studio
+description: Connect the Kapptivate MCP server to a Copilot Studio agent in Microsoft 365.
+sidebarTitle: Copilot Studio (M365)
+---
+
+Microsoft Copilot Studio can call the Kapptivate MCP server as a tool, so makers in your Microsoft 365 tenant build agents that run tests, read monitors, and investigate incidents. Copilot Studio uses the Streamable HTTP transport, which the Kapptivate server speaks natively.
+
+## Add the server
+
+<Steps>
+  <Step title="Open the MCP wizard">
+    In your agent, go to **Tools**, then **Add a tool**, **New tool**, and **Model Context Protocol**.
+  </Step>
+  <Step title="Server details">
+    Set a **Server name** (for example, Kapptivate), a short **Server description** (the orchestrator uses it to decide when to call the server), and the **Server URL**:
+
+    ```
+    https://mcp.kapptivate.com/mcp
+    ```
+  </Step>
+  <Step title="Authentication">
+    Choose **API key**, set the type to **Header**, and enter the header name:
+
+    ```
+    X-Kapptivate-API-Key
+    ```
+  </Step>
+  <Step title="Create the connection">
+    Select **Create**, then **Create a new connection**, paste your Kapptivate API key as the value, and **Add to agent**.
+  </Step>
+</Steps>
+
+<Warning>
+  The API key carries the same access as the Kapptivate account it belongs to. Treat it like a password and prefer a dedicated service account for shared agents.
+</Warning>
+
+## If the custom header is not forwarded
+
+The wizard's API-key-in-header option is the supported path. Some older Copilot Studio configurations do not forward `X-` prefixed headers added manually through a custom connector. If you hit that, create a **Custom connector** in Power Apps from an OpenAPI file that declares the `X-Kapptivate-API-Key` header and the streamable MCP operation (`x-ms-agentic-protocol: mcp-streamable-1.0`), then add that connector as the tool.
+
+## Governance
+
+Access goes through Power Platform connectors, so any data loss prevention (DLP) policy that governs connectors also governs this MCP server and its tools for your agents. Scope a dedicated API key per environment so you can rotate or revoke it independently.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Example prompts" icon="robot" href="/mcp/examples">
+    What to ask once the agent is connected.
+  </Card>
+  <Card title="Google Gemini" icon="sparkles" href="/mcp/integrations/gemini">
+    Connect Gemini for your organisation.
+  </Card>
+</Columns>

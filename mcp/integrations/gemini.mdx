@@ -1,0 +1,58 @@
+---
+title: Google Gemini
+description: Connect the Kapptivate MCP server to Google Gemini, from the Gemini CLI to enterprise agents.
+sidebarTitle: Gemini
+---
+
+Google's Gemini tooling speaks the Model Context Protocol. The most direct path is the Gemini CLI, which connects to the Kapptivate MCP server over streamable HTTP with a custom authentication header. The same endpoint and header work anywhere Gemini supports MCP tools.
+
+## Gemini CLI
+
+Add the server with one command:
+
+```bash
+gemini mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
+  --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
+```
+
+Or configure it in `~/.gemini/settings.json` (all projects) or `.gemini/settings.json` (one project):
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "httpUrl": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "${KAPPTIVATE_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Use `httpUrl` for the streamable HTTP transport (the `url` field is for SSE, which the server does not use). Header values support `${VAR}` substitution, so keep the key in an environment variable rather than committing it.
+
+<Warning>
+  The API key carries the same access as your Kapptivate account. Treat it like a password, and use a dedicated service account for shared or automated agents.
+</Warning>
+
+## At organisation scale
+
+For large deployments, point your Gemini agent tooling (including Vertex AI agent builders and Gemini Enterprise) at the same endpoint:
+
+```
+https://mcp.kapptivate.com/mcp
+```
+
+Send the `X-Kapptivate-API-Key` header on every request and store the key in your secret manager. Scope one key per environment so you can rotate or revoke it independently.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Example prompts" icon="robot" href="/mcp/examples">
+    What to ask once Gemini is connected.
+  </Card>
+  <Card title="Copilot Studio" icon="robot" href="/mcp/integrations/copilot-studio">
+    Connect Microsoft 365 Copilot Studio.
+  </Card>
+</Columns>
