@@ -1,0 +1,51 @@
+---
+title: "delete_variable_group"
+description: "Delete a variable group."
+sidebarTitle: "delete_variable_group"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Delete a variable group.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Yes | Must be true to confirm the delete |
+| `force` | boolean | No | Bypass the non-empty check (default false) |
+| `group_id` | number | Yes | Variable group id |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "group_id": 0,
+  "acknowledge": false
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Delete a variable group. Safe by default: refuses if the group still contains variables, listing them. acknowledge=true is required. force=true bypasses the local non-empty check; the backend's own refusal still applies.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

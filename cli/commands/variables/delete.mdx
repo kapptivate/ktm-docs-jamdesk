@@ -1,0 +1,43 @@
+---
+title: "ktm variables delete"
+description: "Delete a variable; refuses if any test references it"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Delete a variable; refuses if any test references it
+
+## Usage
+
+```bash
+ktm variables delete <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Refuses if any test references the variable, listing the references. The
+platform's DELETE endpoint enforces the same guard server-side and exposes no
+override, so there is no --force flag here — remove the references first via
+'ktm tests edit' (or delete the referencing tests) and re-run delete.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

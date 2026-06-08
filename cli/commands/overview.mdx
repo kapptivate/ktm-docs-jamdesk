@@ -1,0 +1,103 @@
+---
+title: "CLI command reference"
+description: "Every ktm command, grouped by resource (21 top-level commands)."
+sidebarTitle: "Overview"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+The `ktm` CLI groups commands by resource. It exposes **123 commands** across 21 top-level groups. Pick a group below, or use the sidebar.
+
+## Global flags
+
+These flags apply to every command:
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--api-key-file` | string | — | Path to file containing API key (alternative to KAPPTIVATE_API_KEY env var) |
+| `-d, --debug` | boolean | — | Enable debug output: HTTP requests, timing, and verbose errors on stderr |
+| `--host` | string | — | API host (env: KAPPTIVATE_HOST, default: app.kapptivate.com) |
+| `--no-color` | boolean | — | Disable colored output (also: NO_COLOR env, TERM=dumb) |
+| `--no-proxy` | boolean | — | Disable HTTP proxy from environment |
+| `-o, --output` | string | `json` | Output format: json, table, or plain (TSV) |
+| `-q, --quiet` | boolean | — | Suppress info-level log lines on stderr, only show errors |
+| `--skip-tls` | boolean | — | Skip TLS certificate verification (insecure) |
+
+## Commands
+
+<Columns cols={2}>
+  <Card title="adb" icon="angle-right" href="/cli/commands/adb">
+    ADB — remote Android Debug Bridge tunnel to smartphone robots
+  </Card>
+  <Card title="agents" icon="angle-right" href="/cli/commands/agents">
+    Agents — infrastructure health, capacity, and management
+  </Card>
+  <Card title="alerts" icon="angle-right" href="/cli/commands/alerts">
+    Alert definitions — persistent rules that automatically trigger incidents on the platform
+  </Card>
+  <Card title="artifacts" icon="angle-right" href="/cli/commands/artifacts">
+    Artifacts — fetch screenshots, recordings, and other test artifacts
+  </Card>
+  <Card title="ci" icon="angle-right" href="/cli/commands/ci">
+    CI/CD test execution — run tests from JSON config files and report results
+  </Card>
+  <Card title="collections" icon="angle-right" href="/cli/commands/collections">
+    Collections — hierarchical tree of tests and dashboards (kcollections service)
+  </Card>
+  <Card title="dashboards" icon="angle-right" href="/cli/commands/dashboards">
+    Dashboards — operator-level analytics dashboards with metric widgets
+  </Card>
+  <Card title="executions" icon="angle-right" href="/cli/commands/executions">
+    Executions — campaign run results with per-test pass/fail data
+  </Card>
+  <Card title="incidents" icon="angle-right" href="/cli/commands/incidents">
+    Incidents — triggered alerts on the platform (OPEN, CLOSED, MANUALLY_CLOSED)
+  </Card>
+  <Card title="metrics" icon="angle-right" href="/cli/commands/metrics">
+    Metrics — query monitor KPIs, passive collector data, and device utilization from InfluxDB
+  </Card>
+  <Card title="monitors" icon="angle-right" href="/cli/commands/monitors">
+    Monitors — scheduled recurring executions of tests with status tracking
+  </Card>
+  <Card title="operators" icon="angle-right" href="/cli/commands/operators">
+    Operators — top-level organisational entities that own products, tests, and users
+  </Card>
+  <Card title="products" icon="angle-right" href="/cli/commands/products">
+    Products — applications or services under an operator that contain tests and monitors
+  </Card>
+  <Card title="resources" icon="angle-right" href="/cli/commands/resources">
+    Resources — SIMs, web agents, and smartphones available for test execution
+  </Card>
+  <Card title="reusables" icon="angle-right" href="/cli/commands/reusables">
+    Reusables — shared test fragments (tests with kind=2) embedded via import actions
+  </Card>
+  <Card title="shell" icon="angle-right" href="/cli/commands/shell">
+    Shell — interactive live sessions on SIM cards and web agents
+  </Card>
+  <Card title="status" icon="angle-right" href="/cli/commands/status">
+    Check connectivity, authentication, and CLI version
+  </Card>
+  <Card title="test-campaigns" icon="angle-right" href="/cli/commands/test-campaigns">
+    Tests campaigns — named ordered packs of tests (backed by /api/suites/)
+  </Card>
+  <Card title="tests" icon="angle-right" href="/cli/commands/tests">
+    Tests — automated test scenarios that can be executed and monitored
+  </Card>
+  <Card title="users" icon="angle-right" href="/cli/commands/users">
+    Users — human users and service accounts with access to the platform
+  </Card>
+  <Card title="variables" icon="angle-right" href="/cli/commands/variables">
+    Variables, groups, and variants — product-scoped configuration
+  </Card>
+</Columns>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/cli/ci-cd">
+    Run tests from your pipeline.
+  </Card>
+</Columns>

@@ -1,0 +1,69 @@
+---
+title: "ktm executions list"
+description: "List recent test executions for a product"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List recent test executions for a product
+
+## Usage
+
+```bash
+ktm executions list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--creator` | string | — | Filter by creator username |
+| `--from-date` | string | — | Only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z) |
+| `--operator` | string | — | Operator slug (from 'operators list') |
+| `--ordering` | string | — | Sort field: created or -created (default: -created) |
+| `--page` | string | — | Page number to fetch (default: 1) |
+| `--page-size` | string | — | Number of executions per page (default: 20, max: 4000) |
+| `--product` | string | — | Product slug (format: operator~product, from 'products list') |
+| `--search` | string | — | Free-text search across execution name and tags |
+| `--status` | string | — | Filter by execution status: success, failed, ongoing, pending, canceled, timed out, maintenance |
+| `--to-date` | string | — | Only include executions before this date (ISO 8601) |
+
+## Details
+
+List test executions (campaign runs) from the platform.
+
+An execution is a single campaign run containing one or more tests with their
+results. Each execution has an overall status and per-test pass/fail counts.
+
+Status values: success, failed, ongoing, pending, canceled, timed out, maintenance.
+
+Use this command to review execution history, find failed runs, identify patterns,
+or locate a specific execution by name or time range.
+
+Filters:
+  --product    product slug (format: operator~product, from 'products list')
+  --operator   operator slug (from 'operators list')
+  --status     filter by status: success, failed, ongoing, pending, canceled, timed out, maintenance
+  --creator    filter by creator username
+  --search     free-text search across execution name and tags
+  --from-date  only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z)
+  --to-date    only include executions before this date (ISO 8601)
+  --ordering   sort field: created or -created (default: -created, newest first)
+  --page       page number (default: 1)
+  --page-size  results per page (default: 20, max: 4000)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

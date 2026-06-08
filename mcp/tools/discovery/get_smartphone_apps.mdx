@@ -1,0 +1,50 @@
+---
+title: "get_smartphone_apps"
+description: "List installable apps on a smartphone device for V2/classic smartphone test authoring — copy `package` → `starting.app`, the app → `meta`."
+sidebarTitle: "get_smartphone_apps"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List installable apps on a smartphone device for V2/classic smartphone test authoring — copy `package` → `starting.app`, the app → `meta`.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full app objects \{kind,name,label,package,version\} instead of compact lines (default: false) |
+| `filter` | string | No | Case-insensitive substring filter on package name or app name |
+| `serial` | string | Yes | Device UUID/serial (from list_resources type=smartphone) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "serial": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+List installable apps on a smartphone device for V2/classic smartphone test authoring — copy `package` → `starting.app`, the app → `meta`. Find serials via `list_resources type=smartphone`. Compact by default; use filter= to narrow, detail=true for full objects.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

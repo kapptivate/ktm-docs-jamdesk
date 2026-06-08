@@ -1,0 +1,74 @@
+---
+title: "ktm variables"
+description: "Variables, groups, and variants — product-scoped configuration"
+sidebarTitle: "variables"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Variables, groups, and variants — product-scoped configuration
+
+## Usage
+
+```bash
+ktm variables [command]
+```
+
+## Subcommands
+
+<Columns cols={2}>
+  <Card title="create" icon="angle-right" href="/cli/commands/variables/create">
+    Create a variable (single | secret | choice)
+  </Card>
+  <Card title="delete" icon="angle-right" href="/cli/commands/variables/delete">
+    Delete a variable; refuses if any test references it
+  </Card>
+  <Card title="duplicate" icon="angle-right" href="/cli/commands/variables/duplicate">
+    Clone a variable under a new name (atomic; preserves type and values)
+  </Card>
+  <Card title="groups" icon="angle-right" href="/cli/commands/variables/groups">
+    Variable groups — environment configurations holding a set of variants
+  </Card>
+  <Card title="list" icon="angle-right" href="/cli/commands/variables/list">
+    List variables for a product (with scope, group, type, usage, and variant filters)
+  </Card>
+  <Card title="set-value" icon="angle-right" href="/cli/commands/variables/set-value">
+    Set ONE variant's value on a grouped variable (preserves other variants)
+  </Card>
+  <Card title="show" icon="angle-right" href="/cli/commands/variables/show">
+    Fetch a single variable, rich-by-default with usage; --lite skips usage
+  </Card>
+  <Card title="update" icon="angle-right" href="/cli/commands/variables/update">
+    Update a variable's name, description, and/or default_value (properties only)
+  </Card>
+  <Card title="variants" icon="angle-right" href="/cli/commands/variables/variants">
+    Variants — environment slices inside a variable group (dev, staging, prod, …)
+  </Card>
+</Columns>
+
+## Details
+
+Manage variables, variable groups, and variants from a single command tree.
+
+The variable system is organised as Product → Variables → Groups → Variants:
+  - Variables  — typed values used by tests and monitors at runtime (single, secret, choice).
+  - Groups     — environment configurations that hold a set of variants.
+  - Variants   — environment slices inside a group (e.g. dev, staging, prod).
+
+Each operation is a dedicated single-purpose subcommand so the verb is always
+unambiguous.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

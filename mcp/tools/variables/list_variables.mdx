@@ -1,0 +1,63 @@
+---
+title: "list_variables"
+description: "List variables for a product."
+sidebarTitle: "list_variables"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List variables for a product.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full JSON instead of compact one-liners (default: false) |
+| `group` | number | No | Optional: variable group id — restrict to that group |
+| `product` | string | Yes | Product slug (operator~product) |
+| `scope` | string (global \| grouped \| all) | No | global \| grouped \| all (default: all) |
+| `type` | string (single \| secret \| choice) | No | single \| secret \| choice |
+| `used` | string (true \| false) | No | true \| false — filter by usage state (omit for all) |
+| `variant` | string | No | Variant name or id — restrict to variables carrying this variant |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+List variables for a product. Default scope returns ALL variables (global + grouped) via the V3 product_variables endpoint.
+
+Filter set:
+  - scope:   "global" | "grouped" | "all" (default: "all")
+  - group:   numeric variable group id — restrict to one group
+  - type:    "single" | "secret" | "choice" — filter by type
+  - used:    "true" | "false" — filter by usage state (omits unused tests)
+  - variant: variant name or id — restrict to variables that carry the variant
+
+By default returns compact one-liners; pass detail=true for the full JSON shape including per-variant values. Secrets are returned masked by the platform.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

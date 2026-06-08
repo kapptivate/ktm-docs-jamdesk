@@ -1,0 +1,56 @@
+---
+title: "ktm collections items"
+description: "List items (tests + dashboards) inside a collection"
+sidebarTitle: "items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List items (tests + dashboards) inside a collection
+
+## Usage
+
+```bash
+ktm collections items <uid> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (required) |
+| `--page` | int | — | Page number |
+| `--page-size` | int | — | Items per page (default: 25) |
+
+## Details
+
+Paginated list of items directly inside the collection (sub-collections
+are NOT included — use 'ktm collections list' for those). Items are tests,
+reusable_tests, or dashboards; human-readable name / status come from the
+kcollections meta blob.
+
+The kcollections service defaults sort_by=updated_at order=desc when the
+client doesn't specify; this matches the web UI.
+
+Backed by GET /kcollections/api/collections/\{uid\}/items.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

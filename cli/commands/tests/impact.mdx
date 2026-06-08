@@ -1,0 +1,42 @@
+---
+title: "ktm tests impact"
+description: "Check what test campaigns and monitors depend on a test"
+sidebarTitle: "impact"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Check what test campaigns and monitors depend on a test
+
+## Usage
+
+```bash
+ktm tests impact <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Check the blast radius of a test by listing all test campaigns and monitors
+that reference it. Use this before modifying or deleting a test to understand
+the downstream impact.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

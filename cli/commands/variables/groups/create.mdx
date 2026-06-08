@@ -1,0 +1,45 @@
+---
+title: "ktm variables groups create"
+description: "Create a variable group with variants"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a variable group with variants
+
+## Usage
+
+```bash
+ktm variables groups create [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Group name (required) |
+| `--product` | string | — | Product slug (required) |
+| `--variants` | string | — | Comma-separated variant names (required) |
+
+## Details
+
+Create a new variable group under a product. --variants is a comma-separated
+list of variant names (e.g. "Dev,Staging,Prod"). The FIRST variant becomes the
+default per platform convention. After creation, manage variants via
+'ktm variables variants &lt;verb&gt;'.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,70 @@
+---
+title: "ktm ci build"
+description: "Generate a campaign JSON template from test IDs or a saved Tests campaign (local-only, no execution)"
+sidebarTitle: "build"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Generate a campaign JSON template from test IDs or a saved Tests campaign (local-only, no execution)
+
+## Usage
+
+```bash
+ktm ci build [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Campaign name (optional, defaults to empty) |
+| `--product` | string | — | Product slug (format: operator~product). Required with --test-ids (resolves V3 variable buckets); not needed with --test-campaign (auto-derived). |
+| `--test-campaign` | int | — | Saved Tests campaign id (mutually exclusive with --test-ids; product auto-derived) |
+| `--test-ids` | string | — | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
+| `--variant` | string[] | — | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
+
+## Details
+
+Build a campaign JSON template by fetching test details and emitting a
+self-documenting structure ready to be piped into "ci run --stdin".
+
+The output is a JSON template with a "_meta" key that tells an AI agent what
+kind each variable is and what resource type each owner expects. The agent
+fills in values and pipes the result to "ci run --stdin".
+
+The "_meta" key is stripped automatically by "ci run --stdin". The "_meta" key
+provides test names that appear in per-test result output when the campaign is
+executed via "ci run --stdin".
+
+--variant is repeatable, per-group. Each spec pins one variable group.
+Globals always emit a "global" bucket. Variables in unpinned groups use
+that group's default variant. The legacy single-scope --variable-group
+flag has been removed.
+
+Campaign JSON schema:
+  name              — campaign name (optional)
+  run_origin        — 1 (from test IDs) or 2 (from a saved Tests campaign)
+  tests[]           — array of test entries:
+    id              — test ID (from tests list)
+    input_variables — key/value map of variable names to \{value, bucket\} pairs
+    direct_owners   — key/value map of owner labels to resource identifiers
+
+Sources (exactly one required):
+  --test-ids          comma-separated test IDs (from 'tests list')
+  --test-campaign     saved Tests campaign id (auto-derives product; --product not needed)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

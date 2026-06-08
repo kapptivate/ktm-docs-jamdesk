@@ -1,0 +1,52 @@
+---
+title: "list_products"
+description: "List products under an operator."
+sidebarTitle: "list_products"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List products under an operator.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | No | Filter by active status |
+| `detail` | boolean | No | Return full JSON instead of compact summaries (default: false) |
+| `name` | string | No | Filter by product name |
+| `operator` | string | No | Filter by operator slug |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "active": false,
+  "detail": false
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List products under an operator. Products contain tests, monitors, and resources. Product slug format: operator~product.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

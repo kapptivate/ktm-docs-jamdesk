@@ -1,0 +1,62 @@
+---
+title: "build_campaign"
+description: "Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both)."
+sidebarTitle: "build_campaign"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both).
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | No | Optional campaign name |
+| `product` | string | No | Product slug (format: operator~product). Required when test_ids is used with "variants". Auto-derived from the Tests campaign when test_campaign_id is used. |
+| `test_campaign_id` | number | No | Tests campaign ID (from list_test_campaigns). Exactly one of test_ids or test_campaign_id is required. Product is auto-derived from the Tests campaign. |
+| `test_ids` | string | No | Comma-separated test IDs (from list_tests). Exactly one of test_ids or test_campaign_id is required. |
+| `variants` | array | No | Pin a variant per variable group. Each entry is "5" (numeric variant ID) or "GroupName:VariantName" (e.g., "API:Staging"). Repeatable. Variables in unpinned groups use that group's default variant. Globals always emit \{type:"global"\}. Mixing numeric and name forms is allowed. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "name": "string",
+  "product": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both).
+
+SOURCE: test_ids — build an ad-hoc campaign from explicit test IDs.
+SOURCE: test_campaign_id — load a saved Tests campaign and produce the same campaign template (product auto-derived). To create/save a reusable pack instead, use create_test_campaign; building from a Tests campaign never modifies it.
+
+Two distinct concepts — don't confuse them: a "Tests campaign" is the SAVED, named pack you CRUD (see list_test_campaigns); a "campaign" is the throwaway JSON you build here and pass to run_campaign.
+
+The template includes empty variable slots. Use get_test_detail to understand what each test needs, and list_resources to find device identifiers for direct_owners. Pass the template to run_campaign with an overrides map to fill or override values.
+
+Pin variants per group via the variants array — same shape as create_monitor. Globals always emit a "global" bucket. Variables in unpinned groups use that group's default variant. The backend's _resolve_empty_variable handler fills values at launch from each variable's own bucket.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

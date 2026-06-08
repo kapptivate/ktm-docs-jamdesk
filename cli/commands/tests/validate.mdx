@@ -1,0 +1,43 @@
+---
+title: "ktm tests validate"
+description: "Validate a test JSON file without creating it"
+sidebarTitle: "validate"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Validate a test JSON file without creating it
+
+## Usage
+
+```bash
+ktm tests validate [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--from-file` | string | — | Path to JSON file to validate (required) |
+
+## Details
+
+Dry-run validate a test JSON payload without hitting the API.
+
+Checks: action types, owner presence, required command fields, variables structure.
+Returns structured errors and warnings with JSON paths.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

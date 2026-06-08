@@ -1,0 +1,4222 @@
+{
+  "meta": {
+    "kind": "mcp",
+    "source": "mcp-live",
+    "serverName": "ktm",
+    "serverVersion": "1.4.0-beta.3",
+    "count": 105
+  },
+  "items": [
+    {
+      "id": "get_full_test",
+      "name": "get_full_test",
+      "title": "get_full_test",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "Get the complete test definition including actions, variables, dependencies, monitors, and all metadata.",
+      "description": "Get the complete test definition including actions, variables, dependencies, monitors, and all metadata. Returns a summary object plus the full test object. Use get_test_detail instead when you only need variables and owners for campaign building.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "test_id": {
+            "description": "The test ID (from list_tests)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_smartphone_apps",
+      "name": "get_smartphone_apps",
+      "title": "get_smartphone_apps",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List installable apps on a smartphone device for V2/classic smartphone test authoring — copy `package` → `starting.app`, the app → `meta`.",
+      "description": "List installable apps on a smartphone device for V2/classic smartphone test authoring — copy `package` → `starting.app`, the app → `meta`. Find serials via `list_resources type=smartphone`. Compact by default; use filter= to narrow, detail=true for full objects.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full app objects {kind,name,label,package,version} instead of compact lines (default: false)",
+            "type": "boolean"
+          },
+          "filter": {
+            "description": "Case-insensitive substring filter on package name or app name",
+            "type": "string"
+          },
+          "serial": {
+            "description": "Device UUID/serial (from list_resources type=smartphone)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "serial"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_test_detail",
+      "name": "get_test_detail",
+      "title": "get_test_detail",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "Get test summary: name, status, product, input_variables, owners.",
+      "description": "Get test summary: name, status, product, input_variables, owners. Use this before build_campaign to understand what values are needed. This is the FAST, minimal endpoint. For full definition with actions/assertions, use get_full_test instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "test_id": {
+            "description": "The test ID (from list_tests)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_test_impact",
+      "name": "get_test_impact",
+      "title": "get_test_impact",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "Check what Tests campaigns and monitors depend on a test (blast radius).",
+      "description": "Check what Tests campaigns and monitors depend on a test (blast radius). Call this before suggesting modifications to understand the downstream impact. Returns a list of impacted items with their type (test_campaign or monitoring) and the action that would be affected (delete or update).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "test_id": {
+            "description": "The test ID (from list_tests)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_monitors",
+      "name": "list_monitors",
+      "title": "list_monitors",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List scheduled test monitors.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List scheduled test monitors. Monitors run tests on recurring schedules and write KPI metrics to InfluxDB. Can filter by operator/product or by specific device (device_type + device_id).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "Filter by active status",
+            "type": "boolean"
+          },
+          "archived": {
+            "description": "Filter by archived status when using device_type/device_id (default: false)",
+            "type": "boolean"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "device_id": {
+            "description": "Device identifier to query monitors for. SIM: national_msisdn, web-agent: hostname, smartphone: UUID. Must be used with device_type and operator.",
+            "type": "string"
+          },
+          "device_type": {
+            "description": "Device type to query monitors for: sim, web-agent, or smartphone. Must be used with device_id and operator. Returns monitors assigned to the specific device.",
+            "enum": [
+              "sim",
+              "web-agent",
+              "smartphone"
+            ],
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (from list_operators). Required for all queries.",
+            "type": "string"
+          },
+          "product": {
+            "description": "Filter by product slug (format: operator~product)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_operators",
+      "name": "list_operators",
+      "title": "list_operators",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List operators accessible with the current API key.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List operators accessible with the current API key. Operators are the top-level organisational unit in Kapptivate.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "organisation_group": {
+            "description": "Filter by organisation group",
+            "type": "string"
+          },
+          "short_name": {
+            "description": "Filter by operator short name",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_products",
+      "name": "list_products",
+      "title": "list_products",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List products under an operator.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List products under an operator. Products contain tests, monitors, and resources. Product slug format: operator~product.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "Filter by active status",
+            "type": "boolean"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Filter by product name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Filter by operator slug",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_resources",
+      "name": "list_resources",
+      "title": "list_resources",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List resources (SIMs, web agents, smartphones) for test execution and test creation.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List resources (SIMs, web agents, smartphones) for test execution and test creation. Resource identifiers become action owners: SIM→national_msisdn, web agent→hostname, smartphone→UUID. Defaults to online/available and configured resources. To list installable apps on a specific smartphone, use get_smartphone_apps instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "available": {
+            "description": "Filter by online/available status (default: true). Set to false to include offline resources.",
+            "type": "boolean"
+          },
+          "configured": {
+            "description": "Filter by configured status (default: true). Configured means: SIM has national_msisdn, agent has hostname, smartphone has props.",
+            "type": "boolean"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "product": {
+            "description": "Product slug (required, format: operator~product)",
+            "type": "string"
+          },
+          "type": {
+            "description": "Resource type filter: sim, web-agent, smartphone (omit for all three)",
+            "enum": [
+              "sim",
+              "web-agent",
+              "smartphone"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_tests",
+      "name": "list_tests",
+      "title": "list_tests",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List test scenarios.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List test scenarios. Tests belong to a product and can be executed via campaigns.\n\nFlat discovery: returns all tests in a product (paginated, filterable by name/tag/status). For folder-based browsing, use list_collections → list_collection_items instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "archived": {
+            "description": "Filter by archived status",
+            "type": "boolean"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Filter by test name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Filter by operator slug",
+            "type": "string"
+          },
+          "ordering": {
+            "description": "Sort order (e.g. 'name', '-name', 'id', '-id')",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default: 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Number of tests to return per page (default: 20)",
+            "type": "number"
+          },
+          "product": {
+            "description": "Filter by product slug (format: operator~product)",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Filter by tags (comma-separated)",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_users",
+      "name": "list_users",
+      "title": "list_users",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "List user accounts, including human users (type=user) and API service accounts (type=server).",
+      "description": "List user accounts, including human users (type=user) and API service accounts (type=server). Returns all users as compact one-liner summaries by default (no truncation). Use search to find by username, email, or name. Always pass operator to scope results — can return 600+ users without filters. Defaults to active users only (is_active=true) when is_active is not specified.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Switch output format to raw JSON objects (default: false). The default compact format already shows all users — only use detail=true when you need full JSON fields like roles, groups, or email.",
+            "type": "boolean"
+          },
+          "is_active": {
+            "description": "Filter by active status",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Filter by operator slug",
+            "type": "string"
+          },
+          "search": {
+            "description": "Search by username, first name, last name, or email",
+            "type": "string"
+          },
+          "type": {
+            "description": "Filter by user type. Omit for all.",
+            "enum": [
+              "user",
+              "server"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "platform_guide",
+      "name": "platform_guide",
+      "title": "platform_guide",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "Get a structured guide to the Kapptivate platform.",
+      "description": "Get a structured guide to the Kapptivate platform. Call with no topic for the entity hierarchy map and common workflows. Call with a specific topic for step-by-step workflow guidance. Topics: overview, execution, test_creation, test_editing, variables, test_campaigns, collections, reusables, monitoring, metrics, dashboards, shell, alerts.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "topic": {
+            "description": "Guide topic (default: overview). One of the listed topics.",
+            "enum": [
+              "overview",
+              "execution",
+              "test_creation",
+              "test_editing",
+              "variables",
+              "test_campaigns",
+              "collections",
+              "reusables",
+              "monitoring",
+              "metrics",
+              "dashboards",
+              "shell",
+              "alerts"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "toggle_user_status",
+      "name": "toggle_user_status",
+      "title": "toggle_user_status",
+      "category": "Discovery",
+      "categorySlug": "discovery",
+      "summary": "Activate or deactivate a user account.",
+      "description": "Activate or deactivate a user account. Requires superadmin or EDIT_OPERATOR_ADMIN permission. Use list_users to find user IDs.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "true to activate, false to deactivate",
+            "type": "boolean"
+          },
+          "user_id": {
+            "description": "User ID to activate or deactivate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "user_id",
+          "active"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_test",
+      "name": "create_test",
+      "title": "create_test",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Create a new test from a JSON definition.",
+      "description": "Create a new test from a JSON definition. Runs structural validation before submitting. Product slug is resolved to ID + root collection UID automatically.\n\nV3 buckets: every non-global input_variable gets an auto-resolved bucket pointing at (variable_group, variant). Pass variants=[\"API:Staging\", \"Database:Replica\"] (repeatable forms: numeric variant ID or 'group:variant' name) to pin specific variants per group; groups not pinned use their default variant. Globals always emit {type:\"global\"}.\n\nKind validation: declared input_variable.kind must match the platform's variable type (1/3 → \"regular\", 2 → \"secret\"). Mismatches are hard errors by default. Pass auto_correct_kinds=true to rewrite mismatches in-place.\n\nPREREQUISITE: call platform_guide topic=test_creation for the full workflow, owner mapping, and variable substitution rules.\nWorkflow: list_action_types → get_test_template → list_resources → customize → validate_test → create_test.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "actions": {
+            "description": "JSON array of actions",
+            "type": "string"
+          },
+          "auto_correct_kinds": {
+            "description": "Rewrite declared input_variable kinds to match the platform's variable types. Default false: kind mismatches are hard errors.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "Test description (required) — explain what this test verifies",
+            "type": "string"
+          },
+          "kind": {
+            "description": "Test kind: 1=test (default), 2=reusable V2 component (V2 action types only: ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2)",
+            "type": "number"
+          },
+          "name": {
+            "description": "Test name",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug (resolved to ID + root collection UID automatically)",
+            "type": "string"
+          },
+          "variables": {
+            "description": "JSON variables object with input_variables, output_variables, owners",
+            "type": "string"
+          },
+          "variants": {
+            "description": "Variant pin specifiers (V3 bucket resolution). Each item is either '5' (numeric variant ID) or 'API:Staging' (group:variant by name, case-sensitive). Repeat for multi-group: [\"API:Staging\", \"Database:Replica\", \"Frontend:Canary\"]. Groups not pinned use their default variant.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "product",
+          "name",
+          "description",
+          "actions",
+          "variables"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_test_template",
+      "name": "get_test_template",
+      "title": "get_test_template",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Returns a ready-to-customize test JSON template for the specified action types.",
+      "description": "Returns a ready-to-customize test JSON template for the specified action types. Includes default command fields, assertion_sources, and store_sources. Replace <...> placeholders with real values from list_resources. Multi-step: pass comma-separated types (e.g. 'USSD,USSD,SMS_GET').",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "action_types": {
+            "description": "Comma-separated list of action types for the test steps, e.g. 'ETH_HTTP_API' or 'USSD,USSD,SMS_GET'",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action_types"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_action_types",
+      "name": "list_action_types",
+      "title": "list_action_types",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Returns the catalog of available action types for test creation, grouped by owner_kind (ETHERNET, SIM, SMARTPHONE, OWNERLESS).",
+      "description": "Returns the catalog of available action types for test creation, grouped by owner_kind (ETHERNET, SIM, SMARTPHONE, OWNERLESS). Use get_test_template with specific type(s) for ready-to-use test structures with default command fields. For V2 step-based tests, use list_step_types instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "owner_kind": {
+            "description": "Filter by owner kind: ETHERNET, SIM, SMARTPHONE, or OWNERLESS",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_step_types",
+      "name": "list_step_types",
+      "title": "list_step_types",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Returns the catalog of available step types for v2 test actions (ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2).",
+      "description": "Returns the catalog of available step types for v2 test actions (ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2). Each step type has a versioned identifier (e.g. \"click/v1.0.0\"), platform compatibility, and whether it requires a locator. Use this to discover what steps can be added to a v2 no-code test. For classic test types (SIM, ETH non-web), use list_action_types instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "If true, return full JSON with input schemas. Default: compact one-liner format.",
+            "type": "boolean"
+          },
+          "platform": {
+            "description": "Filter by platform: web, smartphone, or omit for all",
+            "enum": [
+              "web",
+              "smartphone"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "manage_test_lifecycle",
+      "name": "manage_test_lifecycle",
+      "title": "manage_test_lifecycle",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Manage a test's lifecycle state: trash, restore, archive, or unarchive.",
+      "description": "Manage a test's lifecycle state: trash, restore, archive, or unarchive.\n\n- trash: soft-delete to the product's test-trash collection (reversible via restore)\n- restore: pull a trashed test back out of trash\n- archive: mark a test as archived (keeps it visible but inactive)\n- unarchive: reactivate an archived test\n\nRequires acknowledge=true for destructive actions (trash, archive). Edit-budget gated.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true for destructive actions (trash, archive)",
+            "type": "boolean"
+          },
+          "action": {
+            "description": "Lifecycle action: trash, restore, archive, unarchive",
+            "enum": [
+              "trash",
+              "restore",
+              "archive",
+              "unarchive"
+            ],
+            "type": "string"
+          },
+          "kind": {
+            "description": "1 = regular test (default), 2 = reusable V2 component",
+            "type": "number"
+          },
+          "test_id": {
+            "description": "Test id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "action",
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "validate_test",
+      "name": "validate_test",
+      "title": "validate_test",
+      "category": "Test Management",
+      "categorySlug": "test-management",
+      "summary": "Dry-run validate a test JSON payload without creating it.",
+      "description": "Dry-run validate a test JSON payload without creating it. Returns structured errors and warnings with JSON paths. Catches: unknown action types, missing owners, placeholders, missing command fields, invalid variables structure.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "test_json": {
+            "description": "Complete test JSON payload to validate",
+            "type": "string"
+          }
+        },
+        "required": [
+          "test_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "edit_test",
+      "name": "edit_test",
+      "title": "edit_test",
+      "category": "Test Editing",
+      "categorySlug": "test-editing",
+      "summary": "Apply changes to an existing test.",
+      "description": "Apply changes to an existing test. DESTRUCTIVE — creates a new version automatically.\n\nPREREQUISITE: call platform_guide topic=test_editing for the guardrailed workflow and protected fields.\nALWAYS preview first with preview_test_edit to check impact.\nProtected fields: product and collection_uid are NEVER changed. Name and description only change when explicitly provided.\nA per-test edit limit is enforced (5 per session). Check edits_remaining in the response.\n\nTop-level metadata that's now always preserved on PUT and editable via this tool: archived, is_favorite, status. Pass archived=true to archive the test without touching actions; use manage_test_lifecycle action=archive (or action=unarchive) for the common case.\n\nskip_validation=true bypasses the client-side validator. Use only when the test has an action type this MCP server's registry doesn't know (future types), or when you're only flipping a top-level flag like archived. The backend will still validate.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval.",
+            "type": "boolean"
+          },
+          "actions": {
+            "description": "JSON array of actions (replaces current actions)",
+            "type": "string"
+          },
+          "archived": {
+            "description": "Flip the archived flag",
+            "type": "boolean"
+          },
+          "auto_correct_kinds": {
+            "description": "Rewrite declared input_variable kinds to match the platform's variable types. Default false: kind mismatches are hard errors.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "New test description (only if explicitly changing it)",
+            "type": "string"
+          },
+          "is_favorite": {
+            "description": "Flip the is_favorite flag",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "New test name (only if explicitly changing it)",
+            "type": "string"
+          },
+          "skip_validation": {
+            "description": "Bypass the client-side validator (backend still validates). Use for action types the CLI doesn't recognise or top-level metadata edits.",
+            "type": "boolean"
+          },
+          "status": {
+            "description": "Change test status (e.g. DRA, APP)",
+            "type": "string"
+          },
+          "test_id": {
+            "description": "ID of the test to edit",
+            "type": "number"
+          },
+          "variables": {
+            "description": "JSON variables object (replaces current variables)",
+            "type": "string"
+          },
+          "variants": {
+            "description": "Variant pin specifiers for V3 bucket resolution. Each item is '5' (numeric ID) or 'API:Staging' (group:variant by name). Edit mode: groups not pinned retain their existing buckets.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_test_versions",
+      "name": "list_test_versions",
+      "title": "list_test_versions",
+      "category": "Test Editing",
+      "categorySlug": "test-editing",
+      "summary": "List version history for a test.",
+      "description": "List version history for a test. Without date: returns available history dates. With date: returns paginated versions for that date (compact one-liner by default; use detail=true for full JSON).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "date": {
+            "description": "Filter by date (YYYY-MM-DD) to see versions for that day",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON for each version (default: false — compact one-liners)",
+            "type": "boolean"
+          },
+          "page": {
+            "description": "Page number (default: 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Results per page (default: 20)",
+            "type": "number"
+          },
+          "test_id": {
+            "description": "ID of the test",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "preview_test_edit",
+      "name": "preview_test_edit",
+      "title": "preview_test_edit",
+      "category": "Test Editing",
+      "categorySlug": "test-editing",
+      "summary": "Shows diff preview.",
+      "description": "Shows diff preview. Protected fields (cannot change): product_id, collection_uid.\n\nPreview the impact of editing a test WITHOUT applying changes. Returns which tests would be invalidated and which monitorings would be deactivated.\n\nV3 buckets: pass variants=[\"API:Staging\", ...] (repeatable, same forms as create_test) to preview re-pinning. In edit mode, groups not pinned retain their existing buckets. Pre-V3 tests get default variants filled in automatically.\n\nWorkflow: get_full_test → preview_test_edit → (review impact) → edit_test.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "actions": {
+            "description": "JSON array of actions (replaces current actions)",
+            "type": "string"
+          },
+          "auto_correct_kinds": {
+            "description": "Rewrite declared input_variable kinds to match the platform's variable types. Default false: kind mismatches are hard errors.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "New test description (only if explicitly changing it)",
+            "type": "string"
+          },
+          "name": {
+            "description": "New test name (only if explicitly changing it)",
+            "type": "string"
+          },
+          "test_id": {
+            "description": "ID of the test to preview changes for",
+            "type": "number"
+          },
+          "variables": {
+            "description": "JSON variables object (replaces current variables)",
+            "type": "string"
+          },
+          "variants": {
+            "description": "Variant pin specifiers for V3 bucket resolution. Each item is '5' (numeric ID) or 'API:Staging' (group:variant by name). Edit mode: groups not pinned retain their existing buckets.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "restore_test_version",
+      "name": "restore_test_version",
+      "title": "restore_test_version",
+      "category": "Test Editing",
+      "categorySlug": "test-editing",
+      "summary": "Restore a test to a previous version.",
+      "description": "Restore a test to a previous version. DESTRUCTIVE — overwrites current test definition. Use list_test_versions to find the history_id. Counts against the per-test edit budget.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "history_id": {
+            "description": "History version ID to restore (from list_test_versions)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "history_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_test_campaign",
+      "name": "create_test_campaign",
+      "title": "create_test_campaign",
+      "category": "Tests Campaigns",
+      "categorySlug": "test-campaigns",
+      "summary": "Create a new SAVED, reusable Tests campaign.",
+      "description": "Create a new SAVED, reusable Tests campaign. (To run tests ad-hoc without saving, use build_campaign(test_ids=…) instead.)\n\ntest_list is a JSON array of {position, test, owners, input_variables}. All tests must belong to the given product. The authenticated user is auto-set as creator.\n\ncollection_uid nests the Tests campaign under a specific collection. When omitted, defaults to the product's campaigns root (test_campaigns_root_collection_uid). A Tests campaign must never live under a tests root — it renders as a test row and crashes the UI test list — so a tests-root collection_uid is rejected.\n\nConsumes one slot of the per-session Tests-campaign edit budget (default: 20). Pass acknowledge=true after a budget-exhaustion message to reset.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "collection_uid": {
+            "description": "Collection UID to nest the Tests campaign under (default: product's campaigns root; a tests-root UID is rejected)",
+            "type": "string"
+          },
+          "description": {
+            "description": "Tests campaign description",
+            "type": "string"
+          },
+          "name": {
+            "description": "Tests campaign name",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug (e.g. operator~product)",
+            "type": "string"
+          },
+          "test_list": {
+            "description": "JSON array of TestCampaignMember entries, e.g. '[{\"position\":0,\"test\":123,\"owners\":{},\"input_variables\":{}}]'",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product",
+          "name",
+          "test_list"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "delete_test_campaign",
+      "name": "delete_test_campaign",
+      "title": "delete_test_campaign",
+      "category": "Tests Campaigns",
+      "categorySlug": "test-campaigns",
+      "summary": "Delete a Tests campaign.",
+      "description": "Delete a Tests campaign. HARD DELETE (no trash) per platform semantics. Refuses without acknowledge=true.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true to confirm",
+            "type": "boolean"
+          },
+          "test_campaign_id": {
+            "description": "Tests campaign id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_campaign_id",
+          "acknowledge"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_test_campaign",
+      "name": "get_test_campaign",
+      "title": "get_test_campaign",
+      "category": "Tests Campaigns",
+      "categorySlug": "test-campaigns",
+      "summary": "Fetch a single Tests campaign with its full test_list.",
+      "description": "Fetch a single Tests campaign with its full test_list.\n\nEach entry in test_list is {position, test (id), name, owners, input_variables}. owners and input_variables are per-campaign overrides — they only apply when the test runs as part of this Tests campaign.\n\nTo run it: build_campaign(test_campaign_id=<id>, variants=[\"Group:Variant\"]) → run_campaign(overrides=…).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "test_campaign_id": {
+            "description": "Tests campaign id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_campaign_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_test_campaigns",
+      "name": "list_test_campaigns",
+      "title": "list_test_campaigns",
+      "category": "Tests Campaigns",
+      "categorySlug": "test-campaigns",
+      "summary": "List Tests campaigns accessible with the current API key.",
+      "description": "List Tests campaigns accessible with the current API key.\n\nA Tests campaign is a SAVED, ordered pack of tests attached to a single product — use it to group regression scenarios, smoke packs, or anything you run as one unit. To run one: build_campaign(test_campaign_id=<id>) → run_campaign(overrides=…).\n\nReturns compact one-liners by default (`\"#42 Regression pack [8 tests, valid]\"`). detail=true returns the full Tests campaign including the test_list.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "creator": {
+            "description": "Filter by creator user id(s), comma-separated",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "ids": {
+            "description": "Comma-separated Tests campaign ids",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Items per page (default 50, max 4000)",
+            "type": "number"
+          },
+          "product": {
+            "description": "Filter by product slug or short_name (comma-separated list also accepted)",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "update_test_campaign",
+      "name": "update_test_campaign",
+      "title": "update_test_campaign",
+      "category": "Tests Campaigns",
+      "categorySlug": "test-campaigns",
+      "summary": "Partial-update a Tests campaign (PATCH).",
+      "description": "Partial-update a Tests campaign (PATCH). Any subset of name, description, test_list is accepted.\n\nWARNING: test_list is a FULL REPLACEMENT, not a merge. To add or remove tests, first call get_test_campaign to read the current test_list, modify it, then pass the complete list.\n\nUse list_test_versions on the member tests before replacing test_list to avoid surprises. Edit-budget gated.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "New description",
+            "type": "string"
+          },
+          "name": {
+            "description": "New name",
+            "type": "string"
+          },
+          "test_campaign_id": {
+            "description": "Tests campaign id",
+            "type": "number"
+          },
+          "test_list": {
+            "description": "JSON array: full replacement of test_list",
+            "type": "string"
+          }
+        },
+        "required": [
+          "test_campaign_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "build_campaign",
+      "name": "build_campaign",
+      "title": "build_campaign",
+      "category": "Execution",
+      "categorySlug": "execution",
+      "summary": "Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both).",
+      "description": "Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both).\n\nSOURCE: test_ids — build an ad-hoc campaign from explicit test IDs.\nSOURCE: test_campaign_id — load a saved Tests campaign and produce the same campaign template (product auto-derived). To create/save a reusable pack instead, use create_test_campaign; building from a Tests campaign never modifies it.\n\nTwo distinct concepts — don't confuse them: a \"Tests campaign\" is the SAVED, named pack you CRUD (see list_test_campaigns); a \"campaign\" is the throwaway JSON you build here and pass to run_campaign.\n\nThe template includes empty variable slots. Use get_test_detail to understand what each test needs, and list_resources to find device identifiers for direct_owners. Pass the template to run_campaign with an overrides map to fill or override values.\n\nPin variants per group via the variants array — same shape as create_monitor. Globals always emit a \"global\" bucket. Variables in unpinned groups use that group's default variant. The backend's _resolve_empty_variable handler fills values at launch from each variable's own bucket.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "name": {
+            "description": "Optional campaign name",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug (format: operator~product). Required when test_ids is used with \"variants\". Auto-derived from the Tests campaign when test_campaign_id is used.",
+            "type": "string"
+          },
+          "test_campaign_id": {
+            "description": "Tests campaign ID (from list_test_campaigns). Exactly one of test_ids or test_campaign_id is required. Product is auto-derived from the Tests campaign.",
+            "type": "number"
+          },
+          "test_ids": {
+            "description": "Comma-separated test IDs (from list_tests). Exactly one of test_ids or test_campaign_id is required.",
+            "type": "string"
+          },
+          "variants": {
+            "description": "Pin a variant per variable group. Each entry is \"5\" (numeric variant ID) or \"GroupName:VariantName\" (e.g., \"API:Staging\"). Repeatable. Variables in unpinned groups use that group's default variant. Globals always emit {type:\"global\"}. Mixing numeric and name forms is allowed.",
+            "type": "array"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "poll_execution",
+      "name": "poll_execution",
+      "title": "poll_execution",
+      "category": "Execution",
+      "categorySlug": "execution",
+      "summary": "Check the status of a running execution.",
+      "description": "Check the status of a running execution. Returns the current status and per-test results when the execution reaches a terminal state (success, failed, timed out, maintenance). result_id from run_campaign or start_execution; use get_execution_detail for per-action failure analysis.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "result_id": {
+            "description": "The result ID from start_execution",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "run_campaign",
+      "name": "run_campaign",
+      "title": "run_campaign",
+      "category": "Execution",
+      "categorySlug": "execution",
+      "summary": "Execute a campaign and wait for results.",
+      "description": "Execute a campaign and wait for results. This is the recommended way to run tests — it blocks until completion and returns per-test results. For very long campaigns (>10 minutes), use start_execution + poll_execution instead.\n\nFor ad-hoc runs: build_campaign(test_ids=…) → run_campaign. For a saved Tests campaign: build_campaign(test_campaign_id=…) → run_campaign(overrides=…).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "campaign_json": {
+            "description": "Campaign JSON template (from build_campaign)",
+            "type": "string"
+          },
+          "ignore_errors": {
+            "description": "Ignore failures across all action types (options.ignore_failed = <all action codes>). Per-test statuses may be rewritten to success.",
+            "type": "boolean"
+          },
+          "max_poll_duration": {
+            "description": "Maximum time to wait for results (default: 10m). Format: Go duration string (e.g. 5m, 15m)",
+            "type": "string"
+          },
+          "overrides": {
+            "description": "JSON object mapping test IDs to their variable values and owner assignments. Format: {\"<test_id>\": {\"input_variables\": {...}, \"direct_owners\": {...}}}. direct_owners maps device identifier to value (e.g., {\"sim_owner\": \"SIM-001\"}). V3: input_variables values may be either flat strings (legacy) or {value, bucket} objects to target a specific variant (variables_v3.md §Bucket System).",
+            "type": "string"
+          },
+          "parallel": {
+            "description": "Run campaign tests in parallel (options.parallel_test_execution=-1). Superadmin-only; the backend rejects test lists that use SIM or SMARTPHONE actions, or sleep on unlocked resources.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "campaign_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "start_execution",
+      "name": "start_execution",
+      "title": "start_execution",
+      "category": "Execution",
+      "categorySlug": "execution",
+      "summary": "Start a campaign execution without waiting for results.",
+      "description": "Start a campaign execution without waiting for results. Returns a result_id for polling. Use this for campaigns that may take longer than 10 minutes, then poll with poll_execution. For shorter campaigns you want to block on, use run_campaign instead.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "campaign_json": {
+            "description": "Campaign JSON template (from build_campaign)",
+            "type": "string"
+          },
+          "ignore_errors": {
+            "description": "Ignore failures across all action types (options.ignore_failed = <all action codes>).",
+            "type": "boolean"
+          },
+          "overrides": {
+            "description": "JSON object mapping test IDs to their variable values and owner assignments. Same format as run_campaign overrides.",
+            "type": "string"
+          },
+          "parallel": {
+            "description": "Run campaign tests in parallel (options.parallel_test_execution=-1). Superadmin-only; the backend rejects test lists that use SIM or SMARTPHONE actions, or sleep on unlocked resources.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "campaign_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_artifact",
+      "name": "get_artifact",
+      "title": "get_artifact",
+      "category": "Results",
+      "categorySlug": "results",
+      "summary": "Fetch and view a screenshot, audio recording, or other artifact from a monitoring result.",
+      "description": "Fetch and view a screenshot, audio recording, or other artifact from a monitoring result. Returns images/audio inline for direct viewing; text artifacts inline; videos and binary as metadata only. Use after get_monitoring_result include_actions=true reveals screenshot URLs or artifact paths.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "path": {
+            "description": "Relative artifact path — https://<HOST>/robot/ prefix added automatically. Mutually exclusive with url.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Full artifact URL (e.g. screenshot URL from action results). Mutually exclusive with path.",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_execution_detail",
+      "name": "get_execution_detail",
+      "title": "get_execution_detail",
+      "category": "Results",
+      "categorySlug": "results",
+      "summary": "Get detailed results of a test execution (campaign or Tests-campaign runs).",
+      "description": "Get detailed results of a test execution (campaign or Tests-campaign runs). Returns metadata, tests_overview, and execution_summary with per-test/per-action status, duration, variables, and error messages — sufficient for diagnosing failures and analyzing performance. Set include_full_json=true only when you need step-level details (selectors, HTTP payloads). For monitoring (scheduled) runs use get_monitoring_result instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "include_full_json": {
+            "description": "Set to true to include the raw json field containing the complete execution payload with full action step details. Warning: this can be very large for multi-test campaigns. Only use when you need step-level detail beyond what execution_summary provides.",
+            "type": "boolean"
+          },
+          "result_id": {
+            "description": "The execution/result ID. Obtain from run_campaign response, poll_execution response, start_execution response, or list_executions results.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_executions",
+      "name": "list_executions",
+      "title": "list_executions",
+      "category": "Results",
+      "categorySlug": "results",
+      "summary": "List recent test executions for a product.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List recent test executions for a product. Each execution is a campaign run containing one or more tests with status, pass/fail counts, creator, and timestamps.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "creator": {
+            "description": "Filter by creator username — the user or service account that triggered the execution.",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "from_date": {
+            "description": "Only include executions created after this date (ISO 8601 format, e.g. 2025-01-15T00:00:00Z). Combine with to_date for time ranges.",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default: 1). Use with page_size to navigate through large result sets.",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Number of executions to return (default: 10, max: 200). Use smaller values for recent overview, larger for historical analysis.",
+            "type": "number"
+          },
+          "product": {
+            "description": "Product slug (format: operator~product). Get available slugs from list_products. Example: 'my-operator~my-product'.",
+            "type": "string"
+          },
+          "search": {
+            "description": "Free-text search across execution names and tags (case-insensitive substring match).",
+            "type": "string"
+          },
+          "status": {
+            "description": "Filter by execution status. Omit to return all.",
+            "enum": [
+              "success",
+              "failed",
+              "ongoing",
+              "pending",
+              "canceled",
+              "timed out",
+              "maintenance"
+            ],
+            "type": "string"
+          },
+          "to_date": {
+            "description": "Only include executions created before this date (ISO 8601 format). Combine with from_date for time ranges.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_reusable",
+      "name": "get_reusable",
+      "title": "get_reusable",
+      "category": "Reusables",
+      "categorySlug": "reusables",
+      "summary": "Fetch the full definition of a reusable V2 component (kind=2).",
+      "description": "Fetch the full definition of a reusable V2 component (kind=2).\n\nReusables are V2-only — they contain step-based actions (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded into other V2 tests via step_group.import. To edit a reusable, use edit_test with its id.\n\nErrors if the id refers to a regular test (kind=1). Use get_full_test for those instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "reusable_id": {
+            "description": "Reusable test id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "reusable_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_reusable_usage",
+      "name": "list_reusable_usage",
+      "title": "list_reusable_usage",
+      "category": "Reusables",
+      "categorySlug": "reusables",
+      "summary": "List the V2 tests that embed a given reusable.",
+      "description": "List the V2 tests that embed a given reusable.\n\nOnly V2 tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) can embed reusables via step_group.import, so the referencing tests returned here will always be V2 tests.\n\nReads reused_by from the reusable's full definition and expands each id into {id, name}. Capped at limit (default: 50, max: 200) — bump the cap explicitly when you need the full list.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "limit": {
+            "description": "Max entries to expand (default: 50, max: 200)",
+            "type": "number"
+          },
+          "reusable_id": {
+            "description": "Reusable test id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "reusable_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_reusables",
+      "name": "list_reusables",
+      "title": "list_reusables",
+      "category": "Reusables",
+      "categorySlug": "reusables",
+      "summary": "List the reusable test components (kind=2) for a product.",
+      "description": "List the reusable test components (kind=2) for a product.\n\nReusables are V2-only — they work exclusively with step-based tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded via step_group.import in V2 test definitions. Classic script-based tests cannot use reusables.\n\nResolves the product's reusable_tests_root_collection_uid, fetches its items via the kcollections service, and returns them with [R] one-liners. (Note: /api/v2/tests/?kind=2 is NOT a reliable path — the backend silently ignores the kind filter. The kcollections route is authoritative.)",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "page": {
+            "description": "Page number (default: 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Items per page (default: 25)",
+            "type": "number"
+          },
+          "product": {
+            "description": "Product slug (e.g. operator~product)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_reusables_in_test",
+      "name": "list_reusables_in_test",
+      "title": "list_reusables_in_test",
+      "category": "Reusables",
+      "categorySlug": "reusables",
+      "summary": "List the reusables embedded in a test.",
+      "description": "List the reusables embedded in a test.\n\nOnly V2 tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) can embed reusables via step_group.import. Classic tests will always return empty results since they have no import mechanism.\n\nReads reused_tests from the target test and expands each id into {id, name}. Errors if the target id refers to a reusable (kind=2) — use list_reusable_usage for the inverse direction.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "limit": {
+            "description": "Max entries to expand (default: 50, max: 200)",
+            "type": "number"
+          },
+          "test_id": {
+            "description": "Regular test id (kind=1)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_collection",
+      "name": "create_collection",
+      "title": "create_collection",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Create a new collection as a child of parent_uid.",
+      "description": "Create a new collection as a child of parent_uid.\n\nConsumes one slot of the per-session collections edit budget (default: 20). Pass acknowledge=true after a budget-exhaustion message to reset the counter.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after the user has approved further mutations",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Name for the new collection",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (supplies org-id)",
+            "type": "string"
+          },
+          "parent_uid": {
+            "description": "Parent collection UID under which to create the new collection",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "parent_uid",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "delete_collection",
+      "name": "delete_collection",
+      "title": "delete_collection",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).",
+      "description": "Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).\n\nThe collection is recoverable until an admin empties the trash on the kcollections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true — confirms the caller accepts moving this collection to trash (soft-delete, recoverable until admin empties trash)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "uid": {
+            "description": "Collection UID to delete",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "uid",
+          "acknowledge"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_collection",
+      "name": "get_collection",
+      "title": "get_collection",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Fetch a single collection's metadata plus its breadcrumb path (ancestor chain from the root down to this collection).",
+      "description": "Fetch a single collection's metadata plus its breadcrumb path (ancestor chain from the root down to this collection). Useful before mutations so agents can confirm scope. Root UID from list_products detail=true (tests_root_collection_uid).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "uid": {
+            "description": "Collection UID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_collection_items",
+      "name": "list_collection_items",
+      "title": "list_collection_items",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "List the items (tests and dashboards, mixed) contained directly in a collection.",
+      "description": "List the items (tests and dashboards, mixed) contained directly in a collection. Compact one-liners tag each item: [T] for tests, [R] for reusable tests, [D] for dashboards. Root UID from list_products detail=true (tests_root_collection_uid).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default: 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Items per page (default: 25)",
+            "type": "number"
+          },
+          "uid": {
+            "description": "Collection UID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_collections",
+      "name": "list_collections",
+      "title": "list_collections",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "List the direct sub-collections under a parent collection UID.",
+      "description": "List the direct sub-collections under a parent collection UID.\n\nCollections are hierarchical containers in the kcollections service that group tests and dashboards. Every product has a tests_root_collection_uid and every operator has a dashboards_root_collection_uid — pass those as parent_uid to browse from the top of each tree.\n\nReturns compact one-liners by default; set detail=true for full JSON (parent_uid, org_id, full UID).\n\nFolder-tree browsing. For flat test discovery by name/tag/status, use list_tests instead — simpler and faster for most queries.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug (required — collections are operator-scoped)",
+            "type": "string"
+          },
+          "parent_uid": {
+            "description": "UID of the parent collection whose children to list",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "parent_uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "move_collection",
+      "name": "move_collection",
+      "title": "move_collection",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Reparent a collection under a new parent.",
+      "description": "Reparent a collection under a new parent. Cycles are rejected server-side.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after the user has approved further mutations",
+            "type": "boolean"
+          },
+          "new_parent_uid": {
+            "description": "Target parent collection UID",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "uid": {
+            "description": "Collection UID to move",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "uid",
+          "new_parent_uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "move_collection_items",
+      "name": "move_collection_items",
+      "title": "move_collection_items",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Relocate tests and/or dashboards into a target collection.",
+      "description": "Relocate tests and/or dashboards into a target collection.\n\nitem_uids accepts a comma-separated list of item UIDs (for dashboards) or numeric ids prefixed with \"test:\" (for tests). The kcollections service routes them to the right table. Example: \"test:3402,a1b2c3d4\".",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after the user has approved further mutations",
+            "type": "boolean"
+          },
+          "item_uids": {
+            "description": "Comma-separated list of item identifiers to move",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "target_collection_uid": {
+            "description": "Destination collection UID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "target_collection_uid",
+          "item_uids"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "rename_collection",
+      "name": "rename_collection",
+      "title": "rename_collection",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Rename an existing collection.",
+      "description": "Rename an existing collection. Consumes one slot of the collections edit budget.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after the user has approved further mutations",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "New name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "uid": {
+            "description": "Collection UID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "uid",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "search_collections",
+      "name": "search_collections",
+      "title": "search_collections",
+      "category": "Collections",
+      "categorySlug": "collections",
+      "summary": "Search across collections and items (tests + dashboards) under a collection sub-tree.",
+      "description": "Search across collections and items (tests + dashboards) under a collection sub-tree.\n\nThe kcollections service requires a collection_uid to scope the search — pass the product's tests_root_collection_uid or any sub-collection UID. Returns a payload with two arrays: collections and items.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "collection_uid": {
+            "description": "Scope the search to this collection sub-tree (typically a product's tests_root_collection_uid)",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug (supplies org-id)",
+            "type": "string"
+          },
+          "owner_id": {
+            "description": "Filter by owner user id",
+            "type": "number"
+          },
+          "query": {
+            "description": "Free-text search (matches name and metadata)",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Comma-separated tag IDs",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "collection_uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "add_variant",
+      "name": "add_variant",
+      "title": "add_variant",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Add a new variant (environment slice) to a variable group.",
+      "description": "Add a new variant (environment slice) to a variable group. If is_default=true the prior default is demoted in the same atomic update. The backend auto-fans new variants into existing variables in the group.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "is_default": {
+            "description": "Make this the default variant (demotes the prior default)",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Variant name (e.g. \"canary\")",
+            "type": "string"
+          }
+        },
+        "required": [
+          "group_id",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "check_variable_name",
+      "name": "check_variable_name",
+      "title": "check_variable_name",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Pre-check whether a variable name is available under a product.",
+      "description": "Pre-check whether a variable name is available under a product. Returns {available: true|false} — call this before create_variable to surface name conflicts client-side instead of seeing an HTTP 400.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "name": {
+            "description": "Variable name to check",
+            "type": "string"
+          },
+          "product_id": {
+            "description": "Product numeric id (from list_products `id` field, NOT the slug)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "product_id",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "copy_variant_values",
+      "name": "copy_variant_values",
+      "title": "copy_variant_values",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Power workflow: copy every variable's source-variant value into the destination variant across the entire group.",
+      "description": "Power workflow: copy every variable's source-variant value into the destination variant across the entire group. One call promotes staging → prod (or copies dev → canary, etc.) atomically.\n\nfrom_variant and to_variant accept variant ids (number) or names (string). Variables that have no value on the source variant are skipped. Returns the count of variables actually mutated.\n\nThis copies ALL variables in the group at once. To set a single variable's value in one variant, use set_variable_value instead.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "from_variant": {
+            "description": "Source variant id or name",
+            "type": "string"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "to_variant": {
+            "description": "Destination variant id or name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "group_id",
+          "from_variant",
+          "to_variant"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_variable",
+      "name": "create_variable",
+      "title": "create_variable",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Create a new variable under a product.",
+      "description": "Create a new variable under a product.\n\nType is one of:\n  - \"single\" — scalar value in default_value\n  - \"secret\" — scalar value; platform masks it on read\n  - \"choice\" — default_value is a comma-separated list of allowed values\n\nPass group=<id> for a group-scoped variable; omit it for a global. The tool auto-fans variable_values to one entry per variant of the group, all initialised to default_value. Tune individual variants afterwards with set_variable_value.\n\nA description is optional but RECOMMENDED — future agents (and humans) rely on it to disambiguate variables that share similar names but differ in purpose. A single short sentence is enough.\n\nConsumes one slot of the per-session variable edit budget. Pre-flight name conflicts with check_variable_name to avoid wasted creates.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "default_value": {
+            "description": "Default value; for choice, comma-separated allowed options",
+            "type": "string"
+          },
+          "description": {
+            "description": "Optional but RECOMMENDED — explain what the variable is for. A short sentence (e.g. \"Production database hostname\" or \"Stripe webhook API key\") helps future agents disambiguate it from similarly-named variables.",
+            "type": "string"
+          },
+          "group": {
+            "description": "Optional: variable group id (omit for a global variable)",
+            "type": "number"
+          },
+          "name": {
+            "description": "Variable name (alphanumeric + underscore)",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug",
+            "type": "string"
+          },
+          "type": {
+            "description": "single | secret | choice",
+            "enum": [
+              "single",
+              "secret",
+              "choice"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "product",
+          "name",
+          "type",
+          "default_value"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_variable_group",
+      "name": "create_variable_group",
+      "title": "create_variable_group",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Create a new variable group with its variants in one call.",
+      "description": "Create a new variable group with its variants in one call. variant_names is a comma-separated list (e.g. \"Dev,Staging,Prod\"). The FIRST variant becomes the default per platform convention. Manage variants afterwards via the variants_* tools.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Group name (e.g. \"Environments\")",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug",
+            "type": "string"
+          },
+          "variant_names": {
+            "description": "Comma-separated variant names (e.g. \"Dev,Staging,Prod\")",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product",
+          "name",
+          "variant_names"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "delete_variable",
+      "name": "delete_variable",
+      "title": "delete_variable",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Delete a variable.",
+      "description": "Delete a variable. Refuses if any test references it (the platform enforces this guard server-side and exposes no override — there is no force parameter).\n\nacknowledge=true is required (the delete is destructive). When the refusal lists test references, update those tests ('test_edit') or remove the references first, then re-run delete.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true to confirm the delete",
+            "type": "boolean"
+          },
+          "variable_id": {
+            "description": "Variable id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "variable_id",
+          "acknowledge"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "delete_variable_group",
+      "name": "delete_variable_group",
+      "title": "delete_variable_group",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Delete a variable group.",
+      "description": "Delete a variable group. Safe by default: refuses if the group still contains variables, listing them. acknowledge=true is required. force=true bypasses the local non-empty check; the backend's own refusal still applies.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true to confirm the delete",
+            "type": "boolean"
+          },
+          "force": {
+            "description": "Bypass the non-empty check (default false)",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id",
+          "acknowledge"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "duplicate_variable",
+      "name": "duplicate_variable",
+      "title": "duplicate_variable",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Clone a variable under a new name.",
+      "description": "Clone a variable under a new name. The duplicate inherits the type, group, and per-variant values of the source — the platform's atomic duplicate endpoint copies everything in one call.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "new_name": {
+            "description": "Name for the new variable",
+            "type": "string"
+          },
+          "variable_id": {
+            "description": "Source variable id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "variable_id",
+          "new_name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_variable",
+      "name": "get_variable",
+      "title": "get_variable",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Fetch a single variable with all its per-variant values.",
+      "description": "Fetch a single variable with all its per-variant values. Secrets remain masked.\n\nCompact by default — returns just the variable. Set with_usage=true to also embed the list of tests referencing it; the response is then wrapped as {variable, usage}.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "variable_id": {
+            "description": "Variable id",
+            "type": "number"
+          },
+          "with_usage": {
+            "description": "If true, augment the response with the list of tests using this variable. Default false.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "variable_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_variable_group",
+      "name": "get_variable_group",
+      "title": "get_variable_group",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Get the full detail of a variable group: metadata, variants[] (with is_default), and variables[] inside the group.",
+      "description": "Get the full detail of a variable group: metadata, variants[] (with is_default), and variables[] inside the group. Single call to inspect everything about a group.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_variable_groups",
+      "name": "list_variable_groups",
+      "title": "list_variable_groups",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "List variable groups for a product.",
+      "description": "List variable groups for a product.\n\nScoping is intentionally limited to a single product to mirror the web UI and avoid surfacing groups across products the caller may not have UI access to. Archived groups are filtered out.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "product": {
+            "description": "Product slug",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_variables",
+      "name": "list_variables",
+      "title": "list_variables",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "List variables for a product.",
+      "description": "List variables for a product. Default scope returns ALL variables (global + grouped) via the V3 product_variables endpoint.\n\nFilter set:\n  - scope:   \"global\" | \"grouped\" | \"all\" (default: \"all\")\n  - group:   numeric variable group id — restrict to one group\n  - type:    \"single\" | \"secret\" | \"choice\" — filter by type\n  - used:    \"true\" | \"false\" — filter by usage state (omits unused tests)\n  - variant: variant name or id — restrict to variables that carry the variant\n\nBy default returns compact one-liners; pass detail=true for the full JSON shape including per-variant values. Secrets are returned masked by the platform.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact one-liners (default: false)",
+            "type": "boolean"
+          },
+          "group": {
+            "description": "Optional: variable group id — restrict to that group",
+            "type": "number"
+          },
+          "product": {
+            "description": "Product slug (operator~product)",
+            "type": "string"
+          },
+          "scope": {
+            "description": "global | grouped | all (default: all)",
+            "enum": [
+              "global",
+              "grouped",
+              "all"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "single | secret | choice",
+            "enum": [
+              "single",
+              "secret",
+              "choice"
+            ],
+            "type": "string"
+          },
+          "used": {
+            "description": "true | false — filter by usage state (omit for all)",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "type": "string"
+          },
+          "variant": {
+            "description": "Variant name or id — restrict to variables carrying this variant",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "remove_variant",
+      "name": "remove_variant",
+      "title": "remove_variant",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Remove a variant from a variable group.",
+      "description": "Remove a variant from a variable group. Safe by default: refuses if any variable in the group has a non-default value for this variant — the response names the variables that would lose data. force=true bypasses the safety check.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Must be true to confirm the remove",
+            "type": "boolean"
+          },
+          "force": {
+            "description": "Bypass the non-default-values safety check (default false)",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "variant_id": {
+            "description": "Variant id to remove",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id",
+          "variant_id",
+          "acknowledge"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "rename_variant",
+      "name": "rename_variant",
+      "title": "rename_variant",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Rename a variant in a group atomically.",
+      "description": "Rename a variant in a group atomically. Existing variable values stay attached to the variant id (the rename is name-only).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "name": {
+            "description": "New variant name",
+            "type": "string"
+          },
+          "variant_id": {
+            "description": "Variant id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id",
+          "variant_id",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "set_default_variant",
+      "name": "set_default_variant",
+      "title": "set_default_variant",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Promote one variant to the group's default and demote every other variant in one atomic update.",
+      "description": "Promote one variant to the group's default and demote every other variant in one atomic update.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "variant_id": {
+            "description": "Variant id to make default",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id",
+          "variant_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "set_variable_value",
+      "name": "set_variable_value",
+      "title": "set_variable_value",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Set ONE variant's value on a grouped variable, preserving every other variant.",
+      "description": "Set ONE variant's value on a grouped variable, preserving every other variant.\n\nvariant accepts the variant id (number) or name (string); name resolution loads the parent group's variants. Errors when called on a global variable — globals have no variants; use update_variable default_value instead. Errors when the variant is not present on the variable.\n\nThis sets ONE variable in ONE variant. To bulk-copy ALL variables' values from one variant into another across the whole group, use copy_variant_values instead.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "value": {
+            "description": "New value for this variant",
+            "type": "string"
+          },
+          "variable_id": {
+            "description": "Variable id (must be group-scoped)",
+            "type": "number"
+          },
+          "variant": {
+            "description": "Variant id (number) or name (string)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "variable_id",
+          "variant",
+          "value"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "update_variable",
+      "name": "update_variable",
+      "title": "update_variable",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Update a variable's name, description, and/or default_value.",
+      "description": "Update a variable's name, description, and/or default_value.\n\nProperties only — this tool does NOT touch per-variant values. To change one variant's value use set_variable_value; to copy values across variants use copy_variant_values. Variable type is immutable on the platform; this tool preserves it.\n\nA description is optional but RECOMMENDED on update too — if the original variable was created without one, this is the place to add semantic context that future agents will rely on.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "default_value": {
+            "description": "New default value (string for single/secret, comma-separated for choice)",
+            "type": "string"
+          },
+          "description": {
+            "description": "New description (optional, recommended) — overwrites the current value. A short sentence describing the variable's purpose helps future agents disambiguate it.",
+            "type": "string"
+          },
+          "name": {
+            "description": "New name",
+            "type": "string"
+          },
+          "variable_id": {
+            "description": "Variable id",
+            "type": "number"
+          }
+        },
+        "required": [
+          "variable_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "update_variable_group",
+      "name": "update_variable_group",
+      "title": "update_variable_group",
+      "category": "Variables",
+      "categorySlug": "variables",
+      "summary": "Rename a variable group.",
+      "description": "Rename a variable group. Variant management has moved to dedicated variants_* tools (add_variant, remove_variant, rename_variant, set_default_variant, copy_variant_values).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Reset edit budget after user approval",
+            "type": "boolean"
+          },
+          "group_id": {
+            "description": "Variable group id",
+            "type": "number"
+          },
+          "name": {
+            "description": "New group name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "group_id",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "batch_create_monitors",
+      "name": "batch_create_monitors",
+      "title": "batch_create_monitors",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Create multiple monitors in a single call.",
+      "description": "Create multiple monitors in a single call. All monitors must belong to the same product.\nReduces round-trips from ~30 (10 individual create_monitor calls) to 2 (one preview + one confirm).\n\nTwo-step workflow (MANDATORY — preview cannot be skipped):\n1. batch_create_monitors product=<slug> monitors=<json_array> → returns BATCH PREVIEW\n2. Show the preview to the user. Get their explicit approval.\n3. batch_create_monitors product=<slug> monitors=<same_array> confirmed=true → SUBMIT ALL\n\nIMPORTANT: NEVER set confirmed=true without showing the preview to the user first.\n\nPin variants per-entry via the variants array (same shape as create_monitor).\nGlobals always emit {type:\"global\"}. Variables in unpinned groups use that\ngroup's default variant. Test-local input vars (no backing product variable)\nkeep their varDef.Value. Monitors created with active=false are defensively\nre-toggled after creation so the platform scheduler actually stops them.\n\nmonitors parameter — JSON array of monitor specs:\n[\n  {\"test_id\": 100, \"variants\": [\"API:Staging\"]},\n  {\"test_id\": 101, \"variants\": [\"API:Staging\", \"Database:Replica\"], \"name\": \"Custom\", \"overrides\": {\"SIM_A\": \"069...\"}},\n  {\"test_id\": 102, \"active\": false, \"scheduling\": {\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":15,\"unit\":\"minutes\"}}}}\n]\n\nEach monitor spec fields:\n  test_id (required, int)  — test to monitor\n  variants (array of str)  — pin a variant per group. Forms: \"5\" (numeric ID) or \"API:Staging\" (group:variant). Repeatable. Omit to use group defaults.\n  name (string)            — monitor name (defaults to test name)\n  active (bool)            — override top-level active (default: true)\n  overrides (object)       — variable value overrides: {\"VAR_NAME\": \"value\"}\n  scheduling (object)      — override top-level scheduling\n  options (object)         — override top-level options\n\nCascading defaults: top-level scheduling/options/active apply to all monitors unless overridden per-monitor.\nMax 20 monitors per batch. Product must have monitoring enabled.\nPartial failure: if some monitors fail, successful ones are kept (not rolled back).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "Default active state for all monitors (default: true). Per-monitor active overrides this.",
+            "type": "boolean"
+          },
+          "confirmed": {
+            "description": "Set to true to submit the batch. NEVER set without explicit user approval of the preview.",
+            "type": "boolean"
+          },
+          "monitors": {
+            "description": "JSON array of monitor specs. Each spec: {\"test_id\": <int>, \"variants\": [\"API:Staging\"], \"name\": \"<str>\", \"active\": <bool>, \"overrides\": {\"VAR\": \"val\"}, \"scheduling\": {...}, \"options\": {...}}. test_id is required; variants is optional (group defaults used when absent).",
+            "type": "string"
+          },
+          "options": {
+            "description": "Default options for all monitors. Per-monitor options override this. Example: {\"timeout_sms\":30,\"ignore_errors\":false,\"auto_retry_failed_test\":0}",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug (format: operator~product). All monitors in the batch belong to this product.",
+            "type": "string"
+          },
+          "scheduling": {
+            "description": "Default scheduling for all monitors. Per-monitor scheduling overrides this. Example: {\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":5,\"unit\":\"minutes\"}}}",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product",
+          "monitors"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_monitor",
+      "name": "create_monitor",
+      "title": "create_monitor",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Create a new monitor for an existing test.",
+      "description": "Create a new monitor for an existing test. Monitors run tests on a schedule and track pass/fail status over time.\n\nPREREQUISITE: call platform_guide topic=monitoring for the full creation workflow and scheduling formats.\n\nPin variants per group via the variants array. Each entry pins one group's variant (\"5\" for numeric variant ID, or \"API:Staging\" for group:variant by name). Groups not pinned use their default variant. Globals always emit {type:\"global\"}. The submitted payload sets variable_group: null on the wire; per-variable buckets carry the group info.\n\nTwo-step workflow (MANDATORY — preview cannot be skipped):\n1. create_monitor product=<slug> test_id=<id> variants=[...] → returns PREVIEW of auto-built payload with resolved buckets\n2. Show the preview to the user. Get their explicit approval.\n3. create_monitor ... owners=<json> input_variables=<json> variants=[...] confirmed=true → SUBMIT\n\nStep 1 auto-builds owners and input_variables from the test definition with V3 buckets attached.\nStep 3 requires confirmed=true AND explicit owners. The submit handler RE-RUNS the resolver against the supplied variants and injects buckets into input_variables — you do NOT need to craft bucket sub-objects yourself, just pass the same variants you passed in step 1.\n\nIMPORTANT: NEVER set confirmed=true without showing the preview to the user and getting their explicit approval.\n\nUse overrides to modify specific values in the preview template.\nProduct must have monitoring enabled (has_monitoring=true from list_products detail=true).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "Start the monitor immediately (default: true)",
+            "type": "boolean"
+          },
+          "confirmed": {
+            "description": "Set to true to submit the monitor. NEVER set without explicit user approval of the preview. Requires owners to be provided.",
+            "type": "boolean"
+          },
+          "input_variables": {
+            "description": "JSON object: variable name → {kind, value, public, actions, owner_kind}. Required with owners for submission. The submit handler injects bucket sub-keys automatically from the variants array — you do not need to add them.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Monitor name (defaults to test name on backend if omitted)",
+            "type": "string"
+          },
+          "options": {
+            "description": "JSON options: {timeout_sms, ignore_errors, auto_retry_failed_test}. Defaults: timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0.",
+            "type": "string"
+          },
+          "overrides": {
+            "description": "JSON object mapping variable name → new value string. Applied to preview template. Example: {\"SIM_A\": \"0699999999\", \"TODO_INDEX\": \"42\"}",
+            "type": "string"
+          },
+          "owners": {
+            "description": "JSON object: device identifier → {kind, hostname/national_msisdn/uuid}. Required for submission.",
+            "type": "string"
+          },
+          "product": {
+            "description": "Product slug (format: operator~product)",
+            "type": "string"
+          },
+          "scheduling": {
+            "description": "JSON scheduling object. If omitted, defaults to simple/v2 every 5 minutes. Example: {\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":5,\"unit\":\"minutes\"}}}",
+            "type": "string"
+          },
+          "test_id": {
+            "description": "ID of the test to monitor",
+            "type": "number"
+          },
+          "variants": {
+            "description": "Pin variants for the monitor. Each entry is \"5\" (numeric variant ID) or \"GroupName:VariantName\" (e.g., \"API:Staging\"). Groups not pinned use their default variant. Globals always emit {type:\"global\"}. Repeatable to pin multiple groups for multi-group tests. Optional — omit for all-defaults behavior.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "product",
+          "test_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "edit_monitor",
+      "name": "edit_monitor",
+      "title": "edit_monitor",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Apply changes to an existing monitor.",
+      "description": "Apply changes to an existing monitor. ALWAYS preview first with preview_monitor_edit.\n\nAuto-migration:\n  Legacy monitors (variable_group != 0 or input_variables lack buckets)\n  auto-migrate to V3 form on edit: every input_variable gets a bucket,\n  and the legacy variable_group field is cleared. The migration is\n  idempotent — re-editing an already-V3 monitor is a no-op on the bucket\n  side. Migration is unconditional: it's correct by construction, so\n  there is no opt-out.\n\n  When the underlying test references multiple variable groups, variables\n  in groups OTHER than the legacy variable_group use their own group's\n  default variant (unless variants overrides). Use the variants array to\n  pin non-default variants for specific groups during the migration edit.\n\nProtected fields: test_id and product_id CANNOT be changed (locked by the API). To change the underlying test, delete the monitor and create a new one.\nA per-monitor edit limit is enforced (10 per session). Check edits_remaining in the response.\nIf this fails with HTTP 400/404, the monitor may have been deleted — verify with get_monitor first.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval.",
+            "type": "boolean"
+          },
+          "active": {
+            "description": "New active status (true/false)",
+            "type": "boolean"
+          },
+          "environment": {
+            "description": "New environment JSON",
+            "type": "string"
+          },
+          "input_variables": {
+            "description": "New input variables JSON. Buckets are injected automatically from the variants array (or preserved from the existing monitor during auto-migration) — you do not need to craft them manually.",
+            "type": "string"
+          },
+          "monitor_id": {
+            "description": "Monitor ID to edit",
+            "type": "number"
+          },
+          "name": {
+            "description": "New monitor name",
+            "type": "string"
+          },
+          "owners": {
+            "description": "New owners JSON",
+            "type": "string"
+          },
+          "scheduling": {
+            "description": "New scheduling JSON",
+            "type": "string"
+          },
+          "test_only": {
+            "description": "Set test_only flag",
+            "type": "boolean"
+          },
+          "variants": {
+            "description": "Pin variants for the monitor's variable groups. Each entry is \"5\" (numeric variant ID) or \"GroupName:VariantName\". Groups not pinned retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. Use to re-pin specific groups during the edit.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "monitor_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "force_run_monitor",
+      "name": "force_run_monitor",
+      "title": "force_run_monitor",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Force a monitor to run immediately, outside of its normal schedule.",
+      "description": "Force a monitor to run immediately, outside of its normal schedule.\nTriggers an out-of-schedule execution and returns a confirmation with the task key.\nUse list_monitoring_results with the monitor ID to track the execution status.\n\nUse list_monitors to find monitor IDs first.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "monitor_id": {
+            "description": "Monitor ID (from list_monitors)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "monitor_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_monitor",
+      "name": "get_monitor",
+      "title": "get_monitor",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Get the full configuration of a monitor — owners, input_variables, scheduling, variable_group, and status.",
+      "description": "Get the full configuration of a monitor — owners, input_variables, scheduling, variable_group, and status. Data-provider tool: returns complete JSON for inspection and editing.\n\nUse list_monitors to find monitor IDs first.\nIf this returns an error, the monitor may have been deleted — verify with list_monitors.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "monitor_id": {
+            "description": "Monitor ID (from list_monitors)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "monitor_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "preview_monitor_edit",
+      "name": "preview_monitor_edit",
+      "title": "preview_monitor_edit",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Preview the impact of editing a monitor WITHOUT applying changes.",
+      "description": "Preview the impact of editing a monitor WITHOUT applying changes. Returns a client-side diff showing current vs proposed values for each changed field, plus the bucket-resolution preview when variants are provided or auto-migration would fire.\n\nPin variants via the variants array (same shape as create_monitor). When the monitor is legacy (variable_group != 0 or input_variables lack buckets), this preview shows what auto-migration would do — useful for users who want to inspect the migration plan before calling edit_monitor.\n\nWorkflow: get_monitor → preview_monitor_edit → (review diff + bucket plan) → edit_monitor.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "New active status",
+            "type": "boolean"
+          },
+          "input_variables": {
+            "description": "New input variables JSON. Buckets are injected automatically from the variants array on submission — preview shows the projected result.",
+            "type": "string"
+          },
+          "monitor_id": {
+            "description": "Monitor ID to preview changes for",
+            "type": "number"
+          },
+          "name": {
+            "description": "New monitor name",
+            "type": "string"
+          },
+          "owners": {
+            "description": "New owners JSON",
+            "type": "string"
+          },
+          "scheduling": {
+            "description": "New scheduling JSON",
+            "type": "string"
+          },
+          "variants": {
+            "description": "Pin variants for the monitor's variable groups. Each entry is \"5\" (numeric variant ID) or \"GroupName:VariantName\". Groups not pinned retain their existing bucket (edit-mode preservation). Use to re-pin specific groups during the edit.",
+            "type": "array"
+          }
+        },
+        "required": [
+          "monitor_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "toggle_monitors",
+      "name": "toggle_monitors",
+      "title": "toggle_monitors",
+      "category": "Monitor Management",
+      "categorySlug": "monitor-management",
+      "summary": "Bulk activate or deactivate multiple monitors.",
+      "description": "Bulk activate or deactivate multiple monitors. Use list_monitors to find IDs. If this fails with HTTP 400, one or more monitor IDs may be invalid or deleted — verify with get_monitor. For a single monitor, edit_monitor active= also works; this is the bulk path.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "active": {
+            "description": "true to activate, false to deactivate",
+            "type": "boolean"
+          },
+          "monitor_ids": {
+            "description": "Comma-separated monitor IDs to toggle",
+            "type": "string"
+          }
+        },
+        "required": [
+          "monitor_ids",
+          "active"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_monitoring_result",
+      "name": "get_monitoring_result",
+      "title": "get_monitoring_result",
+      "category": "Monitoring Results",
+      "categorySlug": "monitoring-results",
+      "summary": "Investigate monitoring (scheduled) run result(s) in detail.",
+      "description": "Investigate monitoring (scheduled) run result(s) in detail. Returns failure reason, per-test/per-action status, duration, and variables. Supports batch: pass comma-separated IDs to investigate multiple failures in one call. Use include_actions=true for raw action results (screenshots, artifacts, logs).\n\nResult IDs come from list_monitoring_results. Always scope list_monitoring_results by monitoring_id first to ensure results belong to the correct operator. For campaign or Tests-campaign runs use get_execution_detail instead.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "include_actions": {
+            "description": "Include raw action results with screenshots, artifacts, logs (default: false). Increases response size significantly. Note: screenshots include full URLs; artifact paths are relative — prepend https://<KAPPTIVATE_HOST>/robot/ to build the full URL.",
+            "type": "boolean"
+          },
+          "include_full_json": {
+            "description": "Include the entire raw result blob (default: false). Use only when you need campaign metadata, options, or history.",
+            "type": "boolean"
+          },
+          "result_ids": {
+            "description": "Comma-separated monitoring result IDs (from list_monitoring_results). Single ID for one result, multiple for batch investigation.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result_ids"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_monitoring_results",
+      "name": "list_monitoring_results",
+      "title": "list_monitoring_results",
+      "category": "Monitoring Results",
+      "categorySlug": "monitoring-results",
+      "summary": "List recent monitoring results (run outcomes).",
+      "description": "List recent monitoring results (run outcomes). Returns compact summaries by default; use detail=true for full JSON. Returns summary fields only — use get_monitoring_result for the full execution payload.\n\nPrerequisite: Call list_monitors with operator=<slug> first to get monitor IDs, then pass monitoring_id here. Without monitoring_id or product, results span ALL operators — do not skip this step.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false).",
+            "type": "boolean"
+          },
+          "end": {
+            "description": "Results before this datetime (ISO 8601). Max span with start: 24 hours.",
+            "type": "string"
+          },
+          "monitoring_id": {
+            "description": "Filter by monitor ID (from list_monitors). Required for operator-scoped results — without this, results span all operators.",
+            "type": "number"
+          },
+          "ordering": {
+            "description": "Sort field: -modified (default, newest first) or modified (oldest first).",
+            "enum": [
+              "-modified",
+              "modified"
+            ],
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default: 1).",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Results per page (default: 20).",
+            "type": "number"
+          },
+          "product": {
+            "description": "Filter by product slug (format: operator~product).",
+            "type": "string"
+          },
+          "start": {
+            "description": "Results after this datetime (ISO 8601, e.g. 2026-02-28T00:00:00Z). Max span with end: 24 hours. Auto-set to now-24h if neither start nor end is provided.",
+            "type": "string"
+          },
+          "test_id": {
+            "description": "Filter by test ID.",
+            "type": "number"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "close_incident",
+      "name": "close_incident",
+      "title": "close_incident",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "Manually close an active incident.",
+      "description": "Manually close an active incident. Sets the incident status to MANUALLY_CLOSED. Use list_incidents status=OPEN to find active incidents first.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "incident_id": {
+            "description": "Incident ID to close",
+            "type": "number"
+          },
+          "operator": {
+            "description": "Operator slug (required for permission scoping)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "incident_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_alert_definition",
+      "name": "get_alert_definition",
+      "title": "get_alert_definition",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "Get a single alert definition by ID, including its configuration (thresholds, conditions) and notification settings.",
+      "description": "Get a single alert definition by ID, including its configuration (thresholds, conditions) and notification settings. Returns a compact summary by default; use detail=true for the full JSON payload. ID from list_alert_definitions.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "alert_definition_id": {
+            "description": "Alert definition ID",
+            "type": "number"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summary (default: false)",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "alert_definition_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_incident",
+      "name": "get_incident",
+      "title": "get_incident",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "Get a single incident by ID, including its tags, status, severity level, duration, and the alert definition that triggered it.",
+      "description": "Get a single incident by ID, including its tags, status, severity level, duration, and the alert definition that triggered it. IDs from list_incidents; close with close_incident.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "incident_id": {
+            "description": "Incident ID",
+            "type": "number"
+          },
+          "operator": {
+            "description": "Operator slug (required for permission scoping)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "incident_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_incident_counter",
+      "name": "get_incident_counter",
+      "title": "get_incident_counter",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "Get a quick count of incidents by severity: critical, warning, and closed.",
+      "description": "Get a quick count of incidents by severity: critical, warning, and closed. Useful for dashboard-style health checks. Accepts the same filters as list_incidents.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "alert_id": {
+            "description": "Comma-separated alert definition IDs",
+            "type": "string"
+          },
+          "closed_date_after": {
+            "description": "ISO datetime: only incidents closed after this time",
+            "type": "string"
+          },
+          "closed_date_before": {
+            "description": "ISO datetime: only incidents closed before this time",
+            "type": "string"
+          },
+          "created_after": {
+            "description": "ISO datetime: only incidents created after this time",
+            "type": "string"
+          },
+          "created_before": {
+            "description": "ISO datetime: only incidents created before this time",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "status": {
+            "description": "Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED",
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "MANUALLY_CLOSED",
+              "CHANGED",
+              "DEACTIVATED"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_alert_definitions",
+      "name": "list_alert_definitions",
+      "title": "list_alert_definitions",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "List alert definitions configured on the Kapptivate platform.",
+      "description": "List alert definitions configured on the Kapptivate platform. These are persistent rules that automatically trigger incidents when conditions are met.\n\nNOT the same as evaluate_alert which performs on-demand local analytics computation. To check platform alert status, use list_incidents.\n\nFilters: name, types (comma-sep: raw_alert, availability, metric, agent_availability, availability_last_point), archived (bool).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "archived": {
+            "description": "Filter by archived status: true or false",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Filter by alert name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "types": {
+            "description": "Comma-separated alert types: raw_alert, availability, metric, agent_availability, availability_last_point",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_incidents",
+      "name": "list_incidents",
+      "title": "list_incidents",
+      "category": "Alerting",
+      "categorySlug": "alerting",
+      "summary": "List incidents (triggered alerts) on the platform.",
+      "description": "List incidents (triggered alerts) on the platform. Incidents are created when a platform alert definition fires. They track the lifecycle from OPEN to CLOSED.\n\nNOT the same as evaluate_alert which performs local on-demand analytics. To manage platform alerts, use list_alert_definitions.\n\nFilters: status (OPEN/CLOSED/MANUALLY_CLOSED/CHANGED/DEACTIVATED), alert_id (comma-sep), created_after/before, closed_date_after/before.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "alert_id": {
+            "description": "Comma-separated alert definition IDs",
+            "type": "string"
+          },
+          "closed_date_after": {
+            "description": "ISO datetime: only incidents closed after this time",
+            "type": "string"
+          },
+          "closed_date_before": {
+            "description": "ISO datetime: only incidents closed before this time",
+            "type": "string"
+          },
+          "created_after": {
+            "description": "ISO datetime: only incidents created after this time",
+            "type": "string"
+          },
+          "created_before": {
+            "description": "ISO datetime: only incidents created before this time",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default 1)",
+            "type": "number"
+          },
+          "status": {
+            "description": "Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED",
+            "enum": [
+              "OPEN",
+              "CLOSED",
+              "MANUALLY_CLOSED",
+              "CHANGED",
+              "DEACTIVATED"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "compute_slo",
+      "name": "compute_slo",
+      "title": "compute_slo",
+      "category": "Metrics",
+      "categorySlug": "metrics",
+      "summary": "Compute SLI/SLO metrics from InfluxDB query results.",
+      "description": "Compute SLI/SLO metrics from InfluxDB query results. Uses Google SRE burn-rate methodology.\n\nPrerequisite: Run query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS first to discover which measurement contains success/failure counts.\n\nExample: SELECT sum(\"number_success\") AS good, sum(\"number_success\") + sum(\"number_failed\") AS total FROM \"test\" WHERE time > now() - 30d GROUP BY time(1d)\n\nThe tool extracts good/total fields, computes SLI, error budget, burn rate, and severity.\n\nSeverity thresholds (Google SRE):\n- critical: burn rate > 14.4x (page immediately)\n- red: burn rate > 6x (create ticket)\n- yellow: burn rate > 1x (SLO at risk)\n- green: burn rate <= 1x (within budget)",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "good_field": {
+            "description": "Field name for good events (default 'good')",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (= InfluxDB database name)",
+            "type": "string"
+          },
+          "precision": {
+            "description": "Query time precision (s, ms, u, ns)",
+            "type": "string"
+          },
+          "query": {
+            "description": "InfluxQL query returning good/total fields",
+            "type": "string"
+          },
+          "slo_target": {
+            "description": "SLO target percentage (e.g. 99.9)",
+            "type": "number"
+          },
+          "total_field": {
+            "description": "Field name for total events (default 'total')",
+            "type": "string"
+          },
+          "window": {
+            "description": "SLO window (default '30d'). Supported: Nd, Nh",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "query",
+          "slo_target"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "correlate_metrics",
+      "name": "correlate_metrics",
+      "title": "correlate_metrics",
+      "category": "Metrics",
+      "categorySlug": "metrics",
+      "summary": "Detect cross-metric relationships: are these metrics related?",
+      "description": "Detect cross-metric relationships: are these metrics related? Did they change at the same time? Does one cause the other?\n\nProvide 2-10 InfluxQL GROUP BY time() queries. Results include per-query health summaries and pairwise correlation with statistical significance.\n\n3 analysis modes (--mode):\n- quick (default): pairwise Spearman/Pearson + p-values. Fast, answers \"are they correlated?\"\n- full: adds distribution shift detection (KS test) and lag scan (±50 steps). Answers \"did they change together?\" and \"does one cause the other?\"\n- shift: per-query KS distribution shift only. Answers \"which metrics changed recently?\"\n\nUse matching GROUP BY time() intervals for best alignment. Prerequisite: discover schema with query_metrics SHOW MEASUREMENTS first.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "mode": {
+            "description": "Analysis mode: 'quick' (default, correlation only), 'full' (correlation + KS shift + lag scan), 'shift' (KS distribution shift only)",
+            "enum": [
+              "quick",
+              "full",
+              "shift"
+            ],
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (= InfluxDB database name)",
+            "type": "string"
+          },
+          "queries": {
+            "description": "JSON array of 2-10 InfluxQL GROUP BY time() queries",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "queries"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "evaluate_alert",
+      "name": "evaluate_alert",
+      "title": "evaluate_alert",
+      "category": "Metrics",
+      "categorySlug": "metrics",
+      "summary": "Evaluate metrics against alert rules without Kapacitor.",
+      "description": "Evaluate metrics against alert rules without Kapacitor. Runs an InfluxQL query, computes statistics, then checks rules. This tool performs LOCAL on-demand analytics computation — it is NOT related to platform alert definitions or incidents. To manage platform alerts, use list_alert_definitions and list_incidents.\n\nIMPORTANT: This is LOCAL on-demand analytics (stateless). For platform alert status and active incidents, use list_alert_definitions + list_incidents instead.\n\nPrerequisite: Run query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS first to discover numeric fields. Your query MUST return numeric time-series data (not SHOW commands). Rule \"metric\" fields (e.g. \"p95\", \"mean\") refer to computed statistics, not raw InfluxDB fields.\n\n8 rule types:\n- threshold: check a metric against a value (operators: >, <, >=, <=, ==, !=)\n- level_shift: detect significant mean changes (optional min_shift_pct filter)\n- missing_data: check for gaps in time series (max_gaps, default 0)\n- flatline: detect stuck values (max_flatline_len, default 3)\n- rate_change: detect spikes or excessive rate (max_spikes default 0, max_abs_rate)\n- outlier: check outlier percentage (max_outlier_pct, default 5.0)\n- counter_reset: detect counter decreases (max_resets, default 0)\n- anomaly: detect sustained EWMA residual breaches (sensitivity 1-5, sustained_periods default 3)\n\nAll rules support optional \"description\" field for user context.\n\nWorkflow: query_metrics (explore data) → evaluate_alert (check rules).\n\nExample rules JSON:\n[\n  {\"type\":\"threshold\",\"metric\":\"p95\",\"operator\":\">\",\"value\":5.0,\"description\":\"SLA p95 < 5s\"},\n  {\"type\":\"missing_data\",\"max_gaps\":5},\n  {\"type\":\"flatline\",\"max_flatline_len\":10},\n  {\"type\":\"level_shift\",\"min_shift_pct\":20},\n  {\"type\":\"anomaly\",\"sensitivity\":3,\"sustained_periods\":3,\"detection_direction\":\"above\"}\n]\n\nThe anomaly rule supports \"detection_direction\": \"above\" (error rates, latency), \"below\" (SLAs, success rates), or \"both\" (default).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "operator": {
+            "description": "Operator slug (= InfluxDB database name)",
+            "type": "string"
+          },
+          "precision": {
+            "description": "Query time precision (s, ms, u, ns)",
+            "type": "string"
+          },
+          "query": {
+            "description": "InfluxQL query string",
+            "type": "string"
+          },
+          "rules": {
+            "description": "JSON array of alert rules",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "query",
+          "rules"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_resource_usage",
+      "name": "get_resource_usage",
+      "title": "get_resource_usage",
+      "category": "Metrics",
+      "categorySlug": "metrics",
+      "summary": "Get device resource usage over time, broken down by a configurable aggregation window.",
+      "description": "Get device resource usage over time, broken down by a configurable aggregation window. Returns usage percentage per resource. Use list_resources to find device IDs (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Response keyed by resource name. Maximum recommended range: 90 days. Pass aggregations (e.g. 'p95,max') to include peak usage data alongside the default aggregation. Use instead of query_metrics for device utilization %; no InfluxQL needed.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "aggregation": {
+            "description": "Time aggregation bucket (e.g. '1h', '5m')",
+            "type": "string"
+          },
+          "aggregations": {
+            "description": "Comma-separated aggregation windows for peak usage (e.g. 'p95,max'). When provided, returns P95 peak usage across these windows instead of the standard time-series.",
+            "type": "string"
+          },
+          "detail": {
+            "description": "Return null-elided JSON instead of summary (default: false)",
+            "type": "boolean"
+          },
+          "end": {
+            "description": "End time in ISO 8601 format (e.g. '2024-01-02T00:00:00Z')",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (= InfluxDB database name)",
+            "type": "string"
+          },
+          "resources": {
+            "description": "Comma-separated device IDs (SIM: national_msisdn, web-agent: hostname, smartphone: UUID)",
+            "type": "string"
+          },
+          "start": {
+            "description": "Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z')",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "resources",
+          "aggregation",
+          "start",
+          "end"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "query_metrics",
+      "name": "query_metrics",
+      "title": "query_metrics",
+      "category": "Metrics",
+      "categorySlug": "metrics",
+      "summary": "Execute an InfluxQL query against the operator's metrics database.",
+      "description": "Execute an InfluxQL query against the operator's metrics database. Returns statistical summaries by default; use detail=true for raw JSON.\n\nPREREQUISITE: call platform_guide topic=metrics for the schema discovery workflow, measurement catalog, and example queries.\n\nStart with SHOW MEASUREMENTS to discover tables, then SHOW FIELD KEYS FROM <measurement> for fields. Always include a WHERE time clause (recommended max 90 days for summary mode, 30 days for detail=true). In detail mode, results truncated at 5000 points.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of statistical summary (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug (= InfluxDB database name)",
+            "type": "string"
+          },
+          "precision": {
+            "description": "Query time precision (s, ms, u, ns)",
+            "type": "string"
+          },
+          "query": {
+            "description": "InfluxQL query string",
+            "type": "string"
+          },
+          "summary_mode": {
+            "description": "Output detail: 'full' (default, all metrics), 'executive' (1-line status, key metrics only)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "query"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "create_dashboard",
+      "name": "create_dashboard",
+      "title": "create_dashboard",
+      "category": "Dashboard",
+      "categorySlug": "dashboard",
+      "summary": "Create a new empty dashboard under an operator.",
+      "description": "Create a new empty dashboard under an operator. The dashboard is created with layout version 2 and an empty widget array. Creates an EMPTY dashboard; use build_dashboard to create with widgets in one call.\n\nThe collection_uid is auto-resolved from the operator's dashboards_root_collection_uid (same pattern as test creation with product root collection).\n\nWorkflow: list_operators → create_dashboard → get_dashboard (to verify).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "bucket": {
+            "description": "InfluxDB bucket for passive agent data (optional)",
+            "type": "string"
+          },
+          "name": {
+            "description": "Dashboard name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug (resolved to collection UID automatically)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "name"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_dashboard",
+      "name": "get_dashboard",
+      "title": "get_dashboard",
+      "category": "Dashboard",
+      "categorySlug": "dashboard",
+      "summary": "Get the full dashboard definition by UID, including widget layout, global filters, and metadata.",
+      "description": "Get the full dashboard definition by UID, including widget layout, global filters, and metadata. The layouts field contains the complete widget configuration (v2 format: {md: [...]}).",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "dashboard_uid": {
+            "description": "Dashboard UID (from list_dashboards)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dashboard_uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_dashboards",
+      "name": "list_dashboards",
+      "title": "list_dashboards",
+      "category": "Dashboard",
+      "categorySlug": "dashboard",
+      "summary": "List dashboards for an operator.",
+      "description": "Returns compact summaries by default; use detail=true for full JSON. List dashboards for an operator. Dashboards contain metric widgets (charts, counters, tables) visualizing InfluxDB data.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "is_favorite": {
+            "description": "Filter by favorite status",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Filter by dashboard name (case-insensitive contains)",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Filter by operator slug (recommended — dashboards are operator-scoped)",
+            "type": "string"
+          },
+          "page": {
+            "description": "Page number (default: 1)",
+            "type": "number"
+          },
+          "page_size": {
+            "description": "Number of dashboards per page (default: 20)",
+            "type": "number"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "update_dashboard",
+      "name": "update_dashboard",
+      "title": "update_dashboard",
+      "category": "Dashboard",
+      "categorySlug": "dashboard",
+      "summary": "Update dashboard metadata (name, bucket, favorite status).",
+      "description": "Update dashboard metadata (name, bucket, favorite status). Does not modify widget layout — use add/edit/remove_dashboard_widget for that. Use get_dashboard to verify.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "bucket": {
+            "description": "New InfluxDB bucket",
+            "type": "string"
+          },
+          "dashboard_uid": {
+            "description": "Dashboard UID (from list_dashboards)",
+            "type": "string"
+          },
+          "is_favorite": {
+            "description": "Set favorite status",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "New dashboard name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dashboard_uid"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "add_dashboard_widget",
+      "name": "add_dashboard_widget",
+      "title": "add_dashboard_widget",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Add a widget to a dashboard.",
+      "description": "Add a widget to a dashboard. Validates the widget, generates a unique ID, auto-positions it, and appends to the dashboard layout via PATCH.\n\nPrerequisite: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before constructing widget queries. Placeholder values will be REJECTED.\n\nWorkflow: get_widget_template → fill with real values → validate_widget → add_dashboard_widget → get_dashboard (verify).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval.",
+            "type": "boolean"
+          },
+          "dashboard_uid": {
+            "description": "Dashboard UID (from list_dashboards or create_dashboard)",
+            "type": "string"
+          },
+          "h": {
+            "description": "Grid height in rows. Omit for type default.",
+            "type": "number"
+          },
+          "preview": {
+            "description": "Dry-run mode: validate, normalize, and auto-position without PATCHing the dashboard or burning edit budget. Returns ASCII grid + normalized data + warnings.",
+            "type": "boolean"
+          },
+          "w": {
+            "description": "Grid width in columns. Omit for type default.",
+            "type": "number"
+          },
+          "widget_json": {
+            "description": "JSON string of the widget data section (from get_widget_template, filled with real values, without _metadata)",
+            "type": "string"
+          },
+          "x": {
+            "description": "Grid x position (0-23). Omit for auto-position.",
+            "type": "number"
+          },
+          "y": {
+            "description": "Grid y position. Omit for auto-position (appends to bottom).",
+            "type": "number"
+          }
+        },
+        "required": [
+          "dashboard_uid",
+          "widget_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "build_dashboard",
+      "name": "build_dashboard",
+      "title": "build_dashboard",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Create a dashboard with all widgets in a single atomic call.",
+      "description": "Create a dashboard with all widgets in a single atomic call. Validates all widgets upfront — if ANY fails, NONE are created. Auto-positions widgets using type defaults (override with _w/_h per widget). Returns ASCII grid preview + all widget IDs.\n\nPREREQUISITE: call platform_guide topic=dashboards for widget types, grid layout rules, and the full creation workflow. Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before building widget queries.\n\nEach widget object uses the same format as widget_json in add_dashboard_widget (without _metadata). Optional _w/_h fields override type default dimensions. Position (_x/_y) is always auto-calculated — do not provide.\n\nAtomic: if ANY widget fails validation, NONE are created. Fix all errors and re-submit.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "bucket": {
+            "description": "InfluxDB bucket for passive agent data (optional)",
+            "type": "string"
+          },
+          "name": {
+            "description": "Dashboard name",
+            "type": "string"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "preview": {
+            "description": "Dry-run mode: validate, normalize, and auto-position all widgets without creating the dashboard. Returns ASCII grid + normalized data + warnings.",
+            "type": "boolean"
+          },
+          "widgets": {
+            "description": "JSON array of widget objects (same format as widget_json in add_dashboard_widget, without _metadata). Optional _w/_h per widget to override default size.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator",
+          "name",
+          "widgets"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "edit_dashboard_widget",
+      "name": "edit_dashboard_widget",
+      "title": "edit_dashboard_widget",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Edit an existing widget in a dashboard.",
+      "description": "Edit an existing widget in a dashboard. Replaces the widget data section. Position (x/y/w/h) is preserved unless explicitly provided.\n\nPrerequisite: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS if changing query fields.\n\nWorkflow: get_dashboard → edit_dashboard_widget → get_dashboard (verify).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Set to true after user approves continuing past the edit limit.",
+            "type": "boolean"
+          },
+          "dashboard_uid": {
+            "description": "Dashboard UID",
+            "type": "string"
+          },
+          "h": {
+            "description": "New grid height (optional)",
+            "type": "number"
+          },
+          "w": {
+            "description": "New grid width (optional)",
+            "type": "number"
+          },
+          "widget_id": {
+            "description": "Widget ID within the dashboard (the 'i' field from get_dashboard layout)",
+            "type": "string"
+          },
+          "widget_json": {
+            "description": "JSON string of the new widget data section",
+            "type": "string"
+          },
+          "x": {
+            "description": "New grid x position (optional — preserves current if omitted)",
+            "type": "number"
+          },
+          "y": {
+            "description": "New grid y position (optional)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "dashboard_uid",
+          "widget_id",
+          "widget_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_widget_template",
+      "name": "get_widget_template",
+      "title": "get_widget_template",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Get a ready-to-fill JSON template for a dashboard widget type.",
+      "description": "Get a ready-to-fill JSON template for a dashboard widget type. Includes _metadata with grid constraints, valid operations, schema discovery steps, and layout hints.\n\nPREREQUISITE: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before filling this template.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "widget_type": {
+            "description": "Widget type (from list_widget_types): line, area, pie, repartitionChart, counter, title, table, customDisplay",
+            "type": "string"
+          }
+        },
+        "required": [
+          "widget_type"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_widget_types",
+      "name": "list_widget_types",
+      "title": "list_widget_types",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "List available dashboard widget types with their constraints, grid sizes, and capabilities.",
+      "description": "List available dashboard widget types with their constraints, grid sizes, and capabilities. Returns a formatted text guide (not JSON) with layout patterns and widget capabilities. Use before adding widgets to understand what types are available.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {},
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "remove_dashboard_widget",
+      "name": "remove_dashboard_widget",
+      "title": "remove_dashboard_widget",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Remove a widget from a dashboard by its widget ID.",
+      "description": "Remove a widget from a dashboard by its widget ID. The remaining widgets' positions are preserved.\n\nWorkflow: get_dashboard → remove_dashboard_widget → get_dashboard (verify).",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "acknowledge": {
+            "description": "Set to true after user approves continuing past the edit limit.",
+            "type": "boolean"
+          },
+          "dashboard_uid": {
+            "description": "Dashboard UID",
+            "type": "string"
+          },
+          "widget_id": {
+            "description": "Widget ID to remove (the 'i' field from get_dashboard layout)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "dashboard_uid",
+          "widget_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "validate_widget",
+      "name": "validate_widget",
+      "title": "validate_widget",
+      "category": "Dashboard Widget",
+      "categorySlug": "dashboard-widget",
+      "summary": "Dry-run validation of a dashboard widget.",
+      "description": "Dry-run validation of a dashboard widget. Checks type, structure, query fields, placeholder detection, and per-type constraints. Returns errors and warnings without modifying any dashboard.\n\nUse before add_dashboard_widget to catch errors early.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "widget_json": {
+            "description": "JSON string of the widget data section (same format as the template output, without _metadata)",
+            "type": "string"
+          }
+        },
+        "required": [
+          "widget_json"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "cancel_shell",
+      "name": "cancel_shell",
+      "title": "cancel_shell",
+      "category": "Shell",
+      "categorySlug": "shell",
+      "summary": "Cancel a pending or ongoing shell command.",
+      "description": "Cancel a pending or ongoing shell command. The command's status changes to Canceled and the runner task is terminated. Find active shell_ids via list_shell_actions.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "shell_id": {
+            "description": "Shell command ID to cancel",
+            "type": "number"
+          }
+        },
+        "required": [
+          "shell_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_shell_result",
+      "name": "get_shell_result",
+      "title": "get_shell_result",
+      "category": "Shell",
+      "categorySlug": "shell",
+      "summary": "Get the full result of a shell command.",
+      "description": "Get the full result of a shell command. Use after send_shell_command to check status and retrieve output. Poll until status is terminal (Done/Timeout/Blocked/Canceled/Maintenance). For USSD: check if session is OPEN or CLOSED — if OPEN, send follow-up input with send_shell_command to navigate the menu.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "shell_id": {
+            "description": "Shell command ID (from send_shell_command)",
+            "type": "number"
+          }
+        },
+        "required": [
+          "shell_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_shell_action_types",
+      "name": "list_shell_action_types",
+      "title": "list_shell_action_types",
+      "category": "Shell",
+      "categorySlug": "shell",
+      "summary": "List action types available in shell mode.",
+      "description": "List action types available in shell mode. Shell actions are a curated subset: direct device/network operations only (USSD, ping, HTTP API, etc.). Script-execution and test-control actions are excluded. Use this before send_shell_command to see available types and their required fields. For the history of commands already sent, use list_shell_actions.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      },
+      "inputSchema": {
+        "properties": {
+          "owner_kind": {
+            "description": "Filter by device type: S (SIM) or E (Ethernet). Omit for all.",
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_shell_actions",
+      "name": "list_shell_actions",
+      "title": "list_shell_actions",
+      "category": "Shell",
+      "categorySlug": "shell",
+      "summary": "List recent shell actions (commands already sent) for a product.",
+      "description": "List recent shell actions (commands already sent) for a product. Returns compact summaries showing ID, type, command summary, status, and duration. Use from_date + ordering to poll for asynchronous results such as incoming SMS or USSD menu responses during a live session. Filter by status to find in-flight commands: status=P (pending), status=O (ongoing). To see which shell action TYPES can be sent, use list_shell_action_types.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON instead of compact summaries (default: false)",
+            "type": "boolean"
+          },
+          "from_date": {
+            "description": "Only show shells created after this ISO 8601 timestamp (e.g. 2026-03-15T19:29:17Z). Use to poll for new async events.",
+            "type": "string"
+          },
+          "ordering": {
+            "description": "Sort order: '-created' (newest first, default), 'created' (oldest first)",
+            "enum": [
+              "-created",
+              "created"
+            ],
+            "type": "string"
+          },
+          "owner": {
+            "description": "Filter by device identifier (MSISDN or hostname)",
+            "type": "string"
+          },
+          "product_id": {
+            "description": "Filter by product ID",
+            "type": "number"
+          },
+          "status": {
+            "description": "Filter by status: P (Pending), D (Done), O (Ongoing), B (Blocked), C (Canceled), T (Timeout), M (Maintenance)",
+            "enum": [
+              "P",
+              "D",
+              "O",
+              "B",
+              "C",
+              "T",
+              "M"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [],
+        "type": "object"
+      }
+    },
+    {
+      "id": "send_shell_command",
+      "name": "send_shell_command",
+      "title": "send_shell_command",
+      "category": "Shell",
+      "categorySlug": "shell",
+      "summary": "Send a shell command to a device (SIM card or web agent) for immediate execution.",
+      "description": "Send a shell command to a device (SIM card or web agent) for immediate execution. PREREQUISITE: call platform_guide topic=shell for USSD navigation, resource contention handling, and async event patterns. Unlike tests, shell commands have no assertions — they fire a command and return the raw result. Use list_shell_action_types to discover available action types and their required command fields. Returns the shell ID for polling with get_shell_result. USSD is session-based: dial the root shortcode first (e.g. {\"input\":\"*199#\"}), then check get_shell_result — if session is OPEN, send follow-up menu options as separate commands (e.g. {\"input\":\"1\"}, {\"input\":\"2\"}). Prefer step-by-step navigation over long shortcodes like *199*5# — only use long shortcodes when the user explicitly provides one. Sessions expire after ~30s.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "command": {
+            "description": "Command payload as JSON string. Fields depend on action type — use list_shell_action_types for guidance.",
+            "type": "string"
+          },
+          "owner": {
+            "description": "Device identifier: MSISDN for SIM (e.g. 0789800356), hostname for Ethernet (e.g. my-web-agent)",
+            "type": "string"
+          },
+          "product_id": {
+            "description": "Product ID that owns the device",
+            "type": "number"
+          },
+          "type": {
+            "description": "Action type (e.g. USSD, ETH_HTTP_API, DATA_PING). Use list_shell_action_types to see options.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "product_id",
+          "owner",
+          "type",
+          "command"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "get_agent",
+      "name": "get_agent",
+      "title": "get_agent",
+      "category": "Agent",
+      "categorySlug": "agent",
+      "summary": "Get detailed information about a single agent, including slots (cellular/smartphone) or capacity (ethernet).",
+      "description": "Get detailed information about a single agent, including slots (cellular/smartphone) or capacity (ethernet).\nCellular agents show SIM card slots with IMEI and attached SIM status.\nSmartphone agents show connected phones with USB paths and status.\nEthernet agents show capacity (max parallel tests).\n\nUse list_agents to find agent UUIDs first.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "type": {
+            "description": "Agent type: cellular, ethernet, smartphone",
+            "enum": [
+              "cellular",
+              "ethernet",
+              "smartphone"
+            ],
+            "type": "string"
+          },
+          "uuid": {
+            "description": "Agent UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "type"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "list_agents",
+      "name": "list_agents",
+      "title": "list_agents",
+      "category": "Agent",
+      "categorySlug": "agent",
+      "summary": "List agents (infrastructure) for an operator with health and capacity summary.",
+      "description": "List agents (infrastructure) for an operator with health and capacity summary.\nAgents are the hardware/software that runs resources — operator-scoped, not product-scoped.\nThree types: cellular (GSM gateways with SIM slots), ethernet (standalone web agents), smartphone (phone hubs).\n\nReturns a capacity summary header showing total online capacity for concurrent tests.\nUse get_agent for detail with slots. Use list_resources for product-scoped device info.",
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "description": "Return full JSON (default: false)",
+            "type": "boolean"
+          },
+          "operator": {
+            "description": "Operator slug",
+            "type": "string"
+          },
+          "type": {
+            "description": "Filter by agent type: cellular, ethernet, smartphone. Omit for all three.",
+            "enum": [
+              "cellular",
+              "ethernet",
+              "smartphone"
+            ],
+            "type": "string"
+          },
+          "zone": {
+            "description": "Filter by zone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "reboot_agent",
+      "name": "reboot_agent",
+      "title": "reboot_agent",
+      "category": "Agent",
+      "categorySlug": "agent",
+      "summary": "Reboot an agent or a specific SIM slot (cellular only).",
+      "description": "Reboot an agent or a specific SIM slot (cellular only).\nRequires confirm=true to execute. Without it, returns a preview of what will be rebooted.\n\nUse list_agents to find agent UUIDs. Use get_agent to see slot IDs for slot-level reboot.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "confirm": {
+            "description": "Must be true to execute. Without confirm=true, returns a preview.",
+            "type": "boolean"
+          },
+          "slot_id": {
+            "description": "Specific SIM slot ID to reboot (cellular only, from get_agent slots)",
+            "type": "number"
+          },
+          "type": {
+            "description": "Agent type: cellular, ethernet, smartphone",
+            "enum": [
+              "cellular",
+              "ethernet",
+              "smartphone"
+            ],
+            "type": "string"
+          },
+          "uuid": {
+            "description": "Agent UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "type",
+          "confirm"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "id": "toggle_agent_maintenance",
+      "name": "toggle_agent_maintenance",
+      "title": "toggle_agent_maintenance",
+      "category": "Agent",
+      "categorySlug": "agent",
+      "summary": "Enable or disable maintenance mode for an agent.",
+      "description": "Enable or disable maintenance mode for an agent. Works for all agent types (polymorphic endpoint).\nRequires confirm=true to execute. Without it, returns a preview of the change.\n\nMaintenance mode prevents the agent from running tests. Use list_agents to find agent UUIDs.",
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": true
+      },
+      "inputSchema": {
+        "properties": {
+          "confirm": {
+            "description": "Must be true to execute. Without confirm=true, returns a preview.",
+            "type": "boolean"
+          },
+          "maintenance": {
+            "description": "true to enable maintenance, false to disable",
+            "type": "boolean"
+          },
+          "uuid": {
+            "description": "Agent UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "uuid",
+          "maintenance",
+          "confirm"
+        ],
+        "type": "object"
+      }
+    }
+  ]
+}

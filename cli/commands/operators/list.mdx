@@ -1,0 +1,52 @@
+---
+title: "ktm operators list"
+description: "List all operators accessible with the current API key"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List all operators accessible with the current API key
+
+## Usage
+
+```bash
+ktm operators list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--organisation-group` | string | — | Filter operators belonging to this organisation group (by slug) |
+| `--short-name` | string | — | Filter by exact operator short name |
+
+## Details
+
+List operators the authenticated API key has access to.
+
+Operators are the top-level entities in Kapptivate. Each operator owns products,
+which in turn contain tests and monitors. Start here to discover your operator
+slug, then use it as --operator in products/tests/monitors/users commands.
+
+Filters:
+  --organisation-group  scope to operators in this organisation group (by slug)
+  --short-name          match by exact operator short name
+
+JSON output fields: name, active, organisation_group, slug, logo
+Table columns:      SLUG, NAME, ACTIVE, ORG GROUP
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

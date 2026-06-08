@@ -1,0 +1,59 @@
+---
+title: "ktm users list"
+description: "List users, optionally filtered by operator"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List users, optionally filtered by operator
+
+## Usage
+
+```bash
+ktm users list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true or false |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--search` | string | — | Search across username, email, first name, and last name |
+| `--type` | string | — | Filter by account type: 'user' (human) or 'server' (service account) |
+
+## Details
+
+List user accounts on the platform, including both human users and service accounts.
+
+Use --operator to scope results to a specific operator. Use --type to distinguish
+between human users ("user") and API service accounts ("server").
+
+Note: Without --active, returns ALL users including inactive. This can produce
+600+ results. Use --active true to limit to active users, and --operator and/or
+--search to narrow results further.
+
+Filters:
+  --operator   scope to a single operator (slug from 'operators list')
+  --search     free-text search across username, email, first name, last name
+  --active  filter by active status: true or false
+  --type       account type: 'user' (human) or 'server' (service account)
+
+JSON output fields: id, username, first_name, last_name, email, is_active, is_superuser, type, roles, groups
+Table columns:      ID, USERNAME, EMAIL, NAME, ACTIVE, TYPE
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

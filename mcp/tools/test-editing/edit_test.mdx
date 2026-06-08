@@ -1,0 +1,68 @@
+---
+title: "edit_test"
+description: "Apply changes to an existing test."
+sidebarTitle: "edit_test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Apply changes to an existing test.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval. |
+| `actions` | string | No | JSON array of actions (replaces current actions) |
+| `archived` | boolean | No | Flip the archived flag |
+| `auto_correct_kinds` | boolean | No | Rewrite declared input_variable kinds to match the platform's variable types. Default false: kind mismatches are hard errors. |
+| `description` | string | No | New test description (only if explicitly changing it) |
+| `is_favorite` | boolean | No | Flip the is_favorite flag |
+| `name` | string | No | New test name (only if explicitly changing it) |
+| `skip_validation` | boolean | No | Bypass the client-side validator (backend still validates). Use for action types the CLI doesn't recognise or top-level metadata edits. |
+| `status` | string | No | Change test status (e.g. DRA, APP) |
+| `test_id` | number | Yes | ID of the test to edit |
+| `variables` | string | No | JSON variables object (replaces current variables) |
+| `variants` | array | No | Variant pin specifiers for V3 bucket resolution. Each item is '5' (numeric ID) or 'API:Staging' (group:variant by name). Edit mode: groups not pinned retain their existing buckets. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Apply changes to an existing test. DESTRUCTIVE — creates a new version automatically.
+
+PREREQUISITE: call platform_guide topic=test_editing for the guardrailed workflow and protected fields.
+ALWAYS preview first with preview_test_edit to check impact.
+Protected fields: product and collection_uid are NEVER changed. Name and description only change when explicitly provided.
+A per-test edit limit is enforced (5 per session). Check edits_remaining in the response.
+
+Top-level metadata that's now always preserved on PUT and editable via this tool: archived, is_favorite, status. Pass archived=true to archive the test without touching actions; use manage_test_lifecycle action=archive (or action=unarchive) for the common case.
+
+skip_validation=true bypasses the client-side validator. Use only when the test has an action type this MCP server's registry doesn't know (future types), or when you're only flipping a top-level flag like archived. The backend will still validate.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

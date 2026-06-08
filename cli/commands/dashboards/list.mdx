@@ -1,0 +1,51 @@
+---
+title: "ktm dashboards list"
+description: "List dashboards for an operator"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List dashboards for an operator
+
+## Usage
+
+```bash
+ktm dashboards list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--favorite` | string | — | Filter by favorite status (true/false) |
+| `--name` | string | — | Filter by name (case-insensitive contains) |
+| `--operator` | string | — | Filter by operator slug (recommended) |
+| `--page` | string | — | Page number |
+| `--page-size` | string | — | Items per page (default: 20) |
+
+## Details
+
+List non-archived dashboards accessible with the current API key.
+
+Dashboards are operator-scoped. Use --operator to scope results to a specific
+operator, then use the UID from the output to get full dashboard details.
+
+JSON output fields: uid, name, owner, operator, version, layouts, global_filters,
+                    is_favorite, bucket, created, modified
+Table columns:      UID, NAME, OWNER, VERSION, WIDGETS, FAVORITE
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

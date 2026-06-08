@@ -1,0 +1,70 @@
+---
+title: "ktm dashboards add-widget"
+description: "Add a widget to a dashboard from a JSON file or stdin"
+sidebarTitle: "add-widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Add a widget to a dashboard from a JSON file or stdin
+
+## Usage
+
+```bash
+ktm dashboards add-widget <uid> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--h` | int | — | Grid height in rows |
+| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
+| `--w` | int | — | Grid width in columns |
+| `--x` | int | — | Grid x position (0-23) |
+| `--y` | int | — | Grid y position |
+
+## Details
+
+Validate a widget definition and append it to the dashboard layout.
+
+The widget JSON is the data section (same format as widget-template output,
+without _metadata). Use --json to specify a file or "-" to read from stdin.
+
+GRID LAYOUT: 24 columns, 30px row height, vertical compaction.
+  - Full width: --w 24. Half: --w 12. Quarter: --w 6.
+  - x + w must be &lt;= 24. Widgets cannot overlap.
+  - Omit --x and --y for auto-positioning (fills gaps left-to-right, top-to-bottom).
+  - Default sizes per type: charts/tables/custom 6x8, counter 6x3, title 6x2.
+
+LAYOUT PATTERNS:
+  - KPI row: 2-4 counters. --w 12 for 2, --w 8 for 3, --w 6 for 4.
+  - Chart pair: 2 charts side by side, --w 12 each.
+  - Section divider: title --w 24 --h 2, then content below.
+
+customDisplay: requires IIFE script, uses queries[] not series[], max 20KB script.
+Scripts can compute (ratios, stats, correlation) but lack the platform's statistical engine
+(EWMA, anomaly detection, SLO) — use InfluxQL or MCP/CLI tools for those.
+Do not hardcode pre-computed values — widgets are live and re-query on time range changes.
+Run validate-widget or check widget-template _metadata.notes for script API docs.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

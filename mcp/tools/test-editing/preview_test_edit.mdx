@@ -1,0 +1,60 @@
+---
+title: "preview_test_edit"
+description: "Shows diff preview."
+sidebarTitle: "preview_test_edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Shows diff preview.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `actions` | string | No | JSON array of actions (replaces current actions) |
+| `auto_correct_kinds` | boolean | No | Rewrite declared input_variable kinds to match the platform's variable types. Default false: kind mismatches are hard errors. |
+| `description` | string | No | New test description (only if explicitly changing it) |
+| `name` | string | No | New test name (only if explicitly changing it) |
+| `test_id` | number | Yes | ID of the test to preview changes for |
+| `variables` | string | No | JSON variables object (replaces current variables) |
+| `variants` | array | No | Variant pin specifiers for V3 bucket resolution. Each item is '5' (numeric ID) or 'API:Staging' (group:variant by name). Edit mode: groups not pinned retain their existing buckets. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Shows diff preview. Protected fields (cannot change): product_id, collection_uid.
+
+Preview the impact of editing a test WITHOUT applying changes. Returns which tests would be invalidated and which monitorings would be deactivated.
+
+V3 buckets: pass variants=["API:Staging", ...] (repeatable, same forms as create_test) to preview re-pinning. In edit mode, groups not pinned retain their existing buckets. Pre-V3 tests get default variants filled in automatically.
+
+Workflow: get_full_test → preview_test_edit → (review impact) → edit_test.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

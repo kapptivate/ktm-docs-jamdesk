@@ -1,0 +1,54 @@
+---
+title: "send_shell_command"
+description: "Send a shell command to a device (SIM card or web agent) for immediate execution."
+sidebarTitle: "send_shell_command"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Send a shell command to a device (SIM card or web agent) for immediate execution.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `command` | string | Yes | Command payload as JSON string. Fields depend on action type — use list_shell_action_types for guidance. |
+| `owner` | string | Yes | Device identifier: MSISDN for SIM (e.g. 0789800356), hostname for Ethernet (e.g. my-web-agent) |
+| `product_id` | number | Yes | Product ID that owns the device |
+| `type` | string | Yes | Action type (e.g. USSD, ETH_HTTP_API, DATA_PING). Use list_shell_action_types to see options. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product_id": 0,
+  "owner": "string",
+  "type": "string",
+  "command": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Send a shell command to a device (SIM card or web agent) for immediate execution. PREREQUISITE: call platform_guide topic=shell for USSD navigation, resource contention handling, and async event patterns. Unlike tests, shell commands have no assertions — they fire a command and return the raw result. Use list_shell_action_types to discover available action types and their required command fields. Returns the shell ID for polling with get_shell_result. USSD is session-based: dial the root shortcode first (e.g. {"input":"*199#"}), then check get_shell_result — if session is OPEN, send follow-up menu options as separate commands (e.g. {"input":"1"}, {"input":"2"}). Prefer step-by-step navigation over long shortcodes like *199*5# — only use long shortcodes when the user explicitly provides one. Sessions expire after ~30s.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

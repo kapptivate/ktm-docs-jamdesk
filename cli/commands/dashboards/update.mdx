@@ -1,0 +1,44 @@
+---
+title: "ktm dashboards update"
+description: "Update dashboard metadata (name, bucket, favorite status)"
+sidebarTitle: "update"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Update dashboard metadata (name, bucket, favorite status)
+
+## Usage
+
+```bash
+ktm dashboards update <uid> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | New InfluxDB bucket |
+| `--favorite` | string | — | Set favorite status (true/false) |
+| `--name` | string | — | New dashboard name |
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

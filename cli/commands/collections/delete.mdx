@@ -1,0 +1,56 @@
+---
+title: "ktm collections delete"
+description: "Move a collection to the organisation's trash (soft-delete)"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Move a collection to the organisation's trash (soft-delete)
+
+## Usage
+
+```bash
+ktm collections delete <uid> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (required) |
+| `--yes` | boolean | — | Confirm irreversible delete |
+
+## Details
+
+Move the collection to the organisation's trash collection. The collection
+and its items are recoverable until the trash is emptied (which requires a
+separate admin action on the kcollections service). Despite the "delete" name
+this is NOT a hard delete — the earlier v100 spec said "no trash"; that was
+wrong and was corrected in v100.1.
+
+The command still refuses without --yes because agents should confirm scope
+before moving collections around.
+
+Backed by POST /kcollections/api/collections/\{uid\}/move_to_trash.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

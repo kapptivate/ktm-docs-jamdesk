@@ -1,0 +1,88 @@
+---
+title: "batch_create_monitors"
+description: "Create multiple monitors in a single call."
+sidebarTitle: "batch_create_monitors"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create multiple monitors in a single call.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | No | Default active state for all monitors (default: true). Per-monitor active overrides this. |
+| `confirmed` | boolean | No | Set to true to submit the batch. NEVER set without explicit user approval of the preview. |
+| `monitors` | string | Yes | JSON array of monitor specs. Each spec: \{"test_id": &lt;int&gt;, "variants": ["API:Staging"], "name": "&lt;str&gt;", "active": &lt;bool&gt;, "overrides": \{"VAR": "val"\}, "scheduling": \{...\}, "options": \{...\}\}. test_id is required; variants is optional (group defaults used when absent). |
+| `options` | string | No | Default options for all monitors. Per-monitor options override this. Example: \{"timeout_sms":30,"ignore_errors":false,"auto_retry_failed_test":0\} |
+| `product` | string | Yes | Product slug (format: operator~product). All monitors in the batch belong to this product. |
+| `scheduling` | string | No | Default scheduling for all monitors. Per-monitor scheduling overrides this. Example: \{"type":"simple/v2","definition":\{"frequency":\{"every":5,"unit":"minutes"\}\}\} |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string",
+  "monitors": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Create multiple monitors in a single call. All monitors must belong to the same product.
+Reduces round-trips from ~30 (10 individual create_monitor calls) to 2 (one preview + one confirm).
+
+Two-step workflow (MANDATORY — preview cannot be skipped):
+1. batch_create_monitors product=<slug> monitors=<json_array> → returns BATCH PREVIEW
+2. Show the preview to the user. Get their explicit approval.
+3. batch_create_monitors product=<slug> monitors=<same_array> confirmed=true → SUBMIT ALL
+
+IMPORTANT: NEVER set confirmed=true without showing the preview to the user first.
+
+Pin variants per-entry via the variants array (same shape as create_monitor).
+Globals always emit {type:"global"}. Variables in unpinned groups use that
+group's default variant. Test-local input vars (no backing product variable)
+keep their varDef.Value. Monitors created with active=false are defensively
+re-toggled after creation so the platform scheduler actually stops them.
+
+monitors parameter — JSON array of monitor specs:
+[
+  {"test_id": 100, "variants": ["API:Staging"]},
+  {"test_id": 101, "variants": ["API:Staging", "Database:Replica"], "name": "Custom", "overrides": {"SIM_A": "069..."}},
+  {"test_id": 102, "active": false, "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":15,"unit":"minutes"}}}}
+]
+
+Each monitor spec fields:
+  test_id (required, int)  — test to monitor
+  variants (array of str)  — pin a variant per group. Forms: "5" (numeric ID) or "API:Staging" (group:variant). Repeatable. Omit to use group defaults.
+  name (string)            — monitor name (defaults to test name)
+  active (bool)            — override top-level active (default: true)
+  overrides (object)       — variable value overrides: {"VAR_NAME": "value"}
+  scheduling (object)      — override top-level scheduling
+  options (object)         — override top-level options
+
+Cascading defaults: top-level scheduling/options/active apply to all monitors unless overridden per-monitor.
+Max 20 monitors per batch. Product must have monitoring enabled.
+Partial failure: if some monitors fail, successful ones are kept (not rolled back).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

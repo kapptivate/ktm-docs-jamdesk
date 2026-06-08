@@ -1,0 +1,52 @@
+---
+title: "get_reusable"
+description: "Fetch the full definition of a reusable V2 component (kind=2)."
+sidebarTitle: "get_reusable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch the full definition of a reusable V2 component (kind=2).
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `reusable_id` | number | Yes | Reusable test id |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "reusable_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Fetch the full definition of a reusable V2 component (kind=2).
+
+Reusables are V2-only — they contain step-based actions (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded into other V2 tests via step_group.import. To edit a reusable, use edit_test with its id.
+
+Errors if the id refers to a regular test (kind=1). Use get_full_test for those instead.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

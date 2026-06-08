@@ -1,0 +1,52 @@
+---
+title: "list_resources"
+description: "List resources (SIMs, web agents, smartphones) for test execution and test creation."
+sidebarTitle: "list_resources"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List resources (SIMs, web agents, smartphones) for test execution and test creation.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `available` | boolean | No | Filter by online/available status (default: true). Set to false to include offline resources. |
+| `configured` | boolean | No | Filter by configured status (default: true). Configured means: SIM has national_msisdn, agent has hostname, smartphone has props. |
+| `detail` | boolean | No | Return full JSON instead of compact summaries (default: false) |
+| `product` | string | Yes | Product slug (required, format: operator~product) |
+| `type` | string (sim \| web-agent \| smartphone) | No | Resource type filter: sim, web-agent, smartphone (omit for all three) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List resources (SIMs, web agents, smartphones) for test execution and test creation. Resource identifiers become action owners: SIM→national_msisdn, web agent→hostname, smartphone→UUID. Defaults to online/available and configured resources. To list installable apps on a specific smartphone, use get_smartphone_apps instead.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

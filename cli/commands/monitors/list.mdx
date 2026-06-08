@@ -1,0 +1,72 @@
+---
+title: "ktm monitors list"
+description: "List monitors, optionally filtered by operator and product"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List monitors, optionally filtered by operator and product
+
+## Usage
+
+```bash
+ktm monitors list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true, false, or comma-separated (e.g. true,false) |
+| `--archived` | string | — | Filter by archived status (true/false). Only used with --device-type and --device-id. |
+| `--device-id` | string | — | Device identifier (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Requires --device-type. |
+| `--device-type` | string | — | Device type: sim, web-agent, or smartphone. Requires --device-id and --operator. |
+| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
+
+## Details
+
+List monitors — scheduled recurring test executions with status tracking.
+
+Monitors run a test on a schedule (e.g. every 20 minutes) and track whether it
+passes or fails over time. Each monitor belongs to a product and references a test.
+Each monitor run also writes KPI metrics to InfluxDB — use 'ktm metrics query'
+to explore (start with SHOW MEASUREMENTS).
+
+Use --operator and --product to narrow results. Status values: up, down, paused.
+
+Device-specific filtering: use --device-type and --device-id together with
+--operator to list monitors assigned to a specific device (SIM, web agent,
+or smartphone).
+
+JSON output fields: id, name, active, test_id, product_id, product_slug, status, scheduling, last_run
+Table columns:      ID, NAME, ACTIVE, STATUS, PRODUCT, SCHEDULING, LAST RUN
+
+Filters:
+  --operator     scope to a single operator (slug from 'operators list')
+  --product      scope to a single product (slug from 'products list', format: operator~product)
+  --active       filter by active status: true or false
+  --fields       restrict JSON response fields (comma-separated whitelist)
+  --device-type  device type: sim, web-agent, or smartphone (requires --device-id and --operator)
+  --device-id    device identifier (requires --device-type)
+  --archived     filter by archived status: true or false (only with --device-type/--device-id)
+
+Note: scheduling is a JSON object (type + frequency). last_run is a JSON array
+of recent execution results (id, status, created).
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

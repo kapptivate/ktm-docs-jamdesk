@@ -1,0 +1,54 @@
+---
+title: "ktm variables list"
+description: "List variables for a product (with scope, group, type, usage, and variant filters)"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List variables for a product (with scope, group, type, usage, and variant filters)
+
+## Usage
+
+```bash
+ktm variables list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--group` | int | — | Optional variable group id |
+| `--product` | string | — | Product slug (required) |
+| `--scope` | string | `all` | global \| grouped \| all |
+| `--type` | string | — | single \| secret \| choice |
+| `--used` | string | — | true \| false — filter by usage state |
+| `--variant` | string | — | Variant name or id — keep only variables carrying this variant |
+
+## Details
+
+Default scope returns ALL variables (global + grouped) via the V3 endpoint
+/api/v2/variables/product_variables/. Filter the result with:
+
+  --scope global|grouped|all   default: all
+  --group &lt;id&gt;                 restrict to one variable group
+  --type single|secret|choice  filter by type
+  --used true|false            filter by usage state (uses /api/v2/variables-usage/)
+  --variant &lt;name|id&gt;          restrict to variables that carry the variant
+
+Secrets are returned masked by the platform.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

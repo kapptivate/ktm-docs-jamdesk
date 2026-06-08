@@ -1,0 +1,60 @@
+---
+title: "add_dashboard_widget"
+description: "Add a widget to a dashboard."
+sidebarTitle: "add_dashboard_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Add a widget to a dashboard.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval. |
+| `dashboard_uid` | string | Yes | Dashboard UID (from list_dashboards or create_dashboard) |
+| `h` | number | No | Grid height in rows. Omit for type default. |
+| `preview` | boolean | No | Dry-run mode: validate, normalize, and auto-position without PATCHing the dashboard or burning edit budget. Returns ASCII grid + normalized data + warnings. |
+| `w` | number | No | Grid width in columns. Omit for type default. |
+| `widget_json` | string | Yes | JSON string of the widget data section (from get_widget_template, filled with real values, without _metadata) |
+| `x` | number | No | Grid x position (0-23). Omit for auto-position. |
+| `y` | number | No | Grid y position. Omit for auto-position (appends to bottom). |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "dashboard_uid": "string",
+  "widget_json": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Add a widget to a dashboard. Validates the widget, generates a unique ID, auto-positions it, and appends to the dashboard layout via PATCH.
+
+Prerequisite: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before constructing widget queries. Placeholder values will be REJECTED.
+
+Workflow: get_widget_template → fill with real values → validate_widget → add_dashboard_widget → get_dashboard (verify).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

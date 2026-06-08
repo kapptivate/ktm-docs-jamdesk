@@ -1,0 +1,59 @@
+---
+title: "ktm variables groups"
+description: "Variable groups — environment configurations holding a set of variants"
+sidebarTitle: "groups"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Variable groups — environment configurations holding a set of variants
+
+<Note>Aliases: groups, group</Note>
+
+## Usage
+
+```bash
+ktm variables groups [command]
+```
+
+## Subcommands
+
+<Columns cols={2}>
+  <Card title="create" icon="angle-right" href="/cli/commands/variables/groups/create">
+    Create a variable group with variants
+  </Card>
+  <Card title="delete" icon="angle-right" href="/cli/commands/variables/groups/delete">
+    Delete a variable group; refuses if non-empty unless --force
+  </Card>
+  <Card title="list" icon="angle-right" href="/cli/commands/variables/groups/list">
+    List variable groups for a product
+  </Card>
+  <Card title="show" icon="angle-right" href="/cli/commands/variables/groups/show">
+    Get variable group detail including variants and variable definitions
+  </Card>
+  <Card title="update" icon="angle-right" href="/cli/commands/variables/groups/update">
+    Rename a variable group (variants management is in 'variables variants')
+  </Card>
+</Columns>
+
+## Details
+
+Manage variable groups under the variables umbrella.
+
+Variants management lives under 'ktm variables variants' (add | remove | rename
+| set-default | copy-values). The 'groups update' command is rename-only.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,138 @@
+---
+title: "ktm tests create"
+description: "Create a new test from a JSON file"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new test from a JSON file
+
+## Usage
+
+```bash
+ktm tests create [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
+| `--from-file` | string | — | Path to JSON file containing the test definition (required) |
+| `--kind` | int | `1` | Test kind: 1=test, 2=reusable component |
+| `--name` | string | — | Override the test name from the JSON file |
+| `--product` | string | — | Product slug (required, format: operator~product) |
+| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. |
+
+## Details
+
+Create a new classic test by posting a JSON definition to the API.
+
+The JSON file should contain the full test definition with actions, variables,
+and metadata. Use "tests template" to generate a valid starting structure.
+
+The --product flag resolves the product slug to a product ID and root collection
+UID. The collection_uid is always auto-resolved from the product — no overrides allowed.
+
+Owner mapping (which device identifier goes in the "owner" field):
+  ETHERNET actions  → web agent hostname  (from 'resources list --type web-agent')
+  SIM actions       → national_msisdn     (from 'resources list --type sim')
+  SMARTPHONE actions → UUID               (from 'resources list --type smartphone')
+  OWNERLESS actions → "" (empty string, no device needed)
+
+Every non-OWNERLESS action needs an owner AND a matching entry in variables.owners.
+
+Variable V3 buckets:
+  Every non-global input_variable needs a per-variable bucket pointing at
+  (variable_group, variant). Buckets are auto-resolved from the product's
+  variable groups — the JSON file does not need to include them. Pass
+  --variant &lt;spec&gt; (repeatable) to pin a specific variant per group; groups
+  without a pin use their group's default variant.
+
+  Spec forms:
+    --variant 5             numeric variant ID (parent group inferred)
+    --variant API:Staging   group:variant by name (case-sensitive exact match)
+
+  Mixing forms is allowed: --variant API:Staging --variant 31
+
+  Kind validation: declared input_variable.kind must match the platform's
+  variable type (1/3 → "regular", 2 → "secret"). Mismatches are hard errors
+  by default. Pass --auto-correct-kinds to rewrite mismatches in-place.
+
+Variable substitution:
+  API command fields (url, header values, body) support \{MYVAR\} to inject input variables.
+  Declare the variable in variables.input_variables with kind=regular.
+  Header format: [\{"name": "Header-Name", "value": "header-value"\}] — use "name" not "key".
+
+  JSON body limitation: \{VAR\} conflicts with JSON braces. Do NOT write body='\{"k":"\{V\}"\}'.
+  Instead, add a JAVASCRIPT action before the API call to build the body via
+  test.variables.get()/set(), then set body="\{API_BODY\}" in the API action.
+
+USSD/SMS rules:
+  - USSD and SMS_GET use expected_result.message for response validation — NOT assertions.
+  - expected_result.message must contain the LITERAL expected text (or "-" for any).
+  - If expected text is unknown, use a single space " " as placeholder — NOT "-" with a message assertion.
+  - Assertions on USSD/SMS are ONLY for non-message validation: session_status, duration, variable.
+  - Variable extraction via store with message_part is a separate feature.
+  - Do NOT add fields not shown in the template — the backend rejects them.
+
+Script actions (Mocha/Chai structure):
+  All script types have command.script_name and command.script_description — always fill
+  these in with a short name and a plain-English summary of what the script does.
+  All script types use Mocha with function() (not arrow functions).
+  Three rules:
+    1. Each logical action gets its own it() block — do NOT put everything in one it()
+    2. Use before() hooks for variable initialization — load test.variables.get() there
+    3. Declare shared variables at describe() root scope with let — required for
+       data shared between before() and it() blocks
+  JAVASCRIPT (ownerless) for data processing between steps:
+    Pattern: describe('Suite', function() \{ let val;
+      before(function() \{ val = test.variables.get('MY_VAR'); \});
+      it('should process', function() \{ /* use val */ \});
+      it('should store', function() \{ test.variables.set('RESULT', val); \});
+    \});
+    Available: Lodash, Moment.js, Chai, xml2json.
+  WebDriverIO scripts (ETH_JS_WEB_SCRIPT, DATA_JS_WEB_SCRIPT, SMARTPHONE_*):
+    Same pattern, plus driver for browser/phone automation.
+    App scripts: the platform launches the app automatically, script handles in-app interaction.
+      Android (SMARTPHONE_JS_APP_SCRIPT): app_package + app_activity required in command.
+      iOS (SMARTPHONE_IOS_JS_APP_SCRIPT): bundle_id required in command.
+    APIs: browser.url(), browser.getTitle(), $(), $$(), scrollIntoView(), expect (Chai).
+    WebDriverIO v7 — full API available, $() works without driver/browser prefix.
+
+Example JSON structure:
+  \{
+    "name": "My API Test",
+    "description": "Tests the login endpoint returns 200",
+    "kind": 1,
+    "is_valid": true,
+    "variables": \{
+      "input_variables": \{\},
+      "output_variables": \{\},
+      "owners": \{"my-agent": \{"owner_kind": "ETHERNET", "value": "my-agent", "actions": [0]\}\}
+    \},
+    "actions": [
+      \{
+        "type": "ETH_HTTP_API",
+        "owner": "my-agent",
+        "command": \{"http_method": "GET", "url": "https://api.example.com", "header": [], "body": "", "follow_redirect": true\},
+        "assertions": [\{"source": "status_code", "compare": "==", "value": "200"\}]
+      \}
+    ]
+  \}
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

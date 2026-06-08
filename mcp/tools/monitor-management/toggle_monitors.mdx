@@ -1,0 +1,50 @@
+---
+title: "toggle_monitors"
+description: "Bulk activate or deactivate multiple monitors."
+sidebarTitle: "toggle_monitors"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Bulk activate or deactivate multiple monitors.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Yes | true to activate, false to deactivate |
+| `monitor_ids` | string | Yes | Comma-separated monitor IDs to toggle |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "monitor_ids": "string",
+  "active": false
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Bulk activate or deactivate multiple monitors. Use list_monitors to find IDs. If this fails with HTTP 400, one or more monitor IDs may be invalid or deleted — verify with get_monitor. For a single monitor, edit_monitor active= also works; this is the bulk path.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

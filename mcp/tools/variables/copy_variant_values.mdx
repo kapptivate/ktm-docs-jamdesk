@@ -1,0 +1,57 @@
+---
+title: "copy_variant_values"
+description: "Power workflow: copy every variable's source-variant value into the destination variant across the entire group."
+sidebarTitle: "copy_variant_values"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Power workflow: copy every variable's source-variant value into the destination variant across the entire group.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `from_variant` | string | Yes | Source variant id or name |
+| `group_id` | number | Yes | Variable group id |
+| `to_variant` | string | Yes | Destination variant id or name |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "group_id": 0,
+  "from_variant": "string",
+  "to_variant": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Power workflow: copy every variable's source-variant value into the destination variant across the entire group. One call promotes staging → prod (or copies dev → canary, etc.) atomically.
+
+from_variant and to_variant accept variant ids (number) or names (string). Variables that have no value on the source variant are skipped. Returns the count of variables actually mutated.
+
+This copies ALL variables in the group at once. To set a single variable's value in one variant, use set_variable_value instead.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

@@ -1,0 +1,51 @@
+---
+title: "get_monitor"
+description: "Get the full configuration of a monitor — owners, input_variables, scheduling, variable_group, and status."
+sidebarTitle: "get_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get the full configuration of a monitor — owners, input_variables, scheduling, variable_group, and status.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `monitor_id` | number | Yes | Monitor ID (from list_monitors) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Get the full configuration of a monitor — owners, input_variables, scheduling, variable_group, and status. Data-provider tool: returns complete JSON for inspection and editing.
+
+Use list_monitors to find monitor IDs first.
+If this returns an error, the monitor may have been deleted — verify with list_monitors.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

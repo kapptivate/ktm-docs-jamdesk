@@ -1,0 +1,48 @@
+---
+title: "ktm executions get"
+description: "Get detailed results of a test execution"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get detailed results of a test execution
+
+## Usage
+
+```bash
+ktm executions get <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Fetch a single execution by ID and display its detailed results.
+
+The response includes:
+  - Execution metadata: name, status, pass/fail counts, creator, timestamps
+  - tests_overview: quick per-test pass/fail summary
+  - json: full execution data with per-test actions, timing, errors, and variables
+
+In table mode, a human-readable summary is shown with a link to the Kapptivate UI.
+In JSON mode, the full response is returned including the raw json field.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

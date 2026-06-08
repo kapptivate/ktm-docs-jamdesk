@@ -1,0 +1,59 @@
+---
+title: "manage_test_lifecycle"
+description: "Manage a test's lifecycle state: trash, restore, archive, or unarchive."
+sidebarTitle: "manage_test_lifecycle"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Manage a test's lifecycle state: trash, restore, archive, or unarchive.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Must be true for destructive actions (trash, archive) |
+| `action` | string (trash \| restore \| archive \| unarchive) | Yes | Lifecycle action: trash, restore, archive, unarchive |
+| `kind` | number | No | 1 = regular test (default), 2 = reusable V2 component |
+| `test_id` | number | Yes | Test id |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "action": "trash",
+  "test_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Manage a test's lifecycle state: trash, restore, archive, or unarchive.
+
+- trash: soft-delete to the product's test-trash collection (reversible via restore)
+- restore: pull a trashed test back out of trash
+- archive: mark a test as archived (keeps it visible but inactive)
+- unarchive: reactivate an archived test
+
+Requires acknowledge=true for destructive actions (trash, archive). Edit-budget gated.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

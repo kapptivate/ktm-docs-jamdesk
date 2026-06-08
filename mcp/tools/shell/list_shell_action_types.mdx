@@ -1,0 +1,48 @@
+---
+title: "list_shell_action_types"
+description: "List action types available in shell mode."
+sidebarTitle: "list_shell_action_types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List action types available in shell mode.
+
+<Note>
+  **Read-only.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `owner_kind` | string | No | Filter by device type: S (SIM) or E (Ethernet). Omit for all. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "owner_kind": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+List action types available in shell mode. Shell actions are a curated subset: direct device/network operations only (USSD, ping, HTTP API, etc.). Script-execution and test-control actions are excluded. Use this before send_shell_command to see available types and their required fields. For the history of commands already sent, use list_shell_actions.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

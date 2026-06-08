@@ -1,0 +1,50 @@
+---
+title: "get_incident"
+description: "Get a single incident by ID, including its tags, status, severity level, duration, and the alert definition that triggered it."
+sidebarTitle: "get_incident"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get a single incident by ID, including its tags, status, severity level, duration, and the alert definition that triggered it.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `incident_id` | number | Yes | Incident ID |
+| `operator` | string | Yes | Operator slug (required for permission scoping) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "incident_id": 0
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Get a single incident by ID, including its tags, status, severity level, duration, and the alert definition that triggered it. IDs from list_incidents; close with close_incident.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

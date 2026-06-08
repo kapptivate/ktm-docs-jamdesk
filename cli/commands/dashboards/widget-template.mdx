@@ -1,0 +1,59 @@
+---
+title: "ktm dashboards widget-template"
+description: "Output a widget template JSON to stdout"
+sidebarTitle: "widget-template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Output a widget template JSON to stdout
+
+## Usage
+
+```bash
+ktm dashboards widget-template <type> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `type` | Yes |
+
+## Details
+
+Get a ready-to-fill JSON template for a dashboard widget type.
+Available types: line, area, pie, repartitionChart, counter, title, table, customDisplay.
+
+PREREQUISITE FOR QUERY WIDGETS (all types except title):
+  1. ktm metrics query --operator &lt;op&gt; --query 'SHOW MEASUREMENTS'
+  2. ktm metrics query --operator &lt;op&gt; --query 'SHOW FIELD KEYS FROM "&lt;measurement&gt;"'
+  3. Fill template measurement and field with REAL values from above — placeholders are REJECTED.
+
+The template includes _metadata with grid constraints, schema discovery steps, and
+(for customDisplay) script API docs with props reference and responseList structure.
+Strip _metadata before submitting to add-widget.
+
+customDisplay widgets use queries[] (NOT series[]), chartOptions (NOT chart_options),
+and require an IIFE script. See _metadata.notes for the full script API.
+
+COMPUTATION BOUNDARY: Scripts can do data manipulation, calculations, simple stats,
+and correlation. They do NOT have access to the platform's statistical engine (EWMA,
+anomaly detection, SLO burn-rate) — those require MCP/CLI tools or InfluxQL aggregations.
+Do NOT pre-compute values with CLI tools and hardcode them into the script — widgets are
+live and re-query when the user changes the time range. Dynamic data must come from queries[].
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,51 @@
+---
+title: "update_dashboard"
+description: "Update dashboard metadata (name, bucket, favorite status)."
+sidebarTitle: "update_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Update dashboard metadata (name, bucket, favorite status).
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | No | New InfluxDB bucket |
+| `dashboard_uid` | string | Yes | Dashboard UID (from list_dashboards) |
+| `is_favorite` | boolean | No | Set favorite status |
+| `name` | string | No | New dashboard name |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "dashboard_uid": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Update dashboard metadata (name, bucket, favorite status). Does not modify widget layout — use add/edit/remove_dashboard_widget for that. Use get_dashboard to verify.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

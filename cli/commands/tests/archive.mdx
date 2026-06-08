@@ -1,0 +1,42 @@
+---
+title: "ktm tests archive"
+description: "Archive a test (sets archived=true via PUT)"
+sidebarTitle: "archive"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Archive a test (sets archived=true via PUT)
+
+## Usage
+
+```bash
+ktm tests archive <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Flips the test's archived flag to true. No other fields are changed. The test stays in its current collection — use 'tests delete' to move it to trash instead.
+
+Uses PATCH with a minimal body (only \{archived\}). This avoids the fragile full-payload round-trip that can 500 on tests whose action types aren't in the CLI registry.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

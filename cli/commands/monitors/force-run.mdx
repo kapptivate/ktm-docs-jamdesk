@@ -1,0 +1,43 @@
+---
+title: "ktm monitors force-run"
+description: "Force a monitor to run immediately, outside its normal schedule"
+sidebarTitle: "force-run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Force a monitor to run immediately, outside its normal schedule
+
+## Usage
+
+```bash
+ktm monitors force-run <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Trigger an immediate out-of-schedule execution of a monitor.
+
+The monitor runs once right away, regardless of its configured schedule.
+Use 'monitoring-results list' with --monitor to track the execution status.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

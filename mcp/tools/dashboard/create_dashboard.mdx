@@ -1,0 +1,55 @@
+---
+title: "create_dashboard"
+description: "Create a new empty dashboard under an operator."
+sidebarTitle: "create_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new empty dashboard under an operator.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | No | InfluxDB bucket for passive agent data (optional) |
+| `name` | string | Yes | Dashboard name |
+| `operator` | string | Yes | Operator slug (resolved to collection UID automatically) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "name": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Create a new empty dashboard under an operator. The dashboard is created with layout version 2 and an empty widget array. Creates an EMPTY dashboard; use build_dashboard to create with widgets in one call.
+
+The collection_uid is auto-resolved from the operator's dashboards_root_collection_uid (same pattern as test creation with product root collection).
+
+Workflow: list_operators → create_dashboard → get_dashboard (to verify).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

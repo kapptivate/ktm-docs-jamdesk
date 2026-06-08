@@ -1,0 +1,53 @@
+---
+title: "rename_collection"
+description: "Rename an existing collection."
+sidebarTitle: "rename_collection"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Rename an existing collection.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after the user has approved further mutations |
+| `name` | string | Yes | New name |
+| `operator` | string | Yes | Operator slug |
+| `uid` | string | Yes | Collection UID |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "uid": "string",
+  "name": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Rename an existing collection. Consumes one slot of the collections edit budget.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

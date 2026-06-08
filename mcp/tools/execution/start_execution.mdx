@@ -1,0 +1,51 @@
+---
+title: "start_execution"
+description: "Start a campaign execution without waiting for results."
+sidebarTitle: "start_execution"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Start a campaign execution without waiting for results.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `campaign_json` | string | Yes | Campaign JSON template (from build_campaign) |
+| `ignore_errors` | boolean | No | Ignore failures across all action types (options.ignore_failed = &lt;all action codes&gt;). |
+| `overrides` | string | No | JSON object mapping test IDs to their variable values and owner assignments. Same format as run_campaign overrides. |
+| `parallel` | boolean | No | Run campaign tests in parallel (options.parallel_test_execution=-1). Superadmin-only; the backend rejects test lists that use SIM or SMARTPHONE actions, or sleep on unlocked resources. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "campaign_json": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Start a campaign execution without waiting for results. Returns a result_id for polling. Use this for campaigns that may take longer than 10 minutes, then poll with poll_execution. For shorter campaigns you want to block on, use run_campaign instead.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

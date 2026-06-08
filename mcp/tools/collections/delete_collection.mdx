@@ -1,0 +1,54 @@
+---
+title: "delete_collection"
+description: "Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash)."
+sidebarTitle: "delete_collection"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/\{uid\}/move_to_trash).
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Yes | Must be true — confirms the caller accepts moving this collection to trash (soft-delete, recoverable until admin empties trash) |
+| `operator` | string | Yes | Operator slug |
+| `uid` | string | Yes | Collection UID to delete |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "uid": "string",
+  "acknowledge": false
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).
+
+The collection is recoverable until an admin empties the trash on the kcollections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

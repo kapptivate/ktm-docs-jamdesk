@@ -1,0 +1,48 @@
+---
+title: "ktm dashboards create"
+description: "Create a new empty dashboard"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new empty dashboard
+
+## Usage
+
+```bash
+ktm dashboards create [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | InfluxDB bucket for passive agent data (optional) |
+| `--name` | string | — | Dashboard name (required) |
+| `--operator` | string | — | Operator slug (required) |
+
+## Details
+
+Create a new dashboard under an operator with an empty widget layout.
+
+The dashboard is created with layout version 2 (production format) and an
+empty widget array. Use the platform UI or future CLI commands to add widgets.
+
+The --operator flag is required. The collection_uid is auto-discovered from
+the operator's dashboard root collection (same pattern as test creation).
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

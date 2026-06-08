@@ -1,0 +1,47 @@
+---
+title: "ktm variables groups delete"
+description: "Delete a variable group; refuses if non-empty unless --force"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Delete a variable group; refuses if non-empty unless --force
+
+## Usage
+
+```bash
+ktm variables groups delete <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--force` | boolean | — | Bypass the non-empty safety check |
+
+## Details
+
+Safe by default: refuses if the group still contains variables, listing them
+and suggesting --force to override.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

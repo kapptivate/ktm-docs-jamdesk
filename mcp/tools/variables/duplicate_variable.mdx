@@ -1,0 +1,51 @@
+---
+title: "duplicate_variable"
+description: "Clone a variable under a new name."
+sidebarTitle: "duplicate_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Clone a variable under a new name.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `new_name` | string | Yes | Name for the new variable |
+| `variable_id` | number | Yes | Source variable id |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "variable_id": 0,
+  "new_name": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Clone a variable under a new name. The duplicate inherits the type, group, and per-variant values of the source — the platform's atomic duplicate endpoint copies everything in one call.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

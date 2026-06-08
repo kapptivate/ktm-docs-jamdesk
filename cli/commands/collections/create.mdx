@@ -1,0 +1,45 @@
+---
+title: "ktm collections create"
+description: "Create a new sub-collection under --parent"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new sub-collection under --parent
+
+## Usage
+
+```bash
+ktm collections create [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Name for the new collection (required) |
+| `--operator` | string | — | Operator slug (required) |
+| `--parent` | string | — | Parent collection UID (required) |
+
+## Details
+
+Create a collection as a child of --parent. Both operator and parent
+UID are required; the new collection inherits the operator's org_id.
+
+Backed by POST /kcollections/api/collections.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

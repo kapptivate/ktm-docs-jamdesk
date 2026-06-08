@@ -1,0 +1,56 @@
+---
+title: "reboot_agent"
+description: "Reboot an agent or a specific SIM slot (cellular only)."
+sidebarTitle: "reboot_agent"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Reboot an agent or a specific SIM slot (cellular only).
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `confirm` | boolean | Yes | Must be true to execute. Without confirm=true, returns a preview. |
+| `slot_id` | number | No | Specific SIM slot ID to reboot (cellular only, from get_agent slots) |
+| `type` | string (cellular \| ethernet \| smartphone) | Yes | Agent type: cellular, ethernet, smartphone |
+| `uuid` | string | Yes | Agent UUID |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "uuid": "string",
+  "type": "cellular",
+  "confirm": false
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Reboot an agent or a specific SIM slot (cellular only).
+Requires confirm=true to execute. Without it, returns a preview of what will be rebooted.
+
+Use list_agents to find agent UUIDs. Use get_agent to see slot IDs for slot-level reboot.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

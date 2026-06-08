@@ -1,0 +1,82 @@
+---
+title: "evaluate_alert"
+description: "Evaluate metrics against alert rules without Kapacitor."
+sidebarTitle: "evaluate_alert"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Evaluate metrics against alert rules without Kapacitor.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `operator` | string | Yes | Operator slug (= InfluxDB database name) |
+| `precision` | string | No | Query time precision (s, ms, u, ns) |
+| `query` | string | Yes | InfluxQL query string |
+| `rules` | string | Yes | JSON array of alert rules |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "query": "string",
+  "rules": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Evaluate metrics against alert rules without Kapacitor. Runs an InfluxQL query, computes statistics, then checks rules. This tool performs LOCAL on-demand analytics computation — it is NOT related to platform alert definitions or incidents. To manage platform alerts, use list_alert_definitions and list_incidents.
+
+IMPORTANT: This is LOCAL on-demand analytics (stateless). For platform alert status and active incidents, use list_alert_definitions + list_incidents instead.
+
+Prerequisite: Run query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS first to discover numeric fields. Your query MUST return numeric time-series data (not SHOW commands). Rule "metric" fields (e.g. "p95", "mean") refer to computed statistics, not raw InfluxDB fields.
+
+8 rule types:
+- threshold: check a metric against a value (operators: >, <, >=, <=, ==, !=)
+- level_shift: detect significant mean changes (optional min_shift_pct filter)
+- missing_data: check for gaps in time series (max_gaps, default 0)
+- flatline: detect stuck values (max_flatline_len, default 3)
+- rate_change: detect spikes or excessive rate (max_spikes default 0, max_abs_rate)
+- outlier: check outlier percentage (max_outlier_pct, default 5.0)
+- counter_reset: detect counter decreases (max_resets, default 0)
+- anomaly: detect sustained EWMA residual breaches (sensitivity 1-5, sustained_periods default 3)
+
+All rules support optional "description" field for user context.
+
+Workflow: query_metrics (explore data) → evaluate_alert (check rules).
+
+Example rules JSON:
+[
+  {"type":"threshold","metric":"p95","operator":">","value":5.0,"description":"SLA p95 < 5s"},
+  {"type":"missing_data","max_gaps":5},
+  {"type":"flatline","max_flatline_len":10},
+  {"type":"level_shift","min_shift_pct":20},
+  {"type":"anomaly","sensitivity":3,"sustained_periods":3,"detection_direction":"above"}
+]
+
+The anomaly rule supports "detection_direction": "above" (error rates, latency), "below" (SLAs, success rates), or "both" (default).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

@@ -1,0 +1,46 @@
+---
+title: "ktm test-campaigns get"
+description: "Fetch a single Tests campaign with its full test_list"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch a single Tests campaign with its full test_list
+
+## Usage
+
+```bash
+ktm test-campaigns get <id> [flags]
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Returns the full Tests campaign shape, including the ordered test_list. Each
+entry is \{position, test (id), name, owners, input_variables\} — owners and
+input_variables are per-campaign overrides applied only during execution.
+
+To run it: ktm ci build --test-campaign &lt;id&gt; | ktm ci run --stdin.
+
+Backed by GET /api/suites/\{id\}/.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

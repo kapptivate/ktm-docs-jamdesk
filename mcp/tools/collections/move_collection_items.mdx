@@ -1,0 +1,55 @@
+---
+title: "move_collection_items"
+description: "Relocate tests and/or dashboards into a target collection."
+sidebarTitle: "move_collection_items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Relocate tests and/or dashboards into a target collection.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after the user has approved further mutations |
+| `item_uids` | string | Yes | Comma-separated list of item identifiers to move |
+| `operator` | string | Yes | Operator slug |
+| `target_collection_uid` | string | Yes | Destination collection UID |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "target_collection_uid": "string",
+  "item_uids": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Relocate tests and/or dashboards into a target collection.
+
+item_uids accepts a comma-separated list of item UIDs (for dashboards) or numeric ids prefixed with "test:" (for tests). The kcollections service routes them to the right table. Example: "test:3402,a1b2c3d4".
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

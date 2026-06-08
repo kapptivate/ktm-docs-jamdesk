@@ -1,0 +1,48 @@
+---
+title: "validate_test"
+description: "Dry-run validate a test JSON payload without creating it."
+sidebarTitle: "validate_test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Dry-run validate a test JSON payload without creating it.
+
+<Note>
+  **Read-only.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `test_json` | string | Yes | Complete test JSON payload to validate |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "test_json": "string"
+}
+```
+
+## Description
+
+The full description the agent receives for this tool:
+
+```text
+Dry-run validate a test JSON payload without creating it. Returns structured errors and warnings with JSON paths. Catches: unknown action types, missing owners, placeholders, missing command fields, invalid variables structure.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

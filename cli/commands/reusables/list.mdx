@@ -1,0 +1,44 @@
+---
+title: "ktm reusables list"
+description: "List reusable tests for a product"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List reusable tests for a product
+
+## Usage
+
+```bash
+ktm reusables list [flags]
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--page` | int | — | Page number |
+| `--page-size` | int | — | Items per page (default: 25) |
+| `--product` | string | — | Product slug (required) |
+
+## Details
+
+Resolves the product's reusable_tests_root_collection_uid and lists items
+in that collection via the kcollections service. /api/v2/tests/?kind=2 is NOT
+reliable — the backend silently ignores the kind filter there.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>
