@@ -1,10 +1,10 @@
 ---
-title: Connect a client
-description: Set up Claude Code, Cursor, or Claude Desktop against the Kapptivate MCP server.
-sidebarTitle: Connect
+title: Connect your AI client
+description: Set up Claude, Cursor, Claude Code, or GitHub Copilot against the Kapptivate MCP server.
+sidebarTitle: AI clients
 ---
 
-Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate with the `X-Kapptivate-API-Key` header. This page covers the common developer clients (Claude, Cursor, Claude Code). For Microsoft 365 Copilot Studio and Google Gemini, see their dedicated pages in this section.
+Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate with the `X-Kapptivate-API-Key` header. This page covers the common developer clients (Claude, Cursor, Claude Code, and GitHub Copilot). For Microsoft 365 Copilot Studio and Google Gemini, see their dedicated pages in this section.
 
 ## Get your API key
 
@@ -72,6 +72,39 @@ Claude Desktop reaches remote servers through `mcp-remote`. Edit `claude_desktop
   }
 }
 ```
+
+</Tab>
+<Tab title="GitHub Copilot">
+
+In VS Code, add a `.vscode/mcp.json` to your workspace (or run **MCP: Open User Configuration** to apply it everywhere):
+
+```json
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "kapptivate-key",
+      "description": "Kapptivate API key",
+      "password": true
+    }
+  ],
+  "servers": {
+    "kapptivate": {
+      "type": "http",
+      "url": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "${input:kapptivate-key}"
+      }
+    }
+  }
+}
+```
+
+Open Copilot Chat in agent mode, then start the server from **MCP: List Servers** in the Command Palette. VS Code prompts for the key on first use and stores it securely.
+
+<Note>
+  This is GitHub Copilot in your editor. It is a different product from [Microsoft Copilot Studio](/mcp/integrations/copilot-studio) (the Microsoft 365 agent builder).
+</Note>
 
 </Tab>
 </Tabs>
