@@ -1,0 +1,54 @@
+name: Sync MCP & CLI docs
+
+# Manual only. Regenerates the MCP tool reference and CLI command reference from the live
+# prod surfaces, then opens a pull request with the diff. The generator
+# (scripts/generate.mjs) is the portable core — this workflow is a thin wrapper around it.
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Which reference to regenerate
+        type: choice
+        options: [all, mcp, cli]
+        default: all
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # MCP  → live tools/list against $MCP_URL using the X-Kapptivate-API-Key header.
+      # CLI  → the prod ktm Linux binary downloaded from $KTM_CLI_URL, introspected via --help.
+      # Both URLs fall back to prod defaults in scripts/generate.mjs when the vars are unset.
+      - name: Generate reference from prod
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+          MCP_URL: ${{ vars.MCP_URL }}
+          KTM_CLI_URL: ${{ vars.KTM_CLI_URL }}
+        run: node scripts/generate.mjs --source=${{ inputs.source }}
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: docs/auto-sync
+          delete-branch: true
+          labels: documentation, automated
+          commit-message: "docs: sync MCP & CLI reference from prod"
+          title: "docs: sync MCP & CLI reference from prod"
+          body: |
+            Automated regeneration of the MCP tool reference and CLI command reference
+            from the live prod surfaces (MCP `tools/list` + the `ktm` binary `--help` tree).
+
+            Produced by `scripts/generate.mjs`. Generated pages carry a "do not edit" banner;
+            human enrichment lives in `mcp/.catalog/overlay.json` and `cli/.catalog/overlay.json`.
+
+            Review the diff before merging.

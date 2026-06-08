@@ -1,4 +1,15 @@
 {
+  "name": "kapptivate-docs",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "docs:generate": "node scripts/generate.mjs --source=all",
+    "docs:generate:mcp": "node scripts/generate.mjs --source=mcp",
+    "docs:generate:cli": "node scripts/generate.mjs --source=cli",
+    "docs:check": "node scripts/generate.mjs --source=all --check"
+  },
   "dependencies": {
     "jamdesk": "^1.1.120"
   }
