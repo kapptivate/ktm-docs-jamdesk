@@ -14,18 +14,6 @@ List monitors, optionally filtered by operator and product
 ktm monitors list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--active` | string | — | Filter by active status: true, false, or comma-separated (e.g. true,false) |
-| `--archived` | string | — | Filter by archived status (true/false). Only used with --device-type and --device-id. |
-| `--device-id` | string | — | Device identifier (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Requires --device-type. |
-| `--device-type` | string | — | Device type: sim, web-agent, or smartphone. Requires --device-id and --operator. |
-| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
-
 ## Examples
 
 ```bash
@@ -41,6 +29,18 @@ ktm monitors list --operator my-operator --device-type web-agent --device-id age
 # Get monitors as JSON for parsing
 ktm monitors list --operator my-operator --product my-operator~my-product -o json
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true, false, or comma-separated (e.g. true,false) |
+| `--archived` | string | — | Filter by archived status (true/false). Only used with --device-type and --device-id. |
+| `--device-id` | string | — | Device identifier (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Requires --device-type. |
+| `--device-type` | string | — | Device type: sim, web-agent, or smartphone. Requires --device-id and --operator. |
+| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
 
 ## Details
 
@@ -65,6 +65,7 @@ of recent execution results (id, status, created).
 
 ## Related
 
+- [`ktm monitors`](/cli/commands/monitors)
 - [`ktm metrics`](/cli/commands/metrics)
 - [`ktm operators list`](/cli/commands/operators/list)
 - [`ktm products list`](/cli/commands/products/list)

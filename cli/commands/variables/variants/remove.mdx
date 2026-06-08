@@ -14,6 +14,13 @@ Remove a variant; refuses if any variable holds non-default data unless --force
 ktm variables variants remove <group-id> <variant-id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables variants remove 42 7           # refuses if data would be lost
+ktm variables variants remove 42 7 --force   # removes anyway
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,18 +34,15 @@ ktm variables variants remove <group-id> <variant-id> [flags]
 | --- | --- | --- | --- |
 | `--force` | boolean | — | Bypass the non-default-values safety check |
 
-## Examples
-
-```bash
-ktm variables variants remove 42 7           # refuses if data would be lost
-ktm variables variants remove 42 7 --force   # removes anyway
-```
-
 ## Details
 
 Safe by default: refuses if any variable in the group has a non-default value
 for this variant, listing the affected variables. Pass --force to remove
 anyway (data on this variant will be lost).
+
+## Related
+
+- [`ktm variables variants`](/cli/commands/variables/variants)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

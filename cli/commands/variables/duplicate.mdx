@@ -14,6 +14,12 @@ Clone a variable under a new name (atomic; preserves type and values)
 ktm variables duplicate <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables duplicate 17 --name DB_HOST_BACKUP
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,16 +32,14 @@ ktm variables duplicate <id> [flags]
 | --- | --- | --- | --- |
 | `--name` | string | — | Name for the new variable (required) |
 
-## Examples
-
-```bash
-ktm variables duplicate 17 --name DB_HOST_BACKUP
-```
-
 ## Details
 
 The duplicate inherits type, group, and all per-variant values from the source.
 Backed by GET /api/v2/variables/\{id\}/duplicate/?name=&lt;new&gt;.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

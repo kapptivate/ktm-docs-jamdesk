@@ -14,17 +14,6 @@ Create a new test from a JSON file
 ktm tests create [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
-| `--from-file` | string | — | Path to JSON file containing the test definition (required) |
-| `--kind` | int | `1` | Test kind: 1=test, 2=reusable component |
-| `--name` | string | — | Override the test name from the JSON file |
-| `--product` | string | — | Product slug (required, format: operator~product) |
-| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. |
-
 ## Examples
 
 ```bash
@@ -46,6 +35,17 @@ ktm tests create --from-file test.json --product acme~web \
 # Auto-correct declared input_variable kinds when they don't match the platform's variable types
 ktm tests create --from-file test.json --product acme~web --auto-correct-kinds
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
+| `--from-file` | string | — | Path to JSON file containing the test definition (required) |
+| `--kind` | int | `1` | Test kind: 1=test, 2=reusable component |
+| `--name` | string | — | Override the test name from the JSON file |
+| `--product` | string | — | Product slug (required, format: operator~product) |
+| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. |
 
 ## Details
 
@@ -146,6 +146,7 @@ Example JSON structure:
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm tests template`](/cli/commands/tests/template)
 - [`ktm variables`](/cli/commands/variables)
 

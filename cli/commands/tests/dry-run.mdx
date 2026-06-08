@@ -14,6 +14,19 @@ Preview the impact of editing a test without applying changes
 ktm tests dry-run <id> [flags]
 ```
 
+## Examples
+
+```bash
+# Preview impact of editing actions
+ktm tests dry-run 16480 --from-file updated.json
+
+# Preview name change
+ktm tests dry-run 16480 --name "New Name"
+
+# Preview impact of re-pinning the API group
+ktm tests dry-run 16480 --variant API:Dev
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -30,19 +43,6 @@ ktm tests dry-run <id> [flags]
 | `--name` | string | — | Override the test name |
 | `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket. |
 
-## Examples
-
-```bash
-# Preview impact of editing actions
-ktm tests dry-run 16480 --from-file updated.json
-
-# Preview name change
-ktm tests dry-run 16480 --name "New Name"
-
-# Preview impact of re-pinning the API group
-ktm tests dry-run 16480 --variant API:Dev
-```
-
 ## Details
 
 Dry-run a test edit to see which tests would be invalidated and which
@@ -54,6 +54,7 @@ what re-pinning would invalidate.
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm tests edit`](/cli/commands/tests/edit)
 
 <Note>

@@ -14,6 +14,16 @@ List variables for a product (with scope, group, type, usage, and variant filter
 ktm variables list [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables list --product acme~web
+ktm variables list --product acme~web --scope global
+ktm variables list --product acme~web --group 42 --type secret
+ktm variables list --product acme~web --used false
+ktm variables list --product acme~web --variant prod
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -24,16 +34,6 @@ ktm variables list [flags]
 | `--type` | string | — | single \| secret \| choice |
 | `--used` | string | — | true \| false — filter by usage state |
 | `--variant` | string | — | Variant name or id — keep only variables carrying this variant |
-
-## Examples
-
-```bash
-ktm variables list --product acme~web
-ktm variables list --product acme~web --scope global
-ktm variables list --product acme~web --group 42 --type secret
-ktm variables list --product acme~web --used false
-ktm variables list --product acme~web --variant prod
-```
 
 ## Details
 
@@ -47,6 +47,10 @@ Default scope returns ALL variables (global + grouped) via the V3 endpoint
   --variant &lt;name|id&gt;          restrict to variables that carry the variant
 
 Secrets are returned masked by the platform.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

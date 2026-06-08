@@ -14,13 +14,6 @@ Close an active incident (sets status to MANUALLY_CLOSED)
 ktm incidents close [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--id` | int | — | Incident ID to close (from 'incidents list') |
-| `--operator` | string | — | Operator slug (required) |
-
 ## Examples
 
 ```bash
@@ -28,11 +21,22 @@ ktm incidents close [flags]
 ktm incidents close --operator my-operator --id 99
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | Incident ID to close (from 'incidents list') |
+| `--operator` | string | — | Operator slug (required) |
+
 ## Details
 
 Close an incident by ID. The incident status changes to MANUALLY_CLOSED.
 
 Use 'incidents list --status OPEN' to find active incidents.
+
+## Related
+
+- [`ktm incidents`](/cli/commands/incidents)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

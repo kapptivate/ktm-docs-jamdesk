@@ -14,19 +14,19 @@ Get incident details
 ktm incidents get [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--id` | int | — | Incident ID (from 'incidents list') |
-| `--operator` | string | — | Operator slug (required) |
-
 ## Examples
 
 ```bash
 # Get incident details
 ktm incidents get --operator my-operator --id 99
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | Incident ID (from 'incidents list') |
+| `--operator` | string | — | Operator slug (required) |
 
 ## Details
 
@@ -36,6 +36,7 @@ Use 'incidents list' to find incident IDs.
 
 ## Related
 
+- [`ktm incidents`](/cli/commands/incidents)
 - [`ktm incidents list`](/cli/commands/incidents/list)
 
 <Note>

@@ -14,18 +14,18 @@ List variable groups for a product
 ktm variables groups list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--product` | string | — | Product slug (required) |
-
 ## Examples
 
 ```bash
 ktm variables groups list --product acme~web-portal
 ktm variables groups list --product acme~web-portal -o table
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--product` | string | — | Product slug (required) |
 
 ## Details
 
@@ -37,6 +37,10 @@ caller may not have UI access to, and the platform's permission gating on
 the cross-product endpoint isn't independently verified.
 
 Archived groups are filtered out (matching the web UI).
+
+## Related
+
+- [`ktm variables groups`](/cli/commands/variables/groups)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

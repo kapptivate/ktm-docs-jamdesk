@@ -14,19 +14,6 @@ List recent monitoring results
 ktm monitoring-results list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--end` | string | — | Results before this datetime (ISO 8601) |
-| `--monitoring-id` | string | — | Filter by monitor ID (from 'monitors list'). Required for operator-scoped results — without this, results span all operators. |
-| `--ordering` | string | — | Sort: -modified (default) or modified |
-| `--page` | string | — | Page number (default: 1) |
-| `--page-size` | string | — | Results per page (default: 20) |
-| `--product` | string | — | Product slug (format: operator~product) |
-| `--start` | string | — | Results after this datetime (ISO 8601) |
-| `--test-id` | string | — | Filter by test ID |
-
 ## Examples
 
 ```bash
@@ -39,6 +26,19 @@ ktm monitoring-results list --product my-operator~my-product
 # Table format
 ktm monitoring-results list --monitoring-id 2180 -o table
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--end` | string | — | Results before this datetime (ISO 8601) |
+| `--monitoring-id` | string | — | Filter by monitor ID (from 'monitors list'). Required for operator-scoped results — without this, results span all operators. |
+| `--ordering` | string | — | Sort: -modified (default) or modified |
+| `--page` | string | — | Page number (default: 1) |
+| `--page-size` | string | — | Results per page (default: 20) |
+| `--product` | string | — | Product slug (format: operator~product) |
+| `--start` | string | — | Results after this datetime (ISO 8601) |
+| `--test-id` | string | — | Filter by test ID |
 
 ## Details
 
@@ -57,6 +57,7 @@ Status codes: S=success, F=failed, O=ongoing, P=pending, WA=waiting, B=broken, D
 
 ## Related
 
+- [`ktm monitoring-results`](/cli/commands/monitoring-results)
 - [`ktm monitors list`](/cli/commands/monitors/list)
 
 <Note>

@@ -14,18 +14,6 @@ Get incident counts: critical, warning, closed
 ktm incidents counter [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--alert-id` | string | — | Comma-separated alert definition IDs |
-| `--closed-after` | string | — | Filter incidents closed after this ISO datetime |
-| `--closed-before` | string | — | Filter incidents closed before this ISO datetime |
-| `--created-after` | string | — | Filter incidents created after this ISO datetime |
-| `--created-before` | string | — | Filter incidents created before this ISO datetime |
-| `--operator` | string | — | Operator slug (required) |
-| `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
-
 ## Examples
 
 ```bash
@@ -39,6 +27,18 @@ ktm incidents counter --operator my-operator --alert-id 42
 ktm incidents counter --operator my-operator --created-after 2026-03-12T00:00:00Z
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--alert-id` | string | — | Comma-separated alert definition IDs |
+| `--closed-after` | string | — | Filter incidents closed after this ISO datetime |
+| `--closed-before` | string | — | Filter incidents closed before this ISO datetime |
+| `--created-after` | string | — | Filter incidents created after this ISO datetime |
+| `--created-before` | string | — | Filter incidents created before this ISO datetime |
+| `--operator` | string | — | Operator slug (required) |
+| `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
 ## Details
 
 Get a quick summary of incident counts grouped by severity.
@@ -48,6 +48,7 @@ Accepts the same filters as 'incidents list' to scope the counts.
 
 ## Related
 
+- [`ktm incidents`](/cli/commands/incidents)
 - [`ktm incidents list`](/cli/commands/incidents/list)
 
 <Note>

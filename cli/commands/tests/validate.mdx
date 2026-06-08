@@ -14,12 +14,6 @@ Validate a test JSON file without creating it
 ktm tests validate [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--from-file` | string | — | Path to JSON file to validate (required) |
-
 ## Examples
 
 ```bash
@@ -33,12 +27,22 @@ ktm tests validate --from-file test.json
 ktm tests create --from-file test.json --product my-operator~my-product
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--from-file` | string | — | Path to JSON file to validate (required) |
+
 ## Details
 
 Dry-run validate a test JSON payload without hitting the API.
 
 Checks: action types, owner presence, required command fields, variables structure.
 Returns structured errors and warnings with JSON paths.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

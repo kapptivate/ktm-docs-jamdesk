@@ -14,6 +14,13 @@ Partial-update a Tests campaign (PATCH)
 ktm test-campaigns update <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm test-campaigns update 42 --name "Regression v2"
+ktm test-campaigns update 42 --test-list @newlist.json
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -28,13 +35,6 @@ ktm test-campaigns update <id> [flags]
 | `--name` | string | — | New name |
 | `--test-list` | string | — | JSON file (or '-') replacing the current test_list |
 
-## Examples
-
-```bash
-ktm test-campaigns update 42 --name "Regression v2"
-ktm test-campaigns update 42 --test-list @newlist.json
-```
-
 ## Details
 
 Apply a partial update. Any combination of --name, --description, or
@@ -42,6 +42,10 @@ Apply a partial update. Any combination of --name, --description, or
 current test_list (backend semantics: old entries deleted, new ones created).
 
 Backed by PATCH /api/suites/\{id\}/.
+
+## Related
+
+- [`ktm test-campaigns`](/cli/commands/test-campaigns)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

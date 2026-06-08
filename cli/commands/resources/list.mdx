@@ -14,14 +14,6 @@ List available resources (SIMs, web agents, smartphones) for a product
 ktm resources list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--available` | boolean | `true` | Show only available/online resources (default: true, set --available=false to include offline) |
-| `--product` | string | — | Product slug (required, from 'products list') |
-| `--type` | string | — | Resource type filter: sim, web-agent, smartphone (omit for all) |
-
 ## Examples
 
 ```bash
@@ -37,6 +29,14 @@ ktm resources list --product acme~web-portal --type web-agent -o table
 # List all resources including offline
 ktm resources list --product acme~web-portal --available=false
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--available` | boolean | `true` | Show only available/online resources (default: true, set --available=false to include offline) |
+| `--product` | string | — | Product slug (required, from 'products list') |
+| `--type` | string | — | Resource type filter: sim, web-agent, smartphone (omit for all) |
 
 ## Details
 
@@ -65,6 +65,7 @@ offline resources.
 
 ## Related
 
+- [`ktm resources`](/cli/commands/resources)
 - [`ktm ci build`](/cli/commands/ci/build)
 - [`ktm products list`](/cli/commands/products/list)
 

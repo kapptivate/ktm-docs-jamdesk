@@ -14,6 +14,14 @@ Create a variable (single | secret | choice)
 ktm variables create [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost
+ktm variables create --product acme~web --name ENV --type choice --default-value "dev,staging,prod"
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -24,14 +32,6 @@ ktm variables create [flags]
 | `--name` | string | — | Variable name (required) |
 | `--product` | string | — | Product slug (required) |
 | `--type` | string | — | single \| secret \| choice (required) |
-
-## Examples
-
-```bash
-ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost
-ktm variables create --product acme~web --name ENV --type choice --default-value "dev,staging,prod"
-ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42
-```
 
 ## Details
 

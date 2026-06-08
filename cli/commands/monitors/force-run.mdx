@@ -14,18 +14,18 @@ Force a monitor to run immediately, outside its normal schedule
 ktm monitors force-run <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
 ktm monitors force-run 42
 ktm monitors force-run 42 -o json
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -36,6 +36,7 @@ Use 'monitoring-results list' with --monitor to track the execution status.
 
 ## Related
 
+- [`ktm monitors`](/cli/commands/monitors)
 - [`ktm monitoring-results list`](/cli/commands/monitoring-results/list)
 
 <Note>

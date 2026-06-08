@@ -14,15 +14,6 @@ List users, optionally filtered by operator
 ktm users list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--active` | string | — | Filter by active status: true or false |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-| `--search` | string | — | Search across username, email, first name, and last name |
-| `--type` | string | — | Filter by account type: 'user' (human) or 'server' (service account) |
-
 ## Examples
 
 ```bash
@@ -38,6 +29,15 @@ ktm users list --operator my-operator --active true
 # List only service accounts
 ktm users list --operator my-operator --type server
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true or false |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--search` | string | — | Search across username, email, first name, and last name |
+| `--type` | string | — | Filter by account type: 'user' (human) or 'server' (service account) |
 
 ## Details
 
@@ -55,6 +55,7 @@ Table columns:      ID, USERNAME, EMAIL, NAME, ACTIVE, TYPE
 
 ## Related
 
+- [`ktm users`](/cli/commands/users)
 - [`ktm operators list`](/cli/commands/operators/list)
 
 <Note>

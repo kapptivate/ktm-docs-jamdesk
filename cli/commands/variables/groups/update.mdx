@@ -14,6 +14,12 @@ Rename a variable group (variants management is in 'variables variants')
 ktm variables groups update <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables groups update 42 --name "Environments v2"
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,12 +32,6 @@ ktm variables groups update <id> [flags]
 | --- | --- | --- | --- |
 | `--name` | string | — | New name (required) |
 
-## Examples
-
-```bash
-ktm variables groups update 42 --name "Environments v2"
-```
-
 ## Details
 
 Rename only. To add, remove, rename, set default, or copy values across
@@ -39,6 +39,7 @@ variants, use the dedicated 'ktm variables variants' subcommands.
 
 ## Related
 
+- [`ktm variables groups`](/cli/commands/variables/groups)
 - [`ktm variables`](/cli/commands/variables)
 
 <Note>

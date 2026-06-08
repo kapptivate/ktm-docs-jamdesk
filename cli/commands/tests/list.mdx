@@ -14,20 +14,6 @@ List tests, optionally filtered by operator and product
 ktm tests list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--archived` | string | — | Include archived tests: true, false (default: false = non-archived only) |
-| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
-| `--name` | string | — | Filter by test name (substring match, case-insensitive) |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-| `--ordering` | string | — | Sort by field: name, created, modified (prefix with - for descending) |
-| `--page` | string | — | Page number to fetch (default: 1) |
-| `--page-size` | string | — | Number of results per page (default: 200) |
-| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
-| `--tags` | string[] | — | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
-
 ## Examples
 
 ```bash
@@ -47,6 +33,20 @@ ktm tests list --operator my-operator --tags smoke,regression
 ktm tests list --operator my-operator --page 2 --page-size 50
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--archived` | string | — | Include archived tests: true, false (default: false = non-archived only) |
+| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--name` | string | — | Filter by test name (substring match, case-insensitive) |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--ordering` | string | — | Sort by field: name, created, modified (prefix with - for descending) |
+| `--page` | string | — | Page number to fetch (default: 1) |
+| `--page-size` | string | — | Number of results per page (default: 200) |
+| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
+| `--tags` | string[] | — | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
+
 ## Details
 
 List test scenarios defined on the platform.
@@ -61,6 +61,7 @@ Table columns:      ID, NAME, PRODUCT, STATUS, KIND, ARCHIVED
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm ci run`](/cli/commands/ci/run)
 - [`ktm operators list`](/cli/commands/operators/list)
 - [`ktm products list`](/cli/commands/products/list)

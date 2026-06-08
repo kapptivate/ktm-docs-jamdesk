@@ -14,19 +14,19 @@ Pre-flight: check whether a variable name is free under a product
 ktm variables name-available [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--name` | string | — | Variable name to check |
-| `--product-id` | int | — | Product numeric id (from 'ktm products list') |
-
 ## Examples
 
 ```bash
 ktm products list -o table       # find the product id
 ktm variables name-available --product-id 134 --name MY_VAR
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Variable name to check |
+| `--product-id` | int | — | Product numeric id (from 'ktm products list') |
 
 ## Details
 
@@ -37,6 +37,10 @@ list -o table'), not the slug.
 Implementation note: the platform's check_variable_exist endpoint is
 unreliable, so the check is performed client-side by listing the product's
 variables and matching by name.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

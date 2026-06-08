@@ -14,6 +14,14 @@ Search collections and items in a collection sub-tree
 ktm collections search [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections search --operator my-op --collection-uid <tests_root> --query login
+ktm collections search --operator my-op --collection-uid <uid> --query "Verify" -o json
+ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -24,14 +32,6 @@ ktm collections search [flags]
 | `--query` | string | — | Free-text search term |
 | `--tags` | string | — | Comma-separated tag ids |
 
-## Examples
-
-```bash
-ktm collections search --operator my-op --collection-uid <tests_root> --query login
-ktm collections search --operator my-op --collection-uid <uid> --query "Verify" -o json
-ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5
-```
-
 ## Details
 
 The kcollections search endpoint scopes results to a sub-tree — pass
@@ -41,6 +41,10 @@ scope). Missing --collection-uid returns HTTP 400 from the service.
 The search walks sub-collections recursively. Items are matched by substring
 on meta.name (the client sends fields=name by default). Returns a payload with
 two arrays: collections (sub-collections whose name matches) and items.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

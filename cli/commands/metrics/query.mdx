@@ -14,16 +14,6 @@ Execute a raw InfluxQL query against the operator's metrics database
 ktm metrics query [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--executive` | boolean | — | One-line-per-series executive summary (implies --summary) |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query string |
-| `--summary` | boolean | — | Run statistical analysis and display formatted summary |
-
 ## Examples
 
 ```bash
@@ -39,6 +29,16 @@ ktm metrics query --operator acme --query "SELECT sum(\"number_success\")/(sum(\
 # Platform activity events over last 24h
 ktm metrics query --operator acme --query "SELECT * FROM \"event\" WHERE time >= '2026-02-17T00:00:00Z' AND time <= '2026-02-18T00:00:00Z' ORDER BY time DESC LIMIT 50"
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--executive` | boolean | — | One-line-per-series executive summary (implies --summary) |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--precision` | string | — | Query time precision (s, ms, u, ns) |
+| `--query` | string | — | InfluxQL query string |
+| `--summary` | boolean | — | Run statistical analysis and display formatted summary |
 
 ## Details
 
@@ -103,6 +103,7 @@ For reports, use --executive. For raw analysis, use --summary.
 
 ## Related
 
+- [`ktm metrics`](/cli/commands/metrics)
 - [`ktm monitors list`](/cli/commands/monitors/list)
 - [`ktm monitors get`](/cli/commands/monitors/get)
 - [`ktm tests get`](/cli/commands/tests/get)

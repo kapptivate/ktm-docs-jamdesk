@@ -14,6 +14,13 @@ Promote variant values: copy every variable's --from variant into --to across th
 ktm variables variants copy-values <group-id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables variants copy-values 42 --from staging --to prod
+ktm variables variants copy-values 42 --from 1 --to 2
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,19 +34,16 @@ ktm variables variants copy-values <group-id> [flags]
 | `--from` | string | — | Source variant id or name (required) |
 | `--to` | string | — | Destination variant id or name (required) |
 
-## Examples
-
-```bash
-ktm variables variants copy-values 42 --from staging --to prod
-ktm variables variants copy-values 42 --from 1 --to 2
-```
-
 ## Details
 
 Power workflow: in one command, copy every variable's source-variant value
 into the destination variant across the entire group. --from and --to accept
 variant ids or names. Variables that have no value on the source variant are
 skipped.
+
+## Related
+
+- [`ktm variables variants`](/cli/commands/variables/variants)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

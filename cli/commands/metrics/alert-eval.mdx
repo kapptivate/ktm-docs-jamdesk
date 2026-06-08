@@ -14,16 +14,6 @@ Evaluate metrics against alert rules
 ktm metrics alert-eval [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query string |
-| `--rules` | string | — | Inline JSON alert rule array |
-| `--rules-file` | string | — | Path to JSON file with alert rule array |
-
 ## Examples
 
 ```bash
@@ -37,6 +27,16 @@ ktm metrics alert-eval --operator acme \
   --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
   --rules-file rules.json
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--precision` | string | — | Query time precision (s, ms, u, ns) |
+| `--query` | string | — | InfluxQL query string |
+| `--rules` | string | — | Inline JSON alert rule array |
+| `--rules-file` | string | — | Path to JSON file with alert rule array |
 
 ## Details
 
@@ -61,6 +61,10 @@ Runs an InfluxQL query, computes statistics, then checks each rule.
 
 Provide rules via --rules (inline JSON) or --rules-file (path to JSON file).
 Typical SRE workflow: metrics query (explore data) → metrics alert-eval (check rules).
+
+## Related
+
+- [`ktm metrics`](/cli/commands/metrics)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -14,14 +14,6 @@ Create multiple monitors from a batch spec file
 ktm monitors batch-create [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--confirm` | boolean | — | Submit all monitors after reviewing the preview |
-| `--force` | boolean | — | Bypass preview — auto-build and submit (CI/CD automation only) |
-| `--from-file` | string | — | Path to JSON batch spec file (required) |
-
 ## Examples
 
 ```bash
@@ -47,6 +39,14 @@ ktm monitors batch-create --from-file batch.json --force
 # }
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Submit all monitors after reviewing the preview |
+| `--force` | boolean | — | Bypass preview — auto-build and submit (CI/CD automation only) |
+| `--from-file` | string | — | Path to JSON batch spec file (required) |
+
 ## Details
 
 Create multiple monitors in a single command from a JSON batch spec file.
@@ -71,6 +71,10 @@ Variables auto-resolve from variants; overrides remain available to deviate
 from variant-stored values. Monitors created with active=false go through a
 post-create toggle so the platform scheduler actually stops them — batch
 create alone does not.
+
+## Related
+
+- [`ktm monitors`](/cli/commands/monitors)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

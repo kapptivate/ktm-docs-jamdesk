@@ -14,12 +14,6 @@ List available action types for test creation
 ktm tests action-types [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--kind` | string | — | Filter by owner kind: ethernet, sim, smartphone, ownerless |
-
 ## Examples
 
 ```bash
@@ -32,6 +26,12 @@ ktm tests action-types --kind ethernet
 # List SIM action types as table
 ktm tests action-types --kind sim -o table
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--kind` | string | — | Filter by owner kind: ethernet, sim, smartphone, ownerless |
 
 ## Details
 
@@ -46,6 +46,10 @@ Each action type has an owner_kind that determines what device it runs on:
 Use --kind to filter by owner kind.
 
 Use the output with 'tests template &lt;type&gt; [type...]' to generate a ready-to-customize test.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

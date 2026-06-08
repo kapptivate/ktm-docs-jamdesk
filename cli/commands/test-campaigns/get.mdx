@@ -14,18 +14,18 @@ Fetch a single Tests campaign with its full test_list
 ktm test-campaigns get <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
 ktm test-campaigns get 42
 ktm test-campaigns get 42 -o json | jq '.test_list[].name'
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -39,6 +39,7 @@ Backed by GET /api/suites/\{id\}/.
 
 ## Related
 
+- [`ktm test-campaigns`](/cli/commands/test-campaigns)
 - [`ktm ci build`](/cli/commands/ci/build)
 - [`ktm ci run`](/cli/commands/ci/run)
 

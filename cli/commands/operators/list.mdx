@@ -14,13 +14,6 @@ List all operators accessible with the current API key
 ktm operators list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--organisation-group` | string | — | Filter operators belonging to this organisation group (by slug) |
-| `--short-name` | string | — | Filter by exact operator short name |
-
 ## Examples
 
 ```bash
@@ -34,6 +27,13 @@ ktm operators list -o table
 ktm operators list --organisation-group my-org
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--organisation-group` | string | — | Filter operators belonging to this organisation group (by slug) |
+| `--short-name` | string | — | Filter by exact operator short name |
+
 ## Details
 
 List operators the authenticated API key has access to.
@@ -44,6 +44,10 @@ slug, then use it as --operator in products/tests/monitors/users commands.
 
 JSON output fields: name, active, organisation_group, slug, logo
 Table columns:      SLUG, NAME, ACTIVE, ORG GROUP
+
+## Related
+
+- [`ktm operators`](/cli/commands/operators)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

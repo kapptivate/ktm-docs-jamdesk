@@ -14,12 +14,6 @@ Restore a test to a previous version
 ktm tests restore <history-id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `history-id` | Yes |
-
 ## Examples
 
 ```bash
@@ -30,12 +24,22 @@ ktm tests history 16480 --date 2026-03-06
 ktm tests restore 42
 ```
 
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `history-id` | Yes |
+
 ## Details
 
 Restore a test to a historical version by its history ID.
 Use "tests history &lt;test-id&gt; --date &lt;date&gt;" to find available history IDs.
 
 This is destructive — it overwrites the current test definition.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

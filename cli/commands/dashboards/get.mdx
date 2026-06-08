@@ -14,12 +14,6 @@ Get a dashboard by UID
 ktm dashboards get <uid> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `uid` | Yes |
-
 ## Examples
 
 ```bash
@@ -30,12 +24,22 @@ ktm dashboards get abc123def456
 ktm dashboards get abc123def456 -o table
 ```
 
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
 ## Details
 
 Retrieve the full dashboard definition including its widget layout.
 
 The UID is the 40-character identifier shown in dashboard list output.
 Returns the complete dashboard object with layouts, global filters, and metadata.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

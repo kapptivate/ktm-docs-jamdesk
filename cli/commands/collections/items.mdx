@@ -14,6 +14,14 @@ List items (tests + dashboards) inside a collection
 ktm collections items <uid> [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections items --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections items --operator my-op <uid> -o json | jq '.[].meta.name'
+ktm collections items --operator my-op <uid> --page-size 10 --page 2
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,14 +35,6 @@ ktm collections items <uid> [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--page` | int | — | Page number |
 | `--page-size` | int | — | Items per page (default: 25) |
-
-## Examples
-
-```bash
-ktm collections items --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
-ktm collections items --operator my-op <uid> -o json | jq '.[].meta.name'
-ktm collections items --operator my-op <uid> --page-size 10 --page 2
-```
 
 ## Details
 

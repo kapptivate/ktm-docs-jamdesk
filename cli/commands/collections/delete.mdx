@@ -14,6 +14,13 @@ Move a collection to the organisation's trash (soft-delete)
 ktm collections delete <uid> [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections delete --operator my-op <uid>              # refuses without --yes
+ktm collections delete --operator my-op --yes <uid>        # moves to trash
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,13 +34,6 @@ ktm collections delete <uid> [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--yes` | boolean | — | Confirm irreversible delete |
 
-## Examples
-
-```bash
-ktm collections delete --operator my-op <uid>              # refuses without --yes
-ktm collections delete --operator my-op --yes <uid>        # moves to trash
-```
-
 ## Details
 
 Move the collection to the organisation's trash collection. The collection
@@ -46,6 +46,10 @@ The command still refuses without --yes because agents should confirm scope
 before moving collections around.
 
 Backed by POST /kcollections/api/collections/\{uid\}/move_to_trash.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

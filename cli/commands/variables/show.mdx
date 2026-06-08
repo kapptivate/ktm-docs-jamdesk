@@ -14,6 +14,14 @@ Fetch a single variable, rich-by-default with usage; --lite skips usage
 ktm variables show <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables show 17
+ktm variables show 17 --lite
+ktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,14 +35,6 @@ ktm variables show <id> [flags]
 | `--lite` | boolean | — | Skip the usage fetch (faster; default rich) |
 | `--variant` | string | — | Reserved — no effect today |
 
-## Examples
-
-```bash
-ktm variables show 17
-ktm variables show 17 --lite
-ktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'
-```
-
 ## Details
 
 Returns the full Variable shape: id, name, type, scope, default_value, and
@@ -47,6 +47,10 @@ The --variant flag is reserved for future per-variant projection and currently
 has no effect.
 
 Backed by GET /api/v2/variables/\{id\}/ (+ /api/v2/variables-usage/by-product/ when not --lite).
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

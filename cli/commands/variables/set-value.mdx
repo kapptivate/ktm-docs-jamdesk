@@ -14,6 +14,13 @@ Set ONE variant's value on a grouped variable (preserves other variants)
 ktm variables set-value <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables set-value 17 --variant prod --value prod.db.example.com
+ktm variables set-value 17 --variant 42 --value 0.0.0.0
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,13 +34,6 @@ ktm variables set-value <id> [flags]
 | `--value` | string | — | New value for this variant |
 | `--variant` | string | — | Variant id or name (required) |
 
-## Examples
-
-```bash
-ktm variables set-value 17 --variant prod --value prod.db.example.com
-ktm variables set-value 17 --variant 42 --value 0.0.0.0
-```
-
 ## Details
 
 Atomic per-variant value setter. --variant accepts a variant id or name; the
@@ -46,6 +46,7 @@ variable (no variants) — use 'ktm variables update --default-value' instead.
 
 ## Related
 
+- [`ktm variables`](/cli/commands/variables)
 - [`ktm variables update`](/cli/commands/variables/update)
 
 <Note>

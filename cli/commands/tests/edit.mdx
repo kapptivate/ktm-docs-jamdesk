@@ -14,23 +14,6 @@ Edit an existing test (creates a new version automatically)
 ktm tests edit <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
-| `--description` | string | — | Override the test description |
-| `--from-file` | string | — | Path to JSON file with updated test definition |
-| `--name` | string | — | Override the test name |
-| `--skip-validation` | boolean | — | Bypass the client-side validator (backend still validates). Use for tests with action types the CLI registry doesn't know about (future types, archive-only edits). |
-| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket; new variables get the group's default variant. |
-
 ## Examples
 
 ```bash
@@ -51,6 +34,23 @@ ktm tests dry-run 16480 --from-file updated.json
 ktm tests edit 16480 --from-file updated.json
 ```
 
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
+| `--description` | string | — | Override the test description |
+| `--from-file` | string | — | Path to JSON file with updated test definition |
+| `--name` | string | — | Override the test name |
+| `--skip-validation` | boolean | — | Bypass the client-side validator (backend still validates). Use for tests with action types the CLI registry doesn't know about (future types, archive-only edits). |
+| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket; new variables get the group's default variant. |
+
 ## Details
 
 Update a test by merging changes from a JSON file or flags with the current definition.
@@ -67,6 +67,7 @@ Use "tests dry-run" first to preview the impact before applying changes.
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm tests dry-run`](/cli/commands/tests/dry-run)
 
 <Note>

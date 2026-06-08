@@ -14,16 +14,6 @@ Create a dashboard with all widgets atomically
 ktm dashboards build [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--bucket` | string | — | InfluxDB bucket (optional) |
-| `--dry-run` | boolean | — | Preview layout without creating the dashboard |
-| `--name` | string | — | Dashboard name (required) |
-| `--operator` | string | — | Operator slug (required) |
-| `--widgets` | string | — | JSON file with widget array (required) |
-
 ## Examples
 
 ```bash
@@ -37,6 +27,16 @@ ktm dashboards build --operator my-op --name "SLA" --widgets widgets.json
 ktm dashboards build --operator my-op --name "Passive" --widgets w.json --bucket my-bucket
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | InfluxDB bucket (optional) |
+| `--dry-run` | boolean | — | Preview layout without creating the dashboard |
+| `--name` | string | — | Dashboard name (required) |
+| `--operator` | string | — | Operator slug (required) |
+| `--widgets` | string | — | JSON file with widget array (required) |
+
 ## Details
 
 Create a dashboard with all widgets in a single atomic call.
@@ -44,6 +44,10 @@ Validates all widgets upfront — if ANY fails, NONE are created.
 Auto-positions widgets using type defaults.
 
 Use --dry-run to preview the ASCII grid layout without creating anything.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

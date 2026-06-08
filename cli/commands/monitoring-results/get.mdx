@@ -14,18 +14,6 @@ Get detailed results of a monitoring run
 ktm monitoring-results get <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `-a, --include-actions` | boolean | — | Include raw action results (screenshots, artifacts, logs) |
-
 ## Examples
 
 ```bash
@@ -38,6 +26,18 @@ ktm monitoring-results get 155461270 --include-actions -o table
 # Get as JSON
 ktm monitoring-results get 155461270
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `-a, --include-actions` | boolean | — | Include raw action results (screenshots, artifacts, logs) |
 
 ## Details
 
@@ -57,6 +57,7 @@ In JSON mode, the structured detail is returned including the parsed summary.
 
 ## Related
 
+- [`ktm monitoring-results`](/cli/commands/monitoring-results)
 - [`ktm monitoring-results list`](/cli/commands/monitoring-results/list)
 
 <Note>

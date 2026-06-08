@@ -14,15 +14,6 @@ Detect cross-metric relationships: correlation, distribution shift, lag
 ktm metrics correlate [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--mode` | string | `quick` | Analysis mode: quick (correlation only), full (correlation + shift + lag), shift (distribution shift only) |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--queries` | string | — | JSON array of InfluxQL query strings |
-| `--query` | string[] | — | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
-
 ## Examples
 
 ```bash
@@ -40,6 +31,15 @@ ktm metrics correlate --operator acme --mode full \
 ktm metrics correlate --operator acme --mode shift \
   --queries '["SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)", "SELECT mean(response_time) FROM action WHERE time > now() - 7d GROUP BY time(1h)"]'
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--mode` | string | `quick` | Analysis mode: quick (correlation only), full (correlation + shift + lag), shift (distribution shift only) |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--queries` | string | — | JSON array of InfluxQL query strings |
+| `--query` | string[] | — | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
 
 ## Details
 
@@ -69,6 +69,7 @@ Measurements may also contain orphaned data from deleted monitors. Check freshne
 
 ## Related
 
+- [`ktm metrics`](/cli/commands/metrics)
 - [`ktm monitors list`](/cli/commands/monitors/list)
 - [`ktm monitors get`](/cli/commands/monitors/get)
 

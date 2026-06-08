@@ -14,14 +14,6 @@ Create a new empty dashboard
 ktm dashboards create [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--bucket` | string | — | InfluxDB bucket for passive agent data (optional) |
-| `--name` | string | — | Dashboard name (required) |
-| `--operator` | string | — | Operator slug (required) |
-
 ## Examples
 
 ```bash
@@ -32,6 +24,14 @@ ktm dashboards create --operator my-operator --name "SLA Dashboard"
 ktm dashboards create --operator my-operator --name "Passive Metrics" --bucket my-bucket
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | InfluxDB bucket for passive agent data (optional) |
+| `--name` | string | — | Dashboard name (required) |
+| `--operator` | string | — | Operator slug (required) |
+
 ## Details
 
 Create a new dashboard under an operator with an empty widget layout.
@@ -41,6 +41,10 @@ empty widget array. Use the platform UI or future CLI commands to add widgets.
 
 The --operator flag is required. The collection_uid is auto-discovered from
 the operator's dashboard root collection (same pattern as test creation).
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

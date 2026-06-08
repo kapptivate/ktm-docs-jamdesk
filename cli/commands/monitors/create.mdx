@@ -14,21 +14,6 @@ Create a new monitor for an existing test
 ktm monitors create [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--confirm` | boolean | — | Submit the auto-built payload after reviewing the preview |
-| `--force` | boolean | — | Bypass preview — auto-build and submit in one step (CI/CD automation only) |
-| `--from-file` | string | — | JSON file with owners, input_variables, scheduling, options (submits directly; --variant ignored) |
-| `--name` | string | — | Monitor name (defaults to test name) |
-| `--product` | string | — | Product slug (required, format: operator~product) |
-| `--scheduling` | string | — | JSON scheduling object. Types: simple/v2 (interval), advanced/v2 (time-windowed with "at" or "between"). Default: simple/v2 every 5 min. See examples in --help. |
-| `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE) |
-| `--start` | boolean | `true; --start=false creates it paused) (default true` | Start the monitor immediately after creation |
-| `--test-id` | int | — | Test ID to monitor (required) |
-| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. Globals always emit a global bucket. |
-
 ## Examples
 
 ```bash
@@ -60,6 +45,21 @@ ktm monitors create ... --confirm \
   --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Submit the auto-built payload after reviewing the preview |
+| `--force` | boolean | — | Bypass preview — auto-build and submit in one step (CI/CD automation only) |
+| `--from-file` | string | — | JSON file with owners, input_variables, scheduling, options (submits directly; --variant ignored) |
+| `--name` | string | — | Monitor name (defaults to test name) |
+| `--product` | string | — | Product slug (required, format: operator~product) |
+| `--scheduling` | string | — | JSON scheduling object. Types: simple/v2 (interval), advanced/v2 (time-windowed with "at" or "between"). Default: simple/v2 every 5 min. See examples in --help. |
+| `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE) |
+| `--start` | boolean | `true; --start=false creates it paused) (default true` | Start the monitor immediately after creation |
+| `--test-id` | int | — | Test ID to monitor (required) |
+| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. Globals always emit a global bucket. |
+
 ## Details
 
 Create a monitor that runs a test on a schedule and tracks pass/fail status.
@@ -87,6 +87,10 @@ Use --from-file for full manual control (submits directly, no preview).
 ## Notes
 
 - Creates a scheduled, recurring execution of a test. For a single ad-hoc run, use [`ktm ci build`](/cli/commands/ci/build) then [`ktm ci run`](/cli/commands/ci/run) instead.
+
+## Related
+
+- [`ktm monitors`](/cli/commands/monitors)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

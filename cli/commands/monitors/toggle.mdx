@@ -14,6 +14,13 @@ Bulk activate or deactivate monitors
 ktm monitors toggle [flags]
 ```
 
+## Examples
+
+```bash
+ktm monitors toggle --ids 42,43 --active false
+ktm monitors toggle --ids 42 --active true
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -21,12 +28,9 @@ ktm monitors toggle [flags]
 | `--active` | string | — | true to activate, false to deactivate (required) |
 | `--ids` | string | — | Comma-separated monitor IDs to toggle (required) |
 
-## Examples
+## Related
 
-```bash
-ktm monitors toggle --ids 42,43 --active false
-ktm monitors toggle --ids 42 --active true
-```
+- [`ktm monitors`](/cli/commands/monitors)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

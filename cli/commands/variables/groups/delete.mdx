@@ -14,6 +14,13 @@ Delete a variable group; refuses if non-empty unless --force
 ktm variables groups delete <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables groups delete 42           # refuses if group has variables
+ktm variables groups delete 42 --force   # bypass the non-empty check
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,17 +33,14 @@ ktm variables groups delete <id> [flags]
 | --- | --- | --- | --- |
 | `--force` | boolean | — | Bypass the non-empty safety check |
 
-## Examples
-
-```bash
-ktm variables groups delete 42           # refuses if group has variables
-ktm variables groups delete 42 --force   # bypass the non-empty check
-```
-
 ## Details
 
 Safe by default: refuses if the group still contains variables, listing them
 and suggesting --force to override.
+
+## Related
+
+- [`ktm variables groups`](/cli/commands/variables/groups)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

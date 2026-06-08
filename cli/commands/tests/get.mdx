@@ -14,12 +14,6 @@ Get test detail including variable definitions and owner slots
 ktm tests get <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
@@ -29,6 +23,12 @@ ktm tests get 16480
 # Get test detail as table
 ktm tests get 16480 -o table
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -54,6 +54,7 @@ Owner kinds (in variables.owners):
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm ci build`](/cli/commands/ci/build)
 - [`ktm ci run`](/cli/commands/ci/run)
 

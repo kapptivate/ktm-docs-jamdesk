@@ -14,12 +14,6 @@ List available shell action types
 ktm shell types [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--owner-kind` | string | — | Filter by owner kind: S (SIM) or E (Ethernet) |
-
 ## Examples
 
 ```bash
@@ -28,6 +22,12 @@ ktm shell types --owner-kind S   # SIM actions only (17)
 ktm shell types --owner-kind E   # Ethernet actions only (13)
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--owner-kind` | string | — | Filter by owner kind: S (SIM) or E (Ethernet) |
+
 ## Details
 
 Show which action types can be used in shell mode.
@@ -35,6 +35,10 @@ Show which action types can be used in shell mode.
 Shell actions are a curated subset of the full action catalog — only direct
 device/network operations (USSD, ping, HTTP API, etc.) are included.
 Script-execution and test-control actions are excluded.
+
+## Related
+
+- [`ktm shell`](/cli/commands/shell)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

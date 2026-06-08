@@ -14,16 +14,6 @@ List dashboards for an operator
 ktm dashboards list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--favorite` | string | — | Filter by favorite status (true/false) |
-| `--name` | string | — | Filter by name (case-insensitive contains) |
-| `--operator` | string | — | Filter by operator slug (recommended) |
-| `--page` | string | — | Page number |
-| `--page-size` | string | — | Items per page (default: 20) |
-
 ## Examples
 
 ```bash
@@ -40,6 +30,16 @@ ktm dashboards list --operator my-operator --name "SLA"
 ktm dashboards list --operator my-operator --favorite true
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--favorite` | string | — | Filter by favorite status (true/false) |
+| `--name` | string | — | Filter by name (case-insensitive contains) |
+| `--operator` | string | — | Filter by operator slug (recommended) |
+| `--page` | string | — | Page number |
+| `--page-size` | string | — | Items per page (default: 20) |
+
 ## Details
 
 List non-archived dashboards accessible with the current API key.
@@ -50,6 +50,10 @@ operator, then use the UID from the output to get full dashboard details.
 JSON output fields: uid, name, owner, operator, version, layouts, global_filters,
                     is_favorite, bucket, created, modified
 Table columns:      UID, NAME, OWNER, VERSION, WIDGETS, FAVORITE
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

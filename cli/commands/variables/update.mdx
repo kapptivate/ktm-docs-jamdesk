@@ -14,6 +14,14 @@ Update a variable's name, description, and/or default_value (properties only)
 ktm variables update <id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables update 17 --description "DB hostname"
+ktm variables update 17 --default-value "new-default"
+ktm variables update 17 --name DB_HOST_V2
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,14 +35,6 @@ ktm variables update <id> [flags]
 | `--default-value` | string | — | New default value |
 | `--description` | string | — | New description (optional, recommended) — overwrites the current value; useful for clarifying purpose |
 | `--name` | string | — | New name |
-
-## Examples
-
-```bash
-ktm variables update 17 --description "DB hostname"
-ktm variables update 17 --default-value "new-default"
-ktm variables update 17 --name DB_HOST_V2
-```
 
 ## Details
 

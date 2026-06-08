@@ -14,6 +14,16 @@ Open an ADB tunnel to a remote phone
 ktm adb connect <phone-serial> [flags]
 ```
 
+## Examples
+
+```bash
+# Connect to a phone (auto-registers with local ADB server)
+ktm adb connect RF8NB07VDGA
+
+# Custom port
+ktm adb connect RF8NB07VDGA --port 7037
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,16 +36,6 @@ ktm adb connect <phone-serial> [flags]
 | --- | --- | --- | --- |
 | `--port` | int | `6037` | Local port to listen on |
 
-## Examples
-
-```bash
-# Connect to a phone (auto-registers with local ADB server)
-ktm adb connect RF8NB07VDGA
-
-# Custom port
-ktm adb connect RF8NB07VDGA --port 7037
-```
-
 ## Details
 
 Starts a local ADB tunnel to a specific phone on a remote smartphone robot.
@@ -45,6 +45,10 @@ secure WebSocket tunnel. The device auto-registers with your local ADB server,
 so Android Studio picks it up automatically. Full support for port forwarding,
 reverse forwarding, and JDWP debugging — your real local ADB server handles
 all protocol concerns.
+
+## Related
+
+- [`ktm adb`](/cli/commands/adb)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

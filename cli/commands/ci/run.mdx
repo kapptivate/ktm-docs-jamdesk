@@ -14,21 +14,6 @@ Execute Kapptivate tests from JSON config files or campaign JSON, poll for resul
 ktm ci run [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--ignore-errors` | boolean | — | Ignore failures for every action type (sets options.ignore_failed to all action codes); the run still completes but per-test status may be overridden |
-| `--junit-file` | string | — | Write a JUnit XML report to this file path (for CI artifact upload) |
-| `--max-poll-duration` | duration | `30m0s` | Max time to poll for each test result before timing out |
-| `--output-file` | string | — | Write the JSON execution summary to this file path |
-| `--parallel` | boolean | — | Run tests in parallel (sets options.parallel_test_execution=-1; superadmin + ethernet-only tests) |
-| `--set-var` | string[] | — | Override a variable value: NAME=VALUE. Repeatable. Applied in --stdin (campaign) mode before execution; bucket preserved. Unknown names are silently ignored. |
-| `--stdin` | boolean | — | Read a single campaign JSON from stdin (mutually exclusive with --test-config-path/--test-config-dir) |
-| `--test-config-dir` | string | — | Directory of JSON test config files (all *.json files are loaded) |
-| `--test-config-path` | string[] | — | Path to a JSON test config file (repeatable, supports glob patterns) |
-| `--validate` | boolean | — | Validate config file structure and exit (no API key or network needed) |
-
 ## Examples
 
 ```bash
@@ -54,6 +39,21 @@ ktm ci build --test-ids 16480 | ktm ci run --stdin --set-var "HOST=staging.examp
 ktm ci build --test-campaign 42 --variant "API:Staging" | \
   ktm ci run --stdin --set-var "GLOBAL_VAR=override-value" --junit-file results.xml
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--ignore-errors` | boolean | — | Ignore failures for every action type (sets options.ignore_failed to all action codes); the run still completes but per-test status may be overridden |
+| `--junit-file` | string | — | Write a JUnit XML report to this file path (for CI artifact upload) |
+| `--max-poll-duration` | duration | `30m0s` | Max time to poll for each test result before timing out |
+| `--output-file` | string | — | Write the JSON execution summary to this file path |
+| `--parallel` | boolean | — | Run tests in parallel (sets options.parallel_test_execution=-1; superadmin + ethernet-only tests) |
+| `--set-var` | string[] | — | Override a variable value: NAME=VALUE. Repeatable. Applied in --stdin (campaign) mode before execution; bucket preserved. Unknown names are silently ignored. |
+| `--stdin` | boolean | — | Read a single campaign JSON from stdin (mutually exclusive with --test-config-path/--test-config-dir) |
+| `--test-config-dir` | string | — | Directory of JSON test config files (all *.json files are loaded) |
+| `--test-config-path` | string[] | — | Path to a JSON test config file (repeatable, supports glob patterns) |
+| `--validate` | boolean | — | Validate config file structure and exit (no API key or network needed) |
 
 ## Details
 
@@ -95,8 +95,8 @@ Exit codes:
 
 ## Related
 
-- [`ktm ci build`](/cli/commands/ci/build)
 - [`ktm ci`](/cli/commands/ci)
+- [`ktm ci build`](/cli/commands/ci/build)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

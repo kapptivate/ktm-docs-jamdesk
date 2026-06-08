@@ -14,15 +14,6 @@ List alert definitions configured on the platform
 ktm alerts list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--archived` | string | — | Filter by archived status: true or false |
-| `--name` | string | — | Filter by alert name |
-| `--operator` | string | — | Operator slug (required) |
-| `--types` | string | — | Comma-separated alert types |
-
 ## Examples
 
 ```bash
@@ -36,6 +27,15 @@ ktm alerts list --operator my-operator --types availability
 ktm alerts list --operator my-operator --archived true
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--archived` | string | — | Filter by archived status: true or false |
+| `--name` | string | — | Filter by alert name |
+| `--operator` | string | — | Operator slug (required) |
+| `--types` | string | — | Comma-separated alert types |
+
 ## Details
 
 List alert definitions for an operator. These are persistent rules that
@@ -45,6 +45,7 @@ NOT the same as 'metrics alert-eval' which performs on-demand local analytics.
 
 ## Related
 
+- [`ktm alerts`](/cli/commands/alerts)
 - [`ktm metrics alert-eval`](/cli/commands/metrics/alert-eval)
 
 <Note>

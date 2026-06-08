@@ -14,18 +14,6 @@ Compute SLI/SLO metrics using Google SRE burn-rate methodology
 ktm metrics slo [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--good-field` | string | `good` | Field name for good events |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query returning good/total fields |
-| `--slo-target` | float | — | SLO target percentage (e.g. 99.9) |
-| `--total-field` | string | `total` | Field name for total events |
-| `--window` | string | `30d` | SLO window (e.g. 30d, 168h) |
-
 ## Examples
 
 ```bash
@@ -39,6 +27,18 @@ ktm metrics slo --operator acme \
   --query "SELECT sum(success) AS ok, sum(requests) AS all_req FROM api WHERE time > now() - 7d" \
   --slo-target 99.5 --good-field ok --total-field all_req --window 7d
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--good-field` | string | `good` | Field name for good events |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--precision` | string | — | Query time precision (s, ms, u, ns) |
+| `--query` | string | — | InfluxQL query returning good/total fields |
+| `--slo-target` | float | — | SLO target percentage (e.g. 99.9) |
+| `--total-field` | string | `total` | Field name for total events |
+| `--window` | string | `30d` | SLO window (e.g. 30d, 168h) |
 
 ## Details
 
@@ -59,6 +59,10 @@ Severity thresholds (Google SRE):
   - red:      burn rate &gt; 6x (create ticket)
   - yellow:   burn rate &gt; 1x (SLO at risk)
   - green:    burn rate &lt;= 1x (within budget)
+
+## Related
+
+- [`ktm metrics`](/cli/commands/metrics)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

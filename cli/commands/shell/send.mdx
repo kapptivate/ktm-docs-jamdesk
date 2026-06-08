@@ -14,16 +14,6 @@ Send a shell command to a device
 ktm shell send [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--command` | string | — | Command payload as JSON (required) |
-| `--owner` | string | — | Device identifier: MSISDN for SIM, hostname for Ethernet (required) |
-| `--product` | int | — | Product ID (required) |
-| `--type` | string | — | Action type (e.g. USSD, ETH_HTTP_API) — see 'shell types' (required) |
-| `--wait` | boolean | — | Wait for the command to complete before returning |
-
 ## Examples
 
 ```bash
@@ -40,6 +30,16 @@ ktm shell send --product 456 --owner my-agent --type ETH_HTTP_API --command '{"h
 ktm shell send --product 123 --owner 0789800356 --type DATA_PING --command '{"host":"8.8.8.8","count":3}'
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--command` | string | — | Command payload as JSON (required) |
+| `--owner` | string | — | Device identifier: MSISDN for SIM, hostname for Ethernet (required) |
+| `--product` | int | — | Product ID (required) |
+| `--type` | string | — | Action type (e.g. USSD, ETH_HTTP_API) — see 'shell types' (required) |
+| `--wait` | boolean | — | Wait for the command to complete before returning |
+
 ## Details
 
 Submit a single shell command for execution on a SIM card or web agent.
@@ -55,6 +55,7 @@ when you know the exact path. Sessions expire after ~30s of inactivity.
 
 ## Related
 
+- [`ktm shell`](/cli/commands/shell)
 - [`ktm shell types`](/cli/commands/shell/types)
 - [`ktm shell get`](/cli/commands/shell/get)
 

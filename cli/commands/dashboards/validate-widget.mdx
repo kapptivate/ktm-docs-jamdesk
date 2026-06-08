@@ -14,12 +14,6 @@ Dry-run validation of a dashboard widget JSON
 ktm dashboards validate-widget [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
-
 ## Examples
 
 ```bash
@@ -27,10 +21,20 @@ ktm dashboards validate-widget --json widget.json
 cat widget.json | ktm dashboards validate-widget --json -
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
+
 ## Details
 
 Validate a widget JSON file without modifying any dashboard.
 Checks type, structure, query fields, placeholder detection, and per-type constraints.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

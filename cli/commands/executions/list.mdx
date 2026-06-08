@@ -14,21 +14,6 @@ List recent test executions for a product
 ktm executions list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--creator` | string | — | Filter by creator username |
-| `--from-date` | string | — | Only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z) |
-| `--operator` | string | — | Operator slug (from 'operators list') |
-| `--ordering` | string | — | Sort field: created or -created (default: -created) |
-| `--page` | string | — | Page number to fetch (default: 1) |
-| `--page-size` | string | — | Number of executions per page (default: 20, max: 4000) |
-| `--product` | string | — | Product slug (format: operator~product, from 'products list') |
-| `--search` | string | — | Free-text search across execution name and tags |
-| `--status` | string | — | Filter by execution status: success, failed, ongoing, pending, canceled, timed out, maintenance |
-| `--to-date` | string | — | Only include executions before this date (ISO 8601) |
-
 ## Examples
 
 ```bash
@@ -48,6 +33,21 @@ ktm executions list --product my-operator~my-product --from-date 2025-01-01T00:0
 ktm executions list --product my-operator~my-product -o table
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--creator` | string | — | Filter by creator username |
+| `--from-date` | string | — | Only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z) |
+| `--operator` | string | — | Operator slug (from 'operators list') |
+| `--ordering` | string | — | Sort field: created or -created (default: -created) |
+| `--page` | string | — | Page number to fetch (default: 1) |
+| `--page-size` | string | — | Number of executions per page (default: 20, max: 4000) |
+| `--product` | string | — | Product slug (format: operator~product, from 'products list') |
+| `--search` | string | — | Free-text search across execution name and tags |
+| `--status` | string | — | Filter by execution status: success, failed, ongoing, pending, canceled, timed out, maintenance |
+| `--to-date` | string | — | Only include executions before this date (ISO 8601) |
+
 ## Details
 
 List test executions (campaign runs) from the platform.
@@ -62,6 +62,7 @@ or locate a specific execution by name or time range.
 
 ## Related
 
+- [`ktm executions`](/cli/commands/executions)
 - [`ktm products list`](/cli/commands/products/list)
 - [`ktm operators list`](/cli/commands/operators/list)
 

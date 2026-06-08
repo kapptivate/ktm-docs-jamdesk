@@ -14,17 +14,17 @@ Un-archive a test (sets archived=false via PUT)
 ktm tests unarchive <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
 ktm tests unarchive 99
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -35,6 +35,10 @@ Uses PATCH with a minimal body (only \{archived\}). This avoids the fragile full
 ## Notes
 
 - Un-hides an archived test — the counterpart to [`ktm tests archive`](/cli/commands/tests/archive).
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

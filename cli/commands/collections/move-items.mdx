@@ -14,14 +14,6 @@ Move tests/dashboards into a target collection
 ktm collections move-items [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--items` | string | — | Comma-separated item UIDs (required) |
-| `--operator` | string | — | Operator slug (required) |
-| `--target` | string | — | Destination collection UID (required) |
-
 ## Examples
 
 ```bash
@@ -32,6 +24,14 @@ ktm collections move-items --operator my-op --target <dst_uid> --items "<item_ui
 # Batch move
 ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<uid2>,<uid3>"
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--items` | string | — | Comma-separated item UIDs (required) |
+| `--operator` | string | — | Operator slug (required) |
+| `--target` | string | — | Destination collection UID (required) |
 
 ## Details
 
@@ -44,6 +44,7 @@ Backed by POST /kcollections/api/items/move.
 
 ## Related
 
+- [`ktm collections`](/cli/commands/collections)
 - [`ktm collections items`](/cli/commands/collections/items)
 
 <Note>

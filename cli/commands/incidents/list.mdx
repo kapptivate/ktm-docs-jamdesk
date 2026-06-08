@@ -14,6 +14,19 @@ List incidents (triggered alerts) on the platform
 ktm incidents list [flags]
 ```
 
+## Examples
+
+```bash
+# List open incidents
+ktm incidents list --operator my-operator --status OPEN
+
+# List incidents for a specific alert
+ktm incidents list --operator my-operator --alert-id 42
+
+# List incidents created after a date
+ktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -28,19 +41,6 @@ ktm incidents list [flags]
 | `--page-size` | int | `50` | Results per page |
 | `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
 
-## Examples
-
-```bash
-# List open incidents
-ktm incidents list --operator my-operator --status OPEN
-
-# List incidents for a specific alert
-ktm incidents list --operator my-operator --alert-id 42
-
-# List incidents created after a date
-ktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z
-```
-
 ## Details
 
 List incidents for an operator. Incidents are created when a platform alert
@@ -50,6 +50,7 @@ NOT the same as 'metrics alert-eval' which performs local on-demand analytics.
 
 ## Related
 
+- [`ktm incidents`](/cli/commands/incidents)
 - [`ktm metrics alert-eval`](/cli/commands/metrics/alert-eval)
 
 <Note>

@@ -14,12 +14,6 @@ Check what test campaigns and monitors depend on a test
 ktm tests impact <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
@@ -30,11 +24,21 @@ ktm tests impact 16480
 ktm tests impact 16480 -o table
 ```
 
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
 ## Details
 
 Check the blast radius of a test by listing all test campaigns and monitors
 that reference it. Use this before modifying or deleting a test to understand
 the downstream impact.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

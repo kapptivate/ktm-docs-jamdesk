@@ -14,14 +14,6 @@ List products, optionally filtered by operator
 ktm products list [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--active` | string | — | Filter by active status: true or false |
-| `--name` | string | — | Filter by exact product name match |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-
 ## Examples
 
 ```bash
@@ -34,6 +26,14 @@ ktm products list --operator my-operator --active true -o table
 # Filter by product name
 ktm products list --operator my-operator --name "Web Portal"
 ```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true or false |
+| `--name` | string | — | Filter by exact product name match |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
 
 ## Details
 
@@ -48,6 +48,7 @@ Table columns:      ID, SLUG, NAME, OPERATOR, ACTIVE, MONITORING
 
 ## Related
 
+- [`ktm products`](/cli/commands/products)
 - [`ktm operators list`](/cli/commands/operators/list)
 
 <Note>

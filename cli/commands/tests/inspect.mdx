@@ -14,12 +14,6 @@ Full test definition with actions, dependencies, and configuration
 ktm tests inspect <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
@@ -29,6 +23,12 @@ ktm tests inspect 16480
 # Inspect test as table (structured summary)
 ktm tests inspect 16480 -o table
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -44,8 +44,8 @@ definitions. Use "tests inspect" when you need to understand the test logic itse
 
 ## Related
 
-- [`ktm tests get`](/cli/commands/tests/get)
 - [`ktm tests`](/cli/commands/tests)
+- [`ktm tests get`](/cli/commands/tests/get)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

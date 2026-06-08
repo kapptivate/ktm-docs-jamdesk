@@ -58,6 +58,15 @@ function relatedLinksCli(item, ctx, o) {
   }
   const hrefByPath = (ctx && ctx.hrefByPath) || new Map();
   const self = item.path.join(' ');
+  // Parent command (See also).
+  if (item.path.length > 1) {
+    const parentKey = item.path.slice(0, -1).join(' ');
+    const href = hrefByPath.get(parentKey);
+    if (href && !seen.has(href)) {
+      links.push({ title: `\`ktm ${parentKey}\``, href });
+      seen.add(href);
+    }
+  }
   const re = /\bktm ((?:[a-z][\w-]*(?: |$)){1,5})/g;
   const desc = item.description || '';
   let m;
@@ -104,6 +113,9 @@ export function renderCommandPage(item, ctx) {
   sections.push(['## Usage', '', codeBlock('bash', item.usage)].join('\n'));
 
   if (item.isLeaf) {
+    // Examples-first (clig.dev): show real usage right after the synopsis, before the flag tables.
+    const examples = o.examples ? o.examples.join('\n\n') : item.examples;
+    if (examples) sections.push(['## Examples', '', codeBlock('bash', examples)].join('\n'));
     if (item.args && item.args.length) {
       const rows = item.args.map((a) => [`\`${escapeCell(a.name)}\``, a.required ? 'Yes' : 'No']);
       sections.push(['## Arguments', '', table(['Argument', 'Required'], rows)].join('\n'));
@@ -111,8 +123,6 @@ export function renderCommandPage(item, ctx) {
     if (item.flags && item.flags.length) {
       sections.push(['## Flags', '', flagTable(item.flags)].join('\n'));
     }
-    const examples = o.examples ? o.examples.join('\n\n') : item.examples;
-    if (examples) sections.push(['## Examples', '', codeBlock('bash', examples)].join('\n'));
   } else {
     // Parent: list subcommands as cards.
     const cards = item.subcommands

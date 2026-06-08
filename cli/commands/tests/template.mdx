@@ -14,12 +14,6 @@ Generate a test template for one or more action types
 ktm tests template <action-types...> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `action-types...` | Yes |
-
 ## Examples
 
 ```bash
@@ -35,6 +29,12 @@ ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_test.json
 # Then create the test:
 ktm tests create --from-file api_test.json --product my-operator~my-product
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `action-types...` | Yes |
 
 ## Details
 
@@ -57,6 +57,7 @@ Replace &lt;...&gt; placeholders with real device identifiers from 'resources li
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm resources list`](/cli/commands/resources/list)
 
 <Note>

@@ -14,6 +14,14 @@ List agents for an operator
 ktm agents list [flags]
 ```
 
+## Examples
+
+```bash
+ktm agents list --operator my-operator
+ktm agents list --operator my-operator --type cellular
+ktm agents list --operator my-operator --zone EU-West
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -22,13 +30,9 @@ ktm agents list [flags]
 | `--type` | string | — | Agent type: cellular, ethernet, smartphone |
 | `--zone` | string | — | Filter by zone |
 
-## Examples
+## Related
 
-```bash
-ktm agents list --operator my-operator
-ktm agents list --operator my-operator --type cellular
-ktm agents list --operator my-operator --zone EU-West
-```
+- [`ktm agents`](/cli/commands/agents)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -14,18 +14,18 @@ Get a reusable's full definition (rejects non-reusable test ids)
 ktm reusables get <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
 ktm reusables get 117
 ktm reusables get 117 -o json | jq '{id, name, kind, reused_by}'
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -38,6 +38,7 @@ Backed by GET /api/tests/\{id\}/.
 
 ## Related
 
+- [`ktm reusables`](/cli/commands/reusables)
 - [`ktm tests`](/cli/commands/tests)
 
 <Note>

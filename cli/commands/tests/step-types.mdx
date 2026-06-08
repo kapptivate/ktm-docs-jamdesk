@@ -14,12 +14,6 @@ List available step types for v2 (no-code) test creation
 ktm tests step-types [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--platform` | string | — | Filter by platform: web, smartphone |
-
 ## Examples
 
 ```bash
@@ -33,6 +27,12 @@ ktm tests step-types --platform web
 ktm tests step-types --platform smartphone -o json
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--platform` | string | — | Filter by platform: web, smartphone |
+
 ## Details
 
 List the catalog of available step types for v2 test creation.
@@ -44,6 +44,10 @@ Use --platform to filter by web or smartphone. Steps marked as "shared" work on 
 
 Use the output with 'tests template ETH_WEB_SCRIPT_V2' or 'tests template SMARTPHONE_APP_SCRIPT_V2'
 to generate a ready-to-customize v2 test.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -14,6 +14,13 @@ Check whether the current user can edit a collection
 ktm collections can-edit <uid> [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections can-edit --operator my-op <uid>
+ktm collections can-edit --operator my-op <uid> -o json | jq .can_edit
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,13 +33,6 @@ ktm collections can-edit <uid> [flags]
 | --- | --- | --- | --- |
 | `--operator` | string | — | Operator slug (required) |
 
-## Examples
-
-```bash
-ktm collections can-edit --operator my-op <uid>
-ktm collections can-edit --operator my-op <uid> -o json | jq .can_edit
-```
-
 ## Details
 
 Permission probe. Useful before calling rename/move/delete to avoid a
@@ -40,6 +40,10 @@ Permission probe. Useful before calling rename/move/delete to avoid a
 \{can_edit: true|false\}.
 
 Backed by GET /kcollections/api/collections/\{uid\}/can_edit.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

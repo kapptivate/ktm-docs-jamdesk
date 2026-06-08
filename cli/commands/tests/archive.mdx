@@ -14,17 +14,17 @@ Archive a test (sets archived=true via PUT)
 ktm tests archive <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
 ktm tests archive 99
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -38,6 +38,7 @@ Uses PATCH with a minimal body (only \{archived\}). This avoids the fragile full
 
 ## Related
 
+- [`ktm tests`](/cli/commands/tests)
 - [`ktm tests delete`](/cli/commands/tests/delete)
 
 <Note>

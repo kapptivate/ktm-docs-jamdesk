@@ -14,6 +14,12 @@ Reparent a collection under a new parent UID
 ktm collections move <uid> [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections move --operator my-op <uid> --new-parent <new_parent_uid>
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -26,12 +32,6 @@ ktm collections move <uid> [flags]
 | --- | --- | --- | --- |
 | `--new-parent` | string | — | Target parent collection UID (required) |
 | `--operator` | string | — | Operator slug (required) |
-
-## Examples
-
-```bash
-ktm collections move --operator my-op <uid> --new-parent <new_parent_uid>
-```
 
 ## Details
 

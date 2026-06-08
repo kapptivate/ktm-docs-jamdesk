@@ -14,16 +14,6 @@ Generate a campaign JSON template from test IDs or a saved Tests campaign (local
 ktm ci build [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--name` | string | — | Campaign name (optional, defaults to empty) |
-| `--product` | string | — | Product slug (format: operator~product). Required with --test-ids (resolves V3 variable buckets); not needed with --test-campaign (auto-derived). |
-| `--test-campaign` | int | — | Saved Tests campaign id (mutually exclusive with --test-ids; product auto-derived) |
-| `--test-ids` | string | — | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
-| `--variant` | string[] | — | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
-
 ## Examples
 
 ```bash
@@ -57,6 +47,16 @@ ktm ci build --product acme~web --test-ids 16480 --variant "API:Staging" | \
   ktm ci run --stdin
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Campaign name (optional, defaults to empty) |
+| `--product` | string | — | Product slug (format: operator~product). Required with --test-ids (resolves V3 variable buckets); not needed with --test-campaign (auto-derived). |
+| `--test-campaign` | int | — | Saved Tests campaign id (mutually exclusive with --test-ids; product auto-derived) |
+| `--test-ids` | string | — | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
+| `--variant` | string[] | — | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
+
 ## Details
 
 Build a campaign JSON template by fetching test details and emitting a
@@ -89,6 +89,7 @@ Campaign JSON schema:
 
 ## Related
 
+- [`ktm ci`](/cli/commands/ci)
 - [`ktm tests list`](/cli/commands/tests/list)
 
 <Note>

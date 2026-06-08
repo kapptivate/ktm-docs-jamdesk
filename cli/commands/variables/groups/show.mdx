@@ -14,12 +14,6 @@ Get variable group detail including variants and variable definitions
 ktm variables groups show <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
@@ -27,10 +21,20 @@ ktm variables groups show 204
 ktm variables groups show 204 -o table
 ```
 
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
 ## Details
 
 Fetch the full group: metadata, variants[] (with is_default), and the
 variables[] inside the group. Single call to inspect the entire group.
+
+## Related
+
+- [`ktm variables groups`](/cli/commands/variables/groups)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

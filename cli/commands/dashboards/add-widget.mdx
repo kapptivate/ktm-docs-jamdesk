@@ -14,22 +14,6 @@ Add a widget to a dashboard from a JSON file or stdin
 ktm dashboards add-widget <uid> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `uid` | Yes |
-
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--h` | int | — | Grid height in rows |
-| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
-| `--w` | int | — | Grid width in columns |
-| `--x` | int | — | Grid x position (0-23) |
-| `--y` | int | — | Grid y position |
-
 ## Examples
 
 ```bash
@@ -45,6 +29,22 @@ ktm dashboards add-widget abc123 --json widget.json --x 0 --y 0 --w 24 --h 1
 # Full-width chart
 ktm dashboards add-widget abc123 --json chart.json --w 24 --h 8
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--h` | int | — | Grid height in rows |
+| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
+| `--w` | int | — | Grid width in columns |
+| `--x` | int | — | Grid x position (0-23) |
+| `--y` | int | — | Grid y position |
 
 ## Details
 
@@ -69,6 +69,10 @@ Scripts can compute (ratios, stats, correlation) but lack the platform's statist
 (EWMA, anomaly detection, SLO) — use InfluxQL or MCP/CLI tools for those.
 Do not hardcode pre-computed values — widgets are live and re-query on time range changes.
 Run validate-widget or check widget-template _metadata.notes for script API docs.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

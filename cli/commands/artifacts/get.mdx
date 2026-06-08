@@ -14,15 +14,6 @@ Download an artifact by URL or relative path
 ktm artifacts get [flags]
 ```
 
-## Flags
-
-| Flag | Type | Default | Description |
-| --- | --- | --- | --- |
-| `--max-size` | int | `5242880` | Maximum artifact size in bytes |
-| `--output` | string | — | Output file path (required for binary artifacts) |
-| `--path` | string | — | Relative artifact path (host prefix added automatically) |
-| `--url` | string | — | Full artifact URL (mutually exclusive with --path) |
-
 ## Examples
 
 ```bash
@@ -36,12 +27,25 @@ ktm artifacts get --path path/screenshot.png --output shot.png
 ktm artifacts get --url https://app.kapptivate.com/robot/path/trace.xml
 ```
 
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--max-size` | int | `5242880` | Maximum artifact size in bytes |
+| `--output` | string | — | Output file path (required for binary artifacts) |
+| `--path` | string | — | Relative artifact path (host prefix added automatically) |
+| `--url` | string | — | Full artifact URL (mutually exclusive with --path) |
+
 ## Details
 
 Fetch a test artifact (screenshot, audio, log, etc.) from the platform.
 
 Provide either --url (full URL) or --path (relative path — host prefix added automatically).
 Text artifacts are printed to stdout. Binary artifacts require --output to specify a file.
+
+## Related
+
+- [`ktm artifacts`](/cli/commands/artifacts)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

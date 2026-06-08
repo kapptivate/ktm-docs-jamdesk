@@ -14,6 +14,13 @@ Get detailed agent info with slots
 ktm agents get [flags]
 ```
 
+## Examples
+
+```bash
+ktm agents get --uuid abc-123 --type cellular
+ktm agents get --uuid def-456 --type ethernet
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -21,12 +28,9 @@ ktm agents get [flags]
 | `--type` | string | — | Agent type: cellular, ethernet, smartphone (required) |
 | `--uuid` | string | — | Agent UUID (required) |
 
-## Examples
+## Related
 
-```bash
-ktm agents get --uuid abc-123 --type cellular
-ktm agents get --uuid def-456 --type ethernet
-```
+- [`ktm agents`](/cli/commands/agents)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

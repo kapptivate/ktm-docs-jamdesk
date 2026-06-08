@@ -14,12 +14,6 @@ Get detailed results of a test execution
 ktm executions get <id> [flags]
 ```
 
-## Arguments
-
-| Argument | Required |
-| --- | --- |
-| `id` | Yes |
-
 ## Examples
 
 ```bash
@@ -29,6 +23,12 @@ ktm executions get 12345
 # Get execution detail as table
 ktm executions get 12345 -o table
 ```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
 
 ## Details
 
@@ -41,6 +41,10 @@ The response includes:
 
 In table mode, a human-readable summary is shown with a link to the Kapptivate UI.
 In JSON mode, the full response is returned including the raw json field.
+
+## Related
+
+- [`ktm executions`](/cli/commands/executions)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

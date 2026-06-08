@@ -14,6 +14,13 @@ Create a new sub-collection under --parent
 ktm collections create [flags]
 ```
 
+## Examples
+
+```bash
+ktm collections create --operator my-op --parent <parent_uid> --name "Auth regression"
+ktm collections create --operator my-op --parent <tests_root> --name "Smoke" -o json | jq .uid
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -22,19 +29,16 @@ ktm collections create [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--parent` | string | — | Parent collection UID (required) |
 
-## Examples
-
-```bash
-ktm collections create --operator my-op --parent <parent_uid> --name "Auth regression"
-ktm collections create --operator my-op --parent <tests_root> --name "Smoke" -o json | jq .uid
-```
-
 ## Details
 
 Create a collection as a child of --parent. Both operator and parent
 UID are required; the new collection inherits the operator's org_id.
 
 Backed by POST /kcollections/api/collections.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -14,6 +14,12 @@ Rename a variant in a group atomically
 ktm variables variants rename <group-id> <variant-id> [flags]
 ```
 
+## Examples
+
+```bash
+ktm variables variants rename 42 7 --name production
+```
+
 ## Arguments
 
 | Argument | Required |
@@ -27,11 +33,9 @@ ktm variables variants rename <group-id> <variant-id> [flags]
 | --- | --- | --- | --- |
 | `--name` | string | — | New variant name (required) |
 
-## Examples
+## Related
 
-```bash
-ktm variables variants rename 42 7 --name production
-```
+- [`ktm variables variants`](/cli/commands/variables/variants)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

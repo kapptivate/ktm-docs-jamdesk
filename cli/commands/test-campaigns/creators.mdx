@@ -14,6 +14,12 @@ List distinct Tests campaign creators (for filtering list)
 ktm test-campaigns creators [flags]
 ```
 
+## Examples
+
+```bash
+ktm test-campaigns creators --product acme~web
+```
+
 ## Flags
 
 | Flag | Type | Default | Description |
@@ -21,18 +27,16 @@ ktm test-campaigns creators [flags]
 | `--operator` | string | — | Operator slug or short_name |
 | `--product` | string | — | Product slug or short_name |
 
-## Examples
-
-```bash
-ktm test-campaigns creators --product acme~web
-```
-
 ## Details
 
 Returns the unique set of users who have created Tests campaigns in the
 given scope (product or operator). Use for populating the creator filter.
 
 Backed by GET /api/suites/list_values/?field=creator&attr=username.
+
+## Related
+
+- [`ktm test-campaigns`](/cli/commands/test-campaigns)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
