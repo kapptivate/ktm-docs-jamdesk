@@ -11,6 +11,10 @@ on:
         type: choice
         options: [all, mcp, cli]
         default: all
+      refresh_versions:
+        description: 'Re-derive "Available since" versions from the CLI repo (needs CLI_REPO_TOKEN)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -25,6 +29,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      # Optional: refresh per-tool "Available since" versions from the CLI source history.
+      # GITHUB_TOKEN cannot read another private repo, so this needs an explicit credential
+      # (a fine-grained PAT with contents:read on the CLI repo, a deploy key, or a GitHub App
+      # token) stored as the CLI_REPO_TOKEN secret. Full history + tags are required for the
+      # git pickaxe / `tag --contains` derivation, hence fetch-depth: 0 and fetch-tags: true.
+      # When this is off, the committed since.json is used as-is (since-versions are immutable,
+      # so it only needs refreshing when new tools ship).
+      - name: Check out CLI source for version history
+        if: ${{ inputs.refresh_versions }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.KTM_CLI_REPO }} # e.g. kapptivate/kapptivate-cli
+          token: ${{ secrets.CLI_REPO_TOKEN }}
+          path: .kapptivate-cli
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Refresh "Available since" versions
+        if: ${{ inputs.refresh_versions }}
+        env:
+          KAPPTIVATE_CLI_DIR: ${{ github.workspace }}/.kapptivate-cli
+        run: node scripts/derive-since.mjs
 
       # MCP  → live tools/list against $MCP_URL using the X-Kapptivate-API-Key header.
       # CLI  → the prod ktm Linux binary downloaded from $KTM_CLI_URL, introspected via --help.
@@ -41,6 +68,11 @@ jobs:
         with:
           branch: docs/auto-sync
           delete-branch: true
+          # Only commit the docs; never the optional .kapptivate-cli checkout or other workspace files.
+          add-paths: |
+            docs.json
+            mcp/**
+            cli/**
           labels: documentation, automated
           commit-message: "docs: sync MCP & CLI reference from prod"
           title: "docs: sync MCP & CLI reference from prod"
