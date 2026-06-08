@@ -28,6 +28,16 @@ ktm dashboards update <uid> [flags]
 | `--favorite` | string | — | Set favorite status (true/false) |
 | `--name` | string | — | New dashboard name |
 
+## Examples
+
+```bash
+# Rename a dashboard
+ktm dashboards update abc123 --name "New Name"
+
+# Set as favorite
+ktm dashboards update abc123 --favorite true
+```
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

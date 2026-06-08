@@ -25,6 +25,16 @@ ktm variables list [flags]
 | `--used` | string | — | true \| false — filter by usage state |
 | `--variant` | string | — | Variant name or id — keep only variables carrying this variant |
 
+## Examples
+
+```bash
+ktm variables list --product acme~web
+ktm variables list --product acme~web --scope global
+ktm variables list --product acme~web --group 42 --type secret
+ktm variables list --product acme~web --used false
+ktm variables list --product acme~web --variant prod
+```
+
 ## Details
 
 Default scope returns ALL variables (global + grouped) via the V3 endpoint

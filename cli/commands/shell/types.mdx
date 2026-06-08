@@ -20,6 +20,14 @@ ktm shell types [flags]
 | --- | --- | --- | --- |
 | `--owner-kind` | string | — | Filter by owner kind: S (SIM) or E (Ethernet) |
 
+## Examples
+
+```bash
+ktm shell types                  # all shell actions
+ktm shell types --owner-kind S   # SIM actions only (17)
+ktm shell types --owner-kind E   # Ethernet actions only (13)
+```
+
 ## Details
 
 Show which action types can be used in shell mode.

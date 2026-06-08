@@ -20,11 +20,22 @@ ktm users activate [flags]
 | --- | --- | --- | --- |
 | `--id` | int | — | User ID to activate (from 'users list') |
 
+## Examples
+
+```bash
+# Activate user with ID 42
+ktm users activate --id 42
+```
+
 ## Details
 
 Activate a user account by ID. Requires superadmin or EDIT_OPERATOR_ADMIN permission.
 
 Use 'users list' to find user IDs.
+
+## Related
+
+- [`ktm users list`](/cli/commands/users/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -27,6 +27,13 @@ ktm variables variants add <group-id> [flags]
 | `--default` | boolean | — | Make the new variant the default (demotes the prior default) |
 | `--name` | string | — | New variant name (required) |
 
+## Examples
+
+```bash
+ktm variables variants add 42 --name canary
+ktm variables variants add 42 --name canary --default
+```
+
 ## Details
 
 Adds a new variant to the group. With --default, the new variant becomes

@@ -24,6 +24,20 @@ ktm metrics alert-eval [flags]
 | `--rules` | string | — | Inline JSON alert rule array |
 | `--rules-file` | string | — | Path to JSON file with alert rule array |
 
+## Examples
+
+```bash
+# Inline rules
+ktm metrics alert-eval --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --rules '[{"type":"threshold","metric":"p95","operator":">","value":5}]'
+
+# Rules from file
+ktm metrics alert-eval --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --rules-file rules.json
+```
+
 ## Details
 
 Evaluate InfluxDB metrics against alert rules without Kapacitor.

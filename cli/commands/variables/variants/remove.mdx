@@ -27,6 +27,13 @@ ktm variables variants remove <group-id> <variant-id> [flags]
 | --- | --- | --- | --- |
 | `--force` | boolean | — | Bypass the non-default-values safety check |
 
+## Examples
+
+```bash
+ktm variables variants remove 42 7           # refuses if data would be lost
+ktm variables variants remove 42 7 --force   # removes anyway
+```
+
 ## Details
 
 Safe by default: refuses if any variable in the group has a non-default value

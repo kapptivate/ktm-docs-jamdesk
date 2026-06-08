@@ -28,6 +28,14 @@ ktm collections items <uid> [flags]
 | `--page` | int | — | Page number |
 | `--page-size` | int | — | Items per page (default: 25) |
 
+## Examples
+
+```bash
+ktm collections items --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections items --operator my-op <uid> -o json | jq '.[].meta.name'
+ktm collections items --operator my-op <uid> --page-size 10 --page 2
+```
+
 ## Details
 
 Paginated list of items directly inside the collection (sub-collections
@@ -39,6 +47,10 @@ The kcollections service defaults sort_by=updated_at order=desc when the
 client doesn't specify; this matches the web UI.
 
 Backed by GET /kcollections/api/collections/\{uid\}/items.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

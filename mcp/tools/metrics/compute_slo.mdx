@@ -38,10 +38,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Compute SLI/SLO metrics from InfluxDB query results. Uses Google SRE burn-rate methodology.
+Uses Google SRE burn-rate methodology.
 
 Prerequisite: Run query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS first to discover which measurement contains success/failure counts.
 
@@ -55,6 +53,10 @@ Severity thresholds (Google SRE):
 - yellow: burn rate > 1x (SLO at risk)
 - green: burn rate <= 1x (within budget)
 ```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
 
 ## What's Next?
 

@@ -26,10 +26,20 @@ ktm variables groups update <id> [flags]
 | --- | --- | --- | --- |
 | `--name` | string | — | New name (required) |
 
+## Examples
+
+```bash
+ktm variables groups update 42 --name "Environments v2"
+```
+
 ## Details
 
 Rename only. To add, remove, rename, set default, or copy values across
 variants, use the dedicated 'ktm variables variants' subcommands.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

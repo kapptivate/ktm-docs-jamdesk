@@ -26,6 +26,19 @@ ktm resources get <serial> [flags]
 | --- | --- | --- | --- |
 | `--include-apps` | boolean | — | Fetch installed apps on the device (for V2 smartphone test authoring: copy package→starting.app, app object→meta) |
 
+## Examples
+
+```bash
+# Get smartphone details
+ktm resources get R92Y70ZDMKH
+
+# Get smartphone with installed apps (for V2 smartphone test authoring)
+ktm resources get R92Y70ZDMKH --include-apps
+
+# Get smartphone with apps in table format
+ktm resources get R92Y70ZDMKH --include-apps -o table
+```
+
 ## Details
 
 Fetch device details for a single smartphone resource by its serial number or UUID.
@@ -36,6 +49,10 @@ The installed apps list maps directly to the V2 test's starting.app and meta fie
   - copy the app object \{kind, name, label, package, version\} → meta
 
 To find smartphone serial numbers, use: ktm resources list --type smartphone
+
+## Related
+
+- [`ktm resources list`](/cli/commands/resources/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -41,10 +41,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create a new test from a JSON definition. Runs structural validation before submitting. Product slug is resolved to ID + root collection UID automatically.
+Runs structural validation before submitting. Product slug is resolved to ID + root collection UID automatically.
 
 V3 buckets: every non-global input_variable gets an auto-resolved bucket pointing at (variable_group, variant). Pass variants=["API:Staging", "Database:Replica"] (repeatable forms: numeric variant ID or 'group:variant' name) to pin specific variants per group; groups not pinned use their default variant. Globals always emit {type:"global"}.
 
@@ -53,6 +51,14 @@ Kind validation: declared input_variable.kind must match the platform's variable
 PREREQUISITE: call platform_guide topic=test_creation for the full workflow, owner mapping, and variable substitution rules.
 Workflow: list_action_types → get_test_template → list_resources → customize → validate_test → create_test.
 ```
+
+## Related
+
+- [`platform_guide`](/mcp/tools/discovery/platform_guide)
+- [`list_action_types`](/mcp/tools/test-management/list_action_types)
+- [`get_test_template`](/mcp/tools/test-management/get_test_template)
+- [`list_resources`](/mcp/tools/discovery/list_resources)
+- [`validate_test`](/mcp/tools/test-management/validate_test)
 
 ## What's Next?
 

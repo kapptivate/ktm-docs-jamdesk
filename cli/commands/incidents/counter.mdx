@@ -26,12 +26,29 @@ ktm incidents counter [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
 
+## Examples
+
+```bash
+# Get incident counts for an operator
+ktm incidents counter --operator my-operator
+
+# Get counts for a specific alert
+ktm incidents counter --operator my-operator --alert-id 42
+
+# Get counts for the last 7 days
+ktm incidents counter --operator my-operator --created-after 2026-03-12T00:00:00Z
+```
+
 ## Details
 
 Get a quick summary of incident counts grouped by severity.
 
 Returns three numbers: critical, warning, and closed incident counts.
 Accepts the same filters as 'incidents list' to scope the counts.
+
+## Related
+
+- [`ktm incidents list`](/cli/commands/incidents/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

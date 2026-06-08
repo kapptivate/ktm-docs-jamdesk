@@ -35,11 +35,7 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Build a runnable campaign (an ephemeral batch of tests, discarded after the run — it is NOT saved) from exactly one source: test_ids or test_campaign_id (not both).
-
 SOURCE: test_ids — build an ad-hoc campaign from explicit test IDs.
 SOURCE: test_campaign_id — load a saved Tests campaign and produce the same campaign template (product auto-derived). To create/save a reusable pack instead, use create_test_campaign; building from a Tests campaign never modifies it.
 
@@ -49,6 +45,15 @@ The template includes empty variable slots. Use get_test_detail to understand wh
 
 Pin variants per group via the variants array — same shape as create_monitor. Globals always emit a "global" bucket. Variables in unpinned groups use that group's default variant. The backend's _resolve_empty_variable handler fills values at launch from each variable's own bucket.
 ```
+
+## Related
+
+- [`create_test_campaign`](/mcp/tools/test-campaigns/create_test_campaign)
+- [`list_test_campaigns`](/mcp/tools/test-campaigns/list_test_campaigns)
+- [`run_campaign`](/mcp/tools/execution/run_campaign)
+- [`get_test_detail`](/mcp/tools/discovery/get_test_detail)
+- [`list_resources`](/mcp/tools/discovery/list_resources)
+- [`create_monitor`](/mcp/tools/monitor-management/create_monitor)
 
 ## What's Next?
 

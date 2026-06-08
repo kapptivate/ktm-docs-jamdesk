@@ -20,6 +20,22 @@ ktm tests template <action-types...> [flags]
 | --- | --- |
 | `action-types...` | Yes |
 
+## Examples
+
+```bash
+# Single API call test
+ktm tests template ETH_HTTP_API > api_test.json
+
+# USSD navigation + SMS reception (3 steps)
+ktm tests template USSD USSD SMS_GET > ussd_test.json
+
+# Authenticated API flow (3 steps)
+ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_test.json
+
+# Then create the test:
+ktm tests create --from-file api_test.json --product my-operator~my-product
+```
+
 ## Details
 
 Generate a complete, minimal, valid test JSON template for the specified action types.
@@ -38,6 +54,10 @@ Store property syntax (in template output):
   status_code, body:       property is empty — stores the whole value
 
 Replace &lt;...&gt; placeholders with real device identifiers from 'resources list'.
+
+## Related
+
+- [`ktm resources list`](/cli/commands/resources/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

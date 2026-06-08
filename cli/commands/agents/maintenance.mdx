@@ -23,6 +23,13 @@ ktm agents maintenance [flags]
 | `--enable` | boolean | — | Enable maintenance mode |
 | `--uuid` | string | — | Agent UUID (required) |
 
+## Examples
+
+```bash
+ktm agents maintenance --uuid abc-123 --enable --confirm
+ktm agents maintenance --uuid abc-123 --disable --confirm
+```
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

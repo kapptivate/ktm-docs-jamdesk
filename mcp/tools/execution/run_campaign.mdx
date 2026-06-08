@@ -34,13 +34,17 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Execute a campaign and wait for results. This is the recommended way to run tests — it blocks until completion and returns per-test results. For very long campaigns (>10 minutes), use start_execution + poll_execution instead.
+This is the recommended way to run tests — it blocks until completion and returns per-test results. For very long campaigns (>10 minutes), use start_execution + poll_execution instead.
 
 For ad-hoc runs: build_campaign(test_ids=…) → run_campaign. For a saved Tests campaign: build_campaign(test_campaign_id=…) → run_campaign(overrides=…).
 ```
+
+## Related
+
+- [`start_execution`](/mcp/tools/execution/start_execution)
+- [`poll_execution`](/mcp/tools/execution/poll_execution)
+- [`build_campaign`](/mcp/tools/execution/build_campaign)
 
 ## What's Next?
 

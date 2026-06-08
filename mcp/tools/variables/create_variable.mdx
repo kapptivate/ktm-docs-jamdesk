@@ -39,11 +39,7 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create a new variable under a product.
-
 Type is one of:
   - "single" — scalar value in default_value
   - "secret" — scalar value; platform masks it on read
@@ -55,6 +51,11 @@ A description is optional but RECOMMENDED — future agents (and humans) rely on
 
 Consumes one slot of the per-session variable edit budget. Pre-flight name conflicts with check_variable_name to avoid wasted creates.
 ```
+
+## Related
+
+- [`set_variable_value`](/mcp/tools/variables/set_variable_value)
+- [`check_variable_name`](/mcp/tools/variables/check_variable_name)
 
 ## What's Next?
 

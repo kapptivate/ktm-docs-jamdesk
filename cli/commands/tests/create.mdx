@@ -25,6 +25,28 @@ ktm tests create [flags]
 | `--product` | string | — | Product slug (required, format: operator~product) |
 | `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. |
 
+## Examples
+
+```bash
+# Generate template, edit, then create
+ktm tests template ETH_HTTP_API > test.json
+# ... edit test.json ...
+ktm tests create --from-file test.json --product my-operator~my-product
+
+# Create with name override
+ktm tests create --from-file test.json --product my-operator~my-product --name "Login Test"
+
+# Pin a single group's variant (other groups use their default variant)
+ktm tests create --from-file test.json --product acme~web --variant API:Staging
+
+# Multi-group test: pin a different variant per group (forms can mix: 'group:variant' name or numeric ID)
+ktm tests create --from-file test.json --product acme~web \
+    --variant API:Staging --variant Database:Replica --variant 31
+
+# Auto-correct declared input_variable kinds when they don't match the platform's variable types
+ktm tests create --from-file test.json --product acme~web --auto-correct-kinds
+```
+
 ## Details
 
 Create a new classic test by posting a JSON definition to the API.
@@ -121,6 +143,11 @@ Example JSON structure:
       \}
     ]
   \}
+
+## Related
+
+- [`ktm tests template`](/cli/commands/tests/template)
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

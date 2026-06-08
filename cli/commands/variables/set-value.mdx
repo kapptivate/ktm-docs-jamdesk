@@ -27,11 +27,22 @@ ktm variables set-value <id> [flags]
 | `--value` | string | — | New value for this variant |
 | `--variant` | string | — | Variant id or name (required) |
 
+## Examples
+
+```bash
+ktm variables set-value 17 --variant prod --value prod.db.example.com
+ktm variables set-value 17 --variant 42 --value 0.0.0.0
+```
+
 ## Details
 
 Atomic per-variant value setter. --variant accepts a variant id or name; the
 target variant must exist on the variable. Errors when called on a global
 variable (no variants) — use 'ktm variables update --default-value' instead.
+
+## Related
+
+- [`ktm variables update`](/cli/commands/variables/update)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -32,11 +32,15 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Bulk activate or deactivate multiple monitors. Use list_monitors to find IDs. If this fails with HTTP 400, one or more monitor IDs may be invalid or deleted — verify with get_monitor. For a single monitor, edit_monitor active= also works; this is the bulk path.
+Use list_monitors to find IDs. If this fails with HTTP 400, one or more monitor IDs may be invalid or deleted — verify with get_monitor. For a single monitor, edit_monitor active= also works; this is the bulk path.
 ```
+
+## Related
+
+- [`list_monitors`](/mcp/tools/discovery/list_monitors)
+- [`get_monitor`](/mcp/tools/monitor-management/get_monitor)
+- [`edit_monitor`](/mcp/tools/monitor-management/edit_monitor)
 
 ## What's Next?
 

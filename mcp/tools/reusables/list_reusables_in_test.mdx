@@ -31,15 +31,15 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-List the reusables embedded in a test.
-
 Only V2 tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) can embed reusables via step_group.import. Classic tests will always return empty results since they have no import mechanism.
 
 Reads reused_tests from the target test and expands each id into {id, name}. Errors if the target id refers to a reusable (kind=2) — use list_reusable_usage for the inverse direction.
 ```
+
+## Related
+
+- [`list_reusable_usage`](/mcp/tools/reusables/list_reusable_usage)
 
 ## What's Next?
 

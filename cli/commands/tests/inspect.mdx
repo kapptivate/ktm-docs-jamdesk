@@ -20,6 +20,16 @@ ktm tests inspect <id> [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+# Inspect test as JSON (full definition with actions)
+ktm tests inspect 16480
+
+# Inspect test as table (structured summary)
+ktm tests inspect 16480 -o table
+```
+
 ## Details
 
 Fetch the complete test object by ID, including the full actions array (step-by-step
@@ -27,6 +37,11 @@ test logic), dependencies, monitors, browser config, environment, and all metada
 
 This returns significantly more data than "tests get", which only fetches variable
 definitions. Use "tests inspect" when you need to understand the test logic itself.
+
+## Related
+
+- [`ktm tests get`](/cli/commands/tests/get)
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

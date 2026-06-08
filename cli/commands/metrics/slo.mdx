@@ -26,6 +26,20 @@ ktm metrics slo [flags]
 | `--total-field` | string | `total` | Field name for total events |
 | `--window` | string | `30d` | SLO window (e.g. 30d, 168h) |
 
+## Examples
+
+```bash
+# Compute SLO for 99.9% target over 30-day window
+ktm metrics slo --operator acme \
+  --query "SELECT sum(good) AS good, sum(total) AS total FROM test WHERE time > now() - 30d" \
+  --slo-target 99.9
+
+# Custom field names and 7-day window
+ktm metrics slo --operator acme \
+  --query "SELECT sum(success) AS ok, sum(requests) AS all_req FROM api WHERE time > now() - 7d" \
+  --slo-target 99.5 --good-field ok --total-field all_req --window 7d
+```
+
 ## Details
 
 Compute SLI/SLO metrics from InfluxDB query results.

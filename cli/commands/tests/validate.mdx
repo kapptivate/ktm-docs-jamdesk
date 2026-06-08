@@ -20,6 +20,19 @@ ktm tests validate [flags]
 | --- | --- | --- | --- |
 | `--from-file` | string | — | Path to JSON file to validate (required) |
 
+## Examples
+
+```bash
+# Validate a test file
+ktm tests validate --from-file test.json
+
+# Pipeline: generate, validate, create
+ktm tests template ETH_HTTP_API > test.json
+# ... edit test.json ...
+ktm tests validate --from-file test.json
+ktm tests create --from-file test.json --product my-operator~my-product
+```
+
 ## Details
 
 Dry-run validate a test JSON payload without hitting the API.

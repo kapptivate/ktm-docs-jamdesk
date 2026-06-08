@@ -23,6 +23,19 @@ ktm alerts list [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--types` | string | — | Comma-separated alert types |
 
+## Examples
+
+```bash
+# List all alert definitions for an operator
+ktm alerts list --operator my-operator
+
+# List only availability alerts
+ktm alerts list --operator my-operator --types availability
+
+# List archived alerts
+ktm alerts list --operator my-operator --archived true
+```
+
 ## Details
 
 List alert definitions for an operator. These are persistent rules that
@@ -30,11 +43,9 @@ automatically trigger incidents when conditions are met.
 
 NOT the same as 'metrics alert-eval' which performs on-demand local analytics.
 
-Filters:
-  --operator   operator slug (required)
-  --name       filter by alert name
-  --types      comma-separated types: raw_alert, availability, metric, agent_availability, availability_last_point
-  --archived   filter by archived status: true or false
+## Related
+
+- [`ktm metrics alert-eval`](/cli/commands/metrics/alert-eval)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -24,6 +24,16 @@ ktm metrics resource-usage [flags]
 | `--resources` | string | — | Comma-separated device IDs |
 | `--start` | string | — | Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z') |
 
+## Examples
+
+```bash
+# Hourly usage for two SIMs over one day
+ktm metrics resource-usage --operator acme --resources 0612345678,0698765432 --start 2024-01-01T00:00:00Z --end 2024-01-02T00:00:00Z
+
+# 5-minute granularity
+ktm metrics resource-usage --operator acme --resources 0612345678 --aggregation 5m --start 2024-01-01T00:00:00Z --end 2024-01-01T06:00:00Z
+```
+
 ## Details
 
 Get device resource usage broken down by time intervals.
@@ -36,6 +46,10 @@ to resources discovered via 'ktm resources list' (SIM: national_msisdn,
 web-agent: hostname, smartphone: UUID).
 
 Maximum recommended time range: 90 days.
+
+## Related
+
+- [`ktm resources`](/cli/commands/resources)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -28,12 +28,25 @@ ktm variables update <id> [flags]
 | `--description` | string | — | New description (optional, recommended) — overwrites the current value; useful for clarifying purpose |
 | `--name` | string | — | New name |
 
+## Examples
+
+```bash
+ktm variables update 17 --description "DB hostname"
+ktm variables update 17 --default-value "new-default"
+ktm variables update 17 --name DB_HOST_V2
+```
+
 ## Details
 
 Properties only — this command does NOT touch per-variant values. To change one
 variant's value use 'ktm variables set-value'; to copy values across variants
 use 'ktm variables variants copy-values'. Variable type is immutable on the
 platform; this command preserves it.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
+- [`ktm variables variants`](/cli/commands/variables/variants)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

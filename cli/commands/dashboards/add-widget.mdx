@@ -30,6 +30,22 @@ ktm dashboards add-widget <uid> [flags]
 | `--x` | int | — | Grid x position (0-23) |
 | `--y` | int | — | Grid y position |
 
+## Examples
+
+```bash
+# Add widget from a file (auto-positioned)
+ktm dashboards add-widget abc123 --json widget.json
+
+# Pipe from template
+ktm dashboards widget-template title | ktm dashboards add-widget abc123 --json -
+
+# With explicit position and size
+ktm dashboards add-widget abc123 --json widget.json --x 0 --y 0 --w 24 --h 1
+
+# Full-width chart
+ktm dashboards add-widget abc123 --json chart.json --w 24 --h 8
+```
+
 ## Details
 
 Validate a widget definition and append it to the dashboard layout.

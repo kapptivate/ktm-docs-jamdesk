@@ -30,15 +30,16 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Fetch a single Tests campaign with its full test_list.
-
 Each entry in test_list is {position, test (id), name, owners, input_variables}. owners and input_variables are per-campaign overrides — they only apply when the test runs as part of this Tests campaign.
 
 To run it: build_campaign(test_campaign_id=<id>, variants=["Group:Variant"]) → run_campaign(overrides=…).
 ```
+
+## Related
+
+- [`build_campaign`](/mcp/tools/execution/build_campaign)
+- [`run_campaign`](/mcp/tools/execution/run_campaign)
 
 ## What's Next?
 

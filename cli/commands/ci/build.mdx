@@ -24,6 +24,39 @@ ktm ci build [flags]
 | `--test-ids` | string | — | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
 | `--variant` | string[] | — | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
 
+## Examples
+
+```bash
+# Build template for two tests (no variant pinning — backend uses defaults)
+ktm ci build --test-ids 16480,16838
+
+# Pin a single group's variant
+ktm ci build --product acme~web --test-ids 16480 \
+  --variant "API:Staging"
+
+# Multi-group pinning
+ktm ci build --product acme~web --test-ids 16480 \
+  --variant "API:Staging" --variant "Database:Replica" --variant "Frontend:Canary"
+
+# Numeric variant id (when stable across environments)
+ktm ci build --product acme~web --test-ids 16480 --variant 691
+
+# Build from a saved Tests campaign (product auto-derived from the campaign)
+ktm ci build --test-campaign 42
+
+# Build from a Tests campaign and pin a variant
+ktm ci build --test-campaign 42 --variant "API:Staging"
+
+# Full Tests-campaign pipeline: build → run with one-off override
+ktm ci build --test-campaign 42 --variant "API:Staging" | \
+  ktm ci run --stdin --set-var "GLOBAL_VAR=override-value"
+
+# Full pipeline: build → fill values → run
+ktm ci build --product acme~web --test-ids 16480 --variant "API:Staging" | \
+  jq '.tests[0].input_variables.TODO_INDEX.value = "42"' | \
+  ktm ci run --stdin
+```
+
 ## Details
 
 Build a campaign JSON template by fetching test details and emitting a
@@ -51,8 +84,10 @@ Campaign JSON schema:
     direct_owners   — key/value map of owner labels to resource identifiers
 
 Sources (exactly one required):
-  --test-ids          comma-separated test IDs (from 'tests list')
-  --test-campaign     saved Tests campaign id (auto-derives product; --product not needed)
+
+## Related
+
+- [`ktm tests list`](/cli/commands/tests/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

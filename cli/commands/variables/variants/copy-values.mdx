@@ -27,6 +27,13 @@ ktm variables variants copy-values <group-id> [flags]
 | `--from` | string | — | Source variant id or name (required) |
 | `--to` | string | — | Destination variant id or name (required) |
 
+## Examples
+
+```bash
+ktm variables variants copy-values 42 --from staging --to prod
+ktm variables variants copy-values 42 --from 1 --to 2
+```
+
 ## Details
 
 Power workflow: in one command, copy every variable's source-variant value

@@ -40,11 +40,14 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Get device resource usage over time, broken down by a configurable aggregation window. Returns usage percentage per resource. Use list_resources to find device IDs (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Response keyed by resource name. Maximum recommended range: 90 days. Pass aggregations (e.g. 'p95,max') to include peak usage data alongside the default aggregation. Use instead of query_metrics for device utilization %; no InfluxQL needed.
+Returns usage percentage per resource. Use list_resources to find device IDs (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Response keyed by resource name. Maximum recommended range: 90 days. Pass aggregations (e.g. 'p95,max') to include peak usage data alongside the default aggregation. Use instead of query_metrics for device utilization %; no InfluxQL needed.
 ```
+
+## Related
+
+- [`list_resources`](/mcp/tools/discovery/list_resources)
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
 
 ## What's Next?
 

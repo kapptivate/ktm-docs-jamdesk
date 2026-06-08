@@ -83,6 +83,12 @@ export function whatsNext(cards, cols = 2) {
   return [`## What's Next?`, '', columns(cards, cols)].join('\n');
 }
 
+/** A "Related" section linking to sibling pages. `links` = [{title, href}]. Returns null if empty. */
+export function relatedSection(links) {
+  if (!links || !links.length) return null;
+  return ['## Related', '', ...links.map((l) => `- [${l.title}](${l.href})`)].join('\n');
+}
+
 /** Join page sections with blank lines and end with a single trailing newline. */
 export function page(sections) {
   return sections.filter(Boolean).join('\n\n') + '\n';

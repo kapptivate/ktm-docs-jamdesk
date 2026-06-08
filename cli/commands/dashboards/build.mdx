@@ -24,6 +24,19 @@ ktm dashboards build [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--widgets` | string | — | JSON file with widget array (required) |
 
+## Examples
+
+```bash
+# Build a dashboard (dry-run)
+ktm dashboards build --operator my-op --name "SLA" --widgets widgets.json --dry-run
+
+# Build for real
+ktm dashboards build --operator my-op --name "SLA" --widgets widgets.json
+
+# With bucket
+ktm dashboards build --operator my-op --name "Passive" --widgets w.json --bucket my-bucket
+```
+
 ## Details
 
 Create a dashboard with all widgets in a single atomic call.

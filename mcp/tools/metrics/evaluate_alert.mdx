@@ -35,10 +35,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Evaluate metrics against alert rules without Kapacitor. Runs an InfluxQL query, computes statistics, then checks rules. This tool performs LOCAL on-demand analytics computation — it is NOT related to platform alert definitions or incidents. To manage platform alerts, use list_alert_definitions and list_incidents.
+Runs an InfluxQL query, computes statistics, then checks rules. This tool performs LOCAL on-demand analytics computation — it is NOT related to platform alert definitions or incidents. To manage platform alerts, use list_alert_definitions and list_incidents.
 
 IMPORTANT: This is LOCAL on-demand analytics (stateless). For platform alert status and active incidents, use list_alert_definitions + list_incidents instead.
 
@@ -69,6 +67,12 @@ Example rules JSON:
 
 The anomaly rule supports "detection_direction": "above" (error rates, latency), "below" (SLAs, success rates), or "both" (default).
 ```
+
+## Related
+
+- [`list_alert_definitions`](/mcp/tools/alerting/list_alert_definitions)
+- [`list_incidents`](/mcp/tools/alerting/list_incidents)
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
 
 ## What's Next?
 

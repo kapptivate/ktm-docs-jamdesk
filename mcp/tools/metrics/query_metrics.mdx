@@ -35,15 +35,17 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Execute an InfluxQL query against the operator's metrics database. Returns statistical summaries by default; use detail=true for raw JSON.
+Returns statistical summaries by default; use detail=true for raw JSON.
 
 PREREQUISITE: call platform_guide topic=metrics for the schema discovery workflow, measurement catalog, and example queries.
 
 Start with SHOW MEASUREMENTS to discover tables, then SHOW FIELD KEYS FROM <measurement> for fields. Always include a WHERE time clause (recommended max 90 days for summary mode, 30 days for detail=true). In detail mode, results truncated at 5000 points.
 ```
+
+## Related
+
+- [`platform_guide`](/mcp/tools/discovery/platform_guide)
 
 ## What's Next?
 

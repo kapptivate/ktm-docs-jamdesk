@@ -24,6 +24,16 @@ ktm test-campaigns create [flags]
 | `--product` | string | — | Product slug, format: operator~product (required) |
 | `--test-list` | string | — | Path to JSON file containing the test_list array, or "-" for stdin (required) |
 
+## Examples
+
+```bash
+ktm test-campaigns create --product acme~web --name "Regression" --test-list @testlist.json
+echo '[{"position":0,"test":117,"owners":{},"input_variables":{}}]' | \
+  ktm test-campaigns create --product acme~web --name "Smoke" --test-list -
+ktm test-campaigns create --product acme~web --name "Targeted" --test-list @list.json \
+  --collection-uid 7b9c6d8e-...
+```
+
 ## Details
 
 Create a new Tests campaign scoped to a single product. --test-list points

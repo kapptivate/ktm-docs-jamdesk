@@ -33,15 +33,19 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create a new empty dashboard under an operator. The dashboard is created with layout version 2 and an empty widget array. Creates an EMPTY dashboard; use build_dashboard to create with widgets in one call.
+The dashboard is created with layout version 2 and an empty widget array. Creates an EMPTY dashboard; use build_dashboard to create with widgets in one call.
 
 The collection_uid is auto-resolved from the operator's dashboards_root_collection_uid (same pattern as test creation with product root collection).
 
 Workflow: list_operators → create_dashboard → get_dashboard (to verify).
 ```
+
+## Related
+
+- [`build_dashboard`](/mcp/tools/dashboard-widget/build_dashboard)
+- [`list_operators`](/mcp/tools/discovery/list_operators)
+- [`get_dashboard`](/mcp/tools/dashboard/get_dashboard)
 
 ## What's Next?
 

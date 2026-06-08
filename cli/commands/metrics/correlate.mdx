@@ -23,6 +23,24 @@ ktm metrics correlate [flags]
 | `--queries` | string | — | JSON array of InfluxQL query strings |
 | `--query` | string[] | — | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
 
+## Examples
+
+```bash
+# Quick correlation (default)
+ktm metrics correlate --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 24h GROUP BY time(1h)" \
+  --query "SELECT mean(response_time) FROM action WHERE time > now() - 24h GROUP BY time(1h)"
+
+# Full analysis with lag detection
+ktm metrics correlate --operator acme --mode full \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --query "SELECT count(error) FROM event WHERE time > now() - 7d GROUP BY time(1h)"
+
+# Distribution shift only (which metrics changed?)
+ktm metrics correlate --operator acme --mode shift \
+  --queries '["SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)", "SELECT mean(response_time) FROM action WHERE time > now() - 7d GROUP BY time(1h)"]'
+```
+
 ## Details
 
 Run 2-10 InfluxQL queries and detect cross-metric relationships.
@@ -48,6 +66,11 @@ Verify which monitors populate a measurement before correlating:
 To understand what a monitor does: ktm monitors list → ktm monitors get --id &lt;id&gt;.
 Measurements may also contain orphaned data from deleted monitors. Check freshness:
   SELECT last(duration_seconds), time FROM "&lt;measurement&gt;"
+
+## Related
+
+- [`ktm monitors list`](/cli/commands/monitors/list)
+- [`ktm monitors get`](/cli/commands/monitors/get)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

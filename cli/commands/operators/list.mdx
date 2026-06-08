@@ -21,6 +21,19 @@ ktm operators list [flags]
 | `--organisation-group` | string | — | Filter operators belonging to this organisation group (by slug) |
 | `--short-name` | string | — | Filter by exact operator short name |
 
+## Examples
+
+```bash
+# List all operators (JSON)
+ktm operators list
+
+# List operators in table format
+ktm operators list -o table
+
+# Filter by organisation group
+ktm operators list --organisation-group my-org
+```
+
 ## Details
 
 List operators the authenticated API key has access to.
@@ -28,10 +41,6 @@ List operators the authenticated API key has access to.
 Operators are the top-level entities in Kapptivate. Each operator owns products,
 which in turn contain tests and monitors. Start here to discover your operator
 slug, then use it as --operator in products/tests/monitors/users commands.
-
-Filters:
-  --organisation-group  scope to operators in this organisation group (by slug)
-  --short-name          match by exact operator short name
 
 JSON output fields: name, active, organisation_group, slug, logo
 Table columns:      SLUG, NAME, ACTIVE, ORG GROUP

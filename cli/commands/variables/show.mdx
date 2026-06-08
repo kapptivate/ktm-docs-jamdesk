@@ -27,6 +27,14 @@ ktm variables show <id> [flags]
 | `--lite` | boolean | — | Skip the usage fetch (faster; default rich) |
 | `--variant` | string | — | Reserved — no effect today |
 
+## Examples
+
+```bash
+ktm variables show 17
+ktm variables show 17 --lite
+ktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'
+```
+
 ## Details
 
 Returns the full Variable shape: id, name, type, scope, default_value, and

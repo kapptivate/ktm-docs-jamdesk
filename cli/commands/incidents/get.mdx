@@ -21,11 +21,22 @@ ktm incidents get [flags]
 | `--id` | int | — | Incident ID (from 'incidents list') |
 | `--operator` | string | — | Operator slug (required) |
 
+## Examples
+
+```bash
+# Get incident details
+ktm incidents get --operator my-operator --id 99
+```
+
 ## Details
 
 Get a single incident by ID, including its tags, status, level, duration, and alert source.
 
 Use 'incidents list' to find incident IDs.
+
+## Related
+
+- [`ktm incidents list`](/cli/commands/incidents/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

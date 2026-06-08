@@ -23,6 +23,22 @@ ktm users list [flags]
 | `--search` | string | — | Search across username, email, first name, and last name |
 | `--type` | string | — | Filter by account type: 'user' (human) or 'server' (service account) |
 
+## Examples
+
+```bash
+# List all users for an operator
+ktm users list --operator my-operator
+
+# Search for a user by name or email
+ktm users list --operator my-operator --search alice
+
+# List only active users
+ktm users list --operator my-operator --active true
+
+# List only service accounts
+ktm users list --operator my-operator --type server
+```
+
 ## Details
 
 List user accounts on the platform, including both human users and service accounts.
@@ -34,14 +50,12 @@ Note: Without --active, returns ALL users including inactive. This can produce
 600+ results. Use --active true to limit to active users, and --operator and/or
 --search to narrow results further.
 
-Filters:
-  --operator   scope to a single operator (slug from 'operators list')
-  --search     free-text search across username, email, first name, last name
-  --active  filter by active status: true or false
-  --type       account type: 'user' (human) or 'server' (service account)
-
 JSON output fields: id, username, first_name, last_name, email, is_active, is_superuser, type, roles, groups
 Table columns:      ID, USERNAME, EMAIL, NAME, ACTIVE, TYPE
+
+## Related
+
+- [`ktm operators list`](/cli/commands/operators/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

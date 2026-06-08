@@ -39,15 +39,18 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Edit an existing widget in a dashboard. Replaces the widget data section. Position (x/y/w/h) is preserved unless explicitly provided.
+Replaces the widget data section. Position (x/y/w/h) is preserved unless explicitly provided.
 
 Prerequisite: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS if changing query fields.
 
 Workflow: get_dashboard → edit_dashboard_widget → get_dashboard (verify).
 ```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+- [`get_dashboard`](/mcp/tools/dashboard/get_dashboard)
 
 ## What's Next?
 

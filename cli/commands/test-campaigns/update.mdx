@@ -28,6 +28,13 @@ ktm test-campaigns update <id> [flags]
 | `--name` | string | — | New name |
 | `--test-list` | string | — | JSON file (or '-') replacing the current test_list |
 
+## Examples
+
+```bash
+ktm test-campaigns update 42 --name "Regression v2"
+ktm test-campaigns update 42 --test-list @newlist.json
+```
+
 ## Details
 
 Apply a partial update. Any combination of --name, --description, or

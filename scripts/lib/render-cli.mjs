@@ -1,5 +1,5 @@
 // Render a normalized CLI catalog into MDX pages.
-import { frontmatter, BANNER, table, codeBlock, card, columns, whatsNext, page } from './mdx.mjs';
+import { frontmatter, BANNER, table, codeBlock, card, columns, whatsNext, relatedSection, page } from './mdx.mjs';
 import { escapeProse, escapeCell } from './util.mjs';
 
 const CMD_DIR = 'cli/commands';
@@ -18,15 +18,75 @@ function flagTable(flags) {
   return table(['Flag', 'Type', 'Default', 'Description'], rows);
 }
 
+/** Drop flag-entry lines (and a bare "Label:" header that only introduces them) that merely
+ *  duplicate the Flags table; keep genuinely additive prose (schemas, workflows, output fields). */
+function stripFlagDoc(body) {
+  const lines = body.split('\n');
+  // A real flag-doc entry is indented and column-aligned (>=2 spaces before its description),
+  // unlike a prose line that merely wraps onto a "--flag ..." continuation.
+  const isFlag = (l) => /^\s+--[a-z][\w-]*(?:\s{2,}|\s*$)/.test(l);
+  const out = [];
+  for (let i = 0; i < lines.length; i++) {
+    if (isFlag(lines[i])) continue;
+    if (/^[A-Z][\w /&-]*:\s*$/.test(lines[i].trim()) && isFlag(lines[i + 1] || '')) continue;
+    out.push(lines[i]);
+  }
+  return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 function detailsBlock(item) {
   const desc = (item.description || '').trim();
   if (!desc) return null;
-  // Drop the first line when it merely repeats the summary.
+  // Drop the first line when it merely repeats the summary, then strip flag-list duplication.
   const lines = desc.split('\n');
   if (lines[0].trim() === (item.summary || '').trim()) lines.shift();
-  const body = lines.join('\n').trim();
+  const body = stripFlagDoc(lines.join('\n').trim());
   if (!body) return null;
   return ['## Details', '', escapeProse(body)].join('\n');
+}
+
+/** Related links: overlay entries plus other commands referenced as "ktm ..." in the description. */
+function relatedLinksCli(item, ctx, o) {
+  const links = [];
+  const seen = new Set();
+  for (const r of o.related || []) {
+    if (r && r.href && !seen.has(r.href)) {
+      links.push(r);
+      seen.add(r.href);
+    }
+  }
+  const hrefByPath = (ctx && ctx.hrefByPath) || new Map();
+  const self = item.path.join(' ');
+  const re = /\bktm ((?:[a-z][\w-]*(?: |$)){1,5})/g;
+  const desc = item.description || '';
+  let m;
+  while ((m = re.exec(desc))) {
+    const words = m[1].trim().split(/\s+/);
+    for (let len = Math.min(words.length, 4); len >= 1; len--) {
+      const key = words.slice(0, len).join(' ');
+      const href = hrefByPath.get(key);
+      if (href && key !== self && !seen.has(href)) {
+        links.push({ title: `\`ktm ${key}\``, href });
+        seen.add(href);
+        break;
+      }
+    }
+  }
+  // Also resolve quoted command references like 'operators list' or "ci run".
+  const qre = /['"]([a-z][\w-]*(?: [a-z][\w-]*){0,3})['"]/g;
+  while ((m = qre.exec(desc))) {
+    const words = m[1].trim().split(/\s+/);
+    for (let len = Math.min(words.length, 4); len >= 1; len--) {
+      const key = words.slice(0, len).join(' ');
+      const href = hrefByPath.get(key);
+      if (href && key !== self && !seen.has(href)) {
+        links.push({ title: `\`ktm ${key}\``, href });
+        seen.add(href);
+        break;
+      }
+    }
+  }
+  return links.slice(0, 8);
 }
 
 /** A single command page (leaf or parent). */
@@ -74,6 +134,10 @@ export function renderCommandPage(item, ctx) {
   if (o.notes && o.notes.length) {
     sections.push(['## Notes', '', ...o.notes.map((n) => `- ${n}`)].join('\n'));
   }
+
+  // Related: overlay links plus other commands referenced in the description.
+  const rel = relatedSection(relatedLinksCli(item, ctx, o));
+  if (rel) sections.push(rel);
 
   sections.push(
     `<Note>\n  Global flags (\`--output\`, \`--debug\`, \`--host\`, …) apply to every command. See the [command reference overview](/cli/commands/overview).\n</Note>`
@@ -136,5 +200,7 @@ export function navPages(catalog) {
 /** All page artifacts for the CLI catalog. */
 export function renderCli(catalog) {
   const byId = Object.fromEntries(catalog.items.map((i) => [i.id, i]));
-  return [renderCommandsOverview(catalog), ...catalog.items.map((i) => renderCommandPage(i, { byId }))];
+  const hrefByPath = new Map(catalog.items.map((i) => [i.path.join(' '), '/' + pagePath(i)]));
+  const ctx = { byId, hrefByPath };
+  return [renderCommandsOverview(catalog), ...catalog.items.map((i) => renderCommandPage(i, ctx))];
 }

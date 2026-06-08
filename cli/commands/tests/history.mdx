@@ -28,6 +28,19 @@ ktm tests history <id> [flags]
 | `--page` | string | — | Page number (default: 1) |
 | `--page-size` | string | — | Results per page (default: 20) |
 
+## Examples
+
+```bash
+# List available history dates
+ktm tests history 16480
+
+# List versions for a specific date
+ktm tests history 16480 --date 2026-03-06
+
+# Paginate through versions
+ktm tests history 16480 --date 2026-03-06 --page 2
+```
+
 ## Details
 
 View the version history of a test. Without --date, shows available history dates.

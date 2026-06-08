@@ -22,6 +22,22 @@ ktm resources list [flags]
 | `--product` | string | — | Product slug (required, from 'products list') |
 | `--type` | string | — | Resource type filter: sim, web-agent, smartphone (omit for all) |
 
+## Examples
+
+```bash
+# List available resources for a product (default: --available=true)
+ktm resources list --product acme~web-portal
+
+# List only SIMs
+ktm resources list --product acme~web-portal --type sim
+
+# List only web agents (table format)
+ktm resources list --product acme~web-portal --type web-agent -o table
+
+# List all resources including offline
+ktm resources list --product acme~web-portal --available=false
+```
+
 ## Details
 
 List hardware and software resources available for test execution.
@@ -47,10 +63,10 @@ SIM and smartphone status is an object with value and detail fields (e.g.
 By default only available/online resources are shown; use --available=false to include
 offline resources.
 
-Filters:
-  --product    product slug (required, from 'products list')
-  --type       resource type: sim, web-agent, smartphone (omit to fetch all three)
-  --available  show only online/available resources (default: true)
+## Related
+
+- [`ktm ci build`](/cli/commands/ci/build)
+- [`ktm products list`](/cli/commands/products/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

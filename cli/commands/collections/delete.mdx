@@ -27,6 +27,13 @@ ktm collections delete <uid> [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--yes` | boolean | — | Confirm irreversible delete |
 
+## Examples
+
+```bash
+ktm collections delete --operator my-op <uid>              # refuses without --yes
+ktm collections delete --operator my-op --yes <uid>        # moves to trash
+```
+
 ## Details
 
 Move the collection to the organisation's trash collection. The collection

@@ -20,6 +20,13 @@ ktm tests undelete <id>... [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+ktm tests undelete 99
+ktm tests undelete 99 100 101
+```
+
 ## Details
 
 Pulls tests back out of the product's test-trash collection. This is the
@@ -27,6 +34,10 @@ inverse of 'ktm tests delete'. Tests are restored into their previous
 collection.
 
 Backed by POST /api/tests/restore/ body \{identifiers\}.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

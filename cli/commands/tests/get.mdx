@@ -20,6 +20,16 @@ ktm tests get <id> [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+# Get test detail as JSON
+ktm tests get 16480
+
+# Get test detail as table
+ktm tests get 16480 -o table
+```
+
 ## Details
 
 Fetch a single test by ID and display its variable definitions.
@@ -37,6 +47,11 @@ Owner kinds (in variables.owners):
   SIM         — national MSISDN from "resources list --type sim"
   ETHERNET    — hostname from "resources list --type web-agent"
   SMARTPHONE  — UUID from "resources list --type smartphone"
+
+## Related
+
+- [`ktm ci build`](/cli/commands/ci/build)
+- [`ktm ci run`](/cli/commands/ci/run)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

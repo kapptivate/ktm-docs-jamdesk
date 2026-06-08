@@ -27,6 +27,16 @@ ktm dashboards edit-widget <uid> <widget-id> [flags]
 | --- | --- | --- | --- |
 | `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
 
+## Examples
+
+```bash
+# Edit widget from file
+ktm dashboards edit-widget abc123 RandomID-xxx --json widget.json
+
+# Pipe from stdin
+cat updated.json | ktm dashboards edit-widget abc123 RandomID-xxx --json -
+```
+
 ## Details
 
 Update a widget's data section in a dashboard.

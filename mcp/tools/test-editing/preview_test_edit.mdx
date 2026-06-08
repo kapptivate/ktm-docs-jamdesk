@@ -36,10 +36,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Shows diff preview. Protected fields (cannot change): product_id, collection_uid.
+Protected fields (cannot change): product_id, collection_uid.
 
 Preview the impact of editing a test WITHOUT applying changes. Returns which tests would be invalidated and which monitorings would be deactivated.
 
@@ -47,6 +45,12 @@ V3 buckets: pass variants=["API:Staging", ...] (repeatable, same forms as create
 
 Workflow: get_full_test → preview_test_edit → (review impact) → edit_test.
 ```
+
+## Related
+
+- [`create_test`](/mcp/tools/test-management/create_test)
+- [`get_full_test`](/mcp/tools/discovery/get_full_test)
+- [`edit_test`](/mcp/tools/test-editing/edit_test)
 
 ## What's Next?
 

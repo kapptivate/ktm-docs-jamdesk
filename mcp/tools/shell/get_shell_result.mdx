@@ -30,11 +30,13 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Get the full result of a shell command. Use after send_shell_command to check status and retrieve output. Poll until status is terminal (Done/Timeout/Blocked/Canceled/Maintenance). For USSD: check if session is OPEN or CLOSED — if OPEN, send follow-up input with send_shell_command to navigate the menu.
+Use after send_shell_command to check status and retrieve output. Poll until status is terminal (Done/Timeout/Blocked/Canceled/Maintenance). For USSD: check if session is OPEN or CLOSED — if OPEN, send follow-up input with send_shell_command to navigate the menu.
 ```
+
+## Related
+
+- [`send_shell_command`](/mcp/tools/shell/send_shell_command)
 
 ## What's Next?
 

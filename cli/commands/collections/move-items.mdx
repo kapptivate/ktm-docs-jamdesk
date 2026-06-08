@@ -22,6 +22,17 @@ ktm collections move-items [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--target` | string | — | Destination collection UID (required) |
 
+## Examples
+
+```bash
+# Discover item UIDs under the source collection, then move one into another.
+ktm collections items --operator my-op <src_uid> -o json | jq -r '.[0].uid'
+ktm collections move-items --operator my-op --target <dst_uid> --items "<item_uid>"
+
+# Batch move
+ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<uid2>,<uid3>"
+```
+
 ## Details
 
 Relocate items between collections in a single call. --items takes a
@@ -30,6 +41,10 @@ comma-separated list of kcollections item UIDs (NOT the numeric test id; use
 every listed item into --target atomically.
 
 Backed by POST /kcollections/api/items/move.
+
+## Related
+
+- [`ktm collections items`](/cli/commands/collections/items)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

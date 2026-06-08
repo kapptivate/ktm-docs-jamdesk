@@ -20,11 +20,22 @@ ktm monitors get <id> [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+ktm monitors get 42
+ktm monitors get 42 -o json
+```
+
 ## Details
 
 Retrieve the complete configuration of a single monitor by ID: owners, input variables, schedule, variant pins, target test, and active status.
 
 Find monitor IDs with 'monitors list'. Output is full JSON by default, or a field table with --output table.
+
+## Related
+
+- [`ktm monitors list`](/cli/commands/monitors/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

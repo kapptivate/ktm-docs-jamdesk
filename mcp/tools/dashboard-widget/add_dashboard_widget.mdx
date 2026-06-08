@@ -38,15 +38,20 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Add a widget to a dashboard. Validates the widget, generates a unique ID, auto-positions it, and appends to the dashboard layout via PATCH.
+Validates the widget, generates a unique ID, auto-positions it, and appends to the dashboard layout via PATCH.
 
 Prerequisite: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before constructing widget queries. Placeholder values will be REJECTED.
 
 Workflow: get_widget_template → fill with real values → validate_widget → add_dashboard_widget → get_dashboard (verify).
 ```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+- [`get_widget_template`](/mcp/tools/dashboard-widget/get_widget_template)
+- [`validate_widget`](/mcp/tools/dashboard-widget/validate_widget)
+- [`get_dashboard`](/mcp/tools/dashboard/get_dashboard)
 
 ## What's Next?
 

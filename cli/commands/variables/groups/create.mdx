@@ -22,12 +22,23 @@ ktm variables groups create [flags]
 | `--product` | string | — | Product slug (required) |
 | `--variants` | string | — | Comma-separated variant names (required) |
 
+## Examples
+
+```bash
+ktm variables groups create --product acme~web --name "Envs" --variants "Dev,Staging,Prod"
+ktm variables groups create --product acme~web --name "Regions" --variants "US,EU,APAC" -o json
+```
+
 ## Details
 
 Create a new variable group under a product. --variants is a comma-separated
 list of variant names (e.g. "Dev,Staging,Prod"). The FIRST variant becomes the
 default per platform convention. After creation, manage variants via
 'ktm variables variants &lt;verb&gt;'.
+
+## Related
+
+- [`ktm variables variants`](/cli/commands/variables/variants)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

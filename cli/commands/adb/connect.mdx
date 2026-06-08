@@ -26,6 +26,16 @@ ktm adb connect <phone-serial> [flags]
 | --- | --- | --- | --- |
 | `--port` | int | `6037` | Local port to listen on |
 
+## Examples
+
+```bash
+# Connect to a phone (auto-registers with local ADB server)
+ktm adb connect RF8NB07VDGA
+
+# Custom port
+ktm adb connect RF8NB07VDGA --port 7037
+```
+
 ## Details
 
 Starts a local ADB tunnel to a specific phone on a remote smartphone robot.

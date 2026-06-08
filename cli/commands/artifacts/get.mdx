@@ -23,6 +23,19 @@ ktm artifacts get [flags]
 | `--path` | string | — | Relative artifact path (host prefix added automatically) |
 | `--url` | string | — | Full artifact URL (mutually exclusive with --path) |
 
+## Examples
+
+```bash
+# Fetch by full URL, save to file
+ktm artifacts get --url https://app.kapptivate.com/robot/path/screenshot.png --output shot.png
+
+# Fetch by relative path
+ktm artifacts get --path path/screenshot.png --output shot.png
+
+# Text artifact to stdout
+ktm artifacts get --url https://app.kapptivate.com/robot/path/trace.xml
+```
+
 ## Details
 
 Fetch a test artifact (screenshot, audio, log, etc.) from the platform.

@@ -21,6 +21,13 @@ ktm variables name-available [flags]
 | `--name` | string | — | Variable name to check |
 | `--product-id` | int | — | Product numeric id (from 'ktm products list') |
 
+## Examples
+
+```bash
+ktm products list -o table       # find the product id
+ktm variables name-available --product-id 134 --name MY_VAR
+```
+
 ## Details
 
 Returns "available" or "taken" so you can surface name conflicts client-side

@@ -39,10 +39,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Apply changes to an existing monitor. ALWAYS preview first with preview_monitor_edit.
+ALWAYS preview first with preview_monitor_edit.
 
 Auto-migration:
   Legacy monitors (variable_group != 0 or input_variables lack buckets)
@@ -61,6 +59,11 @@ Protected fields: test_id and product_id CANNOT be changed (locked by the API). 
 A per-monitor edit limit is enforced (10 per session). Check edits_remaining in the response.
 If this fails with HTTP 400/404, the monitor may have been deleted — verify with get_monitor first.
 ```
+
+## Related
+
+- [`preview_monitor_edit`](/mcp/tools/monitor-management/preview_monitor_edit)
+- [`get_monitor`](/mcp/tools/monitor-management/get_monitor)
 
 ## What's Next?
 

@@ -26,6 +26,19 @@ ktm monitoring-results get <id> [flags]
 | --- | --- | --- | --- |
 | `-a, --include-actions` | boolean | — | Include raw action results (screenshots, artifacts, logs) |
 
+## Examples
+
+```bash
+# Get monitoring result detail as table
+ktm monitoring-results get 155461270 -o table
+
+# Get with raw action results
+ktm monitoring-results get 155461270 --include-actions -o table
+
+# Get as JSON
+ktm monitoring-results get 155461270
+```
+
 ## Details
 
 Fetch a single monitoring result by ID and display its detailed results.
@@ -41,6 +54,10 @@ belong to the correct operator.
 
 In table mode, a human-readable summary is shown with failure reason and test/action tables.
 In JSON mode, the structured detail is returned including the parsed summary.
+
+## Related
+
+- [`ktm monitoring-results list`](/cli/commands/monitoring-results/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

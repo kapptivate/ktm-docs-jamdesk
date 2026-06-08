@@ -20,6 +20,13 @@ ktm reusables get <id> [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+ktm reusables get 117
+ktm reusables get 117 -o json | jq '{id, name, kind, reused_by}'
+```
+
 ## Details
 
 Fetches the full test definition for a reusable (kind=2). If the id
@@ -28,6 +35,10 @@ points to a regular test (kind=1), the command errors and suggests
 reusables before editing.
 
 Backed by GET /api/tests/\{id\}/.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

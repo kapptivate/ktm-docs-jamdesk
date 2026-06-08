@@ -8,6 +8,7 @@ import {
   card,
   columns,
   whatsNext,
+  relatedSection,
   page,
 } from './mdx.mjs';
 import { paramsFromInputSchema, exampleArgs } from './schema.mjs';
@@ -25,8 +26,36 @@ function groupByCategory(catalog) {
   return map;
 }
 
+/** Related links: overlay entries plus tools referenced by name in this tool's description. */
+function relatedLinksMcp(item, ctx, o) {
+  const links = [];
+  const seen = new Set();
+  for (const r of o.related || []) {
+    if (r && r.href && !seen.has(r.href)) {
+      links.push(r);
+      seen.add(r.href);
+    }
+  }
+  const hrefByName = (ctx && ctx.hrefByName) || new Map();
+  const desc = item.description || '';
+  const hits = [];
+  for (const [name, href] of hrefByName) {
+    if (name === item.name || seen.has(href)) continue;
+    const idx = desc.search(new RegExp('\\b' + name + '\\b'));
+    if (idx >= 0) hits.push({ name, href, idx });
+  }
+  hits.sort((a, b) => a.idx - b.idx);
+  for (const h of hits.slice(0, 6)) {
+    if (!seen.has(h.href)) {
+      links.push({ title: `\`${h.name}\``, href: h.href });
+      seen.add(h.href);
+    }
+  }
+  return links;
+}
+
 /** Full MDX page for a single tool. */
-export function renderToolPage(item) {
+export function renderToolPage(item, ctx = {}) {
   const params = paramsFromInputSchema(item.inputSchema);
   const o = item.overlay || {};
   const lead = escapeProse(o.summary || item.summary || `Kapptivate MCP tool \`${item.name}\`.`);
@@ -79,23 +108,21 @@ export function renderToolPage(item) {
   if (o.description) {
     sections.push(['## Description', '', o.description].join('\n'));
   } else {
-    const desc = (item.description || '').trim();
-    if (desc && desc !== (item.summary || '').trim()) {
-      sections.push(
-        ['## Description', '', 'The full description the agent receives for this tool:', '', codeBlock('text', desc)].join('\n')
-      );
-    }
+    let body = (item.description || '').trim();
+    const sum = (item.summary || '').trim();
+    if (sum && body.startsWith(sum)) body = body.slice(sum.length).trim(); // drop the lead sentence repeated above
+    if (body) sections.push(['## Description', '', codeBlock('text', body)].join('\n'));
   }
 
-  // Notes + related (overlay only)
+  // Notes (overlay only)
   const notes = o.notes || [];
-  const related = o.related || [];
-  if (notes.length || related.length) {
-    const parts = ['## Notes'];
-    for (const n of notes) parts.push('', `- ${n}`);
-    for (const r of related) parts.push('', `- [${r.title}](${r.href})`);
-    sections.push(parts.join('\n'));
+  if (notes.length) {
+    sections.push(['## Notes', '', ...notes.map((n) => `- ${n}`)].join('\n'));
   }
+
+  // Related: overlay links plus tools referenced in this tool's description.
+  const rel = relatedSection(relatedLinksMcp(item, ctx, o));
+  if (rel) sections.push(rel);
 
   sections.push(
     whatsNext([
@@ -175,5 +202,6 @@ export function navPages(catalog) {
 
 /** All page artifacts for the MCP catalog: [{path, content}]. */
 export function renderMcp(catalog) {
-  return [renderToolsOverview(catalog), ...catalog.items.map(renderToolPage)];
+  const ctx = { hrefByName: new Map(catalog.items.map((i) => [i.name, '/' + toolPagePath(i)])) };
+  return [renderToolsOverview(catalog), ...catalog.items.map((i) => renderToolPage(i, ctx))];
 }

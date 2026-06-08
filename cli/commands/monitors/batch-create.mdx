@@ -22,6 +22,31 @@ ktm monitors batch-create [flags]
 | `--force` | boolean | — | Bypass preview — auto-build and submit (CI/CD automation only) |
 | `--from-file` | string | — | Path to JSON batch spec file (required) |
 
+## Examples
+
+```bash
+# Preview: see the batch creation plan (does NOT create)
+ktm monitors batch-create --from-file batch.json
+
+# Submit after reviewing the preview
+ktm monitors batch-create --from-file batch.json --confirm
+
+# CI/CD: skip preview, auto-build and submit
+ktm monitors batch-create --from-file batch.json --force
+
+# batch.json format:
+# {
+#   "product": "operator~product",
+#   "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":5,"unit":"minutes"}}},
+#   "active": true,
+#   "monitors": [
+#     {"test_id": 100, "variants": ["API:Staging"]},
+#     {"test_id": 101, "variants": ["API:Staging", "Database:Replica"], "overrides": {"SIM_A": "069..."}},
+#     {"test_id": 102, "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":15,"unit":"minutes"}}}}
+#   ]
+# }
+```
+
 ## Details
 
 Create multiple monitors in a single command from a JSON batch spec file.

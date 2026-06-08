@@ -26,6 +26,13 @@ ktm collections can-edit <uid> [flags]
 | --- | --- | --- | --- |
 | `--operator` | string | — | Operator slug (required) |
 
+## Examples
+
+```bash
+ktm collections can-edit --operator my-op <uid>
+ktm collections can-edit --operator my-op <uid> -o json | jq .can_edit
+```
+
 ## Details
 
 Permission probe. Useful before calling rename/move/delete to avoid a

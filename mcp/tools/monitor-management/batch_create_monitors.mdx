@@ -36,10 +36,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create multiple monitors in a single call. All monitors must belong to the same product.
+All monitors must belong to the same product.
 Reduces round-trips from ~30 (10 individual create_monitor calls) to 2 (one preview + one confirm).
 
 Two-step workflow (MANDATORY — preview cannot be skipped):
@@ -75,6 +73,10 @@ Cascading defaults: top-level scheduling/options/active apply to all monitors un
 Max 20 monitors per batch. Product must have monitoring enabled.
 Partial failure: if some monitors fail, successful ones are kept (not rolled back).
 ```
+
+## Related
+
+- [`create_monitor`](/mcp/tools/monitor-management/create_monitor)
 
 ## What's Next?
 

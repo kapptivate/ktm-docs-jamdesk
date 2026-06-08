@@ -34,15 +34,18 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Partial-update a Tests campaign (PATCH). Any subset of name, description, test_list is accepted.
+Any subset of name, description, test_list is accepted.
 
 WARNING: test_list is a FULL REPLACEMENT, not a merge. To add or remove tests, first call get_test_campaign to read the current test_list, modify it, then pass the complete list.
 
 Use list_test_versions on the member tests before replacing test_list to avoid surprises. Edit-budget gated.
 ```
+
+## Related
+
+- [`get_test_campaign`](/mcp/tools/test-campaigns/get_test_campaign)
+- [`list_test_versions`](/mcp/tools/test-editing/list_test_versions)
 
 ## What's Next?
 

@@ -20,12 +20,23 @@ ktm monitors force-run <id> [flags]
 | --- | --- |
 | `id` | Yes |
 
+## Examples
+
+```bash
+ktm monitors force-run 42
+ktm monitors force-run 42 -o json
+```
+
 ## Details
 
 Trigger an immediate out-of-schedule execution of a monitor.
 
 The monitor runs once right away, regardless of its configured schedule.
 Use 'monitoring-results list' with --monitor to track the execution status.
+
+## Related
+
+- [`ktm monitoring-results list`](/cli/commands/monitoring-results/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

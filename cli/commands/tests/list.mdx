@@ -28,6 +28,25 @@ ktm tests list [flags]
 | `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
 | `--tags` | string[] | — | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
 
+## Examples
+
+```bash
+# List all tests for a product
+ktm tests list --operator my-operator --product my-operator~my-product
+
+# Search by name substring
+ktm tests list --operator my-operator --name login
+
+# Include archived tests
+ktm tests list --operator my-operator --archived true
+
+# Filter by tags
+ktm tests list --operator my-operator --tags smoke,regression
+
+# Paginate through results
+ktm tests list --operator my-operator --page 2 --page-size 50
+```
+
 ## Details
 
 List test scenarios defined on the platform.
@@ -37,19 +56,14 @@ Tests belong to a product (which belongs to an operator). Use --operator and
 
 The test "id" can be used in CI config files to trigger execution via "ci run".
 
-Filters:
-  --operator   scope to a single operator (slug from 'operators list')
-  --product    scope to a single product (slug from 'products list', format: operator~product)
-  --archived   include archived tests: true or false (default: non-archived only)
-  --tags       comma-separated tag filter (e.g. smoke,regression)
-  --name       substring match on test name (case-insensitive)
-  --ordering   sort field: name, created, modified (prefix with - for descending, e.g. -created)
-  --fields     restrict JSON response fields (comma-separated whitelist)
-  --page       page number (default: 1)
-  --page-size  results per page (default: 200)
-
 JSON output fields: id, name, product, owner, tags, archived, is_valid, status, kind, created, modified
 Table columns:      ID, NAME, PRODUCT, STATUS, KIND, ARCHIVED
+
+## Related
+
+- [`ktm ci run`](/cli/commands/ci/run)
+- [`ktm operators list`](/cli/commands/operators/list)
+- [`ktm products list`](/cli/commands/products/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

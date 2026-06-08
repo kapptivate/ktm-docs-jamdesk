@@ -26,6 +26,13 @@ ktm variables groups delete <id> [flags]
 | --- | --- | --- | --- |
 | `--force` | boolean | — | Bypass the non-empty safety check |
 
+## Examples
+
+```bash
+ktm variables groups delete 42           # refuses if group has variables
+ktm variables groups delete 42 --force   # bypass the non-empty check
+```
+
 ## Details
 
 Safe by default: refuses if the group still contains variables, listing them

@@ -24,6 +24,22 @@ ktm metrics query [flags]
 | `--query` | string | — | InfluxQL query string |
 | `--summary` | boolean | — | Run statistical analysis and display formatted summary |
 
+## Examples
+
+```bash
+# Discover available measurements
+ktm metrics query --operator acme --query "SHOW MEASUREMENTS"
+
+# Explore fields in a measurement
+ktm metrics query --operator acme --query "SHOW FIELD KEYS FROM \"test\""
+
+# Success Rate over last 24h grouped by 5 minutes
+ktm metrics query --operator acme --query "SELECT sum(\"number_success\")/(sum(\"number_success\")+sum(\"number_failed\"))*100 AS \"Success Rate (%)\" FROM \"test\" WHERE time > now() - 24h GROUP BY time(5m)"
+
+# Platform activity events over last 24h
+ktm metrics query --operator acme --query "SELECT * FROM \"event\" WHERE time >= '2026-02-17T00:00:00Z' AND time <= '2026-02-18T00:00:00Z' ORDER BY time DESC LIMIT 50"
+```
+
 ## Details
 
 Execute a raw InfluxQL query against the metrics proxy.
@@ -80,6 +96,13 @@ Output modes:
   - --executive: compact 1-line-per-series C-level summary with health classification
 
 For reports, use --executive. For raw analysis, use --summary.
+
+## Related
+
+- [`ktm monitors list`](/cli/commands/monitors/list)
+- [`ktm monitors get`](/cli/commands/monitors/get)
+- [`ktm tests get`](/cli/commands/tests/get)
+- [`ktm metrics resource-usage`](/cli/commands/metrics/resource-usage)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

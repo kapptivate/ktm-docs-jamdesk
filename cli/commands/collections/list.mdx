@@ -21,6 +21,13 @@ ktm collections list [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--parent` | string | — | Parent collection UID (required) |
 
+## Examples
+
+```bash
+ktm collections list --operator my-op --parent <tests_root_uid>
+ktm collections list --operator my-op --parent <uid> -o table
+```
+
 ## Details
 
 List the direct children of a collection (flat array; the kcollections

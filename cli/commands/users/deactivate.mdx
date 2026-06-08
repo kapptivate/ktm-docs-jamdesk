@@ -20,11 +20,22 @@ ktm users deactivate [flags]
 | --- | --- | --- | --- |
 | `--id` | int | — | User ID to deactivate (from 'users list') |
 
+## Examples
+
+```bash
+# Deactivate user with ID 42
+ktm users deactivate --id 42
+```
+
 ## Details
 
 Deactivate a user account by ID. Requires superadmin or EDIT_OPERATOR_ADMIN permission.
 
 Use 'users list' to find user IDs.
+
+## Related
+
+- [`ktm users list`](/cli/commands/users/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

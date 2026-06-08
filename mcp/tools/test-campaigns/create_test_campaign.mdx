@@ -37,10 +37,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create a new SAVED, reusable Tests campaign. (To run tests ad-hoc without saving, use build_campaign(test_ids=…) instead.)
+(To run tests ad-hoc without saving, use build_campaign(test_ids=…) instead.)
 
 test_list is a JSON array of {position, test, owners, input_variables}. All tests must belong to the given product. The authenticated user is auto-set as creator.
 
@@ -48,6 +46,10 @@ collection_uid nests the Tests campaign under a specific collection. When omitte
 
 Consumes one slot of the per-session Tests-campaign edit budget (default: 20). Pass acknowledge=true after a budget-exhaustion message to reset.
 ```
+
+## Related
+
+- [`build_campaign`](/mcp/tools/execution/build_campaign)
 
 ## What's Next?
 

@@ -24,6 +24,22 @@ ktm dashboards list [flags]
 | `--page` | string | — | Page number |
 | `--page-size` | string | — | Items per page (default: 20) |
 
+## Examples
+
+```bash
+# List all dashboards for an operator
+ktm dashboards list --operator my-operator
+
+# List in table format
+ktm dashboards list --operator my-operator -o table
+
+# Filter by name
+ktm dashboards list --operator my-operator --name "SLA"
+
+# Only favorites
+ktm dashboards list --operator my-operator --favorite true
+```
+
 ## Details
 
 List non-archived dashboards accessible with the current API key.

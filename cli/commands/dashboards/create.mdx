@@ -22,6 +22,16 @@ ktm dashboards create [flags]
 | `--name` | string | — | Dashboard name (required) |
 | `--operator` | string | — | Operator slug (required) |
 
+## Examples
+
+```bash
+# Create a dashboard
+ktm dashboards create --operator my-operator --name "SLA Dashboard"
+
+# Create with a specific InfluxDB bucket
+ktm dashboards create --operator my-operator --name "Passive Metrics" --bucket my-bucket
+```
+
 ## Details
 
 Create a new dashboard under an operator with an empty widget layout.

@@ -34,13 +34,13 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).
-
 The collection is recoverable until an admin empties the trash on the kcollections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
 ```
+
+## Related
+
+- [`list_collection_items`](/mcp/tools/collections/list_collection_items)
 
 ## What's Next?
 

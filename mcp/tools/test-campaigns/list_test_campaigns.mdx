@@ -36,15 +36,16 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-List Tests campaigns accessible with the current API key.
-
 A Tests campaign is a SAVED, ordered pack of tests attached to a single product — use it to group regression scenarios, smoke packs, or anything you run as one unit. To run one: build_campaign(test_campaign_id=<id>) → run_campaign(overrides=…).
 
 Returns compact one-liners by default (`"#42 Regression pack [8 tests, valid]"`). detail=true returns the full Tests campaign including the test_list.
 ```
+
+## Related
+
+- [`build_campaign`](/mcp/tools/execution/build_campaign)
+- [`run_campaign`](/mcp/tools/execution/run_campaign)
 
 ## What's Next?
 

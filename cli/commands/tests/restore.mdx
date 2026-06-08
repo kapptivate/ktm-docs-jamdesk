@@ -20,6 +20,16 @@ ktm tests restore <history-id> [flags]
 | --- | --- |
 | `history-id` | Yes |
 
+## Examples
+
+```bash
+# Find history versions
+ktm tests history 16480 --date 2026-03-06
+
+# Restore to a specific version
+ktm tests restore 42
+```
+
 ## Details
 
 Restore a test to a historical version by its history ID.

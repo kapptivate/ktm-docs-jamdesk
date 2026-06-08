@@ -20,6 +20,19 @@ ktm tests step-types [flags]
 | --- | --- | --- | --- |
 | `--platform` | string | — | Filter by platform: web, smartphone |
 
+## Examples
+
+```bash
+# List all v2 step types
+ktm tests step-types
+
+# List web-only step types
+ktm tests step-types --platform web
+
+# List smartphone step types as JSON
+ktm tests step-types --platform smartphone -o json
+```
+
 ## Details
 
 List the catalog of available step types for v2 test creation.

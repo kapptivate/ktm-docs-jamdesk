@@ -33,11 +33,14 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Start a campaign execution without waiting for results. Returns a result_id for polling. Use this for campaigns that may take longer than 10 minutes, then poll with poll_execution. For shorter campaigns you want to block on, use run_campaign instead.
+Returns a result_id for polling. Use this for campaigns that may take longer than 10 minutes, then poll with poll_execution. For shorter campaigns you want to block on, use run_campaign instead.
 ```
+
+## Related
+
+- [`poll_execution`](/mcp/tools/execution/poll_execution)
+- [`run_campaign`](/mcp/tools/execution/run_campaign)
 
 ## What's Next?
 

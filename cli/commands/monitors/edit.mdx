@@ -31,6 +31,25 @@ ktm monitors edit <id> [flags]
 | `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE). Re-builds owners + input_variables from the test definition. |
 | `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Unpinned groups retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. |
 
+## Examples
+
+```bash
+# Change scheduling
+ktm monitors edit 42 --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+
+# Pause a monitor
+ktm monitors edit 42 --active false
+
+# Override a variable (re-builds owners + input_variables from test definition)
+ktm monitors edit 42 --set-var "SIM_A=0699999999"
+
+# Re-pin a variant (V3): re-resolve buckets for the named group
+ktm monitors edit 42 --variant "API:Staging"
+
+# Edit from a JSON file
+ktm monitors edit 42 --from-file patch.json
+```
+
 ## Details
 
 Update monitor configuration via PATCH. Only provided fields are changed.

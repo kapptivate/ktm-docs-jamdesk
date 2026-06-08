@@ -20,6 +20,19 @@ ktm tests action-types [flags]
 | --- | --- | --- | --- |
 | `--kind` | string | — | Filter by owner kind: ethernet, sim, smartphone, ownerless |
 
+## Examples
+
+```bash
+# List all action types
+ktm tests action-types
+
+# List ethernet-only action types
+ktm tests action-types --kind ethernet
+
+# List SIM action types as table
+ktm tests action-types --kind sim -o table
+```
+
 ## Details
 
 List the catalog of available action types (44 types: 15 ETHERNET, 22 SIM, 3 SMARTPHONE, 4 OWNERLESS) for creating tests.

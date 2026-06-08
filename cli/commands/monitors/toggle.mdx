@@ -21,6 +21,13 @@ ktm monitors toggle [flags]
 | `--active` | string | — | true to activate, false to deactivate (required) |
 | `--ids` | string | — | Comma-separated monitor IDs to toggle (required) |
 
+## Examples
+
+```bash
+ktm monitors toggle --ids 42,43 --active false
+ktm monitors toggle --ids 42 --active true
+```
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

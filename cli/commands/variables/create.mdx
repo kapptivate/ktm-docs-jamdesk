@@ -25,6 +25,14 @@ ktm variables create [flags]
 | `--product` | string | — | Product slug (required) |
 | `--type` | string | — | single \| secret \| choice (required) |
 
+## Examples
+
+```bash
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost
+ktm variables create --product acme~web --name ENV --type choice --default-value "dev,staging,prod"
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42
+```
+
 ## Details
 
 Types:
@@ -39,6 +47,10 @@ afterwards with 'ktm variables set-value'.
 
 Secrets: never embed a real secret into shell history. Create via the web UI
 or feed the value through an env-var ($MY_SECRET) on ephemeral shells.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

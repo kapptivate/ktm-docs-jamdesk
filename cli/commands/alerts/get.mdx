@@ -20,11 +20,22 @@ ktm alerts get [flags]
 | --- | --- | --- | --- |
 | `--id` | int | — | Alert definition ID (from 'alerts list') |
 
+## Examples
+
+```bash
+# Get alert definition details
+ktm alerts get --id 42
+```
+
 ## Details
 
 Get a single alert definition by ID, including its configuration and notification settings.
 
 Use 'alerts list' to find alert definition IDs.
+
+## Related
+
+- [`ktm alerts list`](/cli/commands/alerts/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

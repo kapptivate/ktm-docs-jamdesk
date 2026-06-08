@@ -26,6 +26,13 @@ ktm collections get <uid> [flags]
 | --- | --- | --- | --- |
 | `--operator` | string | — | Operator slug (required) |
 
+## Examples
+
+```bash
+ktm collections get --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections get --operator my-op <uid> -o json | jq '.path'
+```
+
 ## Details
 
 Returns the collection's metadata (name, parent_uid, org_id, trash_uid)

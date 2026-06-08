@@ -20,6 +20,13 @@ ktm dashboards validate-widget [flags]
 | --- | --- | --- | --- |
 | `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
 
+## Examples
+
+```bash
+ktm dashboards validate-widget --json widget.json
+cat widget.json | ktm dashboards validate-widget --json -
+```
+
 ## Details
 
 Validate a widget JSON file without modifying any dashboard.

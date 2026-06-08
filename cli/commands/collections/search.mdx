@@ -24,6 +24,14 @@ ktm collections search [flags]
 | `--query` | string | — | Free-text search term |
 | `--tags` | string | — | Comma-separated tag ids |
 
+## Examples
+
+```bash
+ktm collections search --operator my-op --collection-uid <tests_root> --query login
+ktm collections search --operator my-op --collection-uid <uid> --query "Verify" -o json
+ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5
+```
+
 ## Details
 
 The kcollections search endpoint scopes results to a sub-tree — pass

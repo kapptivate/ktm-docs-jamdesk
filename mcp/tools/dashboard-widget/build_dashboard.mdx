@@ -36,10 +36,8 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-Create a dashboard with all widgets in a single atomic call. Validates all widgets upfront — if ANY fails, NONE are created. Auto-positions widgets using type defaults (override with _w/_h per widget). Returns ASCII grid preview + all widget IDs.
+Validates all widgets upfront — if ANY fails, NONE are created. Auto-positions widgets using type defaults (override with _w/_h per widget). Returns ASCII grid preview + all widget IDs.
 
 PREREQUISITE: call platform_guide topic=dashboards for widget types, grid layout rules, and the full creation workflow. Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before building widget queries.
 
@@ -47,6 +45,12 @@ Each widget object uses the same format as widget_json in add_dashboard_widget (
 
 Atomic: if ANY widget fails validation, NONE are created. Fix all errors and re-submit.
 ```
+
+## Related
+
+- [`platform_guide`](/mcp/tools/discovery/platform_guide)
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+- [`add_dashboard_widget`](/mcp/tools/dashboard-widget/add_dashboard_widget)
 
 ## What's Next?
 

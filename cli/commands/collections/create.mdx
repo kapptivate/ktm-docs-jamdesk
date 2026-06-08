@@ -22,6 +22,13 @@ ktm collections create [flags]
 | `--operator` | string | — | Operator slug (required) |
 | `--parent` | string | — | Parent collection UID (required) |
 
+## Examples
+
+```bash
+ktm collections create --operator my-op --parent <parent_uid> --name "Auth regression"
+ktm collections create --operator my-op --parent <tests_root> --name "Smoke" -o json | jq .uid
+```
+
 ## Details
 
 Create a collection as a child of --parent. Both operator and parent

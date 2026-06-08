@@ -28,6 +28,19 @@ ktm incidents list [flags]
 | `--page-size` | int | `50` | Results per page |
 | `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
 
+## Examples
+
+```bash
+# List open incidents
+ktm incidents list --operator my-operator --status OPEN
+
+# List incidents for a specific alert
+ktm incidents list --operator my-operator --alert-id 42
+
+# List incidents created after a date
+ktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z
+```
+
 ## Details
 
 List incidents for an operator. Incidents are created when a platform alert
@@ -35,16 +48,9 @@ definition fires. They track the lifecycle from OPEN to CLOSED.
 
 NOT the same as 'metrics alert-eval' which performs local on-demand analytics.
 
-Filters:
-  --operator        operator slug (required)
-  --status          OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED
-  --alert-id        comma-separated alert definition IDs
-  --created-after   ISO datetime filter
-  --created-before  ISO datetime filter
-  --closed-after    ISO datetime filter
-  --closed-before   ISO datetime filter
-  --page            page number (default 1)
-  --page-size       results per page (default 50)
+## Related
+
+- [`ktm metrics alert-eval`](/cli/commands/metrics/alert-eval)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -24,6 +24,16 @@ ktm shell list [flags]
 | `--product` | int | — | Filter by product ID |
 | `--status` | string | — | Filter by status (P/D/O/B/C/T/M) |
 
+## Examples
+
+```bash
+ktm shell list --product 123
+ktm shell list --product 123 --status D
+ktm shell list --product 123 --owner 0789800356 -o table
+# Poll for async events (wait SMS, USSD push) since session start
+ktm shell list --product 123 --owner 0789800356 --from-date 2026-03-15T19:29:17Z --ordering -created
+```
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

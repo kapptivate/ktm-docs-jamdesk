@@ -24,6 +24,14 @@ ktm test-campaigns list [flags]
 | `--page-size` | int | `50` | Items per page |
 | `--product` | string | — | Filter by product slug or short_name |
 
+## Examples
+
+```bash
+ktm test-campaigns list --product acme~web
+ktm test-campaigns list --product acme~web --creator john.doe
+ktm test-campaigns list --ids 10,11,12 -o json
+```
+
 ## Details
 
 List Tests campaigns accessible with the current API key.
@@ -35,6 +43,11 @@ needed.
 To run one: ktm ci build --test-campaign &lt;id&gt; | ktm ci run --stdin.
 
 Backed by GET /api/suites/.
+
+## Related
+
+- [`ktm ci build`](/cli/commands/ci/build)
+- [`ktm ci run`](/cli/commands/ci/run)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

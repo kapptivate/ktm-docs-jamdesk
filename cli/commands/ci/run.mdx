@@ -29,6 +29,32 @@ ktm ci run [flags]
 | `--test-config-path` | string[] | — | Path to a JSON test config file (repeatable, supports glob patterns) |
 | `--validate` | boolean | — | Validate config file structure and exit (no API key or network needed) |
 
+## Examples
+
+```bash
+# Single config
+ktm ci run --test-config-path tests/smoke.json
+
+# Multiple configs via glob
+ktm ci run --test-config-path "tests/*.json" --junit-file report.xml
+
+# Directory of configs
+ktm ci run --test-config-dir tests/ --output-file results.json
+
+# Validate configs without running (no API key needed)
+ktm ci run --test-config-path tests/smoke.json --validate
+
+# Read campaign JSON from stdin (e.g. piped from "ci build")
+ktm ci build --test-ids 16480 | ktm ci run --stdin
+
+# Override a variable value at run time (preserves bucket)
+ktm ci build --test-ids 16480 | ktm ci run --stdin --set-var "HOST=staging.example.com"
+
+# Run a saved Tests campaign with variant pinning and one-off value override
+ktm ci build --test-campaign 42 --variant "API:Staging" | \
+  ktm ci run --stdin --set-var "GLOBAL_VAR=override-value" --junit-file results.xml
+```
+
 ## Details
 
 Execute Kapptivate tests, poll until completion, and output results as JSON,
@@ -36,7 +62,6 @@ JUnit XML, and/or GitHub Actions annotations.
 
 Input modes (mutually exclusive):
   --test-config-path / --test-config-dir   JSON config files (test IDs + input variables)
-  --stdin                                  campaign JSON on stdin (e.g. piped from "ci build")
 
 When using --stdin, any "_meta" key in the JSON is stripped automatically so you
 can pipe "ci build" output directly after filling in variable values.
@@ -57,13 +82,17 @@ preserved — only the value field changes.
 Output formats (produced in parallel when flags are combined):
   stdout        JSON summary (suppressed when GITHUB_ACTIONS=true)
   --output-file JSON summary written to a file
-  --junit-file  JUnit XML report (for GitLab CI, Jenkins, etc.)
   GITHUB_ACTIONS=true  workflow annotations (::notice / ::error) on stdout
   GITHUB_STEP_SUMMARY  markdown job summary appended to the file
 
 Exit codes:
   0 = all tests passed
   1 = one or more tests failed, timed out, or output error
+
+## Related
+
+- [`ktm ci build`](/cli/commands/ci/build)
+- [`ktm ci`](/cli/commands/ci)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

@@ -20,6 +20,19 @@ ktm dashboards widget-template <type> [flags]
 | --- | --- |
 | `type` | Yes |
 
+## Examples
+
+```bash
+# Get a line chart template
+ktm dashboards widget-template line
+
+# Get a customDisplay template (includes script API docs in _metadata)
+ktm dashboards widget-template customDisplay > custom.json
+
+# Save to file for editing
+ktm dashboards widget-template counter > widget.json
+```
+
 ## Details
 
 Get a ready-to-fill JSON template for a dashboard widget type.
@@ -42,6 +55,11 @@ and correlation. They do NOT have access to the platform's statistical engine (E
 anomaly detection, SLO burn-rate) — those require MCP/CLI tools or InfluxQL aggregations.
 Do NOT pre-compute values with CLI tools and hardcode them into the script — widgets are
 live and re-query when the user changes the time range. Dynamic data must come from queries[].
+
+## Related
+
+- [`ktm metrics query`](/cli/commands/metrics/query)
+- [`ktm metrics`](/cli/commands/metrics)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

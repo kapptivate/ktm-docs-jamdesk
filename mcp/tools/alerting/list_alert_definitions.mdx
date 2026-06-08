@@ -34,15 +34,18 @@ Illustrative arguments an agent supplies when calling this tool:
 
 ## Description
 
-The full description the agent receives for this tool:
-
 ```text
-List alert definitions configured on the Kapptivate platform. These are persistent rules that automatically trigger incidents when conditions are met.
+These are persistent rules that automatically trigger incidents when conditions are met.
 
 NOT the same as evaluate_alert which performs on-demand local analytics computation. To check platform alert status, use list_incidents.
 
 Filters: name, types (comma-sep: raw_alert, availability, metric, agent_availability, availability_last_point), archived (bool).
 ```
+
+## Related
+
+- [`evaluate_alert`](/mcp/tools/metrics/evaluate_alert)
+- [`list_incidents`](/mcp/tools/alerting/list_incidents)
 
 ## What's Next?
 

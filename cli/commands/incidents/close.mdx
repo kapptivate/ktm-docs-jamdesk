@@ -21,6 +21,13 @@ ktm incidents close [flags]
 | `--id` | int | — | Incident ID to close (from 'incidents list') |
 | `--operator` | string | — | Operator slug (required) |
 
+## Examples
+
+```bash
+# Close an active incident
+ktm incidents close --operator my-operator --id 99
+```
+
 ## Details
 
 Close an incident by ID. The incident status changes to MANUALLY_CLOSED.

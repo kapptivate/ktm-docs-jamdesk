@@ -62,6 +62,14 @@ function parsePositional(usageLine) {
   return args;
 }
 
+/** Remove the common leading indentation from a block of text (Cobra indents examples 2 spaces). */
+function dedent(text) {
+  const lines = text.split('\n');
+  const indents = lines.filter((l) => l.trim()).map((l) => l.match(/^\s*/)[0].length);
+  const min = indents.length ? Math.min(...indents) : 0;
+  return lines.map((l) => l.slice(min)).join('\n');
+}
+
 function parseHelp(text) {
   const lines = text.split('\n');
   const sections = { _desc: [] };
@@ -99,7 +107,7 @@ function parseHelp(text) {
     subs,
     flags: parseFlags(sections['Flags:'] || []),
     globalFlags: parseFlags(sections['Global Flags:'] || []),
-    examples: (sections['Examples:'] || []).join('\n').replace(/^\n+|\n+$/g, ''),
+    examples: dedent((sections['Examples:'] || []).join('\n')).replace(/^\n+|\n+$/g, ''),
     aliases: oneLine((sections['Aliases:'] || []).join(' ')),
     args: parsePositional(leafUsage),
   };
@@ -117,6 +125,7 @@ function walk(bin, pathArr, shortFromParent, sink, globalFlagsRef) {
     aliases: parsed.aliases,
     args: parsed.args,
     flags: parsed.flags,
+    examples: parsed.examples,
     isLeaf: !parsed.hasSub,
     subcommands: parsed.subs.map((s) => s.name),
   };
@@ -153,6 +162,7 @@ export function normalizeCli({ nodes, globalFlags, topOrder }, { source }) {
     aliases: n.aliases,
     args: n.args,
     flags: n.flags,
+    examples: n.examples,
     isLeaf: n.isLeaf,
     subcommands: n.subcommands,
   }));

@@ -26,12 +26,23 @@ ktm reusables usage <id> [flags]
 | --- | --- | --- | --- |
 | `--limit` | int | — | Max entries to expand (default: 50, max: 200) |
 
+## Examples
+
+```bash
+ktm reusables usage 117
+ktm reusables usage 117 --limit 200 -o json | jq '.entries'
+```
+
 ## Details
 
 Reads the reusable's reused_by array (an array of test ids), then
 expands each id into \{id, name\} via a per-id GET. Capped at 50 entries by
 default (max 200) to bound latency. Reject if &lt;id&gt; is a regular test; use
 'ktm reusables in-test' for the inverse direction.
+
+## Related
+
+- [`ktm reusables`](/cli/commands/reusables)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

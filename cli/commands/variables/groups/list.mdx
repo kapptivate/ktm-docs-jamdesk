@@ -20,6 +20,13 @@ ktm variables groups list [flags]
 | --- | --- | --- | --- |
 | `--product` | string | — | Product slug (required) |
 
+## Examples
+
+```bash
+ktm variables groups list --product acme~web-portal
+ktm variables groups list --product acme~web-portal -o table
+```
+
 ## Details
 
 List variable groups (environment configurations) for a single product.

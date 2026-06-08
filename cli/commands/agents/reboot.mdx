@@ -23,6 +23,13 @@ ktm agents reboot [flags]
 | `--type` | string | — | Agent type: cellular, ethernet, smartphone (required) |
 | `--uuid` | string | — | Agent UUID (required) |
 
+## Examples
+
+```bash
+ktm agents reboot --uuid abc-123 --type cellular --confirm
+ktm agents reboot --uuid abc-123 --type cellular --slot 3 --confirm
+```
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

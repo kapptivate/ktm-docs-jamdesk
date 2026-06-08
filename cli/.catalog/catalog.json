@@ -102,6 +102,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "# List Android phones (use 'resources list' for discovery)\nktm resources list --product acme~mobile --type smartphone -o table\n\n# Connect to a phone\nktm adb connect RF8NB07VDGA",
       "isLeaf": false,
       "subcommands": [
         "connect"
@@ -135,6 +136,7 @@
           "description": "Local port to listen on"
         }
       ],
+      "examples": "# Connect to a phone (auto-registers with local ADB server)\nktm adb connect RF8NB07VDGA\n\n# Custom port\nktm adb connect RF8NB07VDGA --port 7037",
       "isLeaf": true,
       "subcommands": []
     },
@@ -152,6 +154,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -190,6 +193,7 @@
           "description": "Agent UUID (required)"
         }
       ],
+      "examples": "ktm agents get --uuid abc-123 --type cellular\nktm agents get --uuid def-456 --type ethernet",
       "isLeaf": true,
       "subcommands": []
     },
@@ -230,6 +234,7 @@
           "description": "Filter by zone"
         }
       ],
+      "examples": "ktm agents list --operator my-operator\nktm agents list --operator my-operator --type cellular\nktm agents list --operator my-operator --zone EU-West",
       "isLeaf": true,
       "subcommands": []
     },
@@ -277,6 +282,7 @@
           "description": "Agent UUID (required)"
         }
       ],
+      "examples": "ktm agents maintenance --uuid abc-123 --enable --confirm\nktm agents maintenance --uuid abc-123 --disable --confirm",
       "isLeaf": true,
       "subcommands": []
     },
@@ -324,6 +330,7 @@
           "description": "Agent UUID (required)"
         }
       ],
+      "examples": "ktm agents reboot --uuid abc-123 --type cellular --confirm\nktm agents reboot --uuid abc-123 --type cellular --slot 3 --confirm",
       "isLeaf": true,
       "subcommands": []
     },
@@ -341,6 +348,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -370,6 +378,7 @@
           "description": "Alert definition ID (from 'alerts list')"
         }
       ],
+      "examples": "# Get alert definition details\nktm alerts get --id 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -417,6 +426,7 @@
           "description": "Comma-separated alert types"
         }
       ],
+      "examples": "# List all alert definitions for an operator\nktm alerts list --operator my-operator\n\n# List only availability alerts\nktm alerts list --operator my-operator --types availability\n\n# List archived alerts\nktm alerts list --operator my-operator --archived true",
       "isLeaf": true,
       "subcommands": []
     },
@@ -434,6 +444,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get"
@@ -483,6 +494,7 @@
           "description": "Full artifact URL (mutually exclusive with --path)"
         }
       ],
+      "examples": "# Fetch by full URL, save to file\nktm artifacts get --url https://app.kapptivate.com/robot/path/screenshot.png --output shot.png\n\n# Fetch by relative path\nktm artifacts get --path path/screenshot.png --output shot.png\n\n# Text artifact to stdout\nktm artifacts get --url https://app.kapptivate.com/robot/path/trace.xml",
       "isLeaf": true,
       "subcommands": []
     },
@@ -500,6 +512,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "build",
@@ -557,6 +570,7 @@
           "description": "Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant."
         }
       ],
+      "examples": "# Build template for two tests (no variant pinning — backend uses defaults)\nktm ci build --test-ids 16480,16838\n\n# Pin a single group's variant\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\"\n\n# Multi-group pinning\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\" --variant \"Database:Replica\" --variant \"Frontend:Canary\"\n\n# Numeric variant id (when stable across environments)\nktm ci build --product acme~web --test-ids 16480 --variant 691\n\n# Build from a saved Tests campaign (product auto-derived from the campaign)\nktm ci build --test-campaign 42\n\n# Build from a Tests campaign and pin a variant\nktm ci build --test-campaign 42 --variant \"API:Staging\"\n\n# Full Tests-campaign pipeline: build → run with one-off override\nktm ci build --test-campaign 42 --variant \"API:Staging\" | \\\n  ktm ci run --stdin --set-var \"GLOBAL_VAR=override-value\"\n\n# Full pipeline: build → fill values → run\nktm ci build --product acme~web --test-ids 16480 --variant \"API:Staging\" | \\\n  jq '.tests[0].input_variables.TODO_INDEX.value = \"42\"' | \\\n  ktm ci run --stdin",
       "isLeaf": true,
       "subcommands": []
     },
@@ -646,6 +660,7 @@
           "description": "Validate config file structure and exit (no API key or network needed)"
         }
       ],
+      "examples": "# Single config\nktm ci run --test-config-path tests/smoke.json\n\n# Multiple configs via glob\nktm ci run --test-config-path \"tests/*.json\" --junit-file report.xml\n\n# Directory of configs\nktm ci run --test-config-dir tests/ --output-file results.json\n\n# Validate configs without running (no API key needed)\nktm ci run --test-config-path tests/smoke.json --validate\n\n# Read campaign JSON from stdin (e.g. piped from \"ci build\")\nktm ci build --test-ids 16480 | ktm ci run --stdin\n\n# Override a variable value at run time (preserves bucket)\nktm ci build --test-ids 16480 | ktm ci run --stdin --set-var \"HOST=staging.example.com\"\n\n# Run a saved Tests campaign with variant pinning and one-off value override\nktm ci build --test-campaign 42 --variant \"API:Staging\" | \\\n  ktm ci run --stdin --set-var \"GLOBAL_VAR=override-value\" --junit-file results.xml",
       "isLeaf": true,
       "subcommands": []
     },
@@ -663,6 +678,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "can-edit",
@@ -705,6 +721,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "ktm collections can-edit --operator my-op <uid>\nktm collections can-edit --operator my-op <uid> -o json | jq .can_edit",
       "isLeaf": true,
       "subcommands": []
     },
@@ -745,6 +762,7 @@
           "description": "Parent collection UID (required)"
         }
       ],
+      "examples": "ktm collections create --operator my-op --parent <parent_uid> --name \"Auth regression\"\nktm collections create --operator my-op --parent <tests_root> --name \"Smoke\" -o json | jq .uid",
       "isLeaf": true,
       "subcommands": []
     },
@@ -783,6 +801,7 @@
           "description": "Confirm irreversible delete"
         }
       ],
+      "examples": "ktm collections delete --operator my-op <uid>              # refuses without --yes\nktm collections delete --operator my-op --yes <uid>        # moves to trash",
       "isLeaf": true,
       "subcommands": []
     },
@@ -814,6 +833,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "ktm collections get --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22\nktm collections get --operator my-op <uid> -o json | jq '.path'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -859,6 +879,7 @@
           "description": "Items per page (default: 25)"
         }
       ],
+      "examples": "ktm collections items --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22\nktm collections items --operator my-op <uid> -o json | jq '.[].meta.name'\nktm collections items --operator my-op <uid> --page-size 10 --page 2",
       "isLeaf": true,
       "subcommands": []
     },
@@ -892,6 +913,7 @@
           "description": "Parent collection UID (required)"
         }
       ],
+      "examples": "ktm collections list --operator my-op --parent <tests_root_uid>\nktm collections list --operator my-op --parent <uid> -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -930,6 +952,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "ktm collections move --operator my-op <uid> --new-parent <new_parent_uid>",
       "isLeaf": true,
       "subcommands": []
     },
@@ -970,6 +993,7 @@
           "description": "Destination collection UID (required)"
         }
       ],
+      "examples": "# Discover item UIDs under the source collection, then move one into another.\nktm collections items --operator my-op <src_uid> -o json | jq -r '.[0].uid'\nktm collections move-items --operator my-op --target <dst_uid> --items \"<item_uid>\"\n\n# Batch move\nktm collections move-items --operator my-op --target <dst_uid> --items \"<uid1>,<uid2>,<uid3>\"",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1008,6 +1032,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "ktm collections rename --operator my-op <uid> --name \"Auth regression (v2)\"",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1062,6 +1087,7 @@
           "description": "Comma-separated tag ids"
         }
       ],
+      "examples": "ktm collections search --operator my-op --collection-uid <tests_root> --query login\nktm collections search --operator my-op --collection-uid <uid> --query \"Verify\" -o json\nktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1079,6 +1105,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "add-widget",
@@ -1150,6 +1177,7 @@
           "description": "Grid y position"
         }
       ],
+      "examples": "# Add widget from a file (auto-positioned)\nktm dashboards add-widget abc123 --json widget.json\n\n# Pipe from template\nktm dashboards widget-template title | ktm dashboards add-widget abc123 --json -\n\n# With explicit position and size\nktm dashboards add-widget abc123 --json widget.json --x 0 --y 0 --w 24 --h 1\n\n# Full-width chart\nktm dashboards add-widget abc123 --json chart.json --w 24 --h 8",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1204,6 +1232,7 @@
           "description": "JSON file with widget array (required)"
         }
       ],
+      "examples": "# Build a dashboard (dry-run)\nktm dashboards build --operator my-op --name \"SLA\" --widgets widgets.json --dry-run\n\n# Build for real\nktm dashboards build --operator my-op --name \"SLA\" --widgets widgets.json\n\n# With bucket\nktm dashboards build --operator my-op --name \"Passive\" --widgets w.json --bucket my-bucket",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1244,6 +1273,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "# Create a dashboard\nktm dashboards create --operator my-operator --name \"SLA Dashboard\"\n\n# Create with a specific InfluxDB bucket\nktm dashboards create --operator my-operator --name \"Passive Metrics\" --bucket my-bucket",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1279,6 +1309,7 @@
           "description": "Widget JSON file path, or \"-\" for stdin (required)"
         }
       ],
+      "examples": "# Edit widget from file\nktm dashboards edit-widget abc123 RandomID-xxx --json widget.json\n\n# Pipe from stdin\ncat updated.json | ktm dashboards edit-widget abc123 RandomID-xxx --json -",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1302,6 +1333,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Get dashboard by UID (JSON)\nktm dashboards get abc123def456\n\n# Get in table format\nktm dashboards get abc123def456 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1356,6 +1388,7 @@
           "description": "Items per page (default: 20)"
         }
       ],
+      "examples": "# List all dashboards for an operator\nktm dashboards list --operator my-operator\n\n# List in table format\nktm dashboards list --operator my-operator -o table\n\n# Filter by name\nktm dashboards list --operator my-operator --name \"SLA\"\n\n# Only favorites\nktm dashboards list --operator my-operator --favorite true",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1374,6 +1407,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "ktm dashboards list-widget-types\nktm dashboards list-widget-types -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1401,6 +1435,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Remove widget\nktm dashboards remove-widget abc123 RandomID-a1b2c3d4e5f6",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1446,6 +1481,7 @@
           "description": "New dashboard name"
         }
       ],
+      "examples": "# Rename a dashboard\nktm dashboards update abc123 --name \"New Name\"\n\n# Set as favorite\nktm dashboards update abc123 --favorite true",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1472,6 +1508,7 @@
           "description": "Widget JSON file path, or \"-\" for stdin (required)"
         }
       ],
+      "examples": "ktm dashboards validate-widget --json widget.json\ncat widget.json | ktm dashboards validate-widget --json -",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1495,6 +1532,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Get a line chart template\nktm dashboards widget-template line\n\n# Get a customDisplay template (includes script API docs in _metadata)\nktm dashboards widget-template customDisplay > custom.json\n\n# Save to file for editing\nktm dashboards widget-template counter > widget.json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1512,6 +1550,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -1538,6 +1577,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Get execution detail as JSON\nktm executions get 12345\n\n# Get execution detail as table\nktm executions get 12345 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1627,6 +1667,7 @@
           "description": "Only include executions before this date (ISO 8601)"
         }
       ],
+      "examples": "# List recent executions for a product\nktm executions list --product my-operator~my-product\n\n# Filter by status\nktm executions list --product my-operator~my-product --status failed\n\n# Search by name\nktm executions list --product my-operator~my-product --search \"regression\"\n\n# Filter by date range\nktm executions list --product my-operator~my-product --from-date 2025-01-01T00:00:00Z\n\n# Table format\nktm executions list --product my-operator~my-product -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1644,6 +1685,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "close",
@@ -1682,6 +1724,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "# Close an active incident\nktm incidents close --operator my-operator --id 99",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1750,6 +1793,7 @@
           "description": "Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED"
         }
       ],
+      "examples": "# Get incident counts for an operator\nktm incidents counter --operator my-operator\n\n# Get counts for a specific alert\nktm incidents counter --operator my-operator --alert-id 42\n\n# Get counts for the last 7 days\nktm incidents counter --operator my-operator --created-after 2026-03-12T00:00:00Z",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1783,6 +1827,7 @@
           "description": "Operator slug (required)"
         }
       ],
+      "examples": "# Get incident details\nktm incidents get --operator my-operator --id 99",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1865,6 +1910,7 @@
           "description": "Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED"
         }
       ],
+      "examples": "# List open incidents\nktm incidents list --operator my-operator --status OPEN\n\n# List incidents for a specific alert\nktm incidents list --operator my-operator --alert-id 42\n\n# List incidents created after a date\nktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1882,6 +1928,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "alert-eval",
@@ -1943,6 +1990,7 @@
           "description": "Path to JSON file with alert rule array"
         }
       ],
+      "examples": "# Inline rules\nktm metrics alert-eval --operator acme \\\n  --query \"SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)\" \\\n  --rules '[{\"type\":\"threshold\",\"metric\":\"p95\",\"operator\":\">\",\"value\":5}]'\n\n# Rules from file\nktm metrics alert-eval --operator acme \\\n  --query \"SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)\" \\\n  --rules-file rules.json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -1990,6 +2038,7 @@
           "description": "InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON)"
         }
       ],
+      "examples": "# Quick correlation (default)\nktm metrics correlate --operator acme \\\n  --query \"SELECT mean(duration_seconds) FROM test WHERE time > now() - 24h GROUP BY time(1h)\" \\\n  --query \"SELECT mean(response_time) FROM action WHERE time > now() - 24h GROUP BY time(1h)\"\n\n# Full analysis with lag detection\nktm metrics correlate --operator acme --mode full \\\n  --query \"SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)\" \\\n  --query \"SELECT count(error) FROM event WHERE time > now() - 7d GROUP BY time(1h)\"\n\n# Distribution shift only (which metrics changed?)\nktm metrics correlate --operator acme --mode shift \\\n  --queries '[\"SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)\", \"SELECT mean(response_time) FROM action WHERE time > now() - 7d GROUP BY time(1h)\"]'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2044,6 +2093,7 @@
           "description": "Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z')"
         }
       ],
+      "examples": "# Peak hourly and daily usage for a SIM over one week\nktm metrics peak-usage --operator acme --resources 0612345678 --aggregations 1h,24h --start 2024-01-01T00:00:00Z --end 2024-01-07T00:00:00Z",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2098,6 +2148,7 @@
           "description": "Run statistical analysis and display formatted summary"
         }
       ],
+      "examples": "# Discover available measurements\nktm metrics query --operator acme --query \"SHOW MEASUREMENTS\"\n\n# Explore fields in a measurement\nktm metrics query --operator acme --query \"SHOW FIELD KEYS FROM \\\"test\\\"\"\n\n# Success Rate over last 24h grouped by 5 minutes\nktm metrics query --operator acme --query \"SELECT sum(\\\"number_success\\\")/(sum(\\\"number_success\\\")+sum(\\\"number_failed\\\"))*100 AS \\\"Success Rate (%)\\\" FROM \\\"test\\\" WHERE time > now() - 24h GROUP BY time(5m)\"\n\n# Platform activity events over last 24h\nktm metrics query --operator acme --query \"SELECT * FROM \\\"event\\\" WHERE time >= '2026-02-17T00:00:00Z' AND time <= '2026-02-18T00:00:00Z' ORDER BY time DESC LIMIT 50\"",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2152,6 +2203,7 @@
           "description": "Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z')"
         }
       ],
+      "examples": "# Hourly usage for two SIMs over one day\nktm metrics resource-usage --operator acme --resources 0612345678,0698765432 --start 2024-01-01T00:00:00Z --end 2024-01-02T00:00:00Z\n\n# 5-minute granularity\nktm metrics resource-usage --operator acme --resources 0612345678 --aggregation 5m --start 2024-01-01T00:00:00Z --end 2024-01-01T06:00:00Z",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2220,6 +2272,7 @@
           "description": "SLO window (e.g. 30d, 168h)"
         }
       ],
+      "examples": "# Compute SLO for 99.9% target over 30-day window\nktm metrics slo --operator acme \\\n  --query \"SELECT sum(good) AS good, sum(total) AS total FROM test WHERE time > now() - 30d\" \\\n  --slo-target 99.9\n\n# Custom field names and 7-day window\nktm metrics slo --operator acme \\\n  --query \"SELECT sum(success) AS ok, sum(requests) AS all_req FROM api WHERE time > now() - 7d\" \\\n  --slo-target 99.5 --good-field ok --total-field all_req --window 7d",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2237,6 +2290,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -2271,6 +2325,7 @@
           "description": "Include raw action results (screenshots, artifacts, logs)"
         }
       ],
+      "examples": "# Get monitoring result detail as table\nktm monitoring-results get 155461270 -o table\n\n# Get with raw action results\nktm monitoring-results get 155461270 --include-actions -o table\n\n# Get as JSON\nktm monitoring-results get 155461270",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2346,6 +2401,7 @@
           "description": "Filter by test ID"
         }
       ],
+      "examples": "# List recent results for a monitor\nktm monitoring-results list --monitoring-id 2180\n\n# Filter by product\nktm monitoring-results list --product my-operator~my-product\n\n# Table format\nktm monitoring-results list --monitoring-id 2180 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2363,6 +2419,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "batch-create",
@@ -2411,6 +2468,7 @@
           "description": "Path to JSON batch spec file (required)"
         }
       ],
+      "examples": "# Preview: see the batch creation plan (does NOT create)\nktm monitors batch-create --from-file batch.json\n\n# Submit after reviewing the preview\nktm monitors batch-create --from-file batch.json --confirm\n\n# CI/CD: skip preview, auto-build and submit\nktm monitors batch-create --from-file batch.json --force\n\n# batch.json format:\n# {\n#   \"product\": \"operator~product\",\n#   \"scheduling\": {\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":5,\"unit\":\"minutes\"}}},\n#   \"active\": true,\n#   \"monitors\": [\n#     {\"test_id\": 100, \"variants\": [\"API:Staging\"]},\n#     {\"test_id\": 101, \"variants\": [\"API:Staging\", \"Database:Replica\"], \"overrides\": {\"SIM_A\": \"069...\"}},\n#     {\"test_id\": 102, \"scheduling\": {\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":15,\"unit\":\"minutes\"}}}}\n#   ]\n# }",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2500,6 +2558,7 @@
           "description": "Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. Globals always emit a global bucket."
         }
       ],
+      "examples": "# Preview: see the creation plan (does NOT create)\nktm monitors create --product acme~web --test-id 100 --variant \"API:Staging\"\n\n# Multi-group monitor: pin a variant per group\nktm monitors create --product acme~web --test-id 100 \\\n  --variant \"API:Staging\" --variant \"Database:Replica\" --variant \"Frontend:Canary\" --confirm\n\n# Numeric variant id (when stable across environments)\nktm monitors create --product acme~web --test-id 100 --variant 11 --confirm\n\n# No pin: every variable uses its group's default variant\nktm monitors create --product acme~web --test-id 100 --confirm\n\n# Override variables and submit\nktm monitors create --product acme~web --test-id 100 --variant \"API:Staging\" \\\n  --set-var \"SIM_A=0699999999\" --set-var \"TODO_INDEX=42\" --confirm\n\n# CI/CD: auto-build and submit without preview\nktm monitors create --product acme~web --test-id 100 --variant \"API:Staging\" --force\n\n# Full manual control via JSON file (submits directly)\nktm monitors create --product acme~web --test-id 100 --from-file monitor.json\n\n# Scheduling: every 10 minutes (simple/v2)\nktm monitors create ... --confirm \\\n  --scheduling '{\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":10,\"unit\":\"minutes\"}}}'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2566,6 +2625,7 @@
           "description": "Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Unpinned groups retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable."
         }
       ],
+      "examples": "# Change scheduling\nktm monitors edit 42 --scheduling '{\"type\":\"simple/v2\",\"definition\":{\"frequency\":{\"every\":10,\"unit\":\"minutes\"}}}'\n\n# Pause a monitor\nktm monitors edit 42 --active false\n\n# Override a variable (re-builds owners + input_variables from test definition)\nktm monitors edit 42 --set-var \"SIM_A=0699999999\"\n\n# Re-pin a variant (V3): re-resolve buckets for the named group\nktm monitors edit 42 --variant \"API:Staging\"\n\n# Edit from a JSON file\nktm monitors edit 42 --from-file patch.json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2589,6 +2649,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm monitors force-run 42\nktm monitors force-run 42 -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2612,6 +2673,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm monitors get 42\nktm monitors get 42 -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2680,6 +2742,7 @@
           "description": "Product slug (from 'products list', format: operator~product) to scope results"
         }
       ],
+      "examples": "# List monitors for a product\nktm monitors list --operator my-operator --product my-operator~my-product\n\n# List only active monitors\nktm monitors list --operator my-operator --active true\n\n# List monitors assigned to a specific web agent\nktm monitors list --operator my-operator --device-type web-agent --device-id agent-paris-01\n\n# Get monitors as JSON for parsing\nktm monitors list --operator my-operator --product my-operator~my-product -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2713,6 +2776,7 @@
           "description": "Comma-separated monitor IDs to toggle (required)"
         }
       ],
+      "examples": "ktm monitors toggle --ids 42,43 --active false\nktm monitors toggle --ids 42 --active true",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2730,6 +2794,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "list"
@@ -2765,6 +2830,7 @@
           "description": "Filter by exact operator short name"
         }
       ],
+      "examples": "# List all operators (JSON)\nktm operators list\n\n# List operators in table format\nktm operators list -o table\n\n# Filter by organisation group\nktm operators list --organisation-group my-org",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2782,6 +2848,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "list"
@@ -2824,6 +2891,7 @@
           "description": "Operator slug (from 'operators list') to scope results"
         }
       ],
+      "examples": "# List all products for an operator\nktm products list --operator my-operator\n\n# List only active products (table)\nktm products list --operator my-operator --active true -o table\n\n# Filter by product name\nktm products list --operator my-operator --name \"Web Portal\"",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2841,6 +2909,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -2875,6 +2944,7 @@
           "description": "Fetch installed apps on the device (for V2 smartphone test authoring: copy package→starting.app, app object→meta)"
         }
       ],
+      "examples": "# Get smartphone details\nktm resources get R92Y70ZDMKH\n\n# Get smartphone with installed apps (for V2 smartphone test authoring)\nktm resources get R92Y70ZDMKH --include-apps\n\n# Get smartphone with apps in table format\nktm resources get R92Y70ZDMKH --include-apps -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2915,6 +2985,7 @@
           "description": "Resource type filter: sim, web-agent, smartphone (omit for all)"
         }
       ],
+      "examples": "# List available resources for a product (default: --available=true)\nktm resources list --product acme~web-portal\n\n# List only SIMs\nktm resources list --product acme~web-portal --type sim\n\n# List only web agents (table format)\nktm resources list --product acme~web-portal --type web-agent -o table\n\n# List all resources including offline\nktm resources list --product acme~web-portal --available=false",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2932,6 +3003,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "get",
@@ -2960,6 +3032,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm reusables get 117\nktm reusables get 117 -o json | jq '{id, name, kind, reused_by}'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -2991,6 +3064,7 @@
           "description": "Max entries to expand (default: 50, max: 200)"
         }
       ],
+      "examples": "ktm reusables in-test 204\nktm reusables in-test 204 --limit 100",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3031,6 +3105,7 @@
           "description": "Product slug (required)"
         }
       ],
+      "examples": "ktm reusables list --product acme~web\nktm reusables list --product acme~web -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3062,6 +3137,7 @@
           "description": "Max entries to expand (default: 50, max: 200)"
         }
       ],
+      "examples": "ktm reusables usage 117\nktm reusables usage 117 --limit 200 -o json | jq '.entries'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3079,6 +3155,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "cancel",
@@ -3109,6 +3186,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm shell cancel 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3132,6 +3210,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm shell get 42\nktm shell get 42 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3186,6 +3265,7 @@
           "description": "Filter by status (P/D/O/B/C/T/M)"
         }
       ],
+      "examples": "ktm shell list --product 123\nktm shell list --product 123 --status D\nktm shell list --product 123 --owner 0789800356 -o table\n# Poll for async events (wait SMS, USSD push) since session start\nktm shell list --product 123 --owner 0789800356 --from-date 2026-03-15T19:29:17Z --ordering -created",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3212,6 +3292,7 @@
           "description": "Filter by product ID"
         }
       ],
+      "examples": "ktm shell progress --product 123",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3266,6 +3347,7 @@
           "description": "Wait for the command to complete before returning"
         }
       ],
+      "examples": "# Dial a USSD shortcode and wait for the menu\nktm shell send --product 123 --owner 0789800356 --type USSD --command '{\"input\":\"#131#\"}' --wait\n\n# Navigate a USSD menu (send option \"1\" to continue the session)\nktm shell send --product 123 --owner 0789800356 --type USSD --command '{\"input\":\"1\"}' --wait\n\n# Send an HTTP API call via web agent\nktm shell send --product 456 --owner my-agent --type ETH_HTTP_API --command '{\"http_method\":\"GET\",\"url\":\"https://example.com/api/health\"}'\n\n# Fire and forget (returns immediately with shell ID)\nktm shell send --product 123 --owner 0789800356 --type DATA_PING --command '{\"host\":\"8.8.8.8\",\"count\":3}'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3292,6 +3374,7 @@
           "description": "Filter by owner kind: S (SIM) or E (Ethernet)"
         }
       ],
+      "examples": "ktm shell types                  # all shell actions\nktm shell types --owner-kind S   # SIM actions only (17)\nktm shell types --owner-kind E   # Ethernet actions only (13)",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3309,6 +3392,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "ktm status",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3326,6 +3410,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "create",
@@ -3387,6 +3472,7 @@
           "description": "Path to JSON file containing the test_list array, or \"-\" for stdin (required)"
         }
       ],
+      "examples": "ktm test-campaigns create --product acme~web --name \"Regression\" --test-list @testlist.json\necho '[{\"position\":0,\"test\":117,\"owners\":{},\"input_variables\":{}}]' | \\\n  ktm test-campaigns create --product acme~web --name \"Smoke\" --test-list -\nktm test-campaigns create --product acme~web --name \"Targeted\" --test-list @list.json \\\n  --collection-uid 7b9c6d8e-...",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3420,6 +3506,7 @@
           "description": "Product slug or short_name"
         }
       ],
+      "examples": "ktm test-campaigns creators --product acme~web",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3451,6 +3538,7 @@
           "description": "Confirm the delete"
         }
       ],
+      "examples": "",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3474,6 +3562,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm test-campaigns get 42\nktm test-campaigns get 42 -o json | jq '.test_list[].name'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3528,6 +3617,7 @@
           "description": "Filter by product slug or short_name"
         }
       ],
+      "examples": "ktm test-campaigns list --product acme~web\nktm test-campaigns list --product acme~web --creator john.doe\nktm test-campaigns list --ids 10,11,12 -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3573,6 +3663,7 @@
           "description": "JSON file (or '-') replacing the current test_list"
         }
       ],
+      "examples": "ktm test-campaigns update 42 --name \"Regression v2\"\nktm test-campaigns update 42 --test-list @newlist.json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3590,6 +3681,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "action-types",
@@ -3634,6 +3726,7 @@
           "description": "Filter by owner kind: ethernet, sim, smartphone, ownerless"
         }
       ],
+      "examples": "# List all action types\nktm tests action-types\n\n# List ethernet-only action types\nktm tests action-types --kind ethernet\n\n# List SIM action types as table\nktm tests action-types --kind sim -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3657,6 +3750,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm tests archive 99",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3718,6 +3812,7 @@
           "description": "Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant."
         }
       ],
+      "examples": "# Generate template, edit, then create\nktm tests template ETH_HTTP_API > test.json\n# ... edit test.json ...\nktm tests create --from-file test.json --product my-operator~my-product\n\n# Create with name override\nktm tests create --from-file test.json --product my-operator~my-product --name \"Login Test\"\n\n# Pin a single group's variant (other groups use their default variant)\nktm tests create --from-file test.json --product acme~web --variant API:Staging\n\n# Multi-group test: pin a different variant per group (forms can mix: 'group:variant' name or numeric ID)\nktm tests create --from-file test.json --product acme~web \\\n    --variant API:Staging --variant Database:Replica --variant 31\n\n# Auto-correct declared input_variable kinds when they don't match the platform's variable types\nktm tests create --from-file test.json --product acme~web --auto-correct-kinds",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3756,6 +3851,7 @@
           "description": "Confirm the soft-delete"
         }
       ],
+      "examples": "ktm tests delete 99 --yes\nktm tests delete 99 100 101 --yes\nktm tests delete 117 --kind 2 --yes           # reusable",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3815,6 +3911,7 @@
           "description": "Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket."
         }
       ],
+      "examples": "# Preview impact of editing actions\nktm tests dry-run 16480 --from-file updated.json\n\n# Preview name change\nktm tests dry-run 16480 --name \"New Name\"\n\n# Preview impact of re-pinning the API group\nktm tests dry-run 16480 --variant API:Dev",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3881,6 +3978,7 @@
           "description": "Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket; new variables get the group's default variant."
         }
       ],
+      "examples": "# Edit test actions from file (preserves existing variant pins)\nktm tests edit 16480 --from-file updated.json\n\n# Edit test name only\nktm tests edit 16480 --name \"New Test Name\"\n\n# Re-pin the API group to a different variant; leaves Database/Frontend pins alone\nktm tests edit 16480 --variant API:Dev\n\n# Re-pin multiple groups in one shot (forms can mix: 'group:variant' name or numeric ID)\nktm tests edit 16480 --variant API:Staging --variant Database:Replica --variant 31\n\n# Preview first, then edit\nktm tests dry-run 16480 --from-file updated.json\nktm tests edit 16480 --from-file updated.json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3904,6 +4002,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Get test detail as JSON\nktm tests get 16480\n\n# Get test detail as table\nktm tests get 16480 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3949,6 +4048,7 @@
           "description": "Results per page (default: 20)"
         }
       ],
+      "examples": "# List available history dates\nktm tests history 16480\n\n# List versions for a specific date\nktm tests history 16480 --date 2026-03-06\n\n# Paginate through versions\nktm tests history 16480 --date 2026-03-06 --page 2",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3972,6 +4072,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Check test impact as JSON\nktm tests impact 16480\n\n# Check test impact as table\nktm tests impact 16480 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3995,6 +4096,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Inspect test as JSON (full definition with actions)\nktm tests inspect 16480\n\n# Inspect test as table (structured summary)\nktm tests inspect 16480 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4077,6 +4179,7 @@
           "description": "Comma-separated list of tags to filter by (e.g., --tags smoke,regression)"
         }
       ],
+      "examples": "# List all tests for a product\nktm tests list --operator my-operator --product my-operator~my-product\n\n# Search by name substring\nktm tests list --operator my-operator --name login\n\n# Include archived tests\nktm tests list --operator my-operator --archived true\n\n# Filter by tags\nktm tests list --operator my-operator --tags smoke,regression\n\n# Paginate through results\nktm tests list --operator my-operator --page 2 --page-size 50",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4100,6 +4203,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Find history versions\nktm tests history 16480 --date 2026-03-06\n\n# Restore to a specific version\nktm tests restore 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4126,6 +4230,7 @@
           "description": "Filter by platform: web, smartphone"
         }
       ],
+      "examples": "# List all v2 step types\nktm tests step-types\n\n# List web-only step types\nktm tests step-types --platform web\n\n# List smartphone step types as JSON\nktm tests step-types --platform smartphone -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4149,6 +4254,7 @@
         }
       ],
       "flags": [],
+      "examples": "# Single API call test\nktm tests template ETH_HTTP_API > api_test.json\n\n# USSD navigation + SMS reception (3 steps)\nktm tests template USSD USSD SMS_GET > ussd_test.json\n\n# Authenticated API flow (3 steps)\nktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_test.json\n\n# Then create the test:\nktm tests create --from-file api_test.json --product my-operator~my-product",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4172,6 +4278,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm tests unarchive 99",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4195,6 +4302,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm tests undelete 99\nktm tests undelete 99 100 101",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4221,6 +4329,7 @@
           "description": "Path to JSON file to validate (required)"
         }
       ],
+      "examples": "# Validate a test file\nktm tests validate --from-file test.json\n\n# Pipeline: generate, validate, create\nktm tests template ETH_HTTP_API > test.json\n# ... edit test.json ...\nktm tests validate --from-file test.json\nktm tests create --from-file test.json --product my-operator~my-product",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4238,6 +4347,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "activate",
@@ -4268,6 +4378,7 @@
           "description": "User ID to activate (from 'users list')"
         }
       ],
+      "examples": "# Activate user with ID 42\nktm users activate --id 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4294,6 +4405,7 @@
           "description": "User ID to deactivate (from 'users list')"
         }
       ],
+      "examples": "# Deactivate user with ID 42\nktm users deactivate --id 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4341,6 +4453,7 @@
           "description": "Filter by account type: 'user' (human) or 'server' (service account)"
         }
       ],
+      "examples": "# List all users for an operator\nktm users list --operator my-operator\n\n# Search for a user by name or email\nktm users list --operator my-operator --search alice\n\n# List only active users\nktm users list --operator my-operator --active true\n\n# List only service accounts\nktm users list --operator my-operator --type server",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4358,6 +4471,7 @@
       "aliases": "",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "create",
@@ -4430,6 +4544,7 @@
           "description": "single | secret | choice (required)"
         }
       ],
+      "examples": "ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost\nktm variables create --product acme~web --name ENV --type choice --default-value \"dev,staging,prod\"\nktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4453,6 +4568,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm variables delete 17",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4484,6 +4600,7 @@
           "description": "Name for the new variable (required)"
         }
       ],
+      "examples": "ktm variables duplicate 17 --name DB_HOST_BACKUP",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4502,6 +4619,7 @@
       "aliases": "groups, group",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "create",
@@ -4549,6 +4667,7 @@
           "description": "Comma-separated variant names (required)"
         }
       ],
+      "examples": "ktm variables groups create --product acme~web --name \"Envs\" --variants \"Dev,Staging,Prod\"\nktm variables groups create --product acme~web --name \"Regions\" --variants \"US,EU,APAC\" -o json",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4581,6 +4700,7 @@
           "description": "Bypass the non-empty safety check"
         }
       ],
+      "examples": "ktm variables groups delete 42           # refuses if group has variables\nktm variables groups delete 42 --force   # bypass the non-empty check",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4608,6 +4728,7 @@
           "description": "Product slug (required)"
         }
       ],
+      "examples": "ktm variables groups list --product acme~web-portal\nktm variables groups list --product acme~web-portal -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4632,6 +4753,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm variables groups show 204\nktm variables groups show 204 -o table",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4664,6 +4786,7 @@
           "description": "New name (required)"
         }
       ],
+      "examples": "ktm variables groups update 42 --name \"Environments v2\"",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4725,6 +4848,7 @@
           "description": "Variant name or id — keep only variables carrying this variant"
         }
       ],
+      "examples": "ktm variables list --product acme~web\nktm variables list --product acme~web --scope global\nktm variables list --product acme~web --group 42 --type secret\nktm variables list --product acme~web --used false\nktm variables list --product acme~web --variant prod",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4758,6 +4882,7 @@
           "description": "Product numeric id (from 'ktm products list')"
         }
       ],
+      "examples": "ktm products list -o table       # find the product id\nktm variables name-available --product-id 134 --name MY_VAR",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4796,6 +4921,7 @@
           "description": "Variant id or name (required)"
         }
       ],
+      "examples": "ktm variables set-value 17 --variant prod --value prod.db.example.com\nktm variables set-value 17 --variant 42 --value 0.0.0.0",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4834,6 +4960,7 @@
           "description": "Reserved — no effect today"
         }
       ],
+      "examples": "ktm variables show 17\nktm variables show 17 --lite\nktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4879,6 +5006,7 @@
           "description": "New name"
         }
       ],
+      "examples": "ktm variables update 17 --description \"DB hostname\"\nktm variables update 17 --default-value \"new-default\"\nktm variables update 17 --name DB_HOST_V2",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4897,6 +5025,7 @@
       "aliases": "variants, variant",
       "args": [],
       "flags": [],
+      "examples": "",
       "isLeaf": false,
       "subcommands": [
         "add",
@@ -4942,6 +5071,7 @@
           "description": "New variant name (required)"
         }
       ],
+      "examples": "ktm variables variants add 42 --name canary\nktm variables variants add 42 --name canary --default",
       "isLeaf": true,
       "subcommands": []
     },
@@ -4981,6 +5111,7 @@
           "description": "Destination variant id or name (required)"
         }
       ],
+      "examples": "ktm variables variants copy-values 42 --from staging --to prod\nktm variables variants copy-values 42 --from 1 --to 2",
       "isLeaf": true,
       "subcommands": []
     },
@@ -5017,6 +5148,7 @@
           "description": "Bypass the non-default-values safety check"
         }
       ],
+      "examples": "ktm variables variants remove 42 7           # refuses if data would be lost\nktm variables variants remove 42 7 --force   # removes anyway",
       "isLeaf": true,
       "subcommands": []
     },
@@ -5053,6 +5185,7 @@
           "description": "New variant name (required)"
         }
       ],
+      "examples": "ktm variables variants rename 42 7 --name production",
       "isLeaf": true,
       "subcommands": []
     },
@@ -5081,6 +5214,7 @@
         }
       ],
       "flags": [],
+      "examples": "ktm variables variants set-default 42 7",
       "isLeaf": true,
       "subcommands": []
     }

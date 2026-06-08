@@ -27,6 +27,19 @@ ktm monitoring-results list [flags]
 | `--start` | string | — | Results after this datetime (ISO 8601) |
 | `--test-id` | string | — | Filter by test ID |
 
+## Examples
+
+```bash
+# List recent results for a monitor
+ktm monitoring-results list --monitoring-id 2180
+
+# Filter by product
+ktm monitoring-results list --product my-operator~my-product
+
+# Table format
+ktm monitoring-results list --monitoring-id 2180 -o table
+```
+
 ## Details
 
 List monitoring results (run outcomes from scheduled monitors).
@@ -42,15 +55,9 @@ correct operator.
 
 Status codes: S=success, F=failed, O=ongoing, P=pending, WA=waiting, B=broken, DI=dismissed
 
-Filters:
-  --monitoring-id  filter by monitor ID (from 'monitors list') — required for operator-scoped results
-  --test-id        filter by test ID
-  --product        product slug (format: operator~product)
-  --start          results after this datetime (ISO 8601)
-  --end            results before this datetime (ISO 8601)
-  --ordering       sort: -modified (default) or modified
-  --page           page number (default: 1)
-  --page-size      results per page (default: 20)
+## Related
+
+- [`ktm monitors list`](/cli/commands/monitors/list)
 
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).

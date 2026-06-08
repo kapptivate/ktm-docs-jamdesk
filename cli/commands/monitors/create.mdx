@@ -29,6 +29,37 @@ ktm monitors create [flags]
 | `--test-id` | int | — | Test ID to monitor (required) |
 | `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. Globals always emit a global bucket. |
 
+## Examples
+
+```bash
+# Preview: see the creation plan (does NOT create)
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging"
+
+# Multi-group monitor: pin a variant per group
+ktm monitors create --product acme~web --test-id 100 \
+  --variant "API:Staging" --variant "Database:Replica" --variant "Frontend:Canary" --confirm
+
+# Numeric variant id (when stable across environments)
+ktm monitors create --product acme~web --test-id 100 --variant 11 --confirm
+
+# No pin: every variable uses its group's default variant
+ktm monitors create --product acme~web --test-id 100 --confirm
+
+# Override variables and submit
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging" \
+  --set-var "SIM_A=0699999999" --set-var "TODO_INDEX=42" --confirm
+
+# CI/CD: auto-build and submit without preview
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging" --force
+
+# Full manual control via JSON file (submits directly)
+ktm monitors create --product acme~web --test-id 100 --from-file monitor.json
+
+# Scheduling: every 10 minutes (simple/v2)
+ktm monitors create ... --confirm \
+  --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+```
+
 ## Details
 
 Create a monitor that runs a test on a schedule and tracks pass/fail status.
