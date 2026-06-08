@@ -119,6 +119,7 @@
                 "pages": [
                   "executions/run",
                   "executions/run-campaign",
+                  "executions/run-batch-csv",
                   "executions/ci-cd"
                 ]
               },

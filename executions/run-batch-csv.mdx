@@ -1,0 +1,197 @@
+---
+title: Run a batch from a CSV
+description: Upload a CSV file to run many tests at once, with per-test variables and shared run options.
+sidebarTitle: Batch CSV runs
+---
+
+{/* Hero screenshot of the "Upload CSV to run a tests suite" modal. Add the .webp file to images/ then uncomment.
+![The Upload CSV modal opened from the run queue, with the drag-and-drop area and the Run tests button](/images/run-batch-csv-modal.webp)
+*/}
+
+When you need to launch dozens of tests in one go, queuing them one by one is slow. A CSV batch file lets you describe a whole run in a single file: which tests to launch, the variables each one uses, and the options that apply to the batch. Upload it from the run queue and kapptivate executes everything as one batch.
+
+This page is the reference for that file. It describes each section, how to fill it, and how to upload and run it.
+
+## The CSV structure
+
+A batch file has three sections, each introduced by its own header line:
+
+```text
+__DESCRIPTION__
+__OPTIONS__
+__TESTS__
+```
+
+`__DESCRIPTION__` names the batch and points it at an environment. `__OPTIONS__` tunes how the batch runs. `__TESTS__` lists the tests to launch. Every value inside a section uses a semicolon (`;`) as separator.
+
+## Description section
+
+The `__DESCRIPTION__` section sets the batch **name** and the **variable_group_id** of the environment to run against. The batch reads its variables from that group.
+
+```text
+__DESCRIPTION__
+name;Long Test Suite
+variable_group_id;363
+```
+
+<Steps>
+  <Step title="Open your product">
+    Go to the product your tests belong to.
+  </Step>
+  <Step title="Open the variable group">
+    Go to **Configurations -> Variables groups** and select the group you want the batch to use.
+  </Step>
+  <Step title="Read the ID from the URL">
+    The number at the end of the URL is your `variable_group_id`:
+
+    ```text
+    https://example.kapptivate.com/customer/project/env/groups/363
+    ```
+
+    Here the ID is `363`.
+  </Step>
+</Steps>
+
+## Options section
+
+The `__OPTIONS__` section controls how kapptivate executes the batch. Every option is optional, and you can include as many as you need. These map to the same controls as the options of a [manual run](/executions/run).
+
+| Option | Example value | What it does |
+| --- | --- | --- |
+| `ignore_errors` | `True` | Keep running the batch when a step fails. |
+| `send_result_by_mail` | `True` | Email the results when the batch finishes. |
+| `send_result_by_sms` | `False` | Send the results by SMS. |
+| `send_result_by_call` | `False` | Send the results by call. |
+| `email_recipients` | `john.doe@company.com` | Who receives the email results. |
+| `sms_recipients` | `+33010000000` | Who receives the SMS results. |
+| `call_recipients` | `+33010000000` | Who receives the call results. |
+| `run_later` | `True` | Schedule the batch instead of running it now. |
+| `run_datetime` | `2025-07-27T09:36:54.653Z` | When to run, used with `run_later`. |
+| `timeout_sms` | `30` | Seconds to wait for an SMS. |
+| `timeout_ussd_push` | `30` | Seconds to wait for a USSD push. |
+| `sms_observation_delay` | `0` | Delay before observing an SMS. |
+
+```text
+__OPTIONS__
+ignore_errors;True
+send_result_by_mail;True
+email_recipients;user@example.com
+```
+
+## Tests section
+
+The `__TESTS__` section lists the tests to run, one per line. Each line starts with a **test ID**, optionally followed by `key;value` pairs that override variables for that test.
+
+```text
+TEST_ID;key1;value1;key2;value2
+```
+
+To find a test ID, open the test in kapptivate. The number at the end of the URL is its ID:
+
+```text
+https://app.kapptivate.com/.../test/edit/246
+```
+
+The same test can appear on several lines to run it with different variables. Pass as many pairs as you need:
+
+```text
+__TESTS__
+187;AGENT;R58M92A1MYY
+187;AGENT;XPH5T19823002962
+190
+```
+
+Line `190` runs the test with no overrides.
+
+## Full example
+
+```text
+__DESCRIPTION__
+name;Long Test Suite
+variable_group_id;363
+
+__OPTIONS__
+ignore_errors;True
+send_result_by_mail;True
+email_recipients;john.doe@example.com
+
+__TESTS__
+187;AGENT;R58M92A1MYY
+187;AGENT;XPH5T19823002962
+190
+```
+
+## Upload and run
+
+The CSV upload lives in the **run queue**, next to manual runs and campaigns.
+
+{/* Screenshot of the run queue panel empty state. Add the .webp file to images/ then uncomment.
+![The run queue panel with the upload action in its header](/images/run-queue-csv.webp)
+*/}
+
+<Steps>
+  <Step title="Open the run queue">
+    From the **Tests** or **Executions** page, open the run queue from the action button in the bottom right.
+  </Step>
+  <Step title="Start a CSV upload">
+    In the run queue header, click **Upload a CSV file to run batch tests**. The **Upload CSV to run a tests suite** dialog opens.
+  </Step>
+  <Step title="Select your file">
+    Click or drag your file into the upload area. Only `.CSV` files are accepted.
+  </Step>
+  <Step title="Run the tests">
+    Click **Run tests**. kapptivate redirects you to the batch execution, where you follow it as a [multi-test execution](/executions/results#multi-test-executions).
+  </Step>
+</Steps>
+
+<Tip>
+The upload dialog links to **How to create a valid CSV test file**, which points to this page. Keep the section headers and the semicolon separator exactly as shown above, or the file is rejected.
+</Tip>
+
+## Generate it with an AI agent
+
+If your AI assistant is connected to the [Kapptivate MCP server](/mcp/overview), you don't need a CSV at all: it can launch a batch directly from a plain-language request. The CSV route is for assistants that aren't connected, where the agent writes the file and you upload it yourself.
+
+In that case, give it the format from this page as context, then describe your run in plain language.
+
+A simple request:
+
+```text
+Build a kapptivate batch CSV for me.
+Name it "Nightly smoke" and use variable group 363.
+Run tests 187, 190 and 204.
+Run test 187 twice: once with AGENT = R58M92A1MYY, once with AGENT = XPH5T19823002962.
+Email results to maud@example.com when it finishes, and keep going if a step fails.
+```
+
+A more detailed one, with scheduling and several overrides:
+
+```text
+Generate a kapptivate batch CSV.
+Name it "Release regression" and use variable group 412.
+Schedule it for 2026-06-12 at 09:00 UTC, email results to qa@example.com, and ignore errors.
+Run these tests:
+- 187 with AGENT = R58M92A1MYY
+- 187 with AGENT = XPH5T19823002962
+- 190 with no overrides
+- 204 with LANG = fr and ENV = staging
+```
+
+<Tip>
+Tell the agent to keep the exact section headers (`__DESCRIPTION__`, `__OPTIONS__`, `__TESTS__`) and the semicolon separator. Then save its output as a `.csv` file and upload it from the run queue.
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Run a test" icon="play" href="/executions/run">
+
+    Queue tests from the UI, adjust devices and variables, and launch
+
+</Card>
+  <Card title="Run a campaign" icon="layer-group" href="/executions/run-campaign">
+
+    Group tests into a campaign and run them as one batch
+
+</Card>
+</Columns>
