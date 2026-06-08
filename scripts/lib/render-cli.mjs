@@ -28,7 +28,8 @@ function stripFlagDoc(body) {
   const out = [];
   for (let i = 0; i < lines.length; i++) {
     if (isFlag(lines[i])) continue;
-    if (/^[A-Z][\w /&-]*:\s*$/.test(lines[i].trim()) && isFlag(lines[i + 1] || '')) continue;
+    // Drop a label line (e.g. "Filters:", "Sources (exactly one required):") that only introduces a flag list.
+    if (lines[i].trim().endsWith(':') && isFlag(lines[i + 1] || '')) continue;
     out.push(lines[i]);
   }
   return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();

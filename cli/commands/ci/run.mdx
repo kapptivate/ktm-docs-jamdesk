@@ -89,6 +89,10 @@ Exit codes:
   0 = all tests passed
   1 = one or more tests failed, timed out, or output error
 
+## Notes
+
+- Executes a campaign produced by [`ktm ci build`](/cli/commands/ci/build) (from a file or `--stdin`). Use `--junit-file` / `--output-file` for CI reporting; the exit code is non-zero when any test fails.
+
 ## Related
 
 - [`ktm ci build`](/cli/commands/ci/build)

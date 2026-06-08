@@ -45,6 +45,22 @@ const catalogJSON = (catalog) => {
   return JSON.stringify(rest, null, 2) + '\n';
 };
 
+/** Non-fatal overlay sanity warnings so a stale overlay surfaces without ever blocking a regen. */
+function overlayWarnings(overlay, bucket, items, pageHrefs) {
+  const map = (overlay && overlay[bucket]) || {};
+  const ids = new Set(items.flatMap((i) => [i.id, i.name]));
+  const linkRe = bucket === 'tools' ? /\/mcp\/tools\/[\w./-]+/g : /\/cli\/commands\/[\w./-]+/g;
+  const noun = bucket === 'tools' ? 'tool' : 'command';
+  const warns = [];
+  for (const key of Object.keys(map)) {
+    if (!ids.has(key)) warns.push(`overlay "${key}" matches no current ${noun} — its curation will be ignored (stale?)`);
+    for (const href of JSON.stringify(map[key]).match(linkRe) || []) {
+      if (!pageHrefs.has(href)) warns.push(`overlay "${key}" links to a missing page: ${href}`);
+    }
+  }
+  return warns;
+}
+
 /** Build the MCP file set. Returns { files: Map<relPath,content>, navGroup, warnings, meta }. */
 async function buildMcp(args) {
   const categories = await readJSON(path.join(ROOT, 'scripts/mcp/categories.json'));
@@ -64,10 +80,11 @@ async function buildMcp(args) {
   files.set(CATALOG.mcp, catalogJSON(catalog));
   for (const a of renderMcp(renderCatalog)) files.set(`${a.path}.mdx`, a.content);
 
+  const pageHrefs = new Set([...files.keys()].filter((k) => k.endsWith('.mdx')).map((k) => '/' + k.slice(0, -4)));
   return {
     files,
     navGroup: { tab: 'MCP', group: 'Tools Reference', icon: 'robot', pages: mcpNavPages(catalog), afterGroup: 'Get started' },
-    warnings,
+    warnings: [...warnings, ...overlayWarnings(overlay, 'tools', catalog.items, pageHrefs)],
     meta: catalog.meta,
   };
 }
@@ -90,10 +107,11 @@ async function buildCli(args) {
   files.set(CATALOG.cli, catalogJSON(catalog));
   for (const a of renderCli(renderCatalog)) files.set(`${a.path}.mdx`, a.content);
 
+  const pageHrefs = new Set([...files.keys()].filter((k) => k.endsWith('.mdx')).map((k) => '/' + k.slice(0, -4)));
   return {
     files,
     navGroup: { tab: 'CLI', group: 'Command Reference', icon: 'terminal', pages: cliNavPages(catalog), afterGroup: 'Get started' },
-    warnings,
+    warnings: [...warnings, ...overlayWarnings(overlay, 'commands', catalog.items, pageHrefs)],
     meta: catalog.meta,
   };
 }

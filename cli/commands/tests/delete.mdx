@@ -50,6 +50,10 @@ Refuses without --yes.
 
 Backed by DELETE /api/tests/delete/ body \{identifiers, kind\}.
 
+## Notes
+
+- Soft-deletes to trash, recoverable with [`ktm tests undelete`](/cli/commands/tests/undelete). To merely hide a test from listings, use [`ktm tests archive`](/cli/commands/tests/archive).
+
 ## Related
 
 - [`ktm tests undelete`](/cli/commands/tests/undelete)

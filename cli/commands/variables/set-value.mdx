@@ -40,6 +40,10 @@ Atomic per-variant value setter. --variant accepts a variant id or name; the
 target variant must exist on the variable. Errors when called on a global
 variable (no variants) — use 'ktm variables update --default-value' instead.
 
+## Notes
+
+- Sets ONE variant's value on a grouped variable, preserving the other variants. To change a variable's name, description, or default value, use [`ktm variables update`](/cli/commands/variables/update).
+
 ## Related
 
 - [`ktm variables update`](/cli/commands/variables/update)

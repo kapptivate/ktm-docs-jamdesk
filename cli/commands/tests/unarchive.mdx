@@ -32,6 +32,10 @@ Flips the test's archived flag to false.
 
 Uses PATCH with a minimal body (only \{archived\}). This avoids the fragile full-payload round-trip that can 500 on tests whose action types aren't in the CLI registry.
 
+## Notes
+
+- Un-hides an archived test — the counterpart to [`ktm tests archive`](/cli/commands/tests/archive).
+
 <Note>
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>

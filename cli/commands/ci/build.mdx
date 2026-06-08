@@ -83,7 +83,9 @@ Campaign JSON schema:
     input_variables — key/value map of variable names to \{value, bucket\} pairs
     direct_owners   — key/value map of owner labels to resource identifiers
 
-Sources (exactly one required):
+## Notes
+
+- Builds a campaign template locally and prints JSON — it does **not** execute anything. Fill in the values, then pipe it to [`ktm ci run`](/cli/commands/ci/run) with `--stdin`.
 
 ## Related
 
