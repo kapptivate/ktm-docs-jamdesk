@@ -1,0 +1,52 @@
+---
+title: "get_artifact"
+description: "Fetch and view a screenshot, audio recording, or other artifact from a monitoring result."
+sidebarTitle: "get_artifact"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch and view a screenshot, audio recording, or other artifact from a monitoring result.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `path` | string | No | Relative artifact path — https://&lt;HOST&gt;/robot/ prefix added automatically. Mutually exclusive with url. |
+| `url` | string | No | Full artifact URL (e.g. screenshot URL from action results). Mutually exclusive with path. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "path": "string",
+  "url": "string"
+}
+```
+
+## Description
+
+```text
+Returns images/audio inline for direct viewing; text artifacts inline; videos and binary as metadata only. Use after get_monitoring_result include_actions=true reveals screenshot URLs or artifact paths.
+```
+
+## Related
+
+- [`get_monitoring_result`](/mcp/tools/monitoring-results/get_monitoring_result)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

@@ -1,0 +1,60 @@
+---
+title: "ktm variables variants remove"
+description: "Remove a variant; refuses if any variable holds non-default data unless --force"
+sidebarTitle: "remove"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Remove a variant; refuses if any variable holds non-default data unless --force
+
+## Usage
+
+```bash
+ktm variables variants remove <group-id> <variant-id> [flags]
+```
+
+## Examples
+
+```bash
+ktm variables variants remove 42 7           # refuses if data would be lost
+ktm variables variants remove 42 7 --force   # removes anyway
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `group-id` | Yes |
+| `variant-id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--force` | boolean | — | Bypass the non-default-values safety check |
+
+## Details
+
+Safe by default: refuses if any variable in the group has a non-default value
+for this variant, listing the affected variables. Pass --force to remove
+anyway (data on this variant will be lost).
+
+## Related
+
+- [`ktm variables variants`](/cli/commands/variables/variants)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

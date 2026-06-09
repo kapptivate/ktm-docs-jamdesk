@@ -370,10 +370,219 @@
         "icon": "robot",
         "groups": [
           {
-            "group": "MCP",
+            "group": "Get started",
             "icon": "robot",
             "pages": [
-              "mcp/overview"
+              "mcp/overview",
+              "mcp/concepts",
+              "mcp/workflows",
+              "mcp/examples"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              "mcp/connect",
+              "mcp/integrations/copilot-studio",
+              "mcp/integrations/gemini"
+            ]
+          },
+          {
+            "group": "Tools Reference",
+            "icon": "robot",
+            "pages": [
+              "mcp/tools/overview",
+              {
+                "group": "Discovery",
+                "pages": [
+                  "mcp/tools/discovery/get_full_test",
+                  "mcp/tools/discovery/get_smartphone_apps",
+                  "mcp/tools/discovery/get_test_detail",
+                  "mcp/tools/discovery/get_test_impact",
+                  "mcp/tools/discovery/list_monitors",
+                  "mcp/tools/discovery/list_operators",
+                  "mcp/tools/discovery/list_products",
+                  "mcp/tools/discovery/list_resources",
+                  "mcp/tools/discovery/list_tests",
+                  "mcp/tools/discovery/list_users",
+                  "mcp/tools/discovery/platform_guide",
+                  "mcp/tools/discovery/toggle_user_status"
+                ]
+              },
+              {
+                "group": "Test Management",
+                "pages": [
+                  "mcp/tools/test-management/create_test",
+                  "mcp/tools/test-management/get_test_template",
+                  "mcp/tools/test-management/list_action_types",
+                  "mcp/tools/test-management/list_step_types",
+                  "mcp/tools/test-management/manage_test_lifecycle",
+                  "mcp/tools/test-management/validate_test"
+                ]
+              },
+              {
+                "group": "Test Editing",
+                "pages": [
+                  "mcp/tools/test-editing/edit_test",
+                  "mcp/tools/test-editing/list_test_versions",
+                  "mcp/tools/test-editing/preview_test_edit",
+                  "mcp/tools/test-editing/restore_test_version"
+                ]
+              },
+              {
+                "group": "Tests Campaigns",
+                "pages": [
+                  "mcp/tools/test-campaigns/create_test_campaign",
+                  "mcp/tools/test-campaigns/delete_test_campaign",
+                  "mcp/tools/test-campaigns/get_test_campaign",
+                  "mcp/tools/test-campaigns/list_test_campaigns",
+                  "mcp/tools/test-campaigns/update_test_campaign"
+                ]
+              },
+              {
+                "group": "Execution",
+                "pages": [
+                  "mcp/tools/execution/build_campaign",
+                  "mcp/tools/execution/poll_execution",
+                  "mcp/tools/execution/run_campaign",
+                  "mcp/tools/execution/start_execution"
+                ]
+              },
+              {
+                "group": "Results",
+                "pages": [
+                  "mcp/tools/results/get_artifact",
+                  "mcp/tools/results/get_execution_detail",
+                  "mcp/tools/results/list_executions"
+                ]
+              },
+              {
+                "group": "Reusables",
+                "pages": [
+                  "mcp/tools/reusables/get_reusable",
+                  "mcp/tools/reusables/list_reusable_usage",
+                  "mcp/tools/reusables/list_reusables",
+                  "mcp/tools/reusables/list_reusables_in_test"
+                ]
+              },
+              {
+                "group": "Collections",
+                "pages": [
+                  "mcp/tools/collections/create_collection",
+                  "mcp/tools/collections/delete_collection",
+                  "mcp/tools/collections/get_collection",
+                  "mcp/tools/collections/list_collection_items",
+                  "mcp/tools/collections/list_collections",
+                  "mcp/tools/collections/move_collection",
+                  "mcp/tools/collections/move_collection_items",
+                  "mcp/tools/collections/rename_collection",
+                  "mcp/tools/collections/search_collections"
+                ]
+              },
+              {
+                "group": "Variables",
+                "pages": [
+                  "mcp/tools/variables/add_variant",
+                  "mcp/tools/variables/check_variable_name",
+                  "mcp/tools/variables/copy_variant_values",
+                  "mcp/tools/variables/create_variable",
+                  "mcp/tools/variables/create_variable_group",
+                  "mcp/tools/variables/delete_variable",
+                  "mcp/tools/variables/delete_variable_group",
+                  "mcp/tools/variables/duplicate_variable",
+                  "mcp/tools/variables/get_variable",
+                  "mcp/tools/variables/get_variable_group",
+                  "mcp/tools/variables/list_variable_groups",
+                  "mcp/tools/variables/list_variables",
+                  "mcp/tools/variables/remove_variant",
+                  "mcp/tools/variables/rename_variant",
+                  "mcp/tools/variables/set_default_variant",
+                  "mcp/tools/variables/set_variable_value",
+                  "mcp/tools/variables/update_variable",
+                  "mcp/tools/variables/update_variable_group"
+                ]
+              },
+              {
+                "group": "Monitor Management",
+                "pages": [
+                  "mcp/tools/monitor-management/batch_create_monitors",
+                  "mcp/tools/monitor-management/create_monitor",
+                  "mcp/tools/monitor-management/edit_monitor",
+                  "mcp/tools/monitor-management/force_run_monitor",
+                  "mcp/tools/monitor-management/get_monitor",
+                  "mcp/tools/monitor-management/preview_monitor_edit",
+                  "mcp/tools/monitor-management/toggle_monitors"
+                ]
+              },
+              {
+                "group": "Monitoring Results",
+                "pages": [
+                  "mcp/tools/monitoring-results/get_monitoring_result",
+                  "mcp/tools/monitoring-results/list_monitoring_results"
+                ]
+              },
+              {
+                "group": "Alerting",
+                "pages": [
+                  "mcp/tools/alerting/close_incident",
+                  "mcp/tools/alerting/get_alert_definition",
+                  "mcp/tools/alerting/get_incident",
+                  "mcp/tools/alerting/get_incident_counter",
+                  "mcp/tools/alerting/list_alert_definitions",
+                  "mcp/tools/alerting/list_incidents"
+                ]
+              },
+              {
+                "group": "Metrics",
+                "pages": [
+                  "mcp/tools/metrics/compute_slo",
+                  "mcp/tools/metrics/correlate_metrics",
+                  "mcp/tools/metrics/evaluate_alert",
+                  "mcp/tools/metrics/get_resource_usage",
+                  "mcp/tools/metrics/query_metrics"
+                ]
+              },
+              {
+                "group": "Dashboard",
+                "pages": [
+                  "mcp/tools/dashboard/create_dashboard",
+                  "mcp/tools/dashboard/get_dashboard",
+                  "mcp/tools/dashboard/list_dashboards",
+                  "mcp/tools/dashboard/update_dashboard"
+                ]
+              },
+              {
+                "group": "Dashboard Widget",
+                "pages": [
+                  "mcp/tools/dashboard-widget/add_dashboard_widget",
+                  "mcp/tools/dashboard-widget/build_dashboard",
+                  "mcp/tools/dashboard-widget/edit_dashboard_widget",
+                  "mcp/tools/dashboard-widget/get_widget_template",
+                  "mcp/tools/dashboard-widget/list_widget_types",
+                  "mcp/tools/dashboard-widget/remove_dashboard_widget",
+                  "mcp/tools/dashboard-widget/validate_widget"
+                ]
+              },
+              {
+                "group": "Shell",
+                "pages": [
+                  "mcp/tools/shell/cancel_shell",
+                  "mcp/tools/shell/get_shell_result",
+                  "mcp/tools/shell/list_shell_action_types",
+                  "mcp/tools/shell/list_shell_actions",
+                  "mcp/tools/shell/send_shell_command"
+                ]
+              },
+              {
+                "group": "Agent",
+                "pages": [
+                  "mcp/tools/agent/get_agent",
+                  "mcp/tools/agent/list_agents",
+                  "mcp/tools/agent/reboot_agent",
+                  "mcp/tools/agent/toggle_agent_maintenance"
+                ]
+              }
             ]
           }
         ]
@@ -383,12 +592,271 @@
         "icon": "terminal",
         "groups": [
           {
-            "group": "CLI Reference",
+            "group": "Get started",
             "icon": "terminal",
             "pages": [
               "cli/overview",
-              "cli/commands",
-              "cli/configuration"
+              "cli/installation",
+              "cli/getting-started",
+              "cli/configuration",
+              "cli/ci-cd"
+            ]
+          },
+          {
+            "group": "Guides",
+            "icon": "compass",
+            "pages": [
+              "cli/guides/cheat-sheet",
+              "cli/guides/create-tests",
+              "cli/guides/run-campaigns",
+              "cli/guides/monitors-incidents",
+              "cli/guides/device-farm"
+            ]
+          },
+          {
+            "group": "Command Reference",
+            "icon": "terminal",
+            "pages": [
+              "cli/commands/overview",
+              {
+                "group": "adb",
+                "pages": [
+                  "cli/commands/adb",
+                  "cli/commands/adb/connect"
+                ]
+              },
+              {
+                "group": "agents",
+                "pages": [
+                  "cli/commands/agents",
+                  "cli/commands/agents/get",
+                  "cli/commands/agents/list",
+                  "cli/commands/agents/maintenance",
+                  "cli/commands/agents/reboot"
+                ]
+              },
+              {
+                "group": "alerts",
+                "pages": [
+                  "cli/commands/alerts",
+                  "cli/commands/alerts/get",
+                  "cli/commands/alerts/list"
+                ]
+              },
+              {
+                "group": "artifacts",
+                "pages": [
+                  "cli/commands/artifacts",
+                  "cli/commands/artifacts/get"
+                ]
+              },
+              {
+                "group": "ci",
+                "pages": [
+                  "cli/commands/ci",
+                  "cli/commands/ci/build",
+                  "cli/commands/ci/run"
+                ]
+              },
+              {
+                "group": "collections",
+                "pages": [
+                  "cli/commands/collections",
+                  "cli/commands/collections/can-edit",
+                  "cli/commands/collections/create",
+                  "cli/commands/collections/delete",
+                  "cli/commands/collections/get",
+                  "cli/commands/collections/items",
+                  "cli/commands/collections/list",
+                  "cli/commands/collections/move",
+                  "cli/commands/collections/move-items",
+                  "cli/commands/collections/rename",
+                  "cli/commands/collections/search"
+                ]
+              },
+              {
+                "group": "dashboards",
+                "pages": [
+                  "cli/commands/dashboards",
+                  "cli/commands/dashboards/add-widget",
+                  "cli/commands/dashboards/build",
+                  "cli/commands/dashboards/create",
+                  "cli/commands/dashboards/edit-widget",
+                  "cli/commands/dashboards/get",
+                  "cli/commands/dashboards/list",
+                  "cli/commands/dashboards/list-widget-types",
+                  "cli/commands/dashboards/remove-widget",
+                  "cli/commands/dashboards/update",
+                  "cli/commands/dashboards/validate-widget",
+                  "cli/commands/dashboards/widget-template"
+                ]
+              },
+              {
+                "group": "executions",
+                "pages": [
+                  "cli/commands/executions",
+                  "cli/commands/executions/get",
+                  "cli/commands/executions/list"
+                ]
+              },
+              {
+                "group": "incidents",
+                "pages": [
+                  "cli/commands/incidents",
+                  "cli/commands/incidents/close",
+                  "cli/commands/incidents/counter",
+                  "cli/commands/incidents/get",
+                  "cli/commands/incidents/list"
+                ]
+              },
+              {
+                "group": "metrics",
+                "pages": [
+                  "cli/commands/metrics",
+                  "cli/commands/metrics/alert-eval",
+                  "cli/commands/metrics/correlate",
+                  "cli/commands/metrics/peak-usage",
+                  "cli/commands/metrics/query",
+                  "cli/commands/metrics/resource-usage",
+                  "cli/commands/metrics/slo"
+                ]
+              },
+              {
+                "group": "monitoring-results",
+                "pages": [
+                  "cli/commands/monitoring-results",
+                  "cli/commands/monitoring-results/get",
+                  "cli/commands/monitoring-results/list"
+                ]
+              },
+              {
+                "group": "monitors",
+                "pages": [
+                  "cli/commands/monitors",
+                  "cli/commands/monitors/batch-create",
+                  "cli/commands/monitors/create",
+                  "cli/commands/monitors/edit",
+                  "cli/commands/monitors/force-run",
+                  "cli/commands/monitors/get",
+                  "cli/commands/monitors/list",
+                  "cli/commands/monitors/toggle"
+                ]
+              },
+              {
+                "group": "operators",
+                "pages": [
+                  "cli/commands/operators",
+                  "cli/commands/operators/list"
+                ]
+              },
+              {
+                "group": "products",
+                "pages": [
+                  "cli/commands/products",
+                  "cli/commands/products/list"
+                ]
+              },
+              {
+                "group": "resources",
+                "pages": [
+                  "cli/commands/resources",
+                  "cli/commands/resources/get",
+                  "cli/commands/resources/list"
+                ]
+              },
+              {
+                "group": "reusables",
+                "pages": [
+                  "cli/commands/reusables",
+                  "cli/commands/reusables/get",
+                  "cli/commands/reusables/in-test",
+                  "cli/commands/reusables/list",
+                  "cli/commands/reusables/usage"
+                ]
+              },
+              {
+                "group": "shell",
+                "pages": [
+                  "cli/commands/shell",
+                  "cli/commands/shell/cancel",
+                  "cli/commands/shell/get",
+                  "cli/commands/shell/list",
+                  "cli/commands/shell/progress",
+                  "cli/commands/shell/send",
+                  "cli/commands/shell/types"
+                ]
+              },
+              "cli/commands/status",
+              {
+                "group": "test-campaigns",
+                "pages": [
+                  "cli/commands/test-campaigns",
+                  "cli/commands/test-campaigns/create",
+                  "cli/commands/test-campaigns/creators",
+                  "cli/commands/test-campaigns/delete",
+                  "cli/commands/test-campaigns/get",
+                  "cli/commands/test-campaigns/list",
+                  "cli/commands/test-campaigns/update"
+                ]
+              },
+              {
+                "group": "tests",
+                "pages": [
+                  "cli/commands/tests",
+                  "cli/commands/tests/action-types",
+                  "cli/commands/tests/archive",
+                  "cli/commands/tests/create",
+                  "cli/commands/tests/delete",
+                  "cli/commands/tests/dry-run",
+                  "cli/commands/tests/edit",
+                  "cli/commands/tests/get",
+                  "cli/commands/tests/history",
+                  "cli/commands/tests/impact",
+                  "cli/commands/tests/inspect",
+                  "cli/commands/tests/list",
+                  "cli/commands/tests/restore",
+                  "cli/commands/tests/step-types",
+                  "cli/commands/tests/template",
+                  "cli/commands/tests/unarchive",
+                  "cli/commands/tests/undelete",
+                  "cli/commands/tests/validate"
+                ]
+              },
+              {
+                "group": "users",
+                "pages": [
+                  "cli/commands/users",
+                  "cli/commands/users/activate",
+                  "cli/commands/users/deactivate",
+                  "cli/commands/users/list"
+                ]
+              },
+              {
+                "group": "variables",
+                "pages": [
+                  "cli/commands/variables",
+                  "cli/commands/variables/create",
+                  "cli/commands/variables/delete",
+                  "cli/commands/variables/duplicate",
+                  "cli/commands/variables/groups",
+                  "cli/commands/variables/groups/create",
+                  "cli/commands/variables/groups/delete",
+                  "cli/commands/variables/groups/list",
+                  "cli/commands/variables/groups/show",
+                  "cli/commands/variables/groups/update",
+                  "cli/commands/variables/list",
+                  "cli/commands/variables/name-available",
+                  "cli/commands/variables/set-value",
+                  "cli/commands/variables/show",
+                  "cli/commands/variables/update",
+                  "cli/commands/variables/variants",
+                  "cli/commands/variables/variants/add",
+                  "cli/commands/variables/variants/copy-values",
+                  "cli/commands/variables/variants/remove",
+                  "cli/commands/variables/variants/rename",
+                  "cli/commands/variables/variants/set-default"
+                ]
+              }
             ]
           }
         ]

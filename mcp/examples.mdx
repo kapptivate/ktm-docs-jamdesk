@@ -1,0 +1,63 @@
+---
+title: Example prompts
+description: What to ask an AI assistant connected to the Kapptivate MCP server, grouped by goal.
+sidebarTitle: Examples
+---
+
+Once an assistant is connected, you drive Kapptivate in plain language. These are prompts that work well, grouped by goal. You rarely name a tool: describe the outcome and the agent picks the path. For anything that creates or changes data, the agent shows you the plan first.
+
+## Investigate a failure
+
+The fastest way to understand *why* something broke, when the dashboard only tells you *that* it broke.
+
+- "Monitor 4521 went red an hour ago. What changed, and what is the most likely cause?"
+- "Summarize the failures in last night's checkout regression, grouped by root cause."
+- "Open execution 889123, find the failed step, and show me its error and screenshot."
+- "Which monitors are in an open incident right now, and what do they have in common?"
+- "Compare the last passing run of test 16480 with the first failing one and tell me what differs."
+
+## Create a test
+
+Describe the test in plain language and the agent scaffolds it (it reads a template, fills it, and creates the test on review). Works for every channel.
+
+- **API:** "Create an API test on acme~web that sends GET https://api.acme.test/health and asserts the status is 200."
+- **Web:** "Create a web test on acme~web that opens the login page, signs in as the demo user, and checks the dashboard heading is visible."
+- **Smartphone app:** "Create a smartphone app test that launches our Android app, logs in, and verifies the account balance screen appears."
+- **USSD:** "Create a USSD test that dials *123# and waits for the balance SMS to arrive."
+- **SMS:** "Create an SMS test that sends BAL to 1234 and checks the reply contains the balance."
+
+<Tip>
+  Be specific about the product slug, the endpoint or screen, and what counts as success. The agent maps it to the right action type (API, web, app, USSD/SMS) and asks before it writes.
+</Tip>
+
+## Run a test or campaign
+
+- "Run the checkout regression on Staging and tell me which tests failed."
+- "Build a campaign from tests 16480 and 16838 on acme~web, pin the API group to Prod, run it, and wait for the results."
+
+## Track quality over time
+
+- "What is the p95 response time trend for the payments product this week?"
+- "Are we on track for our 99.9% SLO this month, and how much error budget is left?"
+
+## Manage configuration
+
+- "Add a Staging variant to the API variable group and set BASE_URL to https://staging.acme.test."
+
+<Tip>
+  For a multi-step task, a good opening prompt is "load the platform guide for test creation before you start" — the server exposes a `platform_guide` tool that returns the exact, current workflow.
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Set up Claude, Cursor, or Claude Code.
+  </Card>
+  <Card title="Core concepts" icon="sitemap" href="/mcp/concepts">
+    Operators, products, variables, and the safety model.
+  </Card>
+  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
+    The full tool catalog behind these prompts.
+  </Card>
+</Columns>

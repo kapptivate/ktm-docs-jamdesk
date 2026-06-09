@@ -1,0 +1,42 @@
+---
+title: Local device access (ADB)
+description: Tunnel a smartphone from the device farm to your local machine for hands-on debugging.
+sidebarTitle: Device farm (ADB)
+---
+
+Developers can attach a phone from the device farm to their local machine over a secure tunnel, so `adb`, Android Studio, and JDWP debugging work against a remote device as if it were plugged in. This is handy when authoring or debugging smartphone tests.
+
+## Connect a phone
+
+<Steps>
+  <Step title="Find the device">
+    `ktm resources list --product acme~web --type smartphone -o table` lists the smartphones you can reach. See [Devices lab](/equipment/devices-lab).
+  </Step>
+  <Step title="Open the tunnel">
+    `ktm adb connect <phone-serial>` starts a local ADB tunnel to that phone.
+  </Step>
+  <Step title="Use it locally">
+    The device auto-registers with your local ADB server, so `adb devices` shows it and Android Studio picks it up.
+  </Step>
+</Steps>
+
+```bash
+# Connect (the device registers with your local ADB server on port 6037)
+ktm adb connect RF8NB07VDGA
+
+# Use a custom local port
+ktm adb connect RF8NB07VDGA --port 7037
+```
+
+A thin TCP relay bridges your local ADB server to the remote phone over a secure WebSocket tunnel, with full support for port forwarding, reverse forwarding, and JDWP debugging. Your real local ADB server handles all protocol concerns.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create tests" icon="flask" href="/cli/guides/create-tests">
+    Author smartphone app tests once your device is connected.
+  </Card>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/adb/connect">
+    The full `ktm adb connect` reference.
+  </Card>
+</Columns>

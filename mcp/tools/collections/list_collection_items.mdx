@@ -1,0 +1,55 @@
+---
+title: "list_collection_items"
+description: "List the items (tests and dashboards, mixed) contained directly in a collection."
+sidebarTitle: "list_collection_items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List the items (tests and dashboards, mixed) contained directly in a collection.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full JSON instead of compact one-liners (default: false) |
+| `operator` | string | Yes | Operator slug |
+| `page` | number | No | Page number (default: 1) |
+| `page_size` | number | No | Items per page (default: 25) |
+| `uid` | string | Yes | Collection UID |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "uid": "string"
+}
+```
+
+## Description
+
+```text
+Compact one-liners tag each item: [T] for tests, [R] for reusable tests, [D] for dashboards. Root UID from list_products detail=true (tests_root_collection_uid).
+```
+
+## Related
+
+- [`list_products`](/mcp/tools/discovery/list_products)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

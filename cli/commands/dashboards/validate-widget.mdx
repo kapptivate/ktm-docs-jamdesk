@@ -1,0 +1,52 @@
+---
+title: "ktm dashboards validate-widget"
+description: "Dry-run validation of a dashboard widget JSON"
+sidebarTitle: "validate-widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Dry-run validation of a dashboard widget JSON
+
+## Usage
+
+```bash
+ktm dashboards validate-widget [flags]
+```
+
+## Examples
+
+```bash
+ktm dashboards validate-widget --json widget.json
+cat widget.json | ktm dashboards validate-widget --json -
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
+
+## Details
+
+Validate a widget JSON file without modifying any dashboard.
+Checks type, structure, query fields, placeholder detection, and per-type constraints.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

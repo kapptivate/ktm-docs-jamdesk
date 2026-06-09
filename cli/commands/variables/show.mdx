@@ -1,0 +1,68 @@
+---
+title: "ktm variables show"
+description: "Fetch a single variable, rich-by-default with usage; --lite skips usage"
+sidebarTitle: "show"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch a single variable, rich-by-default with usage; --lite skips usage
+
+## Usage
+
+```bash
+ktm variables show <id> [flags]
+```
+
+## Examples
+
+```bash
+ktm variables show 17
+ktm variables show 17 --lite
+ktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--lite` | boolean | — | Skip the usage fetch (faster; default rich) |
+| `--variant` | string | — | Reserved — no effect today |
+
+## Details
+
+Returns the full Variable shape: id, name, type, scope, default_value, and
+variable_values[] per variant.
+
+CLI is rich-by-default (humans want full info): the response also includes the
+list of tests referencing this variable. Pass --lite to skip the usage fetch.
+
+The --variant flag is reserved for future per-variant projection and currently
+has no effect.
+
+Backed by GET /api/v2/variables/\{id\}/ (+ /api/v2/variables-usage/by-product/ when not --lite).
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,90 @@
+---
+title: Core concepts
+description: The entity model, variable system, edit budgets, and safety annotations behind the MCP tools.
+sidebarTitle: Concepts
+---
+
+The MCP tools mirror Kapptivate's data model. A few concepts explain how the tools fit together and why some of them ask for confirmation before they act.
+
+## Entity hierarchy
+
+Everything hangs off an operator and a product:
+
+```
+Operator (organisation)
+└─ Product  (slug: operator~product)
+   ├─ Tests
+   ├─ Monitors
+   ├─ Variables
+   ├─ Test campaigns
+   ├─ Collections
+   └─ Resources (SIMs, web agents, smartphones)
+```
+
+Product slugs always take the form `operator~product`. Dashboards and agents are scoped to the operator, not the product. Alert definitions and the incidents they raise are also operator-scoped.
+
+<Tip>
+  Start a session with `list_operators`, then `list_products`, to learn the slugs you will pass to almost every other tool.
+</Tip>
+
+## Variables and variants
+
+Configuration values live in a three-level system, scoped per product:
+
+| Level | What it is |
+| --- | --- |
+| Variable | A typed value used at runtime: `single`, `secret`, or `choice`. |
+| Variable group | A container that holds a set of variants (an environment configuration). |
+| Variant | One environment slice inside a group, for example `Dev`, `Staging`, or `Prod`. |
+
+Global variables have no group and a single constant value. Group-scoped variables hold one value per variant. At runtime you select which values to inject by passing a `variants` array (for example `variants=["API:Staging"]`) to `build_campaign`, `run_campaign`, or `create_monitor`.
+
+## Reusables
+
+Reusables are shared test fragments: tests with `kind=2`, embedded into other V2 tests through an import step. Only V2 action types support them. Use `list_reusables` and `get_reusable` to inspect them.
+
+## Safety annotations
+
+Every tool declares behavior hints so a client can decide when to ask for confirmation:
+
+| Annotation | Meaning |
+| --- | --- |
+| Read-only | Does not modify data. Safe to call freely. |
+| Destructive | Can modify or delete data. Review the arguments first. |
+| Idempotent | Repeating the call produces the same result. |
+| Open-world | Reaches the live Kapptivate platform. |
+
+Read-only tools are safe to explore with. Treat destructive tools the way you would treat a manual change in the UI.
+
+## Edit budgets
+
+To prevent runaway changes, the server caps how many mutations one session can make to a given resource:
+
+| Resource | Limit |
+| --- | --- |
+| Tests | 5 per test |
+| Monitors | 10 per monitor |
+| Dashboards | 50 per dashboard |
+| Collections | 20 per session |
+| Variables | 10 per session |
+| Test campaigns | 20 per session |
+
+When a limit is reached, the tool stops and asks for approval. After you confirm, the agent passes `acknowledge=true` to reset the budget and continue.
+
+## Two alert systems
+
+Do not confuse the two:
+
+- **`evaluate_alert`** runs a local, on-demand analysis of metrics. It is stateless and persists nothing. Use it to explore.
+- **Alert definitions and incidents** are the persistent platform system. Use `list_alert_definitions` and `list_incidents` to check real alert status, not `evaluate_alert`.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Common workflows" icon="diagram-project" href="/mcp/workflows">
+    Put these concepts to work: run tests, monitor, query metrics.
+  </Card>
+  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
+    Every tool, grouped by category.
+  </Card>
+</Columns>

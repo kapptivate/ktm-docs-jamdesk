@@ -1,0 +1,84 @@
+---
+title: CI/CD
+description: Run Kapptivate tests from your pipeline with stable exit codes, JUnit output, and native GitHub Actions annotations.
+sidebarTitle: CI/CD
+---
+
+`ktm` is built for pipelines. The pattern is always the same: build a campaign, run it, publish the results. The CLI returns JSON, writes JUnit XML, and exits non-zero when tests fail, so your pipeline reacts automatically.
+
+## GitHub Actions
+
+```yaml
+name: Kapptivate Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ktm
+        run: |
+          # Put the ktm binary on the PATH (see Installation), then:
+          ktm --version
+
+      - name: Build campaign
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+        run: |
+          ktm ci build \
+            --test-ids 16480,16838 \
+            --product acme~web --variant "API:Staging" > campaign.json
+
+      - name: Run tests
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+        run: |
+          ktm ci run \
+            --test-config-path campaign.json \
+            --junit-file results.xml \
+            --output-file summary.json
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            results.xml
+            summary.json
+```
+
+### Native GitHub integration
+
+When `GITHUB_ACTIONS=true` (set automatically), `ktm` produces native output with no extra configuration:
+
+- It emits `::notice` and `::error` annotations that appear on the run and on pull requests.
+- It appends a results table to the job summary.
+
+The JSON summary is suppressed on stdout in that mode, so pass `--output-file summary.json` to keep it as a file.
+
+## Other platforms
+
+The same build-then-run pattern works on GitLab CI, Jenkins, and any runner. Set `KAPPTIVATE_API_KEY` as a secret, put `ktm` on the PATH, then call `ktm ci build` and `ktm ci run`. Commit your campaign JSON or test configs to the repo and point `ktm ci run --test-config-dir ./tests/` at them.
+
+## Exit codes
+
+The pipeline fails on any non-zero exit. Code `5` means tests ran but some failed (distinct from `1`, a general error). See [Configuration](/cli/configuration) for the full list.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/overview">
+    The `ci` commands and their flags.
+  </Card>
+  <Card title="Configuration" icon="gear" href="/cli/configuration">
+    Exit codes, environment variables, and output formats.
+  </Card>
+</Columns>

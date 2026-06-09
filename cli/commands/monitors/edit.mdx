@@ -1,0 +1,96 @@
+---
+title: "ktm monitors edit"
+description: "Edit an existing monitor"
+sidebarTitle: "edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Edit an existing monitor
+
+## Usage
+
+```bash
+ktm monitors edit <id> [flags]
+```
+
+## Examples
+
+```bash
+# Change scheduling
+ktm monitors edit 42 --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+
+# Pause a monitor
+ktm monitors edit 42 --active false
+
+# Override a variable (re-builds owners + input_variables from test definition)
+ktm monitors edit 42 --set-var "SIM_A=0699999999"
+
+# Re-pin a variant (V3): re-resolve buckets for the named group
+ktm monitors edit 42 --variant "API:Staging"
+
+# Edit from a JSON file
+ktm monitors edit 42 --from-file patch.json
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | New active status (true/false) |
+| `--from-file` | string | — | JSON file with fields to update |
+| `--name` | string | — | New monitor name |
+| `--scheduling` | string | — | New scheduling JSON |
+| `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE). Re-builds owners + input_variables from the test definition. |
+| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Unpinned groups retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. |
+
+## Details
+
+Update monitor configuration via PATCH. Only provided fields are changed.
+
+Use --set-var to update individual variable values (auto-rebuilds owners + input_variables).
+Use --variant to re-pin a variable group's variant (repeatable; same shape as tests create).
+Use --from-file for bulk field updates or individual flags for targeted changes.
+Flag values take priority over --from-file values.
+
+V3 auto-migration on edit:
+  Legacy monitors (created before V3) carry a top-level variable_group field
+  and lack per-variable buckets. Editing such a monitor auto-migrates it to
+  V3 form: every input_variable gets a bucket, and the legacy variable_group
+  field is cleared (set to null on the wire). The migration is idempotent
+  — re-editing an already-V3 monitor is a no-op on the bucket side. There
+  is no opt-out: the migration is correct by construction and always fires
+  for legacy monitors.
+
+  When the underlying test references multiple variable groups, variables
+  in groups OTHER than the legacy variable_group use their own group's
+  default variant (unless --variant overrides). Use --variant to pin
+  non-default variants for specific groups during the migration edit.
+
+Protected fields: test_id and product_id cannot be changed via edit.
+To change the underlying test, delete the monitor and create a new one.
+
+## Related
+
+- [`ktm monitors`](/cli/commands/monitors)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

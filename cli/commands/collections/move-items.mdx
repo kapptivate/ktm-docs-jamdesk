@@ -1,0 +1,63 @@
+---
+title: "ktm collections move-items"
+description: "Move tests/dashboards into a target collection"
+sidebarTitle: "move-items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Move tests/dashboards into a target collection
+
+## Usage
+
+```bash
+ktm collections move-items [flags]
+```
+
+## Examples
+
+```bash
+# Discover item UIDs under the source collection, then move one into another.
+ktm collections items --operator my-op <src_uid> -o json | jq -r '.[0].uid'
+ktm collections move-items --operator my-op --target <dst_uid> --items "<item_uid>"
+
+# Batch move
+ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<uid2>,<uid3>"
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--items` | string | — | Comma-separated item UIDs (required) |
+| `--operator` | string | — | Operator slug (required) |
+| `--target` | string | — | Destination collection UID (required) |
+
+## Details
+
+Relocate items between collections in a single call. --items takes a
+comma-separated list of kcollections item UIDs (NOT the numeric test id; use
+'ktm collections items &lt;src_uid&gt;' to discover the UIDs). The service moves
+every listed item into --target atomically.
+
+Backed by POST /kcollections/api/items/move.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
+- [`ktm collections items`](/cli/commands/collections/items)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

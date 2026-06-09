@@ -1,0 +1,108 @@
+---
+title: "ktm monitors create"
+description: "Create a new monitor for an existing test"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new monitor for an existing test
+
+## Usage
+
+```bash
+ktm monitors create [flags]
+```
+
+## Examples
+
+```bash
+# Preview: see the creation plan (does NOT create)
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging"
+
+# Multi-group monitor: pin a variant per group
+ktm monitors create --product acme~web --test-id 100 \
+  --variant "API:Staging" --variant "Database:Replica" --variant "Frontend:Canary" --confirm
+
+# Numeric variant id (when stable across environments)
+ktm monitors create --product acme~web --test-id 100 --variant 11 --confirm
+
+# No pin: every variable uses its group's default variant
+ktm monitors create --product acme~web --test-id 100 --confirm
+
+# Override variables and submit
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging" \
+  --set-var "SIM_A=0699999999" --set-var "TODO_INDEX=42" --confirm
+
+# CI/CD: auto-build and submit without preview
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging" --force
+
+# Full manual control via JSON file (submits directly)
+ktm monitors create --product acme~web --test-id 100 --from-file monitor.json
+
+# Scheduling: every 10 minutes (simple/v2)
+ktm monitors create ... --confirm \
+  --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Submit the auto-built payload after reviewing the preview |
+| `--force` | boolean | — | Bypass preview — auto-build and submit in one step (CI/CD automation only) |
+| `--from-file` | string | — | JSON file with owners, input_variables, scheduling, options (submits directly; --variant ignored) |
+| `--name` | string | — | Monitor name (defaults to test name) |
+| `--product` | string | — | Product slug (required, format: operator~product) |
+| `--scheduling` | string | — | JSON scheduling object. Types: simple/v2 (interval), advanced/v2 (time-windowed with "at" or "between"). Default: simple/v2 every 5 min. See examples in --help. |
+| `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE) |
+| `--start` | boolean | `true; --start=false creates it paused) (default true` | Start the monitor immediately after creation |
+| `--test-id` | int | — | Test ID to monitor (required) |
+| `--variant` | string[] | — | Pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned use their default variant. Globals always emit a global bucket. |
+
+## Details
+
+Create a monitor that runs a test on a schedule and tracks pass/fail status.
+
+The product must have monitoring enabled.
+
+Pin variants per group via repeatable --variant. Each --variant pins one
+group's variant; groups not pinned use their default variant. Globals
+always resolve to a global bucket. The submitted payload sets
+variable_group: null; per-variable buckets carry the group info.
+
+Without --from-file, auto-builds owners and input_variables from the test
+definition. The computed payload is shown for review before submission.
+
+Three modes:
+  Preview (default): shows the auto-built creation plan. Review it for empty
+  device slots or missing values before re-running with --confirm.
+  Confirm (--confirm): submits after user has reviewed the preview.
+  Force (--force): bypasses preview entirely — auto-builds and submits in one
+  step. Use --force only in CI/CD pipelines and automation scripts.
+
+Use --set-var to override individual variable values in the auto-built template.
+Use --from-file for full manual control (submits directly, no preview).
+
+## Notes
+
+- Creates a scheduled, recurring execution of a test. For a single ad-hoc run, use [`ktm ci build`](/cli/commands/ci/build) then [`ktm ci run`](/cli/commands/ci/run) instead.
+
+## Related
+
+- [`ktm monitors`](/cli/commands/monitors)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

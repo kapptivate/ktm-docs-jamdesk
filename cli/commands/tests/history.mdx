@@ -1,0 +1,68 @@
+---
+title: "ktm tests history"
+description: "List version history for a test"
+sidebarTitle: "history"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List version history for a test
+
+## Usage
+
+```bash
+ktm tests history <id> [flags]
+```
+
+## Examples
+
+```bash
+# List available history dates
+ktm tests history 16480
+
+# List versions for a specific date
+ktm tests history 16480 --date 2026-03-06
+
+# Paginate through versions
+ktm tests history 16480 --date 2026-03-06 --page 2
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--date` | string | — | Filter by date (YYYY-MM-DD) |
+| `--page` | string | — | Page number (default: 1) |
+| `--page-size` | string | — | Results per page (default: 20) |
+
+## Details
+
+View the version history of a test. Without --date, shows available history dates.
+With --date, shows paginated versions for that date.
+
+Every test edit creates a history version automatically.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

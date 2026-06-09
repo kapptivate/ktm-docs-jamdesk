@@ -1,0 +1,58 @@
+---
+title: "set_variable_value"
+description: "Set ONE variant's value on a grouped variable, preserving every other variant."
+sidebarTitle: "set_variable_value"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Set ONE variant's value on a grouped variable, preserving every other variant.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `value` | string | Yes | New value for this variant |
+| `variable_id` | number | Yes | Variable id (must be group-scoped) |
+| `variant` | string | Yes | Variant id (number) or name (string) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "variable_id": 0,
+  "variant": "string",
+  "value": "string"
+}
+```
+
+## Description
+
+```text
+variant accepts the variant id (number) or name (string); name resolution loads the parent group's variants. Errors when called on a global variable — globals have no variants; use update_variable default_value instead. Errors when the variant is not present on the variable.
+
+This sets ONE variable in ONE variant. To bulk-copy ALL variables' values from one variant into another across the whole group, use copy_variant_values instead.
+```
+
+## Related
+
+- [`update_variable`](/mcp/tools/variables/update_variable)
+- [`copy_variant_values`](/mcp/tools/variables/copy_variant_values)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

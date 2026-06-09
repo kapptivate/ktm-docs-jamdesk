@@ -1,0 +1,62 @@
+---
+title: "ktm agents"
+description: "Agents — infrastructure health, capacity, and management"
+sidebarTitle: "agents"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Agents — infrastructure health, capacity, and management
+
+## Usage
+
+```bash
+ktm agents [command]
+```
+
+## Subcommands
+
+<Columns cols={2}>
+  <Card title="get" icon="angle-right" href="/cli/commands/agents/get">
+    Get detailed agent info with slots
+  </Card>
+  <Card title="list" icon="angle-right" href="/cli/commands/agents/list">
+    List agents for an operator
+  </Card>
+  <Card title="maintenance" icon="angle-right" href="/cli/commands/agents/maintenance">
+    Toggle maintenance mode for an agent
+  </Card>
+  <Card title="reboot" icon="angle-right" href="/cli/commands/agents/reboot">
+    Reboot an agent or a specific SIM slot
+  </Card>
+</Columns>
+
+## Details
+
+Manage agents (the hardware/software that runs resources). Operator-scoped.
+
+Three agent types:
+  cellular    GSM gateways with SIM card slots
+  ethernet    Standalone web agents (no slots, capacity = max parallel tests)
+  smartphone  Phone hubs with connected smartphones
+
+Use 'resources list' for product-scoped device info instead.
+
+## Related
+
+- [`ktm resources list`](/cli/commands/resources/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

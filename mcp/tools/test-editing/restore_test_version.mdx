@@ -1,0 +1,50 @@
+---
+title: "restore_test_version"
+description: "Restore a test to a previous version."
+sidebarTitle: "restore_test_version"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Restore a test to a previous version.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `history_id` | number | Yes | History version ID to restore (from list_test_versions) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "history_id": 0
+}
+```
+
+## Description
+
+```text
+DESTRUCTIVE — overwrites current test definition. Use list_test_versions to find the history_id. Counts against the per-test edit budget.
+```
+
+## Related
+
+- [`list_test_versions`](/mcp/tools/test-editing/list_test_versions)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

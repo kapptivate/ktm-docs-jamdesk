@@ -1,0 +1,70 @@
+---
+title: "ktm dashboards edit-widget"
+description: "Replace a widget's data from a JSON file or stdin"
+sidebarTitle: "edit-widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Replace a widget's data from a JSON file or stdin
+
+## Usage
+
+```bash
+ktm dashboards edit-widget <uid> <widget-id> [flags]
+```
+
+## Examples
+
+```bash
+# Edit widget from file
+ktm dashboards edit-widget abc123 RandomID-xxx --json widget.json
+
+# Pipe from stdin
+cat updated.json | ktm dashboards edit-widget abc123 RandomID-xxx --json -
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+| `widget-id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--json` | string | — | Widget JSON file path, or "-" for stdin (required) |
+
+## Details
+
+Update a widget's data section in a dashboard.
+
+Provide the full updated data section as JSON (same format as add-widget).
+The widget is identified by its ID within the dashboard layout.
+
+The widget type cannot be changed — only data within the same type.
+Validation runs before the update; placeholder values are rejected.
+
+customDisplay: script changes must follow the IIFE pattern and 20KB limit.
+Always show the full updated script to the user before applying.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

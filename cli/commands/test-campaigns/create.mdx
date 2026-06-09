@@ -1,0 +1,76 @@
+---
+title: "ktm test-campaigns create"
+description: "Create a new Tests campaign"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new Tests campaign
+
+## Usage
+
+```bash
+ktm test-campaigns create [flags]
+```
+
+## Examples
+
+```bash
+ktm test-campaigns create --product acme~web --name "Regression" --test-list @testlist.json
+echo '[{"position":0,"test":117,"owners":{},"input_variables":{}}]' | \
+  ktm test-campaigns create --product acme~web --name "Smoke" --test-list -
+ktm test-campaigns create --product acme~web --name "Targeted" --test-list @list.json \
+  --collection-uid 7b9c6d8e-...
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--collection-uid` | string | — | Collection UID to nest the Tests campaign under (default: product's campaigns root; a tests-root UID is rejected) |
+| `--description` | string | — | Tests campaign description |
+| `--name` | string | — | Tests campaign name (required) |
+| `--product` | string | — | Product slug, format: operator~product (required) |
+| `--test-list` | string | — | Path to JSON file containing the test_list array, or "-" for stdin (required) |
+
+## Details
+
+Create a new Tests campaign scoped to a single product. --test-list points
+to a JSON file (or '-' for stdin) containing an array of TestCampaignMember
+entries:
+  [\{"position": 0, "test": 123, "owners": \{\}, "input_variables": \{\}\}]
+
+All tests must belong to --product. Owners and input_variables can be
+empty objects but must be present per backend validation.
+
+--collection-uid nests the Tests campaign under a specific collection. When
+omitted, it defaults to the product's campaigns root
+(test_campaigns_root_collection_uid). A Tests campaign must never live under a
+tests root — that collection renders it as a test row in the UI and crashes the
+test list, so a tests-root --collection-uid is rejected.
+
+Backed by POST /api/suites/.
+
+## Notes
+
+- Creates a saved, named, reusable pack of tests. For a one-off run from explicit test IDs, skip this and use [`ktm ci build`](/cli/commands/ci/build) with `--test-ids` instead.
+
+## Related
+
+- [`ktm test-campaigns`](/cli/commands/test-campaigns)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

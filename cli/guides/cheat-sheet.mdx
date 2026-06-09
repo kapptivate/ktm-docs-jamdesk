@@ -1,0 +1,69 @@
+---
+title: CLI cheat sheet
+description: The ktm commands you reach for most, grouped by task.
+sidebarTitle: Cheat sheet
+---
+
+The commands you reach for most, grouped by what you are trying to do. `ktm` is JSON-first and scriptable, which makes it a natural fit for shell scripts, CI pipelines, and AI coding agents (Claude Code, Codex, Cursor) driving the platform from the terminal.
+
+## Discover
+
+```bash
+ktm operators list
+ktm products list --operator my-operator
+ktm tests list --product my-operator~my-product -o table
+ktm resources list --product my-operator~my-product --type web-agent
+```
+
+## Create and validate tests
+
+```bash
+ktm tests action-types                          # browse the 44 action types
+ktm tests template ETH_HTTP_API > test.json     # scaffold
+ktm tests validate --from-file test.json        # check without creating
+ktm tests create --from-file test.json --product my-operator~my-product
+```
+
+## Run in CI
+
+```bash
+ktm ci build --test-ids 16480,16838 --product my-operator~my-product --variant "API:Staging" > campaign.json
+ktm ci run --test-config-path campaign.json --junit-file results.xml --output-file summary.json
+```
+
+## Monitor and investigate
+
+```bash
+ktm monitors list --operator my-operator -o table
+ktm incidents counter --operator my-operator          # open / warning / closed
+ktm incidents list --operator my-operator --status OPEN
+ktm executions get <result-id>
+```
+
+## Variables and environments
+
+```bash
+ktm variables list --product my-operator~my-product
+ktm variables set-value <variable-id> --variant Staging --value "https://staging.example.com"
+```
+
+## Local device access
+
+```bash
+ktm adb connect <phone-serial>   # tunnel a device-farm phone to your local ADB
+```
+
+<Tip>
+  Every command takes `-o table` or `-o plain`; the default `json` pipes cleanly into `jq`. Exit codes are stable (0 ok, 5 = tests failed), so pipelines and agents can branch on them. See [Configuration](/cli/configuration).
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create tests" icon="flask" href="/cli/guides/create-tests">
+    Scaffold API, web, app, and USSD/SMS tests.
+  </Card>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/overview">
+    Every command, flag, and example.
+  </Card>
+</Columns>

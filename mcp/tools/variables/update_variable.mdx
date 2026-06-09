@@ -1,0 +1,57 @@
+---
+title: "update_variable"
+description: "Update a variable's name, description, and/or default_value."
+sidebarTitle: "update_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Update a variable's name, description, and/or default_value.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `default_value` | string | No | New default value (string for single/secret, comma-separated for choice) |
+| `description` | string | No | New description (optional, recommended) — overwrites the current value. A short sentence describing the variable's purpose helps future agents disambiguate it. |
+| `name` | string | No | New name |
+| `variable_id` | number | Yes | Variable id |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "variable_id": 0
+}
+```
+
+## Description
+
+```text
+Properties only — this tool does NOT touch per-variant values. To change one variant's value use set_variable_value; to copy values across variants use copy_variant_values. Variable type is immutable on the platform; this tool preserves it.
+
+A description is optional but RECOMMENDED on update too — if the original variable was created without one, this is the place to add semantic context that future agents will rely on.
+```
+
+## Related
+
+- [`set_variable_value`](/mcp/tools/variables/set_variable_value)
+- [`copy_variant_values`](/mcp/tools/variables/copy_variant_values)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

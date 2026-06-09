@@ -1,0 +1,114 @@
+---
+title: "ktm ci run"
+description: "Execute Kapptivate tests from JSON config files or campaign JSON, poll for results, and report"
+sidebarTitle: "run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Execute Kapptivate tests from JSON config files or campaign JSON, poll for results, and report
+
+## Usage
+
+```bash
+ktm ci run [flags]
+```
+
+## Examples
+
+```bash
+# Single config
+ktm ci run --test-config-path tests/smoke.json
+
+# Multiple configs via glob
+ktm ci run --test-config-path "tests/*.json" --junit-file report.xml
+
+# Directory of configs
+ktm ci run --test-config-dir tests/ --output-file results.json
+
+# Validate configs without running (no API key needed)
+ktm ci run --test-config-path tests/smoke.json --validate
+
+# Read campaign JSON from stdin (e.g. piped from "ci build")
+ktm ci build --test-ids 16480 | ktm ci run --stdin
+
+# Override a variable value at run time (preserves bucket)
+ktm ci build --test-ids 16480 | ktm ci run --stdin --set-var "HOST=staging.example.com"
+
+# Run a saved Tests campaign with variant pinning and one-off value override
+ktm ci build --test-campaign 42 --variant "API:Staging" | \
+  ktm ci run --stdin --set-var "GLOBAL_VAR=override-value" --junit-file results.xml
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--ignore-errors` | boolean | — | Ignore failures for every action type (sets options.ignore_failed to all action codes); the run still completes but per-test status may be overridden |
+| `--junit-file` | string | — | Write a JUnit XML report to this file path (for CI artifact upload) |
+| `--max-poll-duration` | duration | `30m0s` | Max time to poll for each test result before timing out |
+| `--output-file` | string | — | Write the JSON execution summary to this file path |
+| `--parallel` | boolean | — | Run tests in parallel (sets options.parallel_test_execution=-1; superadmin + ethernet-only tests) |
+| `--set-var` | string[] | — | Override a variable value: NAME=VALUE. Repeatable. Applied in --stdin (campaign) mode before execution; bucket preserved. Unknown names are silently ignored. |
+| `--stdin` | boolean | — | Read a single campaign JSON from stdin (mutually exclusive with --test-config-path/--test-config-dir) |
+| `--test-config-dir` | string | — | Directory of JSON test config files (all *.json files are loaded) |
+| `--test-config-path` | string[] | — | Path to a JSON test config file (repeatable, supports glob patterns) |
+| `--validate` | boolean | — | Validate config file structure and exit (no API key or network needed) |
+
+## Details
+
+Execute Kapptivate tests, poll until completion, and output results as JSON,
+JUnit XML, and/or GitHub Actions annotations.
+
+Input modes (mutually exclusive):
+  --test-config-path / --test-config-dir   JSON config files (test IDs + input variables)
+
+When using --stdin, any "_meta" key in the JSON is stripped automatically so you
+can pipe "ci build" output directly after filling in variable values.
+
+To run a saved Tests campaign, build a campaign from it first and pipe the result:
+
+  ktm ci build --test-campaign 42 --variant "API:Staging" | ktm ci run --stdin
+
+When using --stdin, the output includes per-test results with individual
+statuses, test IDs, names, and the input variables used — enabling automated
+agents to identify exactly which tests passed or failed.
+
+--set-var NAME=VALUE sets (or overrides) a variable's value across all tests in
+the campaign before execution. Repeatable. The variable must be declared in at
+least one test; unknown names are silently ignored. Bucket assignments are
+preserved — only the value field changes.
+
+Output formats (produced in parallel when flags are combined):
+  stdout        JSON summary (suppressed when GITHUB_ACTIONS=true)
+  --output-file JSON summary written to a file
+  GITHUB_ACTIONS=true  workflow annotations (::notice / ::error) on stdout
+  GITHUB_STEP_SUMMARY  markdown job summary appended to the file
+
+Exit codes:
+  0 = all tests passed
+  1 = one or more tests failed, timed out, or output error
+
+## Notes
+
+- Executes a campaign produced by [`ktm ci build`](/cli/commands/ci/build) (from a file or `--stdin`). Use `--junit-file` / `--output-file` for CI reporting; the exit code is non-zero when any test fails.
+
+## Related
+
+- [`ktm ci`](/cli/commands/ci)
+- [`ktm ci build`](/cli/commands/ci/build)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

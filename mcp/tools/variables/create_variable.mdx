@@ -1,0 +1,69 @@
+---
+title: "create_variable"
+description: "Create a new variable under a product."
+sidebarTitle: "create_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new variable under a product.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `default_value` | string | Yes | Default value; for choice, comma-separated allowed options |
+| `description` | string | No | Optional but RECOMMENDED — explain what the variable is for. A short sentence (e.g. "Production database hostname" or "Stripe webhook API key") helps future agents disambiguate it from similarly-named variables. |
+| `group` | number | No | Optional: variable group id (omit for a global variable) |
+| `name` | string | Yes | Variable name (alphanumeric + underscore) |
+| `product` | string | Yes | Product slug |
+| `type` | string (single \| secret \| choice) | Yes | single \| secret \| choice |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "type": "single",
+  "default_value": "string"
+}
+```
+
+## Description
+
+```text
+Type is one of:
+  - "single" — scalar value in default_value
+  - "secret" — scalar value; platform masks it on read
+  - "choice" — default_value is a comma-separated list of allowed values
+
+Pass group=<id> for a group-scoped variable; omit it for a global. The tool auto-fans variable_values to one entry per variant of the group, all initialised to default_value. Tune individual variants afterwards with set_variable_value.
+
+A description is optional but RECOMMENDED — future agents (and humans) rely on it to disambiguate variables that share similar names but differ in purpose. A single short sentence is enough.
+
+Consumes one slot of the per-session variable edit budget. Pre-flight name conflicts with check_variable_name to avoid wasted creates.
+```
+
+## Related
+
+- [`set_variable_value`](/mcp/tools/variables/set_variable_value)
+- [`check_variable_name`](/mcp/tools/variables/check_variable_name)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

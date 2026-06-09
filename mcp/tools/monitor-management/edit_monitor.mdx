@@ -1,0 +1,77 @@
+---
+title: "edit_monitor"
+description: "Apply changes to an existing monitor."
+sidebarTitle: "edit_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Apply changes to an existing monitor.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Set to true after user approves continuing past the edit limit. NEVER set without explicit user approval. |
+| `active` | boolean | No | New active status (true/false) |
+| `environment` | string | No | New environment JSON |
+| `input_variables` | string | No | New input variables JSON. Buckets are injected automatically from the variants array (or preserved from the existing monitor during auto-migration) — you do not need to craft them manually. |
+| `monitor_id` | number | Yes | Monitor ID to edit |
+| `name` | string | No | New monitor name |
+| `owners` | string | No | New owners JSON |
+| `scheduling` | string | No | New scheduling JSON |
+| `test_only` | boolean | No | Set test_only flag |
+| `variants` | array | No | Pin variants for the monitor's variable groups. Each entry is "5" (numeric variant ID) or "GroupName:VariantName". Groups not pinned retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. Use to re-pin specific groups during the edit. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+```text
+ALWAYS preview first with preview_monitor_edit.
+
+Auto-migration:
+  Legacy monitors (variable_group != 0 or input_variables lack buckets)
+  auto-migrate to V3 form on edit: every input_variable gets a bucket,
+  and the legacy variable_group field is cleared. The migration is
+  idempotent — re-editing an already-V3 monitor is a no-op on the bucket
+  side. Migration is unconditional: it's correct by construction, so
+  there is no opt-out.
+
+  When the underlying test references multiple variable groups, variables
+  in groups OTHER than the legacy variable_group use their own group's
+  default variant (unless variants overrides). Use the variants array to
+  pin non-default variants for specific groups during the migration edit.
+
+Protected fields: test_id and product_id CANNOT be changed (locked by the API). To change the underlying test, delete the monitor and create a new one.
+A per-monitor edit limit is enforced (10 per session). Check edits_remaining in the response.
+If this fails with HTTP 400/404, the monitor may have been deleted — verify with get_monitor first.
+```
+
+## Related
+
+- [`preview_monitor_edit`](/mcp/tools/monitor-management/preview_monitor_edit)
+- [`get_monitor`](/mcp/tools/monitor-management/get_monitor)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

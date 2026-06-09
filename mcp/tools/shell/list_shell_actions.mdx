@@ -1,0 +1,56 @@
+---
+title: "list_shell_actions"
+description: "List recent shell actions (commands already sent) for a product."
+sidebarTitle: "list_shell_actions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List recent shell actions (commands already sent) for a product.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full JSON instead of compact summaries (default: false) |
+| `from_date` | string | No | Only show shells created after this ISO 8601 timestamp (e.g. 2026-03-15T19:29:17Z). Use to poll for new async events. |
+| `ordering` | string (-created \| created) | No | Sort order: '-created' (newest first, default), 'created' (oldest first) |
+| `owner` | string | No | Filter by device identifier (MSISDN or hostname) |
+| `product_id` | number | No | Filter by product ID |
+| `status` | string (P \| D \| O \| B \| C \| T \| M) | No | Filter by status: P (Pending), D (Done), O (Ongoing), B (Blocked), C (Canceled), T (Timeout), M (Maintenance) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "detail": false,
+  "from_date": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries showing ID, type, command summary, status, and duration. Use from_date + ordering to poll for asynchronous results such as incoming SMS or USSD menu responses during a live session. Filter by status to find in-flight commands: status=P (pending), status=O (ongoing). To see which shell action TYPES can be sent, use list_shell_action_types.
+```
+
+## Related
+
+- [`list_shell_action_types`](/mcp/tools/shell/list_shell_action_types)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

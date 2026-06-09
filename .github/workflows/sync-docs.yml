@@ -1,0 +1,76 @@
+name: Sync MCP & CLI docs
+
+# Manual only. Regenerates the MCP tool reference and CLI command reference from the live
+# prod surfaces, then opens a pull request with the diff. The generator
+# (scripts/generate.mjs) is the portable core — this workflow is a thin wrapper around it.
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Which reference to regenerate
+        type: choice
+        options: [all, mcp, cli]
+        default: all
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# One sync at a time; let an in-flight run finish so its PR branch is never left half-pushed.
+concurrency:
+  group: sync-docs
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # MCP  → live tools/list against $MCP_URL using the X-Kapptivate-API-Key header.
+      # CLI  → the prod ktm Linux binary downloaded from $KTM_CLI_URL, introspected via --help.
+      # Both URLs fall back to prod defaults in scripts/generate.mjs when the vars are unset.
+      - name: Generate reference from prod
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+          MCP_URL: ${{ vars.MCP_URL }}
+          KTM_CLI_URL: ${{ vars.KTM_CLI_URL }}
+        run: node scripts/generate.mjs --source=${{ inputs.source }}
+
+      # Non-blocking quality gates: surface MDX / broken-link issues on the run without
+      # blocking the sync (a stale link must never stop an auto-update; the PR is the gate).
+      - name: Validate docs
+        continue-on-error: true
+        run: |
+          npx --yes jamdesk validate
+          npx --yes jamdesk broken-links
+
+      # The prod versions the docs were generated from, for the PR body.
+      - name: Read source versions
+        id: versions
+        run: |
+          echo "mcp=$(node -p "require('./mcp/.catalog/catalog.json').meta.serverVersion || 'n/a'")" >> "$GITHUB_OUTPUT"
+          echo "cli=$(node -p "require('./cli/.catalog/catalog.json').meta.cliVersion || 'n/a'")" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: docs/auto-sync
+          delete-branch: true
+          labels: documentation, automated
+          commit-message: "docs: sync MCP & CLI reference from prod"
+          title: "docs: sync MCP & CLI reference from prod"
+          body: |
+            Automated regeneration of the MCP tool reference and CLI command reference
+            from the live prod surfaces (MCP `tools/list` + the `ktm` binary `--help` tree).
+
+            **Generated from:** MCP server `${{ steps.versions.outputs.mcp }}` · ktm CLI `${{ steps.versions.outputs.cli }}`
+
+            Produced by `scripts/generate.mjs`. Generated pages carry a "do not edit" banner;
+            human enrichment lives in `mcp/.catalog/overlay.json` and `cli/.catalog/overlay.json`.
+
+            Review the diff before merging.

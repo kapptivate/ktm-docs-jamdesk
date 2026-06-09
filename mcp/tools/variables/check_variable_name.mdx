@@ -1,0 +1,52 @@
+---
+title: "check_variable_name"
+description: "Pre-check whether a variable name is available under a product."
+sidebarTitle: "check_variable_name"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Pre-check whether a variable name is available under a product.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `name` | string | Yes | Variable name to check |
+| `product_id` | number | Yes | Product numeric id (from list_products `id` field, NOT the slug) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product_id": 0,
+  "name": "string"
+}
+```
+
+## Description
+
+```text
+Returns {available: true|false} — call this before create_variable to surface name conflicts client-side instead of seeing an HTTP 400.
+```
+
+## Related
+
+- [`create_variable`](/mcp/tools/variables/create_variable)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

@@ -1,0 +1,59 @@
+---
+title: "ktm variables variants add"
+description: "Add a new variant to a variable group"
+sidebarTitle: "add"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Add a new variant to a variable group
+
+## Usage
+
+```bash
+ktm variables variants add <group-id> [flags]
+```
+
+## Examples
+
+```bash
+ktm variables variants add 42 --name canary
+ktm variables variants add 42 --name canary --default
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `group-id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--default` | boolean | — | Make the new variant the default (demotes the prior default) |
+| `--name` | string | — | New variant name (required) |
+
+## Details
+
+Adds a new variant to the group. With --default, the new variant becomes
+the default and the prior default is demoted in the same atomic update.
+
+## Related
+
+- [`ktm variables variants`](/cli/commands/variables/variants)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

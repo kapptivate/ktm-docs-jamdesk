@@ -1,0 +1,79 @@
+---
+title: "ktm shell"
+description: "Shell — interactive live sessions on SIM cards and web agents"
+sidebarTitle: "shell"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Shell — interactive live sessions on SIM cards and web agents
+
+## Usage
+
+```bash
+ktm shell [command]
+```
+
+## Subcommands
+
+<Columns cols={2}>
+  <Card title="cancel" icon="angle-right" href="/cli/commands/shell/cancel">
+    Cancel a pending or ongoing shell command
+  </Card>
+  <Card title="get" icon="angle-right" href="/cli/commands/shell/get">
+    Get full shell command result
+  </Card>
+  <Card title="list" icon="angle-right" href="/cli/commands/shell/list">
+    List recent shell actions
+  </Card>
+  <Card title="progress" icon="angle-right" href="/cli/commands/shell/progress">
+    List pending and ongoing shell commands
+  </Card>
+  <Card title="send" icon="angle-right" href="/cli/commands/shell/send">
+    Send a shell command to a device
+  </Card>
+  <Card title="types" icon="angle-right" href="/cli/commands/shell/types">
+    List available shell action types
+  </Card>
+</Columns>
+
+## Details
+
+Send commands directly to devices and see results in real time.
+Unlike tests, shell commands have no assertions — they fire a command and return the raw result.
+
+Supported device types:
+  SIM (owner_kind=S):      USSD, SMS, calls, data operations via cellular network
+  Ethernet (owner_kind=E): HTTP API, ping, DNS, transfers via web agents
+
+Smartphones are not supported (WebSocket-only architecture).
+
+USSD sessions are stateful — dialing a shortcode opens a session, and sending menu
+option numbers (1, 2, 3) navigates deeper into the menu tree. Sessions expire after
+~30s of inactivity. Use --wait to see the menu text inline.
+
+Some flows trigger asynchronous events (e.g. wait SMS after a USSD selection or API call).
+Use 'shell list --from-date &lt;timestamp&gt;' to poll for new shells since your session started.
+
+Note: SIM cards and web agents are shared resources. Active monitors run tests on the same
+devices on a schedule. If a shell returns Blocked or Timeout unexpectedly, it may be resource
+contention — wait 15-30s and retry. Use 'monitors toggle' to pause monitors if needed.
+
+## Related
+
+- [`ktm monitors toggle`](/cli/commands/monitors/toggle)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

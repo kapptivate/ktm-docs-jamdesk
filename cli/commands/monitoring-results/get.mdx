@@ -1,0 +1,76 @@
+---
+title: "ktm monitoring-results get"
+description: "Get detailed results of a monitoring run"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get detailed results of a monitoring run
+
+## Usage
+
+```bash
+ktm monitoring-results get <id> [flags]
+```
+
+## Examples
+
+```bash
+# Get monitoring result detail as table
+ktm monitoring-results get 155461270 -o table
+
+# Get with raw action results
+ktm monitoring-results get 155461270 --include-actions -o table
+
+# Get as JSON
+ktm monitoring-results get 155461270
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `-a, --include-actions` | boolean | — | Include raw action results (screenshots, artifacts, logs) |
+
+## Details
+
+Fetch a single monitoring result by ID and display its detailed results.
+
+The response includes:
+  - Monitoring result metadata: name, status, monitoring ID, timestamps
+  - Parsed summary: failure reason, per-test status, per-action status, variables
+  - With --include-actions: raw action results (screenshots, artifacts, logs)
+
+Result IDs come from 'monitoring-results list'. Always scope that command by
+--monitoring-id first (via 'monitors list --operator &lt;slug&gt;') to ensure results
+belong to the correct operator.
+
+In table mode, a human-readable summary is shown with failure reason and test/action tables.
+In JSON mode, the structured detail is returned including the parsed summary.
+
+## Related
+
+- [`ktm monitoring-results`](/cli/commands/monitoring-results)
+- [`ktm monitoring-results list`](/cli/commands/monitoring-results/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

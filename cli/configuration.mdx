@@ -1,14 +1,62 @@
 ---
 title: Configuration
-description: "Configure the CLI with environment variables and config files."
+description: Authentication, environment variables, output formats, and exit codes for the ktm CLI.
+sidebarTitle: Configuration
 ---
 
+`ktm` is configured through environment variables and global flags. There is no config file to manage.
 
-## Config file
+## Authentication
 
-```json
-{
-  "defaultPort": 3001,
-  "verbose": false
-}
-```
+Provide your API key in one of two ways:
+
+- Set the `KAPPTIVATE_API_KEY` environment variable (recommended).
+- Pass `--api-key-file <path>` to read the key from a file.
+
+Every command needs a key except local validation (`--validate`).
+
+## Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `KAPPTIVATE_API_KEY` | Your API key. Carries the same access as your account. |
+| `KAPPTIVATE_HOST` | API host. Defaults to `app.kapptivate.com`. |
+
+## Global flags
+
+These apply to every command:
+
+| Flag | Description |
+| --- | --- |
+| `-o, --output` | Output format: `json` (default), `table`, or `plain`. |
+| `-d, --debug` | Print HTTP requests, timing, and verbose errors on stderr. |
+| `--host` | Override the API host (also `KAPPTIVATE_HOST`). |
+| `--api-key-file` | Read the API key from a file instead of the environment. |
+| `-q, --quiet` | Suppress info-level log lines; show errors only. |
+| `--no-color` | Disable colored output. |
+| `--no-proxy` | Ignore HTTP proxy settings from the environment. |
+| `--skip-tls` | Skip TLS certificate verification (insecure). |
+
+## Exit codes
+
+`ktm` uses stable exit codes so pipelines can branch on the outcome:
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success |
+| `1` | General error |
+| `2` | Authentication error |
+| `3` | Timeout (poll timeout exceeded) |
+| `4` | Invalid configuration |
+| `5` | Tests ran but some failed |
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/overview">
+    Every command, flag, and argument.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/cli/ci-cd">
+    Use these settings in your pipeline.
+  </Card>
+</Columns>

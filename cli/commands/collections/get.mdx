@@ -1,0 +1,61 @@
+---
+title: "ktm collections get"
+description: "Fetch a single collection with its breadcrumb path"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch a single collection with its breadcrumb path
+
+## Usage
+
+```bash
+ktm collections get <uid> [flags]
+```
+
+## Examples
+
+```bash
+ktm collections get --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections get --operator my-op <uid> -o json | jq '.path'
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (required) |
+
+## Details
+
+Returns the collection's metadata (name, parent_uid, org_id, trash_uid)
+plus its breadcrumb path from the root down to this collection. Useful before
+a mutation to confirm scope, or to discover the trash UID for cleanup flows.
+
+Backed by GET /kcollections/api/collections/\{uid\}.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

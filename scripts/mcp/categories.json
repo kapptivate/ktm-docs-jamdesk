@@ -1,0 +1,215 @@
+{
+  "order": [
+    "Discovery",
+    "Test Management",
+    "Test Editing",
+    "Tests Campaigns",
+    "Execution",
+    "Results",
+    "Reusables",
+    "Collections",
+    "Variables",
+    "Monitor Management",
+    "Monitoring Results",
+    "Alerting",
+    "Metrics",
+    "Dashboard",
+    "Dashboard Widget",
+    "Shell",
+    "Agent"
+  ],
+  "meta": {
+    "Discovery": {
+      "slug": "discovery",
+      "icon": "magnifying-glass",
+      "description": "List and inspect operators, products, tests, users, and resources."
+    },
+    "Test Management": {
+      "slug": "test-management",
+      "icon": "flask",
+      "description": "Create, list, version, and manage the lifecycle of tests."
+    },
+    "Test Editing": {
+      "slug": "test-editing",
+      "icon": "pen",
+      "description": "Edit test definitions and preview changes before applying them."
+    },
+    "Tests Campaigns": {
+      "slug": "test-campaigns",
+      "icon": "layer-group",
+      "description": "Create and manage saved test campaigns."
+    },
+    "Execution": {
+      "slug": "execution",
+      "icon": "play",
+      "description": "Build and run campaigns, then poll executions for status."
+    },
+    "Results": {
+      "slug": "results",
+      "icon": "list-check",
+      "description": "Fetch execution detail and downloadable artifacts."
+    },
+    "Reusables": {
+      "slug": "reusables",
+      "icon": "puzzle-piece",
+      "description": "Discover and inspect reusable V2 components."
+    },
+    "Collections": {
+      "slug": "collections",
+      "icon": "folder-tree",
+      "description": "Organize tests into folders and browse the tree."
+    },
+    "Variables": {
+      "slug": "variables",
+      "icon": "dollar-sign",
+      "description": "Manage variables, groups, and variants per product."
+    },
+    "Monitor Management": {
+      "slug": "monitor-management",
+      "icon": "gauge-high",
+      "description": "Create, edit, toggle, and force-run monitors."
+    },
+    "Monitoring Results": {
+      "slug": "monitoring-results",
+      "icon": "heart-pulse",
+      "description": "Read monitoring results and history."
+    },
+    "Alerting": {
+      "slug": "alerting",
+      "icon": "bell",
+      "description": "Evaluate alerts and manage alert definitions and incidents."
+    },
+    "Metrics": {
+      "slug": "metrics",
+      "icon": "chart-line",
+      "description": "Query time-series metrics, compute SLOs, and correlate signals."
+    },
+    "Dashboard": {
+      "slug": "dashboard",
+      "icon": "table-columns",
+      "description": "Create and manage dashboards."
+    },
+    "Dashboard Widget": {
+      "slug": "dashboard-widget",
+      "icon": "chart-simple",
+      "description": "Add, edit, validate, and position dashboard widgets."
+    },
+    "Shell": {
+      "slug": "shell",
+      "icon": "terminal",
+      "description": "Run shell actions on agents and read their output."
+    },
+    "Agent": {
+      "slug": "agent",
+      "icon": "server",
+      "description": "Inspect agents, reboot, and toggle maintenance."
+    }
+  },
+  "assign": {
+    "list_operators": "Discovery",
+    "list_products": "Discovery",
+    "list_users": "Discovery",
+    "toggle_user_status": "Discovery",
+    "list_tests": "Discovery",
+    "get_test_detail": "Discovery",
+    "get_full_test": "Discovery",
+    "get_test_impact": "Discovery",
+    "list_monitors": "Discovery",
+    "list_resources": "Discovery",
+    "get_smartphone_apps": "Discovery",
+    "platform_guide": "Discovery",
+    "build_campaign": "Execution",
+    "run_campaign": "Execution",
+    "start_execution": "Execution",
+    "poll_execution": "Execution",
+    "list_executions": "Results",
+    "get_execution_detail": "Results",
+    "query_metrics": "Metrics",
+    "get_resource_usage": "Metrics",
+    "evaluate_alert": "Metrics",
+    "compute_slo": "Metrics",
+    "create_test": "Test Management",
+    "list_action_types": "Test Management",
+    "list_step_types": "Test Management",
+    "get_test_template": "Test Management",
+    "validate_test": "Test Management",
+    "preview_test_edit": "Test Editing",
+    "edit_test": "Test Editing",
+    "list_test_versions": "Test Editing",
+    "restore_test_version": "Test Editing",
+    "get_monitor": "Monitor Management",
+    "create_monitor": "Monitor Management",
+    "preview_monitor_edit": "Monitor Management",
+    "edit_monitor": "Monitor Management",
+    "toggle_monitors": "Monitor Management",
+    "batch_create_monitors": "Monitor Management",
+    "force_run_monitor": "Monitor Management",
+    "list_monitoring_results": "Monitoring Results",
+    "get_monitoring_result": "Monitoring Results",
+    "list_dashboards": "Dashboard",
+    "get_dashboard": "Dashboard",
+    "create_dashboard": "Dashboard",
+    "update_dashboard": "Dashboard",
+    "list_widget_types": "Dashboard Widget",
+    "get_widget_template": "Dashboard Widget",
+    "validate_widget": "Dashboard Widget",
+    "build_dashboard": "Dashboard Widget",
+    "add_dashboard_widget": "Dashboard Widget",
+    "edit_dashboard_widget": "Dashboard Widget",
+    "remove_dashboard_widget": "Dashboard Widget",
+    "correlate_metrics": "Metrics",
+    "send_shell_command": "Shell",
+    "get_shell_result": "Shell",
+    "list_shell_actions": "Shell",
+    "cancel_shell": "Shell",
+    "list_shell_action_types": "Shell",
+    "list_agents": "Agent",
+    "get_agent": "Agent",
+    "reboot_agent": "Agent",
+    "toggle_agent_maintenance": "Agent",
+    "get_artifact": "Results",
+    "list_alert_definitions": "Alerting",
+    "get_alert_definition": "Alerting",
+    "list_incidents": "Alerting",
+    "get_incident": "Alerting",
+    "close_incident": "Alerting",
+    "get_incident_counter": "Alerting",
+    "list_collections": "Collections",
+    "get_collection": "Collections",
+    "list_collection_items": "Collections",
+    "search_collections": "Collections",
+    "create_collection": "Collections",
+    "rename_collection": "Collections",
+    "move_collection": "Collections",
+    "delete_collection": "Collections",
+    "move_collection_items": "Collections",
+    "list_variables": "Variables",
+    "get_variable": "Variables",
+    "create_variable": "Variables",
+    "update_variable": "Variables",
+    "set_variable_value": "Variables",
+    "delete_variable": "Variables",
+    "duplicate_variable": "Variables",
+    "check_variable_name": "Variables",
+    "list_variable_groups": "Variables",
+    "get_variable_group": "Variables",
+    "create_variable_group": "Variables",
+    "update_variable_group": "Variables",
+    "delete_variable_group": "Variables",
+    "add_variant": "Variables",
+    "remove_variant": "Variables",
+    "rename_variant": "Variables",
+    "set_default_variant": "Variables",
+    "copy_variant_values": "Variables",
+    "list_reusables": "Reusables",
+    "get_reusable": "Reusables",
+    "list_reusable_usage": "Reusables",
+    "list_reusables_in_test": "Reusables",
+    "list_test_campaigns": "Tests Campaigns",
+    "get_test_campaign": "Tests Campaigns",
+    "create_test_campaign": "Tests Campaigns",
+    "update_test_campaign": "Tests Campaigns",
+    "delete_test_campaign": "Tests Campaigns",
+    "manage_test_lifecycle": "Test Management"
+  }
+}

@@ -1,0 +1,49 @@
+---
+title: "list_operators"
+description: "List operators accessible with the current API key."
+sidebarTitle: "list_operators"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List operators accessible with the current API key.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full JSON instead of compact summaries (default: false) |
+| `organisation_group` | string | No | Filter by organisation group |
+| `short_name` | string | No | Filter by operator short name |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "detail": false,
+  "organisation_group": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List operators accessible with the current API key. Operators are the top-level organisational unit in Kapptivate.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

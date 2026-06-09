@@ -1,0 +1,64 @@
+---
+title: "build_dashboard"
+description: "Create a dashboard with all widgets in a single atomic call."
+sidebarTitle: "build_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a dashboard with all widgets in a single atomic call.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | No | InfluxDB bucket for passive agent data (optional) |
+| `name` | string | Yes | Dashboard name |
+| `operator` | string | Yes | Operator slug |
+| `preview` | boolean | No | Dry-run mode: validate, normalize, and auto-position all widgets without creating the dashboard. Returns ASCII grid + normalized data + warnings. |
+| `widgets` | string | Yes | JSON array of widget objects (same format as widget_json in add_dashboard_widget, without _metadata). Optional _w/_h per widget to override default size. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "name": "string",
+  "widgets": "string"
+}
+```
+
+## Description
+
+```text
+Validates all widgets upfront — if ANY fails, NONE are created. Auto-positions widgets using type defaults (override with _w/_h per widget). Returns ASCII grid preview + all widget IDs.
+
+PREREQUISITE: call platform_guide topic=dashboards for widget types, grid layout rules, and the full creation workflow. Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before building widget queries.
+
+Each widget object uses the same format as widget_json in add_dashboard_widget (without _metadata). Optional _w/_h fields override type default dimensions. Position (_x/_y) is always auto-calculated — do not provide.
+
+Atomic: if ANY widget fails validation, NONE are created. Fix all errors and re-submit.
+```
+
+## Related
+
+- [`platform_guide`](/mcp/tools/discovery/platform_guide)
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+- [`add_dashboard_widget`](/mcp/tools/dashboard-widget/add_dashboard_widget)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

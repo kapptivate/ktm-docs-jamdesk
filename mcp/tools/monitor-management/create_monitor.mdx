@@ -1,0 +1,79 @@
+---
+title: "create_monitor"
+description: "Create a new monitor for an existing test."
+sidebarTitle: "create_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new monitor for an existing test.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | No | Start the monitor immediately (default: true) |
+| `confirmed` | boolean | No | Set to true to submit the monitor. NEVER set without explicit user approval of the preview. Requires owners to be provided. |
+| `input_variables` | string | No | JSON object: variable name → \{kind, value, public, actions, owner_kind\}. Required with owners for submission. The submit handler injects bucket sub-keys automatically from the variants array — you do not need to add them. |
+| `name` | string | No | Monitor name (defaults to test name on backend if omitted) |
+| `options` | string | No | JSON options: \{timeout_sms, ignore_errors, auto_retry_failed_test\}. Defaults: timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0. |
+| `overrides` | string | No | JSON object mapping variable name → new value string. Applied to preview template. Example: \{"SIM_A": "0699999999", "TODO_INDEX": "42"\} |
+| `owners` | string | No | JSON object: device identifier → \{kind, hostname/national_msisdn/uuid\}. Required for submission. |
+| `product` | string | Yes | Product slug (format: operator~product) |
+| `scheduling` | string | No | JSON scheduling object. If omitted, defaults to simple/v2 every 5 minutes. Example: \{"type":"simple/v2","definition":\{"frequency":\{"every":5,"unit":"minutes"\}\}\} |
+| `test_id` | number | Yes | ID of the test to monitor |
+| `variants` | array | No | Pin variants for the monitor. Each entry is "5" (numeric variant ID) or "GroupName:VariantName" (e.g., "API:Staging"). Groups not pinned use their default variant. Globals always emit \{type:"global"\}. Repeatable to pin multiple groups for multi-group tests. Optional — omit for all-defaults behavior. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string",
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Monitors run tests on a schedule and track pass/fail status over time.
+
+PREREQUISITE: call platform_guide topic=monitoring for the full creation workflow and scheduling formats.
+
+Pin variants per group via the variants array. Each entry pins one group's variant ("5" for numeric variant ID, or "API:Staging" for group:variant by name). Groups not pinned use their default variant. Globals always emit {type:"global"}. The submitted payload sets variable_group: null on the wire; per-variable buckets carry the group info.
+
+Two-step workflow (MANDATORY — preview cannot be skipped):
+1. create_monitor product=<slug> test_id=<id> variants=[...] → returns PREVIEW of auto-built payload with resolved buckets
+2. Show the preview to the user. Get their explicit approval.
+3. create_monitor ... owners=<json> input_variables=<json> variants=[...] confirmed=true → SUBMIT
+
+Step 1 auto-builds owners and input_variables from the test definition with V3 buckets attached.
+Step 3 requires confirmed=true AND explicit owners. The submit handler RE-RUNS the resolver against the supplied variants and injects buckets into input_variables — you do NOT need to craft bucket sub-objects yourself, just pass the same variants you passed in step 1.
+
+IMPORTANT: NEVER set confirmed=true without showing the preview to the user and getting their explicit approval.
+
+Use overrides to modify specific values in the preview template.
+Product must have monitoring enabled (has_monitoring=true from list_products detail=true).
+```
+
+## Related
+
+- [`platform_guide`](/mcp/tools/discovery/platform_guide)
+- [`list_products`](/mcp/tools/discovery/list_products)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

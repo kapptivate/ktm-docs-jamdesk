@@ -1,0 +1,50 @@
+---
+title: "ktm agents reboot"
+description: "Reboot an agent or a specific SIM slot"
+sidebarTitle: "reboot"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Reboot an agent or a specific SIM slot
+
+## Usage
+
+```bash
+ktm agents reboot [flags]
+```
+
+## Examples
+
+```bash
+ktm agents reboot --uuid abc-123 --type cellular --confirm
+ktm agents reboot --uuid abc-123 --type cellular --slot 3 --confirm
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Execute the reboot (without this, shows preview) |
+| `--slot` | int | — | SIM slot ID (cellular only) |
+| `--type` | string | — | Agent type: cellular, ethernet, smartphone (required) |
+| `--uuid` | string | — | Agent UUID (required) |
+
+## Related
+
+- [`ktm agents`](/cli/commands/agents)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

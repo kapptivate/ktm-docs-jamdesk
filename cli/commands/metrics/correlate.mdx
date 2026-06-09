@@ -1,0 +1,89 @@
+---
+title: "ktm metrics correlate"
+description: "Detect cross-metric relationships: correlation, distribution shift, lag"
+sidebarTitle: "correlate"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Detect cross-metric relationships: correlation, distribution shift, lag
+
+## Usage
+
+```bash
+ktm metrics correlate [flags]
+```
+
+## Examples
+
+```bash
+# Quick correlation (default)
+ktm metrics correlate --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 24h GROUP BY time(1h)" \
+  --query "SELECT mean(response_time) FROM action WHERE time > now() - 24h GROUP BY time(1h)"
+
+# Full analysis with lag detection
+ktm metrics correlate --operator acme --mode full \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --query "SELECT count(error) FROM event WHERE time > now() - 7d GROUP BY time(1h)"
+
+# Distribution shift only (which metrics changed?)
+ktm metrics correlate --operator acme --mode shift \
+  --queries '["SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)", "SELECT mean(response_time) FROM action WHERE time > now() - 7d GROUP BY time(1h)"]'
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--mode` | string | `quick` | Analysis mode: quick (correlation only), full (correlation + shift + lag), shift (distribution shift only) |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--queries` | string | — | JSON array of InfluxQL query strings |
+| `--query` | string[] | — | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
+
+## Details
+
+Run 2-10 InfluxQL queries and detect cross-metric relationships.
+
+Provide queries via --query (repeatable) or --queries (JSON array).
+Queries are run in parallel and aligned by timestamp.
+
+3 analysis modes (--mode):
+  quick (default): pairwise Spearman/Pearson correlation + p-values.
+                   Answers: "are these metrics correlated?"
+  full:            adds per-query KS distribution shift detection and
+                   lag scan (±50 steps). Answers: "did they change together?"
+                   and "does one cause the other?"
+  shift:           per-query KS distribution shift only (no pairwise correlation).
+                   Answers: "which metrics changed recently?"
+
+Use matching GROUP BY time() intervals across queries for best alignment.
+
+IMPORTANT: Action-type measurements (ethernet_*, cellular_*, smartphone_*) only contain
+data from tests that use those action types — they are NOT infrastructure metrics.
+Verify which monitors populate a measurement before correlating:
+  SHOW TAG VALUES FROM "&lt;measurement&gt;" WITH KEY = "monitoring_name"
+To understand what a monitor does: ktm monitors list → ktm monitors get --id &lt;id&gt;.
+Measurements may also contain orphaned data from deleted monitors. Check freshness:
+  SELECT last(duration_seconds), time FROM "&lt;measurement&gt;"
+
+## Related
+
+- [`ktm metrics`](/cli/commands/metrics)
+- [`ktm monitors list`](/cli/commands/monitors/list)
+- [`ktm monitors get`](/cli/commands/monitors/get)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

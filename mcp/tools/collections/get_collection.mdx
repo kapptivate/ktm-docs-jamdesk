@@ -1,0 +1,52 @@
+---
+title: "get_collection"
+description: "Fetch a single collection's metadata plus its breadcrumb path (ancestor chain from the root down to this collection)."
+sidebarTitle: "get_collection"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fetch a single collection's metadata plus its breadcrumb path (ancestor chain from the root down to this collection).
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `operator` | string | Yes | Operator slug |
+| `uid` | string | Yes | Collection UID |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "uid": "string"
+}
+```
+
+## Description
+
+```text
+Useful before mutations so agents can confirm scope. Root UID from list_products detail=true (tests_root_collection_uid).
+```
+
+## Related
+
+- [`list_products`](/mcp/tools/discovery/list_products)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

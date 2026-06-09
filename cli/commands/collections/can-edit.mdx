@@ -1,0 +1,61 @@
+---
+title: "ktm collections can-edit"
+description: "Check whether the current user can edit a collection"
+sidebarTitle: "can-edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Check whether the current user can edit a collection
+
+## Usage
+
+```bash
+ktm collections can-edit <uid> [flags]
+```
+
+## Examples
+
+```bash
+ktm collections can-edit --operator my-op <uid>
+ktm collections can-edit --operator my-op <uid> -o json | jq .can_edit
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (required) |
+
+## Details
+
+Permission probe. Useful before calling rename/move/delete to avoid a
+403. The service returns a bare JSON boolean which this command wraps as
+\{can_edit: true|false\}.
+
+Backed by GET /kcollections/api/collections/\{uid\}/can_edit.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

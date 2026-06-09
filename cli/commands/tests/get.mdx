@@ -1,0 +1,74 @@
+---
+title: "ktm tests get"
+description: "Get test detail including variable definitions and owner slots"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get test detail including variable definitions and owner slots
+
+## Usage
+
+```bash
+ktm tests get <id> [flags]
+```
+
+## Examples
+
+```bash
+# Get test detail as JSON
+ktm tests get 16480
+
+# Get test detail as table
+ktm tests get 16480 -o table
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Fetch a single test by ID and display its variable definitions.
+
+The response shows what input_variables (regular text, secrets, owner references)
+and direct_owners (resource slots) the test requires. Use this to understand what
+values must be provided when constructing campaign JSON for "ci build" / "ci run".
+
+Variable kinds:
+  regular   — free-text value
+  secret    — encrypted value (shown as ********)
+  owner     — resource reference (SIM, ETHERNET, or SMARTPHONE identifier)
+
+Owner kinds (in variables.owners):
+  SIM         — national MSISDN from "resources list --type sim"
+  ETHERNET    — hostname from "resources list --type web-agent"
+  SMARTPHONE  — UUID from "resources list --type smartphone"
+
+## Notes
+
+- Fast, minimal detail (required variables and owner slots), ideal before building a campaign. For the full definition with actions and dependencies, use [`ktm tests inspect`](/cli/commands/tests/inspect).
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm ci build`](/cli/commands/ci/build)
+- [`ktm ci run`](/cli/commands/ci/run)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

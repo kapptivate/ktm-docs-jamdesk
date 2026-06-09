@@ -1,0 +1,63 @@
+---
+title: Get started
+description: A five-minute tour of the ktm CLI, from discovering your slugs to running tests.
+sidebarTitle: Get started
+---
+
+This tour assumes `ktm` is installed and `KAPPTIVATE_API_KEY` is set. If not, start with [Installation](/cli/installation).
+
+## 1. Discover your slugs
+
+Almost every command takes an operator and product slug. Find them first:
+
+```bash
+ktm operators list
+ktm products list --operator my-operator
+```
+
+Product slugs take the form `operator~product`.
+
+## 2. Browse and inspect tests
+
+```bash
+# List tests for a product, as a table
+ktm tests list --operator my-operator --product my-operator~my-product -o table
+
+# Inspect one test, including the variables and owners it needs
+ktm tests get <test-id>
+```
+
+## 3. Run tests, CI-style
+
+Build a campaign, then run it. This is the same path your pipeline uses:
+
+```bash
+ktm ci build \
+  --test-ids 16480,16838 \
+  --product my-operator~my-product \
+  --variant "API:Staging" > campaign.json
+
+ktm ci run \
+  --test-config-path campaign.json \
+  --junit-file results.xml \
+  --output-file summary.json
+```
+
+## Output formats
+
+Add `-o` (or `--output`) to any command:
+
+- `json` (default): a JSON array, ideal for piping into `jq`
+- `table`: column-aligned and colored for humans
+- `plain`: tab-separated values for `awk`, `cut`, and `sort`
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/overview">
+    Every command, flag, and argument.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/cli/ci-cd">
+    Run this same flow from your pipeline.
+  </Card>
+</Columns>

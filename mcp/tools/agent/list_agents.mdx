@@ -1,0 +1,58 @@
+---
+title: "list_agents"
+description: "List agents (infrastructure) for an operator with health and capacity summary."
+sidebarTitle: "list_agents"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List agents (infrastructure) for an operator with health and capacity summary.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Return full JSON (default: false) |
+| `operator` | string | Yes | Operator slug |
+| `type` | string (cellular \| ethernet \| smartphone) | No | Filter by agent type: cellular, ethernet, smartphone. Omit for all three. |
+| `zone` | string | No | Filter by zone |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Agents are the hardware/software that runs resources — operator-scoped, not product-scoped.
+Three types: cellular (GSM gateways with SIM slots), ethernet (standalone web agents), smartphone (phone hubs).
+
+Returns a capacity summary header showing total online capacity for concurrent tests.
+Use get_agent for detail with slots. Use list_resources for product-scoped device info.
+```
+
+## Related
+
+- [`get_agent`](/mcp/tools/agent/get_agent)
+- [`list_resources`](/mcp/tools/discovery/list_resources)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

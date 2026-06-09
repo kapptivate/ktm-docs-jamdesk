@@ -1,0 +1,60 @@
+---
+title: "ktm reusables usage"
+description: "List tests that embed this reusable"
+sidebarTitle: "usage"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List tests that embed this reusable
+
+## Usage
+
+```bash
+ktm reusables usage <id> [flags]
+```
+
+## Examples
+
+```bash
+ktm reusables usage 117
+ktm reusables usage 117 --limit 200 -o json | jq '.entries'
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--limit` | int | — | Max entries to expand (default: 50, max: 200) |
+
+## Details
+
+Reads the reusable's reused_by array (an array of test ids), then
+expands each id into \{id, name\} via a per-id GET. Capped at 50 entries by
+default (max 200) to bound latency. Reject if &lt;id&gt; is a regular test; use
+'ktm reusables in-test' for the inverse direction.
+
+## Related
+
+- [`ktm reusables`](/cli/commands/reusables)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,63 @@
+---
+title: "ktm tests inspect"
+description: "Full test definition with actions, dependencies, and configuration"
+sidebarTitle: "inspect"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Full test definition with actions, dependencies, and configuration
+
+## Usage
+
+```bash
+ktm tests inspect <id> [flags]
+```
+
+## Examples
+
+```bash
+# Inspect test as JSON (full definition with actions)
+ktm tests inspect 16480
+
+# Inspect test as table (structured summary)
+ktm tests inspect 16480 -o table
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Fetch the complete test object by ID, including the full actions array (step-by-step
+test logic), dependencies, monitors, browser config, environment, and all metadata.
+
+This returns significantly more data than "tests get", which only fetches variable
+definitions. Use "tests inspect" when you need to understand the test logic itself.
+
+## Notes
+
+- Full test definition (actions, dependencies, configuration). If you only need the variables and owners to build a campaign, [`ktm tests get`](/cli/commands/tests/get) is faster.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm tests get`](/cli/commands/tests/get)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

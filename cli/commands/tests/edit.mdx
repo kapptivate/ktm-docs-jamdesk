@@ -1,0 +1,86 @@
+---
+title: "ktm tests edit"
+description: "Edit an existing test (creates a new version automatically)"
+sidebarTitle: "edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Edit an existing test (creates a new version automatically)
+
+## Usage
+
+```bash
+ktm tests edit <id> [flags]
+```
+
+## Examples
+
+```bash
+# Edit test actions from file (preserves existing variant pins)
+ktm tests edit 16480 --from-file updated.json
+
+# Edit test name only
+ktm tests edit 16480 --name "New Test Name"
+
+# Re-pin the API group to a different variant; leaves Database/Frontend pins alone
+ktm tests edit 16480 --variant API:Dev
+
+# Re-pin multiple groups in one shot (forms can mix: 'group:variant' name or numeric ID)
+ktm tests edit 16480 --variant API:Staging --variant Database:Replica --variant 31
+
+# Preview first, then edit
+ktm tests dry-run 16480 --from-file updated.json
+ktm tests edit 16480 --from-file updated.json
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. Without this flag, kind mismatches are hard errors. |
+| `--description` | string | — | Override the test description |
+| `--from-file` | string | — | Path to JSON file with updated test definition |
+| `--name` | string | — | Override the test name |
+| `--skip-validation` | boolean | — | Bypass the client-side validator (backend still validates). Use for tests with action types the CLI registry doesn't know about (future types, archive-only edits). |
+| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket; new variables get the group's default variant. |
+
+## Details
+
+Update a test by merging changes from a JSON file or flags with the current definition.
+Protected fields (product, collection_uid) are always locked to current values.
+Name and description only change when explicitly provided via flags.
+Every edit creates a restorable history version on the backend.
+
+V3 buckets are auto-resolved against the test's product. Without --variant,
+existing buckets are preserved; --variant API:Staging re-pins the API group
+and leaves other groups' existing buckets untouched. Pre-V3 tests
+(no buckets) get default variants filled in automatically.
+
+Use "tests dry-run" first to preview the impact before applying changes.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm tests dry-run`](/cli/commands/tests/dry-run)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

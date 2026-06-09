@@ -1,0 +1,43 @@
+---
+title: "set_default_variant"
+description: "Promote one variant to the group's default and demote every other variant in one atomic update."
+sidebarTitle: "set_default_variant"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Promote one variant to the group's default and demote every other variant in one atomic update.
+
+<Info>
+  **Writes data · Idempotent · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `group_id` | number | Yes | Variable group id |
+| `variant_id` | number | Yes | Variant id to make default |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "group_id": 0,
+  "variant_id": 0
+}
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

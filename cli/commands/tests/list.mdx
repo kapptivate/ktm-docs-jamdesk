@@ -1,0 +1,82 @@
+---
+title: "ktm tests list"
+description: "List tests, optionally filtered by operator and product"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List tests, optionally filtered by operator and product
+
+## Usage
+
+```bash
+ktm tests list [flags]
+```
+
+## Examples
+
+```bash
+# List all tests for a product
+ktm tests list --operator my-operator --product my-operator~my-product
+
+# Search by name substring
+ktm tests list --operator my-operator --name login
+
+# Include archived tests
+ktm tests list --operator my-operator --archived true
+
+# Filter by tags
+ktm tests list --operator my-operator --tags smoke,regression
+
+# Paginate through results
+ktm tests list --operator my-operator --page 2 --page-size 50
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--archived` | string | — | Include archived tests: true, false (default: false = non-archived only) |
+| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--name` | string | — | Filter by test name (substring match, case-insensitive) |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+| `--ordering` | string | — | Sort by field: name, created, modified (prefix with - for descending) |
+| `--page` | string | — | Page number to fetch (default: 1) |
+| `--page-size` | string | — | Number of results per page (default: 200) |
+| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
+| `--tags` | string[] | — | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
+
+## Details
+
+List test scenarios defined on the platform.
+
+Tests belong to a product (which belongs to an operator). Use --operator and
+--product to narrow results. Non-archived tests are returned by default.
+
+The test "id" can be used in CI config files to trigger execution via "ci run".
+
+JSON output fields: id, name, product, owner, tags, archived, is_valid, status, kind, created, modified
+Table columns:      ID, NAME, PRODUCT, STATUS, KIND, ARCHIVED
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm ci run`](/cli/commands/ci/run)
+- [`ktm operators list`](/cli/commands/operators/list)
+- [`ktm products list`](/cli/commands/products/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,51 @@
+---
+title: "list_users"
+description: "List user accounts, including human users (type=user) and API service accounts (type=server)."
+sidebarTitle: "list_users"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List user accounts, including human users (type=user) and API service accounts (type=server).
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | No | Switch output format to raw JSON objects (default: false). The default compact format already shows all users — only use detail=true when you need full JSON fields like roles, groups, or email. |
+| `is_active` | boolean | No | Filter by active status |
+| `operator` | string | No | Filter by operator slug |
+| `search` | string | No | Search by username, first name, last name, or email |
+| `type` | string (user \| server) | No | Filter by user type. Omit for all. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "detail": false,
+  "is_active": false
+}
+```
+
+## Description
+
+```text
+Returns all users as compact one-liner summaries by default (no truncation). Use search to find by username, email, or name. Always pass operator to scope results — can return 600+ users without filters. Defaults to active users only (is_active=true) when is_active is not specified.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

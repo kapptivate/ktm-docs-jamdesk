@@ -1,0 +1,65 @@
+---
+title: "ktm tests step-types"
+description: "List available step types for v2 (no-code) test creation"
+sidebarTitle: "step-types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List available step types for v2 (no-code) test creation
+
+## Usage
+
+```bash
+ktm tests step-types [flags]
+```
+
+## Examples
+
+```bash
+# List all v2 step types
+ktm tests step-types
+
+# List web-only step types
+ktm tests step-types --platform web
+
+# List smartphone step types as JSON
+ktm tests step-types --platform smartphone -o json
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--platform` | string | — | Filter by platform: web, smartphone |
+
+## Details
+
+List the catalog of available step types for v2 test creation.
+
+V2 tests use step-based definitions with versioned step types (e.g. click/v1.0.0, input/v1.0.0).
+They are used with action types ETH_WEB_SCRIPT_V2 (web) and SMARTPHONE_APP_SCRIPT_V2 (smartphone).
+
+Use --platform to filter by web or smartphone. Steps marked as "shared" work on both platforms.
+
+Use the output with 'tests template ETH_WEB_SCRIPT_V2' or 'tests template SMARTPHONE_APP_SCRIPT_V2'
+to generate a ready-to-customize v2 test.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

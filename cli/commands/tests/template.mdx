@@ -1,0 +1,76 @@
+---
+title: "ktm tests template"
+description: "Generate a test template for one or more action types"
+sidebarTitle: "template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Generate a test template for one or more action types
+
+## Usage
+
+```bash
+ktm tests template <action-types...> [flags]
+```
+
+## Examples
+
+```bash
+# Single API call test
+ktm tests template ETH_HTTP_API > api_test.json
+
+# USSD navigation + SMS reception (3 steps)
+ktm tests template USSD USSD SMS_GET > ussd_test.json
+
+# Authenticated API flow (3 steps)
+ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_test.json
+
+# Then create the test:
+ktm tests create --from-file api_test.json --product my-operator~my-product
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `action-types...` | Yes |
+
+## Details
+
+Generate a complete, minimal, valid test JSON template for the specified action types.
+
+The template includes one action per specified type, with default command fields,
+example assertions, and a pre-structured variables section. Placeholder values
+marked with &lt;...&gt; must be filled in before creating the test.
+
+A test can have multiple actions that execute sequentially. Specify multiple
+action types to create a multi-step test template.
+
+Store property syntax (in template output):
+  message_part (USSD/SMS): property is \{INPUT_VAR-&gt;output_var\}, INPUT_VAR holds regex
+  json_body (API types):   property is JSONPath (e.g. $.userId)
+  header:                  property is HTTP header name
+  status_code, body:       property is empty — stores the whole value
+
+Replace &lt;...&gt; placeholders with real device identifiers from 'resources list'.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm resources list`](/cli/commands/resources/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

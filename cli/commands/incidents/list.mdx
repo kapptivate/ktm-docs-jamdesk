@@ -1,0 +1,69 @@
+---
+title: "ktm incidents list"
+description: "List incidents (triggered alerts) on the platform"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List incidents (triggered alerts) on the platform
+
+## Usage
+
+```bash
+ktm incidents list [flags]
+```
+
+## Examples
+
+```bash
+# List open incidents
+ktm incidents list --operator my-operator --status OPEN
+
+# List incidents for a specific alert
+ktm incidents list --operator my-operator --alert-id 42
+
+# List incidents created after a date
+ktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--alert-id` | string | — | Comma-separated alert definition IDs |
+| `--closed-after` | string | — | Filter incidents closed after this ISO datetime |
+| `--closed-before` | string | — | Filter incidents closed before this ISO datetime |
+| `--created-after` | string | — | Filter incidents created after this ISO datetime |
+| `--created-before` | string | — | Filter incidents created before this ISO datetime |
+| `--operator` | string | — | Operator slug (required) |
+| `--page` | int | `1` | Page number |
+| `--page-size` | int | `50` | Results per page |
+| `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
+## Details
+
+List incidents for an operator. Incidents are created when a platform alert
+definition fires. They track the lifecycle from OPEN to CLOSED.
+
+NOT the same as 'metrics alert-eval' which performs local on-demand analytics.
+
+## Related
+
+- [`ktm incidents`](/cli/commands/incidents)
+- [`ktm metrics alert-eval`](/cli/commands/metrics/alert-eval)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

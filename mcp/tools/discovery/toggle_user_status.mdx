@@ -1,0 +1,52 @@
+---
+title: "toggle_user_status"
+description: "Activate or deactivate a user account."
+sidebarTitle: "toggle_user_status"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Activate or deactivate a user account.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Yes | true to activate, false to deactivate |
+| `user_id` | number | Yes | User ID to activate or deactivate |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "user_id": 0,
+  "active": false
+}
+```
+
+## Description
+
+```text
+Requires superadmin or EDIT_OPERATOR_ADMIN permission. Use list_users to find user IDs.
+```
+
+## Related
+
+- [`list_users`](/mcp/tools/discovery/list_users)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

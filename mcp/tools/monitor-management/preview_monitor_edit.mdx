@@ -1,0 +1,62 @@
+---
+title: "preview_monitor_edit"
+description: "Preview the impact of editing a monitor WITHOUT applying changes."
+sidebarTitle: "preview_monitor_edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Preview the impact of editing a monitor WITHOUT applying changes.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | No | New active status |
+| `input_variables` | string | No | New input variables JSON. Buckets are injected automatically from the variants array on submission — preview shows the projected result. |
+| `monitor_id` | number | Yes | Monitor ID to preview changes for |
+| `name` | string | No | New monitor name |
+| `owners` | string | No | New owners JSON |
+| `scheduling` | string | No | New scheduling JSON |
+| `variants` | array | No | Pin variants for the monitor's variable groups. Each entry is "5" (numeric variant ID) or "GroupName:VariantName". Groups not pinned retain their existing bucket (edit-mode preservation). Use to re-pin specific groups during the edit. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+```text
+Returns a client-side diff showing current vs proposed values for each changed field, plus the bucket-resolution preview when variants are provided or auto-migration would fire.
+
+Pin variants via the variants array (same shape as create_monitor). When the monitor is legacy (variable_group != 0 or input_variables lack buckets), this preview shows what auto-migration would do — useful for users who want to inspect the migration plan before calling edit_monitor.
+
+Workflow: get_monitor → preview_monitor_edit → (review diff + bucket plan) → edit_monitor.
+```
+
+## Related
+
+- [`create_monitor`](/mcp/tools/monitor-management/create_monitor)
+- [`edit_monitor`](/mcp/tools/monitor-management/edit_monitor)
+- [`get_monitor`](/mcp/tools/monitor-management/get_monitor)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

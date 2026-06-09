@@ -1,0 +1,55 @@
+---
+title: Installation
+description: Install the ktm CLI and authenticate it with your Kapptivate API key.
+sidebarTitle: Installation
+---
+
+`ktm` ships as a single self-contained binary for Linux, macOS, and Windows. Once it is on your PATH, you authenticate with your Kapptivate API key and you are ready to go.
+
+<Note>
+  Download links for the current release are being finalized. If you need a build now, ask your Kapptivate contact for the binary for your platform.
+</Note>
+
+## Put ktm on your PATH
+
+After downloading the binary for your platform, make it executable and move it onto your PATH:
+
+```bash
+chmod +x ktm
+sudo mv ktm /usr/local/bin/ktm
+```
+
+Confirm the install:
+
+```bash
+ktm --version
+```
+
+## Authenticate
+
+`ktm` reads your key from the `KAPPTIVATE_API_KEY` environment variable:
+
+```bash
+export KAPPTIVATE_API_KEY="your-key"
+ktm status
+```
+
+`ktm status` checks connectivity, authentication, and the CLI version in one call. A clean result means you are ready.
+
+<Tip>
+  In CI, store the key as a secret and expose it as `KAPPTIVATE_API_KEY`. Never hard-code it in a workflow file.
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Discover your slugs, list tests, and run them.
+  </Card>
+  <Card title="Configuration" icon="gear" href="/cli/configuration">
+    Environment variables, output formats, and exit codes.
+  </Card>
+  <Card title="CI/CD" icon="diagram-project" href="/cli/ci-cd">
+    Wire ktm into your pipeline.
+  </Card>
+</Columns>

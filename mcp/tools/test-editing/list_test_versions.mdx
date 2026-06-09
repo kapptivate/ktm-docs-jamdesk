@@ -1,0 +1,50 @@
+---
+title: "list_test_versions"
+description: "List version history for a test."
+sidebarTitle: "list_test_versions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List version history for a test.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `date` | string | No | Filter by date (YYYY-MM-DD) to see versions for that day |
+| `detail` | boolean | No | Return full JSON for each version (default: false — compact one-liners) |
+| `page` | number | No | Page number (default: 1) |
+| `page_size` | number | No | Results per page (default: 20) |
+| `test_id` | number | Yes | ID of the test |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Without date: returns available history dates. With date: returns paginated versions for that date (compact one-liner by default; use detail=true for full JSON).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

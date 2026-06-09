@@ -1,0 +1,56 @@
+---
+title: Monitors & incidents
+description: Create and control scheduled monitors, then triage incidents from the terminal.
+sidebarTitle: Monitors & incidents
+---
+
+A monitor runs a test on a schedule. When a monitored run breaches an alert rule, it raises an incident. Both are scriptable from the CLI, which suits on-call automation and dashboards.
+
+## Create and control monitors
+
+```bash
+# Schedule a monitor for a test (set the cadence with --scheduling; see the link below)
+ktm monitors create --product acme~web --test-id 16480 --variant "API:Prod" --scheduling "<schedule>" --start
+
+# List, force an immediate run, pause or resume in bulk
+ktm monitors list --operator acme -o table
+ktm monitors force-run <monitor-id>
+ktm monitors toggle --ids 12,13 --active false
+```
+
+See [Scheduling](/monitoring/scheduling) for the cadence format and [Monitoring](/monitoring/overview) for the concepts.
+
+## Triage incidents
+
+```bash
+# Quick health: open / warning / closed counts
+ktm incidents counter --operator acme
+
+# List open incidents, then inspect one
+ktm incidents list --operator acme --status OPEN
+ktm incidents get --operator acme --id 4567
+
+# Close it once handled
+ktm incidents close --operator acme --id 4567
+```
+
+## See recent monitor runs
+
+```bash
+ktm monitoring-results list --product acme~web --monitoring-id <monitor-id>
+```
+
+<Tip>
+  The CLI tells you *that* a monitor failed. To understand *why* in plain language, the MCP server is usually faster: ask your assistant "why did monitor 4521 fail, and what changed?" See [MCP examples](/mcp/examples).
+</Tip>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="MCP examples" icon="robot" href="/mcp/examples">
+    Investigate failures in natural language.
+  </Card>
+  <Card title="Command reference" icon="terminal" href="/cli/commands/monitors">
+    Every monitors and incidents command.
+  </Card>
+</Columns>

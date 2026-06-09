@@ -1,0 +1,70 @@
+---
+title: "compute_slo"
+description: "Compute SLI/SLO metrics from InfluxDB query results."
+sidebarTitle: "compute_slo"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Compute SLI/SLO metrics from InfluxDB query results.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `good_field` | string | No | Field name for good events (default 'good') |
+| `operator` | string | Yes | Operator slug (= InfluxDB database name) |
+| `precision` | string | No | Query time precision (s, ms, u, ns) |
+| `query` | string | Yes | InfluxQL query returning good/total fields |
+| `slo_target` | number | Yes | SLO target percentage (e.g. 99.9) |
+| `total_field` | string | No | Field name for total events (default 'total') |
+| `window` | string | No | SLO window (default '30d'). Supported: Nd, Nh |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "query": "string",
+  "slo_target": 0
+}
+```
+
+## Description
+
+```text
+Uses Google SRE burn-rate methodology.
+
+Prerequisite: Run query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS first to discover which measurement contains success/failure counts.
+
+Example: SELECT sum("number_success") AS good, sum("number_success") + sum("number_failed") AS total FROM "test" WHERE time > now() - 30d GROUP BY time(1d)
+
+The tool extracts good/total fields, computes SLI, error budget, burn rate, and severity.
+
+Severity thresholds (Google SRE):
+- critical: burn rate > 14.4x (page immediately)
+- red: burn rate > 6x (create ticket)
+- yellow: burn rate > 1x (SLO at risk)
+- green: burn rate <= 1x (within budget)
+```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

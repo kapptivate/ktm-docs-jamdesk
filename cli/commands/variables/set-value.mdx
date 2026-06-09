@@ -1,0 +1,65 @@
+---
+title: "ktm variables set-value"
+description: "Set ONE variant's value on a grouped variable (preserves other variants)"
+sidebarTitle: "set-value"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Set ONE variant's value on a grouped variable (preserves other variants)
+
+## Usage
+
+```bash
+ktm variables set-value <id> [flags]
+```
+
+## Examples
+
+```bash
+ktm variables set-value 17 --variant prod --value prod.db.example.com
+ktm variables set-value 17 --variant 42 --value 0.0.0.0
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--value` | string | — | New value for this variant |
+| `--variant` | string | — | Variant id or name (required) |
+
+## Details
+
+Atomic per-variant value setter. --variant accepts a variant id or name; the
+target variant must exist on the variable. Errors when called on a global
+variable (no variants) — use 'ktm variables update --default-value' instead.
+
+## Notes
+
+- Sets ONE variant's value on a grouped variable, preserving the other variants. To change a variable's name, description, or default value, use [`ktm variables update`](/cli/commands/variables/update).
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
+- [`ktm variables update`](/cli/commands/variables/update)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

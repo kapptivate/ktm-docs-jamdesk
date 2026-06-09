@@ -1,0 +1,82 @@
+---
+title: "ktm metrics alert-eval"
+description: "Evaluate metrics against alert rules"
+sidebarTitle: "alert-eval"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Evaluate metrics against alert rules
+
+## Usage
+
+```bash
+ktm metrics alert-eval [flags]
+```
+
+## Examples
+
+```bash
+# Inline rules
+ktm metrics alert-eval --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --rules '[{"type":"threshold","metric":"p95","operator":">","value":5}]'
+
+# Rules from file
+ktm metrics alert-eval --operator acme \
+  --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)" \
+  --rules-file rules.json
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--precision` | string | — | Query time precision (s, ms, u, ns) |
+| `--query` | string | — | InfluxQL query string |
+| `--rules` | string | — | Inline JSON alert rule array |
+| `--rules-file` | string | — | Path to JSON file with alert rule array |
+
+## Details
+
+Evaluate InfluxDB metrics against alert rules without Kapacitor.
+
+Prerequisite: Discover available measurements and fields first using
+'metrics query --operator &lt;slug&gt; --query "SHOW MEASUREMENTS"' and
+'metrics query --operator &lt;slug&gt; --query "SHOW FIELD KEYS FROM &lt;measurement&gt;"'.
+Do not fabricate measurement or field names.
+
+Runs an InfluxQL query, computes statistics, then checks each rule.
+
+8 rule types:
+  - threshold:     check a metric against a value (operators: &gt;, &lt;, &gt;=, &lt;=, ==, !=)
+  - level_shift:   detect significant mean changes (optional min_shift_pct filter)
+  - missing_data:  check for gaps in time series (max_gaps, default 0)
+  - flatline:      detect stuck values (max_flatline_len, default 3)
+  - rate_change:   detect spikes or excessive rate (max_spikes default 0, max_abs_rate)
+  - outlier:       check outlier percentage (max_outlier_pct, default 5.0)
+  - counter_reset: detect counter decreases (max_resets, default 0)
+  - anomaly:       detect sustained EWMA residual breaches (sensitivity 1-5, sustained_periods default 3)
+
+Provide rules via --rules (inline JSON) or --rules-file (path to JSON file).
+Typical SRE workflow: metrics query (explore data) → metrics alert-eval (check rules).
+
+## Related
+
+- [`ktm metrics`](/cli/commands/metrics)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

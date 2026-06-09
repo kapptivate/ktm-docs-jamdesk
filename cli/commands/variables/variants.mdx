@@ -1,0 +1,63 @@
+---
+title: "ktm variables variants"
+description: "Variants — environment slices inside a variable group (dev, staging, prod, …)"
+sidebarTitle: "variants"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Variants — environment slices inside a variable group (dev, staging, prod, …)
+
+<Note>Aliases: variants, variant</Note>
+
+## Usage
+
+```bash
+ktm variables variants [command]
+```
+
+## Subcommands
+
+<Columns cols={2}>
+  <Card title="add" icon="angle-right" href="/cli/commands/variables/variants/add">
+    Add a new variant to a variable group
+  </Card>
+  <Card title="copy-values" icon="angle-right" href="/cli/commands/variables/variants/copy-values">
+    Promote variant values: copy every variable's --from variant into --to across the group
+  </Card>
+  <Card title="remove" icon="angle-right" href="/cli/commands/variables/variants/remove">
+    Remove a variant; refuses if any variable holds non-default data unless --force
+  </Card>
+  <Card title="rename" icon="angle-right" href="/cli/commands/variables/variants/rename">
+    Rename a variant in a group atomically
+  </Card>
+  <Card title="set-default" icon="angle-right" href="/cli/commands/variables/variants/set-default">
+    Promote a variant to default (demotes the prior default atomically)
+  </Card>
+</Columns>
+
+## Details
+
+Manage variants under a variable group: add, remove (safe-by-default),
+rename, set the default, and copy values across variants. Use
+'ktm variables groups show &lt;id&gt;' to list current variants.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
+- [`ktm variables groups show`](/cli/commands/variables/groups/show)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

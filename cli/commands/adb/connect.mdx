@@ -1,0 +1,66 @@
+---
+title: "ktm adb connect"
+description: "Open an ADB tunnel to a remote phone"
+sidebarTitle: "connect"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Open an ADB tunnel to a remote phone
+
+## Usage
+
+```bash
+ktm adb connect <phone-serial> [flags]
+```
+
+## Examples
+
+```bash
+# Connect to a phone (auto-registers with local ADB server)
+ktm adb connect RF8NB07VDGA
+
+# Custom port
+ktm adb connect RF8NB07VDGA --port 7037
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `phone-serial` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--port` | int | `6037` | Local port to listen on |
+
+## Details
+
+Starts a local ADB tunnel to a specific phone on a remote smartphone robot.
+
+A thin TCP relay bridges your local ADB server to the remote phone over a
+secure WebSocket tunnel. The device auto-registers with your local ADB server,
+so Android Studio picks it up automatically. Full support for port forwarding,
+reverse forwarding, and JDWP debugging — your real local ADB server handles
+all protocol concerns.
+
+## Related
+
+- [`ktm adb`](/cli/commands/adb)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

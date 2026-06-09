@@ -1,0 +1,54 @@
+---
+title: "list_executions"
+description: "List recent test executions for a product."
+sidebarTitle: "list_executions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List recent test executions for a product.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `creator` | string | No | Filter by creator username — the user or service account that triggered the execution. |
+| `detail` | boolean | No | Return full JSON instead of compact summaries (default: false) |
+| `from_date` | string | No | Only include executions created after this date (ISO 8601 format, e.g. 2025-01-15T00:00:00Z). Combine with to_date for time ranges. |
+| `page` | number | No | Page number (default: 1). Use with page_size to navigate through large result sets. |
+| `page_size` | number | No | Number of executions to return (default: 10, max: 200). Use smaller values for recent overview, larger for historical analysis. |
+| `product` | string | Yes | Product slug (format: operator~product). Get available slugs from list_products. Example: 'my-operator~my-product'. |
+| `search` | string | No | Free-text search across execution names and tags (case-insensitive substring match). |
+| `status` | string (success \| failed \| ongoing \| pending \| canceled \| timed out \| maintenance) | No | Filter by execution status. Omit to return all. |
+| `to_date` | string | No | Only include executions created before this date (ISO 8601 format). Combine with from_date for time ranges. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List recent test executions for a product. Each execution is a campaign run containing one or more tests with status, pass/fail counts, creator, and timestamps.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

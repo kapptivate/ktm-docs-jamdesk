@@ -1,0 +1,55 @@
+---
+title: "get_monitoring_result"
+description: "Investigate monitoring (scheduled) run result(s) in detail."
+sidebarTitle: "get_monitoring_result"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Investigate monitoring (scheduled) run result(s) in detail.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `include_actions` | boolean | No | Include raw action results with screenshots, artifacts, logs (default: false). Increases response size significantly. Note: screenshots include full URLs; artifact paths are relative — prepend https://&lt;KAPPTIVATE_HOST&gt;/robot/ to build the full URL. |
+| `include_full_json` | boolean | No | Include the entire raw result blob (default: false). Use only when you need campaign metadata, options, or history. |
+| `result_ids` | string | Yes | Comma-separated monitoring result IDs (from list_monitoring_results). Single ID for one result, multiple for batch investigation. |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "result_ids": "string"
+}
+```
+
+## Description
+
+```text
+Returns failure reason, per-test/per-action status, duration, and variables. Supports batch: pass comma-separated IDs to investigate multiple failures in one call. Use include_actions=true for raw action results (screenshots, artifacts, logs).
+
+Result IDs come from list_monitoring_results. Always scope list_monitoring_results by monitoring_id first to ensure results belong to the correct operator. For campaign or Tests-campaign runs use get_execution_detail instead.
+```
+
+## Related
+
+- [`list_monitoring_results`](/mcp/tools/monitoring-results/list_monitoring_results)
+- [`get_execution_detail`](/mcp/tools/results/get_execution_detail)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

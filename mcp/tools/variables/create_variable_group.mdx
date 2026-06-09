@@ -1,0 +1,51 @@
+---
+title: "create_variable_group"
+description: "Create a new variable group with its variants in one call."
+sidebarTitle: "create_variable_group"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a new variable group with its variants in one call.
+
+<Info>
+  **Writes data · Calls external systems.**
+</Info>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | No | Reset edit budget after user approval |
+| `name` | string | Yes | Group name (e.g. "Environments") |
+| `product` | string | Yes | Product slug |
+| `variant_names` | string | Yes | Comma-separated variant names (e.g. "Dev,Staging,Prod") |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "variant_names": "string"
+}
+```
+
+## Description
+
+```text
+variant_names is a comma-separated list (e.g. "Dev,Staging,Prod"). The FIRST variant becomes the default per platform convention. Manage variants afterwards via the variants_* tools.
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

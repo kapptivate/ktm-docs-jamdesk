@@ -1,0 +1,68 @@
+---
+title: "ktm variables create"
+description: "Create a variable (single | secret | choice)"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Create a variable (single | secret | choice)
+
+## Usage
+
+```bash
+ktm variables create [flags]
+```
+
+## Examples
+
+```bash
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost
+ktm variables create --product acme~web --name ENV --type choice --default-value "dev,staging,prod"
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--default-value` | string | — | Default value (for choice: comma-separated) |
+| `--description` | string | — | Description (optional, recommended) — explains the variable's purpose; agents and humans use it to disambiguate semantically |
+| `--group` | int | — | Optional variable group id |
+| `--name` | string | — | Variable name (required) |
+| `--product` | string | — | Product slug (required) |
+| `--type` | string | — | single \| secret \| choice (required) |
+
+## Details
+
+Types:
+  single  scalar string value in --default-value
+  secret  scalar string; platform masks on read
+  choice  --default-value is a comma-separated list of allowed values
+
+For group-scoped vars supply --group &lt;id&gt;; omit for a global variable. When
+--group is set the tool auto-fans variable_values to one entry per variant of
+that group, all initialised to --default-value. Tune individual variants
+afterwards with 'ktm variables set-value'.
+
+Secrets: never embed a real secret into shell history. Create via the web UI
+or feed the value through an env-var ($MY_SECRET) on ephemeral shells.
+
+## Related
+
+- [`ktm variables`](/cli/commands/variables)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

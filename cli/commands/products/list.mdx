@@ -1,0 +1,67 @@
+---
+title: "ktm products list"
+description: "List products, optionally filtered by operator"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List products, optionally filtered by operator
+
+## Usage
+
+```bash
+ktm products list [flags]
+```
+
+## Examples
+
+```bash
+# List all products for an operator
+ktm products list --operator my-operator
+
+# List only active products (table)
+ktm products list --operator my-operator --active true -o table
+
+# Filter by product name
+ktm products list --operator my-operator --name "Web Portal"
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filter by active status: true or false |
+| `--name` | string | — | Filter by exact product name match |
+| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
+
+## Details
+
+List products (applications/services) registered on the platform.
+
+Each product belongs to an operator and contains tests and monitors. Use
+--operator to scope results to a single operator. The product slug (format:
+"&lt;operator-slug&gt;~&lt;product-name&gt;") is used as --product in tests/monitors commands.
+
+JSON output fields: id, name, slug, short_name, active, operator, has_monitoring, icon_name, groups, environments
+Table columns:      ID, SLUG, NAME, OPERATOR, ACTIVE, MONITORING
+
+## Related
+
+- [`ktm products`](/cli/commands/products)
+- [`ktm operators list`](/cli/commands/operators/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

@@ -1,0 +1,59 @@
+---
+title: "ktm tests undelete"
+description: "Restore one or more tests from trash"
+sidebarTitle: "undelete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Restore one or more tests from trash
+
+## Usage
+
+```bash
+ktm tests undelete <id>... [flags]
+```
+
+## Examples
+
+```bash
+ktm tests undelete 99
+ktm tests undelete 99 100 101
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Details
+
+Pulls tests back out of the product's test-trash collection. This is the
+inverse of 'ktm tests delete'. Tests are restored into their previous
+collection.
+
+Backed by POST /api/tests/restore/ body \{identifiers\}.
+
+## Notes
+
+- Restores tests from trash — the counterpart to [`ktm tests delete`](/cli/commands/tests/delete).
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

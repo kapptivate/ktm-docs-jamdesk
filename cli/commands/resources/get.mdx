@@ -1,0 +1,71 @@
+---
+title: "ktm resources get"
+description: "Get details for a specific smartphone by serial/UUID"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get details for a specific smartphone by serial/UUID
+
+## Usage
+
+```bash
+ktm resources get <serial> [flags]
+```
+
+## Examples
+
+```bash
+# Get smartphone details
+ktm resources get R92Y70ZDMKH
+
+# Get smartphone with installed apps (for V2 smartphone test authoring)
+ktm resources get R92Y70ZDMKH --include-apps
+
+# Get smartphone with apps in table format
+ktm resources get R92Y70ZDMKH --include-apps -o table
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `serial` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--include-apps` | boolean | — | Fetch installed apps on the device (for V2 smartphone test authoring: copy package→starting.app, app object→meta) |
+
+## Details
+
+Fetch device details for a single smartphone resource by its serial number or UUID.
+
+Use --include-apps to also retrieve the list of installed applications on the device.
+The installed apps list maps directly to the V2 test's starting.app and meta fields:
+  - copy package   → starting.app
+  - copy the app object \{kind, name, label, package, version\} → meta
+
+To find smartphone serial numbers, use: ktm resources list --type smartphone
+
+## Related
+
+- [`ktm resources`](/cli/commands/resources)
+- [`ktm resources list`](/cli/commands/resources/list)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

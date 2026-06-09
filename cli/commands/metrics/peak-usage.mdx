@@ -1,0 +1,66 @@
+---
+title: "ktm metrics peak-usage"
+description: "Get P95 peak resource usage across time aggregation windows"
+sidebarTitle: "peak-usage"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get P95 peak resource usage across time aggregation windows
+
+## Usage
+
+```bash
+ktm metrics peak-usage [flags]
+```
+
+## Examples
+
+```bash
+# Peak hourly and daily usage for a SIM over one week
+ktm metrics peak-usage --operator acme --resources 0612345678 --aggregations 1h,24h --start 2024-01-01T00:00:00Z --end 2024-01-07T00:00:00Z
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--aggregations` | string | `1h` | Comma-separated aggregation windows (e.g. '1h,24h') |
+| `--end` | string | — | End time in ISO 8601 format (e.g. '2024-01-02T00:00:00Z') |
+| `--operator` | string | — | Operator slug (= InfluxDB database name) |
+| `--resources` | string | — | Comma-separated device IDs |
+| `--start` | string | — | Start time in ISO 8601 format (e.g. '2024-01-01T00:00:00Z') |
+
+## Details
+
+Get P95 peak resource usage across specified time aggregation windows.
+
+Returns P95 peak usage percentage per resource across time aggregation windows.
+One call answers capacity questions like "what is the peak hourly/daily usage
+for these devices?"
+
+This queries the "resource_usage" measurement in InfluxDB. Device IDs correspond
+to resources discovered via 'ktm resources list' (SIM: national_msisdn,
+web-agent: hostname, smartphone: UUID).
+
+Maximum recommended time range: 90 days.
+
+## Related
+
+- [`ktm metrics`](/cli/commands/metrics)
+- [`ktm resources`](/cli/commands/resources)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

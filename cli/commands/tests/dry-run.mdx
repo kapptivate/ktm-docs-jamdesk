@@ -1,0 +1,73 @@
+---
+title: "ktm tests dry-run"
+description: "Preview the impact of editing a test without applying changes"
+sidebarTitle: "dry-run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Preview the impact of editing a test without applying changes
+
+## Usage
+
+```bash
+ktm tests dry-run <id> [flags]
+```
+
+## Examples
+
+```bash
+# Preview impact of editing actions
+ktm tests dry-run 16480 --from-file updated.json
+
+# Preview name change
+ktm tests dry-run 16480 --name "New Name"
+
+# Preview impact of re-pinning the API group
+ktm tests dry-run 16480 --variant API:Dev
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Rewrite declared input_variable kinds to match the platform's variable types. |
+| `--description` | string | — | Override the test description |
+| `--from-file` | string | — | Path to JSON file with updated test definition |
+| `--name` | string | — | Override the test name |
+| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Groups not pinned retain their existing bucket. |
+
+## Details
+
+Dry-run a test edit to see which tests would be invalidated and which
+monitorings would be deactivated. No changes are applied.
+
+Use this before "tests edit" to understand the blast radius. Accepts the
+same --variant and --auto-correct-kinds flags as edit so you can preview
+what re-pinning would invalidate.
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm tests edit`](/cli/commands/tests/edit)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

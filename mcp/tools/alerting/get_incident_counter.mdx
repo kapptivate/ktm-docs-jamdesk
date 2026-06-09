@@ -1,0 +1,56 @@
+---
+title: "get_incident_counter"
+description: "Get a quick count of incidents by severity: critical, warning, and closed."
+sidebarTitle: "get_incident_counter"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get a quick count of incidents by severity: critical, warning, and closed.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `alert_id` | string | No | Comma-separated alert definition IDs |
+| `closed_date_after` | string | No | ISO datetime: only incidents closed after this time |
+| `closed_date_before` | string | No | ISO datetime: only incidents closed before this time |
+| `created_after` | string | No | ISO datetime: only incidents created after this time |
+| `created_before` | string | No | ISO datetime: only incidents created before this time |
+| `operator` | string | Yes | Operator slug |
+| `status` | string (OPEN \| CLOSED \| MANUALLY_CLOSED \| CHANGED \| DEACTIVATED) | No | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Useful for dashboard-style health checks. Accepts the same filters as list_incidents.
+```
+
+## Related
+
+- [`list_incidents`](/mcp/tools/alerting/list_incidents)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

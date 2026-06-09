@@ -1,0 +1,54 @@
+---
+title: "force_run_monitor"
+description: "Force a monitor to run immediately, outside of its normal schedule."
+sidebarTitle: "force_run_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Force a monitor to run immediately, outside of its normal schedule.
+
+<Warning>
+  **Destructive · Writes data · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `monitor_id` | number | Yes | Monitor ID (from list_monitors) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+```text
+Triggers an out-of-schedule execution and returns a confirmation with the task key.
+Use list_monitoring_results with the monitor ID to track the execution status.
+
+Use list_monitors to find monitor IDs first.
+```
+
+## Related
+
+- [`list_monitoring_results`](/mcp/tools/monitoring-results/list_monitoring_results)
+- [`list_monitors`](/mcp/tools/discovery/list_monitors)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

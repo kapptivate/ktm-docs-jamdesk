@@ -1,0 +1,50 @@
+---
+title: "cancel_shell"
+description: "Cancel a pending or ongoing shell command."
+sidebarTitle: "cancel_shell"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Cancel a pending or ongoing shell command.
+
+<Warning>
+  **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
+</Warning>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `shell_id` | number | Yes | Shell command ID to cancel |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "shell_id": 0
+}
+```
+
+## Description
+
+```text
+The command's status changes to Canceled and the runner task is terminated. Find active shell_ids via list_shell_actions.
+```
+
+## Related
+
+- [`list_shell_actions`](/mcp/tools/shell/list_shell_actions)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

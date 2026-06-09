@@ -1,0 +1,52 @@
+---
+title: "get_widget_template"
+description: "Get a ready-to-fill JSON template for a dashboard widget type."
+sidebarTitle: "get_widget_template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get a ready-to-fill JSON template for a dashboard widget type.
+
+<Note>
+  **Read-only.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `widget_type` | string | Yes | Widget type (from list_widget_types): line, area, pie, repartitionChart, counter, title, table, customDisplay |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "widget_type": "string"
+}
+```
+
+## Description
+
+```text
+Includes _metadata with grid constraints, valid operations, schema discovery steps, and layout hints.
+
+PREREQUISITE: Use query_metrics with SHOW MEASUREMENTS and SHOW FIELD KEYS to discover the InfluxDB schema before filling this template.
+```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

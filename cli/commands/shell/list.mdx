@@ -1,0 +1,54 @@
+---
+title: "ktm shell list"
+description: "List recent shell actions"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+List recent shell actions
+
+## Usage
+
+```bash
+ktm shell list [flags]
+```
+
+## Examples
+
+```bash
+ktm shell list --product 123
+ktm shell list --product 123 --status D
+ktm shell list --product 123 --owner 0789800356 -o table
+# Poll for async events (wait SMS, USSD push) since session start
+ktm shell list --product 123 --owner 0789800356 --from-date 2026-03-15T19:29:17Z --ordering -created
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--from-date` | string | — | Only show shells created after this ISO 8601 timestamp |
+| `--ordering` | string | — | Sort order: '-created' (newest first), 'created' (oldest first) |
+| `--owner` | string | — | Filter by device identifier |
+| `--product` | int | — | Filter by product ID |
+| `--status` | string | — | Filter by status (P/D/O/B/C/T/M) |
+
+## Related
+
+- [`ktm shell`](/cli/commands/shell)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

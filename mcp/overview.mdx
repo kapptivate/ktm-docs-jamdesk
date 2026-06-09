@@ -1,36 +1,57 @@
 ---
-title: MCP Overview
-description: Connect Kapptivate to AI assistants and agents via the Model Context Protocol.
+title: MCP server
+description: Connect Kapptivate to AI assistants and agents over the Model Context Protocol.
 sidebarTitle: Overview
 ---
 
-The Kapptivate MCP server exposes test automation, monitoring, and platform data to AI assistants over the Model Context Protocol: letting Claude, Cursor, or any MCP-compatible client read your tests, query metrics, and trigger executions on your behalf.
+The Kapptivate MCP server gives AI assistants direct, governed access to your platform. Point an MCP client at one URL, authenticate with your API key, and the model can discover tests, run campaigns, query metrics, manage monitors, and triage incidents through tools that map one-to-one to Kapptivate.
 
-## Connect
+Use it to turn intent into action: "run the checkout regression on staging and summarize the failures", "create a monitor for the login test every five minutes", or "show last week's success rate for the payments product".
 
-The Kapptivate MCP server is hosted at:
+## How it works
 
-<div className="url-banner" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 16px', borderRadius: '8px', fontSize: '14px' }}>
-  <i className="fa-light fa-link" style={{ flexShrink: 0 }} />
-  <span style={{ fontFamily: 'Geist Mono, monospace' }}>https://mcp.kapptivate.com/mcp</span>
-</div>
+The server speaks the [Model Context Protocol](https://modelcontextprotocol.io), the open standard for connecting assistants to tools. Kapptivate hosts it at a single endpoint:
 
-Authentication uses a personal access token tied to your Kapptivate account.
+```
+https://mcp.kapptivate.com/mcp
+```
 
-<Steps>
-  <Step title="Get your personal token">
+Your client authenticates every request with the `X-Kapptivate-API-Key` header. The key carries the same permissions as your Kapptivate account, so an agent can only do what you can do.
 
-    Sign in to [Kapptivate](https://app.kapptivate.com), open your **Profile** tab, and copy your personal access token.
+<Warning>
+  Your API key grants the same access as your account. Treat it like a password: never commit it to a repository or paste it into a shared chat.
+</Warning>
 
-  </Step>
-  <Step title="Configure your MCP client">
+## What you can do
 
-    Point your MCP client (Claude Desktop, Cursor, or any MCP-compatible app) at `https://mcp.kapptivate.com/mcp` and provide your personal token in the `Authorization` header as a bearer token.
+<Columns cols={2}>
+  <Card title="Discover and run tests" icon="play" href="/mcp/workflows">
+    Find tests, build campaigns, run them, and read pass/fail results.
+  </Card>
+  <Card title="Monitor and alert" icon="gauge-high" href="/mcp/workflows">
+    Create monitors, review incidents, and evaluate alerts.
+  </Card>
+  <Card title="Query metrics" icon="chart-line" href="/mcp/workflows">
+    Explore KPIs, compute SLOs, and correlate signals.
+  </Card>
+  <Card title="Manage configuration" icon="dollar-sign" href="/mcp/concepts">
+    Work with products, variables, variants, and collections.
+  </Card>
+</Columns>
 
-  </Step>
-</Steps>
+## What's Next?
 
-<div className="url-banner" style={{ display: 'flex', alignItems: 'baseline', gap: '12px', padding: '12px 16px', borderRadius: '8px', fontSize: '14px' }}>
-  <i className="fa-light fa-lock" style={{ flexShrink: 0 }} />
-  <span>Your personal token grants the same access as your Kapptivate account. Treat it like a password. Never commit it to a repository or share it in plain text.</span>
-</div>
+<Columns cols={2}>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Set up Claude, Cursor, or Claude Code in a couple of minutes.
+  </Card>
+  <Card title="Core concepts" icon="sitemap" href="/mcp/concepts">
+    Understand operators, products, variables, and the safety model.
+  </Card>
+  <Card title="Tools reference" icon="robot" href="/mcp/tools/overview">
+    Browse every tool the server exposes, grouped by category.
+  </Card>
+  <Card title="Common workflows" icon="diagram-project" href="/mcp/workflows">
+    Step-by-step recipes for the most frequent tasks.
+  </Card>
+</Columns>

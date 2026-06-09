@@ -1,0 +1,62 @@
+---
+title: "correlate_metrics"
+description: "Detect cross-metric relationships: are these metrics related?"
+sidebarTitle: "correlate_metrics"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Detect cross-metric relationships: are these metrics related?
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `mode` | string (quick \| full \| shift) | No | Analysis mode: 'quick' (default, correlation only), 'full' (correlation + KS shift + lag scan), 'shift' (KS distribution shift only) |
+| `operator` | string | Yes | Operator slug (= InfluxDB database name) |
+| `queries` | string | Yes | JSON array of 2-10 InfluxQL GROUP BY time() queries |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "operator": "string",
+  "queries": "string"
+}
+```
+
+## Description
+
+```text
+Did they change at the same time? Does one cause the other?
+
+Provide 2-10 InfluxQL GROUP BY time() queries. Results include per-query health summaries and pairwise correlation with statistical significance.
+
+3 analysis modes (--mode):
+- quick (default): pairwise Spearman/Pearson + p-values. Fast, answers "are they correlated?"
+- full: adds distribution shift detection (KS test) and lag scan (±50 steps). Answers "did they change together?" and "does one cause the other?"
+- shift: per-query KS distribution shift only. Answers "which metrics changed recently?"
+
+Use matching GROUP BY time() intervals for best alignment. Prerequisite: discover schema with query_metrics SHOW MEASUREMENTS first.
+```
+
+## Related
+
+- [`query_metrics`](/mcp/tools/metrics/query_metrics)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

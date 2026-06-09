@@ -1,0 +1,46 @@
+---
+title: "get_dashboard"
+description: "Get the full dashboard definition by UID, including widget layout, global filters, and metadata."
+sidebarTitle: "get_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get the full dashboard definition by UID, including widget layout, global filters, and metadata.
+
+<Note>
+  **Read-only · Calls external systems.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `dashboard_uid` | string | Yes | Dashboard UID (from list_dashboards) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "dashboard_uid": "string"
+}
+```
+
+## Description
+
+```text
+The layouts field contains the complete widget configuration (v2 format: {md: [...]}).
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

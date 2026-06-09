@@ -1,0 +1,62 @@
+---
+title: "ktm collections search"
+description: "Search collections and items in a collection sub-tree"
+sidebarTitle: "search"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Search collections and items in a collection sub-tree
+
+## Usage
+
+```bash
+ktm collections search [flags]
+```
+
+## Examples
+
+```bash
+ktm collections search --operator my-op --collection-uid <tests_root> --query login
+ktm collections search --operator my-op --collection-uid <uid> --query "Verify" -o json
+ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--collection-uid` | string | — | Sub-tree to search under (required; use the product tests_root UID for broadest scope) |
+| `--operator` | string | — | Operator slug (required) |
+| `--owner-id` | int | — | Filter by owner user id |
+| `--query` | string | — | Free-text search term |
+| `--tags` | string | — | Comma-separated tag ids |
+
+## Details
+
+The kcollections search endpoint scopes results to a sub-tree — pass
+--collection-uid (the product's tests_root_collection_uid for the broadest
+scope). Missing --collection-uid returns HTTP 400 from the service.
+
+The search walks sub-collections recursively. Items are matched by substring
+on meta.name (the client sends fields=name by default). Returns a payload with
+two arrays: collections (sub-collections whose name matches) and items.
+
+## Related
+
+- [`ktm collections`](/cli/commands/collections)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

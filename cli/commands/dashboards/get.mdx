@@ -1,0 +1,57 @@
+---
+title: "ktm dashboards get"
+description: "Get a dashboard by UID"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Get a dashboard by UID
+
+## Usage
+
+```bash
+ktm dashboards get <uid> [flags]
+```
+
+## Examples
+
+```bash
+# Get dashboard by UID (JSON)
+ktm dashboards get abc123def456
+
+# Get in table format
+ktm dashboards get abc123def456 -o table
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `uid` | Yes |
+
+## Details
+
+Retrieve the full dashboard definition including its widget layout.
+
+The UID is the 40-character identifier shown in dashboard list output.
+Returns the complete dashboard object with layouts, global filters, and metadata.
+
+## Related
+
+- [`ktm dashboards`](/cli/commands/dashboards)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

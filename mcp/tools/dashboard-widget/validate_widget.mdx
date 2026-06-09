@@ -1,0 +1,52 @@
+---
+title: "validate_widget"
+description: "Dry-run validation of a dashboard widget."
+sidebarTitle: "validate_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Dry-run validation of a dashboard widget.
+
+<Note>
+  **Read-only.** Safe to call: this tool does not modify data.
+</Note>
+
+## Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `widget_json` | string | Yes | JSON string of the widget data section (same format as the template output, without _metadata) |
+
+## Example arguments
+
+Illustrative arguments an agent supplies when calling this tool:
+
+```json
+{
+  "widget_json": "string"
+}
+```
+
+## Description
+
+```text
+Checks type, structure, query fields, placeholder detection, and per-type constraints. Returns errors and warnings without modifying any dashboard.
+
+Use before add_dashboard_widget to catch errors early.
+```
+
+## Related
+
+- [`add_dashboard_widget`](/mcp/tools/dashboard-widget/add_dashboard_widget)
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All MCP tools" icon="robot" href="/mcp/tools/overview">
+    Browse the full tool reference by category.
+  </Card>
+  <Card title="Connect a client" icon="plug" href="/mcp/connect">
+    Point Claude, Cursor, or Claude Code at the server.
+  </Card>
+</Columns>

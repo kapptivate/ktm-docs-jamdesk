@@ -1,0 +1,75 @@
+---
+title: "ktm tests delete"
+description: "Soft-delete one or more tests (move to trash; recoverable via 'tests undelete')"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Soft-delete one or more tests (move to trash; recoverable via 'tests undelete')
+
+## Usage
+
+```bash
+ktm tests delete <id>... [flags]
+```
+
+## Examples
+
+```bash
+ktm tests delete 99 --yes
+ktm tests delete 99 100 101 --yes
+ktm tests delete 117 --kind 2 --yes           # reusable
+```
+
+## Arguments
+
+| Argument | Required |
+| --- | --- |
+| `id` | Yes |
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--kind` | int | `1` | Test kind: 1=test (default), 2=reusable |
+| `--yes` | boolean | — | Confirm the soft-delete |
+
+## Details
+
+Sends tests to the product's test-trash collection. Despite the "delete"
+name this is reversible — run 'ktm tests undelete &lt;id&gt;' to pull a test back
+out of trash. The kcollections service supports an admin 'empty trash' action
+that purges the trash permanently; that is out of scope for this CLI.
+
+--kind controls which test-kind table the backend looks in:
+  1  regular test (default)
+  2  reusable test
+
+Refuses without --yes.
+
+Backed by DELETE /api/tests/delete/ body \{identifiers, kind\}.
+
+## Notes
+
+- Soft-deletes to trash, recoverable with [`ktm tests undelete`](/cli/commands/tests/undelete). To merely hide a test from listings, use [`ktm tests archive`](/cli/commands/tests/archive).
+
+## Related
+
+- [`ktm tests`](/cli/commands/tests)
+- [`ktm tests undelete`](/cli/commands/tests/undelete)
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>
