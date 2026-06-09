@@ -3,6 +3,7 @@
     "kind": "cli",
     "source": "cli-binary",
     "cliName": "ktm",
+    "cliVersion": "dev",
     "count": 134
   },
   "globalFlags": [

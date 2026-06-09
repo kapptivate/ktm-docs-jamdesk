@@ -137,19 +137,30 @@ function walk(bin, pathArr, shortFromParent, sink, globalFlagsRef) {
 export async function introspectCli({ mode = 'binary', bin, url, file }) {
   if (mode === 'file') {
     const data = await readJSON(file);
-    return { nodes: data.nodes || data.items || [], globalFlags: data.globalFlags || [], topOrder: data.topOrder || [] };
+    return {
+      nodes: data.nodes || data.items || [],
+      globalFlags: data.globalFlags || [],
+      topOrder: data.topOrder || [],
+      version: data.version || '',
+    };
   }
   const exe = await ensureBinary({ bin, url });
+  let version = '';
+  try {
+    version = execFileSync(exe, ['--version'], { encoding: 'utf8' }).replace(/^ktm\s+/i, '').trim();
+  } catch {
+    /* version is optional */
+  }
   const root = parseHelp(runHelp(exe, []));
   const nodes = [];
   const globalFlagsRef = { value: [] };
   const topOrder = root.subs.map((s) => s.name);
   for (const s of root.subs) walk(exe, [s.name], s.short, nodes, globalFlagsRef);
-  return { nodes, globalFlags: globalFlagsRef.value, topOrder };
+  return { nodes, globalFlags: globalFlagsRef.value, topOrder, version };
 }
 
 /** Normalize the walked tree into the deterministic CLI catalog IR. */
-export function normalizeCli({ nodes, globalFlags, topOrder }, { source }) {
+export function normalizeCli({ nodes, globalFlags, topOrder, version }, { source }) {
   const items = nodes.map((n) => ({
     id: n.path.join('_'),
     name: n.name,
@@ -168,7 +179,7 @@ export function normalizeCli({ nodes, globalFlags, topOrder }, { source }) {
   }));
   return {
     catalog: {
-      meta: { kind: 'cli', source, cliName: 'ktm', count: items.length },
+      meta: { kind: 'cli', source, cliName: 'ktm', cliVersion: version || '', count: items.length },
       globalFlags,
       topOrder,
       items,
