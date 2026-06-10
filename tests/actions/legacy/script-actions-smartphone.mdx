@@ -1,0 +1,138 @@
+---
+title: Script actions on smartphone
+description: Smartphone-specific helpers for script actions, airplane mode, device events, calls, and audio.
+---
+
+Smartphone script actions (Android app, iOS app, and web mobile) extend WebdriverIO with helpers for things only a real phone can do: toggling airplane mode, reacting to device events like an incoming SMS or call, placing and receiving calls, and playing or recording audio. `browser` and `driver` are aliases; both work with every helper.
+
+For the script structure, parameters, and shared helpers, start with [Script actions](/tests/actions/legacy/script-actions).
+
+## Airplane mode (Android)
+
+```javascript
+browser.enableAirplaneMode();
+browser.disableAirplaneMode();
+```
+
+`isAirplaneModeEnabled()` returns the current state. `enableAirplaneMode`, `disableAirplaneMode`, and `toggleAirplaneMode` do nothing if the phone is already in the requested state, and return a `Not implemented` error on iOS. All accept optional parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `pause` | number (ms) | Wait after the switch before the next action. |
+| `selectorStrategy` | constant | How to find the switch in the settings UI: `selectorStrategy.TEXT` (label text), `selectorStrategy.XPATH`, or `selectorStrategy.ALL` (try everything). |
+| `airplaneLabelRegex` | string | Label regex for the TEXT strategy. Default: `avion\|airplane` (French and English). |
+| `airplaneSwitchXPATH` | string | Full XPath of the switch for the XPATH strategy. |
+| `forceNativeAttempt` | boolean | Try the non-UI approach first even on Android ≥ 7. Default: `false`. |
+
+## Device events
+
+Two helpers work together: `addEventListener` reacts to events as they occur, and `waitForEvent` blocks until one occurs. To catch events with a listener, the step must also wait for one.
+
+```javascript
+driver.addEventListener((event) => { console.log("Received", event) }, new CellularEvent());
+driver.waitForEvent(new ActiveCallEvent(), {
+  timeout: 45000,
+  timeoutMsg: "call never became active"
+});
+```
+
+`waitForEvent(expectedEvent, options)` fails the step if the event does not occur within `timeout` (default 5000 ms). Options: `timeout`, `timeoutMsg`, `interval` (default 500 ms), `requestTimeout` (default 2000 ms). Passing a parent event class matches all its children; passing nothing to `addEventListener` listens to everything.
+
+Every event carries `kind`, `name`, and `time`.
+
+| Scope | Events |
+|-------|--------|
+| Android and iOS | `CellularEvent` (incl. `SwitchTechnologyCellularEvent`, iOS only), `CallEvent`: `IncomingCallEvent`, `ActiveCallEvent` |
+| Android only | `IdleCallEvent`, `RingCallEvent`, `ComposeCallEvent`, `FailedCallEvent`, `GainAudioFocusEvent`, `HandoffAudioFocusEvent`, `ReceivedSMSEvent`, `EnabledAirplaneModeEvent`, `DisabledAirplaneModeEvent`, `BatteryEvent`, `BrowserPackageEvent`, `PhoneStateEvent` family, `RotationEvent` family |
+| iOS only | `MissingCallEvent`, `DisconnectCallEvent`, `OutgoingCallEvent` |
+
+## Receiving an OTP by SMS
+
+The standard pattern on Android: start waiting for the SMS in the step that triggers it, then read it in the next step.
+
+```javascript
+let promise;
+
+it('Click on "VALIDATE"', function () {
+  $('//*[contains(@text,"VALIDATE")]').click();
+  promise = driver.waitForEvent(new ReceivedSMSEvent(), {
+    timeout: 45000,
+    timeoutMsg: "sms not received",
+  });
+});
+
+it('Get OTP sms', async function () {
+  const { event } = await promise;
+  const regex = /This is your OTP code: (\d{4})/gm;
+  const m = regex.exec(_.get(event, 'payload.body', ''));
+  test.variables.set("OTP", m[1]);
+});
+```
+
+On iOS there is no SMS event: read the notification banner instead, with a generous timeout.
+
+```javascript
+it('Wait for OTP sms', function () {
+  const elem = $('//*[contains(@name,"NotificationShortLookView")]');
+  elem.waitForExist({ timeout: 35000, interval: 50 });
+  const m = /(\d{4})/gm.exec(elem.getText());
+  if (m != null) { sms_code = m[0]; }
+});
+```
+
+Adjust the regex to the message you expect in both cases.
+
+## Calls
+
+```javascript
+const report = driver.placeCall("0123456789", {
+  timeout_wait_compose: 30,
+  timeout_ring_call: 30,
+  sound_filename: "file-0m30s",
+});
+// report: { dial_time: 1.454, ring_time: 0.454, call_time: 43.532 }
+```
+
+`placeCall(number, options)` dials and returns timing metrics. Options: `timeout_wait_compose` and `timeout_ring_call` (seconds; exceeding either throws), `sound_filename` (audio played to the other side: `file-0m30s` to `file-3m`), `debug`.
+
+```javascript
+const report = driver.waitCall({
+  timeout_incoming_call: 90,
+  timeout_pickup_call: 20,
+  timeout_end_call: 300,
+  mos_activate: true,
+  mos_listening_condition: "NB",
+  mos_ref_file: "voice-30s",
+  mos_algo: "polqa",
+});
+// report: { incoming_time: 1.454, pickup_time: 4.39, call_time: 43.532 }
+```
+
+`waitCall(options)` answers an incoming call and returns timing metrics, optionally scoring the audio: `mos_listening_condition` is `NB` (2G/3G voice) or `SWB` (VoLTE), `mos_algo` is `polqa` (license required), `visqol`, or `aqua`, and `mos_ref_file` the reference audio.
+
+## Audio
+
+```javascript
+driver.playSound({ sound_filename: "file-0m30s" });   // blocks during playback
+
+driver.startRecordSound({ mos_activate: true, mos_listening_condition: "NB", mos_ref_file: "file-0m30s", mos_algo: "polqa" });
+// ... the audio you want to capture ...
+driver.stopRecordSound();   // waits for the recording to finish
+```
+
+`startRecordSound` is asynchronous; `stopRecordSound` ends it and triggers the MOS computation when enabled.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Script actions" icon="code" href="/tests/actions/legacy/script-actions">
+
+    Structure, parameters, assertions, and shared helpers
+
+</Card>
+  <Card title="Variables, metrics, and artifacts" icon="brackets-curly" href="/tests/actions/legacy/script-actions-variables">
+
+    Store the OTP, time the call, chart the result
+
+</Card>
+</Columns>

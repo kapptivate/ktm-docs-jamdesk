@@ -1,0 +1,96 @@
+---
+title: Robot network troubleshooting
+description: Diagnose an unreachable robot, from the cable to the flows toward Kapptivate.
+---
+
+When a robot is unreachable, the cause is almost always one of three things: the cable is in the wrong port, the flows toward Kapptivate are not open, or DNS resolution fails. Work through the checks in order.
+
+## Check the prerequisites
+
+- The RJ45 cable is plugged into the Ethernet port configured with the static IP ([how to verify](/onpremise/rj45-port)).
+- The required flows to Kapptivate are open. Refer to the IP requirements document; contact support if you don't have it.
+
+## Connect a screen and keyboard
+
+Connect a screen and keyboard to the robot ([serial access](/onpremise/headless-login) for models without display output).
+
+If the screen stays black even when pressing keys, check the screen's input source matches the plug you used. If it does and the screen stays black, reboot the robot a few times and check it powers on. Still unresponsive? Contact support@kapptivate.com, with a video of the front LEDs if it is a cellular robot: it is most likely a hardware issue.
+
+## Test the network path
+
+Log in with your credentials and open a terminal. Run each check against every IP, domain, and port in the requirements document.
+
+### Route to the platform
+
+```bash
+traceroute IP
+```
+
+<Frame caption="The robot reaches the target IP">
+  ![Successful traceroute](/images/onpremise/network-troubleshooting-01.webp)
+</Frame>
+
+<Frame caption="The route never reaches the target: something blocks the traffic">
+  ![Failing traceroute](/images/onpremise/network-troubleshooting-02.webp)
+</Frame>
+
+If the route fails, send a screenshot to your IT department: something on your network blocks the path to Kapptivate.
+
+### Flows by IP and port
+
+```bash
+curl -v telnet://IP:port
+```
+
+<Frame caption="Connection successful">
+  ![Successful telnet](/images/onpremise/network-troubleshooting-03.webp)
+</Frame>
+
+<Frame caption="Connection refused: the flow is not open">
+  ![Refused telnet](/images/onpremise/network-troubleshooting-04.webp)
+</Frame>
+
+A refused connection means the required flows are not open: your IT department needs to open them.
+
+### Flows by domain name
+
+```bash
+curl -v telnet://domain.kapptivate.com:port
+```
+
+<Frame caption="Connection successful">
+  ![Successful domain telnet](/images/onpremise/network-troubleshooting-05.webp)
+</Frame>
+
+<Frame caption="Connection refused: DNS or flows issue">
+  ![Refused domain telnet](/images/onpremise/network-troubleshooting-06.webp)
+</Frame>
+
+If the IP works but the domain fails, DNS is the suspect: either the DNS servers are not configured on the robot (see the DNS field in [the network setup](/onpremise/install-software#ip-configuration)), or the flows for those domains are not open.
+
+### Full HTTPS handshake
+
+```bash
+curl -v https://domain.kapptivate.com
+```
+
+<Frame caption="A complete TLS handshake">
+  ![Successful HTTPS](/images/onpremise/network-troubleshooting-07.webp)
+</Frame>
+
+If the output stops partway through the handshake (for example right after `TLS handshake, Client hello`), something on your internal network intercepts or blocks the connection: escalate to your IT department with the output.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Technical errors troubleshooting" icon="wrench" href="/onpremise/technical-errors">
+
+    When the robot is reachable but monitorings go grey
+
+</Card>
+  <Card title="Mac mini network setup" icon="ethernet" href="/onpremise/macmini-network">
+
+    The equivalent checks on Mac mini robots
+
+</Card>
+</Columns>

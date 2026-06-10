@@ -1,0 +1,81 @@
+---
+title: Script actions variables and metrics
+description: Exchange variables with the test, create custom metrics for Analytics, and attach artifacts from a script.
+sidebarTitle: Variables & metrics
+---
+
+Script actions can read the test's input variables, write output variables for later actions, push custom metrics that behave like any built-in metric in Analytics, and attach arbitrary files to the results.
+
+## Variables
+
+```javascript
+const value = test.variables.get("INPUT_VARIABLE_NAME");
+test.variables.set("OUTPUT_VARIABLE_NAME", "output variable value");
+```
+
+Calling `get` automatically declares the input variable on the test, so you can fill it from the test form, a campaign override, or a previous action. Calling `set` declares an output variable, available to every later action.
+
+## Custom metrics
+
+```javascript
+describe('My test suite', function () {
+  it('Create a custom metric', function () {
+    test.metrics.create("my_custom_metric",
+      {
+        duration: 1.85,            // numbers, strings, or objects
+        status_text: "ok"
+      },
+      {
+        service: "checkout"        // tags (optional)
+      }
+    );
+  });
+});
+```
+
+`test.metrics.create(measurement, fields, tags)` sends a measurement to Analytics exactly like a built-in metric: chart it in dashboards, alert on it, export it. The results screen does not show that a metric was created; check your dashboards.
+
+Combine with the [Timer](/tests/actions/legacy/script-actions#timers) to produce meaningful values:
+
+```javascript
+it('Measure login time', function () {
+  const timer = new Timer();
+  // ... perform the login ...
+  test.metrics.create("login", { duration_seconds: timer.stop() });
+});
+```
+
+## Artifacts
+
+```javascript
+test.artifacts.create(name, content, { encoding, type });
+```
+
+Attach any content to the step's results, next to the automatic artifacts:
+
+| Parameter | Description |
+|-----------|-------------|
+| `name` | File name with extension (the extension is stripped in the UI): `report.json`, `payload.txt`. |
+| `content` | A string, an object (stringified), a number, or a base64 payload. |
+| `encoding` | Optional. Set to `base64` to decode the content before storing, for binary files. |
+| `type` | Optional. Free label used to influence how the artifact is displayed. |
+
+```javascript
+test.artifacts.create("hello_world.txt", "Hello world!");
+test.artifacts.create("data.json", { key: "value", array: [1, 2, 3] });
+```
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Script actions" icon="code" href="/tests/actions/legacy/script-actions">
+
+    Structure, parameters, hooks, and timers
+
+</Card>
+  <Card title="Analytics" icon="chart-line" href="/monitoring/dashboards">
+
+    Where custom metrics show up
+
+</Card>
+</Columns>

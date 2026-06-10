@@ -1,0 +1,72 @@
+---
+title: Swap a SIM in a cellular robot
+description: Replace a SIM card and reconfigure its slot in the platform.
+---
+
+Swapping a SIM is a mix of physical and platform work: put the robot in maintenance, change the card, then update the slot configuration so tests target the right number.
+
+<Warning>
+  Every SIM card used in a robot must be configured **without a PIN code**.
+</Warning>
+
+<Steps>
+  <Step title="Identify the robot and put it in maintenance">
+    In the **Administration** section, choose **Cellular robots**.
+
+    <Frame caption="The Administration section">
+      ![Administration section](/images/onpremise/swap-sim-01.webp)
+    </Frame>
+
+    <Frame caption="The cellular robots list">
+      ![Cellular robots](/images/onpremise/swap-sim-02.webp)
+    </Frame>
+
+    Click the three dots on the robot's box and select **Set agent in maintenance**.
+
+    <Frame caption="Set the agent in maintenance">
+      ![Set agent in maintenance](/images/onpremise/swap-sim-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Swap the card">
+    Withdraw the current SIM and install the new one (no PIN code).
+  </Step>
+  <Step title="Reconfigure the slot">
+    Click the robot's three dots, select **Edit**, and browse to the **slots** section.
+
+    <Frame caption="The slots section of the robot">
+      ![Slots section](/images/onpremise/swap-sim-04.webp)
+    </Frame>
+
+    Click the three dots left of the slot and select **Reboot this slot**. After a minute, click them again and select **Edit**.
+
+    <Frame caption="Reboot, then edit the slot">
+      ![Reboot this slot](/images/onpremise/swap-sim-05.webp)
+    </Frame>
+
+    Update the values for the new SIM: **National msisdn**, **International msisdn** (without `+`), and **Phone prefix**. Assign the necessary products, add the APN data if needed, and save.
+  </Step>
+  <Step title="Reboot and release">
+    From the slots section, reboot the slot once more.
+
+    <Frame caption="Final slot reboot">
+      ![Final reboot](/images/onpremise/swap-sim-06.webp)
+    </Frame>
+
+    Back in the cellular robots menu, release the robot with **Unset agent in maintenance**.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="SIM cards troubleshooting" icon="sim-card" href="/onpremise/sim-troubleshooting">
+
+    If the new SIM does not register
+
+</Card>
+  <Card title="SIM tests" icon="bolt" href="/tests/actions/cellular/overview">
+
+    The actions you can now run on the new SIM
+
+</Card>
+</Columns>

@@ -1,0 +1,150 @@
+---
+title: Script actions
+description: Write full JavaScript tests with Mocha and WebdriverIO, the original way to build advanced scenarios.
+---
+
+Script actions are tests written entirely in JavaScript. They predate the visual test builder and remain widely used for advanced scenarios. Existing script actions keep running and can still be edited; for new tests, prefer the [visual builder](/tests/builder) and reach for scripts when you need logic the builder can't express.
+
+<Note>
+  JavaScript is the only actively supported scripting language. Python script actions and the JavaScript interpreter action are deprecated: existing ones still run, but no new ones can be created. Migrate them to JavaScript when you touch them.
+</Note>
+
+## Action types
+
+Script actions come in two families:
+
+- **Ownerful actions** run on a real device (the owner): Web testing, Android app, Android web, iOS app, and iOS web scripts.
+- **Ownerless actions** run on no device at all. Use them for pure logic: transforming the result of an API call, computing values between actions.
+
+Under the hood they combine [WebdriverIO](https://webdriver.io) (ownerful only), [Mocha](https://mochajs.org), and [Chai](https://www.chaijs.com).
+
+## Basic skeleton
+
+Every script follows Mocha's BDD structure. Each `it` block becomes a step in the results.
+
+```javascript
+describe('My test suite', function () {
+  // Variables shared by multiple steps can be declared here.
+  it('My test step #1', function () {
+    // Actions for this step.
+  });
+  it('My test step #2', function () {
+    // Actions for this step.
+  });
+});
+```
+
+Keep as much code as possible inside `it` blocks. The two exceptions: declaring variables shared across steps, and Mocha hooks (below).
+
+## Parameters
+
+Every script action shares:
+
+| Parameter | Description |
+|-----------|-------------|
+| Name | Optional. Shown at the top of the results. |
+| Description | Optional. Shown in the Summary tab. |
+| Ignore errors | When checked, the script keeps running after a failing step instead of stopping. |
+
+Ownerful actions add **Use custom capabilities**: a JSON object merged into the WebdriverIO capabilities. For example, to accept invalid TLS certificates in a web script:
+
+```json
+{ "acceptInsecureCerts": true }
+```
+
+Per device type:
+
+| Action type | Extra parameters |
+|-------------|------------------|
+| Android app | Application package (`appPackage`), Application activity (`appActivity`), Reset the app (`noReset`) |
+| iOS app | Bundle ID (`bundleId`), Reset the app |
+
+## Logs, failures, and error messages
+
+`console.log(...)` lands in the **System-out** tab of the step's results, `console.error(...)` in **System-err**.
+
+To make a step fail, throw:
+
+```javascript
+it('Step 2', function () {
+  throw new Error("This step should fail with this error message.");
+});
+```
+
+To control the error message a step reports, call `test.errorMessage.set("...")` before the failure (also works from a `beforeEach` hook). Avoid throwing inside `after` or `afterEach` hooks.
+
+## Hooks
+
+All of Mocha's hooks are supported: `before` (once, before the suite), `beforeEach`, `afterEach`, and `after`. Inside hooks, `this.currentTest.title` and `this.currentTest.state` let you react per step:
+
+```javascript
+describe('My suite', function () {
+  beforeEach(function () {
+    test.errorMessage.set(`${this.currentTest.title} failed`);
+  });
+  afterEach(function () {
+    if (this.currentTest.title === "Step 3") {
+      test.variables.set("STEP_3_SUCCEEDED", this.currentTest.state !== 'failed');
+    }
+  });
+  it('Step 3', function () {
+    // ...
+  });
+});
+```
+
+## Pauses
+
+Use `test.pause(milliseconds)`. The calling convention differs by family, and the two are not interchangeable:
+
+- **Ownerless**: mark the step `async` and `await` the pause: `await test.pause(1000);`
+- **Ownerful**: call it synchronously: `test.pause(1000);`
+
+## Timers
+
+Every script ships a simple `Timer` for measuring durations, typically to feed [custom metrics](/tests/actions/legacy/script-actions-variables):
+
+```javascript
+it('Measure something', function () {
+  const timer = new Timer();      // starts immediately
+  // ... actions to measure ...
+  const duration = timer.stop();  // seconds
+  console.log(`duration = ${duration}s`);
+});
+```
+
+A timer exposes `start()`, `stop()` (returns the duration), `getDuration()` (reads without stopping, like a lap button), and `reset()`. Declare it outside the `it` blocks to reuse it across steps.
+
+## Assertions
+
+- **Chai** is included everywhere. Prefer the `should` API, or use `assert`: `variable.should.be.a("string")`, `assert.typeOf(variable, 'string')`.
+- **`expect` is WebdriverIO's** [expect-webdriverio](https://webdriver.io/docs/api/expect-webdriverio) on ownerful actions, the recommended way to assert on elements: `await expect($('#title')).toBeDisplayed()`. Chai's own `expect` API is not included, to keep the keyword unambiguous.
+
+## Included libraries
+
+Available without any import: **Lodash** (`_`), **Moment.js** (`moment`), **Moment Timezone**, **Chai**, and **xml-js** (`xml2json(xml, {compact: true})`, handy for XML API responses). Ownerful actions also get WebdriverIO's `expect`.
+
+## Device helpers
+
+On ownerful actions, a few Kapptivate helpers extend the WebdriverIO API:
+
+- `driver.screenshot(title)`: take an additional screenshot mid-step, beyond the automatic ones.
+- `driver.scrollIntoView(value, { approach, direction })`: scroll `up`/`down`/`left`/`right` until an element is visible, locating it by `text` (default), `description`, or `xpath`.
+- `driver.getSMS(number, message)`: in web and web mobile scripts, wait for an SMS on a platform SIM and return its content; combine with `driver.extractOTP(message)` to pull a code out of it.
+
+Smartphone-specific helpers (airplane mode, device events, calls, audio) have [their own page](/tests/actions/legacy/script-actions-smartphone).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Smartphone helpers" icon="mobile-screen" href="/tests/actions/legacy/script-actions-smartphone">
+
+    Airplane mode, device events, calls, and audio in scripts
+
+</Card>
+  <Card title="Variables, metrics, and artifacts" icon="brackets-curly" href="/tests/actions/legacy/script-actions-variables">
+
+    Exchange data with the test and feed Analytics from a script
+
+</Card>
+</Columns>

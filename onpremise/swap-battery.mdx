@@ -1,0 +1,106 @@
+---
+title: Swap the battery of a robot
+description: Replace the motherboard battery on new and old robot hardware.
+---
+
+Every robot ships with a motherboard battery. When it runs out, the robot can malfunction (clock drift, BIOS resets); replacing it takes a few minutes. The procedure depends on your hardware generation.
+
+## New robot hardware
+
+New hardware is gray or green:
+
+<Frame caption="New generation hardware">
+  ![New hardware](/images/onpremise/swap-battery-01.webp)
+</Frame>
+
+<Steps>
+  <Step title="Open the robot">
+    Remove the 2 screws and take off the top aluminum plate.
+
+    <Frame caption="The 2 screws to remove">
+      ![Screws to remove](/images/onpremise/swap-battery-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Locate the battery">
+    The battery sits on the motherboard, next to the power supply.
+
+    <Frame caption="The battery next to the power supply">
+      ![Battery location](/images/onpremise/swap-battery-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Replace it">
+    Detach the adhesive securing the battery with a thin tool, pull gently on the red and black cable to remove it, and stick the new battery in the same spot.
+
+    <Frame caption="Detach the adhesive, then swap the battery">
+      ![Detach the adhesive](/images/onpremise/swap-battery-04.webp)
+      ![Insert the new battery](/images/onpremise/swap-battery-05.webp)
+    </Frame>
+  </Step>
+  <Step title="Close and update the BIOS">
+    Screw the top plate back in place. Then update the BIOS before using the robot again; contact support for the BIOS update guide for your model.
+  </Step>
+</Steps>
+
+## Old robot hardware
+
+Older hardware looks like this:
+
+<Frame caption="Old generation hardware">
+  ![Old hardware](/images/onpremise/swap-battery-06.webp)
+</Frame>
+
+<Steps>
+  <Step title="Open the robot">
+    Remove the 2 screws and slide the top aluminum plate towards the back.
+
+    <Frame caption="The 2 screws to remove">
+      ![Screws to remove](/images/onpremise/swap-battery-07.webp)
+    </Frame>
+  </Step>
+  <Step title="Locate the battery">
+    The battery is in the lower left corner of the motherboard.
+
+    <Frame caption="Battery in the lower left corner">
+      ![Battery location](/images/onpremise/swap-battery-08.webp)
+    </Frame>
+  </Step>
+  <Step title="Replace it">
+    Detach the adhesive with a thin tool, pull gently on the red and black cable, and stick the new battery in the same spot.
+
+    <Frame caption="Detach the adhesive, then swap the battery">
+      ![Detach the adhesive](/images/onpremise/swap-battery-09.webp)
+      ![Insert the new battery](/images/onpremise/swap-battery-10.webp)
+    </Frame>
+
+    If access is difficult, unscrew the four screws at the corners of the motherboard and lift it, without disconnecting anything, to reach the battery. Reattach those screws before closing.
+
+    <Frame caption="Lift the motherboard for easier access">
+      ![Motherboard screws](/images/onpremise/swap-battery-11.webp)
+      ![Lifted motherboard](/images/onpremise/swap-battery-12.webp)
+    </Frame>
+  </Step>
+  <Step title="Close and update the BIOS">
+    Screw the top plate back. Update the BIOS before using the robot again; contact support for the guide.
+  </Step>
+</Steps>
+
+## Smartphone batteries swelling
+
+Smartphone batteries swell over time when constantly charging, which is the case on a smartphone robot. A stand reduces heat and delays the phenomenon, but the real fix is choosing phones that support **pass-through charging**: power feeds the phone directly without cycling the battery.
+
+Models known to support it: Galaxy S22 and S23 series, Galaxy Z Fold 2 through 5, Galaxy Z Flip 5, Galaxy A73 5G, and Galaxy A33 5G (the most affordable).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Technical errors troubleshooting" icon="wrench" href="/onpremise/technical-errors">
+
+    Symptoms that often trace back to a dead battery
+
+</Card>
+  <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
+
+    Check the robot's health after the swap
+
+</Card>
+</Columns>

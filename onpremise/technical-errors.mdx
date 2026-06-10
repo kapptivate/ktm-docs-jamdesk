@@ -1,0 +1,61 @@
+---
+title: Technical errors troubleshooting
+description: What to do when monitorings show grey technical errors.
+---
+
+Grey results on a monitoring mean a technical error: the test could not run properly, usually because the agent behind it has a problem. Trace it from the resource to the agent, then restart the right thing.
+
+<Steps>
+  <Step title="Identify the resource">
+    Open the monitoring results page and check which resource (SIM card, web agent, smartphone) runs the tests.
+
+    <Frame caption="The resource on the results page">
+      ![Resource in results](/images/onpremise/technical-errors-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Find the agent and its status">
+    For a SIM or smartphone, open **Sims** or **Smartphones** to find which agent it is connected to.
+
+    <Frame caption="Find the agent behind the resource">
+      ![Agent behind the resource](/images/onpremise/technical-errors-02.webp)
+    </Frame>
+
+    Then in the admin section, find that cellular/web/smartphone agent and check its status.
+
+    <Frame caption="The agent status in administration">
+      ![Agent status](/images/onpremise/technical-errors-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Restart the agent (status available)">
+    If the agent shows **available**, restart it from the platform: click **...** and **Set agent in maintenance**, then **...** and **Reboot this agent**. Wait 3 minutes, then **Unset agent from maintenance**.
+
+    <Frame caption="Set the agent in maintenance before rebooting">
+      ![Set agent in maintenance](/images/onpremise/technical-errors-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Reboot the robot (status unreachable)">
+    If the agent shows **unreachable**, physically turn the robot off and on again.
+  </Step>
+  <Step title="Still failing?">
+    Check the robot itself. If it is powered on (front LEDs) and the agent stays unreachable, run the [network troubleshooting](/onpremise/network-troubleshooting) checks.
+  </Step>
+</Steps>
+
+<Note>
+  If the issue keeps coming back, even when these steps fix it, report the details to support@kapptivate.com.
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+
+    The connectivity checks, step by step
+
+</Card>
+  <Card title="Alerts" icon="bell" href="/monitoring/alerts">
+
+    Get notified when an agent goes unavailable
+
+</Card>
+</Columns>

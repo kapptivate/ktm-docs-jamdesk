@@ -1,0 +1,136 @@
+---
+title: Install a robot (hardware)
+description: Unbox, rack, and wire a Kapptivate robot, cellular, smartphone, or web.
+---
+
+Whether it is a cellular, smartphone, or digital/web robot, the physical installation follows the same steps: rack it, power it, wire the network, then add the antennas or the USB hub depending on the robot type.
+
+<Note>
+  This procedure applies to the latest generation of Kapptivate robots. For an older robot, contact support.
+</Note>
+
+## Prepare the installation
+
+Make sure you have the robot, a black power cable, and an RJ45 cable:
+
+<Frame caption="The robot with its power and network cables">
+  ![Robot, power cable, and RJ45 cable](/images/onpremise/install-hardware-01.webp)
+</Frame>
+
+Depending on the robot type, you also need:
+
+| Robot type | Additional items |
+|------------|------------------|
+| Cellular 5G | 8 antennas |
+| Cellular 4G | 4 antennas, plus a SIM tray ejector tool (not included) |
+| Smartphone | A USB hub, a blue USB cable, and a power supply for the hub |
+
+<Frame caption="5G antennas (left), 4G antennas and ejector tool (middle), smartphone USB kit (right)">
+  ![5G antennas](/images/onpremise/install-hardware-02.webp)
+  ![4G antennas and SIM ejector](/images/onpremise/install-hardware-03.webp)
+  ![USB hub kit](/images/onpremise/install-hardware-04.webp)
+</Frame>
+
+We recommend installing the robot in a storage bay for better airflow and accessibility: slide it into a slot and tighten two screws on each side. This is optional; note that air enters at the front and exits at the back.
+
+## Connect power and network
+
+Plug the black power cable into the back of the robot:
+
+<Frame caption="Power connector at the back">
+  ![Power cable](/images/onpremise/install-hardware-05.webp)
+</Frame>
+
+Connect the RJ45 cable to the Ethernet port labelled **1** at the back. Ports 2 and 3 also work; port 4 does not.
+
+<Frame caption="Use Ethernet port 1 (or 2/3, never 4)">
+  ![RJ45 port](/images/onpremise/install-hardware-06.webp)
+</Frame>
+
+## Connect the antennas (5G cellular robots)
+
+A 5G robot uses 4 antennas per modem:
+
+<Frame caption="5G antennas, 4 per modem">
+  ![5G antennas](/images/onpremise/install-hardware-07.webp)
+</Frame>
+
+The back of the robot has 4 connectors per modem. Connect the antennas:
+
+<Frame caption="4 antenna connectors per modem">
+  ![Antenna connectors](/images/onpremise/install-hardware-08.webp)
+</Frame>
+
+To insert a SIM card, push it into the SIM slot until you hear a click, and repeat for the remaining trays.
+
+<Frame caption="Push the SIM in until it clicks">
+  ![SIM insertion](/images/onpremise/install-hardware-09.webp)
+</Frame>
+
+## Connect the antennas (4G cellular robots)
+
+A 4G robot uses 1 antenna per modem, with 3 cables per antenna: the blue cable is GPS, the two red cables are the 4G connectivity.
+
+<Frame caption="4G antenna with its three cables">
+  ![4G antenna cables](/images/onpremise/install-hardware-10.webp)
+</Frame>
+
+On the back, each modem has 3 connectors: the top row takes the blue cables, the bottom two rows take the red cables.
+
+<Frame caption="Blue cables on the top row, red cables below">
+  ![4G antenna connectors](/images/onpremise/install-hardware-11.webp)
+</Frame>
+
+To insert a SIM card, press the button at the top right corner of the SIM slot with the ejector tool, place the SIM in the tray, and push it back in. Repeat for all trays.
+
+<Frame caption="Eject the tray with the tool, place the SIM, push back">
+  ![SIM tray ejection](/images/onpremise/install-hardware-12.webp)
+  ![SIM in the tray](/images/onpremise/install-hardware-13.webp)
+</Frame>
+
+## Connect the USB hub (smartphone robots)
+
+Connect the blue USB cable to the **Host port** of the hub (top left corner):
+
+<Frame caption="The hub's host port">
+  ![Hub host port](/images/onpremise/install-hardware-14.webp)
+</Frame>
+
+Connect the other end to the USB port at the bottom left corner of the back of the robot (any other USB port also works):
+
+<Frame caption="USB port on the robot">
+  ![Robot USB port](/images/onpremise/install-hardware-15.webp)
+</Frame>
+
+Connect the hub's power supply and turn it on by moving the switch to the left. A red light shows the hub is on:
+
+<Frame caption="The hub powered on">
+  ![Hub powered on](/images/onpremise/install-hardware-16.webp)
+</Frame>
+
+You can now connect the smartphones to the available USB ports:
+
+<Frame caption="Smartphones connected to the hub">
+  ![Smartphones on the hub](/images/onpremise/install-hardware-17.webp)
+</Frame>
+
+<Tip>
+  The smartphones only charge while the robot is powered on.
+</Tip>
+
+The hardware installation is complete. The robot still needs its [software setup](/onpremise/install-software) to become operational.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Install a robot (software)" icon="gear" href="/onpremise/install-software">
+
+    Boot, network, and register the robot on the platform
+
+</Card>
+  <Card title="Swap or configure a SIM" icon="sim-card" href="/onpremise/swap-sim">
+
+    Declare the SIMs you just inserted
+
+</Card>
+</Columns>

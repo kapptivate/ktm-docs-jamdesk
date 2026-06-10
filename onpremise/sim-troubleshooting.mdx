@@ -1,0 +1,63 @@
+---
+title: SIM cards troubleshooting
+description: Diagnose SIMs stuck in searching or unregistered, and the common USSD, SMS, and call errors.
+---
+
+A SIM that misbehaves shows up either through its status (searching, unregistered) or through recurring errors in test results. Here is the diagnosis for each case.
+
+## Status: searching
+
+1. Reboot the slot, or the robot.
+2. If the status stays **searching** after 10 minutes, insert the SIM in a phone and check whether it connects to the network.
+3. If it connects in a phone, the modem's IMEI has likely been banned by the operator: investigate that side.
+4. If it does not connect in a phone either, the SIM itself has a problem or the network coverage is very poor.
+
+## Status: unregistered
+
+The SIM has probably been deactivated by the operator because it always stayed connected to the same antenna. Reboot the modem; if it stays unregistered, test the SIM in a phone and replace it if it does not connect.
+
+## Error: Network Timeout (+CUSD 5)
+
+The cellular network did not answer a USSD session opening request. Possible causes: bad network coverage, an outdated USSD licence, or an overloaded USSD server.
+
+To confirm the request left the modem, open the pcap artifacts (radioframes) attached to the test result and look for:
+
+- `UplinkDirectTransfer ... invoke processUnstructuredSS-Request`: the request was sent.
+- `DownlinkDirectTransfer ... invoke unstructuredSS-Request`: the network replied.
+
+If the request is sent but never answered, contact your USSD provider.
+
+## Error: CME 100
+
+Reboot the modem, then contact support if it persists.
+
+## Error: Connection problem or invalid MMI code (CME 258)
+
+The SIM refuses USSD actions. Reboot; if that does not help, escalate to the operator's network team.
+
+## Error: No SMS received
+
+Check the SIM's history in the platform: the SMS may simply have arrived after the timeout.
+
+## Error: Call emitted but suddenly stopped
+
+Either the SIM has no airtime, or it is not allowed to call this number (short numbers, or unavailable while roaming).
+
+## Error: robot unreachable
+
+Either the robot is not connected ([network troubleshooting](/onpremise/network-troubleshooting)), or, if the agent shows available in administration, the robot's clock is out of sync: ask support to check.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Swap a SIM" icon="sim-card" href="/onpremise/swap-sim">
+
+    Replace a SIM that turned out faulty
+
+</Card>
+  <Card title="USSD Command" icon="hashtag" href="/tests/actions/cellular/ussd">
+
+    The session states a USSD test can assert on
+
+</Card>
+</Columns>

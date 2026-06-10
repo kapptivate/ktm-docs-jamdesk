@@ -1,0 +1,49 @@
+---
+title: Ethernet actions
+description: Run the network measurement actions over an agent's wired connection instead of a SIM.
+---
+
+Ethernet actions are the wired twins of the [SIM DATA actions](/tests/actions/cellular/overview): the same measurements (ping, downloads, speedtest, traceroute...) executed over the agent's Ethernet connection instead of a cellular data session. Use them to monitor fixed-line connectivity, or as a wired baseline to compare your cellular measurements against.
+
+They predate the current builders and are considered legacy, but existing tests keep running and the actions remain available on Ethernet-capable agents.
+
+## Available actions
+
+Each action takes the same parameters and produces the same report and Analytics metrics as its SIM equivalent, minus everything cellular: no APN, no access technology, no antenna tags.
+
+| Ethernet action | JSON type | SIM equivalent |
+|-----------------|-----------|----------------|
+| Ping | `ETH_PING` | [Ping](/tests/actions/cellular/ping) |
+| TCP Ping | `ETH_TCP_PING` | [TCP Ping](/tests/actions/cellular/tcp-ping) |
+| HTTP Ping | `ETH_HTTP_PING` | [HTTP Ping](/tests/actions/cellular/http-ping) |
+| DNS Lookup | `ETH_DNS_LOOKUP` | [DNS Lookup](/tests/actions/cellular/dns-lookup) |
+| HTTP Download | `ETH_HTTP_DOWNLOAD` | [Download File](/tests/actions/cellular/download-file) |
+| HTTP Upload | `ETH_HTTP_UPLOAD` | [HTTP Upload](/tests/actions/cellular/http-upload) |
+| FTP Download | `ETH_FTP_DOWNLOAD` | [FTP Download](/tests/actions/cellular/ftp-download) |
+| FTP Upload | `ETH_FTP_UPLOAD` | [FTP Upload](/tests/actions/cellular/ftp-upload) |
+| Email Send | `ETH_EMAIL_SEND` | [Send Mail](/tests/actions/cellular/send-mail) |
+| API Call | `ETH_HTTP_API` | [API Call](/tests/actions/cellular/api-call) |
+| Ookla Speedtest | `ETH_OOKLA_SPEEDTEST` | [Ookla Speedtest](/tests/actions/cellular/speedtest) |
+| Traceroute | `ETH_TRACEROUTE` | [Traceroute](/tests/actions/cellular/traceroute) |
+| Check SSL/TLS Certificate | `ETH_CHECK_CERTIFICATE` | [Check SSL/TLS Certificate](/tests/actions/cellular/check-certificate) |
+| Streaming video | `ETH_STREAMING_VIDEO` | [Youtube](/tests/actions/cellular/youtube) |
+| JS Web Script | `ETH_JS_WEB_SCRIPT` | [Web Script](/tests/actions/cellular/web-script) |
+
+## The actions behind web tests
+
+Two more `ETH_` types exist that you normally never create by hand: `ETH_WEB_SCRIPT` is the legacy [web script action](/tests/actions/legacy/script-actions), and `ETH_WEB_SCRIPT_V2` is what a test built with the current [web builder](/tests/actions/web/overview) becomes when it runs. If you meet them in a scenario JSON, that's what they are.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="SIM steps overview" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    The full parameter and metrics reference these actions share
+
+</Card>
+  <Card title="Script actions" icon="code" href="/tests/actions/legacy/script-actions">
+
+    The legacy JavaScript web scripts that run on Ethernet agents
+
+</Card>
+</Columns>

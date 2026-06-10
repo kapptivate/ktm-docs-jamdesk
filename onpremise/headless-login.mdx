@@ -1,0 +1,50 @@
+---
+title: Log in on a robot without display output
+description: Use a serial-to-USB adapter to access a mini cellular robot.
+sidebarTitle: Headless robot access
+---
+
+Some robot models have no display output. To interact with them, you connect over a serial line instead of plugging a screen. This concerns the mini cellular robot:
+
+<Frame caption="The mini cellular robot">
+  ![Mini cellular robot](/images/onpremise/headless-login-01.webp)
+</Frame>
+
+## What you need
+
+- A **serial-to-USB adapter**:
+
+<Frame caption="Serial to USB adapter">
+  ![Serial to USB adapter](/images/onpremise/headless-login-02.webp)
+</Frame>
+
+- The adapter's **driver** installed on your computer (ask support for the download link for your adapter model).
+- A serial terminal application, for example **CoolTerm** (available for macOS, Windows, and Linux).
+
+## Connect
+
+Configure the serial connection with:
+
+| Parameter | Value |
+|-----------|-------|
+| Baudrate | 115200 |
+| Data bits | 8 |
+| Parity | None |
+| Stop bit | 1 |
+
+Open the connection: you get the robot's console and can log in with your credentials.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Which RJ45 port is configured?" icon="ethernet" href="/onpremise/rj45-port">
+
+    Find the right network port from the command line
+
+</Card>
+  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+
+    Diagnose connectivity from the console
+
+</Card>
+</Columns>

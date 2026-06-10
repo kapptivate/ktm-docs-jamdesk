@@ -105,6 +105,8 @@
                 "pages": [
                   "tests/create",
                   "tests/builder",
+                  "tests/web-recorder",
+                  "tests/mobile-recorder",
                   "tests/variables",
                   "tests/email-sms",
                   "tests/live-session",
@@ -493,6 +495,17 @@
                   "tests/actions/cellular/reboot-sim"
                 ]
               }
+            ]
+          },
+          {
+            "group": "Legacy",
+            "icon": "clock-rotate-left",
+            "expanded": false,
+            "pages": [
+              "tests/actions/legacy/script-actions",
+              "tests/actions/legacy/script-actions-smartphone",
+              "tests/actions/legacy/script-actions-variables",
+              "tests/actions/legacy/ethernet"
             ]
           }
         ]
@@ -1003,6 +1016,51 @@
             "pages": [
               "guides/overview",
               "guides/first-integration"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "On-premise",
+        "icon": "server",
+        "groups": [
+          {
+            "group": "On-premise equipment",
+            "icon": "server",
+            "expanded": true,
+            "pages": [
+              "onpremise/overview"
+            ]
+          },
+          {
+            "group": "Installation",
+            "icon": "screwdriver-wrench",
+            "expanded": true,
+            "pages": [
+              "onpremise/install-hardware",
+              "onpremise/install-software"
+            ]
+          },
+          {
+            "group": "Maintenance",
+            "icon": "gear",
+            "expanded": true,
+            "pages": [
+              "onpremise/swap-sim",
+              "onpremise/swap-battery",
+              "onpremise/macmini-network",
+              "onpremise/headless-login"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "icon": "wrench",
+            "expanded": true,
+            "pages": [
+              "onpremise/network-troubleshooting",
+              "onpremise/technical-errors",
+              "onpremise/sim-troubleshooting",
+              "onpremise/rj45-port"
             ]
           }
         ]

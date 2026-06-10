@@ -1,0 +1,64 @@
+---
+title: Update a Mac mini robot's network configuration
+description: Set the IP address, gateway, and mask of a Mac mini robot and verify connectivity.
+sidebarTitle: Mac mini network setup
+---
+
+Update the network configuration of a Mac mini robot after moving the device or bringing it back into service: IP address, gateway, and whatever else a stable connection to Kapptivate requires.
+
+## Prerequisites
+
+- An external display (HDMI or USB-C)
+- A keyboard and mouse (wired or Bluetooth)
+- An RJ45 cable connected to your network, with the necessary flows open toward Kapptivate
+- The IP address, subnet mask, and gateway from your IT team
+
+## Configuration
+
+<Steps>
+  <Step title="Open the network settings">
+    Turn on the Mac mini and go to **(Apple) > System Settings > Network**.
+
+    <Frame caption="macOS network settings">
+      ![Network settings](/images/onpremise/macmini-network-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Configure the Ethernet interface">
+    Select the Ethernet interface and click **Advanced**.
+
+    <Frame caption="The Ethernet interface">
+      ![Ethernet interface](/images/onpremise/macmini-network-02.webp)
+    </Frame>
+
+    In the **TCP/IP** tab, choose **Configure IPv4 manually** and fill in the IP address, subnet mask, and gateway. Click **OK**, then **Apply**.
+
+    <Frame caption="Manual IPv4 configuration">
+      ![Manual IPv4](/images/onpremise/macmini-network-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Verify connectivity">
+    Open Terminal and check both flows toward the platform:
+
+    ```bash
+    curl -v telnet://app.kapptivate.com:443
+    curl -v telnet://app.kapptivate.com:5671
+    ```
+
+    Replace `app` with your own domain if needed (you can read it in your platform URL: `your_domain.kapptivate.com`).
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+
+    If the robot still does not reach the platform
+
+</Card>
+  <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
+
+    Confirm the robot is back online
+
+</Card>
+</Columns>
