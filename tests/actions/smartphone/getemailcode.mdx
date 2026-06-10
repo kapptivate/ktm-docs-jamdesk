@@ -1,0 +1,58 @@
+---
+title: Get email code
+description: Wait for an email and extract the verification code into a variable.
+---
+
+Test an email verification flow end to end. The step watches a test mailbox, waits for the email, extracts the code with AI, and stores it in a variable you can type into the app's confirmation field.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Email to receive code | `mailbox` | Yes | The test mailbox address that should receive the email containing the code. |
+| Variable | `variable` | Yes | Name of the variable that receives the code. Default: `MailCode`. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no code is found. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-get-mail-code",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@example.com" } }],
+    "variable": "MailCode",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Variable**: the extracted code is stored in the variable, ready to be typed into a confirmation field by a later Fill input step.
+- **Timing**: start, end, and duration (in seconds). The duration includes waiting for the email to arrive.
+- **Status**: failed if no email arrives or the AI finds no code in it.
+- **AI usage**: the AI cost of the extraction is added to the run.
+
+See [Email & SMS in tests](/tests/email-sms) for how test mailboxes work.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Fill input" icon="keyboard" href="/tests/actions/smartphone/input">
+
+    Type the extracted code into the confirmation field
+
+</Card>
+  <Card title="Get email link" icon="link" href="/tests/actions/smartphone/getemaillink">
+
+    Extract a confirmation link instead of a code
+
+</Card>
+</Columns>

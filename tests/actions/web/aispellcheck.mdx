@@ -1,8 +1,56 @@
 ---
-title: AI spell check
-description: Validate spelling and grammar on the current page using AI.
+title: Verify Spell Check (AI)
+description: Have the AI check the visible text of the page for spelling and grammar issues.
 ---
 
-import Content from '/snippets/actions/aispellcheck.mdx'
+Catch typos and grammar mistakes in your UI before your users do. The AI reads the visible text of the current page and reports anything that looks wrong in the language you specify. Useful on content-heavy pages and for localization checks.
 
-<Content />
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Language | `language` | Yes | The language the visible text is expected to be written in (for example `French`). |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-spell-check",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "language": "French",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: failed when the AI finds spelling or grammar issues in the visible text, with the issues listed in the result.
+- **Screenshot**: captured for the checked state, so you can see exactly what was verified.
+- **AI usage**: the AI cost of the check is added to the run.
+
+For how the check works and how to interpret findings, see [Spell check](/ai/spell-check).
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Spell check" icon="spell-check" href="/ai/spell-check">
+
+    How the AI check works and how to read its findings
+
+</Card>
+  <Card title="Verify with AI" icon="sparkles" href="/tests/actions/web/aivisualassert">
+
+    Assert any visual state in plain language
+
+</Card>
+</Columns>

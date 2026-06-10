@@ -1,0 +1,74 @@
+---
+title: Set variable
+description: Store a value in a variable for later steps.
+---
+
+Define a value once and reuse it across the test: a username generated at the start of the run, a constant you don't want to repeat, a value built from other variables.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Variable name | `name` | Yes | Name of the variable to create or overwrite. |
+| Value | `value` | Yes | The value to store. Supports text, other variables, and functions like random text. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "set-variable",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "name": "Username",
+    "value": [
+      { "type": "value", "data": { "value": "qa-" } },
+      {
+        "type": "function",
+        "data": {
+          "name": "random_text",
+          "args": {
+            "length": 8,
+            "include_uppercase": false,
+            "include_lowercase": true,
+            "include_numerical": true,
+            "include_special": false,
+            "min_numerical": 0,
+            "min_special": 0
+          }
+        }
+      }
+    ],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+This example stores `qa-` followed by 8 random characters, giving you a fresh username on every run.
+
+## Results and metrics
+
+- **Variable**: available to every later step of the test. Insert it anywhere a field supports variables.
+- **Timing and status**: recorded in the step result like any other step.
+
+See [Variables](/tests/variables) for variable types and the functions you can use in values.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Extract value" icon="arrow-up-from-bracket" href="/tests/actions/web/extractvalue">
+
+    Capture a value from the page instead of defining it
+
+</Card>
+  <Card title="Variables" icon="brackets-curly" href="/tests/variables">
+
+    Test variables, global variables, and functions
+
+</Card>
+</Columns>

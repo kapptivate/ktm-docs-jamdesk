@@ -1,53 +1,62 @@
 ---
 title: Hover
-description: Move the mouse over an element to trigger hover states.
+description: Move the mouse over an element to reveal menus, tooltips, and hover states.
 ---
 
-Hover the mouse over an element to trigger CSS `:hover` pseudo-classes and mouse-over event handlers. This is useful for testing hover states, tooltips, and menu expansions.
-
-## Channels
-
-- ✅ Web (desktop/tablet browsers)
-- ❌ Smartphone
-- ❌ Cellular
-
-Hover is web-only; mobile devices do not have mouse hover.
+Move the mouse over an element without clicking it. Use it to open dropdown menus that expand on hover, reveal tooltips, or trigger any `:hover` styling you want to interact with or verify.
 
 ## Parameters
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
-| locator.selector | String | No | CSS selector (e.g., `.menu-item`, `.dropdown-trigger`). |
-| locator.description | String | No | Human-readable description for AI-driven locating. |
-| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
-| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". |
-| wait_for | Condition | No | Wait for a condition before or after hover (clickable, displayed, enabled, exist). |
-| ignore_errors | Boolean | No | If true, step passes even if element not found. |
-| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
+| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Enable AI | `enable_ai` | No | When off, only the manual selector is used. Default: on. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
 
-## Example
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
 
 ```json
 {
+  "id": "step-1",
   "type": "hover",
   "version": "v1.0.0",
+  "disabled": false,
   "inputs": {
     "locator": {
-      "selector": [{ "type": "value", "data": { "value": ".dropdown-menu" } }],
-      "description": [{ "type": "value", "data": { "value": "" } }]
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Products entry in the main navigation" } }]
     },
     "enable_ai": true,
     "ai_strategy": "inherit",
     "ignore_errors": false
-  }
+  },
+  "use_capabilities": false,
+  "capabilities": {}
 }
 ```
 
-## Notes
+## Results and metrics
 
-- Hover emits `mouseover` and `mouseenter` events.
-- Triggers CSS `:hover` pseudo-class styles.
-- Common use cases: test tooltip display, menu expansion, reveal hidden elements.
-- Not available on smartphones or cellular channels.
-- Step-level checks (url, loading_time, step_duration) are available.
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured while the hover state is active, showing what it revealed.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="arrow-pointer" href="/tests/actions/web/click">
+
+    Click the menu entry the hover revealed
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/tests/actions/web/verifyelement">
+
+    Check that the tooltip or menu actually appeared
+
+</Card>
+</Columns>

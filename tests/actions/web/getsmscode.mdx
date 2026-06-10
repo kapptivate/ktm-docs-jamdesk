@@ -1,0 +1,58 @@
+---
+title: Get sms code
+description: Wait for an SMS and extract the verification code into a variable.
+---
+
+Test an SMS-based verification flow end to end. The step watches a test phone number, waits for the SMS to arrive, extracts the code with AI, and stores it in a variable you can type into the confirmation field.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Phone number to receive code | `phone_number` | Yes | The test phone number that should receive the SMS. |
+| Variable | `variable` | Yes | Name of the variable that receives the code. Default: `SmsCode`. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no code is found. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-get-sms-code",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "phone_number": [{ "type": "value", "data": { "value": "+33600000000" } }],
+    "variable": "SmsCode",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Variable**: the extracted code is stored in the variable, ready for a [Fill input](/tests/actions/web/input) step.
+- **Timing**: start, end, and duration (in seconds). The duration includes waiting for the SMS to arrive.
+- **Status**: failed if no SMS arrives or the AI finds no code in it.
+- **AI usage**: the AI cost of the extraction is added to the run.
+
+See [Email & SMS in tests](/tests/email-sms) for how test phone numbers are provisioned for your workspace.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Fill input" icon="keyboard" href="/tests/actions/web/input">
+
+    Type the extracted code into the confirmation field
+
+</Card>
+  <Card title="Email & SMS in tests" icon="message-sms" href="/tests/email-sms">
+
+    How test mailboxes and phone numbers work
+
+</Card>
+</Columns>

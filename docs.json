@@ -283,82 +283,214 @@
         "icon": "bolt",
         "groups": [
           {
-            "group": "Actions Library",
+            "group": "Get started",
+            "icon": "bolt",
+            "expanded": true,
             "pages": [
-              "tests/actions/overview",
+              "tests/actions/overview"
+            ]
+          },
+          {
+            "group": "Web",
+            "icon": "globe",
+            "expanded": true,
+            "pages": [
+              "tests/actions/web/overview",
               {
-                "group": "Shared steps",
+                "group": "Interactions",
+                "expanded": false,
                 "pages": [
-                  "tests/actions/shared/pause",
-                  "tests/actions/shared/waitfor",
-                  "tests/actions/shared/setvariable",
-                  "tests/actions/shared/customstep",
-                  "tests/actions/shared/createmetric",
-                  "tests/actions/shared/aigetmailcode",
-                  "tests/actions/shared/aigetmaillink",
-                  "tests/actions/shared/aigetsmscode"
-                ]
-              },
-              {
-                "group": "Web steps",
-                "pages": [
-                  "tests/actions/web/startingurl",
                   "tests/actions/web/click",
                   "tests/actions/web/doubleclick",
                   "tests/actions/web/rightclick",
                   "tests/actions/web/hover",
-                  "tests/actions/web/switchwindow",
-                  "tests/actions/web/select",
                   "tests/actions/web/uploadfile",
-                  "tests/actions/web/input",
-                  "tests/actions/web/scroll",
-                  "tests/actions/web/checkbox",
                   "tests/actions/web/keys",
-                  "tests/actions/web/find",
-                  "tests/actions/web/gettext",
-                  "tests/actions/web/getvalue",
-                  "tests/actions/web/gettextorvalue",
-                  "tests/actions/web/assertdisplayed",
-                  "tests/actions/web/assertnotdisplayed",
+                  "tests/actions/web/input",
+                  "tests/actions/web/scroll"
+                ]
+              },
+              {
+                "group": "Email & SMS",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/web/getsmscode",
+                  "tests/actions/web/getmail",
+                  "tests/actions/web/getemailcode",
+                  "tests/actions/web/getemaillink"
+                ]
+              },
+              {
+                "group": "Verifications",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/web/verifyelement",
                   "tests/actions/web/aispellcheck",
                   "tests/actions/web/aivisualassert"
                 ]
               },
               {
-                "group": "Smartphone steps",
+                "group": "Navigation",
+                "expanded": false,
                 "pages": [
-                  "tests/actions/smartphone/startingapp",
-                  "tests/actions/smartphone/app",
+                  "tests/actions/web/switchwindow",
+                  "tests/actions/web/navigatetourl"
+                ]
+              },
+              {
+                "group": "Wait for",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/web/waitfordelay"
+                ]
+              },
+              {
+                "group": "Others",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/web/customstep",
+                  "tests/actions/web/setvariable",
+                  "tests/actions/web/extractvalue"
+                ]
+              },
+              {
+                "group": "Deprecated",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/web/assertdisplayed",
+                  "tests/actions/web/assertnotdisplayed",
+                  "tests/actions/web/checkbox",
+                  "tests/actions/web/select"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Smartphone",
+            "icon": "mobile-screen",
+            "expanded": false,
+            "pages": [
+              "tests/actions/smartphone/overview",
+              {
+                "group": "Interactions",
+                "expanded": false,
+                "pages": [
                   "tests/actions/smartphone/tap",
                   "tests/actions/smartphone/longpress",
                   "tests/actions/smartphone/hidekeyboard",
-                  "tests/actions/smartphone/input",
-                  "tests/actions/smartphone/scroll",
-                  "tests/actions/smartphone/checkbox",
-                  "tests/actions/smartphone/keys",
-                  "tests/actions/smartphone/find",
-                  "tests/actions/smartphone/gettext",
-                  "tests/actions/smartphone/getvalue",
-                  "tests/actions/smartphone/gettextorvalue",
-                  "tests/actions/smartphone/assertdisplayed",
-                  "tests/actions/smartphone/assertnotdisplayed",
+                  "tests/actions/smartphone/input"
+                ]
+              },
+              {
+                "group": "Email",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/smartphone/getmail",
+                  "tests/actions/smartphone/getemailcode",
+                  "tests/actions/smartphone/getemaillink"
+                ]
+              },
+              {
+                "group": "Verifications",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/smartphone/verifyelement",
                   "tests/actions/smartphone/aispellcheck",
                   "tests/actions/smartphone/aivisualassert"
                 ]
               },
               {
-                "group": "SIM steps",
+                "group": "Wait for",
+                "expanded": false,
                 "pages": [
-                  "tests/cellular",
+                  "tests/actions/smartphone/waitfordelay"
+                ]
+              },
+              {
+                "group": "Others",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/smartphone/customstep",
+                  "tests/actions/smartphone/setvariable",
+                  "tests/actions/smartphone/extractvalue"
+                ]
+              },
+              {
+                "group": "Deprecated",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/smartphone/assertdisplayed",
+                  "tests/actions/smartphone/assertnotdisplayed"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "API",
+            "icon": "code",
+            "expanded": false,
+            "pages": [
+              "tests/actions/api/overview"
+            ]
+          },
+          {
+            "group": "SIMs",
+            "icon": "sim-card",
+            "expanded": false,
+            "pages": [
+              "tests/actions/cellular/overview",
+              "tests/cellular",
+              {
+                "group": "USSD",
+                "expanded": false,
+                "pages": [
                   "tests/actions/cellular/ussd",
-                  "tests/actions/cellular/sms",
                   "tests/actions/cellular/ussd-push"
                 ]
               },
               {
-                "group": "API steps",
+                "group": "SMS",
+                "expanded": false,
                 "pages": [
-                  "tests/actions/api/overview"
+                  "tests/actions/cellular/wait-sms",
+                  "tests/actions/cellular/send-sms"
+                ]
+              },
+              {
+                "group": "DATA",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/cellular/pdp-activation",
+                  "tests/actions/cellular/ping",
+                  "tests/actions/cellular/tcp-ping",
+                  "tests/actions/cellular/http-ping",
+                  "tests/actions/cellular/dns-lookup",
+                  "tests/actions/cellular/download-file",
+                  "tests/actions/cellular/http-upload",
+                  "tests/actions/cellular/ftp-download",
+                  "tests/actions/cellular/ftp-upload",
+                  "tests/actions/cellular/send-mail",
+                  "tests/actions/cellular/api-call",
+                  "tests/actions/cellular/speedtest",
+                  "tests/actions/cellular/traceroute",
+                  "tests/actions/cellular/check-certificate",
+                  "tests/actions/cellular/youtube",
+                  "tests/actions/cellular/web-script"
+                ]
+              },
+              {
+                "group": "CALL",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/cellular/wait-call",
+                  "tests/actions/cellular/place-call"
+                ]
+              },
+              {
+                "group": "Other",
+                "expanded": false,
+                "pages": [
+                  "tests/actions/cellular/reboot-sim"
                 ]
               }
             ]

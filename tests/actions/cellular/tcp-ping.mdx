@@ -1,0 +1,69 @@
+---
+title: TCP Ping
+description: Measure connection latency at the TCP layer over the cellular connection.
+---
+
+Measure latency by opening TCP connections to a host instead of sending ICMP packets. Use it when firewalls filter ICMP, or to measure the latency your applications actually experience at the transport layer.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Url | `command.url` | Yes | Host (and port) to reach. |
+| Ping count | `command.count` | No | Number of connection attempts. Default: 10. |
+| TCP Ping should fail | `expect_failure` | No | Invert the verdict. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings) and DNS override (`command.override_dns`, `command.dns`).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_TCP_PING",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "url": "kapptivate.com:443",
+    "count": 10,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `rtt_mean` | Mean time to establish the TCP connection. |
+| `packet_loss_pct` | Percentage of failed attempts. |
+| `ping_count` | Number of attempts. |
+| `dns_server` | DNS servers used for resolution. |
+| `duration` | Total execution time in seconds. |
+
+In Analytics, each run feeds the TCP ping measurement with `rtt_seconds`, `packet_loss_percent`, and `duration_seconds`, tagged by status, APN, DNS server, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/tests/actions/cellular/ping">
+
+    Plain ICMP latency
+
+</Card>
+  <Card title="API Call" icon="cloud" href="/tests/actions/cellular/api-call">
+
+    Full HTTP requests with status and timing breakdown
+
+</Card>
+</Columns>

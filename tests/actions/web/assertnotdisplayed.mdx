@@ -1,8 +1,63 @@
 ---
 title: Assert not displayed
-description: Verify that an element is hidden or does not exist.
+description: Legacy step that verifies an element is hidden or absent. Use Verify element instead.
 ---
 
-import Content from '/snippets/actions/assertnotdisplayed.mdx'
+<Warning>
+  This step no longer appears in the step palette. Existing tests that use it keep running. For new tests, use [Verify element](/tests/actions/web/verifyelement) with the condition **is not** and the **displayed** state.
+</Warning>
 
-<Content />
+Verify that an element is hidden or absent: an error banner that should not show, a spinner that should be gone.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Description of the element that must not be visible. |
+| Manual selector | `locator.selector` | No | XPath or CSS selector of the element that must not be visible. |
+| Timeout | `timeout` | No | How long to wait for the element to disappear before failing. Default: `30s`. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "assert-not-displayed",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "//div[@class='loading-spinner']" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "timeout": [{ "type": "value", "data": { "value": "30s" } }],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success if the element is absent or hidden within the timeout, failed if it stays visible.
+- **Screenshot**: captured for the verified state.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Verify element" icon="eye" href="/tests/actions/web/verifyelement">
+
+    The current step for element verifications, including negative checks
+
+</Card>
+  <Card title="Wait for delay" icon="clock" href="/tests/actions/web/waitfordelay">
+
+    Pause before checking, if timing matters
+
+</Card>
+</Columns>

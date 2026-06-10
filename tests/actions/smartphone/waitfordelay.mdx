@@ -1,0 +1,56 @@
+---
+title: Wait for delay
+description: Pause the test for a fixed duration.
+---
+
+Pause the test for a fixed time. Reach for it when nothing observable signals readiness: a backend job, a rate limit, an animation you can't hook into.
+
+<Tip>
+  If you are waiting for something to appear on the screen, use [Verify element](/tests/actions/smartphone/verifyelement) instead. It continues as soon as the condition is met instead of always burning the full delay.
+</Tip>
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Duration | `duration` | Yes | How long to pause. A number followed by a unit: `ms`, `s`, or `m`. Default: `10s`. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario. Its internal type is `pause`.
+
+```json
+{
+  "id": "step-1",
+  "type": "pause",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "duration": [{ "type": "value", "data": { "value": "10s" } }]
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+Valid duration values match `^(\d+)(ms|s|m)$`: for example `500ms`, `10s`, or `2m`.
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result. The duration matches the configured pause.
+- **Status**: success, unless the run is interrupted during the pause.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Verify element" icon="eye" href="/tests/actions/smartphone/verifyelement">
+
+    Wait on a real condition instead of a fixed time
+
+</Card>
+  <Card title="Test builder" icon="hammer" href="/tests/builder">
+
+    Where steps are added and configured
+
+</Card>
+</Columns>

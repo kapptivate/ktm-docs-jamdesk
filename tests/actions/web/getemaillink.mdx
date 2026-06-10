@@ -1,0 +1,62 @@
+---
+title: Get email link
+description: Wait for an email and extract a link from it into a variable.
+---
+
+Follow an email link as part of the flow: account confirmation, password reset, magic login. The step waits for the email, asks the AI for the link matching your intent, and stores it in a variable. Open it with a [Navigate to URL](/tests/actions/web/navigatetourl) step to continue the scenario.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Email to receive link | `mailbox` | Yes | The test mailbox address that should receive the email containing the link. |
+| Variable | `variable` | Yes | Name of the variable that receives the link. Default: `MailLink`. |
+| Intent | `intent` | No | Which link the AI should extract. Default: `The first link in the text`. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no link is found. Default: off. |
+
+Use the intent to disambiguate emails with several links: "The password reset link", "The link in the Confirm my account button".
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-get-mail-link",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@example.com" } }],
+    "intent": [{ "type": "value", "data": { "value": "The link in the Confirm my account button" } }],
+    "variable": "MailLink",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Variable**: the extracted link is stored in the variable. Open it with a navigation step to continue the flow.
+- **Timing**: start, end, and duration (in seconds). The duration includes waiting for the email to arrive.
+- **Status**: failed if no email arrives or the AI finds no link matching the intent.
+- **AI usage**: the AI cost of the extraction is added to the run.
+
+See [Email & SMS in tests](/tests/email-sms) for how test mailboxes work.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Navigate to URL" icon="globe" href="/tests/actions/web/navigatetourl">
+
+    Open the extracted link and continue the flow
+
+</Card>
+  <Card title="Email & SMS in tests" icon="envelope" href="/tests/email-sms">
+
+    How test mailboxes work
+
+</Card>
+</Columns>

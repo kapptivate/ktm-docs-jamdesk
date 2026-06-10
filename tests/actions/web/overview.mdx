@@ -1,0 +1,101 @@
+---
+title: Web steps
+description: Every step available in the web test builder, organized like the step palette.
+sidebarTitle: Overview
+---
+
+Web tests are built from the steps below. The groups match the categories of the **Add step** palette in the [test builder](/tests/builder), so what you see here is what you see in the product.
+
+## Interactions
+
+| Step | What it does |
+|------|--------------|
+| [Click](/tests/actions/web/click) | Click an element located by AI description or selector |
+| [Double click](/tests/actions/web/doubleclick) | Two rapid clicks, for edit modes and list items |
+| [Right click](/tests/actions/web/rightclick) | Open an element's context menu |
+| [Hover](/tests/actions/web/hover) | Reveal menus, tooltips, and hover states |
+| [Upload file](/tests/actions/web/uploadfile) | Feed a file to a file input |
+| [Press keys](/tests/actions/web/keys) | Send keyboard keys and shortcuts |
+| [Fill input](/tests/actions/web/input) | Type text, variables, or generated data into a field |
+| [Scroll](/tests/actions/web/scroll) | Bring an element into view |
+
+## Email & SMS
+
+| Step | What it does |
+|------|--------------|
+| [Get sms code](/tests/actions/web/getsmscode) | Wait for an SMS and extract its code into a variable |
+| [Get mail](/tests/actions/web/getmail) | Verify an email arrives in a test mailbox |
+| [Get email code](/tests/actions/web/getemailcode) | Wait for an email and extract its code into a variable |
+| [Get email link](/tests/actions/web/getemaillink) | Wait for an email and extract a link into a variable |
+
+## Verifications
+
+| Step | What it does |
+|------|--------------|
+| [Verify element](/tests/actions/web/verifyelement) | Check an element is (or is not) displayed, clickable, enabled, or present |
+| [Verify Spell Check (AI)](/tests/actions/web/aispellcheck) | Have the AI proofread the visible text of the page |
+| [Verify with AI](/tests/actions/web/aivisualassert) | Assert anything about the screen in plain language |
+
+## Navigation
+
+| Step | What it does |
+|------|--------------|
+| [Switch window](/tests/actions/web/switchwindow) | Continue the test in another tab or window |
+| [Navigate to URL](/tests/actions/web/navigatetourl) | Load a URL, with optional loading-time checks |
+
+## Wait for
+
+| Step | What it does |
+|------|--------------|
+| [Wait for delay](/tests/actions/web/waitfordelay) | Pause for a fixed duration |
+
+## Others
+
+| Step | What it does |
+|------|--------------|
+| [Custom step](/tests/actions/web/customstep) | Run your own JavaScript |
+| [Set variable](/tests/actions/web/setvariable) | Store a value for later steps |
+| [Extract value](/tests/actions/web/extractvalue) | Read an element's text or value into a variable |
+
+<Note>
+  Four legacy steps no longer appear in the palette but keep running in existing tests: [Assert displayed](/tests/actions/web/assertdisplayed), [Assert not displayed](/tests/actions/web/assertnotdisplayed), [Set checkbox](/tests/actions/web/checkbox), and [Select](/tests/actions/web/select).
+</Note>
+
+## Common step settings
+
+Every step shares a few settings, shown in the step's side panel in the builder:
+
+- **Ignore error on this step** (`ignore_errors`): the run continues with the next step even if this one fails.
+- **Skip during run** (`disabled`): the step stays in the scenario but is not executed.
+- **Custom capabilities** (`use_capabilities`, `capabilities`): fine-tune or override the execution behavior for this step only.
+
+Steps that target an element also share the AI settings: a plain-language **description**, an optional **manual selector**, and an **AI strategy** (`inherit`, `smart`, or `always`) that decides when the AI locates the element versus the saved selector. See [AI selectors](/ai/selectors).
+
+## Step checks
+
+Interactions and navigation steps can carry **checks**, evaluated right after the step runs:
+
+- **URL**: the page address matches (or doesn't match) a pattern.
+- **Loading time**: the page load stays under a threshold.
+- **Step duration**: the step itself stays under a threshold.
+
+Each check is set to **error** (a failing check fails the step) or **warning** (the step passes but is flagged). Expected and actual values land in the run results.
+
+## From results to analytics
+
+Each step records its timing, status, screenshots, check results, and any variables it created. At the test level, every run feeds the `test` measurement used by [Analytics](/monitoring/dashboards): duration, success/warning/failure counters, and on failure, which step type broke the run. Custom metrics created in steps flow to the same place.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="hammer" href="/tests/builder">
+
+    How steps are added, configured, and organized into groups
+
+</Card>
+  <Card title="AI selectors" icon="sparkles" href="/ai/selectors">
+
+    How element descriptions and saved selectors work together
+
+</Card>
+</Columns>

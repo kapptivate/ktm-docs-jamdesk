@@ -1,0 +1,66 @@
+---
+title: PDP Activation
+description: Open a data session on the SIM and measure activation time.
+---
+
+Activate a PDP context (the cellular data session) and verify the network assigns an IP configuration. This is the data equivalent of "can this SIM get online", and the activation time itself is a key network quality indicator.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Access technology | `command.access_technology` | No | Network technology to use. Default: automatic. |
+| Use default APN credentials | `command.default_apn` | No | Use the APN configured for the SIM. Default: on. |
+| APN Name, Login, Password | `command.apn`, `command.login`, `command.password` | When default APN is off | Custom APN credentials. |
+| Keep pdp context | `command.keep_alive` | No | Leave the data session open for the following actions. Default: off. |
+| Check internet connection before running action | `command.check_network.active` | No | Verify connectivity first. Default: on. |
+| PDP Activation should fail | `expect_failure` | No | Invert the verdict, for SIMs that must not have data access. |
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_PDP_ACTIVATION",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "access_technology": "",
+    "default_apn": true,
+    "apn": "",
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `duration` | Time to activate the data session, in seconds. |
+| `ip_address`, `mask`, `ip_gateway` | The IP configuration assigned by the network. |
+| `ip_dns1`, `ip_dns2` | The DNS servers assigned. |
+| `apn` | The APN used. |
+
+In Analytics, each run feeds the PDP activation measurement with `duration_seconds`, tagged by status, APN, antenna (MCC, MNC, LAC, cell ID), and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/tests/actions/cellular/ping">
+
+    Measure latency once the session is up
+
+</Card>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/tests/actions/cellular/speedtest">
+
+    Measure the full bandwidth of the connection
+
+</Card>
+</Columns>

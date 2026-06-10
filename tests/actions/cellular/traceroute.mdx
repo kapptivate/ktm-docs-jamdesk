@@ -1,0 +1,71 @@
+---
+title: Traceroute
+description: Map the network path from the SIM to a host, hop by hop.
+---
+
+Trace the route from the SIM to a host and measure response times at every hop. When a ping degrades, traceroute tells you where in the path the latency or loss appears.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Host | `command.host` | Yes | Destination to trace. |
+| Protocol | `command.protocol` | No | `icmp` (default). |
+| Max hops | `command.max_hops` | No | Stop after this many hops. Default: 30. |
+| Packets per hop | `command.nb_packets` | No | Packets sent at each hop. Default: 10. |
+| Packet size | `command.packet_size_bytes` | No | Packet size in bytes. Default: 64. |
+| Show IP | `command.show_ip` | No | Display hop IPs instead of hostnames. Default: off. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_TRACEROUTE",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "host": "kapptivate.com",
+    "protocol": "icmp",
+    "max_hops": 30,
+    "nb_packets": 10,
+    "packet_size_bytes": 64,
+    "show_ip": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `total_hops` | Number of hops to the destination. |
+| `hops[]` | Per hop: `host`, `packet_loss_percent`, `avg_res_time_ms`, `min_res_time_ms`, `max_res_time_ms`, `standard_deviation_ms`. |
+| `duration` | Total execution time in seconds. |
+
+In Analytics, each run feeds the traceroute measurement: `total_hops` plus, per hop (tagged `hop_number`), the average, min, max, and standard deviation of response times and the hop's packet loss. Tags include source and destination host, protocol parameters, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/tests/actions/cellular/ping">
+
+    The end-to-end measurement that triggers a traceroute
+
+</Card>
+  <Card title="DNS Lookup" icon="globe" href="/tests/actions/cellular/dns-lookup">
+
+    Rule out resolution before blaming the path
+
+</Card>
+</Columns>

@@ -1,8 +1,67 @@
 ---
 title: Scroll
-description: Scroll a page or scrollable element to bring content into view.
+description: Scroll the page to bring an element into view.
 ---
 
-import Content from '/snippets/actions/scroll.mdx'
+Scroll the page until an element is visible. Use it before interacting with content below the fold, or to verify lazy-loaded sections actually load when reached.
 
-<Content />
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element to scroll to. |
+| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| Scroll behavior | `behavior` | No | `auto` (default), `smooth`, or `instant`. |
+| Vertical placement | `block` | No | Where the element lands vertically: `start`, `center` (default), `end`, or `nearest`. |
+| Horizontal placement | `inline` | No | Where the element lands horizontally: `start`, `center` (default), `end`, or `nearest`. |
+| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "scroll",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The pricing section at the bottom of the page" } }]
+    },
+    "behavior": "auto",
+    "block": "center",
+    "inline": "center",
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the step runs, showing the new position.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="arrow-pointer" href="/tests/actions/web/click">
+
+    Interact with the element you scrolled to
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/tests/actions/web/verifyelement">
+
+    Check that the lazy-loaded content appeared
+
+</Card>
+</Columns>

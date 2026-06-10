@@ -1,53 +1,65 @@
 ---
 title: Click
-description: Click on an element using a selector or AI-driven locator.
+description: Click an element located by an AI description or a manual selector.
 ---
 
-Click on an element on the page. You can locate the element using a CSS selector, XPath, or an AI-driven description of what you want to click.
-
-## Channels
-
-- ✅ Web (desktop/tablet browsers)
-- ✅ Smartphone (Android/iOS)
-- ❌ Cellular
-
-Click works on both web and mobile devices.
+Click an element on the page: a button, a link, a menu entry. Describe the element in plain language and the AI finds it, or pin it down yourself with an XPath or CSS selector.
 
 ## Parameters
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
-| locator.selector | String | No | CSS selector (e.g., `.button-primary`, `#submit`). |
-| locator.description | String | No | Human-readable description for AI-driven locating (e.g., "the big red submit button"). |
-| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
-| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". Defaults to "inherit". |
-| wait_for | Condition | No | Wait for a condition before or after click (clickable, displayed, enabled, exist). |
-| ignore_errors | Boolean | No | If true, step passes even if element not found. |
-| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element, for example "The Log in button in the header". |
+| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Enable AI | `enable_ai` | No | When off, only the manual selector is used. Default: on. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
 
-## Example
+How the AI resolves the element, and when it falls back to the saved selector, is covered in [AI selectors](/ai/selectors).
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
 
 ```json
 {
+  "id": "step-1",
   "type": "click",
   "version": "v1.0.0",
+  "disabled": false,
   "inputs": {
     "locator": {
-      "selector": [{ "type": "value", "data": { "value": ".submit-button" } }],
-      "description": [{ "type": "value", "data": { "value": "" } }]
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Log in button in the header" } }]
     },
     "enable_ai": true,
     "ai_strategy": "inherit",
     "ignore_errors": false
-  }
+  },
+  "use_capabilities": false,
+  "capabilities": {}
 }
 ```
 
-## Notes
+## Results and metrics
 
-- Selector strategies: CSS (`.class`, `#id`, `[data-testid="value"]`) or XPath (`//button[text()="Click me"]`).
-- AI locating works best with descriptive phrases like "the green Save button in the footer".
-- `wait_for` conditions allow you to wait until the element is clickable, displayed, enabled, or exists before clicking.
-- Step-level checks (url, loading_time, step_duration) are available.
-- If `ignore_errors` is true, the step passes silently if the element is not found.
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the click, so you can see the page it led to.
+- **Step checks**: URL, loading time, and step duration checks report their expected and actual values when configured.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="AI selectors" icon="sparkles" href="/ai/selectors">
+
+    How element descriptions, saved selectors, and AI strategies work together
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/tests/actions/web/verifyelement">
+
+    Check the result of the click before moving on
+
+</Card>
+</Columns>

@@ -1,0 +1,67 @@
+---
+title: Wait Call
+description: Wait for an incoming call on a real SIM, answer it, and score the audio quality.
+---
+
+Wait for an incoming call on the SIM and answer it. Paired with [Place Call](/tests/actions/cellular/place-call) on another SIM, it verifies the full voice path; with recording and MOS enabled, it scores the audio quality the listener actually heard.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Access technology | `command.access_technology` | No | Network technology, including VoLTE profiles. Default: automatic. |
+| Wait time | `command.wait_time_seconds` | No | How long to wait for the call. Default: 30. |
+| Record call | `command.record` | No | Record the received audio. Default: off. |
+| Compute Audio MOS | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | No | Score the recorded audio against the reference file played by the caller. Requires recording. |
+| Block until call received | `command.asynchronous` | No | Run synchronously (block the scenario) or watch in the background. |
+| Call reception is optional | `optional_reception` | No | The test passes even if no call arrives. Default: off. |
+
+## In the scenario JSON
+
+```json
+{
+  "type": "CALL_WAIT",
+  "owner": "SIM_2",
+  "skip": false,
+  "command": {
+    "wait_time_seconds": 30,
+    "record": true,
+    "mos": { "active": true, "algo": "polqa", "ref_file": "voice-10s" },
+    "asynchronous": false,
+    "access_technology": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `seconds_elapsed_until_accept` | Time before the call arrived and was answered. |
+| `call_duration_seconds` | Time the call stayed up. |
+| `caller_number` | The calling party's number. |
+| `audio_mos` | The audio quality score (MOS), when recording and MOS are enabled. |
+| `ceer_response` | The network's call end report. |
+| `access_technology_report` | The technology used for the call. |
+
+In Analytics, each run feeds the call measurement with `cellular_call_duration_seconds`, `cellular_audio_mos`, and `duration_seconds`, tagged by status, caller number, antenna, and access technology. `cellular_audio_mos` is the series to watch for voice quality degradation.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Place Call" icon="phone-volume" href="/tests/actions/cellular/place-call">
+
+    The other end of the voice test
+
+</Card>
+  <Card title="Alerts" icon="bell" href="/monitoring/alerts">
+
+    Alert when the MOS drops below your threshold
+
+</Card>
+</Columns>

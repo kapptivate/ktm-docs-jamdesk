@@ -1,0 +1,68 @@
+---
+title: HTTP Upload
+description: Upload a generated file over HTTP and measure uplink throughput.
+---
+
+Upload a file of a chosen size to an HTTP endpoint and measure uplink throughput, the direction that suffers first when a cell is congested.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Upload link | `command.upload_link` | Yes | The endpoint that accepts the upload. |
+| File size | `command.file_size_in_byte` | Yes | Size of the generated payload, in bytes. |
+| Upload should fail | `expect_failure` | No | Invert the verdict. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings) and DNS override (`command.override_dns`, `command.dns`).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_HTTP_UPLOAD",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "upload_link": "https://files.example.com/upload",
+    "file_size_in_byte": 5000000,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `throughput_in_kbps` | Upload throughput. |
+| `md5sum` | Hash of the uploaded payload. |
+| `dns_server` | DNS servers used. |
+| `duration` | Total execution time in seconds. |
+
+In Analytics, each run feeds the HTTP upload measurement with `throughput_kbps` and `duration_seconds`, tagged by status, URL, APN, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Download File" icon="cloud-arrow-down" href="/tests/actions/cellular/download-file">
+
+    The downlink direction, with the full timing waterfall
+
+</Card>
+  <Card title="FTP Upload" icon="cloud-arrow-up" href="/tests/actions/cellular/ftp-upload">
+
+    The same measurement over FTP
+
+</Card>
+</Columns>

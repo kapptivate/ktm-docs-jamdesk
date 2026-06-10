@@ -1,0 +1,71 @@
+---
+title: Download File
+description: Download a file over HTTP and measure throughput with a full timing breakdown.
+---
+
+Download a file over the SIM's data connection and measure download throughput, with the complete timing waterfall: DNS, TCP connect, TLS, time to first byte, transfer. The reference action for tracking cellular download performance.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Url | `command.url` | Yes | URL of the file to download. |
+| Ignore SSL certificate | `command.insecure_skip_verify` | No | Skip certificate verification. Default: off. |
+| Enable cookies | `command.enable_cookies` | No | Keep cookies across redirects. Default: off. |
+| Download should fail | `expect_failure` | No | Invert the verdict, for content that must be blocked. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings) and DNS override (`command.override_dns`, `command.dns`).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_HTTP_DOWNLOAD",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "url": "https://files.example.com/10MB.bin",
+    "insecure_skip_verify": false,
+    "enable_cookies": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `throughput_in_kbps` | Download throughput. |
+| `size_in_bytes` | Bytes downloaded. |
+| `status_code` | HTTP status of the response. |
+| `md5sum` | Hash of the downloaded file, to verify integrity. |
+| `dnslookup_duration`, `connect_duration`, `appconnect_duration`, `pretransfer_duration`, `starttransfer_duration`, `contenttransfer_duration`, `total_duration` | The timing waterfall: DNS, TCP connect, TLS handshake, request, time to first byte, transfer, total. |
+
+In Analytics, each run feeds the HTTP download measurement with `throughput_kbps`, `downloaded_bytes`, every waterfall duration (`namelookup_duration_seconds`, `connect_duration_seconds`, `starttransfer_duration_seconds`...), and `duration_seconds`, tagged by status, URL, status code, APN, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="HTTP Upload" icon="cloud-arrow-up" href="/tests/actions/cellular/http-upload">
+
+    Measure the uplink direction
+
+</Card>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/tests/actions/cellular/speedtest">
+
+    Both directions plus latency, against Ookla servers
+
+</Card>
+</Columns>

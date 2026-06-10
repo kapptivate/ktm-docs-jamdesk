@@ -1,0 +1,94 @@
+---
+title: SIM steps
+description: Every action available in SIM tests, organized like the action palette, with the metrics each one produces.
+sidebarTitle: Overview
+---
+
+SIM tests run on real SIM cards in your cellular agents. Each action drives the modem (USSD, SMS, calls) or the data connection (ping, downloads, speedtest) and produces network metrics that feed Analytics. The groups below match the action palette in the product.
+
+## USSD
+
+| Action | What it measures |
+|--------|------------------|
+| [USSD Command](/tests/actions/cellular/ussd) | Send a code, verify the response, session state, response time |
+| [Wait USSD Push](/tests/actions/cellular/ussd-push) | Network-initiated USSD: content and reception delay |
+
+## SMS
+
+| Action | What it measures |
+|--------|------------------|
+| [Wait SMS](/tests/actions/cellular/wait-sms) | Incoming SMS: sender, content, parts, reception delay |
+| [Send SMS](/tests/actions/cellular/send-sms) | Send time, parts, retries, optional delivery report |
+
+## DATA
+
+| Action | What it measures |
+|--------|------------------|
+| [PDP Activation](/tests/actions/cellular/pdp-activation) | Data session activation time, assigned IP configuration |
+| [Ping](/tests/actions/cellular/ping) | ICMP round-trip time, jitter, packet loss |
+| [TCP Ping](/tests/actions/cellular/tcp-ping) | Connection latency at the TCP layer |
+| [HTTP Ping](/tests/actions/cellular/http-ping) | Response latency of a web endpoint |
+| [DNS Lookup](/tests/actions/cellular/dns-lookup) | Resolution time and resolved addresses |
+| [Download File](/tests/actions/cellular/download-file) | Download throughput with the full timing waterfall |
+| [HTTP Upload](/tests/actions/cellular/http-upload) | Uplink throughput over HTTP |
+| [FTP Download](/tests/actions/cellular/ftp-download) | Download throughput over FTP |
+| [FTP Upload](/tests/actions/cellular/ftp-upload) | Uplink throughput over FTP |
+| [Send Mail](/tests/actions/cellular/send-mail) | SMTP delivery from the mobile network |
+| [API Call](/tests/actions/cellular/api-call) | Full HTTP request: status, body, timing waterfall |
+| [Ookla Speedtest](/tests/actions/cellular/speedtest) | Download, upload, latency, jitter, packet loss |
+| [Traceroute](/tests/actions/cellular/traceroute) | Per-hop response times and loss |
+| [Check SSL/TLS Certificate](/tests/actions/cellular/check-certificate) | Certificate validity and time before expiry |
+| [Youtube](/tests/actions/cellular/youtube) | Video streaming quality: buffering, dropped frames |
+| [Web Script](/tests/actions/cellular/web-script) | A scripted web journey over the cellular connection |
+
+## CALL
+
+| Action | What it measures |
+|--------|------------------|
+| [Wait Call](/tests/actions/cellular/wait-call) | Incoming call: answer delay, duration, audio MOS |
+| [Place Call](/tests/actions/cellular/place-call) | Connect time, post-dial delay, call hold |
+
+## Other
+
+| Action | What it measures |
+|--------|------------------|
+| [Reboot sim](/tests/actions/cellular/reboot-sim) | Modem restart and network re-registration time |
+
+## Common options
+
+Every SIM action shares the same envelope:
+
+- **Owner** (`owner`): which SIM runs the action. Owners are assigned per test and can be overridden per campaign.
+- **Assertions** (`assertions`): compare any field of the action's report against an expected value (status, response time, packet loss, status code...). A failing assertion fails the action. Some actions ship with a default, like `packet_loss == 0` on Ping.
+- **Stored variables** (`store`): copy a report field (duration, extracted text, RTT...) into a test variable for later actions, with an optional default when the source is absent.
+- **Should fail** (`expect_failure`): invert the verdict, to verify that something is blocked (a barred number, a filtered domain).
+- **Skip** (`skip`): keep the action in the scenario without running it.
+- **Artifacts** (`command.options.artifacts`): capture network traces, TCP dumps, AT command logs, or call audio with the result.
+
+## Connection settings
+
+DATA actions also share the connection setup:
+
+- **Access technology** (`command.access_technology`): force 2G/3G/4G or specific profiles; empty means automatic.
+- **APN** (`command.default_apn`, `command.apn`, `command.login`, `command.password`): use the SIM's default APN or custom credentials.
+- **Keep pdp context** (`command.keep_alive`): leave the data session open for the next actions instead of tearing it down.
+- **Check internet connection** (`command.check_network.active`): verify connectivity before measuring.
+
+## From results to analytics
+
+Every action records a typed report: its status, duration, and the measurements specific to the action (RTT, throughput, MOS, expiry time...). The KPI processor turns each report into a measurement tagged with the test, the SIM, the antenna (MCC, MNC, LAC, cell ID), and the access technology, which is what you chart and alert on in [Analytics](/monitoring/dashboards). Each action page lists its exact fields.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Cellular tests" icon="sim-card" href="/tests/cellular">
+
+    The authoring workflow: owners, variables, campaigns, runs
+
+</Card>
+  <Card title="Analytics" icon="chart-line" href="/monitoring/dashboards">
+
+    Chart and alert on the metrics these actions produce
+
+</Card>
+</Columns>

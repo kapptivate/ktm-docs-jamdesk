@@ -1,0 +1,66 @@
+---
+title: Send Mail
+description: Send an email through SMTP over the cellular connection.
+---
+
+Send an email through an SMTP server over the SIM's data connection. Verify that email delivery works from the mobile network, including through carrier-grade NAT and SMTP filtering.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| SMTP server | `command.smtp_url` | Yes | The SMTP server address. |
+| SMTP account | `command.smtp_user_email`, `command.smtp_password` | Yes | Credentials used to send. |
+| Recipient | `command.mail_receiver` | Yes | Destination email address. |
+| Subject | `command.email_subject` | No | Email subject. |
+| Body | `command.email_body` | No | Email content. |
+| Send should fail | `expect_failure` | No | Invert the verdict, for SMTP that must be blocked. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_EMAIL_SEND",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "smtp_url": "smtp.example.com:587",
+    "smtp_user_email": "qa@example.com",
+    "smtp_password": "secret",
+    "mail_receiver": "inbox@example.com",
+    "email_subject": "Cellular SMTP check",
+    "email_body": "Sent from a real SIM",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`): the send `status` and the `duration` in seconds.
+
+In Analytics, each run feeds the email send measurement with `duration_seconds`, tagged by status, APN, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="API Call" icon="cloud" href="/tests/actions/cellular/api-call">
+
+    Test any HTTP service the same way
+
+</Card>
+  <Card title="SIM steps overview" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    Assertions, stored variables, and shared options
+
+</Card>
+</Columns>

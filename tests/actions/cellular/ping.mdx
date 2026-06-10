@@ -1,0 +1,71 @@
+---
+title: Ping
+description: Measure ICMP latency, jitter, and packet loss over the cellular connection.
+---
+
+Ping a host over the SIM's data connection and measure round-trip time, jitter, and packet loss. The reference action for tracking cellular network latency over time.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Host | `command.host` | Yes | Host to ping, for example `8.8.8.8` or `google.fr`. |
+| Ping count | `command.count` | No | Number of pings. Default: 10. |
+| Packet size | `command.packet_size` | No | Packet size in bytes. Default: 64. |
+| Ping should fail | `expect_failure` | No | Invert the verdict. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings): access technology, APN, keep PDP context, check network. The action ships with a default assertion: `packet_loss == 0`.
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_PING",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "host": "8.8.8.8",
+    "count": 10,
+    "packet_size": 64,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [
+    { "type": "response", "source": "result", "property": "packet_loss_pct", "compare": "==", "value": 0, "evaluate": true }
+  ],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `rtt_mean` | Mean round-trip time. |
+| `jitter` | Variation between round-trip times. |
+| `packet_loss_pct` | Percentage of lost packets. |
+| `ping_count`, `packet_size`, `ping_duplicate` | The run's parameters and duplicate count. |
+| `duration` | Total execution time in seconds. |
+
+In Analytics, each run feeds the ping measurement with `rtt_seconds`, `jitter`, `packet_loss_percent`, and `duration_seconds`, tagged by status, APN, DNS server, antenna, and access technology. These are the series behind latency dashboards and alert thresholds.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="TCP Ping" icon="arrow-right-arrow-left" href="/tests/actions/cellular/tcp-ping">
+
+    Latency at the TCP layer, when ICMP is filtered
+
+</Card>
+  <Card title="HTTP Ping" icon="globe" href="/tests/actions/cellular/http-ping">
+
+    Latency against a real web endpoint
+
+</Card>
+</Columns>

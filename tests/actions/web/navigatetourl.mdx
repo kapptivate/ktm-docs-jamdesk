@@ -1,0 +1,65 @@
+---
+title: Navigate to URL
+description: Load a URL in the current tab, with optional checks on the page that loads.
+---
+
+Load a page by URL: jump to a deep link mid-scenario, or open a link extracted from an email. Every web test also starts with a locked "Navigate to starting page" step, which is this same step pointed at the test's starting URL.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| URL | `url` | Yes | The address to load, for example `https://www.example.com`. Supports variables, so you can navigate to an extracted link. |
+| Checks | `checks` | No | Step checks evaluated after the page loads: URL, loading time, and step duration. Each check can fail the step or only raise a warning. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario. This example adds a loading time check that raises a warning above 3 seconds.
+
+```json
+{
+  "id": "step-1",
+  "type": "navigate-to-url",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "url": [{ "type": "test_variable", "data": { "name": "MailLink" } }]
+  },
+  "checks": [
+    {
+      "id": "check-1",
+      "type": "check",
+      "entity": "loading_time",
+      "operator": "lt",
+      "value": [{ "type": "value", "data": { "value": "3" } }],
+      "logicalOperator": "and",
+      "statusModifier": "warning"
+    }
+  ],
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Loading time**: measured for the page load and compared against your checks.
+- **Check results**: each configured check reports its expected and actual values. A failing `error` check fails the step; a failing `warning` check marks it as a warning.
+- **Status**: success, warning, or failed.
+- **Screenshot**: captured once the page has loaded.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Get email link" icon="link" href="/tests/actions/web/getemaillink">
+
+    Extract the link you navigate to from an email
+
+</Card>
+  <Card title="Switch window" icon="window-restore" href="/tests/actions/web/switchwindow">
+
+    Follow the flow into another tab instead
+
+</Card>
+</Columns>

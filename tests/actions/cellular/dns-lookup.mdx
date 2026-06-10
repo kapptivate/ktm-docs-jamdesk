@@ -1,0 +1,66 @@
+---
+title: DNS Lookup
+description: Resolve a domain name over the cellular connection and measure resolution time.
+---
+
+Resolve a domain over the SIM's data connection. Verify the carrier's DNS answers correctly and track resolution time, a frequent hidden culprit in slow mobile experiences.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Host | `command.host` | Yes | Domain to resolve, for example `kapptivate.com`. |
+| DNS override | `command.override_dns`, `command.dns` | No | Query specific DNS servers instead of the carrier's. |
+| DNS Lookup should fail | `expect_failure` | No | Invert the verdict, for domains that must be blocked. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_DNS_LOOKUP",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "host": "kapptivate.com",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `ip_addresses` | The resolved IP addresses. |
+| `dns_server` | The DNS servers that answered. |
+| `duration` | Resolution time in seconds. |
+
+In Analytics, each run feeds the DNS measurement with `duration_seconds`, tagged by status, host, DNS server, APN, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="HTTP Ping" icon="globe" href="/tests/actions/cellular/http-ping">
+
+    Measure the full request once the name resolves
+
+</Card>
+  <Card title="Check SSL/TLS Certificate" icon="id-card" href="/tests/actions/cellular/check-certificate">
+
+    Verify the certificate served on that domain
+
+</Card>
+</Columns>

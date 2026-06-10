@@ -1,55 +1,62 @@
 ---
-title: USSD push
-description: Wait for an unsolicited USSD message from the network.
+title: Wait USSD Push
+description: Wait for an unsolicited USSD message pushed by the network.
 ---
 
-Wait for an unsolicited USSD push message from the network (server-initiated, without sending a command). USSD pushes are used by carriers to send notifications, balance alerts, promotional messages, or subscription reminders to subscribers.
-
-## Channels
-
-- ✅ Cellular only
-
-USSD push testing is specific to cellular networks on real SIM cards (V1 TestingHouse system).
+Wait for a network-initiated USSD push: a balance alert, a subscription notification, a promotional message. The action sends nothing; it watches the SIM and verifies the message when it arrives.
 
 ## Parameters
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| optional_reception | Boolean | No | If true, test passes even if no USSD push arrives. If false, test fails if push does not arrive. Defaults to false. |
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Expected Message | `expected_result.message` | No | The push content you expect. The result records the match ratio. |
+| Check reception from a previous step | `command.wait_from` | No | Start watching from a previous action's position instead of this one, for pushes triggered earlier in the flow. |
+| Reception is optional | `optional_reception` | No | The test passes even if no push arrives; variables get their default values. Default: off. |
 
-## Assertions
-
-Verify the incoming USSD push using any of the following assertion sources:
-
-| Source | Type | Description |
-|--------|------|-------------|
-| session_status | String | Session state after the push arrives: `alive` (menu active), `close` (session closed). Use string comparisons to validate the state. |
-| variable | String | Extract and store a value from the push message for use in subsequent steps. |
-
-## Example
+## In the scenario JSON
 
 ```json
 {
   "type": "USSD_PUSH",
-  "owner": "sim1",
-  "optional_reception": false,
+  "owner": "SIM_1",
+  "skip": false,
   "command": {
-    "options": {}
+    "wait_from": null,
+    "options": { "artifacts": {} }
   },
-  "assertions": [
-    {
-      "source": "session_status",
-      "compare": "==",
-      "value": "close"
-    }
-  ]
+  "expected_result": {
+    "message": "Your balance is below 1.00"
+  },
+  "assertions": [],
+  "store": []
 }
 ```
 
-## Notes
+## Results and metrics
 
-- **No command sent:** Unlike USSD actions, USSD_PUSH does not send any command. The action waits passively for a message from the network.
-- **Timeouts:** USSD push reception timeouts are configurable at run time (not per action). Pushes may arrive at any time during the test; common wait times: 30–120 seconds.
-- **Optional reception:** Set `optional_reception: true` if the push is not guaranteed to arrive (e.g., depends on carrier timing or conditions). The test will pass regardless.
-- **Session closure:** USSD pushes often close the session immediately (e.g., balance notification). Plan your assertions for the expected session state.
-- **Variable extraction:** Extract data from push messages (e.g., balance, offer details) using `variable` assertions for dynamic flows.
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `message` | The push content received. |
+| `session` | Session state after the push: `alive` or `close`. |
+| `ratio` | Match ratio (0 to 100) against the expected message. |
+| `relative_duration` | How long after the watch started the push arrived, in seconds. |
+| `dynamic_variables` | Values extracted from the push into variables. |
+
+In Analytics, each run feeds the USSD push measurement with `reception_duration_seconds` and `duration_seconds`, tagged by status, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="USSD Command" icon="hashtag" href="/tests/actions/cellular/ussd">
+
+    Trigger the flow that causes the push
+
+</Card>
+  <Card title="Wait SMS" icon="envelope" href="/tests/actions/cellular/wait-sms">
+
+    The same pattern for incoming SMS
+
+</Card>
+</Columns>

@@ -1,0 +1,65 @@
+---
+title: Wait SMS
+description: Wait for an incoming SMS on a real SIM and verify sender and content.
+---
+
+Wait for an SMS to arrive on the SIM and verify it: OTP delivery, notifications, alerts. The action checks the sender, the message text, and the number of parts for long messages.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Expected Message | `expected_result.message` | No | The SMS content you expect. The result records the match ratio. |
+| Check SMS reception from a previous step | `command.wait_from` | No | Start watching from a previous action's position, for SMS triggered earlier in the flow (a Send SMS or USSD action, for example). |
+| SMS reception is optional | `optional_reception` | No | The test passes even if no SMS arrives; variables get their default values. Default: off. |
+
+## In the scenario JSON
+
+```json
+{
+  "type": "SMS_GET",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "wait_from": null,
+    "options": { "artifacts": {} }
+  },
+  "expected_result": {
+    "message": "Your verification code is"
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`), for each SMS received:
+
+| Field | Description |
+|-------|-------------|
+| `sender` | Phone number that sent the SMS. |
+| `message` | The SMS body. |
+| `count` | Number of parts, for multi-part (concatenated) messages. |
+| `ratio` | Match ratio (0 to 100) against the expected message. |
+| `relative_duration` | How long after the watch started the SMS arrived, in seconds. |
+| `dynamic_variables` | Values extracted from the SMS (an OTP code, for example) into variables. |
+
+In Analytics, each run feeds the SMS reception measurement with `reception_duration_seconds` and `duration_seconds`, tagged by status, antenna, and access technology.
+
+Assertions can target `sms_sender`, `message`, `concatenated_sms` (part count), or extract a `variable`.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Send SMS" icon="message" href="/tests/actions/cellular/send-sms">
+
+    Send the SMS from another SIM and verify both ends
+
+</Card>
+  <Card title="SIM steps overview" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    Assertions, stored variables, and shared options
+
+</Card>
+</Columns>

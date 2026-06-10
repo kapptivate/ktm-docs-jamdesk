@@ -1,36 +1,47 @@
 ---
-title: Hide Keyboard
-description: Dismiss the virtual keyboard on a mobile device.
+title: Hide keyboard
+description: Dismiss the on-screen keyboard.
 ---
 
-Dismiss the virtual keyboard (soft keyboard) on a smartphone. This is useful after text input when you need to interact with elements below the keyboard or verify that the keyboard was hidden.
-
-## Channels
-
-- ❌ Web
-- ✅ Smartphone (Android/iOS)
-- ❌ Cellular
-
-Hide Keyboard is smartphone-specific.
+Dismiss the virtual keyboard after typing. The keyboard can cover buttons and fields, so hide it before tapping anything in the lower half of the screen.
 
 ## Parameters
 
-This action has no parameters.
+This step has no parameters.
 
-## Example
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
 
 ```json
 {
+  "id": "step-1",
   "type": "hide-keyboard",
   "version": "v1.0.0",
-  "inputs": {}
+  "disabled": false,
+  "inputs": {},
+  "use_capabilities": false,
+  "capabilities": {}
 }
 ```
 
-## Notes
+## Results and metrics
 
-- Hide Keyboard is a no-op if the keyboard is already hidden; the step always passes.
-- Useful when text input causes the keyboard to cover interactive elements.
-- After calling [input](/tests/actions/smartphone/input) to type text, use Hide Keyboard to dismiss the keyboard and interact with elements below.
-- Mobile-specific action with no web equivalent (web has no virtual keyboard).
-- Step-level checks (step_duration) are available after keyboard dismissal.
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, even if no keyboard was open.
+- **Screenshot**: captured after the keyboard is dismissed.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Fill input" icon="keyboard" href="/tests/actions/smartphone/input">
+
+    The step that usually opens the keyboard in the first place
+
+</Card>
+  <Card title="Tap" icon="hand-pointer" href="/tests/actions/smartphone/tap">
+
+    Tap the button the keyboard was covering
+
+</Card>
+</Columns>

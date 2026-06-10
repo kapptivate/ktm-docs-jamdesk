@@ -1,0 +1,69 @@
+---
+title: Youtube
+description: Stream a video over the cellular connection and measure playback quality.
+---
+
+Stream a video over the SIM's data connection and measure the experience: time to first frame, buffering events, dropped pictures, achieved quality. The closest measurement to what a subscriber feels when watching video on the network.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Url | `command.url` | Yes | The video URL to stream. |
+| Quality | `command.quality` | No | Requested video quality. Default: `144p`. |
+| Duration to play | `command.duration_to_play` | No | How long to stream, in seconds. Default: 10. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "STREAMING_VIDEO",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "quality": "360p",
+    "duration_to_play": 30,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `first_buffering_time` | Time before playback starts. |
+| `additional_buffering_time`, `additional_buffering_count` | Re-buffering during playback: total time and number of stalls. |
+| `played_time` | Seconds actually played. |
+| `displayed_pictures`, `lost_pictures` | Frames displayed versus dropped. |
+| `played_audio_buffers`, `lost_audio_buffers` | Audio continuity. |
+| `streamed_quality`, `best_available_quality`, `codec` | The quality obtained versus available, and the codec. |
+| `total_bytes`, `read_bytes` | Data volume transferred. |
+
+In Analytics, each run feeds the video measurement with the buffering times and counts, `lost_pictures_percent`, `buffering_percent`, played time, and volumes, tagged by status, streamed quality, APN, antenna, DNS server, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/tests/actions/cellular/speedtest">
+
+    Raw bandwidth, to correlate with video quality
+
+</Card>
+  <Card title="Download File" icon="cloud-arrow-down" href="/tests/actions/cellular/download-file">
+
+    Plain throughput against your own servers
+
+</Card>
+</Columns>

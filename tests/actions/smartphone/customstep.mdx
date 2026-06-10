@@ -1,0 +1,63 @@
+---
+title: Custom step
+description: Run your own JavaScript when no built-in step fits.
+---
+
+Run your own JavaScript inside the test: handle a flow no built-in step covers, compute a value, or push a custom metric to Analytics. The script runs in the test's device session with the full WebdriverIO API available.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Step title | `name` | No | The name shown for this step in the builder and in results. |
+| Script | `script` | Yes | JavaScript code, edited in a dedicated modal. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if the script throws. Default: off. |
+
+Inside the script you can use the WebdriverIO `browser` object to drive the session, and the `test` helpers, for example:
+
+```javascript
+// Push a custom metric to Analytics
+test.metrics.create("checkout", { basket_total: 39.98 }, { currency: "EUR" });
+```
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "custom-step",
+  "version": "v1.0.0",
+  "disabled": false,
+  "name": "Accept the cookie banner if present",
+  "inputs": {
+    "script": "const banner = await browser.$('#cookie-accept');\nif (await banner.isDisplayed()) {\n  await banner.click();\n}",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: failed if the script throws, success otherwise.
+- **Output**: anything the script logs is available in the step's output for debugging.
+- **Custom metrics**: metrics created with `test.metrics.create(measurement, fields, tags)` flow to Analytics like any built-in metric.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Set variable" icon="brackets-curly" href="/tests/actions/smartphone/setvariable">
+
+    Store a value without writing code
+
+</Card>
+  <Card title="Analytics" icon="chart-line" href="/monitoring/dashboards">
+
+    Where custom metrics show up
+
+</Card>
+</Columns>

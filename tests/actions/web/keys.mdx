@@ -1,8 +1,56 @@
 ---
 title: Press keys
-description: Press keyboard keys, key combinations, and special keys.
+description: Send keyboard keys and shortcuts to the page.
 ---
 
-import Content from '/snippets/actions/keys.mdx'
+Send one or more keyboard keys to the page: Enter to submit a form, Escape to close a modal, Tab to move focus, or shortcuts like Ctrl+A. In the builder you record the keys in a small keyboard modal: press the keys you want to send, and they are stored in order.
 
-<Content />
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Keys | `keys` | Yes | The keys to press, recorded in the keyboard modal and sent in order. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+
+This step does not target an element: the keys go to whatever currently has focus. Use [Click](/tests/actions/web/click) or [Fill input](/tests/actions/web/input) first to set the focus.
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario. Keys use WebDriver key names.
+
+```json
+{
+  "id": "step-1",
+  "type": "keys",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "type": "string",
+    "keys": ["Enter"],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the keys are sent.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Fill input" icon="keyboard" href="/tests/actions/web/input">
+
+    Type text into a field before pressing Enter
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/tests/actions/web/verifyelement">
+
+    Check what the key press changed on the page
+
+</Card>
+</Columns>

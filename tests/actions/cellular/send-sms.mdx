@@ -1,0 +1,71 @@
+---
+title: Send SMS
+description: Send an SMS from a real SIM, with optional delivery report.
+---
+
+Send an SMS from the SIM to any number. Pair it with a [Wait SMS](/tests/actions/cellular/wait-sms) on a second SIM to verify the full delivery path, or enable the delivery report to check the network's acknowledgment.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Access technology | `command.access_technology` | No | Network technology to use. Default: automatic. |
+| Recipient Number | `command.dest_number` | Yes | The destination phone number. Supports variables. |
+| Message | `command.sms_text` | Yes | The SMS body. Long texts are sent as multi-part SMS. |
+| Wait for delivery | `command.with_delivery_report`, `command.delivery_report_timeout` | No | Wait for the network delivery report, with a timeout in seconds. Default: off, 10s. |
+| Change default SMSC | `command.use_custom_smsc`, `command.smsc` | No | Send through a specific SMS service center. |
+| Execute multiple times | `command.send_multiple_times`, `command.repetition_number` | No | Repeat the send 1 to 30 times. |
+| SMS should fail | `expect_failure` | No | Invert the verdict: the action succeeds only if the send fails (barring tests, for example). |
+
+## In the scenario JSON
+
+```json
+{
+  "type": "SMS_SEND",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "dest_number": "+33600000000",
+    "sms_text": "Test message",
+    "access_technology": "",
+    "with_delivery_report": true,
+    "delivery_report_timeout": 10,
+    "use_custom_smsc": false,
+    "smsc": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `duration` | Time to send, in seconds. |
+| `result` | Send outcome from the network. |
+| `part_count` | Number of SMS parts sent. |
+| `retries_count` | Retries needed before the send succeeded. |
+| `smsc` | The SMS service center used. |
+| `sms_delivery_report` | When enabled: delivery status and time to delivery. |
+
+In Analytics, each run feeds the SMS send measurement with `duration_seconds`, tagged by status, SMSC, antenna, and access technology. When the delivery report is enabled, its status is tagged too.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Wait SMS" icon="envelope" href="/tests/actions/cellular/wait-sms">
+
+    Verify reception on the destination SIM
+
+</Card>
+  <Card title="Place Call" icon="phone" href="/tests/actions/cellular/place-call">
+
+    The same two-SIM pattern for voice
+
+</Card>
+</Columns>

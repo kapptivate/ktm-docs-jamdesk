@@ -1,96 +1,81 @@
 ---
 title: Tap
-description: Tap an element on a mobile app screen.
+description: Tap an element in the app, located by selector, AI description, or screen coordinates.
 ---
 
-Tap an element on a smartphone app. Tap supports two approaches: element-based (using a selector) or coordinate-based (using pixel coordinates). This is the mobile equivalent of the [click](/tests/actions/web/click) action on web.
-
-## Channels
-
-- ❌ Web
-- ✅ Smartphone (Android/iOS)
-- ❌ Cellular
-
-Tap is smartphone-specific.
+Tap an element on the screen: a button, a list item, a tab. Locate it with an XPath selector or an AI description, or switch the step to **Coordinates** mode and tap an exact X/Y position when no element can be targeted.
 
 ## Parameters
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| locator | Object | Yes | Locator configuration. See below. |
-| locator.approach | Number | No | 0 = selector-based (default), 1 = coordinate-based. |
-| locator.selector | Template (string) | Conditional | CSS selector or XPath. Required if approach=0. |
-| locator.description | Template (string) | No | Human-readable element description for AI or intent. |
-| locator.coordinates | Object | Conditional | `{x, y}` pixel coordinates. Required if approach=1. |
-| wait_for | Object | No | Condition to wait for before/after tap (clickable, displayed, enabled, exist). |
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes in Selector mode, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
+| Manual selector | `locator.selector` | No | XPath selector in the app's UI tree, used when AI is disabled or as the saved selector. |
+| Approach | `locator.approach` | No | `0` = Selector (default), `1` = Coordinates. Toggle in the step's details panel. |
+| X Position, Y Position | `locator.coordinates.x`, `locator.coordinates.y` | Yes in Coordinates mode | Screen position to tap, in pixels from the top-left corner. |
+| AI usage | `ai_strategy` | No | `smart` (default), `always`, or `inherit`. |
+| Enable AI | `enable_ai` | No | Default: off. Turn it on to locate the element from the description. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
 
-## Example
+## In the scenario JSON
 
-<Tabs>
-<Tab label="Selector-based (approach 0)">
+The step lives in `step_groups[].steps` of the test scenario. Selector mode:
 
 ```json
 {
+  "id": "step-1",
   "type": "tap",
   "version": "v1.0.0",
+  "disabled": false,
   "inputs": {
     "locator": {
       "approach": 0,
-      "selector": "//button[contains(@text, 'Login')]",
-      "description": "Login button"
-    }
-  }
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Log in button" } }]
+    },
+    "enable_ai": false,
+    "ai_strategy": "smart",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
 }
 ```
 
-</Tab>
-<Tab label="Coordinate-based (approach 1)">
+Coordinates mode replaces the targeting part of `locator`:
 
 ```json
 {
-  "type": "tap",
-  "version": "v1.0.0",
-  "inputs": {
-    "locator": {
-      "approach": 1,
-      "coordinates": {
-        "x": 320,
-        "y": 680
-      },
-      "description": "Login button"
+  "locator": {
+    "approach": 1,
+    "selector": [{ "type": "value", "data": { "value": "" } }],
+    "description": [{ "type": "value", "data": { "value": "Center of the map" } }],
+    "coordinates": {
+      "x": [{ "type": "value", "data": { "value": "540" } }],
+      "y": [{ "type": "value", "data": { "value": "960" } }]
     }
   }
 }
 ```
 
-</Tab>
-</Tabs>
+## Results and metrics
 
-## Locator approaches
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the tap, showing the screen it led to.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
 
-### Approach 0: Selector-based (default)
+## What's Next?
 
-Tap the center of an element matched by CSS selector or XPath.
+<Columns cols={2}>
+  <Card title="Long press" icon="hand-pointer" href="/tests/actions/smartphone/longpress">
 
-- **selector**: XPath or CSS selector matching a single element
-- **description**: Optional human-readable name for test reports
-- Most reliable for stable UI elements
+    Hold the press to open context actions
 
-### Approach 1: Coordinate-based
+</Card>
+  <Card title="Verify element" icon="eye" href="/tests/actions/smartphone/verifyelement">
 
-Tap at absolute pixel coordinates on the screen.
+    Check the result of the tap before moving on
 
-- **coordinates**: `{x, y}` pixel positions
-- **description**: Optional label describing what is being tapped
-- Useful when selectors are unstable or unavailable
-- Coordinates are relative to device screen resolution
-
-## Notes
-
-- Tap uses native WebDriver touch actions to simulate real touch events on the device.
-- The center of the element is tapped when using approach 0; coordinates are tapped directly for approach 1.
-- Tap can include optional [wait conditions](/tests/actions/shared/waitfor) (e.g., wait for element to be clickable before tapping).
-- If the element is not found (approach 0) or coordinates are off-screen (approach 1), the step fails.
-- Coordinates and selectors support [templating](/tests/configurations) for dynamic positioning.
-- Step-level checks (step_duration) are available after tap completes.
-- Tap is similar to [click](/tests/actions/web/click) on web but uses touch events instead of mouse clicks.
+</Card>
+</Columns>

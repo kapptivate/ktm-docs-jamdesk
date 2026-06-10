@@ -1,0 +1,81 @@
+---
+title: Smartphone steps
+description: Every step available in the smartphone test builder, organized like the step palette.
+sidebarTitle: Overview
+---
+
+Smartphone tests run your native app on real Android and iOS devices. They are built from the steps below; the groups match the categories of the **Add step** palette in the [test builder](/tests/builder), so what you see here is what you see in the product.
+
+Every smartphone test starts with a locked **Launch app** step that opens the app selected when the test was created.
+
+## Interactions
+
+| Step | What it does |
+|------|--------------|
+| [Tap](/tests/actions/smartphone/tap) | Tap an element, or an exact X/Y position in Coordinates mode |
+| [Long press](/tests/actions/smartphone/longpress) | Press and hold to open context actions |
+| [Hide keyboard](/tests/actions/smartphone/hidekeyboard) | Dismiss the on-screen keyboard |
+| [Fill input](/tests/actions/smartphone/input) | Type text, variables, or generated data into a field |
+
+## Email
+
+| Step | What it does |
+|------|--------------|
+| [Get mail](/tests/actions/smartphone/getmail) | Verify an email arrives in a test mailbox |
+| [Get email code](/tests/actions/smartphone/getemailcode) | Wait for an email and extract its code into a variable |
+| [Get email link](/tests/actions/smartphone/getemaillink) | Wait for an email and extract a link into a variable |
+
+## Verifications
+
+| Step | What it does |
+|------|--------------|
+| [Verify element](/tests/actions/smartphone/verifyelement) | Check an element is (or is not) displayed, clickable, enabled, or present |
+| [Verify Spell Check (AI)](/tests/actions/smartphone/aispellcheck) | Have the AI proofread the visible text of the screen |
+| [Verify with AI](/tests/actions/smartphone/aivisualassert) | Assert anything about the screen in plain language |
+
+## Wait for
+
+| Step | What it does |
+|------|--------------|
+| [Wait for delay](/tests/actions/smartphone/waitfordelay) | Pause for a fixed duration |
+
+## Others
+
+| Step | What it does |
+|------|--------------|
+| [Custom step](/tests/actions/smartphone/customstep) | Run your own JavaScript |
+| [Set variable](/tests/actions/smartphone/setvariable) | Store a value for later steps |
+| [Extract value](/tests/actions/smartphone/extractvalue) | Read an element's text or value into a variable |
+
+<Note>
+  Two legacy steps no longer appear in the palette but keep running in existing tests: [Assert displayed](/tests/actions/smartphone/assertdisplayed) and [Assert not displayed](/tests/actions/smartphone/assertnotdisplayed).
+</Note>
+
+## Common step settings
+
+Every step shares a few settings, shown in the step's side panel in the builder:
+
+- **Ignore error on this step** (`ignore_errors`): the run continues with the next step even if this one fails.
+- **Skip during run** (`disabled`): the step stays in the scenario but is not executed.
+- **Custom capabilities** (`use_capabilities`, `capabilities`): fine-tune or override the execution behavior for this step only.
+
+Steps that target an element also share the AI settings: a plain-language **description**, an optional **manual selector** (XPath in the app's UI tree), and an **AI strategy** that decides when the AI locates the element versus the saved selector. On smartphone interaction steps, AI is off by default; turn it on per step or through the test strategy. See [AI selectors](/ai/selectors).
+
+## From results to analytics
+
+Each step records its timing, status, and screenshots, plus any variables it created. At the test level, every run feeds the `test` measurement used by [Analytics](/monitoring/dashboards): duration, success/warning/failure counters, and on failure, which step type broke the run. Custom metrics created in steps flow to the same place.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="hammer" href="/tests/builder">
+
+    How steps are added, configured, and organized into groups
+
+</Card>
+  <Card title="Smartphone channel" icon="mobile-screen" href="/agents-devices/smartphone">
+
+    How real devices run your app
+
+</Card>
+</Columns>

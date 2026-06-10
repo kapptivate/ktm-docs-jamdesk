@@ -1,0 +1,73 @@
+---
+title: Place Call
+description: Place a voice call from a real SIM and measure connection and call quality.
+---
+
+Place a voice call from the SIM: to another SIM in the platform for an end-to-end voice test, or to any number. Measure the time to connect, hold the call for a chosen duration, optionally play an audio file and record the call for quality scoring.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Access technology | `command.access_technology` | No | Network technology, including VoLTE profiles. Default: automatic. |
+| Call Receiver Number | `command.receiver` | Yes | The number to call. Supports variables. |
+| Max wait time | `command.max_wait_connect_time_seconds` | No | How long to wait for the call to connect. Default: 30. |
+| Call duration | `command.call_duration_seconds` | No | How long to hold the call once connected. Default: 10. |
+| Play file during call | `command.play_file`, `command.filename` | No | Play a reference audio file into the call (used for MOS scoring on the receiving side). |
+| Record call | `command.record` | No | Record the call audio. Default: off. |
+| Compute Audio MOS | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | No | Score the recorded audio against a reference file. Requires recording. |
+| Call should fail | `expect_failure` | No | Invert the verdict, for barred numbers. |
+
+## In the scenario JSON
+
+```json
+{
+  "type": "CALL_PLACE",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "receiver": "+33600000000",
+    "max_wait_connect_time_seconds": 30,
+    "call_duration_seconds": 10,
+    "play_file": true,
+    "filename": "voice-10s",
+    "record": false,
+    "mos": { "active": false, "algo": "", "ref_file": "voice-10s" },
+    "access_technology": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `wait_connect_duration_in_seconds` | Time for the call to connect. |
+| `post_dial_delay_in_seconds` | Delay between dialing and ringing. |
+| `call_duration_in_seconds` | Time the call stayed up. |
+| `total_duration_in_seconds` | End-to-end action duration. |
+| `ceer_response` | The network's call end report, for diagnosing drops. |
+| `access_technology_report` | The technology used for the call. |
+
+In Analytics, each run feeds the call measurement with `cellular_call_duration_seconds`, `cellular_call_connect_duration_seconds`, `cellular_call_post_dial_delay_seconds`, and `duration_seconds`, tagged by status, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Wait Call" icon="phone" href="/tests/actions/cellular/wait-call">
+
+    Receive the call on a second SIM and score the audio
+
+</Card>
+  <Card title="SIM steps overview" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    Assertions, stored variables, and shared options
+
+</Card>
+</Columns>

@@ -1,61 +1,56 @@
 ---
-title: Actions reference
-description: The complete catalog of test actions, organized by scenario: Shared, Web, Smartphone, SIM, and API.
-sidebarTitle: Actions reference
+title: Actions Library
+description: Every step you can use in a test, organized by channel and by palette category.
 ---
 
-An **action** (also called a step) is a single instruction inside a test: click a button, type text, wait for an element, assert a value, send a USSD code. A test is an ordered list of actions executed top-to-bottom on the device assigned to it.
+An **action** (or step) is a single instruction inside a test: click a button, type text, verify an element, send a USSD code. A test is an ordered list of actions executed top to bottom on the device assigned to it.
 
-Actions are grouped by **scenario**: which kind of test uses them. Pick a scenario below to see the actions it supports.
+The library is organized by **channel**, and inside each channel it mirrors the step palette you see in the product. A step that exists on two channels has one page per channel, so you always find it where you work.
 
-## Browse by scenario
+## Browse by channel
 
 <Columns cols={2}>
-  <Card title="Shared actions" icon="shapes" href="/tests/actions/shared/pause">
-    Flow control and external verification used in any test type: pause, waitfor, setvariable, customstep, createmetric, and email/SMS code retrieval.
-  </Card>
-  <Card title="Web scenarios" icon="globe" href="/tests/actions/web/click">
-    Actions for browser-based tests: mouse interactions, navigation, tabs, forms, plus the cross-channel actions documented per scope.
-  </Card>
-  <Card title="Smartphone scenarios" icon="mobile-screen" href="/tests/actions/smartphone/tap">
-    Actions for native mobile apps on Android and iOS: touch interactions, app management, keyboard, plus the cross-channel actions.
-  </Card>
-  <Card title="SIM scenarios" icon="sim-card" href="/tests/cellular">
-    Actions for cellular tests on real SIM cards: USSD flows, SMS receive, and unsolicited USSD pushes.
-  </Card>
+  <Card title="Web" icon="globe" href="/tests/actions/web/overview">
+
+    Browser tests: interactions, email and SMS retrieval, verifications, navigation
+
+</Card>
+  <Card title="Smartphone" icon="mobile-screen" href="/tests/actions/smartphone/overview">
+
+    Native Android and iOS apps: touch interactions, app management, keyboard
+
+</Card>
+  <Card title="API" icon="code" href="/tests/actions/api/overview">
+
+    HTTP steps you add inside web and smartphone tests
+
+</Card>
+  <Card title="SIMs" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    Real SIM cards: USSD, SMS, voice calls, and data measurements
+
+</Card>
 </Columns>
 
-<Note>
-  API scenarios are also documented. See [API scenarios](/tests/actions/api/overview): HTTP steps you add inside web or mobile tests.
-</Note>
+## What each step page tells you
 
-## How actions are scoped
+Every page follows the same structure, so you can scan the library like a reference:
 
-- **Shared**: works identically in any test type. Pure infrastructure: `pause`, `waitfor`, `setvariable`, `customstep`, `createmetric`, plus the AI mail/SMS code retrieval actions that query external systems.
-- **Web**: interactions and assertions for browser tests. Includes channel-specific actions like `hover`, `rightclick`, `switchwindow`, `uploadfile`, and cross-channel actions like `input`, `scroll`, `assertdisplayed` documented under the Web scope.
-- **Smartphone**: touch-based interactions and mobile-specific actions: `tap`, `longpress`, `hidekeyboard`, plus the cross-channel actions documented under the Smartphone scope.
-- **SIM (Cellular)**: only inside V1 cellular tests: `ussd`, `sms`, `ussd-push`. See [Cellular tests](/tests/cellular) for the workflow.
-- **API**: HTTP requests inside web or mobile tests today. See [API scenarios](/tests/actions/api/overview).
+- **Parameters**: each field as labeled in the builder, with its JSON name, default, and behavior.
+- **In the scenario JSON**: a complete step object, ready to paste into a scenario.
+- **Results and metrics**: what the step records when it runs (timing, status, screenshots, variables) and what flows to Analytics.
 
-A few actions exist in both Web and Smartphone scopes (e.g., `input`, `scroll`, `assertdisplayed`). They share the same parameters and behavior; each scope has its own page so you can find the action from the scenario you are working on.
+## What's Next?
 
-## Step lifecycle
+<Columns cols={2}>
+  <Card title="Web steps" icon="globe" href="/tests/actions/web/overview">
 
-Every action goes through the same lifecycle when it runs:
+    The full web palette at a glance
 
-<Steps>
-  <Step title="Resolve">
-    The action's selector or input is resolved against the current device: DOM, accessibility tree, screenshot, or cellular session.
-  </Step>
-  <Step title="Execute">
-    The platform issues the action on the device (click, tap, type, USSD send, etc.).
-  </Step>
-  <Step title="Verify">
-    Optional step-level checks run (URL, loading time, step duration) and assertions evaluate the result.
-  </Step>
-  <Step title="Record">
-    Screenshots, timings, and any extracted variables are saved into the execution result.
-  </Step>
-</Steps>
+</Card>
+  <Card title="Test builder" icon="hammer" href="/tests/builder">
 
-See [Test builder](/tests/builder) for how steps are added and configured, and [Configurations](/tests/configurations) for variables you can inject into actions.
+    How steps are added and configured
+
+</Card>
+</Columns>

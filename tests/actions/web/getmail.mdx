@@ -1,0 +1,55 @@
+---
+title: Get mail
+description: Wait for an email to arrive in a test mailbox.
+---
+
+Verify that your application actually sends an email: a welcome message, an order confirmation, an invoice. The step waits for the email to land in a test mailbox and fails if nothing arrives.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Mailbox | `mailbox` | Yes | The test mailbox address that should receive the email. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no email arrives. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "get-mail",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@example.com" } }],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Results and metrics
+
+- **Email content**: the received email is attached to the step result, so you can read it when reviewing the run.
+- **Timing**: start, end, and duration (in seconds). The duration tells you how long delivery took.
+- **Status**: failed if no email arrives in the mailbox.
+
+See [Email & SMS in tests](/tests/email-sms) for how test mailboxes work and how to address them.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Get email code" icon="envelope" href="/tests/actions/web/getemailcode">
+
+    Extract a verification code from the email instead
+
+</Card>
+  <Card title="Get email link" icon="link" href="/tests/actions/web/getemaillink">
+
+    Extract a link from the email and continue the flow
+
+</Card>
+</Columns>

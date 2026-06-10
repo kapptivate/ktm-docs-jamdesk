@@ -1,52 +1,62 @@
 ---
-title: Double-click
-description: Double-click on an element to trigger double-click handlers.
+title: Double click
+description: Double-click an element located by an AI description or a manual selector.
 ---
 
-Double-click an element (two rapid clicks). This is useful for triggering double-click event handlers, selecting text, or activating edit modes on elements.
-
-## Channels
-
-- ✅ Web (desktop/tablet browsers)
-- ✅ Smartphone (Android/iOS)
-- ❌ Cellular
-
-Double-click works on both web and mobile, though it is more commonly used on desktop.
+Double-click an element: open an item in a file-manager-style list, switch a cell to edit mode, or trigger any handler bound to the double-click event.
 
 ## Parameters
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| locator | Locator | Yes | CSS selector, XPath, or AI-driven description to locate the element. |
-| locator.selector | String | No | CSS selector (e.g., `.editable-cell`, `#text-field`). |
-| locator.description | String | No | Human-readable description for AI-driven locating. |
-| enable_ai | Boolean | No | Enable AI-assisted element locating. Defaults to true. |
-| ai_strategy | String | No | AI strategy: "inherit", "always", "on-demand". |
-| wait_for | Condition | No | Wait for a condition before or after double-click (clickable, displayed, enabled, exist). |
-| ignore_errors | Boolean | No | If true, step passes even if element not found. |
-| wait_for_idle_network | Boolean | No | If true, wait for network idle before proceeding. |
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
+| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Enable AI | `enable_ai` | No | When off, only the manual selector is used. Default: on. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
 
-## Example
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
 
 ```json
 {
-  "type": "doubleclick",
+  "id": "step-1",
+  "type": "double-click",
   "version": "v1.0.0",
+  "disabled": false,
   "inputs": {
     "locator": {
-      "selector": [{ "type": "value", "data": { "value": ".editable-text" } }],
-      "description": [{ "type": "value", "data": { "value": "" } }]
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Q3 report row in the documents table" } }]
     },
     "enable_ai": true,
     "ai_strategy": "inherit",
     "ignore_errors": false
-  }
+  },
+  "use_capabilities": false,
+  "capabilities": {}
 }
 ```
 
-## Notes
+## Results and metrics
 
-- Double-click emits a `dblclick` event on the target element.
-- Common use cases: text selection, activating inline edit mode, opening editors.
-- On touch devices, double-click may be emulated; behavior depends on the device/browser.
-- Step-level checks (url, loading_time, step_duration) are available.
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the double click.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Click" icon="arrow-pointer" href="/tests/actions/web/click">
+
+    The single-click variant, for most interactions
+
+</Card>
+  <Card title="AI selectors" icon="sparkles" href="/ai/selectors">
+
+    How element descriptions, saved selectors, and AI strategies work together
+
+</Card>
+</Columns>

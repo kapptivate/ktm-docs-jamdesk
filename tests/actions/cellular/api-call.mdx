@@ -1,0 +1,81 @@
+---
+title: API Call
+description: Send an HTTP request over the cellular connection and verify the response.
+---
+
+Send a full HTTP request (method, headers, body) over the SIM's data connection and verify the response: status code, body content, headers, and the complete timing breakdown. Test your APIs exactly as a mobile client reaches them.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| HTTP Method | `command.http_method` | Yes | `GET` (default), `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`. |
+| URL | `command.url` | Yes | The endpoint to call. Supports variables. |
+| Headers | `command.header` | No | Key/value list (Authorization, Content-Type...). |
+| Body | `command.body` | No | Request body, for methods that send one. |
+| Follow redirect | `command.follow_redirect` | No | Follow 3xx responses. Default: on. |
+| Ignore SSL certificate | `command.insecure_skip_verify` | No | Skip certificate verification. Default: off. |
+| Enable cookies | `command.enable_cookies` | No | Keep cookies across redirects. Default: off. |
+| Web access should fail | `expect_failure` | No | Invert the verdict. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings) and DNS override. The action ships with a default assertion: `status_code == 200`.
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_API_HTTP",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "http_method": "POST",
+    "url": "https://api.example.com/v1/login",
+    "header": [{ "Content-Type": "application/json" }],
+    "body": "{\"username\": \"qa\", \"password\": \"secret\"}",
+    "follow_redirect": true,
+    "insecure_skip_verify": false,
+    "enable_cookies": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [
+    { "type": "response", "source": "result", "property": "status_code", "compare": "==", "value": 200, "evaluate": true }
+  ],
+  "store": []
+}
+```
+
+## Results and metrics
+
+In the action report (`result`):
+
+| Field | Description |
+|-------|-------------|
+| `status_code` | HTTP status of the response. |
+| `body` | Response body. Assert on it or extract values into variables. |
+| `header` | Response headers. |
+| `dnslookup_duration`, `tcpconnection_duration`, `appconnect_duration`, `starttransfer_duration`, `contenttransfer_duration`, `total_duration` | The timing waterfall: DNS, TCP, TLS, time to first byte, transfer, total. |
+| `duration` | Total execution time in seconds. |
+
+In Analytics, each run feeds the HTTP API measurement with the full waterfall durations and `duration_seconds`, tagged by status, URL, HTTP method, status code, APN, antenna, and access technology.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="HTTP Ping" icon="globe" href="/tests/actions/cellular/http-ping">
+
+    Just the latency, repeated N times
+
+</Card>
+  <Card title="Check SSL/TLS Certificate" icon="id-card" href="/tests/actions/cellular/check-certificate">
+
+    Verify the endpoint's certificate separately
+
+</Card>
+</Columns>

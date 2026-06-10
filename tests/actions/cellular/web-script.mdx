@@ -1,0 +1,54 @@
+---
+title: Web Script
+description: Run a scripted web scenario over the cellular connection.
+---
+
+Run a JavaScript web scenario (page loads, clicks, form fills) with the traffic routed through the SIM's data connection. Use it to measure a real user journey, login, search, checkout, as experienced over the mobile network.
+
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Script | `command` script fields | Yes | The JavaScript web scenario to execute. |
+| Asynchronous | `command.asynchronous` | No | Run the script without blocking the following actions. Default: off. |
+
+Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
+
+## In the scenario JSON
+
+```json
+{
+  "type": "DATA_JS_WEB_SCRIPT",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "asynchronous": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Results and metrics
+
+The report contains one entry per script step: status, duration, screenshots, and any custom metrics the script creates. Step durations and statuses flow to Analytics like the other actions, tagged by antenna and access technology, so you can track each step of the journey over the cellular network.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Web steps" icon="globe" href="/tests/actions/web/overview">
+
+    The steps available inside web scenarios
+
+</Card>
+  <Card title="API Call" icon="cloud" href="/tests/actions/cellular/api-call">
+
+    Single HTTP requests, without a browser
+
+</Card>
+</Columns>

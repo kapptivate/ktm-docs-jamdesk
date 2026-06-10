@@ -1,8 +1,70 @@
 ---
-title: Input
-description: Type text into an input field or textarea.
+title: Fill input
+description: Type text into a field in the app.
 ---
 
-import Content from '/snippets/actions/input.mdx'
+Type text into a field of the app. The value can mix fixed text, variables, and generated data, so the same step can log in with a stored account or sign up with a fresh random email on every run.
 
-<Content />
+## Parameters
+
+| Parameter | JSON field | Required | Description |
+|-----------|------------|----------|-------------|
+| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the field. The AI uses it to find the element. |
+| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| Value | `value` | Yes | Text to type. Supports variables and functions like random text. |
+| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Enable AI | `enable_ai` | No | When off, only the manual selector is used. Default: on. |
+| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+
+## In the scenario JSON
+
+The step lives in `step_groups[].steps` of the test scenario.
+
+```json
+{
+  "id": "step-1",
+  "type": "input",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The email field of the login form" } }]
+    },
+    "value": [
+      { "type": "value", "data": { "value": "qa+" } },
+      { "type": "test_variable", "data": { "name": "UserId" } },
+      { "type": "value", "data": { "value": "@example.com" } }
+    ],
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+The `value` example above mixes plain text with a test variable. See [Variables](/tests/variables) for everything you can insert: test variables, global variables, and functions such as random text.
+
+## Results and metrics
+
+- **Timing**: start, end, and duration (in seconds) recorded in the step result.
+- **Status**: success, warning, or failed, with the error message on failure.
+- **Screenshot**: captured after the step runs.
+- **AI usage**: if the AI located the element, the healed selector is saved on the test and the AI cost is added to the run.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Hide keyboard" icon="keyboard" href="/tests/actions/smartphone/hidekeyboard">
+
+    Dismiss the keyboard after typing
+
+</Card>
+  <Card title="Variables" icon="brackets-curly" href="/tests/variables">
+
+    Everything you can insert into the value: variables, random text, and more
+
+</Card>
+</Columns>
