@@ -3,6 +3,8 @@ title: Browse and filter events
 description: View the event log, filter by date, type, and user, and inspect event details.
 ---
 
+![The Details panel showing an event's type, source, time, and JSON metadata](/images/event-log-details.webp)
+
 The event log table shows the most recent events first, with pagination to browse older events (30 events per page). Go to **Administration** > **Event log** to open it.
 
 ## Event columns
@@ -20,8 +22,6 @@ Two controls at the top right narrow results to a time period. Pick a quick rang
 
 The quick-range dropdown covers the most common windows: Past 1h, 2h, 6h, 12h, 24h, or 48h, plus Today, Yesterday, Last 7 days, and Last 30 days.
 
-![The quick-range dropdown open, showing presets from Past 1h through Last 30 days](/images/event-log-date-range.webp)
-
 For an exact window, use the date range field next to it:
 
 1. Click the date range field
@@ -33,8 +33,6 @@ All dates are displayed in the timezone you select in the date picker. Your time
 ## Filter by event type
 
 Use the **Type** dropdown filter to show only specific kinds of events (e.g., only login events). Select one or multiple types, or leave blank to show all types.
-
-![The Type filter open, listing selectable event types such as group_created and monitoring_created](/images/event-log-type-filter.webp)
 
 ## Filter by user
 
@@ -52,7 +50,5 @@ The panel shows:
 - **Source**: Full source information
 - **Time**: The formatted event timestamp
 - **Metadata**: The complete event data, with structured payloads shown as formatted JSON
-
-![The Details panel showing an event's type, source, time, and JSON metadata](/images/event-log-details.webp)
 
 Click the close button to dismiss the panel.

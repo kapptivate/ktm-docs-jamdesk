@@ -26,8 +26,6 @@ Click **Create alert** to pick a template. The type determines what the alert ev
 - **Success rate alerts over the last runs** trigger when failures exceed a threshold over recent executions. For example: "alert me if a test failed more than 3 times over the last 5 runs".
 - **Raw alerts** run a custom in-house alerting script, for edge cases the other templates don't cover.
 
-![The alert template chooser with Threshold, Success rate, and Raw alert cards](/images/alert-types.webp)
-
 ## Threshold alerts
 
 A threshold alert watches a metric and fires when it crosses the limits you set. Configuration starts with the **Alert Source**, which defines exactly which data to evaluate:
@@ -38,15 +36,11 @@ A threshold alert watches a metric and fires when it crosses the limits you set.
 - **Select**: the aggregation function applied to the values, such as `mean (http_call_duration_seconds)`.
 - **Grouped by**: optional grouping of the series.
 
-![The Alert Source section with the bucket selected and the measurement dropdown open over the historical chart](/images/alert-threshold-source.webp)
-
 Once a metric is selected, a line chart plots its recent history so you can set thresholds against real data; hover a point to see its timestamp and value. Below the chart, **Alert Conditions** define when to fire:
 
 - **Time window**: a rolling period, such as "Over the last 5 minutes".
 - **Operator**: how the value is compared, with "above or equal", "strictly above", "below or equal", or "strictly below".
 - **Warning Threshold** and **Critical Threshold**: the two trigger levels, drawn on the chart as yellow and red reference lines as you type them.
-
-![The threshold alert chart with warning and critical reference lines and the Alert Conditions form below](/images/alert-threshold-conditions.webp)
 
 ## Success rate alerts
 
@@ -56,11 +50,7 @@ A success rate alert counts failures over the most recent executions instead of 
 - **Include technical error**: whether technical errors count as failures.
 - **Warning** and **Critical**: how many of those points must have failed to reach each severity. Untick the box next to Warning to skip that level and only raise critical alerts.
 
-![The success rate alert form with last points to check, the technical error toggle, and warning and critical failure counts](/images/alert-success-rate.webp)
-
 By default the alert applies to all your active monitorings. Use **Restrictions** to scope it to specific **Products**, **Variable groups**, or **Tests** instead.
-
-![The Restrictions section with the products dropdown open and the notification channels below](/images/alert-restrictions.webp)
 
 ## Notifications
 
@@ -74,8 +64,6 @@ Each alert carries its own notification settings, so a critical production alert
 
 Click **Save** to apply, or **Clear Values** to reset the form.
 
-![The Notifications section of an alert with the Email, Slack, Microsoft Teams, and Webhook channels](/images/alert-notifications.webp)
-
 <Note>
 These notifications are per alert. For workspace-wide alerts when a robot goes offline, see [Notifications](/administration/notifications) under Administration.
 </Note>
@@ -85,5 +73,3 @@ These notifications are per alert. For workspace-wide alerts when a robot goes o
 Some errors are expected: a planned maintenance message, a known harmless failure. Error exclusions keep them from raising alerts, so only meaningful issues generate incidents and notifications.
 
 On the **Configuration** tab, open **Error exclusions** and click **Create error exclusion**. Enter a text snippet in **If pattern contains**: any error whose message matches the pattern is ignored.
-
-![The Create error exclusion modal with a text pattern in the "If pattern contains" field](/images/alert-error-exclusion.webp)

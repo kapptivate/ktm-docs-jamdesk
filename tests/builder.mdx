@@ -3,6 +3,8 @@ title: Test builder
 description: Author tests visually by recording interactions or adding steps manually, then refine them with checks, AI selectors, and hooks.
 ---
 
+![The Environment tab with starting URL, device, and browser preset](/images/builder-environment.webp)
+
 The test builder is where you design what your test does. Record real interactions from a browser or device, or add steps by hand, then organize them into groups, verify behavior with checks, and tune execution with AI selectors, timeouts, and hooks.
 
 ## The builder at a glance
@@ -31,17 +33,13 @@ Recording is the fastest way to build a test: interact with your site or app as 
 
 Web tests record through **Kompagnon**, a Chrome extension. The first time you click **Use recorder**, the builder prompts you to add it to Chrome.
 
-With the extension installed, **Use recorder** opens your starting URL in a new tab with the recorder widget overlaid:
-
-![The Kompagnon recorder widget capturing actions live on the target site](/images/builder-web-recorder.webp)
+With the extension installed, **Use recorder** opens your starting URL in a new tab with the recorder widget overlaid.
 
 Browse normally: clicks, inputs, and navigations are captured as steps in real time. When you stop, the recorded steps appear in your step canvas, ready to edit.
 
 ### Asserting while recording
 
-You can add verifications without leaving the recorder. Click the eye icon in the widget to enter assertion mode, then click any element on the page to verify it:
-
-![Assertion mode in the recorder widget, selecting an element to verify](/images/builder-recorder-assert.webp)
+You can add verifications without leaving the recorder. Click the eye icon in the widget to enter assertion mode, then click any element on the page to verify it.
 
 The assertion is recorded as a step alongside your interactions.
 
@@ -52,8 +50,6 @@ Smartphone tests record through a cloud-based recorder instead of a browser exte
 ## Adding steps manually
 
 Click **Add step...** at the bottom of a step group to insert a step without recording. A searchable menu organizes the actions by category: **Most popular**, **Interactions**, **Email & SMS**, **Verifications**, **Navigation**, **Wait for...**, and **Others**. Pick the action, then configure its target and value. See the [Actions Library](/tests/actions/overview) for every available step.
-
-![The Add step menu with its searchable action categories](/images/builder-step-menu.webp)
 
 Each step's context menu lets you edit, duplicate, or delete it, and you can drag steps to reorder them.
 
@@ -68,8 +64,6 @@ The group menu (the **...** button in the group header) offers:
 - **Create reusable component**: publish the group to the component library
 - **Delete**: remove the group and its steps
 - **Add custom capabilities**: attach capabilities to the group
-
-![The step group menu with Move, Duplicate, Create reusable component, and Delete actions](/images/builder-group-menu.webp)
 
 ### Turning a group into a reusable component
 
@@ -88,8 +82,6 @@ Select any step to open its details panel, organized in three tabs: **General**,
 - **AI usage**: per-step AI settings (see below)
 
 For smartphone steps that already ran, the panel also shows a **Reference screenshot**: the app's state captured at that step during the last run, so you can see exactly what the step targets. Smartphone selectors offer a **Selector** / **Coords** toggle to target by element or by coordinates.
-
-![A smartphone step with its reference screenshot and selector](/images/builder-smartphone-reference.webp)
 
 ### Checks
 
@@ -110,8 +102,6 @@ Checks can be grouped and nested for complex conditions, for example "(URL conta
 - **Interval**: pause after the step, in milliseconds
 - **Capabilities**: attach custom capabilities to the step
 
-![The Advanced settings tab with execution settings and interval](/images/builder-step-advanced.webp)
-
 ## AI selectors
 
 AI helps find elements reliably when selectors are fragile, like on dynamic pages or after UI changes.
@@ -122,8 +112,6 @@ Enable **Turn on AI for this step** in the step's General tab. The selector fiel
 - **Always**: forces the AI to redetect the target element on every run, ignoring saved selectors
 - **On demand**: AI stays off by default; you enable it manually on each step that needs it
 
-![Per-step AI usage with the Smart and Always strategies](/images/builder-step-ai.webp)
-
 **Link to test** ties the step to the test-level AI setting instead of a per-step override. The test-level toggle and strategy live in **Test settings > AI**. For the full picture of what AI does across the platform, see [AI in Kapptivate](/ai/overview).
 
 ## Environment
@@ -133,8 +121,6 @@ The **Environment** tab holds the execution parameters:
 - **Starting URL**: where the test begins
 - **Device**: the agent or device the test runs on
 - **Browser preset**: the browser configuration for web tests (e.g., "Chrome (Desktop, Chrome 143.0)"). Click it to pick from your saved [browser presets](/tests/browser-presets).
-
-![The Environment tab with starting URL, device, and browser preset](/images/builder-environment.webp)
 
 ## Test settings
 
@@ -147,8 +133,6 @@ The **Test settings** tab gathers everything that applies to the whole test:
 - **Hooks**: lifecycle step groups (see below)
 - **Advanced**: options like accepting non-secure certificates
 
-![Test settings with Delays & timeouts and Hooks expanded](/images/builder-test-settings.webp)
-
 ### Hooks
 
 Hooks run a reusable component at fixed points in the test lifecycle:
@@ -158,9 +142,7 @@ Hooks run a reusable component at fixed points in the test lifecycle:
 - **After Each Step**: after every step
 - **After Test**: once, after all steps (e.g., logout or cleanup)
 
-Toggle a hook on and the **Reusable steps group library** opens so you can pick which component runs:
-
-![The Reusable steps group library, picking a component for a hook](/images/builder-component-library.webp)
+Toggle a hook on and the **Reusable steps group library** opens so you can pick which component runs.
 
 ## Variables
 

@@ -4,6 +4,8 @@ description: Build a test once and reuse it as a building block inside other tes
 sidebarTitle: Reusable components
 ---
 
+![The Reusable components tab with usage chips, step counts, and color-coded connection icons](/images/components-list.webp)
+
 A **reusable component** is a test you build once and drop into other tests as a building block: a login flow, a cookie-consent dismissal, a navigation sequence. Instead of copying the same steps into every test, you maintain them in one place and reference them everywhere.
 
 ## How they work
@@ -20,17 +22,11 @@ There are two ways to create a component:
 
 **From an existing test**: in the test builder, open a step group's menu and choose **Create reusable component**. The group is published to the library and turns purple to show it's now shared. To convert it back to plain steps in that test, use **Detach reusable component**.
 
-![Creating a reusable component from a step group's menu in the builder](/images/builder-group-menu.webp)
-
 ## The components list
 
 The Reusable components tab lists each component with a **Usage** chip ("Used in X tests") and a **Steps** count. The connection icon next to the name is color-coded: purple when the component is actively used, grey when nothing references it yet.
 
-![The Reusable components tab with usage chips, step counts, and color-coded connection icons](/images/components-list.webp)
-
 Click a component's usage chip to open the **Used in tests** modal: it lists every dependent test with its creator and an **Edit** shortcut straight into that test's builder, so you can assess the blast radius of a change before making it.
-
-![The Used in tests modal listing dependent tests with Edit shortcuts](/images/component-usage.webp)
 
 ## Reuse and dependencies
 

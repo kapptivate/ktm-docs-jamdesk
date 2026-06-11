@@ -26,8 +26,6 @@ The steps wait for the message to arrive, then parse it with AI: no format confi
 
 An email often carries several links (the action link, but also unsubscribe footers, logos, help pages). Select a **Get email link** step and fill the **Intent** field in its **General** tab to tell the AI which one you mean, in plain language: "The link to activate my account".
 
-![A Get email link step with its Intent field set to "The link to activate my account"](/images/email-sms-intent.webp)
-
 ## Use the extracted values
 
 The extracted variables behave like any test variable. Click the `{}` icon in a later step's field and pick them from the **Previous steps** tab: navigate to `MailLink`, type `SmsCode` into the 2FA input, assert on `MailCode`.

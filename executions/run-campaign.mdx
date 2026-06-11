@@ -1,27 +1,27 @@
 ---
 title: Run a campaign
-description: Launch a test campaign, review the run confirmation, and follow the queued execution.
+description: Review a campaign's tests, devices, and variables, then launch them as one batch.
 sidebarTitle: Campaign runs
 ---
 
-![The Run confirmation page for a campaign, with the execution name and the tests to review](/images/campaign-run-confirmation.webp)
+![The campaign editor with the ordered tests between the Campaign start and Campaign end markers, each with its device and variable values, and the Run button](/images/campaign-editor-run.webp)
 
-A [campaign](/tests/suites) bundles tests that make sense together; running it executes them as one batch. Like a [manual run](/executions/run), a campaign run goes through a confirmation step where you adjust the batch before launching.
+A [campaign](/tests/suites) bundles tests that make sense together; running it executes them as one batch. You launch it straight from the campaign editor, where everything the run will use is laid out for review.
 
-## The run confirmation
+## Review the campaign
 
-Click **Run** on a campaign (from the campaigns table or the editor). The **Run confirmation** page opens for a last review:
+Open a campaign from the **Tests campaigns** tab. The editor shows its name and description, then **Your tests**: the tests the campaign runs, in order, between the **Campaign start** and **Campaign end** markers.
 
-- **Name**: the execution name, defaulting to the campaign name; rename it to mark the occasion (a release check, a regression pass).
-- **Your tests**: every test in the campaign, with its **owner** (the device or agent that will run it) and **input variables**, both adjustable for this run only.
+Each test row carries what that test will run with:
 
-Click **Confirm run** (top right) to launch.
+- **Device**: the agent or device assigned to the test, shown on the right of the row.
+- **Variables**: the test's variable values, shown as pills under its name, with secret values masked.
 
-## The run queue
+Drag the handle on a row to reorder the tests, and click **Add test(s)** to extend the batch. **Save** stores your changes without running.
 
-Queued runs appear in the **Run queue** sidebar. **Clear queue** empties all pending runs after a confirmation.
+## Launch
 
-![The Run queue sidebar with a queued campaign card and the Clear queue action](/images/campaign-run-queue.webp)
+Click **Run** (top right) to execute the campaign. The tests run in their listed order as a single batch.
 
 ## Follow the execution
 

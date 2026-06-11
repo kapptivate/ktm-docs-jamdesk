@@ -4,13 +4,13 @@ description: Assert what a page should show in natural language instead of britt
 sidebarTitle: Verify with AI
 ---
 
+![A Verify with AI step asserting that the login page is displayed, with its reference screenshot](/images/ai-verify-step.webp)
+
 Exact-match assertions can't express "the login page is displayed": they check one selector, one value, one pixel. **Verify with AI** evaluates the whole page against a sentence you write in plain language, so the check holds even when the layout shifts.
 
 ## Add the step
 
 In the builder, choose **Add step... > Verifications > Verify with AI**, then write what you expect: "The login page is displayed", "The cart shows 2 items", "The checkout button is enabled".
-
-![A Verify with AI step asserting that the login page is displayed, with its reference screenshot](/images/ai-verify-step.webp)
 
 At run time, the AI captures the page state and judges it against your assertion. The step fails when the description isn't met, like any other verification.
 

@@ -40,8 +40,6 @@ Open the **Display** menu to choose the layout and adjust how results are shown:
 - **Show period without executions**: include or hide periods with no runs.
 - **Show**: display each item's status or its availability percentage. The List layout adds two more metrics: frequency and average execution time.
 
-![The Display menu open over the card layout, with Cards selected and options for grouping, columns, execution mode, bar chart style, and empty periods](/images/realtime-status-display.webp)
-
 **Cards** show one summary card per grouping. Each card displays:
 
 - **Status badge**: Up, Partial outage, or Down. Items with no executions in the period show grayed-out bars.
@@ -56,13 +54,9 @@ Open the **Display** menu to choose the layout and adjust how results are shown:
 
 Adjust the column count to fit more rows on screen. It's a compact way to scan many monitors at once. For the full monitor table with scheduling and device details, see the [monitors list](/monitoring/overview).
 
-![The list layout showing three condensed columns of monitors, each row with a status icon and colored dots for recent executions](/images/realtime-status-list.webp)
-
 ## Time range and execution mode
 
 Whether you're checking the last few hours after a deploy or reviewing a quarter of history, the analyzed period is yours to set. The time range picker lets you select preset ranges (Last 2h, 4h, 12h, 24h, 48h, 7 days, 30 days, 90 days, or 12 months) or define a custom range with a precise start and end. This controls the data shown in cards and uptime charts.
-
-![The time range dropdown open, listing presets from Last 2h to Last 12 months](/images/realtime-status-time-presets.webp)
 
 Toggle between two execution modes with **Show execution by** in the Display menu:
 
@@ -76,8 +70,6 @@ In either mode you can also zoom directly on a chart: click and drag across the 
 The stacked bar chart in each card visualizes availability over the selected period. Choose between stacked bars (sized by the number of executions in each period) or 100% stacked bars (normalized to the same height to show proportions). Toggle "Show period without executions" to include or hide time ranges with no runs.
 
 Hover over any bar to see the exact time period it covers and a breakdown of successful, failed, and unexecuted runs. Empty periods show "No tests played during this period".
-
-![A custom time range applied, with a tooltip over one bar showing the period and its success, failed, and unexecuted counts](/images/realtime-status-custom-range.webp)
 
 ## Filtering
 
@@ -94,8 +86,6 @@ Build more complex logic by combining rules:
 - **Chain rules** with "and"/"or" operators.
 - **Add groups** to nest conditions: for example, show everything in one product except three specific tests, or everything from two products.
 - **Manage rules and groups** from their menus: duplicate, convert, or delete them.
-
-![The Edit filters dialog with an If rule on product, three chained "and" rules excluding tests, and two "or" groups matching products exactly](/images/realtime-status-filters.webp)
 
 Save the filters to apply them to the current view, or cancel to leave the view unchanged.
 

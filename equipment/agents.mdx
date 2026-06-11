@@ -32,8 +32,6 @@ To narrow the list:
 
 Passive agents support search only; the Status and Zone filters don't apply to them.
 
-![The Status filter open on the agents list, showing Online, Offline, Maintenance, Waiting for configuration, and Test-only options](/images/agent-status-filter.webp)
-
 ## Agent card details
 
 Each agent card displays:
@@ -49,8 +47,6 @@ For what each status means, see [Statuses](/equipment/statuses).
 
 ## Open an agent
 
-![An agent's General tab showing hostname, location, version, and UUID, with Reboot agent and Set agent in maintenance actions in the top right](/images/agent-general.webp)
-
 Click an agent card to open its detail page. The tabs depend on the agent type:
 
 - **SIM and Smartphone agents**: General, Connected devices, Monitors, Settings, Event logs
@@ -64,14 +60,10 @@ Basic information about the agent: hostname, location, software version, and UUI
 
 ### Connected devices
 
-![A Cellular agent's Connected devices tab listing SIM slots with status, network, health, and monitor counts](/images/agent-connected-devices.webp)
-
 Shown for SIM and Smartphone agents.
 
 - **SIM agents** list each slot with the SIM's number, status, network, a health badge (hover it for the weekly-average usage), an access count (hover it for the products that can use the SIM), and active monitors.
 - **Smartphone agents** list each phone with its model, status, UUID, usage badge, access count, and monitor count.
-
-![A Smartphone agent's Connected devices tab listing connected phones with status, UUID, usage, access, and monitor counts](/images/agent-smartphone-devices.webp)
 
 Device and health statuses are explained in [Statuses](/equipment/statuses).
 
@@ -79,13 +71,9 @@ Device and health statuses are explained in [Statuses](/equipment/statuses).
 
 Shown for SIM, Smartphone, and Web agents. Lists the monitors running on the agent, grouped by suite, with each monitor's status, frequency, and location. Pause an individual monitor from its row menu, or use **Pause all monitors** to pause every monitor on the agent.
 
-![An agent's Monitors tab listing monitors grouped by suite, each showing status, frequency, location, and device, with a Pause all monitors action](/images/agent-monitors.webp)
-
 ### Settings
 
 A left sub-navigation groups the agent's configuration:
-
-![The agent Settings tab with its sub-navigation (About, Software update, Automatic reboot, Agent credentials, Network configuration, Danger zone) and the automatic-reboot toggle and agent credentials](/images/agent-settings.webp)
 
 - **About**: general information about the agent
 - **Software update**: enable automatic software updates and choose when they run (every day at a set time)
@@ -94,23 +82,15 @@ A left sub-navigation groups the agent's configuration:
 - **Network configuration**: a read-only JSON view of the agent's network interfaces, IP addresses, and MAC addresses (available for all agent types)
 - **Danger zone**: delete the agent
 
-![The Network configuration section of an agent's Settings, showing a read-only JSON view of network interfaces with their addresses and MAC addresses](/images/agent-network-config.webp)
-
 ### Event logs
 
 A per-agent history of events, with the same Type and User filters, time-range picker, and **Export CSV** action as the workspace-wide [event log](/administration/event-log). Use the time-range picker to refine results.
-
-![An agent's Event logs tab with Type and User filters, a time-range picker, and an Export CSV action above the Time, Type, Source, and Metadata columns](/images/agent-event-logs.webp)
 
 ### Usage (Web agents)
 
 Web agents have a **Usage** tab showing a weekly-average utilization heatmap, the agent's busy percentage hour by hour across the days of the week. Use it to spot when an agent runs hot and to balance load.
 
-![A Web agent's Usage tab showing a weekly-average utilization heatmap, with hours as rows and days as columns shaded by busy percentage](/images/agent-web-usage.webp)
-
 ### Capacity (Web agents)
-
-![The Capacity tab of a Web agent, selecting the number of parallel tests from a dropdown of 1 to 10](/images/agent-web-capacity.webp)
 
 The **Capacity** tab sets how many tests a Web agent runs simultaneously, from 1 to 10 parallel tests. The maximum is determined by your licence; raising it makes more browsers available for web testing.
 
@@ -118,11 +98,7 @@ The **Capacity** tab sets how many tests a Web agent runs simultaneously, from 1
 
 **Maintenance mode**: use **Set agent in maintenance** (top right) to temporarily take an agent out of service. It stays visible in the list but stops running scheduled scenarios and monitors until you **Remove from maintenance**. Only admins can toggle maintenance.
 
-![An agent in Maintenance status, with a Maintenance badge by its name and a Remove from maintenance action in the top right](/images/agent-maintenance.webp)
-
 **Test-only mode**: available for SIM, Smartphone, and Web agents. Activating it pauses all active monitors on the agent and reserves its capacity for manual tests. A confirmation dialog appears before activation. While the mode is active, an indicator shows next to the agent's name and the header button becomes **Exit test-only mode**; exiting opens a dialog confirming that the paused monitors will be resumed.
-
-![The confirmation dialog for activating test-only mode, warning that all active monitors on the device will be paused](/images/agent-test-only.webp)
 
 ## Reboot and delete
 

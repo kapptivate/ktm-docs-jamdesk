@@ -11,54 +11,26 @@ In Testing, open the **Remote control** tab and pick the smartphone to record on
 
 <Steps>
   <Step title="Start the recording">
-    Click the **start a test record** icon.
-
-    <Frame caption="The record icon in the remote control toolbar">
-      ![Start a test record icon](/images/recorders/mobile-01.webp)
-    </Frame>
+    Click the **start a test record** icon in the remote control toolbar.
   </Step>
   <Step title="Select the app">
     Pick the app the test will run on.
-
-    <Frame caption="App selection">
-      ![Select the app](/images/recorders/mobile-02.webp)
-    </Frame>
   </Step>
   <Step title="Perform the steps">
     Drive the device manually. Each interaction adds a row to the recording panel.
-
-    <Frame caption="Each interaction becomes a recorded step">
-      ![Recorded steps](/images/recorders/mobile-03.webp)
-    </Frame>
   </Step>
   <Step title="Generate the test">
     Stop the recording (yellow icon) and click **Generate JavaScript test**. After saving, the test appears in your test list, ready to run.
-
-    <Frame caption="Stop and generate the test">
-      ![Generate JavaScript test](/images/recorders/mobile-04.webp)
-    </Frame>
   </Step>
 </Steps>
 
 ## Fine-tune the selectors
 
-Each recorded step targets an element through an XPath, and the recorder picks one among several candidates. On complex apps, the automatic choice sometimes breaks on replay. Use **target mode** to choose better:
-
-<Frame caption="The target mode icon">
-  ![Start target mode](/images/recorders/mobile-05.webp)
-</Frame>
+Each recorded step targets an element through an XPath, and the recorder picks one among several candidates. On complex apps, the automatic choice sometimes breaks on replay. Use **target mode** to choose better.
 
 Tap the element on the device screen: a popup lists every XPath that matches.
 
-<Frame caption="The candidate XPaths for the selected element">
-  ![XPath candidates](/images/recorders/mobile-06.webp)
-</Frame>
-
-Pick the shortest, clearest one, for example `//*[contains(@text,"1")]`. You can also browse the app's XML tree manually. Then open the three-dots menu next to the XPath and pick the action for the step:
-
-<Frame caption="Choosing the action for the selected element">
-  ![Action menu](/images/recorders/mobile-07.webp)
-</Frame>
+Pick the shortest, clearest one, for example `//*[contains(@text,"1")]`. You can also browse the app's XML tree manually. Then open the three-dots menu next to the XPath and pick the action for the step.
 
 The most used actions:
 
