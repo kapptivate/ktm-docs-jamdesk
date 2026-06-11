@@ -1,0 +1,51 @@
+---
+title: Supported devices and OS versions
+description: Which smartphones and OS versions are fully supported for mobile app tests, and what to know before using your own devices.
+---
+
+Which smartphones can run your mobile app tests, which OS versions are supported, and the compatibility points to check before adding your own devices to the platform.
+
+## Supported smartphone brands
+
+Two manufacturers are officially supported:
+
+- **Samsung** (Android)
+- **Apple** (iOS)
+
+Samsung is the only fully supported Android brand: other manufacturers ship customized OS layers that can interfere with mobile automation. You can still use any device you already have, with two caveats:
+
+<Warning>
+  Investigations on non-Samsung Android devices are deducted from your support package, and full support cannot be guaranteed if issues occur on those devices.
+</Warning>
+
+## Minimum hardware
+
+4 GB of RAM minimum.
+
+## Supported OS versions
+
+| Platform | Versions |
+|----------|----------|
+| iOS | 11 to 26 |
+| Android | 8 to 16 |
+
+To prepare a device for the platform, follow the configuration steps in [Install a robot (software)](/hardware/install-software): one section covers [Android](/hardware/install-software#android-smartphone-setup-smartphone-robots), another [iOS](/hardware/install-software#ios-smartphone-setup-smartphone-robots).
+
+## Android 12+ and FLAG_SECURE
+
+Kapptivate cannot automate apps, or specific screens, that enable `FLAG_SECURE`: Android blocks automation tools from interacting with the protected content. If the app you want to test uses it, ask your development team to remove the flag in the build used for testing.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Install a robot (software)" icon="gear" href="/hardware/install-software">
+
+    Prepare an Android or iOS device for the platform
+
+</Card>
+  <Card title="Devices lab" icon="mobile-screen" href="/equipment/devices-lab">
+
+    Browse and manage the devices connected to your workspace
+
+</Card>
+</Columns>

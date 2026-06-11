@@ -1007,15 +1007,24 @@
         ]
       },
       {
-        "tab": "Guides",
+        "tab": "Guides & Questions",
         "icon": "compass",
         "groups": [
           {
             "group": "Guides",
             "icon": "compass",
+            "expanded": true,
             "pages": [
               "guides/overview",
               "guides/first-integration"
+            ]
+          },
+          {
+            "group": "Questions",
+            "icon": "circle-question",
+            "expanded": true,
+            "pages": [
+              "questions/devices-os-versions"
             ]
           }
         ]

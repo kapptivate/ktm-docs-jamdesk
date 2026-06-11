@@ -97,7 +97,7 @@ Last updated: 2026-06-10. Decisions taken so far:
 | body / json body / xml body in API actions | ❌ | legacy ETH API action detail |
 | Evaluate as expression checkbox | ❌ | assertion detail to fold into a page |
 | SMS response waiting time calculation | 🟠 | fold into `wait-sms` or `tests/cellular` |
-| Devices & OS versions for smartphone tests | 🟠 | fold the matrix into `equipment/devices-lab` |
+| Devices & OS versions for smartphone tests | ✅ | `questions/devices-os-versions` (Questions group of the Guides & Questions tab) |
 | What are platforms used for? | ✅ | `concepts/core-concepts` |
 | How to install an app on your Android smartphone | ❌ | `administration/products/devices` candidate |
 | Smartphone battery has swollen | ✅ | folded into `hardware/swap-battery` (pass-through charging section) |
@@ -108,6 +108,6 @@ Last updated: 2026-06-10. Decisions taken so far:
 - **REST API reference** (monitorings & metrics APIs): scope and home to define.
 - **Integrations overview** (Slack, Whatsapp, Skype, email, SMS...): one page under Administration?
 - **Action macros**: still a real feature? Check with the team before documenting.
-- **Small FAQs** (evaluate as expression, SMS timing, OS matrix, global variables note): fold into their host pages opportunistically.
+- **Small FAQs** (evaluate as expression, SMS timing, global variables note): fold into their host pages, or add them to the new "Questions" group of the Guides & Questions tab (OS matrix landed there).
 - **Screenshot freshness**: recorder and on-premise images were imported as-is from the old help center; replace with fresh captures when the UI evolves. The legacy script action pages reuse no old screenshots (text-only by design).
 - **BIOS update guide**: referenced by the battery swap article but never published on the help center; `hardware/swap-battery` says "contact support". Write it if the procedure can be shared.
