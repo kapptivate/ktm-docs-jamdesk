@@ -17,9 +17,9 @@ Run a cellular test when you need to:
 
 ## Cellular action types
 
-Each cellular test is built from three action types. All run on real SIMs on your cellular agent.
+Each cellular test is built from three action types. All run on real SIMs on your cellular agent. This page covers the flow; the [SIM steps reference](/tests/actions/cellular/overview) documents every action's parameters, including the Data and Call actions not shown here.
 
-### USSD (send and wait for response)
+### [USSD](/tests/actions/cellular/ussd) (send and wait for response)
 
 Send a USSD command and wait for the network to return a menu or response.
 
@@ -38,7 +38,7 @@ Send a USSD command and wait for the network to return a menu or response.
 
 **Example:** To test a balance check, send `#100#`, then assert that the response message contains "Balance: $" and the session is alive.
 
-### SMS_GET (wait for incoming SMS)
+### [SMS_GET](/tests/actions/cellular/wait-sms) (wait for incoming SMS)
 
 Wait for an incoming SMS message and verify its sender and content.
 
@@ -55,7 +55,7 @@ Wait for an incoming SMS message and verify its sender and content.
 
 **Example:** To test OTP delivery, wait for an SMS from "+1234567890", assert the message contains "code:", and capture the code value into a variable.
 
-### USSD_PUSH (wait for unsolicited USSD from network)
+### [USSD_PUSH](/tests/actions/cellular/ussd-push) (wait for unsolicited USSD from network)
 
 Wait for a network-initiated (unsolicited) USSD message. Your test does not send a command; instead, it watches for the network to push a USSD message to the SIM.
 
@@ -104,7 +104,7 @@ Every time you save your test, Kapptivate creates an automatic version snapshot.
 
 ## Organizing tests into campaigns
 
-A **campaign** (also called a suite) groups multiple tests and lets you run them together with shared configuration.
+A **campaign** (also called a [suite](/tests/suites)) groups multiple tests and lets you run them together with shared configuration.
 
 **Campaign features:**
 
@@ -160,3 +160,18 @@ This works for:
 - **USSD messages**: fix the expected response text across multiple tests
 - **SMS messages**: fix the expected SMS text or sender across multiple tests
 - **USSD push messages**: fix the expected push message text across multiple tests
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="SIM steps reference" icon="sim-card" href="/tests/actions/cellular/overview">
+
+    Every USSD, SMS, Data, and Call action with its parameters
+
+</Card>
+  <Card title="Live session" icon="satellite-dish" href="/tests/live-session">
+
+    Drive a SIM manually and turn your actions into a test
+
+</Card>
+</Columns>

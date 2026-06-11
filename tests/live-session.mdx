@@ -27,6 +27,8 @@ Selecting a SIM opens a command interface. The action dropdown at the top groups
 - **Data**: PDP Activation, Ping, TCP Ping, HTTP Ping, DNS Lookup, Download File, HTTP Upload, FTP Download, FTP Upload, Send Mail, API Call, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate, Youtube
 - **Call**: Wait Call, Place Call
 
+Each manual action mirrors a scripted step from the [SIM steps library](/tests/actions/cellular/overview), so what you run here translates directly into a test.
+
 ![A SIM session with the action dropdown open, listing the USSD, SMS, Data, and Call actions](/images/live-session-sim-actions.webp)
 
 Each action shows its own form. For a **USSD Command**, enter the shortcode and pick the **Access technology** (Default, AUTO, 5G, 4G, 3G, or 2G). For a **Send SMS**, set the destination number and message, optionally a **Wait for delivery report** time in seconds, and a **Change default SMSC** override.

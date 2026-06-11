@@ -14,9 +14,11 @@ Add them from **Add step... > Email & SMS** in the builder. Each step extracts o
 
 | Step | Input | Default variable | What AI extracts |
 |------|-------|------------------|------------------|
-| **Get sms code** | Phone number to receive code | `SmsCode` | The verification code in the SMS |
-| **Get email code** | Email to receive code | `MailCode` | The OTP or verification code in the email |
-| **Get email link** | Email to receive link | `MailLink` | The link matching your intent |
+| **[Get sms code](/tests/actions/web/getsmscode)** | Phone number to receive code | `SmsCode` | The verification code in the SMS |
+| **[Get email code](/tests/actions/web/getemailcode)** | Email to receive code | `MailCode` | The OTP or verification code in the email |
+| **[Get email link](/tests/actions/web/getemaillink)** | Email to receive link | `MailLink` | The link matching your intent |
+
+Each step name links to its reference page, with parameters and the JSON format. To fetch a whole message instead of one value, use [Get mail](/tests/actions/web/getmail). The same steps exist for [smartphone tests](/tests/actions/smartphone/getmail).
 
 The steps wait for the message to arrive, then parse it with AI: no format configuration, whatever the sender's wording or layout.
 
