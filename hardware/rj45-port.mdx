@@ -12,14 +12,14 @@ A single Ethernet port, nothing to identify.
 
 ## Latest Linux robots (graphical interface)
 
-The port numbering and the matching `lan1`/`lan2`/`lan3` connections are covered in [Install a robot (software)](/onpremise/install-software).
+The port numbering and the matching `lan1`/`lan2`/`lan3` connections are covered in [Install a robot (software)](/hardware/install-software).
 
 ## Old Linux robots on Ubuntu (no graphical interface)
 
 Log in with your credentials. Ubuntu greets you with a full prompt:
 
 <Frame caption="Ubuntu login screen">
-  ![Ubuntu prompt](/images/onpremise/rj45-port-02.webp)
+  ![Ubuntu prompt](/images/hardware/rj45-port-02.webp)
 </Frame>
 
 List the interfaces:
@@ -29,7 +29,7 @@ ifconfig -s
 ```
 
 <Frame caption="Spot the active interface">
-  ![ifconfig output](/images/onpremise/rj45-port-03.webp)
+  ![ifconfig output](/images/hardware/rj45-port-03.webp)
 </Frame>
 
 Look at the rows starting with `enp` and spot the one whose RX/TX values are not 0: that interface is the one physically connected to the RJ45 cable.
@@ -42,8 +42,8 @@ vim /etc/netplan/01-netcfg.yaml
 ```
 
 <Frame caption="The netplan file and its content">
-  ![netplan directory](/images/onpremise/rj45-port-04.webp)
-  ![netplan configuration](/images/onpremise/rj45-port-05.webp)
+  ![netplan directory](/images/hardware/rj45-port-04.webp)
+  ![netplan configuration](/images/hardware/rj45-port-05.webp)
 </Frame>
 
 The interface configured with a static IP is the one with `dhcp` set to `no` (exit vim with `:q!`). If it differs from the active interface you found with `ifconfig`, move the cable to another RJ45 port and check again.
@@ -53,7 +53,7 @@ The interface configured with a static IP is the one with `dhcp` set to `no` (ex
 Fedora shows a minimal prompt after login:
 
 <Frame caption="Fedora login prompt">
-  ![Fedora prompt](/images/onpremise/rj45-port-06.webp)
+  ![Fedora prompt](/images/hardware/rj45-port-06.webp)
 </Frame>
 
 List the interfaces the same way:
@@ -63,7 +63,7 @@ ifconfig -s
 ```
 
 <Frame caption="Spot the active interface">
-  ![ifconfig output](/images/onpremise/rj45-port-07.webp)
+  ![ifconfig output](/images/hardware/rj45-port-07.webp)
 </Frame>
 
 Spot the `enp` interface with non-zero RX/TX, then read its configuration:
@@ -73,7 +73,7 @@ nmcli device show
 ```
 
 <Frame caption="The interface configuration: IP, gateway, DNS">
-  ![nmcli output](/images/onpremise/rj45-port-08.webp)
+  ![nmcli output](/images/hardware/rj45-port-08.webp)
 </Frame>
 
 Scroll to your `enp` interface: the IP, gateway, and DNS configuration is there. As on Ubuntu, if the statically configured interface is not the active one, move the cable to another port and check again.
@@ -81,12 +81,12 @@ Scroll to your `enp` interface: the IP, gateway, and DNS configuration is there.
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+  <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
 
     The full connectivity checklist
 
 </Card>
-  <Card title="Headless robot access" icon="terminal" href="/onpremise/headless-login">
+  <Card title="Headless robot access" icon="terminal" href="/hardware/headless-login">
 
     Get a console on robots without display output
 

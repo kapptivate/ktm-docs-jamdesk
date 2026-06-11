@@ -3,7 +3,7 @@ title: Install a robot (software)
 description: Configure the network, prepare the smartphones, and bring a new robot online.
 ---
 
-Once the [hardware](/onpremise/install-hardware) is wired, the robot needs its IP configuration and, for smartphone robots, the devices themselves need to be prepared. At the end of this page the robot shows up as available in the platform.
+Once the [hardware](/hardware/install-hardware) is wired, the robot needs its IP configuration and, for smartphone robots, the devices themselves need to be prepared. At the end of this page the robot shows up as available in the platform.
 
 <Note>
   This procedure applies to the latest generation of Kapptivate robots. For an older robot, contact support.
@@ -22,64 +22,64 @@ You need a USB keyboard, a USB mouse, a screen with an HDMI cable, the robot's c
     Plug the keyboard, mouse, and HDMI cable into the back of the robot.
 
     <Frame caption="Peripheral connections at the back">
-      ![Peripherals at the back](/images/onpremise/install-software-01.webp)
+      ![Peripherals at the back](/images/hardware/install-software-01.webp)
     </Frame>
   </Step>
   <Step title="Power on and log in">
     Turn the robot on with the front button. At the login screen, use the provided credentials (ask support if you don't have them). You land on a Linux desktop.
 
     <Frame caption="The front power button">
-      ![Front power button](/images/onpremise/install-software-02.webp)
+      ![Front power button](/images/hardware/install-software-02.webp)
     </Frame>
   </Step>
   <Step title="Open the connection editor">
     Click the network configuration icon and select **Edit Connections**.
 
     <Frame caption="Edit Connections in the network menu">
-      ![Edit Connections](/images/onpremise/install-software-03.webp)
+      ![Edit Connections](/images/hardware/install-software-03.webp)
     </Frame>
 
     The connection here is named `lan1`; yours may differ (for example "Wired connection 1"). Configure the one matching the port you plugged.
 
     <Frame caption="Select the connection and edit it">
-      ![Select lan1](/images/onpremise/install-software-04.webp)
+      ![Select lan1](/images/hardware/install-software-04.webp)
     </Frame>
   </Step>
   <Step title="Check the General tab">
     In **General**, make sure **Connect automatically with priority** is checked with the value `-999`.
 
     <Frame caption="General tab">
-      ![General tab](/images/onpremise/install-software-05.webp)
+      ![General tab](/images/hardware/install-software-05.webp)
     </Frame>
 
     <Frame caption="Connect automatically with priority -999">
-      ![Priority -999](/images/onpremise/install-software-06.webp)
+      ![Priority -999](/images/hardware/install-software-06.webp)
     </Frame>
   </Step>
   <Step title="Set the static IP">
     In **IPV4 Settings**, switch the method from **Automatic (DHCP)** to **Manual**, click **Add**, and enter the IP address, mask, and gateway from your IT department. Add DNS server IPs in the **DNS servers** field if needed, then **Save**.
 
     <Frame caption="IPV4 Settings tab">
-      ![IPV4 Settings](/images/onpremise/install-software-07.webp)
+      ![IPV4 Settings](/images/hardware/install-software-07.webp)
     </Frame>
 
     <Frame caption="Switch from DHCP to Manual">
-      ![Manual method](/images/onpremise/install-software-08.webp)
+      ![Manual method](/images/hardware/install-software-08.webp)
     </Frame>
 
     <Frame caption="Enter the address, mask, gateway, and DNS">
-      ![Static IP configuration](/images/onpremise/install-software-09.webp)
+      ![Static IP configuration](/images/hardware/install-software-09.webp)
     </Frame>
 
     <Frame caption="Save the connection">
-      ![Save](/images/onpremise/install-software-10.webp)
+      ![Save](/images/hardware/install-software-10.webp)
     </Frame>
   </Step>
   <Step title="Check the cable port">
     Make sure the network cable is in the port labelled **1**. If you used port 2 or 3, configure `lan2` or `lan3` instead.
 
     <Frame caption="How the Ethernet ports are numbered">
-      ![Port numbering](/images/onpremise/install-software-11.webp)
+      ![Port numbering](/images/hardware/install-software-11.webp)
     </Frame>
   </Step>
 </Steps>
@@ -93,38 +93,38 @@ Turn the phone on, select the language and country, and do not set any lock pass
 3. In **Settings > Developer options**, change the following options:
 
 <Frame caption="Developer options to change">
-  ![Developer options](/images/onpremise/install-software-12.svg)
+  ![Developer options](/images/hardware/install-software-12.svg)
 </Frame>
 
 4. In **Settings > Battery and device care**, open the menu icon, choose **Automation**, and change the following options:
 
 <Frame caption="Automation options">
-  ![Battery menu icon](/images/onpremise/install-software-13.webp)
-  ![Automation options](/images/onpremise/install-software-14.svg)
+  ![Battery menu icon](/images/hardware/install-software-13.webp)
+  ![Automation options](/images/hardware/install-software-14.svg)
 </Frame>
 
 5. Back in **Battery and device care > Battery > Background usage limits**, disable **Put unused apps to sleep**:
 
 <Frame caption="Background usage limits">
-  ![Background usage limits](/images/onpremise/install-software-15.svg)
+  ![Background usage limits](/images/hardware/install-software-15.svg)
 </Frame>
 
 6. In **Battery > More battery settings**, change the following options:
 
 <Frame caption="More battery settings">
-  ![More battery settings](/images/onpremise/install-software-16.svg)
+  ![More battery settings](/images/hardware/install-software-16.svg)
 </Frame>
 
 7. In **Settings > Software update**, disable **Auto download over Wi-Fi**:
 
 <Frame caption="Disable automatic updates">
-  ![Software update settings](/images/onpremise/install-software-17.svg)
+  ![Software update settings](/images/hardware/install-software-17.svg)
 </Frame>
 
 8. Connect the phone to the USB hub (disconnect and reconnect if it was already plugged). When the popup appears, tick **Always allow from this computer** and press **OK**:
 
 <Frame caption="Allow USB debugging from the robot">
-  ![USB debugging popup](/images/onpremise/install-software-18.webp)
+  ![USB debugging popup](/images/hardware/install-software-18.webp)
 </Frame>
 
 ## iOS smartphone setup (smartphone robots)
@@ -134,14 +134,14 @@ Turn the phone on, select the language and country, and do not set any lock pass
 1. In **Settings > General > Software update > Automatic updates**, disable all **iOS Updates**:
 
 <Frame caption="Disable automatic iOS updates">
-  ![Automatic updates](/images/onpremise/install-software-19.svg)
+  ![Automatic updates](/images/hardware/install-software-19.svg)
 </Frame>
 
 2. In **Settings > Display & Brightness > Auto-Lock**, select **Never**.
 3. In **Settings > Safari > Advanced**, enable **Web Inspector**:
 
 <Frame caption="Enable the Web Inspector">
-  ![Web Inspector](/images/onpremise/install-software-20.svg)
+  ![Web Inspector](/images/hardware/install-software-20.svg)
 </Frame>
 
 <Warning>
@@ -151,14 +151,14 @@ Turn the phone on, select the language and country, and do not set any lock pass
 4. On iOS 26, go to **Privacy & Security > Wired accessories** and select **Always allow**:
 
 <Frame caption="Allow wired accessories on iOS 26">
-  ![Privacy and security](/images/onpremise/install-software-21.webp)
-  ![Wired accessories](/images/onpremise/install-software-22.webp)
+  ![Privacy and security](/images/hardware/install-software-21.webp)
+  ![Wired accessories](/images/hardware/install-software-22.webp)
 </Frame>
 
 5. Connect the phone to the USB hub (disconnect and reconnect if needed). When asked to trust the computer, select **Trust**:
 
 <Frame caption="Trust the robot">
-  ![Trust popup](/images/onpremise/install-software-23.webp)
+  ![Trust popup](/images/hardware/install-software-23.webp)
 </Frame>
 
 6. Close any other popup that shows up, with any option.
@@ -167,12 +167,12 @@ Turn the phone on, select the language and country, and do not set any lock pass
   A brand new iPhone that has never been used with Kapptivate must first be registered with Apple to allow automated testing. Contact support to launch the registration; it takes 24 to 72 hours.
 </Note>
 
-The software installation is complete: open the Kapptivate interface and check that the robot and its devices show as available. If not, head to [troubleshooting](/onpremise/network-troubleshooting).
+The software installation is complete: open the Kapptivate interface and check that the robot and its devices show as available. If not, head to [troubleshooting](/hardware/network-troubleshooting).
 
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+  <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
 
     If the robot does not appear in the platform
 

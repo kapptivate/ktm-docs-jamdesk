@@ -8,7 +8,7 @@ Last updated: 2026-06-10. Decisions taken so far:
 1. Legacy script actions → **done**, "Legacy" group at the bottom of the Actions Library.
 2. Ethernet actions → **done**, page in the same Legacy group.
 3. Web + mobile recorders → **done**, pages in Writing tests, with the original screenshots imported (`images/recorders/`).
-4. Robot ops → **done**, On-premise tab fully migrated (10 pages) with all images downloaded from Zendesk and converted to webp/svg (`images/onpremise/`). Zero remaining links to the old help center.
+4. Robot ops → **done**, On-premise tab fully migrated (10 pages) with all images downloaded from Zendesk and converted to webp/svg (`images/hardware/`). Zero remaining links to the old help center.
 
 ## Getting started
 
@@ -20,8 +20,8 @@ Last updated: 2026-06-10. Decisions taken so far:
 | Monitoring basics | ✅ | `monitoring/overview` |
 | Add steps and variables to your tests | ✅ | `tests/builder`, `tests/variables` |
 | Manual testing | ✅ | `tests/live-session` |
-| How to install a new robot (hardware) | ✅ | `onpremise/install-hardware` |
-| How to install a new robot (software) | ✅ | `onpremise/install-software` |
+| How to install a new robot (hardware) | ✅ | `hardware/install-hardware` |
+| How to install a new robot (software) | ✅ | `hardware/install-software` |
 | IP configuration on linux robots *(internal)* | 🚫 | internal-only article |
 
 ## Testing
@@ -78,15 +78,15 @@ Last updated: 2026-06-10. Decisions taken so far:
 
 | Old article | Status | Where / what's left |
 |---|---|---|
-| Robot network troubleshooting | ✅ | `onpremise/network-troubleshooting` |
-| Technical errors troubleshooting | ✅ | `onpremise/technical-errors` |
-| SIM cards troubleshooting | ✅ | `onpremise/sim-troubleshooting` |
-| Which RJ45 port is configured? | ✅ | `onpremise/rj45-port` |
-| Mac mini network configuration | ✅ | `onpremise/macmini-network` |
-| Swap the battery of a robot | ✅ | `onpremise/swap-battery` |
-| Swap a SIM in a cellular robot | ✅ | `onpremise/swap-sim` |
-| Configure a new SIM card | ✅ | folded into `onpremise/swap-sim` (no-PIN warning); the old article was a single line |
-| Log in on a robot without display | ✅ | `onpremise/headless-login` |
+| Robot network troubleshooting | ✅ | `hardware/network-troubleshooting` |
+| Technical errors troubleshooting | ✅ | `hardware/technical-errors` |
+| SIM cards troubleshooting | ✅ | `hardware/sim-troubleshooting` |
+| Which RJ45 port is configured? | ✅ | `hardware/rj45-port` |
+| Mac mini network configuration | ✅ | `hardware/macmini-network` |
+| Swap the battery of a robot | ✅ | `hardware/swap-battery` |
+| Swap a SIM in a cellular robot | ✅ | `hardware/swap-sim` |
+| Configure a new SIM card | ✅ | folded into `hardware/swap-sim` (no-PIN warning); the old article was a single line |
+| Log in on a robot without display | ✅ | `hardware/headless-login` |
 
 ## FAQ / Technical questions
 
@@ -100,7 +100,7 @@ Last updated: 2026-06-10. Decisions taken so far:
 | Devices & OS versions for smartphone tests | 🟠 | fold the matrix into `equipment/devices-lab` |
 | What are platforms used for? | ✅ | `concepts/core-concepts` |
 | How to install an app on your Android smartphone | ❌ | `administration/products/devices` candidate |
-| Smartphone battery has swollen | ✅ | folded into `onpremise/swap-battery` (pass-through charging section) |
+| Smartphone battery has swollen | ✅ | folded into `hardware/swap-battery` (pass-through charging section) |
 
 ## Remaining decisions
 
@@ -110,4 +110,4 @@ Last updated: 2026-06-10. Decisions taken so far:
 - **Action macros**: still a real feature? Check with the team before documenting.
 - **Small FAQs** (evaluate as expression, SMS timing, OS matrix, global variables note): fold into their host pages opportunistically.
 - **Screenshot freshness**: recorder and on-premise images were imported as-is from the old help center; replace with fresh captures when the UI evolves. The legacy script action pages reuse no old screenshots (text-only by design).
-- **BIOS update guide**: referenced by the battery swap article but never published on the help center; `onpremise/swap-battery` says "contact support". Write it if the procedure can be shared.
+- **BIOS update guide**: referenced by the battery swap article but never published on the help center; `hardware/swap-battery` says "contact support". Write it if the procedure can be shared.

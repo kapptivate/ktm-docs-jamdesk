@@ -10,34 +10,34 @@ Grey results on a monitoring mean a technical error: the test could not run prop
     Open the monitoring results page and check which resource (SIM card, web agent, smartphone) runs the tests.
 
     <Frame caption="The resource on the results page">
-      ![Resource in results](/images/onpremise/technical-errors-01.webp)
+      ![Resource in results](/images/hardware/technical-errors-01.webp)
     </Frame>
   </Step>
   <Step title="Find the agent and its status">
     For a SIM or smartphone, open **Sims** or **Smartphones** to find which agent it is connected to.
 
     <Frame caption="Find the agent behind the resource">
-      ![Agent behind the resource](/images/onpremise/technical-errors-02.webp)
+      ![Agent behind the resource](/images/hardware/technical-errors-02.webp)
     </Frame>
 
     Then in the admin section, find that cellular/web/smartphone agent and check its status.
 
     <Frame caption="The agent status in administration">
-      ![Agent status](/images/onpremise/technical-errors-03.webp)
+      ![Agent status](/images/hardware/technical-errors-03.webp)
     </Frame>
   </Step>
   <Step title="Restart the agent (status available)">
     If the agent shows **available**, restart it from the platform: click **...** and **Set agent in maintenance**, then **...** and **Reboot this agent**. Wait 3 minutes, then **Unset agent from maintenance**.
 
     <Frame caption="Set the agent in maintenance before rebooting">
-      ![Set agent in maintenance](/images/onpremise/technical-errors-04.webp)
+      ![Set agent in maintenance](/images/hardware/technical-errors-04.webp)
     </Frame>
   </Step>
   <Step title="Reboot the robot (status unreachable)">
     If the agent shows **unreachable**, physically turn the robot off and on again.
   </Step>
   <Step title="Still failing?">
-    Check the robot itself. If it is powered on (front LEDs) and the agent stays unreachable, run the [network troubleshooting](/onpremise/network-troubleshooting) checks.
+    Check the robot itself. If it is powered on (front LEDs) and the agent stays unreachable, run the [network troubleshooting](/hardware/network-troubleshooting) checks.
   </Step>
 </Steps>
 
@@ -48,7 +48,7 @@ Grey results on a monitoring mean a technical error: the test could not run prop
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Network troubleshooting" icon="network-wired" href="/onpremise/network-troubleshooting">
+  <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
 
     The connectivity checks, step by step
 

@@ -1021,15 +1021,15 @@
         ]
       },
       {
-        "tab": "On-premise",
+        "tab": "Hardware",
         "icon": "server",
         "groups": [
           {
-            "group": "On-premise equipment",
+            "group": "Hardware",
             "icon": "server",
             "expanded": true,
             "pages": [
-              "onpremise/overview"
+              "hardware/overview"
             ]
           },
           {
@@ -1037,8 +1037,8 @@
             "icon": "screwdriver-wrench",
             "expanded": true,
             "pages": [
-              "onpremise/install-hardware",
-              "onpremise/install-software"
+              "hardware/install-hardware",
+              "hardware/install-software"
             ]
           },
           {
@@ -1046,10 +1046,10 @@
             "icon": "gear",
             "expanded": true,
             "pages": [
-              "onpremise/swap-sim",
-              "onpremise/swap-battery",
-              "onpremise/macmini-network",
-              "onpremise/headless-login"
+              "hardware/swap-sim",
+              "hardware/swap-battery",
+              "hardware/macmini-network",
+              "hardware/headless-login"
             ]
           },
           {
@@ -1057,10 +1057,10 @@
             "icon": "wrench",
             "expanded": true,
             "pages": [
-              "onpremise/network-troubleshooting",
-              "onpremise/technical-errors",
-              "onpremise/sim-troubleshooting",
-              "onpremise/rj45-port"
+              "hardware/network-troubleshooting",
+              "hardware/technical-errors",
+              "hardware/sim-troubleshooting",
+              "hardware/rj45-port"
             ]
           }
         ]
