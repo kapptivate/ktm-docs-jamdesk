@@ -131,8 +131,9 @@
   color: #B14B1F !important;
 }
 
-/* ===== Active tab ===== */
+/* ===== Active tab — same weight to prevent layout shift ===== */
 .nav-tab-link[class*="font-semibold"] {
+  font-weight: 500 !important;
   background-color: rgba(237, 120, 70, 0.12) !important;
   box-shadow: inset 0 0 0 0.5px rgba(237, 120, 70, 0.2) !important;
 }
@@ -153,6 +154,11 @@
   background-color: rgba(237, 120, 70, 0.10);
   border: 1px solid rgba(237, 120, 70, 0.25);
   color: #F2EDE0;
+}
+
+/* ===== Prevent layout shift from scrollbar ===== */
+html {
+  overflow-y: scroll;
 }
 
 /* ===== Sidebar border full height ===== */
