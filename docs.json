@@ -183,7 +183,8 @@
               "ai/overview",
               "ai/selectors",
               "ai/verify-with-ai",
-              "ai/spell-check"
+              "ai/spell-check",
+              "ai/agents"
             ]
           },
           {

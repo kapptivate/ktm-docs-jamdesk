@@ -1,0 +1,65 @@
+---
+title: Kapptivate for AI agents
+description: Drive Kapptivate from Claude Code, Claude Desktop, Codex, Copilot, and other AI agents through the MCP server and the CLI.
+sidebarTitle: For AI agents
+---
+
+AI doesn't just run inside your tests: your coding agent can drive Kapptivate itself. The platform ships two integration surfaces built for agents, an MCP server and a CLI, so the assistant you already work with (Claude Code, Claude Desktop, Codex, GitHub Copilot, Cursor, Gemini) can create tests, launch campaigns, and read results without you switching to the app.
+
+## Two ways in
+
+<Columns cols={2}>
+  <Card title="MCP server" icon="robot" href="/mcp/overview">
+
+    A hosted endpoint speaking the Model Context Protocol, with tools that map one-to-one to the platform. Best for conversational assistants and agent frameworks.
+
+</Card>
+  <Card title="CLI (ktm)" icon="terminal" href="/cli/overview">
+
+    A command-line interface with JSON output and stable exit codes. Best for terminal agents, scripts, and CI pipelines.
+
+</Card>
+</Columns>
+
+Both authenticate with an [API key](/administration/api-keys) and carry the same permissions as your account, so an agent can only do what you can do.
+
+## What an agent can do
+
+- **Create and edit tests**: scaffold a test from a template, fill in the steps, validate it, and save it, from a plain-language description of the flow.
+- **Manage your test base**: list, search, archive, and restore tests, inspect their versions, and check what a change impacts.
+- **Launch campaigns**: build a campaign from selected tests, run it, poll the execution, and summarize the failures.
+- **Get stats**: query metrics, compute SLOs, correlate signals, and pull success rates per product or monitor.
+- **Watch production**: create monitors, review incidents, and evaluate alerts.
+
+A typical session reads like a conversation: "run the checkout regression on staging and summarize the failures", "create a monitor for the login test every five minutes", "show last week's success rate for the payments product".
+
+## Pick your client
+
+For Claude Code, Claude Desktop, Cursor, and GitHub Copilot, point the client at the MCP endpoint and authenticate with the `X-Kapptivate-API-Key` header: [Connect your AI client](/mcp/connect) has the copy-pasteable configuration for each. Microsoft Copilot Studio and Google Gemini have [dedicated integration pages](/mcp/integrations/copilot-studio).
+
+Terminal-first agents like Claude Code can also use the CLI directly: [install ktm](/cli/installation), set `KAPPTIVATE_API_KEY`, and every platform operation is a command away. The [cheat sheet](/cli/guides/cheat-sheet) gives an agent the whole surface at a glance.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Connect an AI client" icon="plug" href="/mcp/connect">
+
+    Set up Claude, Cursor, or Copilot against the MCP server in minutes
+
+</Card>
+  <Card title="MCP tools reference" icon="robot" href="/mcp/tools/overview">
+
+    Every tool the server exposes, grouped by category
+
+</Card>
+  <Card title="CLI guides" icon="terminal" href="/cli/guides/create-tests">
+
+    Create tests, run campaigns, and manage monitors from the terminal
+
+</Card>
+  <Card title="API keys" icon="key" href="/administration/api-keys">
+
+    Create the key your agent authenticates with
+
+</Card>
+</Columns>
