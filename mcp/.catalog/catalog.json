@@ -1419,7 +1419,7 @@
       "category": "Reusables",
       "categorySlug": "reusables",
       "summary": "List the reusable test components (kind=2) for a product.",
-      "description": "List the reusable test components (kind=2) for a product.\n\nReusables are V2-only — they work exclusively with step-based tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded via step_group.import in V2 test definitions. Classic script-based tests cannot use reusables.\n\nResolves the product's reusable_tests_root_collection_uid, fetches its items via the kcollections service, and returns them with [R] one-liners. (Note: /api/v2/tests/?kind=2 is NOT a reliable path — the backend silently ignores the kind filter. The kcollections route is authoritative.)",
+      "description": "List the reusable test components (kind=2) for a product.\n\nReusables are V2-only — they work exclusively with step-based tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded via step_group.import in V2 test definitions. Classic script-based tests cannot use reusables.\n\nResolves the product's reusable_tests_root_collection_uid, fetches its items via the collections service, and returns them with [R] one-liners.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,
@@ -1529,8 +1529,8 @@
       "title": "delete_collection",
       "category": "Collections",
       "categorySlug": "collections",
-      "summary": "Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).",
-      "description": "Move a collection to the organisation's trash (soft-delete via POST /kcollections/api/collections/{uid}/move_to_trash).\n\nThe collection is recoverable until an admin empties the trash on the kcollections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.",
+      "summary": "Move a collection to the organisation's trash.",
+      "description": "Move a collection to the organisation's trash.\n\nThe collection is recoverable until an admin empties the trash on the collections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.",
       "annotations": {
         "readOnlyHint": false,
         "destructiveHint": true,
@@ -1643,7 +1643,7 @@
       "category": "Collections",
       "categorySlug": "collections",
       "summary": "List the direct sub-collections under a parent collection UID.",
-      "description": "List the direct sub-collections under a parent collection UID.\n\nCollections are hierarchical containers in the kcollections service that group tests and dashboards. Every product has a tests_root_collection_uid and every operator has a dashboards_root_collection_uid — pass those as parent_uid to browse from the top of each tree.\n\nReturns compact one-liners by default; set detail=true for full JSON (parent_uid, org_id, full UID).\n\nFolder-tree browsing. For flat test discovery by name/tag/status, use list_tests instead — simpler and faster for most queries.",
+      "description": "List the direct sub-collections under a parent collection UID.\n\nCollections are hierarchical containers in the collections service that group tests and dashboards. Every product has a tests_root_collection_uid and every operator has a dashboards_root_collection_uid — pass those as parent_uid to browse from the top of each tree.\n\nReturns compact one-liners by default; set detail=true for full JSON (parent_uid, org_id, full UID).\n\nFolder-tree browsing. For flat test discovery by name/tag/status, use list_tests instead — simpler and faster for most queries.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,
@@ -1720,7 +1720,7 @@
       "category": "Collections",
       "categorySlug": "collections",
       "summary": "Relocate tests and/or dashboards into a target collection.",
-      "description": "Relocate tests and/or dashboards into a target collection.\n\nitem_uids accepts a comma-separated list of item UIDs (for dashboards) or numeric ids prefixed with \"test:\" (for tests). The kcollections service routes them to the right table. Example: \"test:3402,a1b2c3d4\".",
+      "description": "Relocate tests and/or dashboards into a target collection.\n\nitem_uids accepts a comma-separated list of item UIDs (for dashboards) or numeric ids prefixed with \"test:\" (for tests). The collections service routes them to the right table. Example: \"test:3402,a1b2c3d4\".",
       "annotations": {
         "readOnlyHint": false,
         "destructiveHint": false,
@@ -1802,7 +1802,7 @@
       "category": "Collections",
       "categorySlug": "collections",
       "summary": "Search across collections and items (tests + dashboards) under a collection sub-tree.",
-      "description": "Search across collections and items (tests + dashboards) under a collection sub-tree.\n\nThe kcollections service requires a collection_uid to scope the search — pass the product's tests_root_collection_uid or any sub-collection UID. Returns a payload with two arrays: collections and items.",
+      "description": "Search across collections and items (tests + dashboards) under a collection sub-tree.\n\nThe collections service requires a collection_uid to scope the search — pass the product's tests_root_collection_uid or any sub-collection UID. Returns a payload with two arrays: collections and items.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,

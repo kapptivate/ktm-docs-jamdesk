@@ -39,7 +39,7 @@ ktm tests delete 117 --kind 2 --yes           # reusable
 
 Sends tests to the product's test-trash collection. Despite the "delete"
 name this is reversible — run 'ktm tests undelete &lt;id&gt;' to pull a test back
-out of trash. The kcollections service supports an admin 'empty trash' action
+out of trash. The collections service supports an admin 'empty trash' action
 that purges the trash permanently; that is out of scope for this CLI.
 
 --kind controls which test-kind table the backend looks in:
@@ -47,8 +47,6 @@ that purges the trash permanently; that is out of scope for this CLI.
   2  reusable test
 
 Refuses without --yes.
-
-Backed by DELETE /api/tests/delete/ body \{identifiers, kind\}.
 
 ## Notes
 

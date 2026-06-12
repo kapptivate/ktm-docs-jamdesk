@@ -38,14 +38,11 @@ ktm collections delete --operator my-op --yes <uid>        # moves to trash
 
 Move the collection to the organisation's trash collection. The collection
 and its items are recoverable until the trash is emptied (which requires a
-separate admin action on the kcollections service). Despite the "delete" name
-this is NOT a hard delete — the earlier v100 spec said "no trash"; that was
-wrong and was corrected in v100.1.
+separate admin action on the collections service). Despite the "delete" name
+this is NOT a hard delete.
 
 The command still refuses without --yes because agents should confirm scope
 before moving collections around.
-
-Backed by POST /kcollections/api/collections/\{uid\}/move_to_trash.
 
 ## Related
 

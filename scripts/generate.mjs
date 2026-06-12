@@ -2,11 +2,17 @@
 // Actions-agnostic documentation generator for the Kapptivate MCP server and CLI.
 //
 // Usage:
-//   node scripts/generate.mjs [--source=all|mcp|cli] [--mode=live|file] [--file=PATH] [--check]
+//   node scripts/generate.mjs [--source=all|mcp|cli] [--mode=live|file|catalog] [--file=PATH] [--check]
 //
 // Sources are read from prod by default:
 //   MCP  — live `tools/list` against $MCP_URL using $KAPPTIVATE_API_KEY (X-Kapptivate-API-Key header).
 //   CLI  — the `ktm` binary's --help tree ($KTM_BIN path, or downloaded $KTM_CLI_URL on Linux CI).
+//
+// --mode=catalog re-renders from the committed catalog.json files without any introspection —
+// use it to apply template or sanitizer changes offline.
+//
+// Upstream descriptions are sanitized (scripts/lib/sanitize.mjs) to strip internal service
+// names and backend routes; a leak scan warns on every run and fails --check.
 //
 // --check regenerates in memory and exits non-zero if committed docs are stale (drift gate).
 import path from 'node:path';
@@ -14,6 +20,7 @@ import { promises as fs } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { readJSON, writeFileEnsured, rmDir, listMdx } from './lib/util.mjs';
 import { loadOverlay, attachOverlay } from './lib/overlay.mjs';
+import { sanitizeItems, scanLeaks } from './lib/sanitize.mjs';
 import { applyNav } from './lib/nav.mjs';
 import { introspectMcp, normalizeMcp } from './mcp/introspect.mjs';
 import { renderMcp, navPages as mcpNavPages } from './lib/render-mcp.mjs';
@@ -64,15 +71,23 @@ function overlayWarnings(overlay, bucket, items, pageHrefs) {
 /** Build the MCP file set. Returns { files: Map<relPath,content>, navGroup, warnings, meta }. */
 async function buildMcp(args) {
   const categories = await readJSON(path.join(ROOT, 'scripts/mcp/categories.json'));
-  const raw = await introspectMcp({
-    mode: args.mode,
-    url: MCP_URL,
-    apiKey: process.env.KAPPTIVATE_API_KEY,
-    file: args.file,
-  });
-  const { catalog, warnings } = normalizeMcp(raw, categories, {
-    source: args.mode === 'file' ? 'mcp-file' : 'mcp-live',
-  });
+  let catalog;
+  let warnings = [];
+  if (args.mode === 'catalog') {
+    catalog = await readJSON(path.join(ROOT, CATALOG.mcp));
+    catalog.categories = { order: categories.order, meta: categories.meta };
+  } else {
+    const raw = await introspectMcp({
+      mode: args.mode,
+      url: MCP_URL,
+      apiKey: process.env.KAPPTIVATE_API_KEY,
+      file: args.file,
+    });
+    ({ catalog, warnings } = normalizeMcp(raw, categories, {
+      source: args.mode === 'file' ? 'mcp-file' : 'mcp-live',
+    }));
+  }
+  catalog.items = sanitizeItems(catalog.items);
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.mcp));
   const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'tools') };
 
@@ -91,15 +106,22 @@ async function buildMcp(args) {
 
 /** Build the CLI file set. */
 async function buildCli(args) {
-  const { introspectCli, normalizeCli } = await import('./cli/extract.mjs');
   const { renderCli, navPages: cliNavPages } = await import('./lib/render-cli.mjs');
-  const raw = await introspectCli({
-    mode: args.mode === 'file' ? 'file' : 'binary',
-    bin: process.env.KTM_BIN,
-    url: KTM_CLI_URL,
-    file: args.file,
-  });
-  const { catalog, warnings } = normalizeCli(raw, { source: 'cli-binary' });
+  let catalog;
+  let warnings = [];
+  if (args.mode === 'catalog') {
+    catalog = await readJSON(path.join(ROOT, CATALOG.cli));
+  } else {
+    const { introspectCli, normalizeCli } = await import('./cli/extract.mjs');
+    const raw = await introspectCli({
+      mode: args.mode === 'file' ? 'file' : 'binary',
+      bin: process.env.KTM_BIN,
+      url: KTM_CLI_URL,
+      file: args.file,
+    });
+    ({ catalog, warnings } = normalizeCli(raw, { source: 'cli-binary' }));
+  }
+  catalog.items = sanitizeItems(catalog.items);
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.cli));
   const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'commands') };
 
@@ -138,7 +160,19 @@ async function main() {
   // Report warnings (e.g. unmapped tools).
   for (const [, b] of builds) for (const w of b.warnings) console.warn(`! ${w}`);
 
+  // Leak gate: internal details the sanitizer didn't catch must never reach published docs.
+  const leaks = [];
+  for (const [rel, content] of files) {
+    if (!rel.endsWith('.mdx') && !rel.endsWith('.json')) continue;
+    for (const label of scanLeaks(content)) leaks.push(`${rel}: ${label}`);
+  }
+  for (const l of leaks) console.warn(`! leak: ${l}`);
+
   if (args.check) {
+    if (leaks.length) {
+      console.error(`\nInternal-data leaks detected (${leaks.length}) — extend scripts/lib/sanitize.mjs or fix the upstream description.`);
+      process.exit(1);
+    }
     const drift = [];
     for (const [rel, content] of files) {
       let cur = null;
