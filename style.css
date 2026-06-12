@@ -1,5 +1,18 @@
 /* Custom styles for Kapptivate docs */
 
+/* ===== Danger callout — more vivid red ===== */
+:root {
+  --color-error-bg: #fee2e2;
+  --color-error-border: #f87171;
+  --color-error-text: #b91c1c;
+}
+
+.dark {
+  --color-error-bg: rgba(239, 68, 68, 0.15);
+  --color-error-border: rgba(239, 68, 68, 0.5);
+  --color-error-text: #fca5a5;
+}
+
 /* ===== DARK MODE — Kapptivate neutral charcoal tokens ===== */
 .dark {
   /* Surfaces — neutral charcoal, warm whisper (R > B by 0-4) */
@@ -365,7 +378,41 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
   padding-left: 0 !important;
 }
 
-/* Page links — no rounded background, align over the border line */
+/* Hide vertical line for groups without nested sub-groups */
+.sidebar-scroll .sidebar-nav-groups > div:not(:has(.nav-group-l1)) ul {
+  border-left: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.sidebar-scroll .sidebar-nav-groups > div:not(:has(.nav-group-l1)) ul::after {
+  display: none !important;
+}
+
+.sidebar-scroll .sidebar-nav-groups > div:not(:has(.nav-group-l1)) ul > li > a {
+  margin-left: 0 !important;
+  padding-left: 0.875rem !important;
+  border-left: none !important;
+}
+
+/* Hide vertical line for top-level ul that is the only ul sibling (e.g. Notifications, SIMs overview) */
+.sidebar-scroll .sidebar-nav-groups > div > div > ul:only-of-type {
+  border-left: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.sidebar-scroll .sidebar-nav-groups > div > div > ul:only-of-type::after {
+  display: none !important;
+}
+
+.sidebar-scroll .sidebar-nav-groups > div > div > ul:only-of-type > li > a {
+  margin-left: 0 !important;
+  padding-left: 0.875rem !important;
+  border-left: none !important;
+}
+
+/* Page links — align over the border line */
 .sidebar-nav-groups ul > li > a {
   border-radius: 0 !important;
   margin-left: -1px !important;
@@ -381,7 +428,7 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
   color: var(--color-text-primary) !important;
 }
 
-/* Active page — thick left border + semibold */
+/* Active page — thick left border */
 .sidebar-nav-groups ul > li > a.nav-active {
   border-left-color: var(--color-text-primary) !important;
   background: transparent !important;
@@ -401,4 +448,10 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
 .sidebar-nav-groups button.nav-group-l1:hover {
   background: transparent !important;
   color: var(--color-text-primary) !important;
+}
+
+/* Deprecated page tags — red instead of accent */
+.sidebar-nav-groups ul > li > a > span:last-child[class*="text-["] {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #ef4444 !important;
 }

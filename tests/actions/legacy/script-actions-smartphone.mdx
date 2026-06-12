@@ -3,6 +3,10 @@ title: Script actions on smartphone
 description: Smartphone-specific helpers for script actions, airplane mode, device events, calls, and audio.
 ---
 
+<Danger>
+  **Deprecated.** Script actions are legacy. Existing ones keep running, but for new tests prefer the [visual builder](/tests/builder). Migrate when you can.
+</Danger>
+
 Smartphone script actions (Android app, iOS app, and web mobile) extend WebdriverIO with helpers for things only a real phone can do: toggling airplane mode, reacting to device events like an incoming SMS or call, placing and receiving calls, and playing or recording audio. `browser` and `driver` are aliases; both work with every helper.
 
 For the script structure, parameters, and shared helpers, start with [Script actions](/tests/actions/legacy/script-actions).

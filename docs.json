@@ -360,10 +360,10 @@
                 "group": "Deprecated",
                 "expanded": false,
                 "pages": [
-                  "tests/actions/web/assertdisplayed",
-                  "tests/actions/web/assertnotdisplayed",
-                  "tests/actions/web/checkbox",
-                  "tests/actions/web/select"
+                  { "page": "tests/actions/web/assertdisplayed", "tag": "Deprecated" },
+                  { "page": "tests/actions/web/assertnotdisplayed", "tag": "Deprecated" },
+                  { "page": "tests/actions/web/checkbox", "tag": "Deprecated" },
+                  { "page": "tests/actions/web/select", "tag": "Deprecated" }
                 ]
               }
             ]
@@ -422,8 +422,8 @@
                 "group": "Deprecated",
                 "expanded": false,
                 "pages": [
-                  "tests/actions/smartphone/assertdisplayed",
-                  "tests/actions/smartphone/assertnotdisplayed"
+                  { "page": "tests/actions/smartphone/assertdisplayed", "tag": "Deprecated" },
+                  { "page": "tests/actions/smartphone/assertnotdisplayed", "tag": "Deprecated" }
                 ]
               }
             ]
@@ -503,10 +503,10 @@
             "icon": "clock-rotate-left",
             "expanded": false,
             "pages": [
-              "tests/actions/legacy/script-actions",
-              "tests/actions/legacy/script-actions-smartphone",
-              "tests/actions/legacy/script-actions-variables",
-              "tests/actions/legacy/ethernet"
+              { "page": "tests/actions/legacy/script-actions", "tag": "Deprecated" },
+              { "page": "tests/actions/legacy/script-actions-smartphone", "tag": "Deprecated" },
+              { "page": "tests/actions/legacy/script-actions-variables", "tag": "Deprecated" },
+              { "page": "tests/actions/legacy/ethernet", "tag": "Deprecated" }
             ]
           }
         ]

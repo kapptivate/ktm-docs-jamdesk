@@ -3,6 +3,10 @@ title: Ethernet actions
 description: Run the network measurement actions over an agent's wired connection instead of a SIM.
 ---
 
+<Danger>
+  **Deprecated.** Ethernet actions are legacy. Existing ones keep running, but no new development is planned.
+</Danger>
+
 Ethernet actions are the wired twins of the [SIM DATA actions](/tests/actions/cellular/overview): the same measurements (ping, downloads, speedtest, traceroute...) executed over the agent's Ethernet connection instead of a cellular data session. Use them to monitor fixed-line connectivity, or as a wired baseline to compare your cellular measurements against.
 
 They predate the current builders and are considered legacy, but existing tests keep running and the actions remain available on Ethernet-capable agents.
