@@ -314,3 +314,91 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
 .dark .shiki {
   background-color: #090908 !important;
 }
+
+/* ===== Images — Frame-like padding on all prose images ===== */
+.prose img {
+  padding: 0.5rem !important;
+  border-radius: 0.75rem !important;
+  background-color: #f8f9fa !important;
+  box-shadow: inset 0 0 0 0.5px rgba(209, 213, 219, 0.8) !important;
+}
+
+.dark .prose img {
+  background-color: #0f1419 !important;
+  box-shadow: inset 0 0 0 0.5px rgba(107, 114, 128, 0.3) !important;
+}
+
+/* Images inside Frame already have container chrome — reset */
+.frame-content img {
+  padding: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0.375rem !important;
+}
+
+/* ===== Sidebar — vertical-line submenu ===== */
+
+/* Group titles — bold, primary text */
+.sidebar-nav-groups > div > button > span {
+  color: var(--color-text-primary) !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* Group title stays primary when a child page is active */
+.sidebar-nav-groups div:has(a.nav-active) > button > span,
+.sidebar-nav-groups div:has(a.nav-active) > button {
+  color: var(--color-text-primary) !important;
+}
+
+/* Spacing between groups */
+.sidebar-nav-groups > div {
+  margin-bottom: 0.75rem !important;
+}
+
+/* Page list — thin vertical line on the left */
+.sidebar-nav-groups ul {
+  border-left: 1px solid var(--color-border) !important;
+  margin-left: 0.125rem !important;
+  padding-left: 0 !important;
+}
+
+/* Page links — no rounded background, align over the border line */
+.sidebar-nav-groups ul > li > a {
+  border-radius: 0 !important;
+  margin-left: -1px !important;
+  padding-left: 0.875rem !important;
+  border-left: 2px solid transparent !important;
+  background: transparent !important;
+  transition: color 0.15s ease, border-color 0.15s ease !important;
+}
+
+/* Page links — hover */
+.sidebar-nav-groups ul > li > a:hover {
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Active page — thick left border + semibold */
+.sidebar-nav-groups ul > li > a.nav-active {
+  border-left-color: var(--color-text-primary) !important;
+  background: transparent !important;
+  font-weight: 500 !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Nested group buttons — same line alignment */
+.sidebar-nav-groups button.nav-group-l1 {
+  border-radius: 0 !important;
+  margin-left: -1px !important;
+  padding-left: 0.875rem !important;
+  border-left: 2px solid transparent !important;
+  background: transparent !important;
+}
+
+.sidebar-nav-groups button.nav-group-l1:hover {
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+}
