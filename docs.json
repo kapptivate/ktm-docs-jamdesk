@@ -146,22 +146,22 @@
                 ]
               },
               {
-                "group": "Production supervision",
+                "group": "Alerting",
                 "expanded": false,
                 "pages": [
-                  "monitoring/incidents",
-                  "monitoring/alerts",
-                  {
-                    "group": "Analytics",
-                    "expanded": false,
-                    "pages": [
-                      "monitoring/dashboards",
-                      "monitoring/tests-metrics",
-                      "monitoring/public-dashboards",
-                      "monitoring/mail-reports",
-                      "monitoring/exports"
-                    ]
-                  }
+                  "alerting/incidents",
+                  "alerting/alerts"
+                ]
+              },
+              {
+                "group": "Analytics",
+                "expanded": false,
+                "pages": [
+                  "analytics/dashboards",
+                  "analytics/tests-metrics",
+                  "analytics/public-dashboards",
+                  "analytics/mail-reports",
+                  "analytics/exports"
                 ]
               },
               {
