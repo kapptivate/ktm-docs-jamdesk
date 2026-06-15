@@ -1,59 +1,67 @@
 ---
 title: Mobile app recorder
-description: Record a smartphone test by driving a real device from your browser.
+description: Record a smartphone test by driving a real device next to a live list of steps.
 ---
 
-The mobile app recorder turns a manual session on a real device into a test. You drive the smartphone from your browser through remote control, every tap and input is captured as a step, and one click generates the JavaScript test.
+![The side-by-side smartphone recorder: the step canvas with Tap and Verify element steps on the left, the live device on the right](/images/mobile-recorder-new.webp)
+
+Recording turns a manual session on a real device into a test. You drive the smartphone from your browser, and every tap, input, and scroll becomes a step you can edit, no scripting required. The recorder works side by side with the builder: the device streams on the right while your steps build up on the left.
 
 ## Record a test
 
-In Testing, open the **Remote control** tab and pick the smartphone to record on.
+Start from the **Tests** dashboard so the recording lands in a new test.
 
 <Steps>
-  <Step title="Start the recording">
-    Click the **start a test record** icon in the remote control toolbar.
+  <Step title="Create the test">
+    Click **+ Create new test**, choose **Smartphone (New experience)**, give the test a name, select the device to record on, and pick the app to test. Click **Use recorder**.
   </Step>
-  <Step title="Select the app">
-    Pick the app the test will run on.
-  </Step>
-  <Step title="Perform the steps">
-    Drive the device manually. Each interaction adds a row to the recording panel.
+  <Step title="Drive the device">
+    The recorder opens with the device stream on the right and the step canvas on the left, starting with a **Launch app** block. Tap and swipe directly on the stream: each interaction adds a numbered step (for example **Tap**) under a step group.
   </Step>
   <Step title="Generate the test">
-    Stop the recording (yellow icon) and click **Generate JavaScript test**. After saving, the test appears in your test list, ready to run.
+    Click **Stop record** when you're done. The steps stay in the canvas, ready to run with **Save and run** or to refine first.
   </Step>
 </Steps>
 
-## Fine-tune the selectors
+## Tune selectors and add assertions
 
-Each recorded step targets an element through an XPath, and the recorder picks one among several candidates. On complex apps, the automatic choice sometimes breaks on replay. Use **target mode** to choose better.
+Each recorded step shows the selector it targets (for example `id=...` or `content-desc=...`) right in the step row. When the automatic choice is fragile, open the selector's inline dropdown and pick a clearer match.
 
-Tap the element on the device screen: a popup lists every XPath that matches.
+The three-dots menu on a step adds more, including **Add assertion**: a **Verify element** step that checks the screen looks right, such as a value being `displayed`. Assertions become steps in the canvas alongside your taps, so a recording can verify behavior as it goes.
 
-Pick the shortest, clearest one, for example `//*[contains(@text,"1")]`. You can also browse the app's XML tree manually. Then open the three-dots menu next to the XPath and pick the action for the step.
+<Tip>
+For fragile elements, turn on AI selectors per step in the builder so the test self-heals when the app's UI shifts. See [AI selectors](/tests/builder#ai-selectors).
+</Tip>
 
-The most used actions:
+## Legacy: remote-control recorder
 
-- **Click**: tap a button or element.
-- **Set value**: type text into a field.
-- **Scroll until**: scroll to reach a specific element.
-- **Assert text**: verify the displayed text matches what you expect.
+The original recorder lives in the [live session](/tests/live-session) **Remote control** tab and generates a JavaScript test. It still works, but it's being phased out in favor of the side-by-side recorder above. Prefer the new flow for new tests.
 
-<Note>
-  The recorder generates a [smartphone script action](/tests/actions/legacy/script-actions-smartphone): JavaScript you can edit, extend with assertions, or enrich with [variables and custom metrics](/tests/actions/legacy/script-actions-variables).
-</Note>
+<Steps>
+  <Step title="Start the recording">
+    In **Remote control**, pick the smartphone, then click **start a test record** in the Quick Assistant toolbar (alongside Power, Volume, Home, Back, and App switcher controls).
+  </Step>
+  <Step title="Select the app">
+    Choose the app from the **Choose your test package** modal, which lists **User** and **System** apps.
+  </Step>
+  <Step title="Record and generate">
+    Drive the device manually, then stop the recording. It produces a form-based step configuration with fields like **Application package** and **Application activity** and toggles such as **Reset the app**, **Run in background**, and **Ignore errors**.
+  </Step>
+</Steps>
+
+The result is a [smartphone script action](/tests/actions/legacy/script-actions-smartphone): JavaScript you can edit, extend with assertions, or enrich with [variables and custom metrics](/tests/actions/legacy/script-actions-variables).
 
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Smartphone script helpers" icon="mobile-screen" href="/tests/actions/legacy/script-actions-smartphone">
+  <Card title="Test builder" icon="vial" href="/tests/builder">
 
-    Edit the generated script: events, calls, airplane mode
+    Edit, group, and verify the steps you recorded
 
 </Card>
   <Card title="Live session" icon="display" href="/tests/live-session">
 
-    Remote control without recording
+    Drive a real device interactively without recording
 
 </Card>
 </Columns>

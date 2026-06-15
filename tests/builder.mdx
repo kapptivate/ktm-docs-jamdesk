@@ -35,7 +35,7 @@ Web tests record through **Kompagnon**, a Chrome extension. The first time you c
 
 With the extension installed, **Use recorder** opens your starting URL in a new tab with the recorder widget overlaid.
 
-Browse normally: clicks, inputs, and navigations are captured as steps in real time. When you stop, the recorded steps appear in your step canvas, ready to edit.
+Browse normally: clicks, inputs, and navigations are captured as steps in real time. When you stop, the recorded steps appear in your step canvas, ready to edit. See the [web recorder](/tests/web-recorder) for the full flow, including the side panel and recording verifications.
 
 ### Asserting while recording
 
@@ -45,7 +45,7 @@ The assertion is recorded as a step alongside your interactions.
 
 ### Smartphone: cloud recorder
 
-Smartphone tests record through a cloud-based recorder instead of a browser extension: you drive the real device from your browser and your taps, inputs, and scrolls become steps.
+Smartphone tests record through a cloud-based recorder instead of a browser extension: you drive the real device from your browser and your taps, inputs, and scrolls become steps. See the [mobile app recorder](/tests/mobile-recorder) for the side-by-side recording flow.
 
 ## Adding steps manually
 
@@ -81,7 +81,7 @@ Select any step to open its details panel, organized in three tabs: **General**,
 - **Timeout**: how long to wait for the element (e.g., 20 seconds)
 - **AI usage**: per-step AI settings (see below)
 
-For smartphone steps that already ran, the panel also shows a **Reference screenshot**: the app's state captured at that step during the last run, so you can see exactly what the step targets. Smartphone selectors offer a **Selector** / **Coords** toggle to target by element or by coordinates.
+The panel also shows a **Reference screenshot**: the page or app state captured at that step during the last run, so you can see exactly what the step targets. It appears for both web and smartphone steps; before a step has run, it reads "No reference screenshot available for this step". Smartphone selectors additionally offer a **Selector** / **Coords** toggle to target by element or by coordinates.
 
 ### Checks
 
@@ -131,7 +131,7 @@ The **Test settings** tab gathers everything that applies to the whole test:
 - **AI**: the test-level AI toggle and strategy
 - **Delays & timeouts**: **Step delay** (pause between steps, in seconds) and **Selector timeout** (max wait for an element, in seconds)
 - **Hooks**: lifecycle step groups (see below)
-- **Advanced**: options like accepting non-secure certificates
+- **Advanced**: the test's default [execution mode](/executions/execution-modes) (how much data each run collects), accepting non-secure certificates, and custom capabilities
 
 ### Hooks
 
