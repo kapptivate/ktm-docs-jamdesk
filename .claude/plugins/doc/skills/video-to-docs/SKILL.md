@@ -66,10 +66,23 @@ resolution — if you shrink the input yourself, the screenshots come out pixela
 Read `/tmp/video-to-docs-extract/features.md` and `features.json`. These are the
 **candidate** features and screenshots — a draft, not ground truth.
 
-If the project keeps a reference inventory (e.g. a `references/` folder holding
-the source videos and one markdown per video), also copy `features.md` there as
-`<video-stem>.md`: replace the image embeds with their timestamps and note which
-docs the gap analysis ran against, so the inventory stays complete.
+**Always write a sidecar inventory file next to the source video**, named
+`<video-stem>.md` in the same directory as the video, so every processed video
+leaves a durable record. Start from the extractor's `features.md` and make it
+standalone:
+
+- Drop the `/tmp` screenshot embeds and keep each feature's **timestamps**
+  instead, so the file doesn't point at paths that won't exist later.
+- Right under the `_Extracted with …_` line, add a gap-analysis line naming the
+  pages you ran `--docs` against, e.g.
+  `` _Full-quality (GCS) analysis. Gap analysis against: `path/a.mdx`, `path/b.mdx`_ ``
+  (say "Full-quality (GCS) analysis." only when you ran with a GCS bucket;
+  drop the "Gap analysis against" clause if you ran without `--docs`).
+- Leave room for a `## Verification notes (read before reusing)` section at the
+  end; you fill it in at step 8, once values are checked against frames.
+
+If sidecar files already exist in that directory, match their exact formatting so
+the inventory stays consistent video to video.
 
 ### 2. Learn the existing docs
 
@@ -146,6 +159,11 @@ Implement, deferring to the project's conventions (its `CLAUDE.md` and any
   directory as `.webp`; embed them as plain markdown images (these stay zoomable)
   unless the project's conventions say otherwise.
 - Wire new pages into `docs.json` in the right group.
+- Finish the video's sidecar inventory file from step 1: add the
+  `## Verification notes (read before reusing)` section recording which frames
+  confirmed each concrete value or option list, which claims are voice-only or
+  unverified, and how the screenshots were produced (e.g. grabbed as PNG and
+  converted with `cwebp` when the extractor's webp encoder is disabled).
 - Validate with the project's checks (for Jamdesk: `jamdesk validate` and
   `jamdesk broken-links`).
 - If a dev server is running, restart it — newly added images are synced at
