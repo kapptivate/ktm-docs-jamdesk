@@ -1,59 +1,67 @@
 ---
 title: Recorder d'application mobile
-description: Enregistrez un test smartphone en pilotant un appareil réel depuis votre navigateur.
+description: Enregistrez un test smartphone en pilotant un appareil réel aux côtés d'une liste de steps en direct.
 ---
 
-Le recorder d'application mobile transforme une session manuelle sur un appareil réel en test. Vous pilotez le smartphone depuis votre navigateur via le contrôle à distance, chaque tap et chaque saisie est capturé comme un step, et un clic génère le test JavaScript.
+![Le recorder smartphone côte à côte : le canvas de steps avec des steps Tap et Verify element à gauche, l'appareil en direct à droite](/images/mobile-recorder-new.webp)
+
+L'enregistrement transforme une session manuelle sur un appareil réel en test. Vous pilotez le smartphone depuis votre navigateur, et chaque tap, input et scroll devient un step modifiable, sans script requis. Le recorder fonctionne côte à côte avec le builder : l'appareil est diffusé à droite tandis que vos steps se construisent à gauche.
 
 ## Enregistrer un test
 
-Dans Testing, ouvrez l'onglet **Remote control** et choisissez le smartphone sur lequel enregistrer.
+Partez du tableau de bord **Tests** pour que l'enregistrement aboutisse dans un nouveau test.
 
 <Steps>
-  <Step title="Démarrer l'enregistrement">
-    Cliquez sur l'icône **start a test record** dans la barre d'outils du contrôle à distance.
+  <Step title="Créer le test">
+    Cliquez sur **+ Create new test**, choisissez **Smartphone (New experience)**, donnez un nom au test, sélectionnez l'appareil sur lequel enregistrer et choisissez l'application à tester. Cliquez sur **Use recorder**.
   </Step>
-  <Step title="Sélectionner l'application">
-    Choisissez l'application sur laquelle le test va s'exécuter.
-  </Step>
-  <Step title="Effectuer les steps">
-    Pilotez l'appareil manuellement. Chaque interaction ajoute une ligne au panneau d'enregistrement.
+  <Step title="Piloter l'appareil">
+    Le recorder s'ouvre avec le flux de l'appareil à droite et le canvas de steps à gauche, en commençant par un bloc **Launch app**. Effectuez vos tap et swipe directement sur le flux : chaque interaction ajoute un step numéroté (par exemple **Tap**) sous un groupe de steps.
   </Step>
   <Step title="Générer le test">
-    Arrêtez l'enregistrement (icône jaune) et cliquez sur **Generate JavaScript test**. Après la sauvegarde, le test apparaît dans votre liste de tests, prêt à être exécuté.
+    Cliquez sur **Stop record** lorsque vous avez terminé. Les steps restent dans le canvas, prêts à être exécutés avec **Save and run** ou à être affinés au préalable.
   </Step>
 </Steps>
 
-## Affiner les sélecteurs
+## Ajuster les sélecteurs et ajouter des assertions
 
-Chaque step enregistré cible un élément via un XPath, et le recorder en choisit un parmi plusieurs candidats. Sur les applications complexes, le choix automatique échoue parfois lors de la relecture. Utilisez le **target mode** pour mieux choisir.
+Chaque step enregistré affiche le sélecteur qu'il cible (par exemple `id=...` ou `content-desc=...`) directement dans la ligne du step. Lorsque le choix automatique est fragile, ouvrez le menu déroulant du sélecteur et choisissez une correspondance plus claire.
 
-Appuyez sur l'élément sur l'écran de l'appareil : un popup liste tous les XPath correspondants.
+Le menu trois points d'un step propose des options supplémentaires, dont **Add assertion** : un step **Verify element** qui vérifie que l'écran est correct, par exemple qu'une valeur est `displayed`. Les assertions deviennent des steps dans le canvas aux côtés de vos taps, ce qui permet à un enregistrement de vérifier le comportement au fur et à mesure.
 
-Choisissez le plus court et le plus clair, par exemple `//*[contains(@text,"1")]`. Vous pouvez aussi parcourir manuellement l'arborescence XML de l'application. Ensuite, ouvrez le menu à trois points à côté du XPath et choisissez l'action pour le step.
+<Tip>
+Pour les éléments fragiles, activez les sélecteurs IA par step dans le builder afin que le test s'auto-corrige lorsque l'interface de l'application change. Consultez [Sélecteurs IA](/fr/tests/builder#ai-selectors).
+</Tip>
 
-Les actions les plus utilisées :
+## Legacy : recorder en contrôle à distance
 
-- **Click** : appuyer sur un bouton ou un élément.
-- **Set value** : saisir du texte dans un champ.
-- **Scroll until** : défiler jusqu'à atteindre un élément spécifique.
-- **Assert text** : vérifier que le texte affiché correspond à ce que vous attendez.
+Le recorder d'origine se trouve dans l'onglet **Remote control** de la [live session](/fr/tests/live-session) et génère un test JavaScript. Il fonctionne toujours, mais il est progressivement remplacé par le recorder côte à côte décrit ci-dessus. Préférez le nouveau flux pour les nouveaux tests.
 
-<Note>
-  Le recorder génère une [smartphone script action](/fr/tests/actions/legacy/script-actions-smartphone) : du JavaScript que vous pouvez modifier, enrichir d'assertions, ou compléter avec des [variables et métriques personnalisées](/fr/tests/actions/legacy/script-actions-variables).
-</Note>
+<Steps>
+  <Step title="Démarrer l'enregistrement">
+    Dans **Remote control**, sélectionnez le smartphone, puis cliquez sur **start a test record** dans la barre d'outils Quick Assistant (aux côtés des contrôles Power, Volume, Home, Back et App switcher).
+  </Step>
+  <Step title="Sélectionner l'application">
+    Choisissez l'application depuis la modale **Choose your test package**, qui liste les applications **User** et **System**.
+  </Step>
+  <Step title="Enregistrer et générer">
+    Pilotez l'appareil manuellement, puis arrêtez l'enregistrement. Celui-ci produit une configuration de steps basée sur un formulaire avec des champs comme **Application package** et **Application activity**, ainsi que des options comme **Reset the app**, **Run in background** et **Ignore errors**.
+  </Step>
+</Steps>
+
+Le résultat est une [smartphone script action](/fr/tests/actions/legacy/script-actions-smartphone) : du JavaScript que vous pouvez modifier, enrichir d'assertions, ou compléter avec des [variables et métriques personnalisées](/fr/tests/actions/legacy/script-actions-variables).
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Helpers de script smartphone" icon="mobile-screen" href="/fr/tests/actions/legacy/script-actions-smartphone">
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
 
-    Modifiez le script généré : événements, appels, mode avion
+    Modifiez, groupez et vérifiez les steps que vous avez enregistrés
 
 </Card>
   <Card title="Live session" icon="display" href="/fr/tests/live-session">
 
-    Contrôle à distance sans enregistrement
+    Pilotez un appareil réel de manière interactive sans enregistrer
 
 </Card>
 </Columns>

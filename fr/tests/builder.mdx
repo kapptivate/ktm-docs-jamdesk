@@ -35,7 +35,7 @@ Les tests Web s'enregistrent via **Kompagnon**, une extension Chrome. La premiè
 
 Avec l'extension installée, **Use recorder** ouvre votre URL de départ dans un nouvel onglet avec le widget du recorder superposé.
 
-Naviguez normalement : les clics, saisies et navigations sont capturés comme des steps en temps réel. Quand vous arrêtez, les steps enregistrés apparaissent dans votre canevas de steps, prêts à être modifiés.
+Naviguez normalement : les clics, saisies et navigations sont capturés comme des steps en temps réel. Quand vous arrêtez, les steps enregistrés apparaissent dans votre canevas de steps, prêts à être modifiés. Consultez l'[enregistreur web](/fr/tests/web-recorder) pour le flux complet, y compris le panneau latéral et l'enregistrement des vérifications.
 
 ### Ajouter des assertions pendant l'enregistrement
 
@@ -45,7 +45,7 @@ L'assertion est enregistrée comme un step aux côtés de vos interactions.
 
 ### Smartphone : recorder cloud
 
-Les tests Smartphone s'enregistrent via un recorder basé sur le cloud au lieu d'une extension de navigateur : vous pilotez l'appareil réel depuis votre navigateur et vos taps, saisies et scrolls deviennent des steps.
+Les tests Smartphone s'enregistrent via un recorder basé sur le cloud au lieu d'une extension de navigateur : vous pilotez l'appareil réel depuis votre navigateur et vos taps, saisies et scrolls deviennent des steps. Consultez l'[enregistreur mobile](/fr/tests/mobile-recorder) pour le flux d'enregistrement côte à côte.
 
 ## Ajouter des steps manuellement
 
@@ -81,7 +81,7 @@ Sélectionnez un step pour ouvrir son panneau de détails, organisé en trois on
 - **Timeout** : durée d'attente pour l'élément (par ex. 20 secondes)
 - **AI usage** : paramètres IA par step (voir ci-dessous)
 
-Pour les steps smartphone déjà exécutés, le panneau affiche aussi une **Reference screenshot** : l'état de l'application capturé à ce step lors de la dernière exécution, pour voir exactement ce que le step cible. Les sélecteurs smartphone proposent un basculement **Selector** / **Coords** pour cibler par élément ou par coordonnées.
+Le panneau affiche aussi une **Reference screenshot** : l'état de la page ou de l'application capturé à ce step lors de la dernière exécution, pour voir exactement ce que le step cible. Elle apparaît pour les steps web comme smartphone ; avant qu'un step n'ait été exécuté, le message "No reference screenshot available for this step" s'affiche. Les sélecteurs smartphone proposent un basculement **Selector** / **Coords** pour cibler par élément ou par coordonnées.
 
 ### Checks
 
@@ -131,7 +131,7 @@ L'onglet **Test settings** rassemble tout ce qui s'applique à l'ensemble du tes
 - **AI** : le toggle IA et la stratégie au niveau du test
 - **Delays & timeouts** : **Step delay** (pause entre les steps, en secondes) et **Selector timeout** (attente maximale pour un élément, en secondes)
 - **Hooks** : step groups de cycle de vie (voir ci-dessous)
-- **Advanced** : options comme l'acceptation des certificats non sécurisés
+- **Advanced** : le [mode d'exécution](/fr/executions/execution-modes) par défaut du test (la quantité de données collectées à chaque exécution), l'acceptation des certificats non sécurisés et les capabilities personnalisées
 
 ### Hooks
 
