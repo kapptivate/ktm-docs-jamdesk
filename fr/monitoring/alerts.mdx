@@ -1,0 +1,75 @@
+---
+title: Alertes
+description: Définissez quand vos moniteurs doivent lever des incidents et où envoyer les notifications.
+sidebarTitle: Alertes
+---
+
+![The Alerts tab listing configured alerts with their type, condition, and scope](/images/alerts-list.webp)
+
+Les moniteurs produisent un flux de résultats ; les alertes décident lesquels méritent votre attention. Une alerte surveille les données de monitoring, lève un [incident](/fr/monitoring/incidents) lorsque ses conditions sont remplies, et notifie votre équipe via les canaux que vous choisissez. Vous les gérez dans l'onglet **Alerts** de la zone Incidents.
+
+## Liste des alertes
+
+La liste affiche chaque alerte configurée dans le workspace, pour vous permettre d'auditer ce qui est surveillé et à quels seuils. Chaque ligne présente :
+
+- **ID** et **Alert Name**.
+- **Type** : le modèle d'alerte, par exemple "Availability last point".
+- **Condition** : la règle de déclenchement, par exemple "Critical: Failed Point >= 2".
+- **Apply to** : le périmètre, sous forme de tags comme "All Tests" et "All Products" ou des éléments spécifiques.
+- **Actions** : un menu pour modifier ou supprimer l'alerte.
+
+## Types d'alertes
+
+Cliquez sur **Create alert** pour choisir un modèle. Le type détermine ce que l'alerte évalue :
+
+- **Alertes de seuil** : se déclenchent lorsqu'une métrique ne satisfait pas les conditions sur une durée donnée. Par exemple : "alertez-moi si le temps de réponse USSD reste au-dessus de 60 secondes sur les 5 dernières minutes".
+- **Alertes de taux de réussite sur les dernières exécutions** : se déclenchent lorsque les échecs dépassent un seuil sur les exécutions récentes. Par exemple : "alertez-moi si un test a échoué plus de 3 fois sur les 5 dernières exécutions".
+- **Alertes brutes** : exécutent un script d'alerte personnalisé interne, pour les cas particuliers que les autres modèles ne couvrent pas.
+
+## Alertes de seuil
+
+Une alerte de seuil surveille une métrique et se déclenche lorsqu'elle franchit les limites que vous définissez. La configuration commence par l'**Alert Source**, qui définit précisément les données à évaluer :
+
+- **Bucket** : le bucket de données à lire, par exemple "default - duration (forever)".
+- **Measurement** : la série de métriques, comme `ethernet_http_api`, `cellular_http_download` ou `browsing_performance`.
+- **Filtered by** : filtres optionnels pour affiner la série.
+- **Select** : la fonction d'agrégation appliquée aux valeurs, comme `mean (http_call_duration_seconds)`.
+- **Grouped by** : regroupement optionnel de la série.
+
+Une fois une métrique sélectionnée, un graphique linéaire trace son historique récent pour que vous puissiez définir les seuils en vous appuyant sur des données réelles ; survolez un point pour voir son horodatage et sa valeur. Sous le graphique, **Alert Conditions** définit quand se déclencher :
+
+- **Time window** : une période glissante, par exemple "Over the last 5 minutes".
+- **Operator** : comment la valeur est comparée, avec "above or equal", "strictly above", "below or equal" ou "strictly below".
+- **Warning Threshold** et **Critical Threshold** : les deux niveaux de déclenchement, dessinés sur le graphique sous forme de lignes de référence jaune et rouge au fur et à mesure que vous les saisissez.
+
+## Alertes de taux de réussite
+
+Une alerte de taux de réussite compte les échecs sur les exécutions les plus récentes au lieu de surveiller une métrique, ce qui en fait le choix naturel pour les situations "ce test échoue sans cesse". Sa source est fixée à **Failed Point** ; vous configurez :
+
+- **Last points to check** : combien d'exécutions récentes évaluer, par exemple 10.
+- **Include technical error** : si les erreurs techniques comptent comme des échecs.
+- **Warning** et **Critical** : combien de ces points doivent avoir échoué pour atteindre chaque sévérité. Décochez la case à côté de Warning pour ignorer ce niveau et ne lever que des alertes critiques.
+
+Par défaut, l'alerte s'applique à tous vos monitorings actifs. Utilisez **Restrictions** pour la limiter à des **Products**, **Variable groups** ou **Tests** spécifiques.
+
+## Notifications
+
+Chaque alerte possède ses propres paramètres de notification, de sorte qu'une alerte critique de production peut alerter le canal d'astreinte tandis qu'une alerte moins importante envoie simplement un email. En bas du formulaire d'alerte :
+
+- **Recurrence** : activez "Send a notification every N minutes until the alert is closed" pour continuer à rappeler l'équipe tant que l'incident est ouvert, par exemple toutes les 15 minutes.
+- **Email notification** : sélectionnez les utilisateurs à notifier.
+- **Slack notification** : collez un lien webhook Slack.
+- **Microsoft Teams notification** : collez un lien webhook Teams.
+- **Webhook notification** : envoyez un POST vers un endpoint personnalisé, avec des en-têtes HTTP personnalisés optionnels.
+
+Cliquez sur **Save** pour appliquer, ou **Clear Values** pour réinitialiser le formulaire.
+
+<Note>
+Ces notifications sont par alerte. Pour les alertes globales au workspace lorsqu'un robot passe hors ligne, consultez [Notifications](/fr/administration/notifications) sous Administration.
+</Note>
+
+## Exclusions d'erreurs
+
+Certaines erreurs sont attendues : un message de maintenance planifiée, un échec connu et sans conséquence. Les exclusions d'erreurs les empêchent de lever des alertes, de sorte que seuls les problèmes significatifs génèrent des incidents et des notifications.
+
+Dans l'onglet **Configuration**, ouvrez **Error exclusions** et cliquez sur **Create error exclusion**. Saisissez un extrait de texte dans **If pattern contains** : toute erreur dont le message correspond au motif est ignorée.

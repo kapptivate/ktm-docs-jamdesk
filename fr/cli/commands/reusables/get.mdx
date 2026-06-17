@@ -1,0 +1,55 @@
+---
+title: "ktm reusables get"
+description: "Obtenir la définition complète d'un reusable (rejette les identifiants de tests non-reusable)"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir la définition complète d'un reusable (rejette les identifiants de tests non-reusable)
+
+## Utilisation
+
+```bash
+ktm reusables get <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm reusables get 117
+ktm reusables get 117 -o json | jq '{id, name, kind, reused_by}'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupère la définition complète du test pour un reusable (kind=2). Si l'identifiant
+pointe vers un test standard (kind=1), la commande renvoie une erreur et suggère
+d'utiliser 'ktm tests inspect' à la place. Utilisez cette commande pour consulter les actions, variables et
+reusables intégrés avant de les modifier.
+
+## Voir aussi
+
+- [`ktm reusables`](/fr/cli/commands/reusables)
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

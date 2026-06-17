@@ -1,0 +1,63 @@
+---
+title: "create_test_campaign"
+description: "Crée une nouvelle test campaign SAUVEGARDÉE et réutilisable."
+sidebarTitle: "create_test_campaign"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Crée une nouvelle test campaign SAUVEGARDÉE et réutilisable.
+
+<Info>
+  **Écrit des données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialise le budget d'édition après approbation de l'utilisateur |
+| `collection_uid` | string | Non | UID de la collection sous laquelle nicher la test campaign (défaut : racine des campaigns du produit ; un UID de tests-root est rejeté) |
+| `description` | string | Non | Description de la test campaign |
+| `name` | string | Oui | Nom de la test campaign |
+| `product` | string | Oui | Slug du produit (ex. operator~product) |
+| `test_list` | string | Oui | Tableau JSON d'entrées TestCampaignMember, ex. '[\{"position":0,"test":123,"owners":\{\},"input_variables":\{\}\}]' |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "test_list": "string"
+}
+```
+
+## Description
+
+```text
+(To run tests ad-hoc without saving, use build_campaign(test_ids=…) instead.)
+
+test_list is a JSON array of {position, test, owners, input_variables}. All tests must belong to the given product. The authenticated user is auto-set as creator.
+
+collection_uid nests the Tests campaign under a specific collection. When omitted, defaults to the product's campaigns root (test_campaigns_root_collection_uid). A Tests campaign must never live under a tests root — it renders as a test row and crashes the UI test list — so a tests-root collection_uid is rejected.
+
+Consumes one slot of the per-session Tests-campaign edit budget (default: 20). Pass acknowledge=true after a budget-exhaustion message to reset.
+```
+
+## Associés
+
+- [`build_campaign`](/fr/mcp/tools/execution/build_campaign)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,59 @@
+---
+title: Bibliothèque d'actions
+sidebarTitle: Vue d'ensemble
+description: Toutes les étapes utilisables dans un test, organisées par canal et par catégorie de palette.
+---
+
+Une **action** (ou step) est une instruction unique dans un test : cliquer sur un bouton, saisir du texte, vérifier un élément, envoyer un code USSD. Un test est une liste ordonnée d'actions exécutées de haut en bas sur l'appareil qui lui est assigné.
+
+La bibliothèque est organisée par **canal**, et à l'intérieur de chaque canal elle reflète la palette de steps que vous voyez dans le produit. Un step qui existe sur deux canaux possède une page par canal, vous le trouvez donc toujours là où vous travaillez.
+
+## Parcourir par canal
+
+<Columns cols={2}>
+  <Card title="Web" icon="globe" href="/fr/tests/actions/web/overview">
+
+    Tests navigateur : interactions, récupération d'e-mails et de SMS, vérifications, navigation
+
+</Card>
+  <Card title="Smartphone" icon="mobile-screen" href="/fr/tests/actions/smartphone/overview">
+
+    Applications natives Android et iOS : interactions tactiles, gestion des apps, clavier
+
+</Card>
+  <Card title="API" icon="code" href="/fr/tests/actions/api/overview">
+
+    Steps HTTP que vous ajoutez dans les tests web et smartphone
+
+</Card>
+  <Card title="SIMs" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    Cartes SIM réelles : USSD, SMS, appels vocaux et mesures de données
+
+</Card>
+</Columns>
+
+## Ce que chaque page de step vous indique
+
+Chaque page suit la même structure, ce qui vous permet de parcourir la bibliothèque comme une référence :
+
+- **Paramètres** : chaque champ tel qu'il apparaît dans le builder, avec son nom JSON, sa valeur par défaut et son comportement.
+- **Dans le scénario JSON** : un objet step complet, prêt à être collé dans un scénario.
+- **Résultats et métriques** : ce que le step enregistre lors de son exécution (temps, statut, captures d'écran, variables) et ce qui remonte vers Analytics.
+
+Vous pouvez également lister les types d'actions disponibles de manière programmatique : exécutez [ktm tests action-types](/fr/cli/commands/tests/action-types) depuis le CLI, ou appelez [list_action_types](/fr/mcp/tools/test-management/list_action_types) depuis le serveur MCP.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Steps web" icon="globe" href="/fr/tests/actions/web/overview">
+
+    La palette web complète en un coup d'oeil
+
+</Card>
+  <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
+
+    Comment les steps sont ajoutés et configurés
+
+</Card>
+</Columns>

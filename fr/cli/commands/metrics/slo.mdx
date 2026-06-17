@@ -1,0 +1,76 @@
+---
+title: "ktm metrics slo"
+description: "Calculer les métriques SLI/SLO selon la méthodologie burn-rate de Google SRE"
+sidebarTitle: "slo"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Calculer les métriques SLI/SLO selon la méthodologie burn-rate de Google SRE
+
+## Utilisation
+
+```bash
+ktm metrics slo [flags]
+```
+
+## Exemples
+
+```bash
+# Compute SLO for 99.9% target over 30-day window
+ktm metrics slo --operator acme   --query "SELECT sum(good) AS good, sum(total) AS total FROM test WHERE time > now() - 30d"   --slo-target 99.9
+
+# Custom field names and 7-day window
+ktm metrics slo --operator acme   --query "SELECT sum(success) AS ok, sum(requests) AS all_req FROM api WHERE time > now() - 7d"   --slo-target 99.5 --good-field ok --total-field all_req --window 7d
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--good-field` | string | `good` | Nom du field pour les événements réussis |
+| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--precision` | string | — | Précision temporelle de la requête (s, ms, u, ns) |
+| `--query` | string | — | Requête InfluxQL retournant les fields good/total |
+| `--slo-target` | float | — | Cible SLO en pourcentage (ex. 99.9) |
+| `--total-field` | string | `total` | Nom du field pour le total des événements |
+| `--window` | string | `30d` | Fenêtre SLO (ex. 30d, 168h) |
+
+## Détails
+
+Calculer les métriques SLI/SLO à partir des résultats de requêtes InfluxDB.
+
+Prérequis : Découvrez d'abord les measurements et fields disponibles avec
+'metrics query --operator &lt;slug&gt; --query "SHOW MEASUREMENTS"' et
+'metrics query --operator &lt;slug&gt; --query "SHOW FIELD KEYS FROM &lt;measurement&gt;"'.
+N'inventez pas de noms de measurement ou de field.
+
+Exécute une requête InfluxQL qui retourne les compteurs d'événements réussis et totaux
+(ex. SELECT sum(good) AS good, sum(total) AS total FROM ...).
+L'outil extrait les fields good/total, calcule le SLI, le budget d'erreur,
+le taux de consommation et la sévérité.
+
+Seuils de sévérité (Google SRE) :
+  - critical : burn rate &gt; 14.4x (alerte immédiate)
+  - red :      burn rate &gt; 6x (créer un ticket)
+  - yellow :   burn rate &gt; 1x (SLO à risque)
+  - green :    burn rate &lt;= 1x (dans le budget)
+
+## Voir aussi
+
+- [`ktm metrics`](/fr/cli/commands/metrics)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

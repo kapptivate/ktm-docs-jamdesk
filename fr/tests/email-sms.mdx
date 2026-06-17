@@ -1,0 +1,69 @@
+---
+title: Test Email & SMS
+description: Recevez de vrais emails et SMS dans vos tests, et laissez l'IA extraire les codes et liens nécessaires à votre parcours.
+sidebarTitle: Email & SMS
+---
+
+![Un step group enchaînant Get sms code, Get email code et Get email link, chacun exposant sa variable extraite](/images/email-sms-steps.webp)
+
+Les inscriptions, les connexions avec 2FA et les réinitialisations de mot de passe quittent toutes le navigateur à un moment donné : un code arrive par SMS, un lien de confirmation atterrit dans une boîte de réception. Kapptivate ferme cette boucle. Son service de mail et SMS reçoit les vrais messages, et des steps alimentés par l'IA extraient le code ou le lien dans une variable que vos steps suivants utilisent, sans copier-coller manuel, sans règles d'analyse fragiles.
+
+## Les steps Email & SMS
+
+Ajoutez-les depuis **Add step... > Email & SMS** dans le builder. Chaque step extrait une valeur et la stocke dans une variable (vous pouvez renommer la valeur par défaut) :
+
+| Step | Entrée | Variable par défaut | Ce que l'IA extrait |
+|------|--------|---------------------|---------------------|
+| **[Get sms code](/fr/tests/actions/web/getsmscode)** | Numéro de téléphone pour recevoir le code | `SmsCode` | Le code de vérification dans le SMS |
+| **[Get email code](/fr/tests/actions/web/getemailcode)** | Email pour recevoir le code | `MailCode` | L'OTP ou le code de vérification dans l'email |
+| **[Get email link](/fr/tests/actions/web/getemaillink)** | Email pour recevoir le lien | `MailLink` | Le lien correspondant à votre intention |
+
+Chaque nom de step renvoie à sa page de référence, avec les paramètres et le format JSON. Pour récupérer un message entier au lieu d'une seule valeur, utilisez [Get mail](/fr/tests/actions/web/getmail). Les mêmes steps existent pour les [tests smartphone](/fr/tests/actions/smartphone/getmail).
+
+Les steps attendent l'arrivée du message, puis l'analysent avec l'IA : aucune configuration de format, quelle que soit la formulation ou la mise en page de l'expéditeur.
+
+## Cibler le bon lien avec Intent
+
+Un email contient souvent plusieurs liens (le lien d'action, mais aussi les pieds de page de désinscription, les logos, les pages d'aide). Sélectionnez un step **Get email link** et remplissez le champ **Intent** dans son onglet **General** pour indiquer à l'IA lequel vous voulez, en langage naturel : "Le lien pour activer mon compte".
+
+## Utiliser les valeurs extraites
+
+Les variables extraites se comportent comme n'importe quelle variable de test. Cliquez sur l'icône `{}` dans le champ d'un step suivant et sélectionnez-les depuis l'onglet **Previous steps** : naviguez vers `MailLink`, saisissez `SmsCode` dans le champ 2FA, ajoutez une assertion sur `MailCode`.
+
+Consultez [Variables dans les tests](/fr/tests/variables) pour tout ce que le sélecteur de variables peut faire.
+
+## Ce que les résultats capturent
+
+Chaque step Email & SMS se documente lui-même dans le résultat d'exécution :
+
+- **Steps email** : capturent des captures d'écran de l'email reçu au format mobile, tablette et desktop, pour que vous obteniez aussi une vérification visuelle de vos emails transactionnels.
+- **Steps SMS** : capturent le texte brut du message à côté des variables extraites.
+
+<Note>
+Ces steps reposent sur le service de mail et SMS de Kapptivate : les boîtes mail et les numéros de téléphone qu'ils surveillent doivent être provisionnés pour votre espace de travail.
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Variables dans les tests" icon="brackets-curly" href="/fr/tests/variables">
+
+    Réutilisez les codes et liens extraits dans les steps suivants
+
+</Card>
+  <Card title="L'IA dans Kapptivate" icon="sparkles" href="/fr/ai/overview">
+
+    Les autres endroits où l'IA travaille pour vous sur la plateforme
+
+</Card>
+  <Card title="Référence Get email code" icon="envelope" href="/fr/tests/actions/web/getemailcode">
+
+    Paramètres et format JSON pour le step email code
+
+</Card>
+  <Card title="Référence Get sms code" icon="comment-sms" href="/fr/tests/actions/web/getsmscode">
+
+    Paramètres et format JSON pour le step SMS code
+
+</Card>
+</Columns>

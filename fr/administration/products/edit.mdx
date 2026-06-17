@@ -1,0 +1,34 @@
+---
+title: Modifier un produit
+description: Mettez à jour les détails d'un produit, gérez l'accès des équipes, associez des appareils et configurez les paramètres de monitoring.
+---
+
+![La page de modification d'un produit sur l'onglet About, avec le sélecteur d'icônes ouvert affichant la palette de couleurs et le jeu d'icônes](/images/product-edit.webp)
+
+Vous pouvez modifier n'importe quel produit pour mettre à jour ses détails, ajouter ou retirer des équipes et des appareils, ou configurer les paramètres de monitoring.
+
+## Modifier un produit
+
+1. Accédez à Administration > Products
+2. Cliquez sur le nom du produit pour ouvrir la page de modification
+3. Effectuez vos modifications dans les sections concernées :
+   - **About** : changez l'icône, la couleur ou le nom du produit
+   - **Team access** : ajoutez ou retirez des équipes ayant accès à ce produit
+   - **Allocated devices** : associez des smartphones, des cartes SIM et des agents web au produit
+   - **Settings** : activez le monitoring et définissez l'intervalle d'agrégation
+4. Cliquez sur "Save changes"
+
+<Info>
+Le slug de votre produit est défini lors de la création du produit et ne peut pas être modifié. Le slug est un identifiant adapté aux URL utilisé dans les URL spécifiques au produit.
+</Info>
+
+## Archiver ou supprimer un produit
+
+L'onglet **Settings** propose deux actions en bas de page pour retirer un produit de l'utilisation active :
+
+- **Archive product** : conserve le produit et ses données mais le déplace hors de la liste active. Les produits archivés descendent en fin de liste et restent accessibles, vous pouvez donc les restaurer ou les consulter ultérieurement. Utilisez cette option lorsqu'un produit n'est plus testé mais que vous souhaitez conserver son historique.
+- **Delete product** : supprime définitivement le produit. Utilisez cette option uniquement lorsque vous êtes certain que le produit et sa configuration ne sont plus nécessaires.
+
+<Warning>
+La suppression d'un produit est définitive et irréversible. Archivez plutôt si vous pourriez avoir besoin du produit ou de ses données ultérieurement.
+</Warning>

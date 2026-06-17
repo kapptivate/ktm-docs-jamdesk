@@ -1,0 +1,76 @@
+---
+title: Web
+description: Tests web dans un navigateur et steps API HTTP, tous exécutés par le Web agent.
+sidebarTitle: Web
+---
+
+![Le constructeur de tests web : une action Navigate to starting page suivie d'un groupe de steps Fill Form avec hover, click et fill-input, plus un panneau Prévisualisation/Exécution et les exécutions récentes](/images/web-test-builder.webp)
+
+Le channel Web exécute des tests dans un navigateur sur des sites et applications web. Les steps API interrogent directement des services HTTP, sans navigateur. Les deux fonctionnent sur le **Web agent**, une machine ou un serveur disposant d'un accès réseau depuis un emplacement précis.
+
+## Démarrage rapide
+
+Créez votre premier test web en quatre étapes.
+
+<Steps>
+  <Step>
+    **Créez le test.** Ouvrez la section **Tests** de votre produit, cliquez sur **+ Create new test** et choisissez **Web (New experience)**. Renseignez le nom du test, l'agent Web par défaut et l'URL de départ que le navigateur ouvrira.
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Dans le builder, enregistrez des interactions sur la page en direct ou ajoutez des actions web manuellement : click sur un élément, remplissage d'un input, attente de contenu et assert qu'un élément est affiché. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le sur un navigateur.** Cliquez sur **Run** dans le builder pour le regarder en direct, ou sur **Run** sur la ligne du test, puis confirmez l'agent et les variables sur la page de [confirmation d'exécution](/fr/executions/run) et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les captures d'écran par step et le temps d'exécution.
+  </Step>
+</Steps>
+
+<Tip>
+Le type de navigateur, la taille de fenêtre, la langue et le user agent proviennent du [browser preset](/fr/tests/browser-presets) que vous sélectionnez dans l'onglet **Environment** du builder.
+</Tip>
+
+## Tests web
+
+Les tests web automatisent les interactions utilisateur : click, saisie de texte, navigation et vérification des éléments de page.
+
+**Point de départ :** vous fournissez un modèle d'URL. Les tests lancent le navigateur, naviguent vers cette URL et exécutent vos steps à partir de là.
+
+**Options de navigateur configurables :**
+- Type de navigateur
+- User agent personnalisé
+- Langue / locale
+- Taille de la fenêtre (par défaut 1920x1080)
+
+**Actions courantes :** click sur des éléments, saisie de texte, navigation, attente d'éléments, vérification de l'existence ou du contenu textuel d'éléments, scroll, hover et lecture des propriétés d'éléments.
+
+## Steps API
+
+Testez directement vos services REST et HTTP avec des [steps API](/fr/tests/actions/api/overview) ajoutés dans un test web ou smartphone, utiles pour la validation backend, les vérifications de contrat et les parcours de bout en bout qui mélangent UI et appels backend directs.
+
+**Configuration de la requête :**
+- Méthodes HTTP : GET, POST, PUT, PATCH, DELETE
+- URL avec variables templatées
+- Headers personnalisés
+- Body : JSON ou payload brut
+- Surcharge DNS, routage proxy, gestion SSL, redirections et cookies
+
+**Validation de la réponse :**
+- Vérification du code de statut
+- Assertions sur le body et les headers
+- Extraction de variables depuis la réponse pour les utiliser dans les steps suivants
+
+**Métriques par requête :** décomposition détaillée des temps (résolution DNS, connexion TCP, handshake TLS, génération du contenu, transfert, total) pour l'analyse de performance.
+
+## Le Web agent
+
+Un serveur ou une machine qui exécute des tests dans un navigateur depuis un emplacement réseau précis.
+
+- Automatise les tests de sites et d'applications web
+- Lance les navigateurs et exécute les steps de test
+- Supporte plusieurs tests simultanés
+
+**Configuration :** nom d'hôte ou adresse IP, capacité de tests en parallèle, planification du redémarrage et des mises à jour automatiques, configuration réseau et identifiants d'authentification.
+
+Les Web agents signalent leurs propres états opérationnels : consultez les [Statuts](/fr/equipment/statuses), y compris l'état "Waiting for Config" propre aux Web agents, utilisé uniquement lors de la mise en place.

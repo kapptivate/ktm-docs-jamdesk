@@ -1,0 +1,67 @@
+---
+title: "ktm incidents counter"
+description: "Obtenir les compteurs d'incidents : critical, warning, closed"
+sidebarTitle: "counter"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les compteurs d'incidents : critical, warning, closed
+
+## Utilisation
+
+```bash
+ktm incidents counter [flags]
+```
+
+## Exemples
+
+```bash
+# Get incident counts for an operator
+ktm incidents counter --operator my-operator
+
+# Get counts for a specific alert
+ktm incidents counter --operator my-operator --alert-id 42
+
+# Get counts for the last 7 days
+ktm incidents counter --operator my-operator --created-after 2026-03-12T00:00:00Z
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--alert-id` | string | — | ID de définitions d'alertes séparés par des virgules |
+| `--closed-after` | string | — | Filtrer les incidents fermés après cette date ISO |
+| `--closed-before` | string | — | Filtrer les incidents fermés avant cette date ISO |
+| `--created-after` | string | — | Filtrer les incidents créés après cette date ISO |
+| `--created-before` | string | — | Filtrer les incidents créés avant cette date ISO |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--status` | string | — | Filtrer par statut : OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
+## Détails
+
+Obtenir un résumé rapide des compteurs d'incidents regroupés par sévérité.
+
+Retourne trois nombres : compteurs d'incidents critical, warning et closed.
+Accepte les mêmes filtres que 'incidents list' pour limiter la portée des compteurs.
+
+## Voir aussi
+
+- [`ktm incidents`](/fr/cli/commands/incidents)
+- [`ktm incidents list`](/fr/cli/commands/incidents/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

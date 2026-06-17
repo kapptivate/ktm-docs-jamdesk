@@ -1,0 +1,96 @@
+---
+title: Dépannage réseau du robot
+description: Diagnostiquer un robot injoignable, du câble aux flux vers Kapptivate.
+---
+
+Lorsqu'un robot est injoignable, la cause est presque toujours l'une de ces trois choses : le câble est dans le mauvais port, les flux vers Kapptivate ne sont pas ouverts, ou la résolution DNS échoue. Effectuez les vérifications dans l'ordre.
+
+## Vérifier les prérequis
+
+- Le câble RJ45 est branché dans le port Ethernet configuré avec l'IP statique ([comment vérifier](/fr/hardware/rj45-port)).
+- Les flux requis vers Kapptivate sont ouverts. Consultez le document des exigences IP ; contactez le support si vous ne l'avez pas.
+
+## Connecter un écran et un clavier
+
+Connectez un écran et un clavier au robot ([accès série](/fr/hardware/headless-login) pour les modèles sans sortie vidéo).
+
+Si l'écran reste noir même en appuyant sur des touches, vérifiez que la source d'entrée de l'écran correspond au branchement que vous avez utilisé. Si c'est le cas et que l'écran reste noir, redémarrez le robot plusieurs fois et vérifiez qu'il s'allume. Toujours pas de réponse ? Contactez support@kapptivate.com, avec une vidéo des LED avant s'il s'agit d'un robot cellulaire : il s'agit très probablement d'un problème matériel.
+
+## Tester le chemin réseau
+
+Connectez-vous avec vos identifiants et ouvrez un terminal. Exécutez chaque vérification pour toutes les IP, domaines et ports du document d'exigences.
+
+### Route vers la plateforme
+
+```bash
+traceroute IP
+```
+
+<Frame caption="Le robot atteint l'IP cible">
+  ![Traceroute réussi](/images/hardware/network-troubleshooting-01.webp)
+</Frame>
+
+<Frame caption="La route n'atteint jamais la cible : quelque chose bloque le trafic">
+  ![Traceroute échoué](/images/hardware/network-troubleshooting-02.webp)
+</Frame>
+
+Si la route échoue, envoyez une capture d'écran à votre service informatique : quelque chose sur votre réseau bloque le chemin vers Kapptivate.
+
+### Flux par IP et port
+
+```bash
+curl -v telnet://IP:port
+```
+
+<Frame caption="Connexion réussie">
+  ![Telnet réussi](/images/hardware/network-troubleshooting-03.webp)
+</Frame>
+
+<Frame caption="Connexion refusée : le flux n'est pas ouvert">
+  ![Telnet refusé](/images/hardware/network-troubleshooting-04.webp)
+</Frame>
+
+Une connexion refusée signifie que les flux requis ne sont pas ouverts : votre service informatique doit les ouvrir.
+
+### Flux par nom de domaine
+
+```bash
+curl -v telnet://domain.kapptivate.com:port
+```
+
+<Frame caption="Connexion réussie">
+  ![Telnet domaine réussi](/images/hardware/network-troubleshooting-05.webp)
+</Frame>
+
+<Frame caption="Connexion refusée : problème DNS ou de flux">
+  ![Telnet domaine refusé](/images/hardware/network-troubleshooting-06.webp)
+</Frame>
+
+Si l'IP fonctionne mais le domaine échoue, le DNS est le suspect : soit les serveurs DNS ne sont pas configurés sur le robot (voir le champ DNS dans [la configuration réseau](/fr/hardware/install-software#ip-configuration)), soit les flux pour ces domaines ne sont pas ouverts.
+
+### Handshake HTTPS complet
+
+```bash
+curl -v https://domain.kapptivate.com
+```
+
+<Frame caption="Un handshake TLS complet">
+  ![HTTPS réussi](/images/hardware/network-troubleshooting-07.webp)
+</Frame>
+
+Si la sortie s'arrête en cours de handshake (par exemple juste après `TLS handshake, Client hello`), quelque chose sur votre réseau interne intercepte ou bloque la connexion : escaladez vers votre service informatique avec la sortie.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage des erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
+
+    Quand le robot est joignable mais les monitorings passent au gris
+
+</Card>
+  <Card title="Configuration réseau du Mac mini" icon="ethernet" href="/fr/hardware/macmini-network">
+
+    Les vérifications équivalentes sur les robots Mac mini
+
+</Card>
+</Columns>

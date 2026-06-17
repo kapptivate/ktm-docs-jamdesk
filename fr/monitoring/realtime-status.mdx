@@ -1,0 +1,103 @@
+---
+title: Statut en temps réel
+description: Créez des vues de statut en direct de vos produits et moniteurs avec regroupement et filtrage personnalisés.
+sidebarTitle: Statut en temps réel
+---
+
+![The Realtime status page in card layout, showing one card per product with an uptime bar chart, uptime percentage, and Up status badge over the last 12 hours](/images/realtime-status-overview.webp)
+
+Le statut en temps réel affiche les résultats de monitoring en direct sur l'ensemble de votre workspace avec des vues personnalisables, plusieurs formats d'affichage et un filtrage avancé. Vous pouvez organiser les résultats par produit, test ou moniteur, basculer entre les mises en page carte et liste, et ajuster les métriques affichées.
+
+## Vues et onglets
+
+Les mêmes données de monitoring servent des objectifs différents : un mur de statut pour l'équipe, une vue ciblée pour un produit, une session de débogage sur quelques moniteurs instables. Les vues vous permettent de sauvegarder une configuration par objectif et de basculer instantanément entre elles au lieu de reconstruire les filtres à chaque fois.
+
+Chaque vue est un onglet en haut de la page et conserve ses propres paramètres :
+
+- **Paramètres d'affichage** : mise en page, regroupement et options de graphique.
+- **Filtres** : chaque vue conserve ses propres règles de filtre, de sorte qu'un onglet peut tout afficher tandis qu'un autre se concentre sur un seul produit.
+- **Période** : chaque vue conserve sa propre période, prédéfinie ou personnalisée.
+
+Depuis les onglets de vue, vous pouvez :
+
+- **Créer** une nouvelle vue avec le bouton d'ajout de vue.
+- **Renommer, dupliquer ou supprimer** une vue depuis le menu de son onglet.
+- **Définir une vue par défaut** : une vue se charge automatiquement lorsque vous ouvrez la page. Faites un clic droit sur un onglet et sélectionnez "Set as default" pour la modifier.
+- **Réordonner** : glissez les onglets pour les réorganiser ; l'ordre est conservé dans vos paramètres.
+- **Partager** : copiez l'URL de la vue actuelle avec le bouton de partage pour envoyer la vue exacte à un collègue.
+
+## Formats d'affichage
+
+La façon dont vous lisez les données dépend de ce que vous faites : les cartes rendent le statut visible d'un coup d'oeil, même de l'autre côté de la pièce, tandis que la liste affiche beaucoup plus de moniteurs sur un seul écran.
+
+Ouvrez le menu **Display** pour choisir la mise en page et ajuster l'affichage des résultats :
+
+- **Cards ou List** : basculez entre les deux mises en page.
+- **Grouping** : organisez les résultats par produit, test ou moniteur. La mise en page List ajoute deux options supplémentaires : localisation et agent.
+- **Columns** : disposez les résultats en 1, 2 ou 3 colonnes.
+- **Show execution by** : analysez les résultats sur une période ou par nombre d'exécutions.
+- **Bar chart** : barres empilées standard ou barres empilées à 100 %.
+- **Show period without executions** : incluez ou masquez les périodes sans exécutions.
+- **Show** : affichez le statut ou le pourcentage de disponibilité de chaque élément. La mise en page List ajoute deux métriques supplémentaires : fréquence et temps d'exécution moyen.
+
+**Cards** affiche une carte de synthèse par regroupement. Chaque carte présente :
+
+- **Badge de statut** : Up, Partial outage ou Down. Les éléments sans exécution sur la période affichent des barres grisées.
+- **Pourcentage d'uptime** sur la période sélectionnée.
+- **Diagramme à barres empilées** de la disponibilité, avec le début et la fin de la période comme libellés.
+
+**List** affiche une liste condensée multi-colonnes. Chaque ligne présente :
+
+- **Icône de statut et nom** du moniteur.
+- **Chip de statut** : Up ou Paused.
+- **Points d'exécution** pour les exécutions les plus récentes, vert pour les succès et rouge pour les échecs.
+
+Ajustez le nombre de colonnes pour afficher plus de lignes à l'écran. C'est un moyen compact de parcourir de nombreux moniteurs à la fois. Pour le tableau complet des moniteurs avec planification et détails des appareils, consultez la [liste des moniteurs](/fr/monitoring/overview).
+
+## Période et mode d'exécution
+
+Que vous vérifiez les dernières heures après un déploiement ou que vous examiniez un trimestre d'historique, la période analysée est à votre discrétion. Le sélecteur de période vous permet de choisir des plages prédéfinies (2 dernières heures, 4h, 12h, 24h, 48h, 7 jours, 30 jours, 90 jours ou 12 mois) ou de définir une plage personnalisée avec un début et une fin précis. Cela contrôle les données affichées dans les cartes et les graphiques d'uptime.
+
+Basculez entre deux modes d'exécution avec **Show execution by** dans le menu Display :
+
+- **Mode temporel** : analyse les résultats sur la période sélectionnée et affiche le sélecteur de période. Les libellés du graphique montrent le début et la fin de la période.
+- **Mode par nombre** : analyse un nombre fixe d'exécutions récentes (30, 60 ou 90) sans nécessiter de période. Le sélecteur de période est remplacé par un sélecteur de nombre, et les libellés du graphique passent à "Oldest execution" et "Most recent".
+
+Dans les deux modes, vous pouvez aussi zoomer directement sur un graphique : cliquez et glissez sur les barres pour réduire la vue à cette période ou cet ensemble d'exécutions. En mode temporel, le sélecteur de période passe à "Custom", et vous pouvez continuer à zoomer jusqu'à isoler le moment recherché.
+
+## Graphiques d'uptime
+
+Le diagramme à barres empilées de chaque carte visualise la disponibilité sur la période sélectionnée. Choisissez entre des barres empilées (dimensionnées par le nombre d'exécutions sur chaque période) ou des barres empilées à 100 % (normalisées à la même hauteur pour montrer les proportions). Activez "Show period without executions" pour inclure ou masquer les périodes sans exécution.
+
+Survolez une barre pour voir la période exacte qu'elle couvre et la répartition des exécutions réussies, échouées et non exécutées. Les périodes vides affichent "No tests played during this period".
+
+## Filtrage
+
+Un workspace peut contenir bien plus de moniteurs qu'une seule personne n'en surveille. Les filtres réduisent la vue aux seuls moniteurs qui vous concernent, d'un simple "uniquement ce produit" à une logique comme "tout dans ce produit sauf ces trois tests".
+
+Cliquez sur **Filter** pour ouvrir le constructeur de filtres. Le badge sur le bouton Filter indique le nombre de règles actives. Chaque règle combine :
+
+- **Un paramètre** : produit, moniteur, test, appareil ou statut.
+- **Un opérateur** : "is exactly", "not exactly", "contains", "does not contain", "starts with" ou "ends with".
+- **Une valeur** : choisie dans une liste déroulante avec recherche de vos produits, tests ou appareils. Les règles de statut proposent Up, Degraded, Down, Paused, Running ou Scheduled.
+
+Construisez une logique plus complexe en combinant les règles :
+
+- **Chaînez les règles** avec les opérateurs "and"/"or".
+- **Ajoutez des groupes** pour imbriquer des conditions : par exemple, afficher tout dans un produit sauf trois tests spécifiques, ou tout de deux produits.
+- **Gérez les règles et groupes** depuis leurs menus : dupliquer, convertir ou supprimer.
+
+Sauvegardez les filtres pour les appliquer à la vue actuelle, ou annulez pour laisser la vue inchangée.
+
+## Actualisation
+
+Une page de statut n'est utile que si elle est à jour, la vue se met donc à jour automatiquement. Un compte à rebours à côté de la période indique le temps restant avant la prochaine actualisation automatique.
+
+- **Mettez en pause ou reprenez** l'actualisation automatique avec le bouton de pause.
+- **Modifiez l'intervalle d'actualisation** depuis le menu déroulant du compte à rebours.
+
+Les paramètres de la vue sont conservés jusqu'à ce que vous les modifiiez ; quitter sans sauvegarder affiche une confirmation si vous avez modifié des filtres ou des paramètres.
+
+## Panneau de détails
+
+Cliquez sur une carte ou une ligne pour ouvrir un panneau de détails affichant la hiérarchie complète : produit, test, résultat de monitoring. Parcourez l'historique d'exécution, les logs et les détails d'erreur sans quitter la vue. Le panneau reflète vos filtres et regroupements actuels.

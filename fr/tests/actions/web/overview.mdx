@@ -1,0 +1,101 @@
+---
+title: Steps web
+description: Tous les steps disponibles dans le builder de tests web, organisés comme la palette de steps.
+sidebarTitle: Vue d'ensemble
+---
+
+Les tests web sont construits à partir des steps ci-dessous. Les groupes correspondent aux catégories de la palette **Ajouter un step** dans le [test builder](/fr/tests/builder), ce que vous voyez ici est donc ce que vous voyez dans le produit.
+
+## Interactions
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Click](/fr/tests/actions/web/click) | Cliquer sur un élément localisé par description IA ou selector |
+| [Double click](/fr/tests/actions/web/doubleclick) | Deux clics rapides, pour les modes édition et les éléments de liste |
+| [Right click](/fr/tests/actions/web/rightclick) | Ouvrir le menu contextuel d'un élément |
+| [Hover](/fr/tests/actions/web/hover) | Révéler des menus, infobulles et états de survol |
+| [Upload file](/fr/tests/actions/web/uploadfile) | Fournir un fichier à un champ de téléversement |
+| [Press keys](/fr/tests/actions/web/keys) | Envoyer des touches et raccourcis clavier |
+| [Fill input](/fr/tests/actions/web/input) | Saisir du texte, des variables ou des données générées dans un champ |
+| [Scroll](/fr/tests/actions/web/scroll) | Faire défiler jusqu'à rendre un élément visible |
+
+## Email & SMS
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Get sms code](/fr/tests/actions/web/getsmscode) | Attendre un SMS et extraire son code dans une variable |
+| [Get mail](/fr/tests/actions/web/getmail) | Vérifier qu'un e-mail arrive dans une boîte de test |
+| [Get email code](/fr/tests/actions/web/getemailcode) | Attendre un e-mail et extraire son code dans une variable |
+| [Get email link](/fr/tests/actions/web/getemaillink) | Attendre un e-mail et extraire un lien dans une variable |
+
+## Vérifications
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Verify element](/fr/tests/actions/web/verifyelement) | Vérifier qu'un élément est (ou n'est pas) affiché, cliquable, activé ou présent |
+| [Verify Spell Check (AI)](/fr/tests/actions/web/aispellcheck) | Demander à l'IA de relire le texte visible de la page |
+| [Verify with AI](/fr/tests/actions/web/aivisualassert) | Vérifier n'importe quoi sur l'écran en langage naturel |
+
+## Navigation
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Switch window](/fr/tests/actions/web/switchwindow) | Continuer le test dans un autre onglet ou une autre fenêtre |
+| [Navigate to URL](/fr/tests/actions/web/navigatetourl) | Charger une URL, avec des vérifications optionnelles du temps de chargement |
+
+## Attente
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Wait for delay](/fr/tests/actions/web/waitfordelay) | Mettre en pause pendant une durée fixe |
+
+## Autres
+
+| Step | Ce qu'il fait |
+|------|---------------|
+| [Custom step](/fr/tests/actions/web/customstep) | Exécuter votre propre JavaScript |
+| [Set variable](/fr/tests/actions/web/setvariable) | Stocker une valeur pour les steps suivants |
+| [Extract value](/fr/tests/actions/web/extractvalue) | Lire le texte ou la valeur d'un élément dans une variable |
+
+<Note>
+  Quatre steps historiques n'apparaissent plus dans la palette mais continuent de fonctionner dans les tests existants : [Assert displayed](/fr/tests/actions/web/assertdisplayed), [Assert not displayed](/fr/tests/actions/web/assertnotdisplayed), [Set checkbox](/fr/tests/actions/web/checkbox) et [Select](/fr/tests/actions/web/select).
+</Note>
+
+## Paramètres communs des steps
+
+Chaque step partage quelques paramètres, affichés dans le panneau latéral du step dans le builder :
+
+- **Ignorer l'erreur sur ce step** (`ignore_errors`) : l'exécution continue avec le step suivant même si celui-ci échoue.
+- **Ignorer pendant l'exécution** (`disabled`) : le step reste dans le scénario mais n'est pas exécuté.
+- **Capacités personnalisées** (`use_capabilities`, `capabilities`) : ajuster ou remplacer le comportement d'exécution pour ce step uniquement.
+
+Les steps qui ciblent un élément partagent également les paramètres IA : une **description** en langage naturel, un **selector manuel** optionnel, et une **stratégie IA** (`inherit`, `smart` ou `always`) qui détermine quand l'IA localise l'élément par rapport au selector enregistré. Consultez [Sélecteurs IA](/fr/ai/selectors).
+
+## Vérifications de step
+
+Les steps d'interaction et de navigation peuvent porter des **vérifications**, évaluées juste après l'exécution du step :
+
+- **URL** : l'adresse de la page correspond (ou ne correspond pas) à un motif.
+- **Temps de chargement** : le chargement de la page reste sous un seuil.
+- **Durée du step** : le step lui-même reste sous un seuil.
+
+Chaque vérification est définie en mode **erreur** (un échec de la vérification fait échouer le step) ou **avertissement** (le step réussit mais est signalé). Les valeurs attendues et réelles apparaissent dans les résultats de l'exécution.
+
+## Des résultats à l'analytique
+
+Chaque step enregistre son temps d'exécution, son statut, ses captures d'écran, les résultats de ses vérifications et toutes les variables qu'il a créées. Au niveau du test, chaque exécution alimente la mesure `test` utilisée par [Analytics](/fr/monitoring/dashboards) : durée, compteurs de succès/avertissement/échec, et en cas d'échec, quel type de step a causé la défaillance. Les métriques personnalisées créées dans les steps remontent au même endroit.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
+
+    Comment les steps sont ajoutés, configurés et organisés en groupes
+
+</Card>
+  <Card title="Sélecteurs IA" icon="sparkles" href="/fr/ai/selectors">
+
+    Comment les descriptions d'éléments et les selectors enregistrés fonctionnent ensemble
+
+</Card>
+</Columns>

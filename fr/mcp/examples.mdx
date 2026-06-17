@@ -1,0 +1,63 @@
+---
+title: Exemples de prompts
+description: Ce qu'il faut demander à un assistant IA connecté au serveur MCP de Kapptivate, classé par objectif.
+sidebarTitle: Exemples
+---
+
+Une fois l'assistant connecté, vous pilotez Kapptivate en langage naturel. Voici des prompts qui fonctionnent bien, classés par objectif. Vous nommez rarement un outil : décrivez le résultat souhaité et l'agent choisit le chemin. Pour toute action qui crée ou modifie des données, l'agent vous montre le plan au préalable.
+
+## Investiguer un échec
+
+Le moyen le plus rapide de comprendre *pourquoi* quelque chose a échoué, quand le dashboard vous dit seulement *que* ça a échoué.
+
+- "Le monitor 4521 est passé au rouge il y a une heure. Qu'est-ce qui a changé, et quelle est la cause la plus probable ?"
+- "Résume les échecs de la régression checkout de la nuit dernière, groupés par cause racine."
+- "Ouvre l'exécution 889123, trouve l'étape en échec et montre-moi son erreur et sa capture d'écran."
+- "Quels monitors sont en incident ouvert en ce moment, et qu'ont-ils en commun ?"
+- "Compare la dernière exécution réussie du test 16480 avec la première en échec et dis-moi ce qui diffère."
+
+## Créer un test
+
+Décrivez le test en langage naturel et l'agent le construit (il lit un template, le complète et crée le test après validation). Fonctionne pour tous les canaux.
+
+- **API :** "Crée un test API sur acme~web qui envoie GET https://api.acme.test/health et vérifie que le statut est 200."
+- **Web :** "Crée un test web sur acme~web qui ouvre la page de connexion, se connecte en tant qu'utilisateur démo et vérifie que le titre du dashboard est visible."
+- **Application smartphone :** "Crée un test d'application smartphone qui lance notre app Android, se connecte et vérifie que l'écran de solde du compte apparaît."
+- **USSD :** "Crée un test USSD qui compose *123# et attend que le SMS de solde arrive."
+- **SMS :** "Crée un test SMS qui envoie BAL au 1234 et vérifie que la réponse contient le solde."
+
+<Tip>
+  Soyez précis sur le slug du produit, l'endpoint ou l'écran, et ce qui constitue un succès. L'agent le mappe au bon type d'action (API, web, app, USSD/SMS) et vous demande confirmation avant d'écrire.
+</Tip>
+
+## Exécuter un test ou une campaign
+
+- "Exécute la régression checkout sur Staging et dis-moi quels tests ont échoué."
+- "Construis une campaign à partir des tests 16480 et 16838 sur acme~web, fixe le groupe API sur Prod, exécute-la et attends les résultats."
+
+## Suivre la qualité dans le temps
+
+- "Quelle est la tendance du temps de réponse p95 pour le produit paiements cette semaine ?"
+- "Sommes-nous en bonne voie pour notre SLO à 99,9 % ce mois-ci, et combien de budget d'erreur reste-t-il ?"
+
+## Gérer la configuration
+
+- "Ajoute un variant Staging au groupe de variables API et définis BASE_URL à https://staging.acme.test."
+
+<Tip>
+  Pour une tâche à plusieurs étapes, un bon prompt d'ouverture est "charge le guide de la plateforme pour la création de tests avant de commencer" : le serveur expose un outil `platform_guide` qui renvoie le workflow exact et à jour.
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code.
+  </Card>
+  <Card title="Concepts fondamentaux" icon="sitemap" href="/fr/mcp/concepts">
+    Operators, produits, variables et modèle de sécurité.
+  </Card>
+  <Card title="Référence des outils" icon="robot" href="/fr/mcp/tools/overview">
+    Le catalogue complet des outils derrière ces prompts.
+  </Card>
+</Columns>

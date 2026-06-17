@@ -1,0 +1,54 @@
+---
+title: "ktm shell list"
+description: "Lister les actions shell récentes"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les actions shell récentes
+
+## Utilisation
+
+```bash
+ktm shell list [flags]
+```
+
+## Exemples
+
+```bash
+ktm shell list --product 123
+ktm shell list --product 123 --status D
+ktm shell list --product 123 --owner 0789800356 -o table
+# Interroger les événements asynchrones (attente SMS, push USSD) depuis le début de la session
+ktm shell list --product 123 --owner 0789800356 --from-date 2026-03-15T19:29:17Z --ordering -created
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--from-date` | string | — | Afficher uniquement les shells créés après cet horodatage ISO 8601 |
+| `--ordering` | string | — | Ordre de tri : '-created' (plus récent en premier), 'created' (plus ancien en premier) |
+| `--owner` | string | — | Filtrer par identifiant d'appareil |
+| `--product` | int | — | Filtrer par identifiant de produit |
+| `--status` | string | — | Filtrer par statut (P/D/O/B/C/T/M) |
+
+## Voir aussi
+
+- [`ktm shell`](/fr/cli/commands/shell)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

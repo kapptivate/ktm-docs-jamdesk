@@ -1,0 +1,54 @@
+---
+title: "ktm monitors get"
+description: "Obtenir la configuration complète d'un monitor"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir la configuration complète d'un monitor
+
+## Utilisation
+
+```bash
+ktm monitors get <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm monitors get 42
+ktm monitors get 42 -o json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupère la configuration complète d'un seul monitor par ID : owners, variables d'entrée, planning, variants fixés, test cible et statut actif.
+
+Trouvez les ID de monitors avec 'monitors list'. La sortie est du JSON complet par défaut, ou un tableau de champs avec --output table.
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+- [`ktm monitors list`](/fr/cli/commands/monitors/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

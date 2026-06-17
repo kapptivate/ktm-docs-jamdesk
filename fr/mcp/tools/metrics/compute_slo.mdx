@@ -1,0 +1,70 @@
+---
+title: "compute_slo"
+description: "Calculer les métriques SLI/SLO à partir des résultats de requêtes InfluxDB."
+sidebarTitle: "compute_slo"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Calculer les métriques SLI/SLO à partir des résultats de requêtes InfluxDB.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `good_field` | string | Non | Nom du champ pour les événements réussis (par défaut 'good') |
+| `operator` | string | Oui | Slug de l'opérateur (= nom de la base InfluxDB) |
+| `precision` | string | Non | Précision temporelle de la requête (s, ms, u, ns) |
+| `query` | string | Oui | Requête InfluxQL renvoyant les champs good/total |
+| `slo_target` | number | Oui | Objectif SLO en pourcentage (par ex. 99.9) |
+| `total_field` | string | Non | Nom du champ pour le total des événements (par défaut 'total') |
+| `window` | string | Non | Fenêtre SLO (par défaut '30d'). Supporté : Nd, Nh |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "query": "string",
+  "slo_target": 0
+}
+```
+
+## Description
+
+```text
+Utilise la méthodologie de burn-rate de Google SRE.
+
+Prérequis : exécutez query_metrics avec SHOW MEASUREMENTS et SHOW FIELD KEYS d'abord pour découvrir quelle measurement contient les compteurs de succès/échec.
+
+Exemple : SELECT sum("number_success") AS good, sum("number_success") + sum("number_failed") AS total FROM "test" WHERE time > now() - 30d GROUP BY time(1d)
+
+L'outil extrait les champs good/total, calcule le SLI, le budget d'erreur, le burn rate et la sévérité.
+
+Seuils de sévérité (Google SRE) :
+- critical : burn rate > 14.4x (pager immédiatement)
+- red : burn rate > 6x (créer un ticket)
+- yellow : burn rate > 1x (SLO en danger)
+- green : burn rate <= 1x (dans le budget)
+```
+
+## Associé
+
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

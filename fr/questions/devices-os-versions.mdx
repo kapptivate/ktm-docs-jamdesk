@@ -1,0 +1,51 @@
+---
+title: Appareils et versions d'OS supportés
+description: Quels smartphones et versions d'OS sont entièrement supportés pour les tests d'applications mobiles, et ce qu'il faut savoir avant d'utiliser vos propres appareils.
+---
+
+Quels smartphones peuvent exécuter vos tests d'applications mobiles, quelles versions d'OS sont supportées, et les points de compatibilité à vérifier avant d'ajouter vos propres appareils à la plateforme.
+
+## Marques de smartphones supportées
+
+Deux fabricants sont officiellement supportés :
+
+- **Samsung** (Android)
+- **Apple** (iOS)
+
+Samsung est la seule marque Android entièrement supportée : les autres fabricants intègrent des couches d'OS personnalisées qui peuvent interférer avec l'automatisation mobile. Vous pouvez tout de même utiliser n'importe quel appareil que vous possédez déjà, avec deux réserves :
+
+<Warning>
+  Les investigations sur des appareils Android non Samsung sont déduites de votre forfait de support, et le support complet ne peut pas être garanti si des problèmes surviennent sur ces appareils.
+</Warning>
+
+## Configuration matérielle minimale
+
+4 Go de RAM minimum.
+
+## Versions d'OS supportées
+
+| Plateforme | Versions |
+|------------|----------|
+| iOS | 11 à 26 |
+| Android | 8 à 16 |
+
+Pour préparer un appareil pour la plateforme, suivez les étapes de configuration dans [Installer un robot (logiciel)](/fr/hardware/install-software) : une section couvre [Android](/fr/hardware/install-software#android-smartphone-setup-smartphone-robots), une autre [iOS](/fr/hardware/install-software#ios-smartphone-setup-smartphone-robots).
+
+## Android 12+ et FLAG_SECURE
+
+Kapptivate ne peut pas automatiser les applications, ou les écrans spécifiques, qui activent `FLAG_SECURE` : Android empêche les outils d'automatisation d'interagir avec le contenu protégé. Si l'application que vous souhaitez tester l'utilise, demandez à votre équipe de développement de retirer le flag dans le build utilisé pour les tests.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Installer un robot (logiciel)" icon="gear" href="/fr/hardware/install-software">
+
+    Préparer un appareil Android ou iOS pour la plateforme
+
+</Card>
+  <Card title="Parc d'appareils" icon="mobile-screen" href="/fr/equipment/devices-lab">
+
+    Parcourir et gérer les appareils connectés à votre espace de travail
+
+</Card>
+</Columns>

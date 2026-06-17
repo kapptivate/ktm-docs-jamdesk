@@ -1,0 +1,37 @@
+---
+title: Exports Excel et CSV
+description: Exportez les données de monitoring pour une analyse hors ligne, agrégées en Excel ou brutes en CSV.
+sidebarTitle: Exports
+---
+
+![The Excel reports tab listing generated exports with their period, time group, source, and download and delete actions](/images/excel-reports.webp)
+
+Certaines analyses se font en dehors de Kapptivate : un modèle dans un tableur, un outil de BI, un entrepôt de données. Les onglets **Excel reports** et **CSV reports** de la zone Analytics génèrent des extracts téléchargeables de vos données de monitoring, agrégés pour Excel ou bruts pour CSV.
+
+## La liste des exports
+
+Les deux onglets fonctionnent de la même manière. Chaque export généré affiche :
+
+- **Period** : la plage de dates couverte.
+- **Time group** : l'intervalle d'agrégation (exports Excel).
+- **Source** : les produits inclus, sous forme de tags (ou un nombre de produits).
+- **Created** et **Creator**.
+- **Actions** : télécharger le fichier à nouveau ou le supprimer.
+
+Les exports restent disponibles dans la liste jusqu'à ce que vous les supprimiez, vous pouvez donc re-télécharger un fichier sans le régénérer.
+
+## Créer un rapport Excel
+
+Cliquez sur **+ Create report** dans l'onglet Excel reports et configurez :
+
+- **Time range** : choisissez un preset (Past 1h, 2h, 6h, 12h, 24h, Today, Yesterday, Last 7 days, This week, Last 30 days) ou définissez un début et une fin personnalisés.
+- **Include all products** : laissez activé pour tout inclure, ou désactivez pour sélectionner des produits spécifiques.
+- **Time group** : l'intervalle d'agrégation, sous forme de nombre et d'unité (par exemple 30 minutes).
+
+Le fichier est agrégé par produit et par période : chaque ligne contient un horodatage, le produit et ses métriques agrégées pour cet intervalle.
+
+## Créer un export CSV
+
+Cliquez sur **+ Create report** dans l'onglet CSV reports, choisissez la **Time range** et décidez si vous souhaitez **Include all products**.
+
+Les exports CSV contiennent les points de données bruts, non agrégés, ce qui en fait le format adapté pour alimenter des outils d'analyse ou des pipelines personnalisés.

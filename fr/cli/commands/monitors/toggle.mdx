@@ -1,0 +1,48 @@
+---
+title: "ktm monitors toggle"
+description: "Activer ou désactiver des monitors en masse"
+sidebarTitle: "toggle"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Activer ou désactiver des monitors en masse
+
+## Utilisation
+
+```bash
+ktm monitors toggle [flags]
+```
+
+## Exemples
+
+```bash
+ktm monitors toggle --ids 42,43 --active false
+ktm monitors toggle --ids 42 --active true
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | true pour activer, false pour désactiver (requis) |
+| `--ids` | string | — | Identifiants de monitors séparés par des virgules à basculer (requis) |
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

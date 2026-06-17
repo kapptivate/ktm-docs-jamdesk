@@ -1,0 +1,75 @@
+---
+title: Définir une variable
+sidebarTitle: Définir une variable
+description: Stockez une valeur dans une variable pour les steps suivants.
+---
+
+Définissez une valeur une fois et réutilisez-la dans tout le test : un nom d'utilisateur généré au début de l'exécution, une constante que vous ne voulez pas répéter, une valeur construite à partir d'autres variables.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Nom de la variable | `name` | Oui | Nom de la variable à créer ou écraser. |
+| Valeur | `value` | Oui | La valeur à stocker. Supporte le texte, d'autres variables et des fonctions comme le texte aléatoire. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "set-variable",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "name": "Username",
+    "value": [
+      { "type": "value", "data": { "value": "qa-" } },
+      {
+        "type": "function",
+        "data": {
+          "name": "random_text",
+          "args": {
+            "length": 8,
+            "include_uppercase": false,
+            "include_lowercase": true,
+            "include_numerical": true,
+            "include_special": false,
+            "min_numerical": 0,
+            "min_special": 0
+          }
+        }
+      }
+    ],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+Cet exemple stocke `qa-` suivi de 8 caractères aléatoires, vous donnant un nom d'utilisateur unique à chaque exécution.
+
+## Résultats et métriques
+
+- **Variable** : disponible pour chaque step ultérieur du test. Insérez-la partout où un champ supporte les variables.
+- **Temps et statut** : enregistrés dans le résultat du step comme pour tout autre step.
+
+Consultez [Variables](/fr/tests/variables) pour les types de variables et les fonctions utilisables dans les valeurs.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Extraire une valeur" icon="arrow-up-from-bracket" href="/fr/tests/actions/web/extractvalue">
+
+    Capturez une valeur depuis la page au lieu de la définir
+
+</Card>
+  <Card title="Variables" icon="brackets-curly" href="/fr/tests/variables">
+
+    Variables de test, variables globales et fonctions
+
+</Card>
+</Columns>

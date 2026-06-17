@@ -1,0 +1,66 @@
+---
+title: Assert displayed
+description: Step historique qui vérifie qu'un élément est visible. Utilisez Verify element à la place.
+---
+
+<Danger>
+  **Déprécié.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Verify element](/fr/tests/actions/smartphone/verifyelement) avec l'état **displayed**.
+</Danger>
+
+Vérifiez qu'un élément est visible dans l'application, en échouant s'il n'apparaît pas dans le délai imparti.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément qui doit être visible. |
+| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Timeout | `timeout` | Non | Combien de temps attendre l'élément avant l'échec. Par défaut : `30s`. |
+| Utilisation de l'IA | `ai_strategy` | Non | `inherit` (par défaut, suit la stratégie du test), `smart` ou `always`. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "assert-displayed",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The order confirmation banner" } }]
+    },
+    "timeout": [{ "type": "value", "data": { "value": "30s" } }],
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step. En cas d'échec, la durée reflète la totalité du timeout.
+- **Statut** : succès si l'élément est devenu visible dans le délai imparti, échec sinon.
+- **Capture d'écran** : prise pour l'état vérifié.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+
+    Le step actuel pour les vérifications d'éléments
+
+</Card>
+  <Card title="Verify with AI" icon="sparkles" href="/fr/tests/actions/smartphone/aivisualassert">
+
+    Vérifier des états visuels en langage naturel
+
+</Card>
+</Columns>

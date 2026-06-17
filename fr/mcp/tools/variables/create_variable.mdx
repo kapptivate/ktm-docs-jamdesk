@@ -1,0 +1,69 @@
+---
+title: "create_variable"
+description: "Créer une nouvelle variable sous un produit."
+sidebarTitle: "create_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer une nouvelle variable sous un produit.
+
+<Info>
+  **Écriture de données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `default_value` | string | Oui | Valeur par défaut ; pour choice, options autorisées séparées par des virgules |
+| `description` | string | Non | Optionnel mais RECOMMANDÉ, expliquez à quoi sert la variable. Une courte phrase (par ex. "Nom d'hôte de la base de données de production" ou "Clé API webhook Stripe") aide les futurs agents à la distinguer de variables aux noms similaires. |
+| `group` | number | Non | Optionnel : identifiant du groupe de variables (omettre pour une variable globale) |
+| `name` | string | Oui | Nom de la variable (alphanumérique + underscore) |
+| `product` | string | Oui | Slug du produit |
+| `type` | string (single \| secret \| choice) | Oui | single \| secret \| choice |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "type": "single",
+  "default_value": "string"
+}
+```
+
+## Description
+
+```text
+Type est l'un des suivants :
+  - "single" — valeur scalaire dans default_value
+  - "secret" — valeur scalaire ; la plateforme la masque en lecture
+  - "choice" — default_value est une liste de valeurs autorisées séparées par des virgules
+
+Passez group=<id> pour une variable de groupe ; omettez-le pour une variable globale. L'outil génère automatiquement les variable_values à raison d'une entrée par variant du groupe, toutes initialisées à default_value. Ajustez ensuite les variants individuels avec set_variable_value.
+
+Une description est optionnelle mais RECOMMANDÉE — les futurs agents (et humains) s'y fient pour distinguer les variables portant des noms similaires mais ayant des fonctions différentes. Une seule courte phrase suffit.
+
+Consomme un créneau du budget d'édition de variables par session. Vérifiez les conflits de noms au préalable avec check_variable_name pour éviter les créations inutiles.
+```
+
+## Associé
+
+- [`set_variable_value`](/fr/mcp/tools/variables/set_variable_value)
+- [`check_variable_name`](/fr/mcp/tools/variables/check_variable_name)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

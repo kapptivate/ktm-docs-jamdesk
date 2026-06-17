@@ -1,0 +1,64 @@
+---
+title: "ktm collections delete"
+description: "Déplacer une collection vers la corbeille de l'organisation (suppression douce)"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplacer une collection vers la corbeille de l'organisation (suppression douce)
+
+## Utilisation
+
+```bash
+ktm collections delete <uid> [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections delete --operator my-op <uid>              # refuses without --yes
+ktm collections delete --operator my-op --yes <uid>        # moves to trash
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--yes` | boolean | — | Confirmer la suppression irréversible |
+
+## Détails
+
+Déplace la collection vers la corbeille de l'organisation. La collection
+et ses éléments sont récupérables jusqu'à ce que la corbeille soit vidée (ce qui nécessite
+une action admin séparée sur le service de collections). Malgré le nom "delete",
+ce n'est PAS une suppression définitive.
+
+La commande refuse l'opération sans --yes car les agents doivent confirmer la portée
+avant de déplacer des collections.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

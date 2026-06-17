@@ -1,0 +1,68 @@
+---
+title: "ktm variables update"
+description: "Mettre à jour le nom, la description et/ou la default_value d'une variable (propriétés uniquement)"
+sidebarTitle: "update"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Mettre à jour le nom, la description et/ou la default_value d'une variable (propriétés uniquement)
+
+## Utilisation
+
+```bash
+ktm variables update <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables update 17 --description "DB hostname"
+ktm variables update 17 --default-value "new-default"
+ktm variables update 17 --name DB_HOST_V2
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--default-value` | string | — | Nouvelle valeur par défaut |
+| `--description` | string | — | Nouvelle description (optionnelle, recommandée) : écrase la valeur actuelle ; utile pour clarifier l'objectif |
+| `--name` | string | — | Nouveau nom |
+
+## Détails
+
+Propriétés uniquement : cette commande ne touche PAS les valeurs par variant. Pour changer la
+valeur d'un variant, utilisez 'ktm variables set-value' ; pour copier des valeurs entre variants,
+utilisez 'ktm variables variants copy-values'. Le type de variable est immuable sur la
+plateforme ; cette commande le conserve.
+
+## Notes
+
+- Met à jour les propriétés d'une variable (nom, description, valeur par défaut). Pour définir la valeur d'un seul variant, utilisez [`ktm variables set-value`](/fr/cli/commands/variables/set-value).
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+- [`ktm variables variants`](/fr/cli/commands/variables/variants)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,53 @@
+---
+title: "get_test_campaign"
+description: "Récupère une test campaign avec sa test_list complète."
+sidebarTitle: "get_test_campaign"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupère une test campaign avec sa test_list complète.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `test_campaign_id` | number | Oui | Identifiant de la test campaign |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_campaign_id": 0
+}
+```
+
+## Description
+
+```text
+Each entry in test_list is {position, test (id), name, owners, input_variables}. owners and input_variables are per-campaign overrides — they only apply when the test runs as part of this Tests campaign.
+
+To run it: build_campaign(test_campaign_id=<id>, variants=["Group:Variant"]) → run_campaign(overrides=…).
+```
+
+## Associés
+
+- [`build_campaign`](/fr/mcp/tools/execution/build_campaign)
+- [`run_campaign`](/fr/mcp/tools/execution/run_campaign)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

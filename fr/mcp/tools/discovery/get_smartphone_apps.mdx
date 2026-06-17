@@ -1,0 +1,52 @@
+---
+title: "get_smartphone_apps"
+description: "Liste les applications installables sur un smartphone pour la création de tests smartphone V2/classiques. Copiez `package` vers `starting.app`, l'app vers `meta`."
+sidebarTitle: "get_smartphone_apps"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les applications installables sur un smartphone pour la création de tests smartphone V2/classiques. Copiez `package` vers `starting.app`, l'app vers `meta`.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoie les objets app complets \{kind,name,label,package,version\} au lieu de lignes compactes (défaut : false) |
+| `filter` | string | Non | Filtre insensible à la casse sur le nom du package ou de l'app |
+| `serial` | string | Oui | UUID/serial du device (depuis list_resources type=smartphone) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "serial": "string"
+}
+```
+
+## Description
+
+```text
+Find serials via `list_resources type=smartphone`. Compact by default; use filter= to narrow, detail=true for full objects.
+```
+
+## Associés
+
+- [`list_resources`](/fr/mcp/tools/discovery/list_resources)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

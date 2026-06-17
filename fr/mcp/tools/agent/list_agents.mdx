@@ -1,0 +1,58 @@
+---
+title: "list_agents"
+description: "Lister les agents (infrastructure) d'un opérateur avec un résumé de santé et de capacité."
+sidebarTitle: "list_agents"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les agents (infrastructure) d'un opérateur avec un résumé de santé et de capacité.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet (par défaut : false) |
+| `operator` | string | Oui | Slug de l'opérateur |
+| `type` | string (cellular \| ethernet \| smartphone) | Non | Filtrer par type d'agent : cellular, ethernet, smartphone. Omettre pour les trois. |
+| `zone` | string | Non | Filtrer par zone |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Les agents sont le matériel/logiciel qui exécute les ressources, limités à un opérateur et non à un produit.
+Trois types : cellular (passerelles GSM avec slots SIM), ethernet (web agents autonomes), smartphone (hubs téléphoniques).
+
+Renvoie un en-tête de résumé de capacité montrant la capacité totale en ligne pour les tests simultanés.
+Utilisez get_agent pour le détail avec les slots. Utilisez list_resources pour les informations sur les appareils par produit.
+```
+
+## Associé
+
+- [`get_agent`](/fr/mcp/tools/agent/get_agent)
+- [`list_resources`](/fr/mcp/tools/discovery/list_resources)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

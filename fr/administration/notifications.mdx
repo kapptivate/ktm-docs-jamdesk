@@ -1,0 +1,71 @@
+---
+title: Notifications
+description: Alertez votre équipe lorsque des robots passent hors ligne, et choisissez où les alertes sont envoyées.
+---
+
+![La page de paramètres des notifications avec le toggle de disponibilité des robots et les canaux](/images/notification-channels.webp)
+
+Les notifications vous alertent lorsque des robots deviennent indisponibles. Vous activez le monitoring, définissez la durée d'indisponibilité d'un robot avant que Kapptivate ne déclenche une alerte, et choisissez où les alertes sont envoyées : email, Slack, Teams ou webhooks. Tout se trouve sur un seul écran sous **Administration → Notifications**.
+
+<Note>
+Cette page couvre les alertes de disponibilité des robots à l'échelle du workspace. Pour être notifié lorsque les résultats d'un monitor se dégradent, configurez les notifications par alerte dans [Alertes](/fr/monitoring/alerts).
+</Note>
+
+## Disponibilité des robots
+
+Le monitoring de la disponibilité des robots suit les déconnexions des robots. Les alertes sont envoyées à la fois lorsqu'un robot est déconnecté et lorsque sa connexion est rétablie, pour que vous sachiez quand une panne commence et quand elle se termine.
+
+Activez-le avec le toggle **Trigger alert after an unavailability of N minutes**, puis choisissez la période de détection : la durée pendant laquelle un robot peut être hors ligne avant que Kapptivate n'envoie une alerte, de 5 à 30 minutes par incréments de 5 minutes.
+
+Une période plus courte détecte les problèmes plus rapidement mais peut déclencher des alertes lors de courtes interruptions prévues (comme les redémarrages). Une période plus longue réduit le bruit mais retarde votre réponse aux véritables pannes.
+
+<Note>
+Lorsque le monitoring est activé, vous devez activer au moins un canal de notification avant de pouvoir sauvegarder.
+</Note>
+
+## Canaux de notification
+
+Les canaux contrôlent où les alertes sont envoyées. Une fois le monitoring activé, chaque canal peut être activé ou désactivé indépendamment : activez ceux dont vous avez besoin et renseignez leurs paramètres.
+
+### Email
+
+Envoyez des alertes à une ou plusieurs adresses email. Activez **Email notifications**, puis sous **Select users who should be notified** saisissez les adresses des destinataires.
+
+### Slack
+
+Recevez des alertes dans un canal Slack. Activez **Slack notifications** et collez votre **Slack webhook link**. Si vous n'en avez pas encore, utilisez l'assistant **Create webhook link in Slack** pour en configurer un dans votre workspace Slack.
+
+### Microsoft Teams
+
+Recevez des alertes dans Microsoft Teams. Activez **Microsoft Teams notifications** et collez votre **Microsoft Teams webhook link**. L'assistant **Create webhook link in Microsoft Teams** vous guide dans la création d'un webhook entrant dans Teams.
+
+### Webhook
+
+Envoyez des alertes vers un endpoint HTTP personnalisé que vous contrôlez. Activez **Webhook notifications** et fournissez un **Webhook link** vers lequel Kapptivate enverra une requête POST lorsqu'un robot devient indisponible.
+
+Sous **Headers**, cliquez sur **Add header** pour envoyer des en-têtes HTTP personnalisés avec chaque requête. Saisissez une clé et une valeur pour chacun, utile pour transmettre un jeton d'autorisation ou des métadonnées de routage attendues par votre endpoint.
+
+## Sauvegarde et validation
+
+Cliquez sur **Save changes** pour appliquer vos paramètres. Le bouton est désactivé si aucune modification n'a été effectuée ou si votre configuration est invalide. La validation exige :
+
+- Au moins un canal de notification activé lorsque le monitoring est actif
+- Des adresses email valides pour les destinataires
+- Des URL valides pour les liens Slack, Teams et webhook
+
+Si la validation échoue, Kapptivate indique quel champ contient l'erreur. Corrigez-le et sauvegardez à nouveau.
+
+<Info>
+Les modifications non sauvegardées déclenchent une confirmation si vous quittez la page.
+</Info>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Incidents" icon="triangle-exclamation" href="/fr/monitoring/incidents">
+    Consultez et gérez les incidents déclenchés par ces alertes
+  </Card>
+  <Card title="Clés API" icon="key" href="/fr/administration/api-keys">
+    Authentifiez les services externes auxquels vos canaux se connectent
+  </Card>
+</Columns>

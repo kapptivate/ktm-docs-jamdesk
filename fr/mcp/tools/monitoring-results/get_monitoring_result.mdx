@@ -1,0 +1,55 @@
+---
+title: "get_monitoring_result"
+description: "Examiner en détail le(s) résultat(s) d'une exécution de monitoring (planifiée)."
+sidebarTitle: "get_monitoring_result"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Examiner en détail le(s) résultat(s) d'une exécution de monitoring (planifiée).
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `include_actions` | boolean | Non | Inclure les résultats bruts des actions avec captures d'écran, artefacts, logs (par défaut : false). Augmente significativement la taille de la réponse. Note : les captures d'écran incluent des URL complètes ; les chemins d'artefacts sont relatifs, préfixez https://&lt;KAPPTIVATE_HOST&gt;/robot/ pour construire l'URL complète. |
+| `include_full_json` | boolean | Non | Inclure le blob JSON brut complet du résultat (par défaut : false). À utiliser uniquement lorsque vous avez besoin des métadonnées de campagne, des options ou de l'historique. |
+| `result_ids` | string | Oui | Identifiants de résultats de monitoring séparés par des virgules (depuis list_monitoring_results). Un seul ID pour un résultat, plusieurs pour une investigation groupée. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "result_ids": "string"
+}
+```
+
+## Description
+
+```text
+Renvoie la raison de l'échec, le statut par test/par action, la durée et les variables. Supporte le traitement par lot : passez des identifiants séparés par des virgules pour examiner plusieurs échecs en un seul appel. Utilisez include_actions=true pour les résultats bruts des actions (captures d'écran, artefacts, logs).
+
+Les identifiants de résultat proviennent de list_monitoring_results. Filtrez toujours list_monitoring_results par monitoring_id d'abord pour vous assurer que les résultats appartiennent au bon opérateur. Pour les exécutions de campagne ou de Tests-campagne, utilisez get_execution_detail à la place.
+```
+
+## Associé
+
+- [`list_monitoring_results`](/fr/mcp/tools/monitoring-results/list_monitoring_results)
+- [`get_execution_detail`](/fr/mcp/tools/results/get_execution_detail)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

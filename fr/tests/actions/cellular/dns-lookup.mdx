@@ -1,0 +1,66 @@
+---
+title: DNS Lookup
+description: Résolvez un nom de domaine via la connexion cellulaire et mesurez le temps de résolution.
+---
+
+Résolvez un domaine via la connexion data de la SIM. Vérifiez que le DNS de l'opérateur répond correctement et suivez le temps de résolution, un coupable caché fréquent des expériences mobiles lentes.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Hôte | `command.host` | Oui | Domaine à résoudre, par exemple `kapptivate.com`. |
+| Surcharge DNS | `command.override_dns`, `command.dns` | Non | Interroger des serveurs DNS spécifiques au lieu de ceux de l'opérateur. |
+| Le DNS Lookup doit échouer | `expect_failure` | Non | Inverse le verdict, pour les domaines qui doivent être bloqués. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_DNS_LOOKUP",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "host": "kapptivate.com",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `ip_addresses` | Les adresses IP résolues. |
+| `dns_server` | Les serveurs DNS qui ont répondu. |
+| `duration` | Temps de résolution en secondes. |
+
+Dans Analytics, chaque exécution alimente la mesure DNS avec `duration_seconds`, étiquetée par statut, hôte, serveur DNS, APN, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="HTTP Ping" icon="globe" href="/fr/tests/actions/cellular/http-ping">
+
+    Mesurez la requête complète une fois le nom résolu
+
+</Card>
+  <Card title="Check SSL/TLS Certificate" icon="id-card" href="/fr/tests/actions/cellular/check-certificate">
+
+    Vérifiez le certificat servi sur ce domaine
+
+</Card>
+</Columns>

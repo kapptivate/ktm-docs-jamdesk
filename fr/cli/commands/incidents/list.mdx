@@ -1,0 +1,69 @@
+---
+title: "ktm incidents list"
+description: "Lister les incidents (alertes déclenchées) sur la plateforme"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les incidents (alertes déclenchées) sur la plateforme
+
+## Utilisation
+
+```bash
+ktm incidents list [flags]
+```
+
+## Exemples
+
+```bash
+# List open incidents
+ktm incidents list --operator my-operator --status OPEN
+
+# List incidents for a specific alert
+ktm incidents list --operator my-operator --alert-id 42
+
+# List incidents created after a date
+ktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--alert-id` | string | — | ID de définitions d'alertes séparés par des virgules |
+| `--closed-after` | string | — | Filtrer les incidents fermés après cette date ISO |
+| `--closed-before` | string | — | Filtrer les incidents fermés avant cette date ISO |
+| `--created-after` | string | — | Filtrer les incidents créés après cette date ISO |
+| `--created-before` | string | — | Filtrer les incidents créés avant cette date ISO |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--page` | int | `1` | Numéro de page |
+| `--page-size` | int | `50` | Résultats par page |
+| `--status` | string | — | Filtrer par statut : OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
+## Détails
+
+Lister les incidents d'un opérateur. Les incidents sont créés quand une définition d'alerte
+de la plateforme se déclenche. Ils suivent le cycle de vie de OPEN à CLOSED.
+
+Ce n'est PAS la même chose que 'metrics alert-eval' qui effectue des analyses locales à la demande.
+
+## Voir aussi
+
+- [`ktm incidents`](/fr/cli/commands/incidents)
+- [`ktm metrics alert-eval`](/fr/cli/commands/metrics/alert-eval)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

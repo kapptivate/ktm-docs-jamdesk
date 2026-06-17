@@ -1,0 +1,50 @@
+---
+title: "ktm agents list"
+description: "Lister les agents d'un opérateur"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les agents d'un opérateur
+
+## Utilisation
+
+```bash
+ktm agents list [flags]
+```
+
+## Exemples
+
+```bash
+ktm agents list --operator my-operator
+ktm agents list --operator my-operator --type cellular
+ktm agents list --operator my-operator --zone EU-West
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--type` | string | — | Type d'agent : cellular, ethernet, smartphone |
+| `--zone` | string | — | Filtrer par zone |
+
+## Voir aussi
+
+- [`ktm agents`](/fr/cli/commands/agents)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

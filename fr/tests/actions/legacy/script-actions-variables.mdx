@@ -1,0 +1,85 @@
+---
+title: Variables et métriques des actions script
+description: Échangez des variables avec le test, créez des métriques personnalisées pour Analytics et attachez des artefacts depuis un script.
+sidebarTitle: Variables & métriques
+---
+
+<Danger>
+  **Déprécié.** Les actions script sont un héritage. Les actions existantes continuent de fonctionner, mais pour les nouveaux tests préférez le [constructeur visuel](/fr/tests/builder). Migrez dès que possible.
+</Danger>
+
+Les actions script peuvent lire les variables d'entrée du test, écrire des variables de sortie pour les actions suivantes, envoyer des métriques personnalisées qui se comportent comme n'importe quelle métrique native dans Analytics, et attacher des fichiers arbitraires aux résultats.
+
+## Variables
+
+```javascript
+const value = test.variables.get("INPUT_VARIABLE_NAME");
+test.variables.set("OUTPUT_VARIABLE_NAME", "output variable value");
+```
+
+Appeler `get` déclare automatiquement la variable d'entrée sur le test, pour que vous puissiez la remplir depuis le formulaire du test, une surcharge de campagne ou une action précédente. Appeler `set` déclare une variable de sortie, disponible pour chaque action suivante.
+
+## Métriques personnalisées
+
+```javascript
+describe('My test suite', function () {
+  it('Create a custom metric', function () {
+    test.metrics.create("my_custom_metric",
+      {
+        duration: 1.85,            // numbers, strings, or objects
+        status_text: "ok"
+      },
+      {
+        service: "checkout"        // tags (optional)
+      }
+    );
+  });
+});
+```
+
+`test.metrics.create(measurement, fields, tags)` envoie une mesure à Analytics exactement comme une métrique native : visualisez-la dans les tableaux de bord, alertez dessus, exportez-la. L'écran de résultats ne montre pas qu'une métrique a été créée ; vérifiez vos tableaux de bord.
+
+Combinez avec le [minuteur](/fr/tests/actions/legacy/script-actions#minuteurs) pour produire des valeurs significatives :
+
+```javascript
+it('Measure login time', function () {
+  const timer = new Timer();
+  // ... perform the login ...
+  test.metrics.create("login", { duration_seconds: timer.stop() });
+});
+```
+
+## Artefacts
+
+```javascript
+test.artifacts.create(name, content, { encoding, type });
+```
+
+Attachez n'importe quel contenu aux résultats de l'étape, à côté des artefacts automatiques :
+
+| Paramètre | Description |
+|-----------|-------------|
+| `name` | Nom du fichier avec extension (l'extension est retirée dans l'interface) : `report.json`, `payload.txt`. |
+| `content` | Une chaîne, un objet (converti en chaîne), un nombre ou un contenu base64. |
+| `encoding` | Optionnel. Définir à `base64` pour décoder le contenu avant stockage, pour les fichiers binaires. |
+| `type` | Optionnel. Libellé libre utilisé pour influencer l'affichage de l'artefact. |
+
+```javascript
+test.artifacts.create("hello_world.txt", "Hello world!");
+test.artifacts.create("data.json", { key: "value", array: [1, 2, 3] });
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Actions script" icon="code" href="/fr/tests/actions/legacy/script-actions">
+
+    Structure, paramètres, hooks et minuteurs
+
+</Card>
+  <Card title="Analytics" icon="chart-line" href="/fr/monitoring/dashboards">
+
+    Où les métriques personnalisées apparaissent
+
+</Card>
+</Columns>

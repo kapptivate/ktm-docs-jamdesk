@@ -1,0 +1,53 @@
+---
+title: "get_monitor"
+description: "Obtenir la configuration complète d'un monitor : owners, input_variables, scheduling, variable_group et statut."
+sidebarTitle: "get_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir la configuration complète d'un monitor : owners, input_variables, scheduling, variable_group et statut.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `monitor_id` | number | Oui | Identifiant du monitor (depuis list_monitors) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+```text
+Outil fournisseur de données : renvoie le JSON complet pour inspection et édition.
+
+Utilisez list_monitors pour trouver les identifiants de monitors au préalable.
+Si cet outil renvoie une erreur, le monitor a peut-être été supprimé — vérifiez avec list_monitors.
+```
+
+## Associé
+
+- [`list_monitors`](/fr/mcp/tools/discovery/list_monitors)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

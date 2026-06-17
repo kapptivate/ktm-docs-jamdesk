@@ -1,0 +1,66 @@
+---
+title: Naviguer vers une URL
+sidebarTitle: Accéder à l'URL
+description: Chargez une URL dans l'onglet courant, avec des vérifications optionnelles sur la page chargée.
+---
+
+Chargez une page par URL : accédez à un lien profond en cours de scénario, ou ouvrez un lien extrait d'un e-mail. Chaque test web commence également par un step verrouillé "Naviguer vers la page de départ", qui est ce même step pointant vers l'URL de départ du test.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| URL | `url` | Oui | L'adresse à charger, par exemple `https://www.example.com`. Supporte les [variables](/fr/tests/variables), vous pouvez donc naviguer vers un lien extrait. |
+| Vérifications | `checks` | Non | Vérifications du step évaluées après le chargement de la page : URL, temps de chargement et durée du step. Chaque vérification peut faire échouer le step ou seulement émettre un avertissement. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test. Cet exemple ajoute une vérification du temps de chargement qui émet un avertissement au-delà de 3 secondes.
+
+```json
+{
+  "id": "step-1",
+  "type": "navigate-to-url",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "url": [{ "type": "test_variable", "data": { "name": "MailLink" } }]
+  },
+  "checks": [
+    {
+      "id": "check-1",
+      "type": "check",
+      "entity": "loading_time",
+      "operator": "lt",
+      "value": [{ "type": "value", "data": { "value": "3" } }],
+      "logicalOperator": "and",
+      "statusModifier": "warning"
+    }
+  ],
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps de chargement** : mesuré pour le chargement de la page et comparé à vos vérifications.
+- **Résultats des vérifications** : chaque vérification configurée indique ses valeurs attendues et réelles. Une vérification en `error` qui échoue fait échouer le step ; une vérification en `warning` qui échoue le marque comme avertissement.
+- **Statut** : succès, avertissement ou échec.
+- **Capture d'écran** : prise une fois la page chargée.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Récupérer un lien e-mail" icon="link" href="/fr/tests/actions/web/getemaillink">
+
+    Extrayez le lien vers lequel naviguer depuis un e-mail
+
+</Card>
+  <Card title="Changer de fenêtre" icon="window-restore" href="/fr/tests/actions/web/switchwindow">
+
+    Poursuivez le flux dans un autre onglet
+
+</Card>
+</Columns>

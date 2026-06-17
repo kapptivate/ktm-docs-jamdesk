@@ -1,0 +1,42 @@
+---
+title: Selectors IA
+description: Laissez l'IA trouver les éléments par intention, pour que vos tests survivent aux changements de DOM sans maintenance de selectors.
+sidebarTitle: Selectors IA
+---
+
+![The AI section of Test settings with the Enable AI toggle and the strategy dropdown open](/images/ai-strategy-settings.webp)
+
+Les selectors sont la partie la plus fragile d'un test UI : une classe renommée ou un DOM restructuré casse un XPath qui fonctionnait hier. Avec les selectors IA, un step trouve sa cible à partir de l'intention humainement lisible (comme le libellé d'un bouton) au lieu d'un chemin écrit manuellement : lors de la première exécution, l'IA analyse la page, trouve le bon élément et sauvegarde le selector pour les exécutions suivantes.
+
+## Activer l'IA
+
+Trois niveaux, du plus large au plus précis :
+
+- **À la création** : cochez **AI usage** dans le formulaire de création de test pour démarrer avec l'IA activée ([Créer un test](/fr/tests/create)).
+- **Par test** : activez **Enable AI** dans **Test settings > AI**. Désactiver l'IA signifie maintenir le XPath de chaque step vous-même.
+- **Par step** : activez **Turn on AI for this step** dans l'onglet General du step. Le champ selector obtient une bordure en dégradé pour indiquer que l'IA est active. **Link to test** rattache le step au paramètre au niveau du test au lieu d'une surcharge par step.
+
+## Stratégies IA
+
+La stratégie contrôle quand l'IA s'engage :
+
+- **Smart** : utilise l'IA pour trouver le premier selector, ou lorsque l'exécution échoue avec le selector sauvegardé.
+- **Always** : force l'IA à redétecter les éléments cibles à chaque exécution, en ignorant les selectors sauvegardés.
+- **On demand** : l'IA reste désactivée par défaut ; activez-la manuellement sur chaque step qui en a besoin.
+
+**Smart** est le choix par défaut habituel : des exécutions rapides avec les selectors en cache, l'IA comme filet de sécurité. Utilisez **Always** sur les pages dont la structure change constamment, et **On demand** lorsque vous voulez l'IA uniquement sur quelques steps connus comme fragiles.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vérifier avec l'IA" icon="badge-check" href="/fr/ai/verify-with-ai">
+
+    Assertions en langage naturel sur ce que la page affiche
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Où les toggles IA se trouvent dans le flux de création
+
+</Card>
+</Columns>

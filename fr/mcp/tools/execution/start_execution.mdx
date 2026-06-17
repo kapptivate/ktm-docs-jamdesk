@@ -1,0 +1,54 @@
+---
+title: "start_execution"
+description: "Démarre l'exécution d'une campaign sans attendre les résultats."
+sidebarTitle: "start_execution"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Démarre l'exécution d'une campaign sans attendre les résultats.
+
+<Warning>
+  **Destructif · Écrit des données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `campaign_json` | string | Oui | Template JSON de la campaign (depuis build_campaign) |
+| `ignore_errors` | boolean | Non | Ignore les échecs pour tous les types d'action (options.ignore_failed = &lt;all action codes&gt;). |
+| `overrides` | string | Non | Objet JSON mappant les identifiants de test à leurs valeurs de variables et assignations d'owners. Même format que les overrides de run_campaign. |
+| `parallel` | boolean | Non | Exécute les tests de la campaign en parallèle (options.parallel_test_execution=-1). Superadmin uniquement ; le backend rejette les listes de tests qui utilisent des actions SIM ou SMARTPHONE, ou sleep sur des ressources non verrouillées. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "campaign_json": "string"
+}
+```
+
+## Description
+
+```text
+Returns a result_id for polling. Use this for campaigns that may take longer than 10 minutes, then poll with poll_execution. For shorter campaigns you want to block on, use run_campaign instead.
+```
+
+## Associés
+
+- [`poll_execution`](/fr/mcp/tools/execution/poll_execution)
+- [`run_campaign`](/fr/mcp/tools/execution/run_campaign)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

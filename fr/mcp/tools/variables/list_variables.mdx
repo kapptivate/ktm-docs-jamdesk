@@ -1,0 +1,61 @@
+---
+title: "list_variables"
+description: "Lister les variables d'un produit."
+sidebarTitle: "list_variables"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les variables d'un produit.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (false par défaut) |
+| `group` | number | Non | Optionnel : identifiant du groupe de variables, restreindre à ce groupe |
+| `product` | string | Oui | Slug du produit (operator~product) |
+| `scope` | string (global \| grouped \| all) | Non | global \| grouped \| all (par défaut : all) |
+| `type` | string (single \| secret \| choice) | Non | single \| secret \| choice |
+| `used` | string (true \| false) | Non | true \| false, filtrer par état d'utilisation (omettre pour tout afficher) |
+| `variant` | string | Non | Nom ou identifiant du variant, restreindre aux variables portant ce variant |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Le scope par défaut renvoie TOUTES les variables (globales + groupées) via le endpoint V3 product_variables.
+
+Jeu de filtres :
+  - scope :   "global" | "grouped" | "all" (par défaut : "all")
+  - group :   identifiant numérique du groupe de variables, restreindre à un groupe
+  - type :    "single" | "secret" | "choice", filtrer par type
+  - used :    "true" | "false", filtrer par état d'utilisation (omet les tests inutilisés)
+  - variant : nom ou identifiant du variant, restreindre aux variables portant le variant
+
+Par défaut, renvoie des résumés compacts ; passez detail=true pour la structure JSON complète incluant les valeurs par variant. Les secrets sont renvoyés masqués par la plateforme.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,55 @@
+---
+title: "ktm tests get"
+description: "Obtenir les détails d'un test incluant les définitions de variables et les slots owner"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les détails d'un test incluant les définitions de variables et les slots owner
+
+## Utilisation
+
+```bash
+ktm tests get <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm tests get 99
+ktm tests get 99 -o json | jq '{name, id, variables}'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupérer les détails d'un test : métadonnées, variables (input_variables, output_variables,
+owners) et informations de collection. Cela retourne les définitions de variables, pas
+la liste complète des actions. Pour la définition complète incluant les actions, utilisez
+'ktm tests inspect'.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests inspect`](/fr/cli/commands/tests/inspect)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

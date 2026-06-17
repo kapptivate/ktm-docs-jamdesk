@@ -1,0 +1,86 @@
+---
+title: "ktm tests"
+description: "Tests : scénarios de test automatisés pouvant être exécutés et surveillés"
+sidebarTitle: "tests"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Tests : scénarios de test automatisés pouvant être exécutés et surveillés
+
+## Utilisation
+
+```bash
+ktm tests [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="action-types" icon="angle-right" href="/fr/cli/commands/tests/action-types">
+    Lister les types d'action disponibles pour la création de tests
+  </Card>
+  <Card title="archive" icon="angle-right" href="/fr/cli/commands/tests/archive">
+    Archiver un test (définit archived=true via PUT)
+  </Card>
+  <Card title="create" icon="angle-right" href="/fr/cli/commands/tests/create">
+    Créer un nouveau test à partir d'un fichier JSON
+  </Card>
+  <Card title="delete" icon="angle-right" href="/fr/cli/commands/tests/delete">
+    Supprimer un ou plusieurs tests (déplacement vers la corbeille ; récupérable via 'tests undelete')
+  </Card>
+  <Card title="dry-run" icon="angle-right" href="/fr/cli/commands/tests/dry-run">
+    Prévisualiser l'impact de la modification d'un test sans appliquer les changements
+  </Card>
+  <Card title="edit" icon="angle-right" href="/fr/cli/commands/tests/edit">
+    Modifier un test existant (crée automatiquement une nouvelle version)
+  </Card>
+  <Card title="get" icon="angle-right" href="/fr/cli/commands/tests/get">
+    Obtenir les détails d'un test incluant les définitions de variables et les slots owner
+  </Card>
+  <Card title="history" icon="angle-right" href="/fr/cli/commands/tests/history">
+    Lister l'historique des versions d'un test
+  </Card>
+  <Card title="impact" icon="angle-right" href="/fr/cli/commands/tests/impact">
+    Vérifier quelles test campaigns et monitors dépendent d'un test
+  </Card>
+  <Card title="inspect" icon="angle-right" href="/fr/cli/commands/tests/inspect">
+    Définition complète du test avec actions, dépendances et configuration
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/tests/list">
+    Lister les tests, avec filtrage optionnel par operator et produit
+  </Card>
+  <Card title="restore" icon="angle-right" href="/fr/cli/commands/tests/restore">
+    Restaurer un test à une version précédente
+  </Card>
+  <Card title="step-types" icon="angle-right" href="/fr/cli/commands/tests/step-types">
+    Lister les types d'étape disponibles pour la création de tests v2 (no-code)
+  </Card>
+  <Card title="template" icon="angle-right" href="/fr/cli/commands/tests/template">
+    Générer un modèle de test pour un ou plusieurs types d'action
+  </Card>
+  <Card title="unarchive" icon="angle-right" href="/fr/cli/commands/tests/unarchive">
+    Désarchiver un test (définit archived=false via PUT)
+  </Card>
+  <Card title="undelete" icon="angle-right" href="/fr/cli/commands/tests/undelete">
+    Restaurer un ou plusieurs tests depuis la corbeille
+  </Card>
+  <Card title="validate" icon="angle-right" href="/fr/cli/commands/tests/validate">
+    Valider un fichier JSON de test sans le créer
+  </Card>
+</Columns>
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

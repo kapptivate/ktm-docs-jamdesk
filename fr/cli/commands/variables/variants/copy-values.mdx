@@ -1,0 +1,61 @@
+---
+title: "ktm variables variants copy-values"
+description: "Promouvoir les valeurs de variants : copier la valeur du variant --from vers --to pour chaque variable du groupe"
+sidebarTitle: "copy-values"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Promouvoir les valeurs de variants : copier la valeur du variant --from vers --to pour chaque variable du groupe
+
+## Utilisation
+
+```bash
+ktm variables variants copy-values <group-id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables variants copy-values 42 --from staging --to prod
+ktm variables variants copy-values 42 --from 1 --to 2
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `group-id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--from` | string | — | Identifiant ou nom du variant source (requis) |
+| `--to` | string | — | Identifiant ou nom du variant de destination (requis) |
+
+## Détails
+
+Workflow puissant : en une commande, copier la valeur du variant source
+vers le variant de destination pour chaque variable de l'ensemble du groupe. --from et --to acceptent
+des identifiants ou noms de variants. Les variables qui n'ont pas de valeur sur le variant source sont
+ignorées.
+
+## Voir aussi
+
+- [`ktm variables variants`](/fr/cli/commands/variables/variants)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

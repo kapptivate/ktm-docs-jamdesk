@@ -1,0 +1,58 @@
+---
+title: "ktm variables groups list"
+description: "Lister les groupes de variables d'un produit"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les groupes de variables d'un produit
+
+## Utilisation
+
+```bash
+ktm variables groups list [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables groups list --product acme~web-portal
+ktm variables groups list --product acme~web-portal -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--product` | string | — | Slug du produit (requis) |
+
+## Détails
+
+Lister les groupes de variables (configurations d'environnement) pour un seul produit.
+
+Le CLI reflète le périmètre par produit de l'interface web : il n'y a volontairement pas
+d'agrégation au niveau de l'operator, car cela exposerait des groupes de produits auxquels
+l'appelant n'a peut-être pas accès via l'interface, et le contrôle des permissions de la plateforme sur
+le endpoint multi-produits n'est pas vérifié indépendamment.
+
+Les groupes archivés sont filtrés (conformément à l'interface web).
+
+## Voir aussi
+
+- [`ktm variables groups`](/fr/cli/commands/variables/groups)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

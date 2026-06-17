@@ -1,0 +1,69 @@
+---
+title: Youtube
+description: Diffusez une vidéo via la connexion cellulaire et mesurez la qualité de lecture.
+---
+
+Diffusez une vidéo via la connexion data de la SIM et mesurez l'expérience : temps avant la première image, événements de mise en mémoire tampon, images perdues, qualité obtenue. La mesure la plus proche de ce qu'un abonné ressent en regardant une vidéo sur le réseau.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Url | `command.url` | Oui | L'URL de la vidéo à diffuser. |
+| Qualité | `command.quality` | Non | Qualité vidéo demandée. Par défaut : `144p`. |
+| Durée de lecture | `command.duration_to_play` | Non | Combien de temps diffuser, en secondes. Par défaut : 10. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "STREAMING_VIDEO",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "quality": "360p",
+    "duration_to_play": 30,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `first_buffering_time` | Temps avant le début de la lecture. |
+| `additional_buffering_time`, `additional_buffering_count` | Re-buffering pendant la lecture : temps total et nombre d'arrêts. |
+| `played_time` | Secondes effectivement lues. |
+| `displayed_pictures`, `lost_pictures` | Images affichées versus perdues. |
+| `played_audio_buffers`, `lost_audio_buffers` | Continuité audio. |
+| `streamed_quality`, `best_available_quality`, `codec` | La qualité obtenue versus disponible, et le codec. |
+| `total_bytes`, `read_bytes` | Volume de données transféré. |
+
+Dans Analytics, chaque exécution alimente la mesure vidéo avec les temps et nombres de buffering, `lost_pictures_percent`, `buffering_percent`, temps lu et volumes, étiquetée par statut, qualité diffusée, APN, antenne, serveur DNS et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/fr/tests/actions/cellular/speedtest">
+
+    Bande passante brute, à corréler avec la qualité vidéo
+
+</Card>
+  <Card title="Download File" icon="cloud-arrow-down" href="/fr/tests/actions/cellular/download-file">
+
+    Débit simple contre vos propres serveurs
+
+</Card>
+</Columns>

@@ -1,0 +1,59 @@
+---
+title: "create_dashboard"
+description: "Créer un nouveau dashboard vide sous un opérateur."
+sidebarTitle: "create_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau dashboard vide sous un opérateur.
+
+<Info>
+  **Écriture de données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | Non | Bucket InfluxDB pour les données d'agent passif (optionnel) |
+| `name` | string | Oui | Nom du dashboard |
+| `operator` | string | Oui | Slug de l'opérateur (résolu automatiquement en collection UID) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "name": "string"
+}
+```
+
+## Description
+
+```text
+Le dashboard est créé avec la version de layout 2 et un tableau de widgets vide. Crée un dashboard VIDE ; utilisez build_dashboard pour créer avec des widgets en un seul appel.
+
+Le collection_uid est résolu automatiquement depuis le dashboards_root_collection_uid de l'opérateur (même schéma que la création de test avec la collection racine du produit).
+
+Workflow : list_operators → create_dashboard → get_dashboard (pour vérifier).
+```
+
+## Associé
+
+- [`build_dashboard`](/fr/mcp/tools/dashboard-widget/build_dashboard)
+- [`list_operators`](/fr/mcp/tools/discovery/list_operators)
+- [`get_dashboard`](/fr/mcp/tools/dashboard/get_dashboard)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

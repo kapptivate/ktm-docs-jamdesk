@@ -1,0 +1,135 @@
+---
+title: Connecter votre client IA
+description: Configurez Claude, Cursor, Claude Code ou GitHub Copilot avec le serveur MCP de Kapptivate.
+sidebarTitle: Clients IA
+---
+
+Configurez n'importe quel client compatible MCP sur `https://mcp.kapptivate.com/mcp` et authentifiez-vous avec l'en-tête `X-Kapptivate-API-Key`. Cette page couvre les clients développeur courants (Claude, Cursor, Claude Code et GitHub Copilot). Pour Microsoft 365 Copilot Studio et Google Gemini, consultez leurs pages dédiées dans cette section.
+
+## Obtenir votre clé API
+
+<Steps>
+  <Step title="Ouvrir votre profil">
+    Connectez-vous à [Kapptivate](https://app.kapptivate.com) et ouvrez votre profil.
+  </Step>
+  <Step title="Copier votre clé API">
+    Copiez votre clé API personnelle. Elle porte le même accès que votre compte. Les clés au niveau workspace, scopées par équipe, se gèrent dans [Administration > Clés API](/fr/administration/api-keys).
+  </Step>
+</Steps>
+
+<Warning>
+  Traitez la clé comme un mot de passe. Préférez une variable d'environnement plutôt que de la coller dans un fichier de configuration que vous pourriez commiter.
+</Warning>
+
+## Configurer votre client
+
+<Tabs>
+<Tab title="Claude Code">
+
+Enregistrez le serveur avec une seule commande, puis vérifiez la connexion :
+
+```bash
+claude mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
+  --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
+
+claude mcp list
+```
+
+</Tab>
+<Tab title="Cursor">
+
+Ajoutez Kapptivate à votre configuration MCP (Settings, puis MCP) :
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "url": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "YOUR_KEY"
+      }
+    }
+  }
+}
+```
+
+</Tab>
+<Tab title="Claude Desktop">
+
+Claude Desktop accède aux serveurs distants via `mcp-remote`. Modifiez `claude_desktop_config.json`, puis redémarrez Claude Desktop :
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "command": "npx",
+      "args": [
+        "-y", "mcp-remote",
+        "https://mcp.kapptivate.com/mcp",
+        "--header", "X-Kapptivate-API-Key:YOUR_KEY"
+      ]
+    }
+  }
+}
+```
+
+</Tab>
+<Tab title="GitHub Copilot">
+
+Dans VS Code, ajoutez un fichier `.vscode/mcp.json` à votre workspace (ou lancez **MCP: Open User Configuration** pour l'appliquer partout) :
+
+```json
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "kapptivate-key",
+      "description": "Kapptivate API key",
+      "password": true
+    }
+  ],
+  "servers": {
+    "kapptivate": {
+      "type": "http",
+      "url": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "${input:kapptivate-key}"
+      }
+    }
+  }
+}
+```
+
+Ouvrez Copilot Chat en mode agent, puis démarrez le serveur depuis **MCP: List Servers** dans la Palette de commandes. VS Code demande la clé à la première utilisation et la stocke de façon sécurisée.
+
+<Note>
+  Il s'agit de GitHub Copilot dans votre éditeur. C'est un produit différent de [Microsoft Copilot Studio](/fr/mcp/integrations/copilot-studio) (le constructeur d'agents Microsoft 365).
+</Note>
+
+</Tab>
+</Tabs>
+
+## Vérifier la connexion
+
+Demandez à votre assistant quelque chose en lecture seule, par exemple : "Liste les operators auxquels j'ai accès." Si des résultats apparaissent, vous êtes connecté.
+
+<Tip>
+  Si un appel échoue avec une erreur d'authentification, vérifiez la valeur de l'en-tête. Le serveur accepte uniquement `X-Kapptivate-API-Key` ; il n'utilise pas `Authorization: Bearer`.
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Microsoft Copilot Studio" icon="robot" href="/fr/mcp/integrations/copilot-studio">
+    Connectez depuis Microsoft 365.
+  </Card>
+  <Card title="Google Gemini" icon="sparkles" href="/fr/mcp/integrations/gemini">
+    Connectez Gemini, du CLI à l'entreprise.
+  </Card>
+  <Card title="Exemples de prompts" icon="robot" href="/fr/mcp/examples">
+    Que demander une fois connecté.
+  </Card>
+  <Card title="Concepts fondamentaux" icon="sitemap" href="/fr/mcp/concepts">
+    Operators, produits, variables et modèle de sécurité.
+  </Card>
+</Columns>

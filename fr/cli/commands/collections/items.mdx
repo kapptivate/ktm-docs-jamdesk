@@ -1,0 +1,66 @@
+---
+title: "ktm collections items"
+description: "Lister les éléments (tests + dashboards) dans une collection"
+sidebarTitle: "items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les éléments (tests + dashboards) dans une collection
+
+## Utilisation
+
+```bash
+ktm collections items <uid> [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections items --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections items --operator my-op <uid> -o json | jq '.[].meta.name'
+ktm collections items --operator my-op <uid> --page-size 10 --page 2
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--page` | int | — | Numéro de page |
+| `--page-size` | int | — | Éléments par page (défaut : 25) |
+
+## Détails
+
+Liste paginée des éléments directement dans la collection (les sous-collections
+ne sont PAS incluses, utilisez 'ktm collections list' pour celles-ci). Les éléments sont des tests,
+reusable_tests ou dashboards ; le nom / statut lisible provient du
+blob meta des collections.
+
+Le service de collections utilise par défaut sort_by=updated_at order=desc quand le
+client ne précise pas ; cela correspond à l'interface web.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

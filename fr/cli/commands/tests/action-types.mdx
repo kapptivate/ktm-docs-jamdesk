@@ -1,0 +1,67 @@
+---
+title: "ktm tests action-types"
+description: "Lister les types d'action disponibles pour la création de tests"
+sidebarTitle: "action-types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les types d'action disponibles pour la création de tests
+
+## Utilisation
+
+```bash
+ktm tests action-types [flags]
+```
+
+## Exemples
+
+```bash
+# Lister tous les types d'action
+ktm tests action-types
+
+# Lister les types d'action ethernet uniquement
+ktm tests action-types --kind ethernet
+
+# Lister les types d'action SIM au format tableau
+ktm tests action-types --kind sim -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--kind` | string | — | Filtrer par type de propriétaire : ethernet, sim, smartphone, ownerless |
+
+## Détails
+
+Lister le catalogue des types d'action disponibles (44 types : 15 ETHERNET, 22 SIM, 3 SMARTPHONE, 4 OWNERLESS) pour la création de tests.
+
+Chaque type d'action a un owner_kind qui détermine sur quel appareil il s'exécute :
+  ETHERNET    : s'exécute sur un web agent (hostname)
+  SIM         : s'exécute sur une carte SIM (MSISDN)
+  SMARTPHONE  : s'exécute sur un smartphone (UUID)
+  OWNERLESS   : aucun appareil nécessaire (flux de contrôle : JAVASCRIPT, WAIT, etc.)
+
+Utilisez --kind pour filtrer par type de propriétaire.
+
+Utilisez la sortie avec 'tests template &lt;type&gt; [type...]' pour générer un test prêt à personnaliser.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

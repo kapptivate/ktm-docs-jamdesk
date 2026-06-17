@@ -1,0 +1,54 @@
+---
+title: Web Script
+description: Exécutez un scénario web scripté via la connexion cellulaire.
+---
+
+Exécutez un scénario web JavaScript (chargements de pages, clics, remplissage de formulaires) avec le trafic routé via la connexion data de la SIM. Utilisez-le pour mesurer un vrai parcours utilisateur (connexion, recherche, paiement) tel que vécu sur le réseau mobile.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Script | Champs script de `command` | Oui | Le scénario web JavaScript à exécuter. |
+| Asynchrone | `command.asynchronous` | Non | Exécuter le script sans bloquer les actions suivantes. Par défaut : désactivé. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_JS_WEB_SCRIPT",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "asynchronous": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Le rapport contient une entrée par étape du script : statut, durée, captures d'écran et métriques personnalisées créées par le script. Les durées et statuts des étapes alimentent Analytics comme les autres actions, étiquetées par antenne et technologie d'accès, pour que vous puissiez suivre chaque étape du parcours sur le réseau cellulaire.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Actions web" icon="globe" href="/fr/tests/actions/web/overview">
+
+    Les étapes disponibles dans les scénarios web
+
+</Card>
+  <Card title="API Call" icon="cloud" href="/fr/tests/actions/cellular/api-call">
+
+    Requêtes HTTP unitaires, sans navigateur
+
+</Card>
+</Columns>

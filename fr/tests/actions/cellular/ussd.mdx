@@ -1,0 +1,72 @@
+---
+title: USSD Command
+description: Envoyez un code USSD sur une vraie SIM et vérifiez la réponse du réseau.
+---
+
+Envoyez un code USSD (`#100#`, `*123*1#`) sur une vraie SIM et attendez la réponse du réseau. Enchaînez plusieurs actions USSD Command pour naviguer dans un menu complet : envoyez le code d'entrée, vérifiez le menu, envoyez une sélection, vérifiez l'écran suivant.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Technologie d'accès | `command.access_technology` | Non | Technologie réseau à utiliser (2G, 3G, 4G...). Par défaut : automatique. |
+| Commande | `command.input` | Oui | Le code USSD à envoyer, par exemple `#100#`. Supporte les variables. |
+| Message attendu | `expected_result.message` | Non | La réponse que vous attendez. Le résultat enregistre le degré de correspondance avec la réponse réelle. |
+| Activer la comparaison stricte | `command.enable_strict_mode` | Non | Comparaison exacte au lieu de la correspondance approximative. Par défaut : désactivé. |
+| Exécuter plusieurs fois | `command.send_multiple_times`, `command.repetition_number` | Non | Répéter la commande de 1 à 30 fois. |
+
+Comme chaque action SIM, elle supporte aussi les [assertions, variables stockées et artefacts](/fr/tests/actions/cellular/overview#options-communes).
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "USSD",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "input": "#100#",
+    "access_technology": "",
+    "enable_strict_mode": false,
+    "options": { "artifacts": {} }
+  },
+  "expected_result": {
+    "message": "Balance: 50.00"
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `response` | Le texte retourné par la passerelle USSD. |
+| `shortcode` | Le code qui a été envoyé. |
+| `session` | État de la session : `alive`, `close`, ou erreurs réseau comme `Network Timeout (+CUSD 5)`. |
+| `ratio` | Ratio de correspondance (0 à 100) entre la réponse et le message attendu. |
+| `duration` | Temps d'exécution total en secondes. |
+| `access_technology_report` | La technologie réellement utilisée, avec son temps de configuration. |
+| `dynamic_variables` | Valeurs extraites de la réponse dans les variables. |
+
+Dans Analytics, chaque exécution alimente la mesure USSD avec `duration_seconds`, étiquetée par statut, antenne (MCC, MNC, LAC, cell ID) et technologie d'accès.
+
+Les assertions peuvent cibler `message`, `session_status`, `duration`, `access_technology`, ou extraire une `variable` de la réponse.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Wait USSD Push" icon="flag" href="/fr/tests/actions/cellular/ussd-push">
+
+    Vérifiez les messages USSD initiés par le réseau
+
+</Card>
+  <Card title="Vue d'ensemble des actions SIM" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    Assertions, variables stockées et options partagées
+
+</Card>
+</Columns>

@@ -1,0 +1,70 @@
+---
+title: "ktm dashboards edit-widget"
+description: "Remplacer les données d'un widget depuis un fichier JSON ou stdin"
+sidebarTitle: "edit-widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Remplacer les données d'un widget depuis un fichier JSON ou stdin
+
+## Utilisation
+
+```bash
+ktm dashboards edit-widget <uid> <widget-id> [flags]
+```
+
+## Exemples
+
+```bash
+# Edit widget from file
+ktm dashboards edit-widget abc123 RandomID-xxx --json widget.json
+
+# Pipe from stdin
+cat updated.json | ktm dashboards edit-widget abc123 RandomID-xxx --json -
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+| `widget-id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--json` | string | — | Chemin du fichier JSON du widget, ou "-" pour stdin (requis) |
+
+## Détails
+
+Met à jour la section data d'un widget dans un dashboard.
+
+Fournissez la section data mise à jour complète en JSON (même format que add-widget).
+Le widget est identifié par son ID dans la disposition du dashboard.
+
+Le type du widget ne peut pas être changé, seules les données du même type.
+La validation s'exécute avant la mise à jour ; les valeurs placeholder sont rejetées.
+
+customDisplay : les modifications de script doivent suivre le pattern IIFE et la limite de 20Ko.
+Montrez toujours le script mis à jour complet à l'utilisateur avant d'appliquer.
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

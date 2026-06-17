@@ -1,0 +1,84 @@
+---
+title: CI/CD
+description: Exécutez les tests Kapptivate depuis votre pipeline avec des codes de sortie stables, une sortie JUnit et des annotations natives GitHub Actions.
+sidebarTitle: CI/CD
+---
+
+`ktm` est conçu pour les pipelines. Le schéma est toujours le même : construire une campagne, l'exécuter, publier les résultats. Le CLI retourne du JSON, écrit du JUnit XML et retourne un code non nul quand des tests échouent, pour que votre pipeline réagisse automatiquement.
+
+## GitHub Actions
+
+```yaml
+name: Kapptivate Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ktm
+        run: |
+          # Put the ktm binary on the PATH (see Installation), then:
+          ktm --version
+
+      - name: Build campaign
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+        run: |
+          ktm ci build \
+            --test-ids 16480,16838 \
+            --product acme~web --variant "API:Staging" > campaign.json
+
+      - name: Run tests
+        env:
+          KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
+        run: |
+          ktm ci run \
+            --test-config-path campaign.json \
+            --junit-file results.xml \
+            --output-file summary.json
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            results.xml
+            summary.json
+```
+
+### Intégration native GitHub
+
+Quand `GITHUB_ACTIONS=true` (défini automatiquement), `ktm` produit une sortie native sans configuration supplémentaire :
+
+- Il émet des annotations `::notice` et `::error` qui apparaissent sur l'exécution et sur les pull requests.
+- Il ajoute un tableau de résultats au résumé du job.
+
+Le résumé JSON est supprimé sur stdout dans ce mode, donc passez `--output-file summary.json` pour le conserver en fichier.
+
+## Autres plateformes
+
+Le même schéma construire-puis-exécuter fonctionne sur GitLab CI, Jenkins et tout runner. Définissez `KAPPTIVATE_API_KEY` comme secret, placez `ktm` sur le PATH, puis appelez `ktm ci build` et `ktm ci run`. Committez vos fichiers JSON de campagne ou de configuration de tests dans le dépôt et pointez `ktm ci run --test-config-dir ./tests/` dessus.
+
+## Codes de sortie
+
+Le pipeline échoue sur tout code de sortie non nul. Le code `5` signifie que les tests ont été exécutés mais que certains ont échoué (distinct du `1`, qui est une erreur générale). Consultez [Configuration](/fr/cli/configuration) pour la liste complète.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Les commandes `ci` et leurs flags.
+  </Card>
+  <Card title="Configuration" icon="gear" href="/fr/cli/configuration">
+    Codes de sortie, variables d'environnement et formats de sortie.
+  </Card>
+</Columns>

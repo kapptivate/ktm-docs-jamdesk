@@ -1,0 +1,64 @@
+---
+title: Mettre à jour la configuration réseau d'un robot Mac mini
+description: Définir l'adresse IP, la passerelle et le masque d'un robot Mac mini et vérifier la connectivité.
+sidebarTitle: Configuration réseau du Mac mini
+---
+
+Mettez à jour la configuration réseau d'un robot Mac mini après avoir déplacé l'appareil ou l'avoir remis en service : adresse IP, passerelle et tout ce qu'une connexion stable vers Kapptivate nécessite.
+
+## Prérequis
+
+- Un écran externe (HDMI ou USB-C)
+- Un clavier et une souris (filaire ou Bluetooth)
+- Un câble RJ45 connecté à votre réseau, avec les flux nécessaires ouverts vers Kapptivate
+- L'adresse IP, le masque de sous-réseau et la passerelle fournis par votre service informatique
+
+## Configuration
+
+<Steps>
+  <Step title="Ouvrir les paramètres réseau">
+    Allumez le Mac mini et allez dans **(Apple) > System Settings > Network**.
+
+    <Frame caption="Paramètres réseau macOS">
+      ![Paramètres réseau](/images/hardware/macmini-network-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Configurer l'interface Ethernet">
+    Sélectionnez l'interface Ethernet et cliquez sur **Advanced**.
+
+    <Frame caption="L'interface Ethernet">
+      ![Interface Ethernet](/images/hardware/macmini-network-02.webp)
+    </Frame>
+
+    Dans l'onglet **TCP/IP**, choisissez **Configure IPv4 manually** et renseignez l'adresse IP, le masque de sous-réseau et la passerelle. Cliquez sur **OK**, puis **Apply**.
+
+    <Frame caption="Configuration IPv4 manuelle">
+      ![IPv4 manuel](/images/hardware/macmini-network-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Vérifier la connectivité">
+    Ouvrez Terminal et vérifiez les deux flux vers la plateforme :
+
+    ```bash
+    curl -v telnet://app.kapptivate.com:443
+    curl -v telnet://app.kapptivate.com:5671
+    ```
+
+    Remplacez `app` par votre propre domaine si nécessaire (vous pouvez le lire dans l'URL de votre plateforme : `votre_domaine.kapptivate.com`).
+  </Step>
+</Steps>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Si le robot n'atteint toujours pas la plateforme
+
+</Card>
+  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+
+    Confirmer que le robot est de nouveau en ligne
+
+</Card>
+</Columns>

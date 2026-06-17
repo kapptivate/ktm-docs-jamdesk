@@ -1,0 +1,60 @@
+---
+title: "ktm reusables in-test"
+description: "Lister les reusables intégrés dans un test standard"
+sidebarTitle: "in-test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les reusables intégrés dans un test standard
+
+## Utilisation
+
+```bash
+ktm reusables in-test <test_id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm reusables in-test 204
+ktm reusables in-test 204 --limit 100
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `test_id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--limit` | int | — | Nombre maximum d'entrées à développer (défaut : 50, max : 200) |
+
+## Détails
+
+Inverse de 'usage'. Étant donné un identifiant de test standard (kind=1), retourne les
+reusables intégrés via des actions 'import' (le tableau reused_tests de la définition
+complète du test), développés en \{id, name\}. Rejette si &lt;test_id&gt; pointe vers un
+reusable lui-même.
+
+## Voir aussi
+
+- [`ktm reusables`](/fr/cli/commands/reusables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

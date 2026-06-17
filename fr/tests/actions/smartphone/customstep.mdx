@@ -1,0 +1,64 @@
+---
+title: Custom step
+sidebarTitle: Script
+description: Exécuter votre propre JavaScript quand aucun step intégré ne convient.
+---
+
+Exécutez votre propre JavaScript dans le test : gérer un flux qu'aucun step intégré ne couvre, calculer une valeur, ou envoyer une métrique personnalisée vers les Analytiques. Le script s'exécute dans la session de l'appareil du test avec l'API WebdriverIO complète disponible.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Titre du step | `name` | Non | Le nom affiché pour ce step dans le builder et dans les résultats. |
+| Script | `script` | Oui | Code JavaScript, édité dans une fenêtre modale dédiée. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si le script lève une erreur. Par défaut : désactivé. |
+
+Dans le script, vous pouvez utiliser l'objet WebdriverIO `browser` pour piloter la session, et les helpers `test`, par exemple :
+
+```javascript
+// Push a custom metric to Analytics
+test.metrics.create("checkout", { basket_total: 39.98 }, { currency: "EUR" });
+```
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "custom-step",
+  "version": "v1.0.0",
+  "disabled": false,
+  "name": "Accept the cookie banner if present",
+  "inputs": {
+    "script": "const banner = await browser.$('#cookie-accept');\nif (await banner.isDisplayed()) {\n  await banner.click();\n}",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : échec si le script lève une erreur, succès sinon.
+- **Sortie** : tout ce que le script journalise est disponible dans la sortie du step pour le débogage.
+- **Métriques personnalisées** : les métriques créées avec `test.metrics.create(measurement, fields, tags)` remontent vers les Analytiques comme toute métrique intégrée.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Set variable" icon="brackets-curly" href="/fr/tests/actions/smartphone/setvariable">
+
+    Stocker une valeur sans écrire de code
+
+</Card>
+  <Card title="Analytiques" icon="chart-line" href="/fr/monitoring/dashboards">
+
+    Où les métriques personnalisées apparaissent
+
+</Card>
+</Columns>

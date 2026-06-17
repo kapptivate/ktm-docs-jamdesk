@@ -1,0 +1,66 @@
+---
+title: "ktm variables show"
+description: "Récupérer une variable avec utilisation par défaut ; --lite ignore l'utilisation"
+sidebarTitle: "show"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupérer une variable avec utilisation par défaut ; --lite ignore l'utilisation
+
+## Utilisation
+
+```bash
+ktm variables show <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables show 17
+ktm variables show 17 --lite
+ktm variables show 17 -o json | jq '.variable_values[] | {variant: .variant.name, value: .values}'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--lite` | boolean | — | Ignorer la récupération de l'utilisation (plus rapide ; défaut : enrichi) |
+| `--variant` | string | — | Réservé : sans effet aujourd'hui |
+
+## Détails
+
+Retourne la forme complète de la Variable : id, name, type, scope, default_value et
+variable_values[] par variant.
+
+Le CLI est enrichi par défaut (les humains veulent l'information complète) : la réponse inclut aussi la
+liste des tests référençant cette variable. Passez --lite pour ignorer la récupération de l'utilisation.
+
+Le flag --variant est réservé pour une projection future par variant et n'a actuellement
+aucun effet.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

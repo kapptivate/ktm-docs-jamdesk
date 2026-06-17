@@ -1,12 +1,35 @@
 ---
-title: Web & API
+title: Web
 description: Browser-based web tests and HTTP API steps, both run by the Web agent.
-sidebarTitle: Web & API
+sidebarTitle: Web
 ---
 
 ![The web test builder: a Navigate to starting page action followed by a Fill Form step group with hover, click, and fill-input steps, plus a Preview/Run panel and recent executions](/images/web-test-builder.webp)
 
 The Web channel runs browser-based tests against websites and web apps. API steps hit HTTP services directly, without a browser. Both run on the **Web agent**, a machine or server with network access at a specific location.
+
+## Quickstart
+
+Create your first browser test in four steps.
+
+<Steps>
+  <Step>
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, and choose **Web (New experience)**. Fill in the test name, the default Web agent, and the start URL the browser opens.
+  </Step>
+  <Step>
+    **Add steps.** In the builder, record interactions on the live page or add web actions manually: click an element, fill an input, wait for content, and assert that something is displayed. Save the test.
+  </Step>
+  <Step>
+    **Run it on a browser.** Click **Run** in the builder to watch it live, or **Run** on the test's row, then confirm the agent and variables on the [run confirmation](/executions/run) page and launch.
+  </Step>
+  <Step>
+    **Read the result.** Open the execution under **Executions** to see status, per-step screenshots, and timing.
+  </Step>
+</Steps>
+
+<Tip>
+The browser type, window size, language, and user agent come from the [browser preset](/tests/browser-presets) you pick in the builder's **Environment** tab.
+</Tip>
 
 ## Web tests
 

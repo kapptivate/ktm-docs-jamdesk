@@ -1,0 +1,50 @@
+---
+title: Se connecter à un robot sans sortie vidéo
+description: Utiliser un adaptateur série-USB pour accéder à un mini robot cellulaire.
+sidebarTitle: Accès au robot sans écran
+---
+
+Certains modèles de robots n'ont pas de sortie vidéo. Pour interagir avec eux, vous vous connectez via une liaison série au lieu de brancher un écran. Cela concerne le mini robot cellulaire :
+
+<Frame caption="Le mini robot cellulaire">
+  ![Mini robot cellulaire](/images/hardware/headless-login-01.webp)
+</Frame>
+
+## Ce dont vous avez besoin
+
+- Un **adaptateur série-USB** :
+
+<Frame caption="Adaptateur série-USB">
+  ![Adaptateur série-USB](/images/hardware/headless-login-02.webp)
+</Frame>
+
+- Le **driver** de l'adaptateur installé sur votre ordinateur (contactez le support pour obtenir le lien de téléchargement correspondant à votre modèle d'adaptateur).
+- Une application de terminal série, par exemple **CoolTerm** (disponible pour macOS, Windows et Linux).
+
+## Connexion
+
+Configurez la connexion série avec :
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Baudrate | 115200 |
+| Data bits | 8 |
+| Parity | None |
+| Stop bit | 1 |
+
+Ouvrez la connexion : vous obtenez la console du robot et pouvez vous connecter avec vos identifiants.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Quel port RJ45 est configuré ?" icon="ethernet" href="/fr/hardware/rj45-port">
+
+    Trouver le bon port réseau depuis la ligne de commande
+
+</Card>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Diagnostiquer la connectivité depuis la console
+
+</Card>
+</Columns>

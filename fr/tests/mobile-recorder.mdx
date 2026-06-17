@@ -1,0 +1,59 @@
+---
+title: Recorder d'application mobile
+description: Enregistrez un test smartphone en pilotant un appareil réel depuis votre navigateur.
+---
+
+Le recorder d'application mobile transforme une session manuelle sur un appareil réel en test. Vous pilotez le smartphone depuis votre navigateur via le contrôle à distance, chaque tap et chaque saisie est capturé comme un step, et un clic génère le test JavaScript.
+
+## Enregistrer un test
+
+Dans Testing, ouvrez l'onglet **Remote control** et choisissez le smartphone sur lequel enregistrer.
+
+<Steps>
+  <Step title="Démarrer l'enregistrement">
+    Cliquez sur l'icône **start a test record** dans la barre d'outils du contrôle à distance.
+  </Step>
+  <Step title="Sélectionner l'application">
+    Choisissez l'application sur laquelle le test va s'exécuter.
+  </Step>
+  <Step title="Effectuer les steps">
+    Pilotez l'appareil manuellement. Chaque interaction ajoute une ligne au panneau d'enregistrement.
+  </Step>
+  <Step title="Générer le test">
+    Arrêtez l'enregistrement (icône jaune) et cliquez sur **Generate JavaScript test**. Après la sauvegarde, le test apparaît dans votre liste de tests, prêt à être exécuté.
+  </Step>
+</Steps>
+
+## Affiner les sélecteurs
+
+Chaque step enregistré cible un élément via un XPath, et le recorder en choisit un parmi plusieurs candidats. Sur les applications complexes, le choix automatique échoue parfois lors de la relecture. Utilisez le **target mode** pour mieux choisir.
+
+Appuyez sur l'élément sur l'écran de l'appareil : un popup liste tous les XPath correspondants.
+
+Choisissez le plus court et le plus clair, par exemple `//*[contains(@text,"1")]`. Vous pouvez aussi parcourir manuellement l'arborescence XML de l'application. Ensuite, ouvrez le menu à trois points à côté du XPath et choisissez l'action pour le step.
+
+Les actions les plus utilisées :
+
+- **Click** : appuyer sur un bouton ou un élément.
+- **Set value** : saisir du texte dans un champ.
+- **Scroll until** : défiler jusqu'à atteindre un élément spécifique.
+- **Assert text** : vérifier que le texte affiché correspond à ce que vous attendez.
+
+<Note>
+  Le recorder génère une [smartphone script action](/fr/tests/actions/legacy/script-actions-smartphone) : du JavaScript que vous pouvez modifier, enrichir d'assertions, ou compléter avec des [variables et métriques personnalisées](/fr/tests/actions/legacy/script-actions-variables).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Helpers de script smartphone" icon="mobile-screen" href="/fr/tests/actions/legacy/script-actions-smartphone">
+
+    Modifiez le script généré : événements, appels, mode avion
+
+</Card>
+  <Card title="Live session" icon="display" href="/fr/tests/live-session">
+
+    Contrôle à distance sans enregistrement
+
+</Card>
+</Columns>

@@ -1,0 +1,54 @@
+---
+title: "ktm collections create"
+description: "Créer une nouvelle sous-collection sous --parent"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer une nouvelle sous-collection sous --parent
+
+## Utilisation
+
+```bash
+ktm collections create [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections create --operator my-op --parent <parent_uid> --name "Auth regression"
+ktm collections create --operator my-op --parent <tests_root> --name "Smoke" -o json | jq .uid
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nom de la nouvelle collection (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--parent` | string | — | UID de la collection parent (requis) |
+
+## Détails
+
+Crée une collection en tant qu'enfant de --parent. L'opérateur et l'UID parent
+sont requis ; la nouvelle collection hérite de l'org_id de l'opérateur.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,61 @@
+---
+title: "ktm test-campaigns update"
+description: "Mise à jour partielle d'une Tests campaign (PATCH)"
+sidebarTitle: "update"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Mise à jour partielle d'une Tests campaign (PATCH)
+
+## Utilisation
+
+```bash
+ktm test-campaigns update <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm test-campaigns update 42 --name "Regression v2"
+ktm test-campaigns update 42 --test-list @newlist.json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--description` | string | — | Nouvelle description |
+| `--name` | string | — | Nouveau nom |
+| `--test-list` | string | — | Fichier JSON (ou '-') remplaçant la test_list actuelle |
+
+## Détails
+
+Appliquer une mise à jour partielle. Toute combinaison de --name, --description ou
+--test-list est autorisée. Si --test-list est fourni, il remplace entièrement la
+test_list actuelle (sémantique backend : les anciennes entrées sont supprimées, les nouvelles sont créées).
+
+## Voir aussi
+
+- [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

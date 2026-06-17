@@ -1,0 +1,64 @@
+---
+title: Planification
+description: Contrôlez la fréquence et les horaires d'exécution d'un moniteur.
+sidebarTitle: Planification
+---
+
+![The Advanced scheduling form with the Days section, the Forever checkbox, and the run frequency options](/images/monitor-advanced-scheduling.webp)
+
+La planification d'un moniteur détermine quand et à quelle fréquence il s'exécute. Vous pouvez choisir des intervalles simples et répétitifs ou des planifications avancées avec des jours, horaires, fenêtres temporelles et fuseaux horaires spécifiques.
+
+## Planification simple
+
+La planification simple exécute le moniteur à intervalle fixe : toutes les X secondes, minutes ou heures.
+
+- **Every** : définissez le nombre et l'unité (secondes, minutes ou heures). Le minimum est de 10 secondes.
+- **Par défaut** : toutes les 5 minutes.
+
+Choisissez ce mode pour les moniteurs qui doivent s'exécuter en continu à une cadence régulière, sans restriction d'heure de la journée ou de jour de la semaine.
+
+## Planification avancée
+
+La planification avancée vous permet de contrôler les jours d'exécution du moniteur et les fenêtres temporelles utilisées. Vous pouvez aussi définir une date de fin ou exécuter le moniteur à des heures précises uniquement.
+
+### Fréquence d'exécution
+
+Choisissez comment le moniteur se répète :
+
+**Defined Frequency** : se répète toutes les X secondes, minutes ou heures dans des fenêtres temporelles optionnelles. Utilisez ce mode lorsque vous souhaitez des intervalles réguliers mais uniquement pendant les heures de bureau ou certaines parties de la journée.
+
+**Specific Times** : s'exécute à des heures précises (jusqu'à 12 par jour). Utilisez ce mode lorsque vous souhaitez exécuter à 9h00, 12h00, 15h00, etc.
+
+### Jours de la semaine
+
+Choisissez **Every day** (les 7 jours) ou **Specific days** (sélectionnez des jours individuels). Au moins un jour doit être sélectionné.
+
+### Dates de début et de fin
+
+- **From** : date de début de la planification (par défaut aujourd'hui).
+- **Until / Forever** : choisissez une date de fin, ou cochez la case **Forever** pour une exécution indéfinie.
+
+Le moniteur s'exécute à 23:59:59 le jour de la date de fin, puis s'arrête.
+
+### Fenêtres temporelles (fréquence définie uniquement)
+
+Si vous choisissez Defined Frequency, vous pouvez définir une ou plusieurs fenêtres temporelles. Le moniteur s'exécutera toutes les X secondes/minutes/heures uniquement entre ces horaires.
+
+- **Par défaut** : 00:00 à 23:59 (toute la journée).
+- **Exemple** : exécuter toutes les 5 minutes entre 9h00 et 17h00, puis à nouveau entre 21h00 et 6h00.
+
+Vous pouvez ajouter ou supprimer des fenêtres temporelles.
+
+### Fuseaux horaires
+
+Sélectionnez le fuseau horaire qui s'applique à la planification. Les horaires (heures précises, fenêtres temporelles, dates de début/fin) sont interprétés dans ce fuseau horaire.
+
+- **Par défaut** : le fuseau horaire actuel de votre système (détecté automatiquement lors du passage en mode avancé).
+- **Pris en charge** : tout fuseau horaire IANA (par exemple UTC, America/New_York, Europe/London).
+- **Référence** : les boutons radio basculent la référence horaire entre **Local** et **UTC**.
+
+## Modifier uniquement la planification
+
+Si vous souhaitez modifier uniquement la planification sans ouvrir le formulaire complet du moniteur, ouvrez le menu à trois points du moniteur et cliquez sur **Edit frequency**. Une modale apparaît avec les seuls champs de planification. C'est plus rapide que d'ouvrir le formulaire d'édition complet.
+
+Vous pouvez aussi mettre à jour la planification de plusieurs moniteurs à la fois : activez la sélection multiple, cochez les moniteurs et cliquez sur **Edit Frequency** dans le bandeau d'actions groupées.

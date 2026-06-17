@@ -1,0 +1,48 @@
+---
+title: Lancer un test
+description: Ajoutez des tests à la file d'attente, ajustez-les pour l'exécution et lancez-les à la demande.
+sidebarTitle: Exécutions manuelles
+---
+
+![The Run queue panel with two queued tests, one expanded to show its starting URL, device, and browser preset, and the Run button](/images/run-queue-panel.webp)
+
+Toutes les exécutions n'attendent pas une planification : pendant la création d'un test, après une correction ou lors d'une investigation, vous lancez des tests à la demande. Une exécution manuelle passe par trois étapes rapides : ajouter les tests à la file d'attente, vérifier la file et lancer.
+
+## Ajouter les tests à la file d'attente
+
+Dans la liste des tests, cliquez sur **Add to queue** sur la ligne d'un test. Continuez à ajouter des tests pour les accumuler : une barre flottante en bas de l'écran suit la file d'attente (**Run queue** avec un compteur), avec **Clear** pour la vider et **Open** pour la consulter.
+
+Pour ajouter plusieurs tests d'un coup, sélectionnez-les avec les cases à cocher : une barre de sélection apparaît en bas avec une action **Add to queue** pour tout ce que vous avez sélectionné.
+
+## Vérifier la file d'attente
+
+Cliquez sur **Open** dans la barre flottante pour ouvrir le panneau **Run queue**. Chaque test en file d'attente affiche son nombre de steps et ses variables. Développez un test pour ajuster ses paramètres pour cette exécution uniquement, sans modifier le test lui-même : l'appareil sur lequel il s'exécute, ses variables d'entrée et les paramètres spécifiques au canal. Un test web, par exemple, expose son URL de départ et son [browser preset](/fr/tests/browser-presets).
+
+Deux boutons sur chaque carte de test vous permettent de le **dupliquer** (pour lancer le même test plusieurs fois) ou de le **retirer** de la file d'attente.
+
+La barre d'outils en haut du panneau peut aussi transformer la file d'attente en un élément réutilisable : un clic crée une [suite de tests](/fr/tests/suites) à partir des tests en file, pour qu'un batch que vous assemblez souvent n'ait pas à être reconstruit. L'icône corbeille vide la file d'attente.
+
+Pour lancer de nombreux tests avec différentes valeurs de variables, [importez un batch CSV](/fr/executions/run-batch-csv) au lieu de les ajouter un par un.
+
+## Options avancées
+
+La section **Advanced options** en bas du panneau contrôle le comportement du batch :
+
+- **Execution mode** : quantité de données collectées pendant l'exécution (Standard par défaut).
+- **Run later** : planifier l'exécution au lieu de la lancer immédiatement.
+- **Parallel test execution** : lancer les tests en file d'attente en parallèle.
+- **Wait between each test** : insérer une pause entre les tests.
+
+**More options** développe le reste :
+
+- **Send results by email / by SMS / by call** : recevez une notification quand l'exécution se termine.
+- **Ignore errors** : continuer quand un step échoue.
+- **Use capabilities** : transmettre des capacités d'exécution supplémentaires.
+
+## Lancement
+
+Cliquez sur **Run** dans l'en-tête du panneau pour lancer tout ce qui se trouve dans la file d'attente. L'exécution apparaît dans la [liste des exécutions](/fr/executions/overview), où vous pouvez la suivre et [consulter ses résultats](/fr/executions/results).
+
+## Lancer depuis le builder
+
+Pendant la création, vous n'avez pas besoin de quitter l'éditeur pour tester : cliquez sur **Run** en haut à droite du builder. Une fenêtre modale s'ouvre avec un flux vidéo en direct du test en cours d'exécution, que vous pouvez agrandir en plein écran pour suivre l'exécution en temps réel.

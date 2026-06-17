@@ -1,0 +1,52 @@
+---
+title: "search_collections"
+description: "Recherche parmi les collections et éléments (tests + dashboards) sous un sous-arbre de collections."
+sidebarTitle: "search_collections"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Recherche parmi les collections et éléments (tests + dashboards) sous un sous-arbre de collections.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `collection_uid` | string | Oui | Scope la recherche à ce sous-arbre de collections (typiquement le tests_root_collection_uid d'un produit) |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de lignes compactes (défaut : false) |
+| `operator` | string | Oui | Slug de l'operator (fournit l'org-id) |
+| `owner_id` | number | Non | Filtrer par identifiant d'utilisateur propriétaire |
+| `query` | string | Non | Recherche texte libre (correspond au nom et aux métadonnées) |
+| `tags` | string | Non | Identifiants de tags séparés par des virgules |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "collection_uid": "string"
+}
+```
+
+## Description
+
+```text
+The collections service requires a collection_uid to scope the search — pass the product's tests_root_collection_uid or any sub-collection UID. Returns a payload with two arrays: collections and items.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

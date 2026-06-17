@@ -1,0 +1,49 @@
+---
+title: "list_reusable_usage"
+description: "Liste les tests V2 qui intègrent un reusable donné."
+sidebarTitle: "list_reusable_usage"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les tests V2 qui intègrent un reusable donné.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `limit` | number | Non | Nombre max d'entrées à développer (défaut : 50, max : 200) |
+| `reusable_id` | number | Oui | Identifiant du test reusable |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "reusable_id": 0
+}
+```
+
+## Description
+
+```text
+Only V2 tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) can embed reusables via step_group.import, so the referencing tests returned here will always be V2 tests.
+
+Reads reused_by from the reusable's full definition and expands each id into {id, name}. Capped at limit (default: 50, max: 200) — bump the cap explicitly when you need the full list.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

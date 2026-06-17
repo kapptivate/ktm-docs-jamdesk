@@ -1,0 +1,94 @@
+---
+title: Actions SIM
+description: Toutes les actions disponibles dans les tests SIM, organisées comme la palette d'actions, avec les métriques produites par chacune.
+sidebarTitle: Vue d'ensemble
+---
+
+Les tests SIM s'exécutent sur de vraies cartes SIM dans vos agents cellulaires. Chaque action pilote le modem (USSD, SMS, appels) ou la connexion data (ping, téléchargements, speedtest) et produit des métriques réseau qui alimentent Analytics. Les groupes ci-dessous correspondent à la palette d'actions du produit.
+
+## USSD
+
+| Action | Ce qu'elle mesure |
+|--------|-------------------|
+| [USSD Command](/fr/tests/actions/cellular/ussd) | Envoi d'un code, vérification de la réponse, état de la session, temps de réponse |
+| [Wait USSD Push](/fr/tests/actions/cellular/ussd-push) | USSD initié par le réseau : contenu et délai de réception |
+
+## SMS
+
+| Action | Ce qu'elle mesure |
+|--------|-------------------|
+| [Wait SMS](/fr/tests/actions/cellular/wait-sms) | SMS entrant : expéditeur, contenu, parties, délai de réception |
+| [Send SMS](/fr/tests/actions/cellular/send-sms) | Temps d'envoi, parties, tentatives, accusé de réception optionnel |
+
+## DATA
+
+| Action | Ce qu'elle mesure |
+|--------|-------------------|
+| [PDP Activation](/fr/tests/actions/cellular/pdp-activation) | Temps d'activation de la session data, configuration IP attribuée |
+| [Ping](/fr/tests/actions/cellular/ping) | Temps aller-retour ICMP, gigue, perte de paquets |
+| [TCP Ping](/fr/tests/actions/cellular/tcp-ping) | Latence de connexion au niveau TCP |
+| [HTTP Ping](/fr/tests/actions/cellular/http-ping) | Latence de réponse d'un point d'accès web |
+| [DNS Lookup](/fr/tests/actions/cellular/dns-lookup) | Temps de résolution et adresses résolues |
+| [Download File](/fr/tests/actions/cellular/download-file) | Débit descendant avec la cascade de temps complète |
+| [HTTP Upload](/fr/tests/actions/cellular/http-upload) | Débit montant via HTTP |
+| [FTP Download](/fr/tests/actions/cellular/ftp-download) | Débit descendant via FTP |
+| [FTP Upload](/fr/tests/actions/cellular/ftp-upload) | Débit montant via FTP |
+| [Send Mail](/fr/tests/actions/cellular/send-mail) | Envoi SMTP depuis le réseau mobile |
+| [API Call](/fr/tests/actions/cellular/api-call) | Requête HTTP complète : statut, corps, cascade de temps |
+| [Ookla Speedtest](/fr/tests/actions/cellular/speedtest) | Débit descendant, montant, latence, gigue, perte de paquets |
+| [Traceroute](/fr/tests/actions/cellular/traceroute) | Temps de réponse et perte par saut |
+| [Check SSL/TLS Certificate](/fr/tests/actions/cellular/check-certificate) | Validité du certificat et délai avant expiration |
+| [Youtube](/fr/tests/actions/cellular/youtube) | Qualité de streaming vidéo : mise en mémoire tampon, images perdues |
+| [Web Script](/fr/tests/actions/cellular/web-script) | Un parcours web scripté via la connexion cellulaire |
+
+## CALL
+
+| Action | Ce qu'elle mesure |
+|--------|-------------------|
+| [Wait Call](/fr/tests/actions/cellular/wait-call) | Appel entrant : délai de réponse, durée, MOS audio |
+| [Place Call](/fr/tests/actions/cellular/place-call) | Temps de connexion, délai post-numérotation, maintien d'appel |
+
+## Autre
+
+| Action | Ce qu'elle mesure |
+|--------|-------------------|
+| [Reboot sim](/fr/tests/actions/cellular/reboot-sim) | Redémarrage du modem et temps de ré-enregistrement réseau |
+
+## Options communes
+
+Chaque action SIM partage la même enveloppe :
+
+- **Propriétaire** (`owner`) : quelle SIM exécute l'action. Les propriétaires sont assignés par test et peuvent être surchargés par campagne.
+- **Assertions** (`assertions`) : comparez n'importe quel champ du rapport de l'action avec une valeur attendue (statut, temps de réponse, perte de paquets, code de statut...). Une assertion en échec fait échouer l'action. Certaines actions ont une assertion par défaut, comme `packet_loss == 0` sur Ping.
+- **Variables stockées** (`store`) : copiez un champ du rapport (durée, texte extrait, RTT...) dans une variable de test pour les actions suivantes, avec une valeur par défaut optionnelle quand la source est absente.
+- **Doit échouer** (`expect_failure`) : inverse le verdict, pour vérifier qu'un élément est bloqué (un numéro interdit, un domaine filtré).
+- **Ignorer** (`skip`) : conserve l'action dans le scénario sans l'exécuter.
+- **Artefacts** (`command.options.artifacts`) : capture des traces réseau, des dumps TCP, des journaux de commandes AT ou l'audio d'un appel avec le résultat.
+
+## Paramètres de connexion
+
+Les actions DATA partagent aussi la configuration de connexion :
+
+- **Technologie d'accès** (`command.access_technology`) : forcer 2G/3G/4G ou des profils spécifiques ; vide signifie automatique.
+- **APN** (`command.default_apn`, `command.apn`, `command.login`, `command.password`) : utiliser l'APN par défaut de la SIM ou des identifiants personnalisés.
+- **Conserver le contexte PDP** (`command.keep_alive`) : maintient la session data ouverte pour les actions suivantes au lieu de la fermer.
+- **Vérifier la connexion internet** (`command.check_network.active`) : vérifie la connectivité avant de mesurer.
+
+## Des résultats à Analytics
+
+Chaque action enregistre un rapport typé : son statut, sa durée et les mesures spécifiques à l'action (RTT, débit, MOS, date d'expiration...). Le processeur de KPI transforme chaque rapport en une mesure étiquetée avec le test, la SIM, l'antenne (MCC, MNC, LAC, cell ID) et la technologie d'accès, ce que vous visualisez et surveillez dans [Analytics](/fr/monitoring/dashboards). Chaque page d'action liste ses champs exacts.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tests cellulaires" icon="sim-card" href="/fr/tests/cellular">
+
+    Le flux de création : propriétaires, variables, campagnes, exécutions
+
+</Card>
+  <Card title="Analytics" icon="chart-line" href="/fr/monitoring/dashboards">
+
+    Visualisez et alertez sur les métriques produites par ces actions
+
+</Card>
+</Columns>

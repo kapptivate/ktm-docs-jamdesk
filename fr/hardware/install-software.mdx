@@ -1,0 +1,185 @@
+---
+title: Installer un robot (logiciel)
+description: Configurer le réseau, préparer les smartphones et mettre en service un nouveau robot.
+---
+
+Une fois le [matériel](/fr/hardware/install-hardware) câblé, le robot a besoin de sa configuration IP et, pour les robots smartphone, les appareils eux-mêmes doivent être préparés. À la fin de cette page, le robot apparaît comme disponible dans la plateforme.
+
+<Note>
+  Cette procédure s'applique à la dernière génération de robots Kapptivate. Pour un robot plus ancien, contactez le support.
+</Note>
+
+## Prérequis réseau
+
+Selon la plateforme que vous utilisez pour accéder à Kapptivate, certains flux réseau doivent être ouverts depuis le robot. Si vous ne savez pas quels flux sont nécessaires, contactez le support.
+
+## Configuration IP
+
+Vous avez besoin d'un clavier USB, d'une souris USB, d'un écran avec un câble HDMI, des identifiants du robot et des paramètres réseau fournis par votre service informatique (IP statique, masque, passerelle).
+
+<Steps>
+  <Step title="Connecter les périphériques">
+    Branchez le clavier, la souris et le câble HDMI à l'arrière du robot.
+
+    <Frame caption="Connexion des périphériques à l'arrière">
+      ![Périphériques à l'arrière](/images/hardware/install-software-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Allumer et se connecter">
+    Allumez le robot avec le bouton avant. Sur l'écran de connexion, utilisez les identifiants fournis (contactez le support si vous ne les avez pas). Vous arrivez sur un bureau Linux.
+
+    <Frame caption="Le bouton d'alimentation avant">
+      ![Bouton d'alimentation avant](/images/hardware/install-software-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Ouvrir l'éditeur de connexion">
+    Cliquez sur l'icône de configuration réseau et sélectionnez **Edit Connections**.
+
+    <Frame caption="Edit Connections dans le menu réseau">
+      ![Edit Connections](/images/hardware/install-software-03.webp)
+    </Frame>
+
+    La connexion ici s'appelle `lan1` ; la vôtre peut être différente (par exemple "Wired connection 1"). Configurez celle qui correspond au port que vous avez branché.
+
+    <Frame caption="Sélectionnez la connexion et modifiez-la">
+      ![Sélection de lan1](/images/hardware/install-software-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Vérifier l'onglet General">
+    Dans **General**, assurez-vous que **Connect automatically with priority** est coché avec la valeur `-999`.
+
+    <Frame caption="Onglet General">
+      ![Onglet General](/images/hardware/install-software-05.webp)
+    </Frame>
+
+    <Frame caption="Connect automatically with priority -999">
+      ![Priorité -999](/images/hardware/install-software-06.webp)
+    </Frame>
+  </Step>
+  <Step title="Définir l'IP statique">
+    Dans **IPV4 Settings**, changez la méthode de **Automatic (DHCP)** à **Manual**, cliquez sur **Add** et saisissez l'adresse IP, le masque et la passerelle fournis par votre service informatique. Ajoutez les IP des serveurs DNS dans le champ **DNS servers** si nécessaire, puis cliquez sur **Save**.
+
+    <Frame caption="Onglet IPV4 Settings">
+      ![IPV4 Settings](/images/hardware/install-software-07.webp)
+    </Frame>
+
+    <Frame caption="Passer de DHCP à Manual">
+      ![Méthode Manual](/images/hardware/install-software-08.webp)
+    </Frame>
+
+    <Frame caption="Saisir l'adresse, le masque, la passerelle et les DNS">
+      ![Configuration IP statique](/images/hardware/install-software-09.webp)
+    </Frame>
+
+    <Frame caption="Enregistrer la connexion">
+      ![Enregistrer](/images/hardware/install-software-10.webp)
+    </Frame>
+  </Step>
+  <Step title="Vérifier le port du câble">
+    Assurez-vous que le câble réseau est dans le port numéroté **1**. Si vous avez utilisé le port 2 ou 3, configurez `lan2` ou `lan3` à la place.
+
+    <Frame caption="Numérotation des ports Ethernet">
+      ![Numérotation des ports](/images/hardware/install-software-11.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Configuration du smartphone Android (robots smartphone)
+
+Allumez le téléphone, sélectionnez la langue et le pays, et ne définissez aucun mot de passe de verrouillage. Ensuite :
+
+1. Dans **Settings > Apps > Choose default apps > Browser app**, sélectionnez **Chrome** (installez-le s'il est absent).
+2. Dans **Settings > About phone > Software information**, appuyez plusieurs fois sur **Build number** jusqu'à ce que le mode développeur s'active.
+3. Dans **Settings > Developer options**, modifiez les options suivantes :
+
+<Frame caption="Options développeur à modifier">
+  ![Options développeur](/images/hardware/install-software-12.svg)
+</Frame>
+
+4. Dans **Settings > Battery and device care**, ouvrez l'icône du menu, choisissez **Automation** et modifiez les options suivantes :
+
+<Frame caption="Options d'automatisation">
+  ![Icône du menu batterie](/images/hardware/install-software-13.webp)
+  ![Options d'automatisation](/images/hardware/install-software-14.svg)
+</Frame>
+
+5. De retour dans **Battery and device care > Battery > Background usage limits**, désactivez **Put unused apps to sleep** :
+
+<Frame caption="Limites d'utilisation en arrière-plan">
+  ![Limites d'utilisation en arrière-plan](/images/hardware/install-software-15.svg)
+</Frame>
+
+6. Dans **Battery > More battery settings**, modifiez les options suivantes :
+
+<Frame caption="Paramètres de batterie supplémentaires">
+  ![Paramètres de batterie supplémentaires](/images/hardware/install-software-16.svg)
+</Frame>
+
+7. Dans **Settings > Software update**, désactivez **Auto download over Wi-Fi** :
+
+<Frame caption="Désactiver les mises à jour automatiques">
+  ![Paramètres de mise à jour logicielle](/images/hardware/install-software-17.svg)
+</Frame>
+
+8. Connectez le téléphone au hub USB (déconnectez-le et reconnectez-le s'il était déjà branché). Lorsque la popup apparaît, cochez **Always allow from this computer** et appuyez sur **OK** :
+
+<Frame caption="Autoriser le débogage USB depuis le robot">
+  ![Popup de débogage USB](/images/hardware/install-software-18.webp)
+</Frame>
+
+## Configuration du smartphone iOS (robots smartphone)
+
+Allumez le téléphone, sélectionnez la langue et le pays, et ne définissez aucun mot de passe de verrouillage. Ensuite :
+
+1. Dans **Settings > General > Software update > Automatic updates**, désactivez toutes les **iOS Updates** :
+
+<Frame caption="Désactiver les mises à jour automatiques iOS">
+  ![Mises à jour automatiques](/images/hardware/install-software-19.svg)
+</Frame>
+
+2. Dans **Settings > Display & Brightness > Auto-Lock**, sélectionnez **Never**.
+3. Dans **Settings > Safari > Advanced**, activez **Web Inspector** :
+
+<Frame caption="Activer le Web Inspector">
+  ![Web Inspector](/images/hardware/install-software-20.svg)
+</Frame>
+
+<Warning>
+  L'iPhone doit avoir un accès internet (Wi-Fi ou réseau mobile), sinon il n'apparaîtra pas dans Kapptivate : les appareils iOS doivent vérifier les certificats en ligne pour fonctionner avec la plateforme.
+</Warning>
+
+4. Sur iOS 26, allez dans **Privacy & Security > Wired accessories** et sélectionnez **Always allow** :
+
+<Frame caption="Autoriser les accessoires filaires sur iOS 26">
+  ![Confidentialité et sécurité](/images/hardware/install-software-21.webp)
+  ![Accessoires filaires](/images/hardware/install-software-22.webp)
+</Frame>
+
+5. Connectez le téléphone au hub USB (déconnectez-le et reconnectez-le si nécessaire). Lorsqu'on vous demande de faire confiance à l'ordinateur, sélectionnez **Trust** :
+
+<Frame caption="Faire confiance au robot">
+  ![Popup Trust](/images/hardware/install-software-23.webp)
+</Frame>
+
+6. Fermez toute autre popup qui apparaît, avec n'importe quelle option.
+
+<Note>
+  Un iPhone neuf qui n'a jamais été utilisé avec Kapptivate doit d'abord être enregistré auprès d'Apple pour permettre les tests automatisés. Contactez le support pour lancer l'enregistrement ; cela prend 24 à 72 heures.
+</Note>
+
+L'installation logicielle est terminée : ouvrez l'interface Kapptivate et vérifiez que le robot et ses appareils apparaissent comme disponibles. Si ce n'est pas le cas, consultez le [dépannage](/fr/hardware/network-troubleshooting).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Si le robot n'apparaît pas dans la plateforme
+
+</Card>
+  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+
+    Vérifier la santé du robot depuis la plateforme
+
+</Card>
+</Columns>

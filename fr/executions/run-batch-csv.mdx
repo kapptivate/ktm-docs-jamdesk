@@ -1,0 +1,193 @@
+---
+title: Lancer un batch depuis un CSV
+description: Importez un fichier CSV pour lancer de nombreux tests d'un coup, avec des variables par test et des options d'exécution partagées.
+sidebarTitle: Exécutions batch CSV
+---
+
+{/* Hero screenshot of the "Upload CSV to run a tests suite" modal. Add the .webp file to images/ then uncomment.
+![The Upload CSV modal opened from the run queue, with the drag-and-drop area and the Run tests button](/images/run-batch-csv-modal.webp)
+*/}
+
+Quand vous devez lancer des dizaines de tests d'un coup, les ajouter un par un à la file d'attente est lent. Un fichier batch CSV vous permet de décrire une exécution complète dans un seul fichier : quels tests lancer, les variables utilisées par chacun, et les options qui s'appliquent au batch. Importez-le depuis la file d'attente et kapptivate exécute tout en un seul batch.
+
+Cette page est la référence de ce fichier. Elle décrit chaque section, comment la remplir, et comment importer et lancer le batch.
+
+## Structure du CSV
+
+Un fichier batch comporte trois sections, chacune introduite par sa propre ligne d'en-tête :
+
+```text
+__DESCRIPTION__
+__OPTIONS__
+__TESTS__
+```
+
+`__DESCRIPTION__` nomme le batch et le dirige vers un environnement. `__OPTIONS__` ajuste le comportement du batch. `__TESTS__` liste les tests à lancer. Chaque valeur dans une section utilise un point-virgule (`;`) comme séparateur.
+
+## Section description
+
+La section `__DESCRIPTION__` définit le **nom** du batch et le **variable_group_id** de l'environnement cible. Le batch lit ses variables depuis ce groupe.
+
+```text
+__DESCRIPTION__
+name;Long Test Suite
+variable_group_id;363
+```
+
+<Steps>
+  <Step title="Ouvrez votre produit">
+    Accédez au produit auquel vos tests appartiennent.
+  </Step>
+  <Step title="Ouvrez le groupe de variables">
+    Allez dans **Configurations -> Variables groups** et sélectionnez le groupe que le batch doit utiliser.
+  </Step>
+  <Step title="Lisez l'ID dans l'URL">
+    Le nombre à la fin de l'URL est votre `variable_group_id` :
+
+    ```text
+    https://example.kapptivate.com/customer/project/env/groups/363
+    ```
+
+    Ici l'ID est `363`.
+  </Step>
+</Steps>
+
+## Section options
+
+La section `__OPTIONS__` contrôle comment kapptivate exécute le batch. Chaque option est facultative, et vous pouvez en inclure autant que nécessaire. Elles correspondent aux mêmes contrôles que les options d'une [exécution manuelle](/fr/executions/run).
+
+| Option | Exemple de valeur | Ce qu'elle fait |
+| --- | --- | --- |
+| `ignore_errors` | `True` | Continuer le batch quand un step échoue. |
+| `send_result_by_mail` | `True` | Envoyer les résultats par email à la fin du batch. |
+| `send_result_by_sms` | `False` | Envoyer les résultats par SMS. |
+| `send_result_by_call` | `False` | Envoyer les résultats par appel. |
+| `email_recipients` | `john.doe@company.com` | Destinataires des résultats par email. |
+| `sms_recipients` | `+33010000000` | Destinataires des résultats par SMS. |
+| `call_recipients` | `+33010000000` | Destinataires des résultats par appel. |
+| `run_later` | `True` | Planifier le batch au lieu de le lancer maintenant. |
+| `run_datetime` | `2025-07-27T09:36:54.653Z` | Date d'exécution, utilisée avec `run_later`. |
+| `timeout_sms` | `30` | Secondes d'attente pour un SMS. |
+| `timeout_ussd_push` | `30` | Secondes d'attente pour un USSD push. |
+| `sms_observation_delay` | `0` | Délai avant l'observation d'un SMS. |
+
+```text
+__OPTIONS__
+ignore_errors;True
+send_result_by_mail;True
+email_recipients;user@example.com
+```
+
+## Section tests
+
+La section `__TESTS__` liste les tests à exécuter, un par ligne. Chaque ligne commence par un **test ID**, suivi optionnellement de paires `clé;valeur` qui surchargent les variables pour ce test.
+
+```text
+TEST_ID;key1;value1;key2;value2
+```
+
+Pour trouver l'ID d'un test, ouvrez le test dans kapptivate. Le nombre à la fin de l'URL est son ID :
+
+```text
+https://app.kapptivate.com/.../test/edit/246
+```
+
+Le même test peut apparaître sur plusieurs lignes pour le lancer avec différentes variables. Passez autant de paires que nécessaire :
+
+```text
+__TESTS__
+187;AGENT;R58M92A1MYY
+187;AGENT;XPH5T19823002962
+190
+```
+
+La ligne `190` lance le test sans surcharge.
+
+## Exemple complet
+
+```text
+__DESCRIPTION__
+name;Long Test Suite
+variable_group_id;363
+
+__OPTIONS__
+ignore_errors;True
+send_result_by_mail;True
+email_recipients;john.doe@example.com
+
+__TESTS__
+187;AGENT;R58M92A1MYY
+187;AGENT;XPH5T19823002962
+190
+```
+
+## Importer et lancer
+
+L'import CSV se trouve dans la **file d'attente**, à côté des exécutions manuelles et des campaigns.
+
+<Steps>
+  <Step title="Ouvrez la file d'attente">
+    Depuis la page **Tests** ou **Executions**, ouvrez la file d'attente via le bouton d'action en bas à droite.
+  </Step>
+  <Step title="Lancez un import CSV">
+    Dans l'en-tête de la file d'attente, cliquez sur **Upload a CSV file to run batch tests**. La boîte de dialogue **Upload CSV to run a tests suite** s'ouvre.
+  </Step>
+  <Step title="Sélectionnez votre fichier">
+    Cliquez ou glissez votre fichier dans la zone d'import. Seuls les fichiers `.CSV` sont acceptés.
+  </Step>
+  <Step title="Lancez les tests">
+    Cliquez sur **Run tests**. kapptivate vous redirige vers l'exécution du batch, où vous la suivez comme une [exécution multi-test](/fr/executions/results#exécutions-multi-test).
+  </Step>
+</Steps>
+
+<Tip>
+La boîte de dialogue d'import contient un lien **How to create a valid CSV test file**, qui pointe vers cette page. Conservez les en-têtes de section et le séparateur point-virgule exactement comme indiqué ci-dessus, sinon le fichier est rejeté.
+</Tip>
+
+## Générer le fichier avec un agent IA
+
+Si votre assistant IA est connecté au [serveur MCP Kapptivate](/fr/mcp/overview), vous n'avez pas besoin de CSV du tout : il peut lancer un batch directement depuis une requête en langage naturel. La voie CSV est pour les assistants non connectés, où l'agent génère le fichier et vous l'importez vous-même.
+
+Dans ce cas, donnez-lui le format de cette page comme contexte, puis décrivez votre exécution en langage naturel.
+
+Une requête simple :
+
+```text
+Build a kapptivate batch CSV for me.
+Name it "Nightly smoke" and use variable group 363.
+Run tests 187, 190 and 204.
+Run test 187 twice: once with AGENT = R58M92A1MYY, once with AGENT = XPH5T19823002962.
+Email results to maud@example.com when it finishes, and keep going if a step fails.
+```
+
+Une requête plus détaillée, avec planification et plusieurs surcharges :
+
+```text
+Generate a kapptivate batch CSV.
+Name it "Release regression" and use variable group 412.
+Schedule it for 2026-06-12 at 09:00 UTC, email results to qa@example.com, and ignore errors.
+Run these tests:
+- 187 with AGENT = R58M92A1MYY
+- 187 with AGENT = XPH5T19823002962
+- 190 with no overrides
+- 204 with LANG = fr and ENV = staging
+```
+
+<Tip>
+Dites à l'agent de conserver les en-têtes de section exacts (`__DESCRIPTION__`, `__OPTIONS__`, `__TESTS__`) et le séparateur point-virgule. Enregistrez ensuite sa sortie dans un fichier `.csv` et importez-le depuis la file d'attente.
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Lancer un test" icon="play" href="/fr/executions/run">
+
+    Ajoutez des tests à la file d'attente depuis l'interface, ajustez les appareils et variables, et lancez
+
+</Card>
+  <Card title="Lancer une campaign" icon="layer-group" href="/fr/executions/run-campaign">
+
+    Regroupez des tests dans une campaign et lancez-les en un seul batch
+
+</Card>
+</Columns>

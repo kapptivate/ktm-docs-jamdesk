@@ -1,0 +1,52 @@
+---
+title: "get_widget_template"
+description: "Obtenir un modèle JSON prêt à remplir pour un type de widget de dashboard."
+sidebarTitle: "get_widget_template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir un modèle JSON prêt à remplir pour un type de widget de dashboard.
+
+<Note>
+  **Lecture seule.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `widget_type` | string | Oui | Type de widget (depuis list_widget_types) : line, area, pie, repartitionChart, counter, title, table, customDisplay |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "widget_type": "string"
+}
+```
+
+## Description
+
+```text
+Inclut _metadata avec les contraintes de grille, les opérations valides, les étapes de découverte de schéma et les indications de disposition.
+
+PRÉREQUIS : utilisez query_metrics avec SHOW MEASUREMENTS et SHOW FIELD KEYS pour découvrir le schéma InfluxDB avant de remplir ce modèle.
+```
+
+## Associé
+
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

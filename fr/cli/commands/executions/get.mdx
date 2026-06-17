@@ -1,0 +1,62 @@
+---
+title: "ktm executions get"
+description: "Obtenir les résultats détaillés d'une exécution de test"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les résultats détaillés d'une exécution de test
+
+## Utilisation
+
+```bash
+ktm executions get <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Get execution detail as JSON
+ktm executions get 12345
+
+# Get execution detail as table
+ktm executions get 12345 -o table
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupère une seule exécution par ID et affiche ses résultats détaillés.
+
+La réponse inclut :
+  - Métadonnées d'exécution : nom, statut, nombre de réussites/échecs, créateur, horodatages
+  - tests_overview : résumé rapide réussite/échec par test
+  - json : données d'exécution complètes avec actions par test, timing, erreurs et variables
+
+En mode table, un résumé lisible est affiché avec un lien vers l'interface Kapptivate.
+En mode JSON, la réponse complète est retournée incluant le champ json brut.
+
+## Voir aussi
+
+- [`ktm executions`](/fr/cli/commands/executions)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

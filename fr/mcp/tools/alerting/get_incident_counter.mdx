@@ -1,0 +1,56 @@
+---
+title: "get_incident_counter"
+description: "Obtenir un décompte rapide des incidents par sévérité : critique, avertissement et clôturé."
+sidebarTitle: "get_incident_counter"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir un décompte rapide des incidents par sévérité : critique, avertissement et clôturé.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `alert_id` | string | Non | Identifiants de définitions d'alert séparés par des virgules |
+| `closed_date_after` | string | Non | Date/heure ISO : uniquement les incidents clôturés après cette date |
+| `closed_date_before` | string | Non | Date/heure ISO : uniquement les incidents clôturés avant cette date |
+| `created_after` | string | Non | Date/heure ISO : uniquement les incidents créés après cette date |
+| `created_before` | string | Non | Date/heure ISO : uniquement les incidents créés avant cette date |
+| `operator` | string | Oui | Slug de l'opérateur |
+| `status` | string (OPEN \| CLOSED \| MANUALLY_CLOSED \| CHANGED \| DEACTIVATED) | Non | Filtrer par statut : OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Utile pour des vérifications de santé de type dashboard. Accepte les mêmes filtres que list_incidents.
+```
+
+## Associé
+
+- [`list_incidents`](/fr/mcp/tools/alerting/list_incidents)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

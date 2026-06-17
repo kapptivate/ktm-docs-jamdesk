@@ -1,0 +1,52 @@
+---
+title: Web recorder
+description: Enregistrez un parcours web dans Chrome et transformez-le en script de test.
+---
+
+Le web recorder de Kapptivate est une extension Chrome qui enregistre une session de navigation (clics, saisie, navigation) et l'exporte sous forme de script que vous pouvez coller dans un test. Parcourez votre scénario une fois dans le navigateur, et le test s'écrit tout seul.
+
+## Installer l'extension
+
+Le recorder est fourni sous forme d'extension Chrome non empaquetée (`kapptivate-web-recorder.zip`) :
+
+<Steps>
+  <Step title="Ouvrir la page Extensions de Chrome">
+    Téléchargez et décompressez le package, puis accédez à `chrome://extensions`.
+  </Step>
+  <Step title="Charger l'extension">
+    Activez le **Developer mode** (en haut à droite), cliquez sur **Load unpacked**, et sélectionnez le dossier décompressé. L'icône Kapptivate apparaît dans la barre d'outils.
+  </Step>
+</Steps>
+
+## Enregistrer un test
+
+Cliquez sur l'icône Kapptivate pour ouvrir le recorder.
+
+1. Cliquez sur **Record**, accédez à votre page de départ, et parcourez le scénario : chaque clic et chaque saisie est capturé comme une action.
+2. Cliquez à nouveau sur l'icône pour revoir les actions enregistrées.
+3. Cliquez sur **Stop**, puis **Export** et **CopyToClipboard**.
+
+## Importer l'enregistrement
+
+Dans votre espace de travail, créez un test avec une action **Web Script**. Sélectionnez l'agent Ethernet par défaut, passez en mode **raw script**, et collez l'enregistrement.
+
+Sauvegardez et exécutez le test une fois avant de le connecter à un monitor.
+
+<Note>
+  Le recorder génère une [script action](/fr/tests/actions/legacy/script-actions) : du JavaScript que vous pouvez ensuite modifier librement, enrichir d'assertions, ou compléter avec des [variables et métriques personnalisées](/fr/tests/actions/legacy/script-actions-variables).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Script actions" icon="code" href="/fr/tests/actions/legacy/script-actions">
+
+    Comprenez et modifiez le script généré
+
+</Card>
+  <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
+
+    L'alternative visuelle pour créer des tests web
+
+</Card>
+</Columns>

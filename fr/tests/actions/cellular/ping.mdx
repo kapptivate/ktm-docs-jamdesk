@@ -1,0 +1,71 @@
+---
+title: Ping
+description: Mesurez la latence ICMP, la gigue et la perte de paquets via la connexion cellulaire.
+---
+
+Effectuez un ping vers un hôte via la connexion data de la SIM et mesurez le temps aller-retour, la gigue et la perte de paquets. L'action de référence pour suivre la latence du réseau cellulaire dans le temps.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Hôte | `command.host` | Oui | Hôte à pinger, par exemple `8.8.8.8` ou `google.fr`. |
+| Nombre de pings | `command.count` | Non | Nombre de pings. Par défaut : 10. |
+| Taille du paquet | `command.packet_size` | Non | Taille du paquet en octets. Par défaut : 64. |
+| Le Ping doit échouer | `expect_failure` | Non | Inverse le verdict. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés : technologie d'accès, APN, conserver le contexte PDP, vérifier le réseau. L'action est livrée avec une assertion par défaut : `packet_loss == 0`.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_PING",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "host": "8.8.8.8",
+    "count": 10,
+    "packet_size": 64,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [
+    { "type": "response", "source": "result", "property": "packet_loss_pct", "compare": "==", "value": 0, "evaluate": true }
+  ],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `rtt_mean` | Temps aller-retour moyen. |
+| `jitter` | Variation entre les temps aller-retour. |
+| `packet_loss_pct` | Pourcentage de paquets perdus. |
+| `ping_count`, `packet_size`, `ping_duplicate` | Les paramètres de l'exécution et le nombre de doublons. |
+| `duration` | Temps d'exécution total en secondes. |
+
+Dans Analytics, chaque exécution alimente la mesure ping avec `rtt_seconds`, `jitter`, `packet_loss_percent` et `duration_seconds`, étiquetée par statut, APN, serveur DNS, antenne et technologie d'accès. Ce sont les séries derrière les tableaux de bord de latence et les seuils d'alerte.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="TCP Ping" icon="arrow-right-arrow-left" href="/fr/tests/actions/cellular/tcp-ping">
+
+    Latence au niveau TCP, quand ICMP est filtré
+
+</Card>
+  <Card title="HTTP Ping" icon="globe" href="/fr/tests/actions/cellular/http-ping">
+
+    Latence contre un vrai point d'accès web
+
+</Card>
+</Columns>

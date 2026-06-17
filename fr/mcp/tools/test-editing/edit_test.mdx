@@ -1,0 +1,72 @@
+---
+title: "edit_test"
+description: "Applique des modifications à un test existant."
+sidebarTitle: "edit_test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Applique des modifications à un test existant.
+
+<Warning>
+  **Destructif · Écrit des données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Passez à true après approbation de l'utilisateur pour continuer au-delà de la limite d'édition. Ne JAMAIS activer sans approbation explicite de l'utilisateur. |
+| `actions` | string | Non | Tableau JSON d'actions (remplace les actions actuelles) |
+| `archived` | boolean | Non | Bascule le flag archived |
+| `auto_correct_kinds` | boolean | Non | Réécrit les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Défaut false : les incohérences de kind sont des erreurs bloquantes. |
+| `description` | string | Non | Nouvelle description du test (uniquement si modification explicite) |
+| `is_favorite` | boolean | Non | Bascule le flag is_favorite |
+| `name` | string | Non | Nouveau nom du test (uniquement si modification explicite) |
+| `skip_validation` | boolean | Non | Contourne le validateur côté client (le backend valide toujours). À utiliser pour les types d'action que le CLI ne reconnaît pas ou pour les modifications de métadonnées de premier niveau. |
+| `status` | string | Non | Change le statut du test (ex. DRA, APP) |
+| `test_id` | number | Oui | Identifiant du test à modifier |
+| `variables` | string | Non | Objet JSON variables (remplace les variables actuelles) |
+| `variants` | array | Non | Spécificateurs de variant pin pour la résolution de bucket V3. Chaque élément est '5' (ID numérique) ou 'API:Staging' (group:variant par nom). Mode édition : les groupes non épinglés conservent leurs buckets existants. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+DESTRUCTIVE — creates a new version automatically.
+
+PREREQUISITE: call platform_guide topic=test_editing for the guardrailed workflow and protected fields.
+ALWAYS preview first with preview_test_edit to check impact.
+Protected fields: product and collection_uid are NEVER changed. Name and description only change when explicitly provided.
+A per-test edit limit is enforced (5 per session). Check edits_remaining in the response.
+
+Top-level metadata that's now always preserved on PUT and editable via this tool: archived, is_favorite, status. Pass archived=true to archive the test without touching actions; use manage_test_lifecycle action=archive (or action=unarchive) for the common case.
+
+skip_validation=true bypasses the client-side validator. Use only when the test has an action type this MCP server's registry doesn't know (future types), or when you're only flipping a top-level flag like archived. The backend will still validate.
+```
+
+## Associés
+
+- [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
+- [`preview_test_edit`](/fr/mcp/tools/test-editing/preview_test_edit)
+- [`manage_test_lifecycle`](/fr/mcp/tools/test-management/manage_test_lifecycle)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

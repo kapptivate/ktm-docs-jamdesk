@@ -1,0 +1,44 @@
+---
+title: Gérer les accès
+description: Contrôlez l'accès des utilisateurs via les assignations d'équipes, les rôles directs sur les produits et les politiques de sécurité.
+---
+
+![L'onglet Accès d'un utilisateur, listant chaque produit avec son rôle et une source d'accès de type Multiple ou Depuis une équipe](/images/user-access.webp)
+
+L'accès d'un utilisateur provient de trois sources : l'appartenance à une équipe, les assignations directes de produits et sa politique de sécurité. Vous pouvez combiner les trois pour obtenir le niveau de contrôle dont vous avez besoin.
+
+## Assigner des utilisateurs à des équipes
+
+Les utilisateurs d'une équipe héritent de l'accès aux produits et des rôles de cette équipe. C'est le moyen le plus efficace de gérer les accès pour plusieurs utilisateurs à la fois.
+
+1. Ouvrez un utilisateur pour le modifier
+2. Ouvrez l'onglet **Équipes de l'utilisateur**
+3. Cliquez sur **+ Ajouter une équipe**, puis recherchez ou utilisez **Tout sélectionner** pour choisir une ou plusieurs équipes ; chaque équipe affiche son nombre de membres
+4. Cliquez sur **Enregistrer les modifications**
+
+L'utilisateur a désormais accès à tous les produits assignés à ces équipes.
+
+## Accorder l'accès aux produits avec des rôles
+
+Vous pouvez assigner des utilisateurs directement à des produits et spécifier un rôle pour chacun. Cela complète l'accès basé sur les équipes lorsque vous avez besoin d'un contrôle plus granulaire.
+
+1. Ouvrez un utilisateur pour le modifier
+2. Ouvrez l'onglet **Accès**
+3. Cliquez sur **+ Ajouter un produit**, puis recherchez ou utilisez **Tout sélectionner** dans la fenêtre de sélection
+4. Choisissez un rôle pour le produit : Administrateur, Bêta testeur, Rapporteur, Superviseur ou Testeur
+5. Cliquez sur **Enregistrer les modifications**
+
+Chaque produit affiche une **source d'accès** : **Ajouté manuellement** pour les assignations directes, ou **Depuis [équipe]** lorsque l'accès est hérité. Un produit auquel l'utilisateur accède via plusieurs équipes ou rôles affiche **Multiple**, ce qui vous permet de toujours voir pourquoi un utilisateur a accès à un produit.
+
+Supprimez un produit ajouté manuellement avec l'icône de corbeille en fin de ligne. Les produits hérités ne peuvent pas être supprimés ici ; ajustez plutôt l'accès de l'équipe.
+
+## Appliquer des politiques de sécurité
+
+Les politiques de sécurité contrôlent les exigences de mot de passe et les règles d'authentification par utilisateur. Vous définissez la politique lors de la création de l'utilisateur et pouvez la mettre à jour ultérieurement.
+
+1. Ouvrez un utilisateur pour le modifier
+2. Ouvrez l'onglet **Politique de sécurité**
+3. Choisissez une politique dans le menu déroulant
+4. Cliquez sur **Enregistrer les modifications**
+
+Si vous ajoutez un utilisateur existant à votre workspace, la politique de sécurité est définie par défaut sur la politique par défaut du workspace.

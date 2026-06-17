@@ -1,0 +1,57 @@
+---
+title: Wait for delay
+sidebarTitle: Attendre un délai
+description: Mettre le test en pause pendant une durée fixe.
+---
+
+Mettez le test en pause pendant un temps fixe. Utilisez-le quand rien d'observable ne signale que le système est prêt : un job backend, une limite de débit, une animation que vous ne pouvez pas intercepter.
+
+<Tip>
+  Si vous attendez qu'un élément apparaisse à l'écran, utilisez plutôt [Verify element](/fr/tests/actions/smartphone/verifyelement). Il continue dès que la condition est remplie au lieu de consommer systématiquement la totalité du délai.
+</Tip>
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Durée | `duration` | Oui | Durée de la pause. Un nombre suivi d'une unité : `ms`, `s` ou `m`. Par défaut : `10s`. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test. Son type interne est `pause`.
+
+```json
+{
+  "id": "step-1",
+  "type": "pause",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "duration": [{ "type": "value", "data": { "value": "10s" } }]
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+Les valeurs de durée valides correspondent à `^(\d+)(ms|s|m)$` : par exemple `500ms`, `10s` ou `2m`.
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step. La durée correspond à la pause configurée.
+- **Statut** : succès, sauf si l'exécution est interrompue pendant la pause.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+
+    Attendre une vraie condition plutôt qu'un temps fixe
+
+</Card>
+  <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
+
+    Où les steps sont ajoutés et configurés
+
+</Card>
+</Columns>

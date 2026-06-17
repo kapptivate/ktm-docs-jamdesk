@@ -1,0 +1,58 @@
+---
+title: "ktm variables name-available"
+description: "Pré-vérification : vérifier si un nom de variable est disponible sous un produit"
+sidebarTitle: "name-available"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Pré-vérification : vérifier si un nom de variable est disponible sous un produit
+
+## Utilisation
+
+```bash
+ktm variables name-available [flags]
+```
+
+## Exemples
+
+```bash
+ktm products list -o table       # trouver l'identifiant du produit
+ktm variables name-available --product-id 134 --name MY_VAR
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nom de variable à vérifier |
+| `--product-id` | int | — | Identifiant numérique du produit (depuis 'ktm products list') |
+
+## Détails
+
+Retourne "available" ou "taken" pour identifier les conflits de noms côté client
+avant de tenter la création. Prend l'identifiant NUMÉRIQUE du produit (trouvez-le via 'ktm products
+list -o table'), pas le slug.
+
+Note d'implémentation : le endpoint check_variable_exist de la plateforme n'est pas
+fiable, donc la vérification est effectuée côté client en listant les
+variables du produit et en comparant par nom.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

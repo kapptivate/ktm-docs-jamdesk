@@ -1,0 +1,55 @@
+---
+title: Installation
+description: Installez le CLI ktm et authentifiez-le avec votre clé API Kapptivate.
+sidebarTitle: Installation
+---
+
+`ktm` est distribué sous la forme d'un binaire unique et autonome pour Linux, macOS et Windows. Une fois placé sur votre PATH, vous vous authentifiez avec votre clé API Kapptivate et vous êtes prêt.
+
+<Note>
+  Les liens de téléchargement de la version actuelle sont en cours de finalisation. Si vous avez besoin d'un build maintenant, demandez le binaire pour votre plateforme à votre contact Kapptivate.
+</Note>
+
+## Placer ktm sur votre PATH
+
+Après avoir téléchargé le binaire pour votre plateforme, rendez-le exécutable et déplacez-le sur votre PATH :
+
+```bash
+chmod +x ktm
+sudo mv ktm /usr/local/bin/ktm
+```
+
+Vérifiez l'installation :
+
+```bash
+ktm --version
+```
+
+## Authentification
+
+`ktm` lit votre clé depuis la variable d'environnement `KAPPTIVATE_API_KEY` :
+
+```bash
+export KAPPTIVATE_API_KEY="your-key"
+ktm status
+```
+
+`ktm status` vérifie la connectivité, l'authentification et la version du CLI en un seul appel. Un résultat propre signifie que vous êtes prêt.
+
+<Tip>
+  En CI, stockez la clé comme secret et exposez-la en tant que `KAPPTIVATE_API_KEY`. Ne la codez jamais en dur dans un fichier de workflow.
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Découvrez vos slugs, listez les tests et exécutez-les.
+  </Card>
+  <Card title="Configuration" icon="gear" href="/fr/cli/configuration">
+    Variables d'environnement, formats de sortie et codes de sortie.
+  </Card>
+  <Card title="CI/CD" icon="diagram-project" href="/fr/cli/ci-cd">
+    Intégrez ktm dans votre pipeline.
+  </Card>
+</Columns>

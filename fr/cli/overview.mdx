@@ -1,0 +1,46 @@
+---
+title: Présentation du CLI
+description: ktm est l'interface en ligne de commande Kapptivate pour exécuter des tests en CI, gérer les ressources et interroger la plateforme depuis votre terminal.
+sidebarTitle: Présentation
+---
+
+`ktm` est l'interface en ligne de commande Kapptivate. Il exécute des tests dans les pipelines CI/CD, gère les tests, monitors, variables et collections, et interroge l'API de la plateforme, le tout depuis votre terminal. Chaque commande retourne du JSON par défaut, ce qui permet une intégration fluide avec `jq` et les scripts.
+
+## Points forts
+
+- Sortie JSON par défaut, avec des formats tableau et texte brut (TSV) quand vous en avez besoin
+- Un binaire unique et autonome, sans dépendances d'exécution
+- Conçu pour la CI : codes de sortie stables, JUnit XML et annotations natives GitHub Actions
+- La même clé API que le serveur MCP et l'application web
+
+## Un aperçu rapide
+
+```bash
+# Découvrez ce à quoi vous avez accès
+ktm operators list
+ktm products list --operator my-operator
+
+# Lister les tests d'un produit, sous forme de tableau
+ktm tests list --operator my-operator --product my-operator~my-product -o table
+```
+
+## Authentification
+
+`ktm` lit votre clé API depuis la variable d'environnement `KAPPTIVATE_API_KEY`. Toutes les commandes en ont besoin, sauf la validation locale. Consultez [Configuration](/fr/cli/configuration) pour plus de détails.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Installation" icon="download" href="/fr/cli/installation">
+    Installez le binaire sur votre PATH et authentifiez-vous.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Visite guidée de cinq minutes : découvrir, lister et exécuter.
+  </Card>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Toutes les commandes, flags et arguments.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/fr/cli/ci-cd">
+    Exécutez des tests depuis votre pipeline.
+  </Card>
+</Columns>

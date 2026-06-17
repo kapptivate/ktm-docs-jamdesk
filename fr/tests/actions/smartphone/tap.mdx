@@ -1,0 +1,82 @@
+---
+title: Tap
+sidebarTitle: Toucher
+description: Appuyer sur un élément de l'application, localisé par selector, description IA ou coordonnées d'écran.
+---
+
+Appuyez sur un élément à l'écran : un bouton, un élément de liste, un onglet. Localisez-le avec un selector XPath ou une description IA, ou passez le step en mode **Coordinates** pour appuyer sur une position X/Y exacte lorsqu'aucun élément ne peut être ciblé.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui en mode Selector, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
+| Selector manuel | `locator.selector` | Non | Selector XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Approche | `locator.approach` | Non | `0` = Selector (par défaut), `1` = Coordinates. Basculez dans le panneau de détails du step. |
+| Position X, Position Y | `locator.coordinates.x`, `locator.coordinates.y` | Oui en mode Coordinates | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
+| Utilisation de l'IA | `ai_strategy` | Non | `smart` (par défaut), `always` ou `inherit`. |
+| Activer l'IA | `enable_ai` | Non | Par défaut : désactivé. Activez-le pour localiser l'élément à partir de la description. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test. Mode Selector :
+
+```json
+{
+  "id": "step-1",
+  "type": "tap",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "approach": 0,
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Log in button" } }]
+    },
+    "enable_ai": false,
+    "ai_strategy": "smart",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+Le mode Coordinates remplace la partie ciblage de `locator` :
+
+```json
+{
+  "locator": {
+    "approach": 1,
+    "selector": [{ "type": "value", "data": { "value": "" } }],
+    "description": [{ "type": "value", "data": { "value": "Center of the map" } }],
+    "coordinates": {
+      "x": [{ "type": "value", "data": { "value": "540" } }],
+      "y": [{ "type": "value", "data": { "value": "960" } }]
+    }
+  }
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
+- **Capture d'écran** : prise après le tap, montrant l'écran résultant.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Long press" icon="hand-pointer" href="/fr/tests/actions/smartphone/longpress">
+
+    Maintenir l'appui pour ouvrir les actions contextuelles
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+
+    Vérifier le résultat du tap avant de continuer
+
+</Card>
+</Columns>

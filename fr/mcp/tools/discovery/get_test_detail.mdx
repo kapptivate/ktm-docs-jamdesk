@@ -1,0 +1,51 @@
+---
+title: "get_test_detail"
+description: "Récupère le résumé du test : nom, statut, produit, input_variables, owners."
+sidebarTitle: "get_test_detail"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupère le résumé du test : nom, statut, produit, input_variables, owners.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `test_id` | number | Oui | L'identifiant du test (depuis list_tests) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Use this before build_campaign to understand what values are needed. This is the FAST, minimal endpoint. For full definition with actions/assertions, use get_full_test instead.
+```
+
+## Associés
+
+- [`build_campaign`](/fr/mcp/tools/execution/build_campaign)
+- [`get_full_test`](/fr/mcp/tools/discovery/get_full_test)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

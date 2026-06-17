@@ -1,0 +1,56 @@
+---
+title: "ktm tests unarchive"
+description: "Désarchiver un test (définit archived=false via PUT)"
+sidebarTitle: "unarchive"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Désarchiver un test (définit archived=false via PUT)
+
+## Utilisation
+
+```bash
+ktm tests unarchive <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm tests unarchive 99
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Bascule le flag archived du test à false.
+
+Utilise PATCH avec un corps minimal (uniquement \{archived\}). Cela évite l'aller-retour fragile du payload complet qui peut provoquer une erreur 500 sur les tests dont les types d'action ne sont pas dans le registre du CLI.
+
+## Notes
+
+- Rend visible un test archivé, c'est l'opération inverse de [`ktm tests archive`](/fr/cli/commands/tests/archive).
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

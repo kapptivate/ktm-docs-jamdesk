@@ -1,0 +1,75 @@
+---
+title: "ktm shell send"
+description: "Envoyer une commande shell à un appareil"
+sidebarTitle: "send"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Envoyer une commande shell à un appareil
+
+## Utilisation
+
+```bash
+ktm shell send [flags]
+```
+
+## Exemples
+
+```bash
+# Composer un shortcode USSD et attendre le menu
+ktm shell send --product 123 --owner 0789800356 --type USSD --command '{"input":"#131#"}' --wait
+
+# Naviguer dans un menu USSD (envoyer l'option "1" pour continuer la session)
+ktm shell send --product 123 --owner 0789800356 --type USSD --command '{"input":"1"}' --wait
+
+# Envoyer un appel HTTP API via web agent
+ktm shell send --product 456 --owner my-agent --type ETH_HTTP_API --command '{"http_method":"GET","url":"https://example.com/api/health"}'
+
+# Envoyer et oublier (retourne immédiatement avec l'identifiant shell)
+ktm shell send --product 123 --owner 0789800356 --type DATA_PING --command '{"host":"8.8.8.8","count":3}'
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--command` | string | — | Payload de la commande en JSON (requis) |
+| `--owner` | string | — | Identifiant de l'appareil : MSISDN pour SIM, hostname pour Ethernet (requis) |
+| `--product` | int | — | Identifiant du produit (requis) |
+| `--type` | string | — | Type d'action (ex. USSD, ETH_HTTP_API), consultez 'shell types' (requis) |
+| `--wait` | boolean | — | Attendre la fin de la commande avant de retourner |
+
+## Détails
+
+Soumettre une commande shell unique pour exécution sur une carte SIM ou un web agent.
+
+Le flag --type accepte le nom complet du type d'action (ex. USSD, ETH_HTTP_API).
+Utilisez 'shell types' pour voir tous les types d'action disponibles et leurs champs de commande requis.
+
+USSD est basé sur les sessions : composez d'abord le shortcode racine (ex. --command '\{"input":"*199#"\}'),
+puis vérifiez le résultat avec 'shell get'. Si la session est OPEN, envoyez les options de menu suivantes
+comme commandes séparées (ex. --command '\{"input":"1"\}').
+Préférez la navigation étape par étape aux shortcodes longs comme *199*5# : n'utilisez les shortcodes longs
+que lorsque vous connaissez le chemin exact. Les sessions expirent après environ 30s d'inactivité.
+
+## Voir aussi
+
+- [`ktm shell`](/fr/cli/commands/shell)
+- [`ktm shell types`](/fr/cli/commands/shell/types)
+- [`ktm shell get`](/fr/cli/commands/shell/get)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

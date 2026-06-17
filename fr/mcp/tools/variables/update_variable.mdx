@@ -1,0 +1,57 @@
+---
+title: "update_variable"
+description: "Mettre à jour le nom, la description et/ou la default_value d'une variable."
+sidebarTitle: "update_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Mettre à jour le nom, la description et/ou la default_value d'une variable.
+
+<Info>
+  **Écriture de données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `default_value` | string | Non | Nouvelle valeur par défaut (string pour single/secret, séparée par des virgules pour choice) |
+| `description` | string | Non | Nouvelle description (optionnelle, recommandée). Remplace la valeur actuelle. Une courte phrase décrivant l'objectif de la variable aide les futurs agents à la distinguer. |
+| `name` | string | Non | Nouveau nom |
+| `variable_id` | number | Oui | Identifiant de la variable |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "variable_id": 0
+}
+```
+
+## Description
+
+```text
+Propriétés uniquement. Cet outil ne touche PAS aux valeurs par variant. Pour modifier la valeur d'un variant, utilisez set_variable_value ; pour copier des valeurs entre variants, utilisez copy_variant_values. Le type de variable est immuable sur la plateforme ; cet outil le préserve.
+
+Une description est optionnelle mais RECOMMANDÉE lors de la mise à jour aussi. Si la variable d'origine a été créée sans description, c'est l'endroit idéal pour ajouter du contexte sémantique sur lequel les futurs agents s'appuieront.
+```
+
+## Associé
+
+- [`set_variable_value`](/fr/mcp/tools/variables/set_variable_value)
+- [`copy_variant_values`](/fr/mcp/tools/variables/copy_variant_values)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

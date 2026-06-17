@@ -1,0 +1,78 @@
+---
+title: Variables dans les tests
+description: Définissez, générez et réutilisez des valeurs dynamiques dans un test grâce au sélecteur de variables.
+sidebarTitle: Variables dans les tests
+---
+
+![Le sélecteur de variables ouvert sur un champ de step, avec les onglets Previous steps, Random et Variables](/images/variables-picker.webp)
+
+Les données de test statiques deviennent rapidement obsolètes : un email codé en dur provoque une collision lors de la deuxième inscription, un nom fixe ne peut pas prouver que la page de confirmation affiche ce que vous avez saisi. Dans un test, les variables alimentent chaque step avec des données dynamiques : des valeurs produites par des steps précédents, générées à la volée, ou récupérées depuis la configuration de votre produit.
+
+## Le sélecteur de variables
+
+Cliquez sur l'icône `{}` à côté de n'importe quel champ de step pour ouvrir le sélecteur de variables. Sélectionner une entrée l'insère sous forme de pastille dans le champ, où elle peut se combiner avec du texte littéral. Le sélecteur comporte trois onglets :
+
+- **Previous steps** : valeurs produites précédemment dans le test.
+- **Random** : données fictives générées pour cette exécution.
+- **Variables** : les variables et groupes de variables configurés dans votre produit.
+
+## Previous steps
+
+Chaque step qui produit une valeur l'exporte comme variable, listée avec le step qui l'a créée (par exemple `SmsCode`, Step 1). Producteurs typiques : les [steps Email & SMS](/fr/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), les actions de lecture de texte, et vos propres steps **Set variable**.
+
+Choisissez-en une pour enchaîner les steps : naviguez vers le `MailLink` extrait deux steps plus tôt, ou saisissez `SmsCode` dans le champ 2FA.
+
+### Set variable
+
+Le step **Set variable** stocke une valeur de votre choix en cours de test : donnez-lui une valeur et un nom, et il apparaît dans l'onglet Previous steps pour tous les steps suivants. Consultez la [référence Set variable](/fr/tests/actions/web/setvariable) pour le format JSON et les fonctions de template.
+
+## Données aléatoires
+
+L'onglet **Random** génère des données fictives à chaque exécution, pour que chaque lancement utilise des valeurs nouvelles. Préréglages : **First name**, **Last name**, **City** et **Street address**.
+
+**Custom** ouvre un générateur de format quand les préréglages ne conviennent pas :
+
+- **Text** : choisissez les jeux de caractères et la longueur.
+- **Number** : générez une valeur numérique.
+- **Date** : choisissez le format, `DD/MM/YYYY`, `MM/DD/YYYY`, `DD/MM`, `MM/DD` ou `M, D Y`, avec des contraintes optionnelles.
+
+## Variables configurées
+
+L'onglet **Variables** expose ce qui est défini dans les [Configurations](/fr/tests/configurations) de votre produit : des variables simples et des groupes de variables que vous pouvez développer pour sélectionner une entrée spécifique (comme un `PASSWORD` dans votre groupe par défaut). Définissez une fois, réutilisez dans tous vos tests.
+
+## Résumé dans l'onglet Environment
+
+L'onglet **Environment** du builder résume les variables utilisées par votre test :
+
+- **Test variables** : tout ce qui est créé dans le test (codes extraits, steps Set variable).
+- **Global variables** : les variables configurées et les variantes de groupe référencées par le test, avec les valeurs secrètes masquées.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Configurations et variables" icon="gear" href="/fr/tests/configurations">
+
+    Définissez les variables, groupes et variantes au niveau produit
+
+</Card>
+  <Card title="Test Email & SMS" icon="envelope" href="/fr/tests/email-sms">
+
+    Les steps qui alimentent vos variables en codes et liens
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Là où les steps, checks et variables se rejoignent
+
+</Card>
+  <Card title="Exécuter un test" icon="play" href="/fr/executions/run">
+
+    Remplacez les variables et variantes au moment de l'exécution
+
+</Card>
+  <Card title="Variables depuis le CLI" icon="terminal" href="/fr/cli/commands/variables">
+
+    Créez, listez et mettez à jour les variables configurées avec ktm
+
+</Card>
+</Columns>

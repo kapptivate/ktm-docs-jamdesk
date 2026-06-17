@@ -1,0 +1,72 @@
+---
+title: Remplacer une SIM dans un robot cellulaire
+description: Remplacer une carte SIM et reconfigurer son slot dans la plateforme.
+---
+
+Le remplacement d'une SIM combine des opérations physiques et des actions sur la plateforme : mettez le robot en maintenance, changez la carte, puis mettez à jour la configuration du slot pour que les tests ciblent le bon numéro.
+
+<Warning>
+  Chaque carte SIM utilisée dans un robot doit être configurée **sans code PIN**.
+</Warning>
+
+<Steps>
+  <Step title="Identifier le robot et le mettre en maintenance">
+    Dans la section **Administration**, choisissez **Cellular robots**.
+
+    <Frame caption="La section Administration">
+      ![Section Administration](/images/hardware/swap-sim-01.webp)
+    </Frame>
+
+    <Frame caption="La liste des robots cellulaires">
+      ![Robots cellulaires](/images/hardware/swap-sim-02.webp)
+    </Frame>
+
+    Cliquez sur les trois points du robot et sélectionnez **Set agent in maintenance**.
+
+    <Frame caption="Mettre l'agent en maintenance">
+      ![Mettre l'agent en maintenance](/images/hardware/swap-sim-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Remplacer la carte">
+    Retirez la SIM actuelle et installez la nouvelle (sans code PIN).
+  </Step>
+  <Step title="Reconfigurer le slot">
+    Cliquez sur les trois points du robot, sélectionnez **Edit** et accédez à la section **slots**.
+
+    <Frame caption="La section slots du robot">
+      ![Section slots](/images/hardware/swap-sim-04.webp)
+    </Frame>
+
+    Cliquez sur les trois points à gauche du slot et sélectionnez **Reboot this slot**. Après une minute, cliquez à nouveau et sélectionnez **Edit**.
+
+    <Frame caption="Redémarrer, puis modifier le slot">
+      ![Redémarrer ce slot](/images/hardware/swap-sim-05.webp)
+    </Frame>
+
+    Mettez à jour les valeurs pour la nouvelle SIM : **National msisdn**, **International msisdn** (sans `+`) et **Phone prefix**. Assignez les produits nécessaires, ajoutez les données APN si besoin et enregistrez.
+  </Step>
+  <Step title="Redémarrer et libérer">
+    Depuis la section slots, redémarrez le slot une dernière fois.
+
+    <Frame caption="Dernier redémarrage du slot">
+      ![Dernier redémarrage](/images/hardware/swap-sim-06.webp)
+    </Frame>
+
+    De retour dans le menu des robots cellulaires, libérez le robot avec **Unset agent in maintenance**.
+  </Step>
+</Steps>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage des cartes SIM" icon="sim-card" href="/fr/hardware/sim-troubleshooting">
+
+    Si la nouvelle SIM ne s'enregistre pas
+
+</Card>
+  <Card title="Tests SIM" icon="bolt" href="/fr/tests/actions/cellular/overview">
+
+    Les actions que vous pouvez maintenant exécuter sur la nouvelle SIM
+
+</Card>
+</Columns>

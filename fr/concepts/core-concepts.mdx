@@ -1,0 +1,138 @@
+---
+title: Concepts fondamentaux
+description: Workspaces, produits, tests, exécutions, moniteurs, métriques, canaux, agents et appareils, et comment ils s'articulent.
+---
+
+Neuf termes reviennent partout dans Kapptivate. Cette page définit chacun d'entre eux et montre comment ils s'articulent, pour que le reste de la documentation se lise sans friction.
+
+```
+Workspace
+├─ Product A
+│  ├─ Test 1 (Web)
+│  │  ├─ Execution 1 (run on Chrome agent) → success
+│  │  ├─ Execution 2 (run on Firefox agent) → failed
+│  │  └─ Monitor 1 (runs daily on Chrome agent) → up
+│  ├─ Test 2 (Smartphone)
+│  └─ Devices: Chrome browser, iPhone 12, Samsung Galaxy
+├─ Product B
+│  ├─ Test 3 (Cellular)
+│  └─ Devices: SIM card 1, SIM card 2
+└─ Agents: Web Agent, Smartphone Agent, Cellular Agent
+```
+
+Lorsque vous lancez le Test 1 sur l'agent Chrome, une exécution est créée, l'agent pilote le navigateur et les résultats sont enregistrés. Par la suite, vous pouvez transformer le Test 1 en moniteur : il s'exécute selon un calendrier et suit l'état de santé au fil du temps.
+
+## Workspace
+
+Un **Workspace** est l'unité opérationnelle de votre organisation. Il contient tous vos produits, appareils, tests, agents, utilisateurs et résultats. Considérez-le comme un conteneur pour un client ou une grande unité métier.
+
+Lorsque vous vous connectez à Kapptivate, vous choisissez un Workspace. Tout votre travail dans ce Workspace est isolé des autres. Un Workspace peut être actif (en cours d'utilisation) ou archivé (inactif), et vous pouvez être membre de plusieurs.
+
+Vous n'avez pas besoin de vous déconnecter pour passer d'un Workspace à l'autre. Cliquez sur le nom de votre workspace en haut de la barre latérale et ouvrez **Changer de workspace** : recherchez un workspace par nom, choisissez-en un dans votre liste récente, ou cliquez sur **Voir tout** pour parcourir tous les workspaces auxquels vous appartenez.
+
+## Produit
+
+Un **Produit** est une application ou un service spécifique testé au sein d'un Workspace. Un même Workspace peut contenir plusieurs produits de types différents : un portail web, une application mobile Android ou iOS, un service basé sur carte SIM, etc.
+
+Les tests, moniteurs, configurations et appareils sont tous rattachés à un Produit. Lorsque vous changez de produit dans la barre latérale, les tests et appareils affichés changent en conséquence. Vous pouvez définir un produit par défaut pour chaque Workspace : la plateforme l'ouvre automatiquement lorsque vous entrez.
+
+L'accès est géré par espace produit. Les [rôles](/fr/administration/roles) accordent à certaines personnes l'accès à certains produits, et les [appareils](/fr/equipment/devices-lab) peuvent être restreints de la même manière.
+
+## Test
+
+Un **Test** est une séquence automatisée réutilisable qui valide une fonctionnalité ou un parcours spécifique. Vous le définissez une fois, puis vous l'exécutez autant de fois que nécessaire.
+
+Un test est organisé en **step groups**, et chaque step group contient des **steps** :
+
+- Un **step group** est une unité fonctionnelle : *Se connecter*, *Acheter un article*, *Effectuer une recherche*. Il regroupe tout ce qui est nécessaire pour accomplir une action de niveau supérieur.
+- Un **step** est une action unitaire au sein d'un groupe : click sur un élément, saisie de texte, navigation, attente ou vérification d'état.
+
+Cette structure à deux niveaux rend les tests lisibles : vous voyez le parcours d'un coup d'oeil grâce aux step groups, puis vous explorez un groupe pour voir les steps individuels. Chaque test démarre à partir d'un point d'entrée (une URL vers laquelle naviguer ou une application à lancer) avant d'exécuter ses step groups.
+
+Un test utilise également :
+
+- **Variables** : des paramètres d'entrée qui permettent d'exécuter le même test avec des données différentes.
+- **Checks** : des instructions de validation qui vérifient la réponse de l'application (contenu de la page, temps de chargement, etc.).
+
+Les tests peuvent référencer des [composants reusable](/fr/tests/reusable-components) (d'autres tests utilisés comme briques de base) pour réduire la duplication. Une fois qu'un test est écrit et approuvé, il peut être lancé à la demande, selon un calendrier ou dans le cadre du CI/CD.
+
+## Exécution
+
+Une **Exécution** correspond à un lancement unique d'un ou plusieurs tests sur des appareils spécifiques.
+
+Lorsque vous mettez un test en file d'attente, la plateforme crée une exécution. Cette exécution produit des résultats détaillés : captures d'écran, logs de steps, temps de réponse et statut final. Les exécutions ont des statuts tels que success, failed, warning, ongoing, canceled ou timed out.
+
+Vous pouvez lancer un test plusieurs fois et obtenir plusieurs exécutions. Chaque exécution est indépendante et conserve ses résultats indéfiniment, ce qui vous permet de revenir analyser des échecs des semaines plus tard.
+
+## Moniteur
+
+Un **Moniteur** est un test transformé en supervision continue de la production. Au lieu de s'exécuter une seule fois puis de s'arrêter, un moniteur s'exécute selon un calendrier récurrent et suit l'état de santé de l'application au fil du temps.
+
+Les moniteurs ont des statuts : up (sain), degraded (échec partiel) ou down (échec critique). Lorsque le statut d'un moniteur change de manière inattendue, il lève un **Incident**, une alerte visible dans la vue d'ensemble à laquelle vous pouvez réagir.
+
+Les moniteurs vous permettent de détecter les problèmes en production avant vos utilisateurs. Créez un moniteur à partir de n'importe quel test dès qu'il a fait ses preuves.
+
+## Métrique
+
+Une **Métrique** est une mesure capturée lors de l'exécution d'un test ou d'un moniteur, comme un temps de réponse ou un statut de réussite. Les métriques transforment les exécutions brutes en données que vous pouvez suivre et représenter graphiquement dans le temps. Elles s'appliquent aussi bien aux tests qu'aux moniteurs.
+
+Certaines métriques sont intégrées, par exemple le temps d'ouverture de session USSD ou le temps de chargement d'une application mobile. Vous pouvez également définir des [métriques personnalisées](/fr/tests/actions/shared/createmetric) pour tout ce que vous souhaitez mesurer.
+
+Chaque step produit une durée, et chaque step group aussi. Les données de temps sont donc disponibles à chaque niveau d'un test sans configuration supplémentaire.
+
+## Canal
+
+Un **Canal** est une grande catégorie d'endpoints que vous testez : Web, Smartphone ou Cellulaire. Chaque canal possède ses propres types d'appareils et agents. En complément, les **APIs** peuvent également être testées via des steps API dans les tests de n'importe quel canal.
+
+- **Web** : testez les navigateurs desktop et mobile.
+- **Smartphone** : testez les applications natives iOS et Android.
+- **Cellulaire** : testez les flux SMS, USSD ou dépendants du réseau cellulaire.
+- **API** : testez les endpoints HTTP avec des steps API dans un test Web ou Smartphone.
+
+Un test simple s'exécute sur un seul canal, éventuellement combiné avec l'API (par exemple Web seul, Web + API, Smartphone + API ou USSD (SIM) + API). Pour les parcours plus complexes, l'orchestration avancée permet à un seul test de couvrir plusieurs appareils : commencer un scénario sur le Web et le terminer sur un Smartphone, par exemple.
+
+## Agent
+
+Un **Agent** est le composant matériel ou logiciel qui pilote les appareils sur lesquels vos tests s'exécutent. Il en existe plusieurs types :
+
+- **Web Agent** : physique ou virtualisé. Pilote les navigateurs web (Chrome, Firefox, Safari, etc.).
+- **Smartphone Agent** : physique. Pilote de vrais appareils Android ou iOS.
+- **Cellular Agent** : toujours physique. Pilote les cartes SIM pour tester les SMS et l'USSD, lancer des tests réseau, passer et recevoir des appels, naviguer sur le réseau data, et plus encore.
+- **Passive Agent** : collecte des métriques et des données de santé sans exécuter de tests actifs.
+
+Vous pouvez créer des agents et les enregistrer dans la plateforme via votre administrateur. Lorsque vous lancez un test, vous choisissez sur quel(s) agent(s) l'exécuter.
+
+## Appareil
+
+Un **Appareil** (Device) est l'endpoint testé, l'élément que l'agent pilote. Les appareils incluent :
+
+- **Navigateurs web** : Chrome, Firefox, Safari fonctionnant sur un Web Agent.
+- **Smartphones** : téléphones iOS/Android physiques ou virtuels connectés à un Smartphone Agent.
+- **Cartes SIM** : lignes cellulaires enregistrées auprès d'un Cellular Agent pour les tests SMS et réseau.
+
+Vous pouvez voir les appareils disponibles (et leur statut actuel : en ligne, hors ligne, occupé) dans la section Équipement de la barre latérale. Consultez la page [Statuts](/fr/equipment/statuses) pour la référence complète des statuts.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Démarrage rapide" icon="rocket" href="/fr/quickstart">
+
+    Créez votre premier test, lancez-le et lisez le résultat
+
+</Card>
+  <Card title="Canal Web et API" icon="globe" href="/fr/agents-devices/web-api">
+
+    Comment les tests navigateur et HTTP s'exécutent sur le Web Agent
+
+</Card>
+  <Card title="Canal Smartphone" icon="mobile" href="/fr/agents-devices/smartphone">
+
+    Tests d'applications natives sur de vrais appareils Android et iOS
+
+</Card>
+  <Card title="Canal SIM" icon="sim-card" href="/fr/agents-devices/sim">
+
+    Tests USSD, SMS et réseau sur de vraies cartes SIM
+
+</Card>
+</Columns>

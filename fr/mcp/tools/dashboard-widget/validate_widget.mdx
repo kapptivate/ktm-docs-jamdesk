@@ -1,0 +1,52 @@
+---
+title: "validate_widget"
+description: "Validation à sec d'un widget de dashboard."
+sidebarTitle: "validate_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Validation à sec d'un widget de dashboard.
+
+<Note>
+  **Lecture seule.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `widget_json` | string | Oui | Chaîne JSON de la section données du widget (même format que la sortie du modèle, sans _metadata) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "widget_json": "string"
+}
+```
+
+## Description
+
+```text
+Vérifie le type, la structure, les champs de requête, la détection de placeholders et les contraintes par type. Renvoie les erreurs et avertissements sans modifier aucun dashboard.
+
+À utiliser avant add_dashboard_widget pour détecter les erreurs en amont.
+```
+
+## Associé
+
+- [`add_dashboard_widget`](/fr/mcp/tools/dashboard-widget/add_dashboard_widget)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

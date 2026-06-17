@@ -1,0 +1,85 @@
+---
+title: "ktm resources list"
+description: "Lister les ressources disponibles (SIM, web agents, smartphones) pour un produit"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les ressources disponibles (SIM, web agents, smartphones) pour un produit
+
+## Utilisation
+
+```bash
+ktm resources list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister les ressources disponibles pour un produit (défaut : --available=true)
+ktm resources list --product acme~web-portal
+
+# Lister uniquement les SIM
+ktm resources list --product acme~web-portal --type sim
+
+# Lister uniquement les web agents (format tableau)
+ktm resources list --product acme~web-portal --type web-agent -o table
+
+# Lister toutes les ressources y compris hors ligne
+ktm resources list --product acme~web-portal --available=false
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--available` | boolean | `true` | Afficher uniquement les ressources disponibles/en ligne (défaut : true, utilisez --available=false pour inclure celles hors ligne) |
+| `--product` | string | — | Slug du produit (requis, depuis 'products list') |
+| `--type` | string | — | Filtre par type de ressource : sim, web-agent, smartphone (omettre pour tout afficher) |
+
+## Détails
+
+Lister les ressources matérielles et logicielles disponibles pour l'exécution de tests.
+
+Les ressources sont rattachées à un produit. Utilisez --type pour filtrer par type de ressource,
+ou omettez-le pour récupérer les trois types.
+
+Types de ressources et leurs identifiants (utilisés dans le JSON de campaign) :
+  sim         : cartes SIM, identifiées par national_msisdn
+  web-agent   : agents Ethernet/web, identifiés par hostname
+  smartphone  : smartphones, identifiés par uuid
+
+Ces identifiants sont utilisés comme valeurs pour les variables de type owner-type et direct_owners
+lors de la construction du JSON de campaign via "ci build".
+
+Pour la création de tests : ces identifiants sont utilisés comme champ "owner" dans les actions de test.
+  SIM national_msisdn      : owner pour les types d'action SIM (USSD, SMS_GET, DATA_*, CALL_*, etc.)
+  Web-agent hostname       : owner pour les types d'action ETHERNET (ETH_HTTP_API, ETH_PING, etc.)
+  Smartphone UUID          : owner pour les types d'action SMARTPHONE
+
+Le statut SIM et smartphone est un objet avec des champs value et detail (ex.
+"Available", "Disconnected (Sim not inserted)"). Le statut EthernetAgent est un booléen.
+Par défaut, seules les ressources disponibles/en ligne sont affichées ; utilisez --available=false pour inclure
+les ressources hors ligne.
+
+## Voir aussi
+
+- [`ktm resources`](/fr/cli/commands/resources)
+- [`ktm ci build`](/fr/cli/commands/ci/build)
+- [`ktm products list`](/fr/cli/commands/products/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

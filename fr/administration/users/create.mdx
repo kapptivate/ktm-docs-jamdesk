@@ -1,0 +1,40 @@
+---
+title: Créer un utilisateur
+description: Ajoutez de nouveaux utilisateurs à votre workspace avec un profil, des assignations d'équipes et un accès aux produits.
+---
+
+![Le formulaire de création d'un nouvel utilisateur avec ses sections Profil, Équipes de l'utilisateur, Accès aux produits et Sécurité & Politique](/images/user-create.webp)
+
+Lorsque vous créez un utilisateur, vous définissez son profil de base, lui donnez accès via des équipes ou des produits et appliquez une politique de sécurité.
+
+## Créer un nouvel utilisateur
+
+<Steps>
+  <Step title="Ouvrir le formulaire de création">
+    Allez dans **Administration > Utilisateurs** et cliquez sur **Créer un utilisateur**.
+  </Step>
+  <Step title="Remplir le profil">
+    Dans la section **Profil** :
+    - Saisissez un nom d'utilisateur (doit être unique ; le système valide en temps réel)
+    - Saisissez le prénom et le nom
+    - Saisissez une adresse e-mail (doit être unique)
+  </Step>
+  <Step title="Assigner des équipes">
+    Dans la section **Équipes de l'utilisateur**, cliquez sur **Ajouter une équipe** et sélectionnez une ou plusieurs équipes. L'utilisateur hérite de l'accès aux produits et des rôles de chaque équipe.
+  </Step>
+  <Step title="Accorder l'accès aux produits">
+    Dans la section **Accès aux produits**, cliquez sur **Ajouter un produit** pour donner à l'utilisateur un accès direct à un produit spécifique, puis choisissez un rôle (Administrateur, Bêta testeur, Rapporteur, Superviseur ou Testeur). Les produits assignés directement affichent **Ajouté manuellement** comme source d'accès.
+
+    Un utilisateur doit avoir accès à **au moins une équipe ou un produit** avant de pouvoir être créé. L'appartenance à une équipe accorde automatiquement l'accès aux produits, il n'est donc pas toujours nécessaire d'ajouter des produits directement.
+  </Step>
+  <Step title="Définir la politique de sécurité">
+    Dans la section **Sécurité & Politique**, choisissez une politique de sécurité. Par défaut, c'est la politique par défaut de votre workspace qui s'applique et définit le niveau de sécurité de connexion du compte.
+  </Step>
+  <Step title="Enregistrer">
+    Cliquez sur **Créer l'utilisateur** pour ajouter l'utilisateur.
+  </Step>
+</Steps>
+
+<Info>
+Le système détecte si vous ajoutez un utilisateur qui existe déjà dans votre workspace. Si son nom d'utilisateur ou son e-mail correspond à un utilisateur existant, le formulaire bascule en mode "ajouter à l'opérateur" et pré-remplit son profil depuis le système.
+</Info>

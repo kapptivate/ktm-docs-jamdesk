@@ -1,0 +1,50 @@
+---
+title: "ktm agents maintenance"
+description: "Activer ou désactiver le mode maintenance d'un agent"
+sidebarTitle: "maintenance"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Activer ou désactiver le mode maintenance d'un agent
+
+## Utilisation
+
+```bash
+ktm agents maintenance [flags]
+```
+
+## Exemples
+
+```bash
+ktm agents maintenance --uuid abc-123 --enable --confirm
+ktm agents maintenance --uuid abc-123 --disable --confirm
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Exécuter le basculement (sans ce flag, affiche un aperçu) |
+| `--disable` | boolean | — | Désactiver le mode maintenance |
+| `--enable` | boolean | — | Activer le mode maintenance |
+| `--uuid` | string | — | UUID de l'agent (requis) |
+
+## Voir aussi
+
+- [`ktm agents`](/fr/cli/commands/agents)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

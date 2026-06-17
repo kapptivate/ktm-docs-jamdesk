@@ -1,0 +1,57 @@
+---
+title: "ktm collections list"
+description: "Lister les sous-collections sous un UID parent"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les sous-collections sous un UID parent
+
+## Utilisation
+
+```bash
+ktm collections list [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections list --operator my-op --parent <tests_root_uid>
+ktm collections list --operator my-op --parent <uid> -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--parent` | string | — | UID de la collection parent (requis) |
+
+## Détails
+
+Liste les enfants directs d'une collection (tableau plat ; le service
+de collections ne pagine pas cet endpoint).
+
+Les collections ont une portée opérateur. Commencez par le tests_root_collection_uid d'un produit
+(pour l'arborescence de tests) ou le dashboards_root_collection_uid d'un opérateur (pour
+l'arborescence de dashboards) et naviguez en profondeur.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

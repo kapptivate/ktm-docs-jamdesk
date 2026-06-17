@@ -1,0 +1,59 @@
+---
+title: "ktm collections move"
+description: "Déplacer une collection sous un nouveau parent UID"
+sidebarTitle: "move"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplacer une collection sous un nouveau parent UID
+
+## Utilisation
+
+```bash
+ktm collections move <uid> [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections move --operator my-op <uid> --new-parent <new_parent_uid>
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--new-parent` | string | — | UID de la collection parent cible (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Déplace la collection (et tout son sous-arbre) sous un nouveau parent.
+Les cycles sont rejetés côté serveur. Utilisez 'ktm collections move-items' pour
+déplacer un test ou dashboard plutôt qu'une collection entière.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

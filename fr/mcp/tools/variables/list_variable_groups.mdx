@@ -1,0 +1,47 @@
+---
+title: "list_variable_groups"
+description: "Lister les groupes de variables d'un produit."
+sidebarTitle: "list_variable_groups"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les groupes de variables d'un produit.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (false par défaut) |
+| `product` | string | Oui | Slug du produit |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Le périmètre est volontairement limité à un seul produit pour refléter l'interface web et éviter d'afficher des groupes d'autres produits auxquels l'appelant n'a pas accès dans l'interface. Les groupes archivés sont exclus.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,56 @@
+---
+title: "ktm variables duplicate"
+description: "Cloner une variable sous un nouveau nom (atomique ; conserve le type et les valeurs)"
+sidebarTitle: "duplicate"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Cloner une variable sous un nouveau nom (atomique ; conserve le type et les valeurs)
+
+## Utilisation
+
+```bash
+ktm variables duplicate <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables duplicate 17 --name DB_HOST_BACKUP
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nom pour la nouvelle variable (requis) |
+
+## Détails
+
+Le duplicata hérite du type, du groupe et de toutes les valeurs par variant de la source.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

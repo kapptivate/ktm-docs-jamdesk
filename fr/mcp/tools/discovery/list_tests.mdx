@@ -1,0 +1,62 @@
+---
+title: "list_tests"
+description: "Liste les scénarios de test."
+sidebarTitle: "list_tests"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les scénarios de test.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `archived` | boolean | Non | Filtrer par statut archivé |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de résumés compacts (défaut : false) |
+| `name` | string | Non | Filtrer par nom de test |
+| `operator` | string | Non | Filtrer par slug de l'operator |
+| `ordering` | string | Non | Ordre de tri (ex. 'name', '-name', 'id', '-id') |
+| `page` | number | Non | Numéro de page (défaut : 1) |
+| `page_size` | number | Non | Nombre de tests par page (défaut : 20) |
+| `product` | string | Non | Filtrer par slug de produit (format : operator~product) |
+| `tags` | string | Non | Filtrer par tags (séparés par des virgules) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "archived": false,
+  "detail": false
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List test scenarios. Tests belong to a product and can be executed via campaigns.
+
+Flat discovery: returns all tests in a product (paginated, filterable by name/tag/status). For folder-based browsing, use list_collections → list_collection_items instead.
+```
+
+## Associés
+
+- [`list_collections`](/fr/mcp/tools/collections/list_collections)
+- [`list_collection_items`](/fr/mcp/tools/collections/list_collection_items)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

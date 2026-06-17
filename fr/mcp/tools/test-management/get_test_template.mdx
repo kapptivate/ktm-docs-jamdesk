@@ -1,0 +1,50 @@
+---
+title: "get_test_template"
+description: "Renvoie un template JSON de test prêt à personnaliser pour les types d'action spécifiés."
+sidebarTitle: "get_test_template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renvoie un template JSON de test prêt à personnaliser pour les types d'action spécifiés.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `action_types` | string | Oui | Liste de types d'action séparés par des virgules pour les steps du test, ex. 'ETH_HTTP_API' ou 'USSD,USSD,SMS_GET' |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "action_types": "string"
+}
+```
+
+## Description
+
+```text
+Includes default command fields, assertion_sources, and store_sources. Replace <...> placeholders with real values from list_resources. Multi-step: pass comma-separated types (e.g. 'USSD,USSD,SMS_GET').
+```
+
+## Associés
+
+- [`list_resources`](/fr/mcp/tools/discovery/list_resources)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,41 @@
+---
+title: Premier test web
+description: Créez, lancez et consultez un test navigateur sur un site ou une application web.
+sidebarTitle: Démarrage rapide
+---
+
+Les tests Web pilotent un vrai navigateur sur votre site : click, saisie, navigation et vérification du contenu affiché. Ils s'exécutent sur un agent Web. Voici le chemin le plus rapide vers votre premier test.
+
+<Steps>
+  <Step>
+    **Créez le test.** Ouvrez la section **Tests** de votre produit, cliquez sur **+ Create new test** et choisissez **Web (New experience)**. Renseignez le nom du test, l'agent Web par défaut et l'URL de départ que le navigateur ouvrira.
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Dans le builder, enregistrez des interactions sur la page en direct ou ajoutez des actions web manuellement : click sur un élément, remplissage d'un input, attente de contenu et assert qu'un élément est affiché. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le sur un navigateur.** Cliquez sur **Run** dans le builder pour le regarder en direct, ou sur **Run** sur la ligne du test, puis confirmez l'agent et les variables sur la page de [confirmation d'exécution](/fr/executions/run) et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les captures d'écran par step et le temps d'exécution.
+  </Step>
+</Steps>
+
+<Tip>
+Le type de navigateur, la taille de fenêtre, la langue et le user agent proviennent du [browser preset](/fr/tests/browser-presets) que vous sélectionnez dans l'onglet **Environment** du builder.
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Canal Web & API" icon="globe" href="/fr/agents-devices/web-api">
+
+    Fonctionnement du canal Web et de l'agent Web
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Construisez des flux web plus complexes, step par step
+
+</Card>
+</Columns>

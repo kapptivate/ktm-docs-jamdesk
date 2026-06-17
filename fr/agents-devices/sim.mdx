@@ -1,0 +1,76 @@
+---
+title: SIM (Cellulaire)
+description: Tests USSD, SMS, réseau et données sur de vraies cartes SIM, exécutés par le Cellular agent.
+sidebarTitle: USSD
+---
+
+Le channel Cellular teste les réseaux cellulaires, les flux USSD et la messagerie SMS sur de vraies cartes SIM. Les tests s'exécutent sur des SIM physiques à l'intérieur de votre **Cellular agent** sur site.
+
+## Démarrage rapide
+
+Créez votre premier test SIM en quatre étapes.
+
+<Steps>
+  <Step>
+    **Créez le test.** Ouvrez la section **Tests** de votre produit, cliquez sur **+ Create new test**, choisissez **Classic** et sélectionnez le canal **Cellular**. Nommez le test.
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Construisez le flux avec des actions cellulaires : envoyez une commande USSD et faites un assert sur la réponse, ou envoyez et recevez un SMS. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le sur une SIM.** Cliquez sur **Run** sur la ligne du test, puis sélectionnez une SIM dans un slot d'agent Cellular sur la page de [confirmation d'exécution](/fr/executions/run) et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les réponses USSD ou SMS et le temps d'exécution.
+  </Step>
+</Steps>
+
+<Info>
+  Le channel Cellular couvre la communication de données, les flux de menus USSD et l'envoi/réception de SMS. Il s'agit d'un seul channel, pas de types de tests séparés.
+</Info>
+
+<Tip>
+  Consultez [Tests Cellular (USSD & SMS)](/fr/tests/cellular) pour un guide complet sur la création de menus USSD, les flux SMS et la gestion des USSD push initiés par le réseau.
+</Tip>
+
+## Tests Cellular
+
+**Actions courantes :** envoi et réception de SMS, navigation dans les menus USSD, vérification de l'enregistrement réseau et du signal, et test de la connectivité données.
+
+## Cartes SIM
+
+Cartes SIM physiques GSM/3G/4G/5G installées dans les slots du Cellular agent. Chaque SIM rapporte :
+
+- IMSI (International Mobile Subscriber Identity)
+- Numéros de téléphone (format national et international)
+- Position du slot dans l'agent
+- Version du firmware
+- Statut d'enregistrement sur le réseau
+- Puissance du signal
+- Configuration APN (Access Point Name)
+- Opérateur télécom
+- Gateway (l'agent qui la contrôle)
+- Utilisation des tests sur 24 heures
+
+Consultez les [Statuts](/fr/equipment/statuses) pour les statuts des SIM, les états d'enregistrement réseau et les niveaux de signal.
+
+## Le Cellular agent
+
+Un device spécialisé qui contient plusieurs cartes SIM et exécute des tests sur de vrais réseaux cellulaires.
+
+- Exécute des tests sur des cartes SIM physiques
+- Gère les flux de menus USSD et la messagerie SMS
+- Surveille l'enregistrement réseau et la puissance du signal
+- Gère les configurations APN pour chaque SIM
+
+### Slots SIM
+
+Un Cellular agent contient plusieurs slots, chacun accueillant une carte SIM :
+
+- ID du slot (par ex. `agent-uuid-0`, `agent-uuid-1`)
+- Position (index numérique : 0, 1, 2, etc.)
+- SIM actuelle (vide ou SIM installée)
+- Flag actif (le slot est-il actuellement opérationnel)
+- Version du firmware
+
+Chaque slot rapporte indépendamment le statut et l'état d'enregistrement de la SIM qui y est installée.

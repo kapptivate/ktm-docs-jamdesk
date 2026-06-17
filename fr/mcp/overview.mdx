@@ -1,0 +1,57 @@
+---
+title: Serveur MCP
+description: Connectez Kapptivate à vos assistants et agents IA via le Model Context Protocol.
+sidebarTitle: Vue d'ensemble
+---
+
+Le serveur MCP de Kapptivate offre à vos assistants IA un accès direct et contrôlé à votre plateforme. Configurez un client MCP avec une seule URL, authentifiez-vous avec votre clé API, et le modèle peut découvrir des [tests](/fr/tests/overview), exécuter des [campaigns](/fr/executions/run-campaign), interroger des métriques, gérer des [monitors](/fr/monitoring/overview) et traiter des [incidents](/fr/monitoring/incidents) grâce à des outils qui correspondent un à un aux fonctionnalités de Kapptivate.
+
+Utilisez-le pour transformer une intention en action : "exécute la régression du checkout sur staging et résume les échecs", "crée un monitor pour le test de login toutes les cinq minutes", ou "affiche le taux de succès de la semaine dernière pour le produit paiements".
+
+## Fonctionnement
+
+Le serveur parle le [Model Context Protocol](https://modelcontextprotocol.io), le standard ouvert pour connecter des assistants à des outils. Kapptivate l'héberge sur un seul endpoint :
+
+```
+https://mcp.kapptivate.com/mcp
+```
+
+Votre client authentifie chaque requête avec l'en-tête `X-Kapptivate-API-Key`. La clé porte les mêmes permissions que votre compte Kapptivate, donc un agent ne peut faire que ce que vous pouvez faire.
+
+<Warning>
+  Votre clé API accorde le même accès que votre compte. Traitez-la comme un mot de passe : ne la commitez jamais dans un dépôt et ne la collez pas dans un chat partagé.
+</Warning>
+
+## Ce que vous pouvez faire
+
+<Columns cols={2}>
+  <Card title="Découvrir et exécuter des tests" icon="play" href="/fr/mcp/workflows">
+    Trouvez des tests, construisez des campaigns, exécutez-les et lisez les résultats pass/fail.
+  </Card>
+  <Card title="Monitorer et alerter" icon="gauge-high" href="/fr/mcp/workflows">
+    Créez des monitors, examinez les incidents et évaluez les alertes.
+  </Card>
+  <Card title="Interroger les métriques" icon="chart-line" href="/fr/mcp/workflows">
+    Explorez les KPI, calculez les SLO et corrélez les signaux.
+  </Card>
+  <Card title="Gérer la configuration" icon="dollar-sign" href="/fr/mcp/concepts">
+    Travaillez avec les produits, variables, variants et collections.
+  </Card>
+</Columns>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code en quelques minutes.
+  </Card>
+  <Card title="Concepts fondamentaux" icon="sitemap" href="/fr/mcp/concepts">
+    Comprenez les operators, produits, variables et le modèle de sécurité.
+  </Card>
+  <Card title="Référence des outils" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez tous les outils exposés par le serveur, classés par catégorie.
+  </Card>
+  <Card title="Workflows courants" icon="diagram-project" href="/fr/mcp/workflows">
+    Recettes pas à pas pour les tâches les plus fréquentes.
+  </Card>
+</Columns>

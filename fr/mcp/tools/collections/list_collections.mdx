@@ -1,0 +1,57 @@
+---
+title: "list_collections"
+description: "Liste les sous-collections directes sous un UID de collection parente."
+sidebarTitle: "list_collections"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les sous-collections directes sous un UID de collection parente.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de lignes compactes (défaut : false) |
+| `operator` | string | Oui | Slug de l'operator (requis, les collections sont scopées par operator) |
+| `parent_uid` | string | Oui | UID de la collection parente dont lister les enfants |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "parent_uid": "string"
+}
+```
+
+## Description
+
+```text
+Collections are hierarchical containers in the collections service that group tests and dashboards. Every product has a tests_root_collection_uid and every operator has a dashboards_root_collection_uid — pass those as parent_uid to browse from the top of each tree.
+
+Returns compact one-liners by default; set detail=true for full JSON (parent_uid, org_id, full UID).
+
+Folder-tree browsing. For flat test discovery by name/tag/status, use list_tests instead — simpler and faster for most queries.
+```
+
+## Associés
+
+- [`list_tests`](/fr/mcp/tools/discovery/list_tests)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

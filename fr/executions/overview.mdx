@@ -1,0 +1,73 @@
+---
+title: Vue d'ensemble des exécutions
+description: Parcourez l'historique de toutes les exécutions de tests et filtrez ce qui compte.
+sidebarTitle: Liste des exécutions
+---
+
+![The executions list with status icons, failed-count badges, test detail chips, and per-row Run buttons](/images/executions-list.webp)
+
+Chaque fois qu'un test s'exécute, il produit une exécution. La liste des exécutions est l'historique de toutes ces exécutions : filtrez ce qui compte, relancez ce qui a échoué, et cliquez pour accéder aux résultats détaillés.
+
+## La liste des exécutions
+
+Les exécutions sont regroupées par jour, les plus récentes en premier, et la liste se rafraîchit pour afficher les statuts mis à jour. Chaque ligne affiche :
+
+- **Name** : le nom de l'exécution avec son icône de statut, la date d'exécution, la durée et la pastille de l'appareil.
+- **About** : un badge avec le nombre de tests échoués sur le total.
+- **Ran by** : qui ou quoi a déclenché l'exécution.
+- **Details** : des pastilles nommant les tests de l'exécution, avec "View more" quand il y en a beaucoup.
+- **Run** : un bouton pour relancer l'exécution.
+
+## Filtrer les exécutions
+
+- **Search** : recherchez des exécutions par nom.
+- **Status** : filtrez par success, failed, warning, running et d'autres statuts le cas échéant.
+- **Creator** : affichez uniquement les exécutions lancées par un utilisateur spécifique.
+- **Date range** : choisissez un préréglage dans le menu déroulant (Past 1h, 2h, 6h, 12h, 24h, Today, Yesterday, Last 7 days, Last 30 days) ou définissez une plage personnalisée.
+- **Multi-select** : activez le mode cases à cocher pour les actions groupées ; appuyez sur Echap pour effacer la sélection.
+
+## Actions sur les lignes
+
+Utilisez le bouton **Run** pour relancer une exécution telle quelle. Le menu à trois points de la ligne propose :
+
+- **Add tag(s)** : étiquetez l'exécution pour l'organiser.
+- **Rerun only failed tests** : relancez uniquement les tests qui ont échoué.
+- **Rename execution** : modifiez son nom d'affichage.
+- **Delete** : supprimez l'exécution.
+
+Cliquez sur la ligne elle-même pour ouvrir la [vue des résultats](/fr/executions/results) complète.
+
+## Statut d'exécution
+
+Le statut d'une exécution reflète le résultat de ses tests :
+
+- **success** : tous les tests ont réussi.
+- **failed** : un ou plusieurs tests ont échoué.
+- **warning** : tous les tests ont réussi mais avec des avertissements.
+- **pending** : en file d'attente, en attente de démarrage.
+- **ongoing** : en cours d'exécution.
+- **canceled** : l'utilisateur a annulé l'exécution.
+- **blocked** : bloquée par un autre processus.
+- **scheduled** : planifiée pour une exécution future.
+- **timed out** : l'exécution a dépassé le délai d'expiration.
+
+Les exécutions planifiées affichent un tag avec la date et l'heure prévues au lieu des détails individuels des tests.
+
+## Monitoring en direct
+
+Quand un test est en cours d'exécution, vous pouvez le regarder en direct : ouvrez l'exécution pour voir un aperçu en direct de l'écran de l'appareil avec les steps qui se mettent à jour en temps réel, ou lancez directement [depuis le builder](/fr/executions/run#lancer-depuis-le-builder) pour regarder dans une fenêtre modale sans quitter l'éditeur.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Consulter les résultats" icon="magnifying-glass-chart" href="/fr/executions/results">
+
+    Consultez une exécution : steps, captures d'écran, vidéo et métadonnées
+
+</Card>
+  <Card title="Lancer un test" icon="play" href="/fr/executions/run">
+
+    Ajoutez des tests à la file d'attente, ajustez les appareils et variables, et lancez
+
+</Card>
+</Columns>

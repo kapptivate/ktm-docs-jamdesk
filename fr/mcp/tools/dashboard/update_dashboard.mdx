@@ -1,0 +1,54 @@
+---
+title: "update_dashboard"
+description: "Mettre à jour les métadonnées d'un dashboard (nom, bucket, statut de favori)."
+sidebarTitle: "update_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Mettre à jour les métadonnées d'un dashboard (nom, bucket, statut de favori).
+
+<Info>
+  **Écriture de données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | Non | Nouveau bucket InfluxDB |
+| `dashboard_uid` | string | Oui | UID du dashboard (depuis list_dashboards) |
+| `is_favorite` | boolean | Non | Définir le statut de favori |
+| `name` | string | Non | Nouveau nom du dashboard |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "dashboard_uid": "string"
+}
+```
+
+## Description
+
+```text
+Ne modifie pas la disposition des widgets. Utilisez add/edit/remove_dashboard_widget pour cela. Utilisez get_dashboard pour vérifier.
+```
+
+## Associé
+
+- [`remove_dashboard_widget`](/fr/mcp/tools/dashboard-widget/remove_dashboard_widget)
+- [`get_dashboard`](/fr/mcp/tools/dashboard/get_dashboard)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,69 @@
+---
+title: Aide-mémoire CLI
+description: Les commandes ktm les plus utilisées, regroupées par tâche.
+sidebarTitle: Aide-mémoire
+---
+
+Les commandes que vous utilisez le plus souvent, regroupées par objectif. `ktm` est JSON-first et scriptable, ce qui en fait un choix naturel pour les scripts shell, les pipelines CI et les agents de codage IA (Claude Code, Codex, Cursor) pilotant la plateforme depuis le terminal.
+
+## Découvrir
+
+```bash
+ktm operators list
+ktm products list --operator my-operator
+ktm tests list --product my-operator~my-product -o table
+ktm resources list --product my-operator~my-product --type web-agent
+```
+
+## Créer et valider des tests
+
+```bash
+ktm tests action-types                          # parcourir les 44 types d'actions
+ktm tests template ETH_HTTP_API > test.json     # générer un squelette
+ktm tests validate --from-file test.json        # vérifier sans créer
+ktm tests create --from-file test.json --product my-operator~my-product
+```
+
+## Exécuter en CI
+
+```bash
+ktm ci build --test-ids 16480,16838 --product my-operator~my-product --variant "API:Staging" > campaign.json
+ktm ci run --test-config-path campaign.json --junit-file results.xml --output-file summary.json
+```
+
+## Surveiller et investiguer
+
+```bash
+ktm monitors list --operator my-operator -o table
+ktm incidents counter --operator my-operator          # ouverts / avertissement / fermés
+ktm incidents list --operator my-operator --status OPEN
+ktm executions get <result-id>
+```
+
+## Variables et environnements
+
+```bash
+ktm variables list --product my-operator~my-product
+ktm variables set-value <variable-id> --variant Staging --value "https://staging.example.com"
+```
+
+## Accès local aux appareils
+
+```bash
+ktm adb connect <phone-serial>   # tunnel un téléphone du device farm vers votre ADB local
+```
+
+<Tip>
+  Chaque commande accepte `-o table` ou `-o plain` ; le format par défaut `json` se pipe facilement dans `jq`. Les codes de sortie sont stables (0 ok, 5 = tests échoués), permettant aux pipelines et agents de prendre des décisions. Voir [Configuration](/fr/cli/configuration).
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Créer des tests" icon="flask" href="/fr/cli/guides/create-tests">
+    Générer des tests API, web, app et USSD/SMS.
+  </Card>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Toutes les commandes, flags et exemples.
+  </Card>
+</Columns>

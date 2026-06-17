@@ -1,0 +1,73 @@
+---
+title: "ktm tests delete"
+description: "Supprimer un ou plusieurs tests (déplacement vers la corbeille ; récupérable via 'tests undelete')"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Supprimer un ou plusieurs tests (déplacement vers la corbeille ; récupérable via 'tests undelete')
+
+## Utilisation
+
+```bash
+ktm tests delete <id>... [flags]
+```
+
+## Exemples
+
+```bash
+ktm tests delete 99 --yes
+ktm tests delete 99 100 101 --yes
+ktm tests delete 117 --kind 2 --yes           # reusable
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--kind` | int | `1` | Kind du test : 1=test (défaut), 2=reusable |
+| `--yes` | boolean | — | Confirmer la suppression |
+
+## Détails
+
+Envoie les tests dans la collection test-trash du produit. Malgré le nom "delete",
+cette opération est réversible : exécutez 'ktm tests undelete &lt;id&gt;' pour récupérer un test
+depuis la corbeille. Le service collections prend en charge une action admin 'empty trash'
+qui purge la corbeille de manière permanente ; cela est hors du périmètre de ce CLI.
+
+--kind contrôle dans quelle table de kind de test le backend cherche :
+  1  test standard (défaut)
+  2  test reusable
+
+Refuse sans --yes.
+
+## Notes
+
+- Suppression vers la corbeille, récupérable avec [`ktm tests undelete`](/fr/cli/commands/tests/undelete). Pour simplement masquer un test des listes, utilisez [`ktm tests archive`](/fr/cli/commands/tests/archive).
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests undelete`](/fr/cli/commands/tests/undelete)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

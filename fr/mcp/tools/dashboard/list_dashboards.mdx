@@ -1,0 +1,52 @@
+---
+title: "list_dashboards"
+description: "Lister les dashboards d'un opérateur."
+sidebarTitle: "list_dashboards"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les dashboards d'un opérateur.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (par défaut : false) |
+| `is_favorite` | boolean | Non | Filtrer par statut de favori |
+| `name` | string | Non | Filtrer par nom de dashboard (recherche insensible à la casse) |
+| `operator` | string | Non | Filtrer par slug de l'opérateur (recommandé, les dashboards sont limités à un opérateur) |
+| `page` | number | Non | Numéro de page (par défaut : 1) |
+| `page_size` | number | Non | Nombre de dashboards par page (par défaut : 20) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "detail": false,
+  "is_favorite": false
+}
+```
+
+## Description
+
+```text
+Renvoie des résumés compacts par défaut ; utilisez detail=true pour le JSON complet. Liste les dashboards d'un opérateur. Les dashboards contiennent des widgets de métriques (graphiques, compteurs, tableaux) visualisant les données InfluxDB.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,166 @@
+---
+title: "ktm tests create"
+description: "Créer un nouveau test à partir d'un fichier JSON"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau test à partir d'un fichier JSON
+
+## Utilisation
+
+```bash
+ktm tests create [flags]
+```
+
+## Exemples
+
+```bash
+# Générer un modèle, le modifier, puis créer
+ktm tests template ETH_HTTP_API > test.json
+# ... modifier test.json ...
+ktm tests create --from-file test.json --product my-operator~my-product
+
+# Créer avec remplacement du nom
+ktm tests create --from-file test.json --product my-operator~my-product --name "Login Test"
+
+# Fixer un variant pour un seul groupe (les autres groupes utilisent leur variant par défaut)
+ktm tests create --from-file test.json --product acme~web --variant API:Staging
+
+# Test multi-groupes : fixer un variant différent par groupe (les formes peuvent être mélangées : nom 'group:variant' ou identifiant numérique)
+ktm tests create --from-file test.json --product acme~web \
+    --variant API:Staging --variant Database:Replica --variant 31
+
+# Auto-corriger les kinds d'input_variable déclarés lorsqu'ils ne correspondent pas aux types de variables de la plateforme
+ktm tests create --from-file test.json --product acme~web --auto-correct-kinds
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Réécrire les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Sans ce flag, les décalages de kind sont des erreurs bloquantes. |
+| `--from-file` | string | — | Chemin vers le fichier JSON contenant la définition du test (requis) |
+| `--kind` | int | `1` | Kind du test : 1=test, 2=composant reusable |
+| `--name` | string | — | Remplacer le nom du test depuis le fichier JSON |
+| `--product` | string | — | Slug du produit (requis, format : operator~product) |
+| `--variant` | string[] | — | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. |
+
+## Détails
+
+Créer un nouveau test classique en envoyant une définition JSON à l'API.
+
+Le fichier JSON doit contenir la définition complète du test avec les actions, variables
+et métadonnées. Utilisez "tests template" pour générer une structure de départ valide.
+
+Le flag --product résout le slug du produit en identifiant de produit et UID de collection
+racine. Le collection_uid est toujours résolu automatiquement depuis le produit, aucun remplacement n'est permis.
+
+Correspondance des owners (quel identifiant d'appareil va dans le champ "owner") :
+  Actions ETHERNET  : hostname du web agent  (depuis 'resources list --type web-agent')
+  Actions SIM       : national_msisdn     (depuis 'resources list --type sim')
+  Actions SMARTPHONE : UUID               (depuis 'resources list --type smartphone')
+  Actions OWNERLESS : "" (chaîne vide, aucun appareil nécessaire)
+
+Chaque action non-OWNERLESS nécessite un owner ET une entrée correspondante dans variables.owners.
+
+Buckets de variables V3 :
+  Chaque input_variable non globale nécessite un bucket par variable pointant vers
+  (variable_group, variant). Les buckets sont résolus automatiquement depuis les
+  groupes de variables du produit : le fichier JSON n'a pas besoin de les inclure. Passez
+  --variant &lt;spec&gt; (répétable) pour fixer un variant spécifique par groupe ; les groupes
+  sans spécification utilisent le variant par défaut de leur groupe.
+
+  Formes de spécification :
+    --variant 5             identifiant numérique du variant (groupe parent inféré)
+    --variant API:Staging   group:variant par nom (correspondance exacte sensible à la casse)
+
+  Le mélange des formes est autorisé : --variant API:Staging --variant 31
+
+  Validation des kinds : le kind déclaré d'input_variable doit correspondre au type de variable
+  de la plateforme (1/3 vers "regular", 2 vers "secret"). Les décalages sont des erreurs
+  bloquantes par défaut. Passez --auto-correct-kinds pour réécrire les décalages sur place.
+
+Substitution de variables :
+  Les champs de commande API (url, valeurs d'en-tête, body) acceptent \{MYVAR\} pour injecter des input variables.
+  Déclarez la variable dans variables.input_variables avec kind=regular.
+  Format d'en-tête : [\{"name": "Header-Name", "value": "header-value"\}] : utilisez "name" et non "key".
+
+  Limitation du body JSON : \{VAR\} entre en conflit avec les accolades JSON. N'écrivez PAS body='\{"k":"\{V\}"\}'.
+  À la place, ajoutez une action JAVASCRIPT avant l'appel API pour construire le body via
+  test.variables.get()/set(), puis définissez body="\{API_BODY\}" dans l'action API.
+
+Règles USSD/SMS :
+  - USSD et SMS_GET utilisent expected_result.message pour la validation de la réponse, PAS les assertions.
+  - expected_result.message doit contenir le texte attendu LITTÉRAL (ou "-" pour tout accepter).
+  - Si le texte attendu est inconnu, utilisez un espace simple " " comme placeholder, PAS "-" avec une assertion de message.
+  - Les assertions sur USSD/SMS servent UNIQUEMENT à la validation non-message : session_status, duration, variable.
+  - L'extraction de variables via store avec message_part est une fonctionnalité séparée.
+  - N'ajoutez PAS de champs non présents dans le modèle : le backend les rejette.
+
+Actions de script (structure Mocha/Chai) :
+  Tous les types de script ont command.script_name et command.script_description : remplissez
+  toujours ces champs avec un nom court et un résumé en texte clair de ce que fait le script.
+  Tous les types de script utilisent Mocha avec function() (pas de fonctions fléchées).
+  Trois règles :
+    1. Chaque action logique a son propre bloc it() : ne mettez PAS tout dans un seul it()
+    2. Utilisez les hooks before() pour l'initialisation des variables : chargez test.variables.get() dedans
+    3. Déclarez les variables partagées à la portée racine de describe() avec let : requis pour
+       les données partagées entre les blocs before() et it()
+  JAVASCRIPT (ownerless) pour le traitement de données entre les étapes :
+    Pattern : describe('Suite', function() \{ let val;
+      before(function() \{ val = test.variables.get('MY_VAR'); \});
+      it('should process', function() \{ /* utiliser val */ \});
+      it('should store', function() \{ test.variables.set('RESULT', val); \});
+    \});
+    Disponible : Lodash, Moment.js, Chai, xml2json.
+  Scripts WebDriverIO (ETH_JS_WEB_SCRIPT, DATA_JS_WEB_SCRIPT, SMARTPHONE_*) :
+    Même pattern, plus driver pour l'automatisation navigateur/téléphone.
+    Scripts d'app : la plateforme lance l'app automatiquement, le script gère l'interaction in-app.
+      Android (SMARTPHONE_JS_APP_SCRIPT) : app_package + app_activity requis dans command.
+      iOS (SMARTPHONE_IOS_JS_APP_SCRIPT) : bundle_id requis dans command.
+    APIs : browser.url(), browser.getTitle(), $(), $$(), scrollIntoView(), expect (Chai).
+    WebDriverIO v7 : API complète disponible, $() fonctionne sans préfixe driver/browser.
+
+Exemple de structure JSON :
+  \{
+    "name": "My API Test",
+    "description": "Tests the login endpoint returns 200",
+    "kind": 1,
+    "is_valid": true,
+    "variables": \{
+      "input_variables": \{\},
+      "output_variables": \{\},
+      "owners": \{"my-agent": \{"owner_kind": "ETHERNET", "value": "my-agent", "actions": [0]\}\}
+    \},
+    "actions": [
+      \{
+        "type": "ETH_HTTP_API",
+        "owner": "my-agent",
+        "command": \{"http_method": "GET", "url": "https://api.example.com", "header": [], "body": "", "follow_redirect": true\},
+        "assertions": [\{"source": "status_code", "compare": "==", "value": "200"\}]
+      \}
+    ]
+  \}
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests template`](/fr/cli/commands/tests/template)
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

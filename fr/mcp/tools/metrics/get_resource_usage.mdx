@@ -1,0 +1,61 @@
+---
+title: "get_resource_usage"
+description: "Obtenir l'utilisation des ressources d'un appareil dans le temps, ventilée par une fenêtre d'agrégation configurable."
+sidebarTitle: "get_resource_usage"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir l'utilisation des ressources d'un appareil dans le temps, ventilée par une fenêtre d'agrégation configurable.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `aggregation` | string | Oui | Intervalle d'agrégation temporelle (par ex. '1h', '5m') |
+| `aggregations` | string | Non | Fenêtres d'agrégation séparées par des virgules pour l'utilisation de pointe (par ex. 'p95,max'). Lorsque fourni, renvoie l'utilisation de pointe P95 sur ces fenêtres au lieu de la série temporelle standard. |
+| `detail` | boolean | Non | Renvoyer le JSON sans valeurs nulles au lieu du résumé (par défaut : false) |
+| `end` | string | Oui | Heure de fin au format ISO 8601 (par ex. '2024-01-02T00:00:00Z') |
+| `operator` | string | Oui | Slug de l'opérateur (= nom de la base InfluxDB) |
+| `resources` | string | Oui | Identifiants d'appareils séparés par des virgules (SIM : national_msisdn, web-agent : hostname, smartphone : UUID) |
+| `start` | string | Oui | Heure de début au format ISO 8601 (par ex. '2024-01-01T00:00:00Z') |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "resources": "string",
+  "aggregation": "string",
+  "start": "string",
+  "end": "string"
+}
+```
+
+## Description
+
+```text
+Renvoie le pourcentage d'utilisation par ressource. Utilisez list_resources pour trouver les identifiants d'appareils (SIM : national_msisdn, web-agent : hostname, smartphone : UUID). La réponse est indexée par nom de ressource. Plage maximale recommandée : 90 jours. Passez aggregations (par ex. 'p95,max') pour inclure les données d'utilisation de pointe en plus de l'agrégation par défaut. À utiliser à la place de query_metrics pour le pourcentage d'utilisation des appareils ; pas besoin d'InfluxQL.
+```
+
+## Associé
+
+- [`list_resources`](/fr/mcp/tools/discovery/list_resources)
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,55 @@
+---
+title: Microsoft Copilot Studio
+description: Connectez le serveur MCP de Kapptivate à un agent Copilot Studio dans Microsoft 365.
+sidebarTitle: Copilot Studio (M365)
+---
+
+Microsoft Copilot Studio peut appeler le serveur MCP de Kapptivate comme outil, permettant aux makers de votre tenant Microsoft 365 de construire des agents qui exécutent des tests, lisent des monitors et investiguent des incidents. Copilot Studio utilise le transport Streamable HTTP, que le serveur Kapptivate parle nativement.
+
+## Ajouter le serveur
+
+<Steps>
+  <Step title="Ouvrir l'assistant MCP">
+    Dans votre agent, allez dans **Tools**, puis **Add a tool**, **New tool** et **Model Context Protocol**.
+  </Step>
+  <Step title="Détails du serveur">
+    Définissez un **Server name** (par exemple, Kapptivate), une courte **Server description** (l'orchestrateur l'utilise pour décider quand appeler le serveur) et la **Server URL** :
+
+    ```
+    https://mcp.kapptivate.com/mcp
+    ```
+  </Step>
+  <Step title="Authentification">
+    Choisissez **API key**, définissez le type sur **Header** et saisissez le nom de l'en-tête :
+
+    ```
+    X-Kapptivate-API-Key
+    ```
+  </Step>
+  <Step title="Créer la connexion">
+    Sélectionnez **Create**, puis **Create a new connection**, collez votre clé API Kapptivate comme valeur et cliquez sur **Add to agent**.
+  </Step>
+</Steps>
+
+<Warning>
+  La clé API porte le même accès que le compte Kapptivate auquel elle appartient. Traitez-la comme un mot de passe et préférez un compte de service dédié pour les agents partagés.
+</Warning>
+
+## Si l'en-tête personnalisé n'est pas transmis
+
+L'option clé API dans l'en-tête de l'assistant est le chemin supporté. Certaines configurations Copilot Studio plus anciennes ne transmettent pas les en-têtes préfixés `X-` ajoutés manuellement via un connecteur personnalisé. Si vous rencontrez ce problème, créez un **Custom connector** dans Power Apps à partir d'un fichier OpenAPI qui déclare l'en-tête `X-Kapptivate-API-Key` et l'opération MCP streamable (`x-ms-agentic-protocol: mcp-streamable-1.0`), puis ajoutez ce connecteur comme outil.
+
+## Gouvernance
+
+L'accès passe par les connecteurs Power Platform, donc toute politique de prévention de perte de données (DLP) qui régit les connecteurs régit également ce serveur MCP et ses outils pour vos agents. Scopez une clé API dédiée par environnement pour pouvoir la faire tourner ou la révoquer indépendamment.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Exemples de prompts" icon="robot" href="/fr/mcp/examples">
+    Que demander une fois l'agent connecté.
+  </Card>
+  <Card title="Google Gemini" icon="sparkles" href="/fr/mcp/integrations/gemini">
+    Connectez Gemini pour votre organisation.
+  </Card>
+</Columns>

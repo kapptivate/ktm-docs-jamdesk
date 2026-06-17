@@ -1,0 +1,84 @@
+---
+title: "ktm metrics correlate"
+description: "Détecter les relations entre métriques : corrélation, changement de distribution, décalage"
+sidebarTitle: "correlate"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Détecter les relations entre métriques : corrélation, changement de distribution, décalage
+
+## Utilisation
+
+```bash
+ktm metrics correlate [flags]
+```
+
+## Exemples
+
+```bash
+# Quick correlation (default)
+ktm metrics correlate --operator acme   --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 24h GROUP BY time(1h)"   --query "SELECT mean(response_time) FROM action WHERE time > now() - 24h GROUP BY time(1h)"
+
+# Full analysis with lag detection
+ktm metrics correlate --operator acme --mode full   --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)"   --query "SELECT count(error) FROM event WHERE time > now() - 7d GROUP BY time(1h)"
+
+# Distribution shift only (which metrics changed?)
+ktm metrics correlate --operator acme --mode shift   --queries '["SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)", "SELECT mean(response_time) FROM action WHERE time > now() - 7d GROUP BY time(1h)"]'
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--mode` | string | `quick` | Mode d'analyse : quick (corrélation uniquement), full (corrélation + shift + lag), shift (changement de distribution uniquement) |
+| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--queries` | string | — | Tableau JSON de chaînes de requêtes InfluxQL |
+| `--query` | string[] | — | Requête InfluxQL (répétable, utilisez plusieurs flags --query au lieu du JSON --queries) |
+
+## Détails
+
+Exécute 2 à 10 requêtes InfluxQL et détecte les relations entre métriques.
+
+Fournissez les requêtes via --query (répétable) ou --queries (tableau JSON).
+Les requêtes sont exécutées en parallèle et alignées par horodatage.
+
+3 modes d'analyse (--mode) :
+  quick (défaut) : corrélation Spearman/Pearson par paire + p-values.
+                   Répond à : « ces métriques sont-elles corrélées ? »
+  full :           ajoute la détection de changement de distribution KS par requête et
+                   le scan de décalage (50 pas). Répond à : « ont-elles changé ensemble ? »
+                   et « l'une cause-t-elle l'autre ? »
+  shift :          changement de distribution KS par requête uniquement (pas de corrélation par paire).
+                   Répond à : « quelles métriques ont changé récemment ? »
+
+Utilisez des intervalles GROUP BY time() identiques pour un meilleur alignement.
+
+IMPORTANT : les measurements par type d'action (ethernet_*, cellular_*, smartphone_*) ne contiennent que
+les données des tests utilisant ces types d'actions. Ce ne sont PAS des métriques d'infrastructure.
+Vérifiez quels monitors alimentent un measurement avant de corréler :
+  SHOW TAG VALUES FROM "&lt;measurement&gt;" WITH KEY = "monitoring_name"
+Pour comprendre ce que fait un monitor : ktm monitors list puis ktm monitors get --id &lt;id&gt;.
+Les measurements peuvent aussi contenir des données orphelines de monitors supprimés. Vérifiez la fraîcheur :
+  SELECT last(duration_seconds), time FROM "&lt;measurement&gt;"
+
+## Voir aussi
+
+- [`ktm metrics`](/fr/cli/commands/metrics)
+- [`ktm monitors list`](/fr/cli/commands/monitors/list)
+- [`ktm monitors get`](/fr/cli/commands/monitors/get)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

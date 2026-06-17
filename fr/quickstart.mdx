@@ -1,0 +1,73 @@
+---
+title: Créer un test
+description: Créez votre premier test, lancez-le et consultez le résultat, puis choisissez le canal qui vous convient.
+sidebarTitle: Créer un test
+---
+
+Chaque test dans Kapptivate suit la même boucle : créer un test, le lancer sur un agent, lire le résultat. Cette page présente cette boucle, puis vous oriente vers un guide spécifique à votre canal pour commencer avec le type de test qui vous intéresse.
+
+## La boucle
+
+<Steps>
+  <Step>
+    **Créez un test.** Ouvrez la section **Tests** de votre produit et cliquez sur **+ Create new test**. Choisissez un mode de création et un canal, puis nommez le test. Consultez [Créer un test](/fr/tests/create) pour le parcours complet.
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Dans le [test builder](/fr/tests/builder), enregistrez des interactions sur un appareil en direct ou ajoutez des steps manuellement, organisés en step groups. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le.** Cliquez sur **Run** sur la ligne du test, puis vérifiez la [confirmation d'exécution](/fr/executions/run) : ajustez l'appareil, les variables et les options, et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les captures d'écran par step, le temps d'exécution et les variables.
+  </Step>
+</Steps>
+
+## Choisissez votre canal
+
+<Columns cols={2}>
+  <Card title="Web" icon="globe" href="/fr/agents-devices/web-api">
+
+    Automatisez un test navigateur sur un site ou une application web
+
+</Card>
+  <Card title="API" icon="code" href="/fr/tests/actions/api/overview">
+
+    Validez des endpoints HTTP avec méthodes, headers, body et assertions sur la réponse
+
+</Card>
+  <Card title="Smartphone" icon="mobile-screen" href="/fr/agents-devices/smartphone">
+
+    Testez une application native Android ou iOS sur un appareil réel
+
+</Card>
+  <Card title="USSD" icon="sim-card" href="/fr/agents-devices/sim">
+
+    Lancez des flux USSD et SMS sur une vraie carte SIM
+
+</Card>
+</Columns>
+
+## Aller plus loin
+
+Une fois votre test exécuté :
+
+- **Organisez vos tests** en [collections](/fr/tests/overview) par fonctionnalité ou par équipe.
+- **Paramétrez vos tests** avec des [variables d'entrée](/fr/tests/configurations) pour lancer le même test avec des données différentes.
+- **Planifiez des exécutions** en [créant un monitor](/fr/monitoring/create) qui tourne en continu et vous alerte en cas d'échec.
+- **Intégrez avec le CI/CD** en utilisant des [clés API](/fr/administration/api-keys) pour déclencher des exécutions depuis votre pipeline.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Navigation" icon="compass" href="/fr/concepts/interface">
+
+    Familiarisez-vous avec la barre latérale, les workspaces et les produits
+
+</Card>
+  <Card title="Concepts clés" icon="lightbulb" href="/fr/concepts/core-concepts">
+
+    Comprenez les workspaces, produits, tests, exécutions et monitors
+
+</Card>
+</Columns>

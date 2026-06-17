@@ -1,0 +1,34 @@
+---
+title: Rapports par email
+description: Planifiez des rapports récurrents par email qui envoient des captures de dashboard à votre équipe.
+sidebarTitle: Rapports par email
+---
+
+![The Mail reports tab listing scheduled reports with their status, frequency, aggregation, and last sent time](/images/mail-reports.webp)
+
+Les parties prenantes ne devraient pas avoir besoin de se connecter pour savoir comment se porte la production. Les rapports par email envoient une capture de dashboard aux bonnes boîtes mail selon un calendrier, pour que la revue de service hebdomadaire ou le contrôle quotidien des opérations arrive tout seul. Ils se trouvent dans l'onglet **Mail reports** de la zone Analytics.
+
+## La liste des rapports
+
+Chaque rapport planifié affiche :
+
+- **Name** et le badge de statut **Active**.
+- **Frequency** : la fréquence d'envoi.
+- **Aggregation** : la granularité des données utilisée dans la capture.
+- **Last sent** et **Last updated** : temps relatifs pour confirmer la livraison et repérer les configurations obsolètes.
+- **Creator** : qui l'a configuré.
+
+Recherchez les rapports par nom, et utilisez le menu d'une ligne pour modifier, dupliquer ou supprimer un rapport.
+
+## Créer un rapport
+
+Cliquez sur **+ Create report** et configurez :
+
+- **Dashboard** : choisissez le dashboard à envoyer ; le sélecteur affiche vos collections et favoris.
+- **Name** : un nom descriptif pour référence interne.
+- **Frequency** : Daily, Weekly, Monthly ou Last 24 Hours, avec l'heure d'envoi.
+- **Aggregation** : la granularité des données, par exemple 1 heure.
+- **Timezone displayed** : le fuseau horaire utilisé pour les dates dans le rapport.
+- **Recipients** : choisissez une ou plusieurs adresses depuis la liste déroulante des utilisateurs du workspace.
+
+Si le dashboard utilise des variables, vous pouvez surcharger leurs valeurs par rapport, de sorte que différents groupes de destinataires reçoivent des vues personnalisées sans dupliquer le dashboard.

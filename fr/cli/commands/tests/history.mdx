@@ -1,0 +1,65 @@
+---
+title: "ktm tests history"
+description: "Lister l'historique des versions d'un test"
+sidebarTitle: "history"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister l'historique des versions d'un test
+
+## Utilisation
+
+```bash
+ktm tests history <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Lister l'historique des versions
+ktm tests history 16480
+
+# Filtrer par date
+ktm tests history 16480 --date 2026-03-06
+
+# Lister l'historique en tableau
+ktm tests history 16480 -o table
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--date` | string | — | Filtrer les entrées d'historique par date (YYYY-MM-DD) |
+
+## Détails
+
+Lister les entrées de l'historique des versions pour un test. Chaque entrée contient un identifiant d'historique
+qui peut être passé à 'ktm tests restore' pour revenir à cette version.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests restore`](/fr/cli/commands/tests/restore)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

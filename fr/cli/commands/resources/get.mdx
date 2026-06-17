@@ -1,0 +1,71 @@
+---
+title: "ktm resources get"
+description: "Obtenir les détails d'un smartphone spécifique par numéro de série/UUID"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les détails d'un smartphone spécifique par numéro de série/UUID
+
+## Utilisation
+
+```bash
+ktm resources get <serial> [flags]
+```
+
+## Exemples
+
+```bash
+# Obtenir les détails d'un smartphone
+ktm resources get R92Y70ZDMKH
+
+# Obtenir un smartphone avec les applications installées (pour la création de tests smartphone V2)
+ktm resources get R92Y70ZDMKH --include-apps
+
+# Obtenir un smartphone avec les applications au format tableau
+ktm resources get R92Y70ZDMKH --include-apps -o table
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `serial` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--include-apps` | boolean | — | Récupérer les applications installées sur l'appareil (pour la création de tests smartphone V2 : copier package vers starting.app, objet app vers meta) |
+
+## Détails
+
+Récupérer les détails d'un appareil smartphone par son numéro de série ou UUID.
+
+Utilisez --include-apps pour récupérer également la liste des applications installées sur l'appareil.
+La liste des applications installées correspond directement aux champs starting.app et meta du test V2 :
+  - copier package   vers starting.app
+  - copier l'objet app \{kind, name, label, package, version\} vers meta
+
+Pour trouver les numéros de série des smartphones, utilisez : ktm resources list --type smartphone
+
+## Voir aussi
+
+- [`ktm resources`](/fr/cli/commands/resources)
+- [`ktm resources list`](/fr/cli/commands/resources/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

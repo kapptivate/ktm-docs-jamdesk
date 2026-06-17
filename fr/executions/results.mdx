@@ -1,0 +1,54 @@
+---
+title: Consulter les résultats
+description: Consultez le résultat d'une exécution : steps, captures d'écran, vidéo et métadonnées.
+sidebarTitle: Résultats
+---
+
+![An execution result with the Steps, Screenshots, and Video tabs, top-right actions, and the metadata sidebar](/images/execution-details.webp)
+
+Le résultat d'une exécution montre exactement ce qui s'est passé pendant l'exécution d'un test : quels steps ont été exécutés, à quoi ressemblait l'écran à chaque étape, et les conditions d'exécution. C'est là qu'une ligne rouge dans la liste des exécutions se transforme en diagnostic exploitable.
+
+## La vue des résultats
+
+Ouvrez n'importe quelle exécution depuis la [liste des exécutions](/fr/executions/overview). La vue s'articule autour de :
+
+- **En-tête** : le nom de l'exécution (cliquez sur le crayon pour le renommer), son badge de statut et un bouton **Add tag(s)**.
+- **Actions en haut à droite** : **Edit related test** pour accéder au builder, **Export** pour télécharger un rapport, **Run again** pour relancer, et l'icône corbeille pour supprimer.
+- **Onglets** : Steps, Screenshots et Video.
+- **Barre latérale** : **About** (l'URL testée et qui a lancé l'exécution), **Execution details** (début, fin et durée), et **Conditions** (l'appareil et le browser preset utilisés).
+
+Les exécutions comportant plusieurs tests s'ouvrent dans la [vue multi-test](#exécutions-multi-test) à la place.
+
+## Steps
+
+L'onglet Steps est le compte-rendu détaillé de l'exécution, step par step. Chaque step affiche sa description, son statut et sa durée ; développez-le pour voir le **Result** avec une capture d'écran intégrée, l'élément avec lequel il a interagi mis en surbrillance.
+
+- **View artifacts** ouvre une fenêtre modale avec les logs et les images du step.
+- Cliquez sur une capture d'écran pour ouvrir un **carrousel plein écran** et parcourir visuellement l'exécution, step par step.
+- **Expert mode** (en haut à droite de l'onglet) révèle des détails techniques supplémentaires.
+
+## Captures d'écran
+
+L'onglet Screenshots rassemble toutes les captures d'écran prises pendant l'exécution, étiquetées avec le step qui les a produites, pour que vous puissiez corréler l'état visuel avec les steps du test. Cliquez sur une capture d'écran pour la voir en taille réelle.
+
+## Vidéo
+
+L'onglet Video rejoue l'intégralité de l'exécution, pour que vous puissiez regarder toute l'exécution en mouvement sans parcourir les steps un par un. Utilisez le bouton **Download** pour enregistrer la capture localement.
+
+## Exporter un rapport
+
+Cliquez sur **Export** (en haut à droite) pour télécharger un rapport de l'exécution. Une fenêtre modale vous permet de choisir le format, comme un rapport Excel, avant de l'enregistrer.
+
+## Exécutions multi-test
+
+Une exécution de [campaign](/fr/tests/suites), ou toute exécution comportant plusieurs tests, ouvre une vue conçue pour le batch : d'abord le résultat global, puis chaque test accessible en un clic.
+
+- **Compteurs de synthèse** en haut : Success executions, Failed executions, Unexecuted, et Total duration (décompte en temps réel tant que l'exécution est en cours).
+- Section **About** dans la barre latérale : la vue d'ensemble et un graphique **Execution time** traçant la durée de chaque test, pour que les tests lents ressortent.
+- Section **Tests** dans la barre latérale : chaque test de l'exécution ; cliquez sur l'un d'eux pour ouvrir ses résultats détaillés sans quitter l'exécution.
+
+Pour les tests API, les détails d'un step incluent l'échange HTTP, organisé en onglets **Headers**, **Body** et **Performance**.
+
+## Relancer
+
+**Run again** (en haut à droite) remet en file d'attente les mêmes tests avec la configuration actuelle. Pour relancer uniquement ce qui a échoué, utilisez **Rerun only failed tests** depuis le menu de la ligne dans la [liste des exécutions](/fr/executions/overview#actions-sur-les-lignes).

@@ -1,0 +1,54 @@
+---
+title: "toggle_monitors"
+description: "Activer ou désactiver plusieurs monitors en masse."
+sidebarTitle: "toggle_monitors"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Activer ou désactiver plusieurs monitors en masse.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Oui | true pour activer, false pour désactiver |
+| `monitor_ids` | string | Oui | Identifiants de monitors séparés par des virgules |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "monitor_ids": "string",
+  "active": false
+}
+```
+
+## Description
+
+```text
+Utilisez list_monitors pour trouver les identifiants. Si l'opération échoue avec HTTP 400, un ou plusieurs identifiants de monitors peuvent être invalides ou supprimés — vérifiez avec get_monitor. Pour un seul monitor, edit_monitor active= fonctionne aussi ; ceci est le chemin pour les opérations en masse.
+```
+
+## Associé
+
+- [`list_monitors`](/fr/mcp/tools/discovery/list_monitors)
+- [`get_monitor`](/fr/mcp/tools/monitor-management/get_monitor)
+- [`edit_monitor`](/fr/mcp/tools/monitor-management/edit_monitor)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

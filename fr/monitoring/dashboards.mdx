@@ -1,0 +1,61 @@
+---
+title: Dashboards
+description: Créez, organisez et partagez des dashboards personnalisés pour vos données de monitoring.
+sidebarTitle: Dashboards
+---
+
+![The Dashboards tab of the Analytics area, with collection folders, the dashboard list with source tags and favorites, and the Create buttons](/images/analytics-dashboards.webp)
+
+Les mêmes données de monitoring répondent à des questions différentes selon les personnes : un dirigeant veut une vue hebdomadaire de la santé du service, un ingénieur veut le nombre d'erreurs par test. Les dashboards vous permettent de composer exactement la vue dont chaque audience a besoin et de la garder à un clic. Ils se trouvent dans la zone **Analytics**, aux côtés des [métriques de tests](/fr/monitoring/tests-metrics), des [rapports par email](/fr/monitoring/mail-reports) et des [exports](/fr/monitoring/exports).
+
+## La liste des dashboards
+
+L'onglet Dashboards liste chaque dashboard du workspace :
+
+- **Name**, avec une étoile pour marquer les favoris ; les favoris sont triés en haut et sauvegardés dans vos préférences.
+- **Source** : des tags colorés montrant quels produits alimentent le dashboard (ou "All products").
+- **Last update** : date de dernière modification, en temps relatif.
+- **Creator** : le propriétaire.
+
+Recherchez les dashboards par nom avec la barre de recherche. Les dossiers de collections se trouvent au-dessus de la liste, avec **Trash**, **Create collection** et **+ Create dashboard** en haut à droite.
+
+## Organiser avec les collections
+
+Les collections sont des dossiers qui regroupent des dashboards associés par équipe, projet ou objectif. Cliquez sur **Create collection** pour en ajouter une, ouvrez une carte de dossier pour la parcourir, et utilisez **Move dashboard** depuis le menu d'une ligne pour classer un dashboard dans une collection.
+
+Les dashboards supprimés vont dans la collection **Trash**, où ils peuvent être restaurés ou supprimés définitivement.
+
+## Actions par ligne
+
+Chaque ligne de dashboard dispose d'un menu avec :
+
+- **Edit** : ouvrir le dashboard en mode édition.
+- **Put in favorites / Remove from favorites** : basculer l'étoile.
+- **Lock** : empêcher les modifications accidentelles ; les dashboards verrouillés affichent une icône de cadenas.
+- **Duplicate** : copier le dashboard comme point de départ.
+- **Move dashboard** : classer dans une collection.
+- **Share public link** : ouvrir la boîte de dialogue de partage.
+- **Delete** : déplacer vers la corbeille.
+
+## Créer un dashboard
+
+<Note>
+Si vous avez uniquement besoin d'analyses par moniteur, les [métriques de tests](/fr/monitoring/tests-metrics) fournissent déjà un dashboard prêt à l'emploi pour chaque moniteur, sans configuration.
+</Note>
+
+Cliquez sur **+ Create dashboard**, puis donnez-lui un **Dashboard name** et sélectionnez le **Bucket** qui fournit ses données. Ouvrez **Options** pour les paramètres avancés, puis cliquez sur **Add**.
+
+Le dashboard s'ouvre en mode édition, où vous le composez à partir de widgets :
+
+- **Types de widget** : Title, Counter, Pie, Area range, Line / Bar, Percentage area, Histogram, Table et Custom Display, tous disponibles depuis la barre d'outils.
+- **Barre du mode édition** : définissez l'intervalle d'agrégation, le fuseau horaire et la période (par exemple "Past 48h (Realtime)"), activez ou désactivez la légende, puis cliquez sur **Save** ou **Cancel**.
+- **Variables** : créez des champs texte, des listes déroulantes ou des listes à sélection multiple pour que les lecteurs puissent filtrer les données dynamiquement ; chaque widget utilisant une variable se met à jour lorsque sa valeur change.
+
+## Partager un dashboard
+
+Partagez un dashboard avec des personnes qui n'ont pas de compte Kapptivate. Choisissez **Share public link** depuis le menu de la ligne :
+
+- **Public link** : définissez un mot de passe (au moins 8 caractères, obligatoire), puis cliquez sur **Generate share link** et envoyez le lien vous-même.
+- **Send by email** : saisissez l'adresse du destinataire et le mot de passe, et Kapptivate envoie le lien protégé directement.
+
+Les visiteurs obtiennent une vue en lecture seule ; consultez [Dashboards publics](/fr/monitoring/public-dashboards) pour savoir ce qu'ils peuvent et ne peuvent pas faire.

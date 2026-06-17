@@ -1,0 +1,52 @@
+---
+title: "ktm test-campaigns creators"
+description: "Lister les créateurs distincts de Tests campaigns (pour filtrer la liste)"
+sidebarTitle: "creators"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les créateurs distincts de Tests campaigns (pour filtrer la liste)
+
+## Utilisation
+
+```bash
+ktm test-campaigns creators [flags]
+```
+
+## Exemples
+
+```bash
+ktm test-campaigns creators --product acme~web
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug ou short_name de l'operator |
+| `--product` | string | — | Slug ou short_name du produit |
+
+## Détails
+
+Retourne l'ensemble unique des utilisateurs ayant créé des Tests campaigns dans
+le périmètre donné (produit ou operator). Utilisez-le pour alimenter le filtre par créateur.
+
+## Voir aussi
+
+- [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,59 @@
+---
+title: "list_test_campaigns"
+description: "Liste les test campaigns accessibles avec la clé API actuelle."
+sidebarTitle: "list_test_campaigns"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les test campaigns accessibles avec la clé API actuelle.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `creator` | string | Non | Filtrer par identifiant(s) d'utilisateur créateur, séparés par des virgules |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de lignes compactes (défaut : false) |
+| `ids` | string | Non | Identifiants de test campaigns séparés par des virgules |
+| `page` | number | Non | Numéro de page (défaut 1) |
+| `page_size` | number | Non | Éléments par page (défaut 50, max 4000) |
+| `product` | string | Non | Filtrer par slug de produit ou short_name (liste séparée par des virgules acceptée) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "creator": "string",
+  "detail": false
+}
+```
+
+## Description
+
+```text
+A Tests campaign is a SAVED, ordered pack of tests attached to a single product — use it to group regression scenarios, smoke packs, or anything you run as one unit. To run one: build_campaign(test_campaign_id=<id>) → run_campaign(overrides=…).
+
+Returns compact one-liners by default (`"#42 Regression pack [8 tests, valid]"`). detail=true returns the full Tests campaign including the test_list.
+```
+
+## Associés
+
+- [`build_campaign`](/fr/mcp/tools/execution/build_campaign)
+- [`run_campaign`](/fr/mcp/tools/execution/run_campaign)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

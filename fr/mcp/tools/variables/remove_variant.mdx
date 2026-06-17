@@ -1,0 +1,51 @@
+---
+title: "remove_variant"
+description: "Supprimer un variant d'un groupe de variables."
+sidebarTitle: "remove_variant"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Supprimer un variant d'un groupe de variables.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Oui | Doit être true pour confirmer la suppression |
+| `force` | boolean | Non | Contourner la vérification de sécurité des valeurs non-défaut (false par défaut) |
+| `group_id` | number | Oui | Identifiant du groupe de variables |
+| `variant_id` | number | Oui | Identifiant du variant à supprimer |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "group_id": 0,
+  "variant_id": 0,
+  "acknowledge": false
+}
+```
+
+## Description
+
+```text
+Sécurisé par défaut : refuse si une variable du groupe possède une valeur non-défaut pour ce variant. La réponse nomme les variables qui perdraient des données. force=true contourne la vérification de sécurité.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

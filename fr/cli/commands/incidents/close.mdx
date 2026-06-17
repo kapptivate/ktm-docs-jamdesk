@@ -1,0 +1,54 @@
+---
+title: "ktm incidents close"
+description: "Fermer un incident actif (définit le statut à MANUALLY_CLOSED)"
+sidebarTitle: "close"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Fermer un incident actif (définit le statut à MANUALLY_CLOSED)
+
+## Utilisation
+
+```bash
+ktm incidents close [flags]
+```
+
+## Exemples
+
+```bash
+# Close an active incident
+ktm incidents close --operator my-operator --id 99
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | ID de l'incident à fermer (depuis 'incidents list') |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Fermer un incident par ID. Le statut de l'incident passe à MANUALLY_CLOSED.
+
+Utilisez 'incidents list --status OPEN' pour trouver les incidents actifs.
+
+## Voir aussi
+
+- [`ktm incidents`](/fr/cli/commands/incidents)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

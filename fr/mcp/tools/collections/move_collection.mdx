@@ -1,0 +1,51 @@
+---
+title: "move_collection"
+description: "Déplace une collection sous un nouveau parent."
+sidebarTitle: "move_collection"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplace une collection sous un nouveau parent.
+
+<Info>
+  **Écrit des données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialise le budget d'édition après approbation de l'utilisateur pour des mutations supplémentaires |
+| `new_parent_uid` | string | Oui | UID de la collection parente cible |
+| `operator` | string | Oui | Slug de l'operator |
+| `uid` | string | Oui | UID de la collection à déplacer |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "uid": "string",
+  "new_parent_uid": "string"
+}
+```
+
+## Description
+
+```text
+Cycles are rejected server-side.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

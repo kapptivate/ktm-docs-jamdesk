@@ -1,0 +1,51 @@
+---
+title: "rename_variant"
+description: "Renommer un variant dans un groupe de manière atomique."
+sidebarTitle: "rename_variant"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renommer un variant dans un groupe de manière atomique.
+
+<Info>
+  **Écriture de données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `group_id` | number | Oui | Identifiant du groupe de variables |
+| `name` | string | Oui | Nouveau nom du variant |
+| `variant_id` | number | Oui | Identifiant du variant |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "group_id": 0,
+  "variant_id": 0,
+  "name": "string"
+}
+```
+
+## Description
+
+```text
+Les valeurs de variables existantes restent attachées à l'identifiant du variant (le renommage ne concerne que le nom).
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

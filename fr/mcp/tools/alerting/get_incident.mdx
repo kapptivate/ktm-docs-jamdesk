@@ -1,0 +1,53 @@
+---
+title: "get_incident"
+description: "Obtenir un incident par son identifiant, incluant ses tags, statut, niveau de sévérité, durée et la définition d'alert qui l'a déclenché."
+sidebarTitle: "get_incident"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir un incident par son identifiant, incluant ses tags, statut, niveau de sévérité, durée et la définition d'alert qui l'a déclenché.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `incident_id` | number | Oui | Identifiant de l'incident |
+| `operator` | string | Oui | Slug de l'opérateur (requis pour le périmètre de permissions) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "incident_id": 0
+}
+```
+
+## Description
+
+```text
+Les identifiants proviennent de list_incidents ; clôturez avec close_incident.
+```
+
+## Associé
+
+- [`list_incidents`](/fr/mcp/tools/alerting/list_incidents)
+- [`close_incident`](/fr/mcp/tools/alerting/close_incident)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

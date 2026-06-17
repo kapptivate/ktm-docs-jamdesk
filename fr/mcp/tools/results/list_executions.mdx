@@ -1,0 +1,54 @@
+---
+title: "list_executions"
+description: "Liste les exécutions de test récentes pour un produit."
+sidebarTitle: "list_executions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les exécutions de test récentes pour un produit.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `creator` | string | Non | Filtrer par nom d'utilisateur du créateur, l'utilisateur ou le compte de service qui a déclenché l'exécution. |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de résumés compacts (défaut : false) |
+| `from_date` | string | Non | N'inclure que les exécutions créées après cette date (format ISO 8601, ex. 2025-01-15T00:00:00Z). Combinez avec to_date pour des plages temporelles. |
+| `page` | number | Non | Numéro de page (défaut : 1). Utilisez avec page_size pour naviguer dans de grands ensembles de résultats. |
+| `page_size` | number | Non | Nombre d'exécutions à renvoyer (défaut : 10, max : 200). Utilisez des valeurs plus petites pour un aperçu récent, plus grandes pour une analyse historique. |
+| `product` | string | Oui | Slug du produit (format : operator~product). Obtenez les slugs disponibles depuis list_products. Exemple : 'my-operator~my-product'. |
+| `search` | string | Non | Recherche texte libre parmi les noms et tags d'exécution (correspondance de sous-chaîne insensible à la casse). |
+| `status` | string (success \| failed \| ongoing \| pending \| canceled \| timed out \| maintenance) | Non | Filtrer par statut d'exécution. Omettez pour tout renvoyer. |
+| `to_date` | string | Non | N'inclure que les exécutions créées avant cette date (format ISO 8601). Combinez avec from_date pour des plages temporelles. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List recent test executions for a product. Each execution is a campaign run containing one or more tests with status, pass/fail counts, creator, and timestamps.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

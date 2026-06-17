@@ -1,0 +1,71 @@
+---
+title: Fill input
+sidebarTitle: Saisie de texte
+description: Saisir du texte dans un champ de l'application.
+---
+
+Saisissez du texte dans un champ de l'application. La valeur peut mélanger du texte fixe, des variables et des données générées, pour que le même step puisse se connecter avec un compte enregistré ou s'inscrire avec un email aléatoire à chaque exécution.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel du champ. L'IA l'utilise pour trouver l'élément. |
+| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Valeur | `value` | Oui | Texte à saisir. Supporte les variables et les fonctions comme le texte aléatoire. |
+| Utilisation de l'IA | `ai_strategy` | Non | `inherit` (par défaut, suit la stratégie du test), `smart` ou `always`. |
+| Activer l'IA | `enable_ai` | Non | Lorsque désactivé, seul le selector manuel est utilisé. Par défaut : activé. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "input",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The email field of the login form" } }]
+    },
+    "value": [
+      { "type": "value", "data": { "value": "qa+" } },
+      { "type": "test_variable", "data": { "name": "UserId" } },
+      { "type": "value", "data": { "value": "@example.com" } }
+    ],
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+L'exemple de `value` ci-dessus mélange du texte brut avec une variable de test. Consultez [Variables](/fr/tests/variables) pour tout ce que vous pouvez insérer : variables de test, variables globales et fonctions comme le texte aléatoire.
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
+- **Capture d'écran** : prise après l'exécution du step.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Hide keyboard" icon="keyboard" href="/fr/tests/actions/smartphone/hidekeyboard">
+
+    Masquer le clavier après la saisie
+
+</Card>
+  <Card title="Variables" icon="brackets-curly" href="/fr/tests/variables">
+
+    Tout ce que vous pouvez insérer dans la valeur : variables, texte aléatoire, et plus
+
+</Card>
+</Columns>

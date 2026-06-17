@@ -1,0 +1,58 @@
+---
+title: Smartphone
+description: Tests d'applications natives Android et iOS sur de vrais devices, exécutés par le Smartphone agent.
+sidebarTitle: Smartphone
+---
+
+![Le constructeur de tests smartphone : une action Launch app suivie d'un groupe de steps tap, fill-input et assert-displayed, avec une capture de référence et un selector d'élément pour le step sélectionné](/images/smartphone-test-builder.webp)
+
+Le channel Smartphone teste des applications mobiles natives sur de vrais devices Android et iOS. Les tests interagissent avec les applications comme le ferait un utilisateur : tap, saisie de texte, swipe et vérification des éléments d'interface. Ils s'exécutent sur le **Smartphone agent**, un contrôleur qui gère les devices connectés.
+
+## Démarrage rapide
+
+Créez votre premier test smartphone en quatre étapes.
+
+<Steps>
+  <Step>
+    **Créez le test.** Ouvrez la section **Tests** de votre produit, cliquez sur **+ Create new test** et choisissez **Smartphone (New experience)**. Nommez le test et sélectionnez l'application installée à lancer par son nom de package (Android) ou bundle ID (iOS).
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Dans le builder, enregistrez des interactions sur l'appareil en direct ou ajoutez des actions smartphone manuellement : tap sur un élément, remplissage d'un input, swipe, attente et assert qu'un élément est affiché. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le sur un appareil.** Cliquez sur **Run** dans le builder pour le regarder en direct, ou sur **Run** sur la ligne du test, puis confirmez l'appareil et les variables sur la page de [confirmation d'exécution](/fr/executions/run) et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les captures d'écran par step et le temps d'exécution.
+  </Step>
+</Steps>
+
+## Tests smartphone
+
+**Point de départ :** spécifiez l'application par son nom de package (Android) ou son bundle ID (iOS), ainsi que des métadonnées comme le nom et la version de l'application.
+
+**Gestion des applications :** Kapptivate peut lister les applications installées et réinitialiser une application avant chaque exécution de test.
+
+**Actions courantes :** tap sur des éléments, saisie de texte, swipe, attente d'éléments, vérification de l'existence d'un texte ou d'un élément, ouverture ou fermeture d'applications, et navigation entre les écrans.
+
+## Devices
+
+Vrais devices Android et iOS (physiques ou virtuels) connectés à un Smartphone agent. Chaque device rapporte :
+
+- UUID et nom (par défaut : fabricant et modèle)
+- Type de device (Android ou iOS)
+- Fabricant, modèle, version SDK, résolution d'écran
+- Gateway (l'agent qui le contrôle)
+- Statut d'itinérance par SIM installée
+- Applications installées
+- Utilisation CPU et réseau sur 24 heures
+
+## Le Smartphone agent
+
+Un contrôleur qui gère de vrais devices Android et iOS.
+
+- Exécute des tests sur des applications natives Android et iOS
+- Capture les propriétés des devices (fabricant, modèle, version SDK, résolution d'écran)
+- Peut réinitialiser les applications avant chaque exécution de test
+
+Consultez les [Statuts](/fr/equipment/statuses) pour les états des agents et des devices, ainsi que le suivi d'utilisation sur 24 heures.

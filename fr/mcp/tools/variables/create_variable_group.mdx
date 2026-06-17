@@ -1,0 +1,51 @@
+---
+title: "create_variable_group"
+description: "Créer un nouveau groupe de variables avec ses variants en un seul appel."
+sidebarTitle: "create_variable_group"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau groupe de variables avec ses variants en un seul appel.
+
+<Info>
+  **Écriture de données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `name` | string | Oui | Nom du groupe (par ex. "Environments") |
+| `product` | string | Oui | Slug du produit |
+| `variant_names` | string | Oui | Noms des variants séparés par des virgules (par ex. "Dev,Staging,Prod") |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "variant_names": "string"
+}
+```
+
+## Description
+
+```text
+variant_names est une liste séparée par des virgules (par ex. "Dev,Staging,Prod"). Le PREMIER variant devient le variant par défaut selon la convention de la plateforme. Gérez ensuite les variants via les outils variants_*.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

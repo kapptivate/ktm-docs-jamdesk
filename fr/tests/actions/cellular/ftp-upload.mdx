@@ -1,0 +1,64 @@
+---
+title: FTP Upload
+description: Envoyez un fichier généré via FTP et mesurez le débit montant.
+---
+
+Envoyez un fichier d'une taille choisie vers un serveur FTP via la connexion data de la SIM et mesurez le débit montant.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Lien d'envoi | `command.upload_link` | Oui | URL FTP de destination. |
+| Taille du fichier | `command.file_size_in_byte` | Oui | Taille du contenu généré, en octets. |
+| Identifiants FTP | `command.ftp_username`, `command.ftp_password` | Non | Login pour le serveur FTP. |
+| L'envoi doit échouer | `expect_failure` | Non | Inverse le verdict. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_FTP_UPLOAD",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "upload_link": "ftp://files.example.com/incoming/",
+    "file_size_in_byte": 5000000,
+    "ftp_username": "test",
+    "ftp_password": "secret",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) : `throughput_in_kbps`, `md5sum`, `dns_server` et `duration` en secondes.
+
+Dans Analytics, chaque exécution alimente la mesure FTP upload avec `throughput_kbps` et `duration_seconds`, étiquetée par statut, URL, APN, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="FTP Download" icon="cloud-arrow-down" href="/fr/tests/actions/cellular/ftp-download">
+
+    La direction descendante
+
+</Card>
+  <Card title="HTTP Upload" icon="cloud-arrow-up" href="/fr/tests/actions/cellular/http-upload">
+
+    L'équivalent HTTP
+
+</Card>
+</Columns>

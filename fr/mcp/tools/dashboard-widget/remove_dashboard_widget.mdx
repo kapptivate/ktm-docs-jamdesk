@@ -1,0 +1,55 @@
+---
+title: "remove_dashboard_widget"
+description: "Retirer un widget d'un dashboard par son identifiant de widget."
+sidebarTitle: "remove_dashboard_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Retirer un widget d'un dashboard par son identifiant de widget.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Définir à true après que l'utilisateur approuve la poursuite au-delà de la limite d'édition. |
+| `dashboard_uid` | string | Oui | UID du dashboard |
+| `widget_id` | string | Oui | Identifiant du widget à retirer (le champ 'i' depuis le layout de get_dashboard) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "dashboard_uid": "string",
+  "widget_id": "string"
+}
+```
+
+## Description
+
+```text
+Les positions des widgets restants sont préservées.
+
+Workflow : get_dashboard → remove_dashboard_widget → get_dashboard (vérifier).
+```
+
+## Associé
+
+- [`get_dashboard`](/fr/mcp/tools/dashboard/get_dashboard)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

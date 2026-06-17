@@ -1,0 +1,54 @@
+---
+title: Créer et modifier des rôles
+description: Consultez les rôles par défaut, créez des rôles personnalisés avec des permissions spécifiques et modifiez les rôles existants.
+---
+
+![La liste des rôles affichant les rôles par défaut Administrateur, Bêta testeur, Rapporteur, Superviseur et Testeur, avec un bouton Créer un rôle](/images/roles-list.webp)
+
+Kapptivate fournit des rôles système par défaut que vous pouvez consulter comme référence, et vous permet de créer des rôles personnalisés avec n'importe quelle combinaison de permissions adaptée à votre workspace.
+
+## Consulter les rôles par défaut
+
+Les rôles par défaut sont fournis par le système et sont en lecture seule. Tous les workspaces disposent des mêmes rôles par défaut.
+
+Pour consulter les rôles par défaut :
+
+1. Allez dans Administration > Rôles
+2. Parcourez la liste pour voir les rôles par défaut et les rôles personnalisés
+3. Cliquez sur un rôle par défaut pour l'ouvrir ; ses permissions sont affichées dans un panneau latéral en lecture seule avec la mention "Ceci est un rôle par défaut et ne peut pas être modifié"
+
+Les rôles par défaut ne peuvent pas être modifiés, mais vous pouvez les utiliser comme référence lors de la création de rôles personnalisés.
+
+## Créer un rôle personnalisé
+
+Les rôles personnalisés vous permettent de définir exactement quelles permissions les utilisateurs et les équipes doivent avoir. Vous pouvez assigner des permissions dans n'importe quelle combinaison pertinente pour votre workspace.
+
+Pour créer un rôle personnalisé :
+
+1. Allez dans Administration > Rôles
+2. Cliquez sur "+ Créer un rôle" pour ouvrir la fenêtre "Créer un nouveau rôle"
+3. Saisissez un nom de rôle
+4. Dans la liste des permissions :
+   - Dépliez chaque groupe ; les en-têtes portent un préfixe "Voir" ("Voir Admin Opérateur", "Voir Événements", "Voir Tests manuels", "Voir Tests automatisés", "Voir Supervision", "Voir Analytique", "Voir Fonctionnalités bêta")
+   - Cochez les permissions "Voir" pour les fonctionnalités que les utilisateurs doivent voir
+   - Cochez les permissions "Modifier" pour les fonctionnalités que les utilisateurs doivent modifier
+5. Cliquez sur "Créer le rôle"
+
+N'oubliez pas que Modifier implique Voir, vous n'avez pas besoin de cocher les deux manuellement. Lorsque vous cochez Modifier, Voir est automatiquement activé.
+
+## Modifier un rôle personnalisé
+
+Vous pouvez modifier les permissions de n'importe quel rôle personnalisé que vous avez créé. Les rôles par défaut ne peuvent pas être modifiés.
+
+Pour modifier un rôle personnalisé :
+
+1. Allez dans Administration > Rôles
+2. Cliquez sur le nom du rôle pour ouvrir l'éditeur
+3. Mettez à jour les permissions selon vos besoins
+4. Cliquez sur "Enregistrer"
+
+Vos modifications prennent effet immédiatement pour tous les utilisateurs et équipes ayant ce rôle.
+
+<Warning>
+Si vous décochez une permission Voir, la permission Modifier correspondante est automatiquement décochée. Évaluez l'impact sur les utilisateurs avant de retirer des permissions d'un rôle.
+</Warning>

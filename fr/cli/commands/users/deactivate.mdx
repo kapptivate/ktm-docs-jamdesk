@@ -1,0 +1,54 @@
+---
+title: "ktm users deactivate"
+description: "Désactiver un compte utilisateur"
+sidebarTitle: "deactivate"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Désactiver un compte utilisateur
+
+## Utilisation
+
+```bash
+ktm users deactivate [flags]
+```
+
+## Exemples
+
+```bash
+# Désactiver l'utilisateur avec l'identifiant 42
+ktm users deactivate --id 42
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | Identifiant de l'utilisateur à désactiver (depuis 'users list') |
+
+## Détails
+
+Désactiver un compte utilisateur par identifiant. Nécessite la permission superadmin ou EDIT_OPERATOR_ADMIN.
+
+Utilisez 'users list' pour trouver les identifiants d'utilisateurs.
+
+## Voir aussi
+
+- [`ktm users`](/fr/cli/commands/users)
+- [`ktm users list`](/fr/cli/commands/users/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,63 @@
+---
+title: Double click
+sidebarTitle: Double clic
+description: Double-cliquer sur un élément localisé par une description IA ou un selector manuel.
+---
+
+Double-cliquez sur un élément : ouvrir un élément dans une liste de type gestionnaire de fichiers, passer une cellule en mode édition, ou déclencher tout gestionnaire lié à l'événement double-clic.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
+| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS, utilisé quand l'IA est désactivée ou comme selector enregistré. |
+| Utilisation de l'IA | `ai_strategy` | Non | `inherit` (par défaut, suit la stratégie du test), `smart` ou `always`. |
+| Activer l'IA | `enable_ai` | Non | Quand désactivé, seul le selector manuel est utilisé. Par défaut : activé. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le scénario JSON
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "double-click",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The Q3 report row in the documents table" } }]
+    },
+    "enable_ai": true,
+    "ai_strategy": "inherit",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Temps d'exécution** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
+- **Capture d'écran** : prise après le double-clic.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Click" icon="arrow-pointer" href="/fr/tests/actions/web/click">
+
+    La variante simple clic, pour la plupart des interactions
+
+</Card>
+  <Card title="Sélecteurs IA" icon="sparkles" href="/fr/ai/selectors">
+
+    Comment les descriptions d'éléments, les selectors enregistrés et les stratégies IA fonctionnent ensemble
+
+</Card>
+</Columns>

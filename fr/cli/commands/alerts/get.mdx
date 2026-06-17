@@ -1,0 +1,54 @@
+---
+title: "ktm alerts get"
+description: "Obtenir les détails d'une définition d'alerte"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les détails d'une définition d'alerte
+
+## Utilisation
+
+```bash
+ktm alerts get [flags]
+```
+
+## Exemples
+
+```bash
+# Get alert definition details
+ktm alerts get --id 42
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | ID de la définition d'alerte (depuis 'alerts list') |
+
+## Détails
+
+Obtenir une seule définition d'alerte par ID, incluant sa configuration et ses paramètres de notification.
+
+Utilisez 'alerts list' pour trouver les ID des définitions d'alertes.
+
+## Voir aussi
+
+- [`ktm alerts`](/fr/cli/commands/alerts)
+- [`ktm alerts list`](/fr/cli/commands/alerts/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

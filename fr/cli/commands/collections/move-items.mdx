@@ -1,0 +1,61 @@
+---
+title: "ktm collections move-items"
+description: "Déplacer des tests/dashboards dans une collection cible"
+sidebarTitle: "move-items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplacer des tests/dashboards dans une collection cible
+
+## Utilisation
+
+```bash
+ktm collections move-items [flags]
+```
+
+## Exemples
+
+```bash
+# Discover item UIDs under the source collection, then move one into another.
+ktm collections items --operator my-op <src_uid> -o json | jq -r '.[0].uid'
+ktm collections move-items --operator my-op --target <dst_uid> --items "<item_uid>"
+
+# Batch move
+ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<uid2>,<uid3>"
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--items` | string | — | UID d'éléments séparés par des virgules (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--target` | string | — | UID de la collection de destination (requis) |
+
+## Détails
+
+Déplace des éléments entre collections en un seul appel. --items prend une
+liste d'UID d'éléments de collection séparés par des virgules (PAS l'ID numérique du test ; utilisez
+'ktm collections items &lt;src_uid&gt;' pour découvrir les UID). Le service déplace
+chaque élément listé dans --target de manière atomique.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+- [`ktm collections items`](/fr/cli/commands/collections/items)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

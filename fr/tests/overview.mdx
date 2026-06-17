@@ -1,0 +1,112 @@
+---
+title: Vue d'ensemble des tests
+description: Organisez, recherchez et gérez vos tests automatisés.
+sidebarTitle: Liste des tests
+---
+
+![La vue d'ensemble des tests : une collection de tests dans un tableau avec les colonnes nom, tags, statut, dernière mise à jour et créateur, plus un bouton Run par test et l'action Create new test](/images/tests-overview.webp)
+
+Les tests sont des scénarios automatisés qui vérifient vos canaux Web, Smartphone et Cellulaire. Cette page explique comment organiser les tests en collections, les rechercher et les filtrer, et exécuter des actions groupées sur plusieurs tests à la fois.
+
+## Collections
+
+Les tests sont regroupés dans des collections, des dossiers organisés hiérarchiquement sous une collection racine. Naviguez entre les collections grâce au fil d'Ariane en haut de la page, et cliquez sur **Create collection** pour en ajouter une.
+
+Chaque carte de collection dispose d'un menu à trois points avec **Rename**, **Duplicate**, **Move collection** et **Delete**. Les tests dans une collection vide affichent une invitation à créer votre premier test. Lorsque vous supprimez un test, il est déplacé dans une collection corbeille où vous pouvez le restaurer ou le supprimer définitivement.
+
+## Rechercher des tests
+
+Utilisez la barre de recherche pour trouver des tests par nom. Les résultats se mettent à jour au fil de la saisie. Filtrez les tests par statut (Draft, In Progress, Approved ou Deprecated), par tags ou par créateur. Tous les filtres sont conservés dans l'URL, ce qui vous permet de sauvegarder et de partager des vues filtrées. Le **sélecteur de produit** dans la barre latérale limite l'affichage à un espace produit, pour ne voir que les collections et tests de ce produit.
+
+## Tableau des tests
+
+La liste des tests affiche des colonnes pour le nom, le statut, la dernière mise à jour et le créateur, avec un bouton **Run** à la fin de chaque ligne. La colonne nom affiche :
+
+- Une icône étoile pour mettre un test en favori ; les favoris sont épinglés en haut de la liste
+- Une icône de verrou si un autre utilisateur est en train de modifier le test
+- Des icônes de validité (cercle rouge si le test lui-même est invalide ; triangle rouge s'il dépend d'un test invalide)
+- Des tags avec code couleur
+
+Le badge **Status** est aussi un menu déroulant : cliquez dessus pour changer le statut du test en Draft, In progress, Approved ou Deprecated directement, sans ouvrir l'éditeur.
+
+Cliquez sur le nom d'un test pour le modifier. Les noms grisés ou désactivés indiquent que vous ne pouvez pas modifier ce test (généralement parce qu'un autre utilisateur l'a verrouillé).
+
+## Actions sur les lignes
+
+Chaque ligne de test dispose d'un menu à trois points couvrant les opérations courantes :
+
+- **Edit** : ouvrir le test dans le builder.
+- **Add to / Remove from favorites** et **Add tag(s)** : la fenêtre des tags permet d'attribuer des tags existants avec code couleur ou d'en créer de nouveaux.
+- **Lock** : protéger le test contre les modifications.
+- **Duplicate** et **Create copy in other product**.
+- **Move test** : choisir une collection de destination dans une arborescence de dossiers avec recherche.
+- **Run now** et **Create monitor**.
+- **Replace existing test** : voir ci-dessous.
+- **Delete** : envoyer le test à la corbeille. La suppression est bloquée tant qu'un monitor utilise le test ; le menu explique pourquoi.
+- **View connections** : voir de quoi dépend le test et ce qui l'utilise.
+
+## Remplacer un test
+
+Lorsqu'une copie remaniée est prête à prendre le relais de l'original (un parcours reconstruit, une v2), vous n'avez pas besoin de recâbler les monitors ou les campagnes. Ouvrez le menu du nouveau test, choisissez **Replace existing test**, et sélectionnez le test à remplacer. La case **Delete source test** (cochée par défaut) supprime la copie désormais redondante après le remplacement.
+
+## Actions groupées
+
+Sélectionnez un ou plusieurs tests en cochant la case à côté de chaque nom. Un bandeau bleu apparaît en haut avec les actions suivantes :
+
+- **Change Status** : définir tous les tests sélectionnés en Draft, In Progress, Approved ou Deprecated. Désactivé si un test est verrouillé.
+- **Duplicate** : créer des copies des tests sélectionnés dans la même collection.
+- **Copy to Product** : exporter les tests vers un autre produit. Désactivé si un test est un reusable component.
+- **Move** : déplacer les tests sélectionnés vers une autre collection. Désactivé si un test est verrouillé.
+- **Favorite / Unfavorite** : basculer le statut favori sur tous les tests sélectionnés.
+- **Create Monitors** : convertir les tests sélectionnés en tâches de monitoring. Un seul test redirige directement ; plusieurs tests ouvrent une fenêtre pour choisir lesquels surveiller.
+- **Delete** : envoyer les tests sélectionnés à la corbeille. Désactivé si verrouillé.
+- **Add to Run Queue** : mettre les tests sélectionnés en file d'attente pour une exécution immédiate. Désactivé si un test est invalide.
+
+Appuyez sur ESC pour effacer votre sélection.
+
+## Validité des tests et dépendances
+
+Une icône de cercle rouge à côté du nom d'un test signifie que le test lui-même présente un problème (step invalide, configuration manquante). Un triangle rouge signifie que le test dépend d'un autre test qui est invalide. Les tests avec des problèmes de validité ne peuvent pas être exécutés, le bouton Run est désactivé.
+
+## Statut de verrouillage
+
+Lorsque vous ouvrez un test pour le modifier, il est verrouillé pour empêcher les modifications simultanées par plusieurs utilisateurs. Une icône de verrou apparaît à côté du nom du test, et une infobulle indique qui l'a verrouillé. Les autres utilisateurs ne peuvent pas modifier, déplacer, dupliquer ou changer le statut d'un test verrouillé tant que vous n'avez pas fermé l'éditeur.
+
+## Campagnes de test
+
+Regroupez plusieurs tests dans une campagne pour les exécuter ensemble avec des paramètres partagés ou personnalisés. Les campagnes vous permettent de remplacer les variables, les URL de départ et les browser presets par test, puis de les exécuter en batch. Consultez [Campagnes de test](/fr/tests/suites) pour les créer et les lancer.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Créer un test" icon="square-plus" href="/fr/tests/create">
+
+    Démarrez un nouveau test pour Web, Smartphone ou Cellulaire
+
+</Card>
+  <Card title="Campagnes de test" icon="layer-group" href="/fr/tests/suites">
+
+    Regroupez des tests et exécutez-les en un seul batch
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Créez des steps, des vérifications et des variables dans l'éditeur visuel
+
+</Card>
+  <Card title="Exécuter un test" icon="play" href="/fr/executions/run">
+
+    Lancez des tests à la demande et suivez-les en direct
+
+</Card>
+  <Card title="Créer des tests depuis le CLI" icon="terminal" href="/fr/cli/guides/create-tests">
+
+    Générez, validez et créez des tests avec ktm au lieu de l'interface
+
+</Card>
+  <Card title="Serveur MCP" icon="robot" href="/fr/mcp/overview">
+
+    Laissez un assistant IA créer et gérer vos tests pour vous
+
+</Card>
+</Columns>

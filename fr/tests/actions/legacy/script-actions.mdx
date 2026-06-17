@@ -1,0 +1,154 @@
+---
+title: Actions script
+description: Écrivez des tests complets en JavaScript avec Mocha et WebdriverIO, la méthode originale pour créer des scénarios avancés.
+---
+
+<Danger>
+  **Déprécié.** Les actions script sont un héritage. Les actions existantes continuent de fonctionner, mais pour les nouveaux tests préférez le [constructeur visuel](/fr/tests/builder). Migrez dès que possible.
+</Danger>
+
+Les actions script sont des tests écrits entièrement en JavaScript. Elles précèdent le constructeur visuel de tests et restent largement utilisées pour les scénarios avancés. Les actions script existantes continuent de fonctionner et peuvent toujours être modifiées ; pour les nouveaux tests, préférez le [constructeur visuel](/fr/tests/builder) et utilisez les scripts quand vous avez besoin d'une logique que le constructeur ne peut pas exprimer.
+
+<Note>
+  JavaScript est le seul langage de script activement supporté. Les actions script Python et l'action interpréteur JavaScript sont dépréciées : les existantes fonctionnent toujours, mais aucune nouvelle ne peut être créée. Migrez-les vers JavaScript quand vous les modifiez.
+</Note>
+
+## Types d'actions
+
+Les actions script se divisent en deux familles :
+
+- **Actions avec propriétaire** s'exécutent sur un vrai appareil (le propriétaire) : tests web, application Android, web Android, application iOS et scripts web iOS.
+- **Actions sans propriétaire** ne s'exécutent sur aucun appareil. Utilisez-les pour la logique pure : transformer le résultat d'un appel API, calculer des valeurs entre les actions.
+
+Sous le capot, elles combinent [WebdriverIO](https://webdriver.io) (actions avec propriétaire uniquement), [Mocha](https://mochajs.org) et [Chai](https://www.chaijs.com).
+
+## Structure de base
+
+Chaque script suit la structure BDD de Mocha. Chaque bloc `it` devient une étape dans les résultats.
+
+```javascript
+describe('My test suite', function () {
+  // Variables shared by multiple steps can be declared here.
+  it('My test step #1', function () {
+    // Actions for this step.
+  });
+  it('My test step #2', function () {
+    // Actions for this step.
+  });
+});
+```
+
+Gardez autant de code que possible dans les blocs `it`. Les deux exceptions : déclarer des variables partagées entre les étapes, et les hooks Mocha (ci-dessous).
+
+## Paramètres
+
+Chaque action script partage :
+
+| Paramètre | Description |
+|-----------|-------------|
+| Nom | Optionnel. Affiché en haut des résultats. |
+| Description | Optionnel. Affiché dans l'onglet Résumé. |
+| Ignorer les erreurs | Quand coché, le script continue après une étape en échec au lieu de s'arrêter. |
+
+Les actions avec propriétaire ajoutent **Utiliser des capacités personnalisées** : un objet JSON fusionné dans les capacités WebdriverIO. Par exemple, pour accepter les certificats TLS invalides dans un script web :
+
+```json
+{ "acceptInsecureCerts": true }
+```
+
+Par type d'appareil :
+
+| Type d'action | Paramètres supplémentaires |
+|---------------|---------------------------|
+| Application Android | Package de l'application (`appPackage`), Activité de l'application (`appActivity`), Réinitialiser l'application (`noReset`) |
+| Application iOS | Bundle ID (`bundleId`), Réinitialiser l'application |
+
+## Logs, échecs et messages d'erreur
+
+`console.log(...)` apparaît dans l'onglet **System-out** des résultats de l'étape, `console.error(...)` dans **System-err**.
+
+Pour faire échouer une étape, lancez une exception :
+
+```javascript
+it('Step 2', function () {
+  throw new Error("This step should fail with this error message.");
+});
+```
+
+Pour contrôler le message d'erreur qu'une étape rapporte, appelez `test.errorMessage.set("...")` avant l'échec (fonctionne aussi depuis un hook `beforeEach`). Évitez de lancer des exceptions dans les hooks `after` ou `afterEach`.
+
+## Hooks
+
+Tous les hooks de Mocha sont supportés : `before` (une fois, avant la suite), `beforeEach`, `afterEach` et `after`. Dans les hooks, `this.currentTest.title` et `this.currentTest.state` vous permettent de réagir par étape :
+
+```javascript
+describe('My suite', function () {
+  beforeEach(function () {
+    test.errorMessage.set(`${this.currentTest.title} failed`);
+  });
+  afterEach(function () {
+    if (this.currentTest.title === "Step 3") {
+      test.variables.set("STEP_3_SUCCEEDED", this.currentTest.state !== 'failed');
+    }
+  });
+  it('Step 3', function () {
+    // ...
+  });
+});
+```
+
+## Pauses
+
+Utilisez `test.pause(milliseconds)`. La convention d'appel diffère selon la famille, et les deux ne sont pas interchangeables :
+
+- **Sans propriétaire** : marquez l'étape `async` et utilisez `await` : `await test.pause(1000);`
+- **Avec propriétaire** : appelez-la de manière synchrone : `test.pause(1000);`
+
+## Minuteurs
+
+Chaque script inclut un `Timer` simple pour mesurer les durées, typiquement pour alimenter les [métriques personnalisées](/fr/tests/actions/legacy/script-actions-variables) :
+
+```javascript
+it('Measure something', function () {
+  const timer = new Timer();      // starts immediately
+  // ... actions to measure ...
+  const duration = timer.stop();  // seconds
+  console.log(`duration = ${duration}s`);
+});
+```
+
+Un minuteur expose `start()`, `stop()` (retourne la durée), `getDuration()` (lecture sans arrêt, comme un bouton de tour) et `reset()`. Déclarez-le en dehors des blocs `it` pour le réutiliser entre les étapes.
+
+## Assertions
+
+- **Chai** est inclus partout. Préférez l'API `should`, ou utilisez `assert` : `variable.should.be.a("string")`, `assert.typeOf(variable, 'string')`.
+- **`expect` est celui de WebdriverIO** [expect-webdriverio](https://webdriver.io/docs/api/expect-webdriverio) sur les actions avec propriétaire, la méthode recommandée pour faire des assertions sur les éléments : `await expect($('#title')).toBeDisplayed()`. L'API `expect` de Chai n'est pas incluse, pour garder le mot-clé sans ambiguïté.
+
+## Bibliothèques incluses
+
+Disponibles sans import : **Lodash** (`_`), **Moment.js** (`moment`), **Moment Timezone**, **Chai** et **xml-js** (`xml2json(xml, {compact: true})`, pratique pour les réponses API XML). Les actions avec propriétaire incluent aussi le `expect` de WebdriverIO.
+
+## Helpers d'appareil
+
+Sur les actions avec propriétaire, quelques helpers Kapptivate étendent l'API WebdriverIO :
+
+- `driver.screenshot(title)` : prendre une capture d'écran supplémentaire en cours d'étape, en plus des captures automatiques.
+- `driver.scrollIntoView(value, { approach, direction })` : défiler vers le `haut`/`bas`/`gauche`/`droite` jusqu'à ce qu'un élément soit visible, en le localisant par `text` (par défaut), `description` ou `xpath`.
+- `driver.getSMS(number, message)` : dans les scripts web et web mobile, attendre un SMS sur une SIM de la plateforme et retourner son contenu ; combinez avec `driver.extractOTP(message)` pour en extraire un code.
+
+Les helpers spécifiques aux smartphones (mode avion, événements d'appareil, appels, audio) ont [leur propre page](/fr/tests/actions/legacy/script-actions-smartphone).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Helpers smartphone" icon="mobile-screen" href="/fr/tests/actions/legacy/script-actions-smartphone">
+
+    Mode avion, événements d'appareil, appels et audio dans les scripts
+
+</Card>
+  <Card title="Variables, métriques et artefacts" icon="brackets-curly" href="/fr/tests/actions/legacy/script-actions-variables">
+
+    Échangez des données avec le test et alimentez Analytics depuis un script
+
+</Card>
+</Columns>

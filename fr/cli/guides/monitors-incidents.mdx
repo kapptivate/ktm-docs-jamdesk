@@ -1,0 +1,56 @@
+---
+title: Monitors et incidents
+description: Créez et contrôlez des monitors planifiés, puis triez les incidents depuis le terminal.
+sidebarTitle: Monitors et incidents
+---
+
+Un monitor exécute un test selon un planning. Quand une exécution surveillée enfreint une règle d'alerte, elle déclenche un incident. Les deux sont scriptables depuis le CLI, ce qui convient à l'automatisation d'astreinte et aux dashboards.
+
+## Créer et contrôler les monitors
+
+```bash
+# Planifier un monitor pour un test (définir la cadence avec --scheduling ; voir le lien ci-dessous)
+ktm monitors create --product acme~web --test-id 16480 --variant "API:Prod" --scheduling "<schedule>" --start
+
+# Lister, forcer une exécution immédiate, mettre en pause ou reprendre en masse
+ktm monitors list --operator acme -o table
+ktm monitors force-run <monitor-id>
+ktm monitors toggle --ids 12,13 --active false
+```
+
+Voir [Planification](/fr/monitoring/scheduling) pour le format de cadence et [Monitoring](/fr/monitoring/overview) pour les concepts.
+
+## Trier les incidents
+
+```bash
+# Aperçu rapide : compteurs ouverts / avertissement / fermés
+ktm incidents counter --operator acme
+
+# Lister les incidents ouverts, puis en inspecter un
+ktm incidents list --operator acme --status OPEN
+ktm incidents get --operator acme --id 4567
+
+# Le fermer une fois traité
+ktm incidents close --operator acme --id 4567
+```
+
+## Voir les exécutions récentes d'un monitor
+
+```bash
+ktm monitoring-results list --product acme~web --monitoring-id <monitor-id>
+```
+
+<Tip>
+  Le CLI vous indique *qu'*un monitor a échoué. Pour comprendre *pourquoi* en langage naturel, le serveur MCP est généralement plus rapide : demandez à votre assistant « pourquoi le monitor 4521 a-t-il échoué, et qu'est-ce qui a changé ? » Voir [Exemples MCP](/fr/mcp/examples).
+</Tip>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Exemples MCP" icon="robot" href="/fr/mcp/examples">
+    Investiguer les échecs en langage naturel.
+  </Card>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/monitors">
+    Toutes les commandes monitors et incidents.
+  </Card>
+</Columns>

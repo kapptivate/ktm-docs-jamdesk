@@ -1,0 +1,56 @@
+---
+title: "ktm shell types"
+description: "Lister les types d'action shell disponibles"
+sidebarTitle: "types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les types d'action shell disponibles
+
+## Utilisation
+
+```bash
+ktm shell types [flags]
+```
+
+## Exemples
+
+```bash
+ktm shell types                  # toutes les actions shell
+ktm shell types --owner-kind S   # actions SIM uniquement (17)
+ktm shell types --owner-kind E   # actions Ethernet uniquement (13)
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--owner-kind` | string | — | Filtrer par type de propriétaire : S (SIM) ou E (Ethernet) |
+
+## Détails
+
+Afficher les types d'action utilisables en mode shell.
+
+Les actions shell sont un sous-ensemble sélectionné du catalogue complet d'actions : seules les opérations
+directes sur l'appareil/le réseau (USSD, ping, HTTP API, etc.) sont incluses.
+Les actions d'exécution de scripts et de contrôle de tests sont exclues.
+
+## Voir aussi
+
+- [`ktm shell`](/fr/cli/commands/shell)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

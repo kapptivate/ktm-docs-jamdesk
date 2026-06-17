@@ -1,0 +1,182 @@
+---
+title: Test builder
+description: Créez des tests visuellement en enregistrant des interactions ou en ajoutant des steps manuellement, puis affinez-les avec des vérifications, des sélecteurs IA et des hooks.
+---
+
+![L'onglet Environment avec l'URL de départ, l'appareil et le browser preset](/images/builder-environment.webp)
+
+Le test builder est l'endroit où vous concevez ce que fait votre test. Enregistrez des interactions réelles depuis un navigateur ou un appareil, ou ajoutez des steps manuellement, puis organisez-les en groupes, vérifiez le comportement avec des checks, et ajustez l'exécution avec les sélecteurs IA, les timeouts et les hooks.
+
+## Le builder en un coup d'oeil
+
+Le canevas à gauche affiche votre test : le point de départ en haut, suivi des step groups contenant des steps numérotés. Le panneau à droite comporte quatre onglets :
+
+- **Preview** : retours d'exécution et captures d'écran
+- **Environment** : paramètres d'exécution (URL de départ, appareil, browser preset)
+- **Test settings** : description, tags, IA, timeouts et hooks
+- **Version history** : versions précédentes du test
+
+Sélectionner un step dans le canevas remplace le panneau par les détails de ce step.
+
+## Point de départ
+
+Le premier bloc du canevas définit où le test commence. Il dépend du canal :
+
+- **Tests Web** : **Navigate to starting page** avec une URL (par ex. `https://example.com/login`)
+- **Tests Smartphone** : **Launch app** avec l'application sélectionnée à la création
+
+## Enregistrement des interactions
+
+L'enregistrement est le moyen le plus rapide de construire un test : interagissez avec votre site ou application comme le ferait un utilisateur, et chaque action devient un step.
+
+### Web : l'extension Kompagnon
+
+Les tests Web s'enregistrent via **Kompagnon**, une extension Chrome. La première fois que vous cliquez sur **Use recorder**, le builder vous invite à l'ajouter à Chrome.
+
+Avec l'extension installée, **Use recorder** ouvre votre URL de départ dans un nouvel onglet avec le widget du recorder superposé.
+
+Naviguez normalement : les clics, saisies et navigations sont capturés comme des steps en temps réel. Quand vous arrêtez, les steps enregistrés apparaissent dans votre canevas de steps, prêts à être modifiés.
+
+### Ajouter des assertions pendant l'enregistrement
+
+Vous pouvez ajouter des vérifications sans quitter le recorder. Cliquez sur l'icône en forme d'oeil dans le widget pour entrer en mode assertion, puis cliquez sur n'importe quel élément de la page pour le vérifier.
+
+L'assertion est enregistrée comme un step aux côtés de vos interactions.
+
+### Smartphone : recorder cloud
+
+Les tests Smartphone s'enregistrent via un recorder basé sur le cloud au lieu d'une extension de navigateur : vous pilotez l'appareil réel depuis votre navigateur et vos taps, saisies et scrolls deviennent des steps.
+
+## Ajouter des steps manuellement
+
+Cliquez sur **Add step...** en bas d'un step group pour insérer un step sans enregistrement. Un menu avec recherche organise les actions par catégorie : **Most popular**, **Interactions**, **Email & SMS**, **Verifications**, **Navigation**, **Wait for...** et **Others**. Choisissez l'action, puis configurez sa cible et sa valeur. Consultez la [Bibliothèque d'actions](/fr/tests/actions/overview) pour tous les steps disponibles.
+
+Le menu contextuel de chaque step vous permet de le modifier, le dupliquer ou le supprimer, et vous pouvez glisser les steps pour les réordonner.
+
+## Step groups
+
+Les steps sont organisés en groupes nommés. Utilisez-les pour structurer votre test par parcours ou fonctionnalité : un groupe de connexion, un groupe de recherche, un groupe de paiement.
+
+Le menu du groupe (le bouton **...** dans l'en-tête du groupe) propose :
+
+- **Move up / Move down** : changer l'ordre d'exécution
+- **Duplicate** : copier le groupe et ses steps
+- **Create reusable component** : publier le groupe dans la bibliothèque de composants
+- **Delete** : supprimer le groupe et ses steps
+- **Add custom capabilities** : attacher des capabilities au groupe
+
+### Transformer un groupe en reusable component
+
+**Create reusable component** enregistre le groupe dans la bibliothèque de composants de votre produit pour que d'autres tests puissent l'utiliser. Le groupe devient violet pour indiquer qu'il est désormais un composant partagé. Pour le reconvertir en steps classiques dans ce test, utilisez **Detach reusable component**.
+
+Pour en savoir plus, consultez [Reusable components](/fr/tests/reusable-components).
+
+## Détails d'un step
+
+Sélectionnez un step pour ouvrir son panneau de détails, organisé en trois onglets : **General**, **Checks** et **Advanced settings**.
+
+### General
+
+- **Selector** : comment le step trouve son élément cible (XPath ou texte). Le bouton `{}` insère des variables.
+- **Timeout** : durée d'attente pour l'élément (par ex. 20 secondes)
+- **AI usage** : paramètres IA par step (voir ci-dessous)
+
+Pour les steps smartphone déjà exécutés, le panneau affiche aussi une **Reference screenshot** : l'état de l'application capturé à ce step lors de la dernière exécution, pour voir exactement ce que le step cible. Les sélecteurs smartphone proposent un basculement **Selector** / **Coords** pour cibler par élément ou par coordonnées.
+
+### Checks
+
+Les checks vérifient que votre test se comporte comme prévu à un step donné. Ajoutez-en un depuis l'onglet **Checks** et configurez :
+
+- **Entity** : ce qu'il faut vérifier, comme `url`, `loading_time` ou `step_duration`
+- **Operator** : comment comparer (`=`, `!=`, `>`, `<`, `contains`, etc.)
+- **Value** : le résultat attendu, qui peut inclure des variables
+- **Status** : `error` fait échouer le test, `warning` journalise et continue
+- **Logical operator** : combiner plusieurs checks avec `and` ou `or`
+
+Les checks peuvent être regroupés et imbriqués pour des conditions complexes, par exemple "(URL contains 'dashboard') AND (loading_time < 2000)". Les steps avec des checks affichent un tag dans le canevas, comme **URL contains**.
+
+### Advanced settings
+
+- **Ignore error on this step** : un échec ici ne fait pas échouer le test
+- **Skip during run** : conserver le step mais ne pas l'exécuter
+- **Interval** : pause après le step, en millisecondes
+- **Capabilities** : attacher des capabilities personnalisées au step
+
+## Sélecteurs IA
+
+L'IA aide à trouver des éléments de manière fiable lorsque les sélecteurs sont fragiles, comme sur des pages dynamiques ou après des changements d'interface.
+
+Activez **Turn on AI for this step** dans l'onglet General du step. Le champ selector obtient une bordure dégradée, et vous choisissez une stratégie :
+
+- **Smart** : utilise l'IA pour trouver l'élément lors de la première exécution ou lorsque le selector enregistré échoue, puis met en cache le résultat pour gagner du temps
+- **Always** : force l'IA à redétecter l'élément cible à chaque exécution, en ignorant les sélecteurs enregistrés
+- **On demand** : l'IA reste désactivée par défaut ; vous l'activez manuellement sur chaque step qui en a besoin
+
+**Link to test** lie le step au paramètre IA au niveau du test au lieu d'un remplacement par step. Le toggle et la stratégie au niveau du test se trouvent dans **Test settings > AI**. Pour une vue complète de ce que fait l'IA sur la plateforme, consultez [L'IA dans Kapptivate](/fr/ai/overview).
+
+## Environment
+
+L'onglet **Environment** contient les paramètres d'exécution :
+
+- **Starting URL** : où le test commence
+- **Device** : l'agent ou l'appareil sur lequel le test s'exécute
+- **Browser preset** : la configuration du navigateur pour les tests web (par ex. "Chrome (Desktop, Chrome 143.0)"). Cliquez dessus pour choisir parmi vos [browser presets](/fr/tests/browser-presets) enregistrés.
+
+## Test settings
+
+L'onglet **Test settings** rassemble tout ce qui s'applique à l'ensemble du test :
+
+- **Description** : notes optionnelles sur ce que fait le test
+- **Tags** : étiquettes pour organiser et filtrer les tests
+- **AI** : le toggle IA et la stratégie au niveau du test
+- **Delays & timeouts** : **Step delay** (pause entre les steps, en secondes) et **Selector timeout** (attente maximale pour un élément, en secondes)
+- **Hooks** : step groups de cycle de vie (voir ci-dessous)
+- **Advanced** : options comme l'acceptation des certificats non sécurisés
+
+### Hooks
+
+Les hooks exécutent un reusable component à des moments précis du cycle de vie du test :
+
+- **Before Test** : une fois, avant tous les steps (par ex. un flux de connexion)
+- **Before Each Step** : avant chaque step
+- **After Each Step** : après chaque step
+- **After Test** : une fois, après tous les steps (par ex. déconnexion ou nettoyage)
+
+Activez un hook et la **Reusable steps group library** s'ouvre pour que vous puissiez choisir quel composant exécuter.
+
+## Variables
+
+Cliquez sur le bouton `{}` dans n'importe quel champ texte (selector, valeur, URL) pour insérer une variable : des valeurs provenant de steps précédents, des données aléatoires générées, ou vos variables configurées. Vous pouvez mélanger du texte littéral et des variables dans un même champ, par exemple `https://example.com/{userId}`.
+
+Consultez [Variables dans les tests](/fr/tests/variables) pour le sélecteur complet, et [Configurations et variables](/fr/tests/configurations) pour les variables et groupes au niveau produit.
+
+## Sauvegarde et exécution
+
+**Save** enregistre vos modifications ; **Save and run** met aussi une exécution en file d'attente immédiatement (ou appuyez sur `Cmd+Enter` / `Ctrl+Enter`). Les fonctions annuler et rétablir fonctionnent avec les raccourcis habituels `Cmd+Z` / `Cmd+Shift+Z`.
+
+L'onglet **Version history** liste les versions précédentes du test. Ouvrez-en une et cliquez sur **Restore** pour la restaurer.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Live session" icon="satellite-dish" href="/fr/tests/live-session">
+
+    Pilotez un appareil réel de manière interactive et enregistrez un parcours dans un test
+
+</Card>
+  <Card title="Reusable components" icon="puzzle-piece" href="/fr/tests/reusable-components">
+
+    Construisez un flux une seule fois et partagez-le entre vos tests
+
+</Card>
+  <Card title="Exécuter un test" icon="play" href="/fr/executions/run">
+
+    Exécutez votre test manuellement et consultez les résultats
+
+</Card>
+  <Card title="Browser presets" icon="globe" href="/fr/tests/browser-presets">
+
+    Configurations de navigateur réutilisables pour vos tests web
+
+</Card>
+</Columns>

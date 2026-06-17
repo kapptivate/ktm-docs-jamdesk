@@ -1,0 +1,110 @@
+---
+title: Créer des tests depuis le CLI
+description: Générer, remplir, valider et créer des tests API, web, app et USSD/SMS avec ktm.
+sidebarTitle: Créer des tests
+---
+
+`ktm` crée des tests à partir d'une définition JSON, ce qui rend la création de tests scriptable et naturellement adaptée à la CI et aux agents de codage IA comme Claude Code ou Codex. Le flux est identique pour chaque canal : générer un template pour les types d'actions nécessaires, remplir les champs, valider, puis créer.
+
+## Le flux
+
+<Steps>
+  <Step title="Parcourir les types d'actions">
+    `ktm tests action-types` liste tous les types (44 répartis entre API, web, smartphone et SIM) avec leur canal.
+  </Step>
+  <Step title="Générer un template">
+    `ktm tests template <TYPE...> > test.json` écrit une action par type, avec des valeurs de substitution `<...>`.
+  </Step>
+  <Step title="Remplir les champs">
+    Définissez la requête/URL, les assertions et l'`owner` de chaque action (un identifiant d'appareil).
+  </Step>
+  <Step title="Valider">
+    `ktm tests validate --from-file test.json` vérifie la définition sans la créer.
+  </Step>
+  <Step title="Créer">
+    `ktm tests create --from-file test.json --product my-operator~my-product`.
+  </Step>
+</Steps>
+
+<Tip>
+  L'`owner` d'une action prend un identifiant d'appareil depuis `ktm resources list` : agents web par nom d'hôte (`--type web-agent`), SIM par MSISDN (`--type sim`), smartphones par UUID (`--type smartphone`). Les actions sans propriétaire (`JAVASCRIPT`, `SLEEP`) utilisent `""`.
+</Tip>
+
+## Par canal
+
+Choisissez le type d'action correspondant au scénario. Parcourez l'ensemble complet avec `ktm tests action-types`, et définissez les détails des étapes depuis la [Bibliothèque d'actions](/fr/tests/actions/overview).
+
+<Tabs>
+<Tab title="API (HTTP)">
+
+```bash
+ktm tests template ETH_HTTP_API > api_test.json
+# fill in url, method, assertions...
+ktm tests create --from-file api_test.json --product my-operator~my-product
+```
+
+`ETH_HTTP_API` envoie une requête HTTP et vérifie le statut, les en-têtes ou le corps JSON. Voir [Scénarios API](/fr/tests/actions/api/overview).
+
+</Tab>
+<Tab title="Web (navigateur)">
+
+```bash
+ktm tests template ETH_WEB_SCRIPT_V2 > web_test.json
+ktm tests create --from-file web_test.json --product my-operator~my-product
+```
+
+`ETH_WEB_SCRIPT_V2` est le type d'automatisation web no-code (clics, saisies, assertions). Voir [Étapes web](/fr/tests/actions/web/click).
+
+</Tab>
+<Tab title="Application smartphone">
+
+```bash
+ktm tests template SMARTPHONE_APP_SCRIPT_V2 > app_test.json
+ktm tests create --from-file app_test.json --product my-operator~my-product
+```
+
+`SMARTPHONE_APP_SCRIPT_V2` est le type d'automatisation d'application no-code pour Android et iOS (taps, saisies). Voir [Étapes smartphone](/fr/tests/actions/smartphone/tap).
+
+</Tab>
+<Tab title="USSD / SMS">
+
+```bash
+# A USSD flow that waits for a confirmation SMS (3 steps)
+ktm tests template USSD USSD SMS_GET > sim_test.json
+ktm tests create --from-file sim_test.json --product my-operator~my-product
+```
+
+Les types SIM incluent `USSD`, `USSD_PUSH`, `SMS_GET` et `SMS_SEND`. USSD et SMS valident via `expected_result.message` (le texte littéral attendu), et non via des assertions. Voir [Étapes SIM](/fr/tests/cellular).
+
+</Tab>
+</Tabs>
+
+## Tests multi-étapes
+
+Passez plusieurs types d'actions pour générer une séquence qui s'exécute de haut en bas :
+
+```bash
+# Authenticated API flow: call, process the response, call again
+ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_flow.json
+```
+
+Utilisez une action `JAVASCRIPT` entre les appels API pour construire un corps de requête ou transformer des données avec `test.variables.get()` / `set()`.
+
+## Fixer un environnement
+
+Les tests résolvent la valeur de chaque variable par variant. Fixez le variant d'un groupe à la création (les autres utilisent leur défaut) :
+
+```bash
+ktm tests create --from-file test.json --product acme~web --variant API:Staging
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Construire et exécuter des campagnes" icon="play" href="/fr/cli/guides/run-campaigns">
+    Transformez vos tests en campagne exécutable et lisez les résultats.
+  </Card>
+  <Card title="Bibliothèque d'actions" icon="bolt" href="/fr/tests/actions/overview">
+    Définissez les détails des étapes pour chaque canal.
+  </Card>
+</Columns>

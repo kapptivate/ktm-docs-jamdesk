@@ -1,0 +1,48 @@
+---
+title: "ktm agents get"
+description: "Obtenir les informations détaillées d'un agent avec ses slots"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les informations détaillées d'un agent avec ses slots
+
+## Utilisation
+
+```bash
+ktm agents get [flags]
+```
+
+## Exemples
+
+```bash
+ktm agents get --uuid abc-123 --type cellular
+ktm agents get --uuid def-456 --type ethernet
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--type` | string | — | Type d'agent : cellular, ethernet, smartphone (requis) |
+| `--uuid` | string | — | UUID de l'agent (requis) |
+
+## Voir aussi
+
+- [`ktm agents`](/fr/cli/commands/agents)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

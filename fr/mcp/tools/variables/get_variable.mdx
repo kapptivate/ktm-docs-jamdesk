@@ -1,0 +1,49 @@
+---
+title: "get_variable"
+description: "Récupérer une variable unique avec toutes ses valeurs par variant."
+sidebarTitle: "get_variable"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupérer une variable unique avec toutes ses valeurs par variant.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `variable_id` | number | Oui | Identifiant de la variable |
+| `with_usage` | boolean | Non | Si true, enrichit la réponse avec la liste des tests utilisant cette variable. False par défaut. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "variable_id": 0
+}
+```
+
+## Description
+
+```text
+Les secrets restent masqués.
+
+Compact par défaut, renvoie uniquement la variable. Définissez with_usage=true pour inclure également la liste des tests qui la référencent ; la réponse est alors structurée en {variable, usage}.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

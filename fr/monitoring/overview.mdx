@@ -1,0 +1,97 @@
+---
+title: Vue d'ensemble des moniteurs
+description: Transformez vos tests en supervision continue de la production et suivez leur état de santé.
+sidebarTitle: Liste des moniteurs
+---
+
+![The Monitors list with health counter cards, last 5 runs squares, frequency, and device chips](/images/monitors-list.webp)
+
+Un moniteur est un test automatisé promu depuis l'espace Tests vers la supervision continue de la production. Les moniteurs s'exécutent selon un calendrier récurrent avec un suivi de statut en temps réel et des capacités d'alerte. Utilisez la liste des moniteurs pour visualiser tous vos moniteurs, leur état de santé et les résultats d'exécution récents.
+
+## La liste des moniteurs
+
+La liste des moniteurs affiche chaque moniteur de votre produit. Chaque ligne présente l'**ID**, le **Statut**, les **5 dernières exécutions**, la **Fréquence** et l'**Appareil** du moniteur. Survolez un chip d'appareil pour voir sa machine hôte et la version du navigateur. Recherchez par nom ou ID de moniteur, ou filtrez par test.
+
+Depuis la liste, vous pouvez exécuter un moniteur immédiatement, le mettre en pause ou le reprendre, modifier sa configuration ou le dupliquer. Utilisez la sélection multiple pour mettre en pause, reprendre, modifier la planification, changer d'appareil ou supprimer plusieurs moniteurs à la fois.
+
+## Cartes de synthèse
+
+Les cartes compteurs en haut de la liste des moniteurs fournissent un aperçu instantané de l'état de santé :
+
+| Carte | Ce qu'elle affiche |
+|-------|-------------------|
+| **Daily active monitors** | Nombre total de moniteurs actifs (non mis en pause) |
+| **Up** | Moniteurs dont la dernière exécution a réussi |
+| **Device issue** | Moniteurs avec des appareils indisponibles ou mal configurés |
+| **Down** | Moniteurs dont la dernière exécution a échoué |
+| **Paused** | Moniteurs actuellement en pause et non exécutés |
+
+## Statuts des moniteurs
+
+Chaque moniteur affiche un statut unique qui reflète son état de santé et d'activité :
+
+| Statut | Signification |
+|--------|---------------|
+| **up** | Le moniteur est actif et la dernière exécution a réussi |
+| **degraded** | Le moniteur est actif mais la dernière exécution a généré des avertissements ou des problèmes mineurs |
+| **down** | Le moniteur est actif et la dernière exécution a échoué |
+| **paused** | Le moniteur est en pause (inactif) et ne s'exécute pas selon son calendrier |
+| **running** | Le moniteur est en cours d'exécution d'un test |
+| **scheduled** | Le moniteur est actif et attend sa prochaine exécution planifiée |
+
+## 5 dernières exécutions
+
+La colonne **Last 5 runs** affiche les exécutions les plus récentes sous forme de carrés colorés, vert pour les succès et rouge pour les échecs. Cliquez sur un carré pour ouvrir la modale "Monitoring results" : elle affiche le résultat de l'exécution, ses onglets **Steps** (avec les durées) et **Video**, ainsi que **Open details** pour accéder au résultat complet et **Edit related test** pour corriger le scénario.
+
+## Actions par ligne
+
+Chaque ligne de moniteur dispose d'un menu à trois points avec les actions suivantes :
+
+| Action | Ce qu'elle fait |
+|--------|----------------|
+| **View analytics** | Ouvrir la page de détails du moniteur pour consulter les analyses et l'historique d'exécution |
+| **Edit monitor** | Ouvrir le formulaire pour modifier le nom, les appareils, la planification et les options du moniteur |
+| **Duplicate** | Cloner le moniteur ; vous pouvez le renommer et réattribuer les appareils avant de sauvegarder |
+| **Edit related test** | Naviguer vers le test sur lequel ce moniteur est basé |
+| **Edit frequency** | Modifier la planification du moniteur sans ouvrir le formulaire complet |
+| **Edit device** | Changer l'appareil attribué (disponible uniquement pour les moniteurs avec un seul appareil) |
+| **Pause / Unpause** | Désactiver ou réactiver temporairement le moniteur |
+| **Force run** | Exécuter le moniteur immédiatement, quel que soit son calendrier |
+| **Activate test-only mode** | Suspendre le calendrier automatisé tout en permettant les déclenchements manuels depuis l'interface ou le CI/CD |
+
+Pour supprimer des moniteurs, utilisez la sélection multiple et le bandeau d'actions groupées.
+
+## Actions groupées
+
+Activez le mode sélection multiple et cochez les moniteurs que vous souhaitez traiter. Un bandeau apparaît en bas avec les actions suivantes :
+
+- **Edit Frequency** : mettre à jour la planification de tous les moniteurs sélectionnés en une seule fois
+- **Edit Device** : changer l'appareil attribué (uniquement si tous les moniteurs sélectionnés utilisent exactement un appareil chacun, du même type)
+- **Pause** : mettre en pause tous les moniteurs sélectionnés
+- **Unpause** : reprendre tous les moniteurs sélectionnés
+- **Delete** : supprimer tous les moniteurs sélectionnés
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Créer un moniteur" icon="square-plus" href="/fr/monitoring/create">
+
+    Transformez un test en moniteur, seul ou en lot
+
+</Card>
+  <Card title="Détails du moniteur" icon="chart-line" href="/fr/monitoring/monitor-details">
+
+    Consultez la disponibilité, le temps d'exécution et les échecs quotidiens
+
+</Card>
+  <Card title="Planification" icon="clock" href="/fr/monitoring/scheduling">
+
+    Contrôlez la fréquence et les horaires d'exécution d'un moniteur
+
+</Card>
+  <Card title="Alertes" icon="bell" href="/fr/monitoring/alerts">
+
+    Définissez quand les moniteurs lèvent des incidents et qui est notifié
+
+</Card>
+</Columns>

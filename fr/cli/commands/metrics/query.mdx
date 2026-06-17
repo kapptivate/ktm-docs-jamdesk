@@ -1,0 +1,125 @@
+---
+title: "ktm metrics query"
+description: "Exécuter une requête InfluxQL brute sur la base de métriques de l'opérateur"
+sidebarTitle: "query"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Exécuter une requête InfluxQL brute sur la base de métriques de l'opérateur
+
+## Utilisation
+
+```bash
+ktm metrics query [flags]
+```
+
+## Exemples
+
+```bash
+# Discover available measurements
+ktm metrics query --operator acme --query "SHOW MEASUREMENTS"
+
+# Explore fields in a measurement
+ktm metrics query --operator acme --query "SHOW FIELD KEYS FROM \"test\""
+
+# Success Rate over last 24h grouped by 5 minutes
+ktm metrics query --operator acme --query "SELECT sum(\"number_success\")/(sum(\"number_success\")+sum(\"number_failed\"))*100 AS \"Success Rate (%)\" FROM \"test\" WHERE time > now() - 24h GROUP BY time(5m)"
+
+# Platform activity events over last 24h
+ktm metrics query --operator acme --query "SELECT * FROM \"event\" WHERE time >= '2026-02-17T00:00:00Z' AND time <= '2026-02-18T00:00:00Z' ORDER BY time DESC LIMIT 50"
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--executive` | boolean | — | Résumé exécutif d'une ligne par série (implique --summary) |
+| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--precision` | string | — | Précision temporelle de la requête (s, ms, u, ns) |
+| `--query` | string | — | Chaîne de requête InfluxQL |
+| `--summary` | boolean | — | Exécuter une analyse statistique et afficher un résumé formaté |
+
+## Détails
+
+Exécuter une requête InfluxQL brute contre le proxy de métriques.
+
+Les monitors Kapptivate génèrent des métriques KPI dans InfluxDB. Chaque exécution de monitor écrit des points
+de données dans plusieurs measurements selon les types d'actions du test.
+
+Patterns de measurements courants (commencez par SHOW MEASUREMENTS pour découvrir ce qui est disponible) :
+  - "test"           — KPI au niveau test : number_success, number_failed, number_total, duration_seconds (toujours présent pour tout test monitoré)
+  - "action"         — données d'exécution par étape, field : duration_seconds (une ligne par action dans un test)
+  - "event"          — aperçu d'activité de la plateforme : connexions, exécutions de tests déclenchées, actions utilisateur. Essentiel pour les rapports d'utilisation. Utilisez SHOW FIELD KEYS FROM "event" pour découvrir les fields. Le field metadata peut contenir du JSON.
+  - "cellular_*"     — KPI des actions SIM (uniquement les tests avec des types d'actions SIM)
+  - "smartphone_*"   — KPI des actions smartphone (uniquement les tests avec des types d'actions smartphone)
+  - "ethernet_*"     — KPI des actions web agent (uniquement les tests avec des types d'actions ethernet)
+  - "kcollector_*"   — données passives collectées depuis les systèmes IT des clients
+
+IMPORTANT : Chaque measurement par type d'action (cellular_*, ethernet_*, smartphone_*, web_browsing*)
+ne contient que les données des tests qui UTILISENT ce type d'action. Ce ne sont PAS des métriques d'infrastructure.
+Par exemple, ethernet_http_api ne contient des données que si un test contient une action ETH_HTTP_API.
+Avant de corréler, vérifiez quels monitors alimentent un measurement :
+  SHOW TAG VALUES FROM "&lt;measurement&gt;" WITH KEY = "monitoring_name"
+Pour investiguer un monitor : ktm monitors list puis ktm monitors get --id &lt;id&gt;
+puis voir test_id, scheduling, variables. Si non trouvé, le monitor a été supprimé (données historiques).
+Pour voir la définition du test : ktm tests get --id &lt;test_id&gt; (depuis le monitor).
+Pour filtrer les requêtes par monitor : utilisez "monitoring_id" ou "monitoring_name" dans les clauses WHERE.
+
+IMPORTANT : InfluxDB conserve les données après la suppression d'un test ou monitor. Les measurements peuvent
+contenir des données orphelines de monitors qui n'existent plus. Vérifiez la fraîcheur avant analyse :
+  SELECT last(duration_seconds), time FROM "&lt;measurement&gt;"
+
+Tables d'exception (non générées par les monitors) :
+  - "resource_usage"      — utilisation des appareils (utilisez 'metrics resource-usage' à la place)
+  - "robots_statistics"   — données internes de la plateforme (peuvent être ignorées)
+  - "sim_card_statistics" — niveau de signal en dBm par ressource SIM
+
+Un seul monitor écrit typiquement dans "test" plus un ou plusieurs measurements spécifiques aux actions.
+Utilisez les tags (SHOW TAG KEYS) pour filtrer par test, produit ou monitor spécifique.
+
+Workflow de découverte de schéma (SUIVEZ CET ORDRE) :
+  1. SHOW MEASUREMENTS                                       — lister les tables disponibles
+  2. SHOW FIELD KEYS FROM &lt;measurement&gt;                      — fields numériques disponibles
+  3. SHOW TAG VALUES FROM &lt;measurement&gt; WITH KEY = "monitoring_name" — quels monitors alimentent cette table
+  4. SELECT last(&lt;field&gt;), time FROM &lt;measurement&gt;            — vérifier la fraîcheur (obsolète = monitor supprimé)
+  5. SHOW TAG KEYS FROM &lt;measurement&gt;                        — dimensions filtrables
+  6. SHOW TAG VALUES FROM &lt;measurement&gt; WITH KEY = "&lt;tag&gt;"   — valeurs réelles des tags
+  7. SELECT ... FROM &lt;measurement&gt; WHERE time &gt; now() - 7d GROUP BY time(1h)
+
+Incluez toujours une clause WHERE time. Plage maximale recommandée : 90 jours (utilisez GROUP BY time() pour les grandes plages). Les selects bruts sans agrégation : préférez 30 jours max.
+Les requêtes doivent se terminer en 60 secondes. Utilisez LIMIT et GROUP BY time() pour les gros jeux de données.
+
+Modes de sortie :
+  - Défaut : JSON brut (pour le scripting et le piping)
+  - --summary : analyse statistique complète (67 métriques par colonne, EWMA, détection d'anomalies, tendances)
+  - --executive : résumé compact d'une ligne par série de niveau direction avec classification de santé
+
+Pour les rapports, utilisez --executive. Pour l'analyse brute, utilisez --summary.
+
+## Notes
+
+- InfluxQL brut contre les KPI des monitors. Pour la conformité SLO, utilisez [`ktm metrics slo`](/fr/cli/commands/metrics/slo) ; pour la corrélation inter-signaux, utilisez [`ktm metrics correlate`](/fr/cli/commands/metrics/correlate).
+
+## Voir aussi
+
+- [`ktm metrics`](/fr/cli/commands/metrics)
+- [`ktm monitors list`](/fr/cli/commands/monitors/list)
+- [`ktm monitors get`](/fr/cli/commands/monitors/get)
+- [`ktm tests get`](/fr/cli/commands/tests/get)
+- [`ktm metrics resource-usage`](/fr/cli/commands/metrics/resource-usage)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

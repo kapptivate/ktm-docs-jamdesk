@@ -1,0 +1,73 @@
+---
+title: "ktm test-campaigns create"
+description: "Créer une nouvelle Tests campaign"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer une nouvelle Tests campaign
+
+## Utilisation
+
+```bash
+ktm test-campaigns create [flags]
+```
+
+## Exemples
+
+```bash
+ktm test-campaigns create --product acme~web --name "Regression" --test-list @testlist.json
+echo '[{"position":0,"test":117,"owners":{},"input_variables":{}}]' | \
+  ktm test-campaigns create --product acme~web --name "Smoke" --test-list -
+ktm test-campaigns create --product acme~web --name "Targeted" --test-list @list.json \
+  --collection-uid 7b9c6d8e-...
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--collection-uid` | string | — | UID de collection sous lequel placer la Tests campaign (défaut : racine des campaigns du produit ; un UID de racine de tests est rejeté) |
+| `--description` | string | — | Description de la Tests campaign |
+| `--name` | string | — | Nom de la Tests campaign (requis) |
+| `--product` | string | — | Slug du produit, format : operator~product (requis) |
+| `--test-list` | string | — | Chemin vers le fichier JSON contenant le tableau test_list, ou "-" pour stdin (requis) |
+
+## Détails
+
+Créer une nouvelle Tests campaign rattachée à un seul produit. --test-list pointe
+vers un fichier JSON (ou '-' pour stdin) contenant un tableau d'entrées TestCampaignMember :
+  [\{"position": 0, "test": 123, "owners": \{\}, "input_variables": \{\}\}]
+
+Tous les tests doivent appartenir au --product. Owners et input_variables peuvent être
+des objets vides mais doivent être présents selon la validation du backend.
+
+--collection-uid place la Tests campaign sous une collection spécifique. Lorsqu'il est
+omis, le défaut est la racine des campaigns du produit
+(test_campaigns_root_collection_uid). Une Tests campaign ne doit jamais se trouver sous une
+racine de tests, car cette collection l'afficherait comme une ligne de test dans l'interface et ferait
+planter la liste de tests, donc un --collection-uid de racine de tests est rejeté.
+
+## Notes
+
+- Crée un pack de tests sauvegardé, nommé et réutilisable. Pour une exécution ponctuelle à partir d'identifiants de tests explicites, ignorez cette commande et utilisez [`ktm ci build`](/fr/cli/commands/ci/build) avec `--test-ids` à la place.
+
+## Voir aussi
+
+- [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

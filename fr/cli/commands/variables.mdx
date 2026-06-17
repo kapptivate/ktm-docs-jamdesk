@@ -1,0 +1,77 @@
+---
+title: "ktm variables"
+description: "Variables, groupes et variants : configuration rattachée aux produits"
+sidebarTitle: "variables"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Variables, groupes et variants : configuration rattachée aux produits
+
+## Utilisation
+
+```bash
+ktm variables [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="create" icon="angle-right" href="/fr/cli/commands/variables/create">
+    Créer une variable (single | secret | choice)
+  </Card>
+  <Card title="delete" icon="angle-right" href="/fr/cli/commands/variables/delete">
+    Supprimer une variable ; refuse si un test la référence
+  </Card>
+  <Card title="duplicate" icon="angle-right" href="/fr/cli/commands/variables/duplicate">
+    Cloner une variable sous un nouveau nom (atomique ; conserve le type et les valeurs)
+  </Card>
+  <Card title="groups" icon="angle-right" href="/fr/cli/commands/variables/groups">
+    Groupes de variables : configurations d'environnement contenant un ensemble de variants
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/variables/list">
+    Lister les variables d'un produit (avec filtres de portée, groupe, type, utilisation et variant)
+  </Card>
+  <Card title="name-available" icon="angle-right" href="/fr/cli/commands/variables/name-available">
+    Pré-vérification : vérifier si un nom de variable est disponible sous un produit
+  </Card>
+  <Card title="set-value" icon="angle-right" href="/fr/cli/commands/variables/set-value">
+    Définir la valeur d'UN variant sur une variable groupée (conserve les autres variants)
+  </Card>
+  <Card title="show" icon="angle-right" href="/fr/cli/commands/variables/show">
+    Récupérer une variable avec utilisation par défaut ; --lite ignore l'utilisation
+  </Card>
+  <Card title="update" icon="angle-right" href="/fr/cli/commands/variables/update">
+    Mettre à jour le nom, la description et/ou la default_value d'une variable (propriétés uniquement)
+  </Card>
+  <Card title="variants" icon="angle-right" href="/fr/cli/commands/variables/variants">
+    Variants : déclinaisons d'environnement au sein d'un groupe de variables (dev, staging, prod, ...)
+  </Card>
+</Columns>
+
+## Détails
+
+Gérer les variables, les groupes de variables et les variants depuis un seul arbre de commandes.
+
+Le système de variables est organisé comme Produit > Variables > Groupes > Variants :
+  - Variables  : valeurs typées utilisées par les tests et monitors à l'exécution (single, secret, choice).
+  - Groupes    : configurations d'environnement qui contiennent un ensemble de variants.
+  - Variants   : déclinaisons d'environnement au sein d'un groupe (ex. dev, staging, prod).
+
+Chaque opération est une sous-commande dédiée à un seul objectif afin que le verbe soit toujours
+sans ambiguïté.
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

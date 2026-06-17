@@ -1,0 +1,106 @@
+---
+title: Remplacer la batterie d'un robot
+description: Remplacer la pile de la carte mère sur les nouvelles et anciennes générations de robots.
+---
+
+Chaque robot est livré avec une pile de carte mère. Lorsqu'elle est épuisée, le robot peut dysfonctionner (dérive de l'horloge, réinitialisations du BIOS) ; la remplacer prend quelques minutes. La procédure dépend de la génération de votre matériel.
+
+## Nouveau matériel
+
+Le nouveau matériel est gris ou vert :
+
+<Frame caption="Matériel de nouvelle génération">
+  ![Nouveau matériel](/images/hardware/swap-battery-01.webp)
+</Frame>
+
+<Steps>
+  <Step title="Ouvrir le robot">
+    Retirez les 2 vis et enlevez la plaque en aluminium du dessus.
+
+    <Frame caption="Les 2 vis à retirer">
+      ![Vis à retirer](/images/hardware/swap-battery-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Localiser la batterie">
+    La pile se trouve sur la carte mère, à côté de l'alimentation.
+
+    <Frame caption="La pile à côté de l'alimentation">
+      ![Emplacement de la pile](/images/hardware/swap-battery-03.webp)
+    </Frame>
+  </Step>
+  <Step title="La remplacer">
+    Détachez l'adhésif qui maintient la pile avec un outil fin, tirez doucement sur le câble rouge et noir pour la retirer, puis collez la nouvelle pile au même emplacement.
+
+    <Frame caption="Détachez l'adhésif, puis remplacez la pile">
+      ![Détacher l'adhésif](/images/hardware/swap-battery-04.webp)
+      ![Insérer la nouvelle pile](/images/hardware/swap-battery-05.webp)
+    </Frame>
+  </Step>
+  <Step title="Refermer et mettre à jour le BIOS">
+    Revissez la plaque du dessus. Mettez ensuite à jour le BIOS avant de réutiliser le robot ; contactez le support pour obtenir le guide de mise à jour du BIOS correspondant à votre modèle.
+  </Step>
+</Steps>
+
+## Ancien matériel
+
+L'ancien matériel ressemble à ceci :
+
+<Frame caption="Matériel d'ancienne génération">
+  ![Ancien matériel](/images/hardware/swap-battery-06.webp)
+</Frame>
+
+<Steps>
+  <Step title="Ouvrir le robot">
+    Retirez les 2 vis et faites glisser la plaque en aluminium du dessus vers l'arrière.
+
+    <Frame caption="Les 2 vis à retirer">
+      ![Vis à retirer](/images/hardware/swap-battery-07.webp)
+    </Frame>
+  </Step>
+  <Step title="Localiser la batterie">
+    La pile se trouve dans le coin inférieur gauche de la carte mère.
+
+    <Frame caption="Pile dans le coin inférieur gauche">
+      ![Emplacement de la pile](/images/hardware/swap-battery-08.webp)
+    </Frame>
+  </Step>
+  <Step title="La remplacer">
+    Détachez l'adhésif avec un outil fin, tirez doucement sur le câble rouge et noir, puis collez la nouvelle pile au même emplacement.
+
+    <Frame caption="Détachez l'adhésif, puis remplacez la pile">
+      ![Détacher l'adhésif](/images/hardware/swap-battery-09.webp)
+      ![Insérer la nouvelle pile](/images/hardware/swap-battery-10.webp)
+    </Frame>
+
+    Si l'accès est difficile, dévissez les quatre vis aux coins de la carte mère et soulevez-la, sans rien débrancher, pour atteindre la pile. Revissez ces vis avant de refermer.
+
+    <Frame caption="Soulever la carte mère pour un accès plus facile">
+      ![Vis de la carte mère](/images/hardware/swap-battery-11.webp)
+      ![Carte mère soulevée](/images/hardware/swap-battery-12.webp)
+    </Frame>
+  </Step>
+  <Step title="Refermer et mettre à jour le BIOS">
+    Revissez la plaque du dessus. Mettez à jour le BIOS avant de réutiliser le robot ; contactez le support pour obtenir le guide.
+  </Step>
+</Steps>
+
+## Gonflement des batteries de smartphones
+
+Les batteries de smartphones gonflent avec le temps lorsqu'elles sont constamment en charge, ce qui est le cas sur un robot smartphone. Un support réduit la chaleur et retarde le phénomène, mais la vraie solution est de choisir des téléphones qui supportent le **pass-through charging** : l'alimentation alimente directement le téléphone sans solliciter la batterie.
+
+Modèles connus pour le supporter : Galaxy S22 et S23 series, Galaxy Z Fold 2 à 5, Galaxy Z Flip 5, Galaxy A73 5G et Galaxy A33 5G (le plus abordable).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage des erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
+
+    Symptômes souvent liés à une pile déchargée
+
+</Card>
+  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+
+    Vérifier la santé du robot après le remplacement
+
+</Card>
+</Columns>

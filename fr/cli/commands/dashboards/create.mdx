@@ -1,0 +1,62 @@
+---
+title: "ktm dashboards create"
+description: "Créer un nouveau dashboard vide"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau dashboard vide
+
+## Utilisation
+
+```bash
+ktm dashboards create [flags]
+```
+
+## Exemples
+
+```bash
+# Create a dashboard
+ktm dashboards create --operator my-operator --name "SLA Dashboard"
+
+# Create with a specific InfluxDB bucket
+ktm dashboards create --operator my-operator --name "Passive Metrics" --bucket my-bucket
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | Bucket InfluxDB pour les données d'agents passifs (optionnel) |
+| `--name` | string | — | Nom du dashboard (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Crée un nouveau dashboard sous un opérateur avec une disposition de widgets vide.
+
+Le dashboard est créé avec la version de disposition 2 (format production) et un
+tableau de widgets vide. Utilisez l'interface de la plateforme ou les futures commandes CLI pour ajouter des widgets.
+
+Le flag --operator est requis. Le collection_uid est auto-découvert depuis
+la collection racine de dashboards de l'opérateur (même principe que la création de tests).
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

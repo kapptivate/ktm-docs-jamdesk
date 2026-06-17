@@ -1,0 +1,51 @@
+---
+title: "ktm incidents"
+description: "Incidents — alertes déclenchées sur la plateforme (OPEN, CLOSED, MANUALLY_CLOSED)"
+sidebarTitle: "incidents"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Incidents — alertes déclenchées sur la plateforme (OPEN, CLOSED, MANUALLY_CLOSED)
+
+## Utilisation
+
+```bash
+ktm incidents [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="close" icon="angle-right" href="/fr/cli/commands/incidents/close">
+    Fermer un incident actif (définit le statut à MANUALLY_CLOSED)
+  </Card>
+  <Card title="counter" icon="angle-right" href="/fr/cli/commands/incidents/counter">
+    Obtenir les compteurs d'incidents : critical, warning, closed
+  </Card>
+  <Card title="get" icon="angle-right" href="/fr/cli/commands/incidents/get">
+    Obtenir les détails d'un incident
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/incidents/list">
+    Lister les incidents (alertes déclenchées) sur la plateforme
+  </Card>
+</Columns>
+
+## Notes
+
+- Les incidents sont des occurrences d'alertes déclenchées (OPEN / CLOSED). Les règles qui les créent se trouvent sous [`ktm alerts`](/fr/cli/commands/alerts).
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

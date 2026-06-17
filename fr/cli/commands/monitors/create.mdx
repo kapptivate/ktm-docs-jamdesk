@@ -1,0 +1,105 @@
+---
+title: "ktm monitors create"
+description: "Créer un nouveau monitor pour un test existant"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau monitor pour un test existant
+
+## Utilisation
+
+```bash
+ktm monitors create [flags]
+```
+
+## Exemples
+
+```bash
+# Preview: see the creation plan (does NOT create)
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging"
+
+# Multi-group monitor: pin a variant per group
+ktm monitors create --product acme~web --test-id 100   --variant "API:Staging" --variant "Database:Replica" --variant "Frontend:Canary" --confirm
+
+# Numeric variant id (when stable across environments)
+ktm monitors create --product acme~web --test-id 100 --variant 11 --confirm
+
+# No pin: every variable uses its group's default variant
+ktm monitors create --product acme~web --test-id 100 --confirm
+
+# Override variables and submit
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging"   --set-var "SIM_A=0699999999" --set-var "TODO_INDEX=42" --confirm
+
+# CI/CD: auto-build and submit without preview
+ktm monitors create --product acme~web --test-id 100 --variant "API:Staging" --force
+
+# Full manual control via JSON file (submits directly)
+ktm monitors create --product acme~web --test-id 100 --from-file monitor.json
+
+# Scheduling: every 10 minutes (simple/v2)
+ktm monitors create ... --confirm   --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Soumettre le payload auto-construit après avoir examiné l'aperçu |
+| `--force` | boolean | — | Ignorer l'aperçu, construire et soumettre en une étape (uniquement pour l'automatisation CI/CD) |
+| `--from-file` | string | — | Fichier JSON avec owners, input_variables, scheduling, options (soumet directement ; --variant ignoré) |
+| `--name` | string | — | Nom du monitor (par défaut le nom du test) |
+| `--product` | string | — | Slug du produit (requis, format : operator~product) |
+| `--scheduling` | string | — | Objet JSON de planification. Types : simple/v2 (intervalle), advanced/v2 (fenêtre temporelle avec "at" ou "between"). Défaut : simple/v2 toutes les 5 min. Voir les exemples dans --help. |
+| `--set-var` | string[] | — | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE) |
+| `--start` | boolean | `true; --start=false crée en pause) (défaut true` | Démarrer le monitor immédiatement après sa création |
+| `--test-id` | int | — | ID du test à monitorer (requis) |
+| `--variant` | string[] | — | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. Les globales émettent toujours un bucket global. |
+
+## Détails
+
+Crée un monitor qui exécute un test selon un planning et suit le statut réussite/échec.
+
+Le produit doit avoir le monitoring activé.
+
+Fixez les variants par groupe via --variant répétable. Chaque --variant fixe le
+variant d'un groupe ; les groupes non fixés utilisent leur variant par défaut. Les globales
+se résolvent toujours vers un bucket global. Le payload soumis définit
+variable_group: null ; les buckets par variable portent l'information du groupe.
+
+Sans --from-file, auto-construit les owners et input_variables depuis la définition
+du test. Le payload calculé est affiché pour examen avant soumission.
+
+Trois modes :
+  Aperçu (défaut) : affiche le plan de création auto-construit. Examinez-le pour les slots
+  d'appareils vides ou les valeurs manquantes avant de relancer avec --confirm.
+  Confirmer (--confirm) : soumet après que l'utilisateur a examiné l'aperçu.
+  Forcer (--force) : ignore complètement l'aperçu, construit et soumet en une
+  étape. Utilisez --force uniquement dans les pipelines CI/CD et les scripts d'automatisation.
+
+Utilisez --set-var pour remplacer des valeurs de variables individuelles dans le template auto-construit.
+Utilisez --from-file pour un contrôle manuel complet (soumet directement, pas d'aperçu).
+
+## Notes
+
+- Crée une exécution récurrente et planifiée d'un test. Pour une exécution ponctuelle ad-hoc, utilisez [`ktm ci build`](/fr/cli/commands/ci/build) puis [`ktm ci run`](/fr/cli/commands/ci/run).
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

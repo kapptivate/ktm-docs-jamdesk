@@ -1,0 +1,51 @@
+---
+title: "list_users"
+description: "Liste les comptes utilisateur, y compris les utilisateurs humains (type=user) et les comptes de service API (type=server)."
+sidebarTitle: "list_users"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les comptes utilisateur, y compris les utilisateurs humains (type=user) et les comptes de service API (type=server).
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Bascule le format de sortie vers les objets JSON bruts (défaut : false). Le format compact par défaut affiche déjà tous les utilisateurs. Utilisez detail=true uniquement quand vous avez besoin des champs JSON complets comme roles, groups ou email. |
+| `is_active` | boolean | Non | Filtrer par statut actif |
+| `operator` | string | Non | Filtrer par slug de l'operator |
+| `search` | string | Non | Recherche par nom d'utilisateur, prénom, nom ou email |
+| `type` | string (user \| server) | Non | Filtrer par type d'utilisateur. Omettez pour tous. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "detail": false,
+  "is_active": false
+}
+```
+
+## Description
+
+```text
+Returns all users as compact one-liner summaries by default (no truncation). Use search to find by username, email, or name. Always pass operator to scope results — can return 600+ users without filters. Defaults to active users only (is_active=true) when is_active is not specified.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,62 @@
+---
+title: "list_monitoring_results"
+description: "Lister les résultats récents de monitoring (résultats d'exécution)."
+sidebarTitle: "list_monitoring_results"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les résultats récents de monitoring (résultats d'exécution).
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (par défaut : false). |
+| `end` | string | Non | Résultats avant cette date/heure (ISO 8601). Intervalle maximum avec start : 24 heures. |
+| `monitoring_id` | number | Non | Filtrer par identifiant de monitor (depuis list_monitors). Requis pour les résultats limités à un opérateur, sans cela les résultats couvrent tous les opérateurs. |
+| `ordering` | string (-modified \| modified) | Non | Champ de tri : -modified (par défaut, plus récent en premier) ou modified (plus ancien en premier). |
+| `page` | number | Non | Numéro de page (par défaut : 1). |
+| `page_size` | number | Non | Résultats par page (par défaut : 20). |
+| `product` | string | Non | Filtrer par slug du produit (format : operator~product). |
+| `start` | string | Non | Résultats après cette date/heure (ISO 8601, par ex. 2026-02-28T00:00:00Z). Intervalle maximum avec end : 24 heures. Défini automatiquement à now-24h si ni start ni end n'est fourni. |
+| `test_id` | number | Non | Filtrer par identifiant de test. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "detail": false,
+  "end": "string"
+}
+```
+
+## Description
+
+```text
+Renvoie des résumés compacts par défaut ; utilisez detail=true pour le JSON complet. Renvoie uniquement les champs de résumé — utilisez get_monitoring_result pour le payload d'exécution complet.
+
+Prérequis : appelez d'abord list_monitors avec operator=<slug> pour obtenir les identifiants de monitors, puis passez monitoring_id ici. Sans monitoring_id ni product, les résultats couvrent TOUS les opérateurs — ne sautez pas cette étape.
+```
+
+## Associé
+
+- [`get_monitoring_result`](/fr/mcp/tools/monitoring-results/get_monitoring_result)
+- [`list_monitors`](/fr/mcp/tools/discovery/list_monitors)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

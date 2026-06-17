@@ -1,0 +1,86 @@
+---
+title: "ktm tests edit"
+description: "Modifier un test existant (crée automatiquement une nouvelle version)"
+sidebarTitle: "edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Modifier un test existant (crée automatiquement une nouvelle version)
+
+## Utilisation
+
+```bash
+ktm tests edit <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Modifier les actions du test depuis un fichier (conserve les variants fixés existants)
+ktm tests edit 16480 --from-file updated.json
+
+# Modifier uniquement le nom du test
+ktm tests edit 16480 --name "New Test Name"
+
+# Fixer à nouveau le groupe API sur un variant différent ; laisse les fixations Database/Frontend intactes
+ktm tests edit 16480 --variant API:Dev
+
+# Fixer à nouveau plusieurs groupes en une seule commande (les formes peuvent être mélangées : nom 'group:variant' ou identifiant numérique)
+ktm tests edit 16480 --variant API:Staging --variant Database:Replica --variant 31
+
+# Prévisualiser d'abord, puis modifier
+ktm tests dry-run 16480 --from-file updated.json
+ktm tests edit 16480 --from-file updated.json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Réécrire les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Sans ce flag, les décalages de kind sont des erreurs bloquantes. |
+| `--description` | string | — | Remplacer la description du test |
+| `--from-file` | string | — | Chemin vers le fichier JSON avec la définition de test mise à jour |
+| `--name` | string | — | Remplacer le nom du test |
+| `--skip-validation` | boolean | — | Contourner le validateur côté client (le backend valide toujours). Utilisez pour les tests avec des types d'action que le registre CLI ne connaît pas (types futurs, modifications d'archive uniquement). |
+| `--variant` | string[] | — | Fixer à nouveau un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant ; les nouvelles variables obtiennent le variant par défaut du groupe. |
+
+## Détails
+
+Mettre à jour un test en fusionnant les changements d'un fichier JSON ou de flags avec la définition actuelle.
+Les champs protégés (product, collection_uid) sont toujours verrouillés sur les valeurs actuelles.
+Le nom et la description ne changent que lorsqu'ils sont explicitement fournis via des flags.
+Chaque modification crée une version d'historique restaurable sur le backend.
+
+Les buckets V3 sont résolus automatiquement contre le produit du test. Sans --variant,
+les buckets existants sont conservés ; --variant API:Staging fixe à nouveau le groupe API
+et laisse les buckets des autres groupes intacts. Les tests pré-V3
+(sans buckets) reçoivent les variants par défaut automatiquement.
+
+Utilisez "tests dry-run" d'abord pour prévisualiser l'impact avant d'appliquer les changements.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests dry-run`](/fr/cli/commands/tests/dry-run)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,57 @@
+---
+title: "toggle_agent_maintenance"
+description: "Activer ou désactiver le mode maintenance d'un agent."
+sidebarTitle: "toggle_agent_maintenance"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Activer ou désactiver le mode maintenance d'un agent.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `confirm` | boolean | Oui | Doit être true pour exécuter. Sans confirm=true, renvoie un aperçu. |
+| `maintenance` | boolean | Oui | true pour activer la maintenance, false pour la désactiver |
+| `uuid` | string | Oui | UUID de l'agent |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "uuid": "string",
+  "maintenance": false,
+  "confirm": false
+}
+```
+
+## Description
+
+```text
+Fonctionne pour tous les types d'agents (endpoint polymorphe).
+Nécessite confirm=true pour exécuter. Sans cela, renvoie un aperçu du changement.
+
+Le mode maintenance empêche l'agent d'exécuter des tests. Utilisez list_agents pour trouver les UUID d'agents.
+```
+
+## Associé
+
+- [`list_agents`](/fr/mcp/tools/agent/list_agents)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

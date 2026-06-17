@@ -1,0 +1,59 @@
+---
+title: "ktm collections get"
+description: "Récupérer une seule collection avec son chemin de navigation"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupérer une seule collection avec son chemin de navigation
+
+## Utilisation
+
+```bash
+ktm collections get <uid> [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections get --operator my-op 8294de2a-ecd9-4202-9169-7d55d1328e22
+ktm collections get --operator my-op <uid> -o json | jq '.path'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Retourne les métadonnées de la collection (name, parent_uid, org_id, trash_uid)
+ainsi que son chemin de navigation depuis la racine. Utile avant
+une mutation pour confirmer la portée, ou pour découvrir l'UID de la corbeille pour les flux de nettoyage.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

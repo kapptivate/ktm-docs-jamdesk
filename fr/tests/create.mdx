@@ -1,0 +1,83 @@
+---
+title: Créer un test
+description: Créez un test pour Web, Smartphone ou Cellulaire et ajoutez ses steps.
+sidebarTitle: Créer un test
+---
+
+![La fenêtre Create new test avec les choix Classic, Web (New experience) et Smartphone (New experience)](/images/test-create-modal.webp)
+
+Créer un test commence par le choix d'un canal (Web, Smartphone ou Cellulaire), puis la définition d'un point de départ et d'un appareil. Après la création, vous ajoutez des steps pour définir ce que fait le test. Cette page détaille le processus de configuration pour chaque canal.
+
+## Démarrer un nouveau test
+
+Cliquez sur **+ Create new test** dans votre collection. Une fenêtre vous demande quelle expérience de création utiliser :
+
+- **Classic** : le builder traditionnel, couvrant tous les canaux (Web, Smartphone et Cellulaire).
+- **Web (New experience)** et **Smartphone (New experience)** : les builders nouvelle génération pour ces canaux.
+
+Choisissez ensuite votre canal et définissez son point de départ :
+
+<Tabs>
+  <Tab title="Web">
+    Les tests Web exécutent des interactions automatisées dans un navigateur : cliquer sur des liens, remplir des formulaires, vérifier du contenu.
+
+    Dans le parcours **Web (New experience)**, le formulaire de création demande :
+
+    - **Test name** : un nom clair et descriptif
+    - **Default agent** : l'agent web sur lequel le test s'exécute
+    - **Start URL** : le point de départ du test (par ex. `https://example.com/login`)
+    - **AI usage** (optionnel) : cochez **Turn on AI for this test** pour activer les sélecteurs assistés par IA dès le départ
+
+    La configuration du navigateur (type de navigateur, taille de fenêtre, langue, etc.) provient du **browser preset**, que vous choisissez dans l'onglet Environment du builder après la création. Consultez [Browser presets](/fr/tests/browser-presets).
+
+    Dans le parcours **Classic**, vous définissez les options du navigateur directement à la création :
+    - **Browser type** : Chrome, Firefox ou Edge
+    - **User agent** : utiliser le défaut ou ajouter un suffixe personnalisé
+    - **Language** : par défaut ou une locale spécifique (par ex. en-US)
+    - **Window size** : par défaut 1920×1080 ou dimensions personnalisées
+
+  </Tab>
+  <Tab title="Smartphone">
+    Les tests Smartphone automatisent les interactions avec les applications mobiles : appuyer sur des boutons, remplir des champs, naviguer entre les écrans.
+
+    **Point de départ :** Sélectionnez une application installée.
+    - **Android** : choisissez l'application par nom de package. Kapptivate affiche les métadonnées comme le type, le nom et la version.
+    - **iOS** : choisissez l'application par bundle ID.
+
+    **Propriétés de l'appareil disponibles lors de la création des steps :**
+    - Fabricant (Android uniquement)
+    - Modèle
+    - Version du SDK
+    - Résolution
+    - Statut d'itinérance par SIM
+
+    **Réinitialisation de l'application :** Vous pouvez configurer le test pour réinitialiser l'application (effacer les données et le cache) avant chaque exécution afin de démarrer dans un état propre.
+
+  </Tab>
+  <Tab title="Cellulaire">
+    Les tests Cellulaire interagissent avec des appareils SIM pour tester les menus USSD et les workflows SMS sur de vrais réseaux téléphoniques.
+
+    **Point de départ :** Spécifiez la SIM à appeler (code de menu USSD) ou le destinataire pour les SMS.
+
+    **Note :** Cette fonctionnalité peut nécessiter une configuration supplémentaire. Vérifiez que votre espace de travail dispose d'agents cellulaires et d'appareils SIM configurés.
+
+  </Tab>
+
+</Tabs>
+
+<Note>
+Pour tester un service HTTP, ajoutez des [steps API](/fr/tests/actions/api/overview) dans un test Web ou Smartphone : définissez la méthode, l'URL, les headers et le body, puis ajoutez des assertions sur la réponse et extrayez des valeurs pour les steps suivants.
+</Note>
+
+## Propriétés du test
+
+Dans le parcours Classic, vous renseignez ces informations à la création. Dans la nouvelle expérience, vous donnez un nom au test à la création et définissez le reste plus tard dans l'onglet **Test settings** du builder :
+
+- **Test name** : un nom clair et descriptif
+- **Description** (optionnel) : notes sur ce que fait le test
+- **Collection** : le dossier dans lequel placer le test
+- **Tags** (optionnel) : des étiquettes avec code couleur pour organiser et filtrer les tests
+
+## Suite : créez votre test
+
+Une fois le test créé, l'éditeur s'ouvre. Vous êtes prêt à construire le comportement de votre test en enregistrant des interactions ou en ajoutant manuellement des steps depuis la [bibliothèque d'actions](/fr/tests/actions/overview). Le [test builder](/fr/tests/builder) est l'endroit où vous passerez la majeure partie de votre temps de création, pour organiser les steps en groupes, ajouter des assertions, gérer les variables et configurer les options avancées.

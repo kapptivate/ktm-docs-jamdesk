@@ -1,0 +1,28 @@
+---
+title: Intégration CI/CD
+description: Lancez des tests Kapptivate depuis votre pipeline et consultez les résultats sans le quitter.
+sidebarTitle: CI/CD
+---
+
+![A GitHub Actions run with the Kapptivate Test Results summary table and its View deep links](/images/cicd-github-summary.webp)
+
+Les tests qui ne s'exécutent que quand quelqu'un pense à cliquer sur Run ne protègent pas une release. Piloter Kapptivate depuis votre pipeline CI/CD place les mêmes tests devant chaque push, planification ou déploiement, avec les résultats lisibles directement dans le pipeline.
+
+## Comment ça fonctionne
+
+Votre workflow exécute le [CLI Kapptivate](/fr/cli/overview), authentifié avec une [clé API](/fr/administration/api-keys), pour lancer un test ou une campaign. Le pipeline reflète ensuite le résultat :
+
+- Le job **réussit ou échoue** avec l'exécution, donc un pipeline rouge signifie un test rouge.
+- Un tableau de synthèse **Kapptivate Test Results** apparaît sur la page de résumé de l'exécution, une ligne par test avec son **Status**, son nom, sa **Duration** et un lien **View**.
+- Chaque lien **View** pointe directement vers les [résultats](/fr/executions/results) de cette exécution dans l'application Kapptivate, captures d'écran, vidéo et steps inclus.
+- Le rapport de l'exécution est attaché en tant qu'**artifact**.
+
+## GitHub Actions
+
+Dans GitHub Actions, le tableau de synthèse s'affiche sur la page Summary de l'exécution du workflow. Une configuration typique lance une campaign selon une planification (par exemple `run-kapptivate-suite.yml` avec `on: schedule`) ou sur push, et fait échouer le job quand les tests échouent.
+
+Consultez [ktm ci build](/fr/cli/commands/ci/build) et [ktm ci run](/fr/cli/commands/ci/run) pour les commandes à utiliser dans votre workflow, et le [guide CI/CD](/fr/cli/ci-cd) pour des exemples complets de pipeline.
+
+<Tip>
+Vous préférez piloter les tests depuis un assistant IA plutôt qu'un pipeline ? Le [serveur MCP](/fr/mcp/overview) permet aux agents de créer et lancer des campaigns en langage naturel.
+</Tip>

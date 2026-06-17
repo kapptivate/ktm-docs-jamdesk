@@ -1,0 +1,52 @@
+---
+title: "ktm variables groups show"
+description: "Obtenir les détails d'un groupe de variables incluant les variants et définitions de variables"
+sidebarTitle: "show"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les détails d'un groupe de variables incluant les variants et définitions de variables
+
+## Utilisation
+
+```bash
+ktm variables groups show <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables groups show 204
+ktm variables groups show 204 -o table
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupérer le groupe complet : métadonnées, variants[] (avec is_default) et les
+variables[] du groupe. Un seul appel pour inspecter l'ensemble du groupe.
+
+## Voir aussi
+
+- [`ktm variables groups`](/fr/cli/commands/variables/groups)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

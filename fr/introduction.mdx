@@ -1,0 +1,86 @@
+---
+title: Qu'est-ce que Kapptivate
+description: Une plateforme d'automatisation de tests qui utilise le même test automatisé du CI/CD à la supervision continue en production.
+sidebarTitle: Bienvenue sur Kapptivate
+---
+
+Kapptivate est une plateforme d'automatisation de tests pour les applications **web**, **mobile**, **API** et **cellulaires (SIM)**. Créez un test une seule fois et réutilisez-le sur tout le cycle de livraison : non-régression, mise en production, CI/CD et supervision continue en production, sur de vrais appareils installés on-premise.
+
+<Frame>
+  <img src="/images/hero.webp" alt="Vue d'ensemble de la plateforme Kapptivate" />
+</Frame>
+
+## Ce que Kapptivate permet de faire
+
+<Columns cols={3}>
+  <Card title="Tester" icon="vial" href="/fr/tests/overview">
+    Concevez des tests de bout en bout pour les canaux web, smartphone, API et cellulaire grâce à un éditeur visuel, un enregistreur en direct et un catalogue de plus de 30 types de step.
+  </Card>
+  <Card title="Exécuter" icon="play" href="/fr/executions/overview">
+    Lancez des tests à la demande, en suite ou depuis votre pipeline CI/CD. Chaque exécution produit un résultat détaillé avec captures d'écran, vidéo, steps et métriques.
+  </Card>
+  <Card title="Superviser" icon="gauge" href="/fr/monitoring/overview">
+    Transformez un test en moniteur pour l'exécuter en continu en production. Suivez la disponibilité, recevez des alertes en cas d'échec, explorez les incidents et les dashboards.
+  </Card>
+</Columns>
+
+## Un test, tout le cycle de vie
+
+La plupart des plateformes vous obligent à maintenir des suites de tests séparées pour le QA, le CI et le monitoring en production. Kapptivate les unifie : le test que vous créez dans l'éditeur est le même qui s'exécute dans votre pipeline et le même qui supervise la production.
+
+<Steps>
+  <Step title="Concevoir">
+    Construisez un test dans l'éditeur visuel ou enregistrez des actions dans une [session Live](/fr/tests/live-session) sur un vrai appareil.
+  </Step>
+  <Step title="Exécuter">
+    Lancez le test à la demande, regroupez-le dans une suite, ou déclenchez-le depuis le CI/CD via des [clés API](/fr/administration/api-keys).
+  </Step>
+  <Step title="Superviser">
+    Transformez le test validé en [moniteur](/fr/monitoring/overview) : il s'exécute selon un calendrier, lève des [incidents](/fr/monitoring/incidents) et alimente les dashboards.
+  </Step>
+</Steps>
+
+## Pourquoi Kapptivate
+
+**De vrais appareils, on-premise.** Les agents, SIMs, smartphones, endpoints web et le "robot digital" combiné sont installés dans votre réseau. Vos tests reflètent ce que vos utilisateurs vivent réellement.
+
+**Tests cellulaires natifs.** Exécutez des tests cellulaires sur de vraies cartes SIM via de vrais réseaux opérateurs, y compris les menus USSD et les flux SMS. Peu de plateformes couvrent ce besoin ; Kapptivate est conçu pour cela.
+
+**Conception assistée par IA.** Les selectors intelligents retrouvent les éléments lorsque le DOM change. Les steps IA gèrent les asserts visuels, la vérification orthographique et les codes à usage unique par email ou SMS. Voir [L'IA dans Kapptivate](/fr/ai/overview).
+
+**Résultats unifiés.** Les exécutions manuelles, automatisées et les moniteurs continus produisent tous le même type de résultat (captures d'écran, logs de steps, temps de réponse, variables). L'analyse reste cohérente sur tout le cycle de vie.
+
+**Variables et environnements.** Paramétrez vos tests une seule fois et exécutez-les sur n'importe quel environnement (dev, staging, prod) en changeant simplement de groupe de variables.
+
+## Canaux
+
+<Columns cols={2}>
+  <Card title="Web" icon="globe" href="/fr/agents-devices/web-api">
+    Automatisation navigateur avec des [presets navigateur](/fr/tests/browser-presets) configurables : user agent, langue, taille de fenêtre, headers, cookies et proxy.
+  </Card>
+  <Card title="API (HTTP)" icon="plug" href="/fr/agents-devices/web-api">
+    Testez les services REST et HTTP avec des steps API dans vos tests web et smartphone : méthodes (GET / POST / PUT / PATCH / DELETE), headers personnalisés, corps JSON ou brut, assertions sur la réponse, extraction de variables et détail des temps par requête.
+  </Card>
+  <Card title="Smartphone" icon="mobile-screen" href="/fr/agents-devices/smartphone">
+    Tests d'applications natives sur de vrais appareils Android et iOS avec accès complet aux taps, gestes, clavier et propriétés de l'appareil.
+  </Card>
+  <Card title="Cellulaire (SIM)" icon="sim-card" href="/fr/agents-devices/sim">
+    Tests sur des SIMs physiques (données, flux USSD et SMS) via de vrais réseaux cellulaires.
+  </Card>
+</Columns>
+
+## Cas d'usage
+
+- **Non-régression pré-production** : lancez des tests scriptés sur un environnement de staging avant chaque mise en production pour détecter les régressions.
+- **Validation de mise en production** : exécutez une checklist de lancement sous forme de suite de tests pour confirmer que le système est prêt en production.
+- **Contrôles dans le pipeline CI/CD** : déclenchez Kapptivate depuis votre pipeline via des clés API et conditionnez vos déploiements aux résultats des tests.
+- **Supervision de production 24/7** : transformez les parcours critiques en moniteurs qui s'exécutent selon un calendrier et alertent en cas d'échec.
+- **Couverture multi-canaux** : validez des parcours qui traversent le web, le mobile, l'USSD et le SMS sur une seule plateforme.
+
+## À qui s'adresse Kapptivate
+
+**Équipes QA et test** qui veulent qu'un seul test automatisé couvre chaque phase, au lieu de maintenir des suites parallèles.
+
+**Équipes DevOps et SRE** qui veulent intégrer l'exécution de tests au CI/CD et au monitoring de production avec des résultats cohérents.
+
+**Entreprises proches du secteur télécom** (banques, opérateurs mobiles, fintech) dont les parcours utilisateurs traversent le web, le mobile, l'USSD et le SMS, et qui ont besoin de tests sur de vraies SIMs pour les valider.

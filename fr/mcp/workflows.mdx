@@ -1,0 +1,78 @@
+---
+title: Workflows courants
+description: Recettes pas à pas pour les tâches les plus fréquentes qu'un agent réalise via MCP.
+sidebarTitle: Workflows
+---
+
+Ces recettes montrent l'ordre des outils pour les tâches que les agents exécutent le plus souvent. Chaque étape nomme l'outil à appeler.
+
+<Tip>
+  Avant une tâche à plusieurs étapes, appelez `platform_guide` avec le sujet concerné (par exemple `test_creation` ou `metrics`). Il renvoie la séquence à jour et les prérequis directement depuis le serveur.
+</Tip>
+
+## Exécuter un test
+
+<Steps>
+  <Step title="Trouver le test">
+    `list_tests` avec un slug de produit, ou `search_collections` pour le trouver dans l'arborescence de dossiers.
+  </Step>
+  <Step title="Vérifier ses besoins">
+    `get_test_detail` pour voir les variables d'entrée requises et les owners.
+  </Step>
+  <Step title="Construire et exécuter une campaign">
+    `build_campaign` pour assembler l'exécution (passez un tableau `variants` pour choisir un environnement), puis `run_campaign`.
+  </Step>
+  <Step title="Lire le résultat">
+    `poll_execution` jusqu'à la fin, puis `get_execution_detail` pour les données pass/fail par test.
+  </Step>
+</Steps>
+
+## Créer un monitor
+
+<Steps>
+  <Step title="Choisir le test et l'environnement">
+    `list_tests` pour l'identifiant du test, et `list_variable_groups` pour le groupe de variables contenant votre environnement.
+  </Step>
+  <Step title="Créer le monitor">
+    `create_monitor` avec le produit, l'identifiant du test, le groupe de variables et la planification.
+  </Step>
+  <Step title="Activer ou mettre en pause">
+    `toggle_monitors` pour activer ou désactiver des monitors en lot.
+  </Step>
+</Steps>
+
+## Interroger les métriques
+
+<Steps>
+  <Step title="Explorer le schéma">
+    `query_metrics` avec `SHOW MEASUREMENTS` et `SHOW FIELD KEYS` pour découvrir ce qui est collecté.
+  </Step>
+  <Step title="Interroger la série">
+    `query_metrics` avec un `SELECT` pour lire les séries temporelles de KPI, puis `compute_slo` ou `correlate_metrics` pour une analyse plus poussée.
+  </Step>
+</Steps>
+
+## Investiguer des incidents
+
+<Steps>
+  <Step title="Vérifier l'état général">
+    `get_incident_counter` pour un comptage rapide critical / warning / closed.
+  </Step>
+  <Step title="Lister et inspecter">
+    `list_incidents` filtré par statut, puis `get_incident` pour le détail.
+  </Step>
+  <Step title="Résoudre">
+    `close_incident` une fois le problème sous-jacent traité.
+  </Step>
+</Steps>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Référence des outils" icon="robot" href="/fr/mcp/tools/overview">
+    Consultez les paramètres exacts de chaque outil ci-dessus.
+  </Card>
+  <Card title="Concepts fondamentaux" icon="sitemap" href="/fr/mcp/concepts">
+    Variables, variants, budgets d'édition et modèle de sécurité.
+  </Card>
+</Columns>

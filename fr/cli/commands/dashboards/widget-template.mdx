@@ -1,0 +1,78 @@
+---
+title: "ktm dashboards widget-template"
+description: "Afficher un template JSON de widget sur stdout"
+sidebarTitle: "widget-template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Afficher un template JSON de widget sur stdout
+
+## Utilisation
+
+```bash
+ktm dashboards widget-template <type> [flags]
+```
+
+## Exemples
+
+```bash
+# Get a line chart template
+ktm dashboards widget-template line
+
+# Get a customDisplay template (includes script API docs in _metadata)
+ktm dashboards widget-template customDisplay > custom.json
+
+# Save to file for editing
+ktm dashboards widget-template counter > widget.json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `type` | Oui |
+
+## Détails
+
+Obtenir un template JSON prêt à remplir pour un type de widget de dashboard.
+Types disponibles : line, area, pie, repartitionChart, counter, title, table, customDisplay.
+
+PRÉREQUIS POUR LES WIDGETS AVEC REQUÊTES (tous les types sauf title) :
+  1. ktm metrics query --operator &lt;op&gt; --query 'SHOW MEASUREMENTS'
+  2. ktm metrics query --operator &lt;op&gt; --query 'SHOW FIELD KEYS FROM "&lt;measurement&gt;"'
+  3. Remplir le template measurement et field avec des valeurs RÉELLES issues de ci-dessus. Les placeholders sont REJETÉS.
+
+Le template inclut _metadata avec les contraintes de grille, les étapes de découverte de schéma et
+(pour customDisplay) la documentation de l'API script avec la référence des props et la structure responseList.
+Supprimez _metadata avant de soumettre à add-widget.
+
+Les widgets customDisplay utilisent queries[] (PAS series[]), chartOptions (PAS chart_options),
+et nécessitent un script IIFE. Voir _metadata.notes pour l'API script complète.
+
+LIMITE DE CALCUL : les scripts peuvent faire de la manipulation de données, des calculs, des statistiques simples
+et de la corrélation. Ils n'ont PAS accès au moteur statistique de la plateforme (EWMA,
+détection d'anomalies, burn-rate SLO). Ceux-ci nécessitent les outils MCP/CLI ou les agrégations InfluxQL.
+Ne pré-calculez PAS de valeurs avec les outils CLI pour les coder en dur dans le script : les widgets sont
+dynamiques et ré-interrogent quand l'utilisateur change la plage temporelle. Les données dynamiques doivent provenir de queries[].
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+- [`ktm metrics query`](/fr/cli/commands/metrics/query)
+- [`ktm metrics`](/fr/cli/commands/metrics)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

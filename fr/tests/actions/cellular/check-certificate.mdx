@@ -1,0 +1,65 @@
+---
+title: Check SSL/TLS Certificate
+description: Vérifiez le certificat TLS d'un domaine depuis le réseau cellulaire, y compris l'expiration.
+---
+
+Récupérez et inspectez le certificat TLS servi par un domaine, tel que vu depuis le réseau mobile : émetteur, sujet, dates de validité, délai avant expiration. Détectez un certificat expirant avant vos utilisateurs, et repérez l'interception (un certificat qui diffère sur le chemin cellulaire).
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Nom de domaine | `command.domain_name` | Oui | Le domaine dont il faut vérifier le certificat. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_CHECK_CERTIFICATE",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "domain_name": "kapptivate.com",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`), pour la chaîne de certificats :
+
+| Champ | Description |
+|-------|-------------|
+| `expire_in_seconds` | Temps restant avant expiration. Le champ sur lequel alerter. |
+| `not_before`, `not_after` | Fenêtre de validité. |
+| `issuer`, `subject` | Qui a émis le certificat et pour qui (nom commun, organisation, pays...). |
+| `signature_algorithm`, `public_key_algorithm` | Algorithmes cryptographiques utilisés. |
+| `fingerprint_sha_256`, `fingerprint_sha_1`, `serial_number` | Identité du certificat, pour détecter la substitution. |
+| `dns_names` | Les domaines couverts par le certificat. |
+| `certificate_error` | Toute erreur de validation rencontrée. |
+
+Dans Analytics, chaque exécution alimente la mesure certificat avec `expire_in_seconds`, les détails de l'émetteur et du sujet, les empreintes et `duration_seconds`, étiquetée par statut, nom de domaine, erreur de certificat et algorithmes. Alertez sur `expire_in_seconds` pour anticiper les renouvellements.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="API Call" icon="cloud" href="/fr/tests/actions/cellular/api-call">
+
+    Vérifiez le service derrière le certificat
+
+</Card>
+  <Card title="Alertes" icon="bell" href="/fr/monitoring/alerts">
+
+    Déclenchez une alerte avant l'expiration du certificat
+
+</Card>
+</Columns>

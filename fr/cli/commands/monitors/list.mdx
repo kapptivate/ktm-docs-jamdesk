@@ -1,0 +1,86 @@
+---
+title: "ktm monitors list"
+description: "Lister les monitors, avec filtrage optionnel par operator et produit"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les monitors, avec filtrage optionnel par operator et produit
+
+## Utilisation
+
+```bash
+ktm monitors list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister les monitors pour un produit
+ktm monitors list --operator my-operator --product my-operator~my-product
+
+# Lister uniquement les monitors actifs
+ktm monitors list --operator my-operator --active true
+
+# Lister les monitors assignés à un web agent spécifique
+ktm monitors list --operator my-operator --device-type web-agent --device-id agent-paris-01
+
+# Obtenir les monitors en JSON pour analyse
+ktm monitors list --operator my-operator --product my-operator~my-product -o json
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filtrer par statut actif : true, false, ou séparés par des virgules (ex. true,false) |
+| `--archived` | string | — | Filtrer par statut archivé (true/false). Utilisé uniquement avec --device-type et --device-id. |
+| `--device-id` | string | — | Identifiant de l'appareil (SIM : national_msisdn, web-agent : hostname, smartphone : UUID). Nécessite --device-type. |
+| `--device-type` | string | — | Type d'appareil : sim, web-agent, ou smartphone. Nécessite --device-id et --operator. |
+| `--fields` | string | — | Restreindre la réponse JSON à ces champs (liste blanche séparée par des virgules) |
+| `--operator` | string | — | Slug de l'operator (depuis 'operators list') pour limiter les résultats |
+| `--product` | string | — | Slug du produit (depuis 'products list', format : operator~product) pour limiter les résultats |
+
+## Détails
+
+Lister les monitors, des exécutions de tests récurrentes et planifiées avec suivi de statut.
+
+Les monitors exécutent un test selon un calendrier (ex. toutes les 20 minutes) et suivent s'il
+réussit ou échoue au fil du temps. Chaque monitor appartient à un produit et référence un test.
+Chaque exécution de monitor écrit également des métriques KPI dans InfluxDB. Utilisez 'ktm metrics query'
+pour explorer (commencez par SHOW MEASUREMENTS).
+
+Utilisez --operator et --product pour affiner les résultats. Valeurs de statut : up, down, paused.
+
+Filtrage par appareil : utilisez --device-type et --device-id ensemble avec
+--operator pour lister les monitors assignés à un appareil spécifique (SIM, web agent,
+ou smartphone).
+
+Champs de sortie JSON : id, name, active, test_id, product_id, product_slug, status, scheduling, last_run
+Colonnes du tableau :    ID, NAME, ACTIVE, STATUS, PRODUCT, SCHEDULING, LAST RUN
+
+Note : scheduling est un objet JSON (type + frequency). last_run est un tableau JSON
+de résultats d'exécution récents (id, status, created).
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+- [`ktm metrics`](/fr/cli/commands/metrics)
+- [`ktm operators list`](/fr/cli/commands/operators/list)
+- [`ktm products list`](/fr/cli/commands/products/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,56 @@
+---
+title: "list_shell_actions"
+description: "Lister les actions shell récentes (commandes déjà envoyées) pour un produit."
+sidebarTitle: "list_shell_actions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les actions shell récentes (commandes déjà envoyées) pour un produit.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (par défaut : false) |
+| `from_date` | string | Non | Afficher uniquement les shells créés après ce timestamp ISO 8601 (par ex. 2026-03-15T19:29:17Z). Utilisez pour interroger les nouveaux événements asynchrones. |
+| `ordering` | string (-created \| created) | Non | Ordre de tri : '-created' (plus récent en premier, par défaut), 'created' (plus ancien en premier) |
+| `owner` | string | Non | Filtrer par identifiant d'appareil (MSISDN ou hostname) |
+| `product_id` | number | Non | Filtrer par identifiant de produit |
+| `status` | string (P \| D \| O \| B \| C \| T \| M) | Non | Filtrer par statut : P (Pending), D (Done), O (Ongoing), B (Blocked), C (Canceled), T (Timeout), M (Maintenance) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "detail": false,
+  "from_date": "string"
+}
+```
+
+## Description
+
+```text
+Renvoie des résumés compacts montrant l'identifiant, le type, le résumé de commande, le statut et la durée. Utilisez from_date + ordering pour interroger les résultats asynchrones comme les SMS entrants ou les réponses de menu USSD pendant une session en cours. Filtrez par statut pour trouver les commandes en cours : status=P (en attente), status=O (en cours). Pour voir quels TYPES d'actions shell peuvent être envoyés, utilisez list_shell_action_types.
+```
+
+## Associé
+
+- [`list_shell_action_types`](/fr/mcp/tools/shell/list_shell_action_types)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

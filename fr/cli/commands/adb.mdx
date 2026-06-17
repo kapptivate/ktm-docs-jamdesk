@@ -1,0 +1,50 @@
+---
+title: "ktm adb"
+description: "ADB — tunnel distant Android Debug Bridge vers les robots smartphone"
+sidebarTitle: "adb"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+ADB — tunnel distant Android Debug Bridge vers les robots smartphone
+
+## Utilisation
+
+```bash
+ktm adb [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="connect" icon="angle-right" href="/fr/cli/commands/adb/connect">
+    Ouvrir un tunnel ADB vers un téléphone distant
+  </Card>
+</Columns>
+
+## Détails
+
+Connectez Android Studio ou le CLI ADB aux téléphones sur des robots smartphone distants.
+
+Le tunnel démarre un relais TCP léger sur votre machine. Votre serveur ADB local
+s'y connecte et le trafic est relayé vers le téléphone via un tunnel WebSocket
+sécurisé à travers l'infrastructure de la plateforme. L'appareil s'enregistre
+automatiquement pour qu'Android Studio le détecte.
+
+Chaque tunnel est limité à un seul téléphone : vous ne pouvez voir et interagir
+qu'avec l'appareil auquel vous vous connectez.
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

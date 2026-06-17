@@ -8,6 +8,25 @@ sidebarTitle: Smartphone
 
 The Smartphone channel tests native mobile apps on real Android and iOS devices. Tests interact with apps just as a user would: tapping, typing, swiping, and verifying UI elements. They run on the **Smartphone agent**, a controller that manages the connected devices.
 
+## Quickstart
+
+Create your first native app test in four steps.
+
+<Steps>
+  <Step>
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, and choose **Smartphone (New experience)**. Name the test and select the installed app to launch by its package name (Android) or bundle ID (iOS).
+  </Step>
+  <Step>
+    **Add steps.** In the builder, record interactions on the live device or add smartphone actions manually: tap an element, fill an input, swipe, wait, and assert that something is displayed. Save the test.
+  </Step>
+  <Step>
+    **Run it on a device.** Click **Run** in the builder to watch it live, or **Run** on the test's row, then confirm the device and variables on the [run confirmation](/executions/run) page and launch.
+  </Step>
+  <Step>
+    **Read the result.** Open the execution under **Executions** to see status, per-step screenshots, and timing.
+  </Step>
+</Steps>
+
 ## Smartphone tests
 
 **Starting point:** specify the app by its package name (Android) or bundle ID (iOS), along with metadata like app name and version.

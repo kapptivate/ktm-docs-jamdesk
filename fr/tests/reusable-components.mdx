@@ -1,0 +1,34 @@
+---
+title: Reusable components
+description: Construisez un test une seule fois et réutilisez-le comme brique de base dans d'autres tests.
+sidebarTitle: Reusable components
+---
+
+![L'onglet Reusable components avec les pastilles d'utilisation, le nombre de steps et les icônes de connexion avec code couleur](/images/components-list.webp)
+
+Un **reusable component** est un test que vous construisez une seule fois et intégrez dans d'autres tests comme brique de base : un flux de connexion, une fermeture de bandeau de cookies, une séquence de navigation. Au lieu de copier les mêmes steps dans chaque test, vous les maintenez à un seul endroit et les référencez partout.
+
+## Comment ça fonctionne
+
+Un reusable component est créé comme n'importe quel autre test, mais il se trouve dans son propre onglet **Reusable components**, à côté de Tests et Test campaigns. Quand un autre test référence un composant, les steps du composant s'exécutent en ligne comme partie intégrante de ce test.
+
+Mettez à jour un composant une seule fois et chaque test qui l'utilise prend en compte la modification : corrigez un flux de connexion à un seul endroit et tous les tests dépendants restent corrects.
+
+## En créer un
+
+Il existe deux façons de créer un composant :
+
+**Depuis zéro** : ouvrez l'onglet **Reusable components** dans la liste des tests et créez-le comme un test normal : choisissez un canal, définissez un point de départ, et ajoutez des steps. Une fois sauvegardé, il est disponible pour être inséré dans d'autres tests du même produit.
+
+**Depuis un test existant** : dans le test builder, ouvrez le menu d'un step group et choisissez **Create reusable component**. Le groupe est publié dans la bibliothèque et devient violet pour indiquer qu'il est désormais partagé. Pour le reconvertir en steps classiques dans ce test, utilisez **Detach reusable component**.
+
+## La liste des composants
+
+L'onglet Reusable components liste chaque composant avec une pastille **Usage** ("Used in X tests") et un compteur de **Steps**. L'icône de connexion à côté du nom est codée par couleur : violet quand le composant est activement utilisé, gris quand rien ne le référence encore.
+
+Cliquez sur la pastille d'utilisation d'un composant pour ouvrir la fenêtre **Used in tests** : elle liste chaque test dépendant avec son créateur et un raccourci **Edit** directement vers le builder de ce test, pour que vous puissiez évaluer l'impact d'une modification avant de la faire.
+
+## Réutilisation et dépendances
+
+- **Propagation de la validité :** si un composant devient invalide, chaque test qui en dépend est marqué comme invalide jusqu'à ce que le composant soit corrigé. Dans la liste des tests, un triangle rouge signale un test dont une dépendance est cassée.
+- **Portée produit :** les reusable components appartiennent à un seul produit. Un test qui contient un reusable component ne peut pas être copié vers un autre produit.

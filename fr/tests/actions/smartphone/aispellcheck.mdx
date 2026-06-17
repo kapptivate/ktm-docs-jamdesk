@@ -1,0 +1,57 @@
+---
+title: Verify Spell Check (AI)
+sidebarTitle: Vérification orthographique (IA)
+description: L'IA vérifie l'orthographe et la grammaire du texte visible à l'écran.
+---
+
+Détectez les fautes de frappe et les erreurs de grammaire dans votre application avant vos utilisateurs. L'IA lit le texte visible de l'écran actuel et signale tout ce qui semble incorrect dans la langue que vous spécifiez. Utile sur les écrans riches en contenu et pour les vérifications de localisation.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Langue | `language` | Oui | La langue dans laquelle le texte visible est censé être rédigé (par exemple `French`). |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-spell-check",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "language": "French",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : échec lorsque l'IA trouve des problèmes d'orthographe ou de grammaire dans le texte visible, avec les problèmes listés dans le résultat.
+- **Capture d'écran** : prise pour l'état vérifié, afin que vous puissiez voir exactement ce qui a été contrôlé.
+- **Utilisation de l'IA** : le coût IA de la vérification est ajouté à l'exécution.
+
+Pour comprendre le fonctionnement de la vérification et interpréter les résultats, consultez [Spell check](/fr/ai/spell-check).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Spell check" icon="spell-check" href="/fr/ai/spell-check">
+
+    Comment fonctionne la vérification IA et comment lire ses résultats
+
+</Card>
+  <Card title="Verify with AI" icon="sparkles" href="/fr/tests/actions/smartphone/aivisualassert">
+
+    Vérifier n'importe quel état visuel en langage naturel
+
+</Card>
+</Columns>

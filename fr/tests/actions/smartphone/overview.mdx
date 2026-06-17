@@ -1,0 +1,81 @@
+---
+title: Steps smartphone
+description: Tous les steps disponibles dans le builder de tests smartphone, organisés comme la palette de steps.
+sidebarTitle: Vue d'ensemble
+---
+
+Les tests smartphone exécutent votre application native sur de vrais appareils Android et iOS. Ils sont construits à partir des steps ci-dessous ; les groupes correspondent aux catégories de la palette **Ajouter un step** dans le [test builder](/fr/tests/builder), ce que vous voyez ici est ce que vous voyez dans le produit.
+
+Chaque test smartphone commence par un step verrouillé **Launch app** qui ouvre l'application sélectionnée lors de la création du test.
+
+## Interactions
+
+| Step | Description |
+|------|-------------|
+| [Tap](/fr/tests/actions/smartphone/tap) | Appuyer sur un élément, ou sur une position X/Y exacte en mode Coordinates |
+| [Long press](/fr/tests/actions/smartphone/longpress) | Appui long pour ouvrir les actions contextuelles |
+| [Hide keyboard](/fr/tests/actions/smartphone/hidekeyboard) | Masquer le clavier virtuel |
+| [Fill input](/fr/tests/actions/smartphone/input) | Saisir du texte, des variables ou des données générées dans un champ |
+
+## Email
+
+| Step | Description |
+|------|-------------|
+| [Get mail](/fr/tests/actions/smartphone/getmail) | Vérifier qu'un email arrive dans une boîte de test |
+| [Get email code](/fr/tests/actions/smartphone/getemailcode) | Attendre un email et extraire son code dans une variable |
+| [Get email link](/fr/tests/actions/smartphone/getemaillink) | Attendre un email et extraire un lien dans une variable |
+
+## Vérifications
+
+| Step | Description |
+|------|-------------|
+| [Verify element](/fr/tests/actions/smartphone/verifyelement) | Vérifier qu'un élément est (ou n'est pas) affiché, cliquable, activé ou présent |
+| [Verify Spell Check (AI)](/fr/tests/actions/smartphone/aispellcheck) | L'IA vérifie l'orthographe du texte visible à l'écran |
+| [Verify with AI](/fr/tests/actions/smartphone/aivisualassert) | Vérifier n'importe quoi sur l'écran en langage naturel |
+
+## Attente
+
+| Step | Description |
+|------|-------------|
+| [Wait for delay](/fr/tests/actions/smartphone/waitfordelay) | Mettre en pause pendant une durée fixe |
+
+## Autres
+
+| Step | Description |
+|------|-------------|
+| [Custom step](/fr/tests/actions/smartphone/customstep) | Exécuter votre propre JavaScript |
+| [Set variable](/fr/tests/actions/smartphone/setvariable) | Stocker une valeur pour les steps suivants |
+| [Extract value](/fr/tests/actions/smartphone/extractvalue) | Lire le texte ou la valeur d'un élément dans une variable |
+
+<Note>
+  Deux steps historiques n'apparaissent plus dans la palette mais continuent de fonctionner dans les tests existants : [Assert displayed](/fr/tests/actions/smartphone/assertdisplayed) et [Assert not displayed](/fr/tests/actions/smartphone/assertnotdisplayed).
+</Note>
+
+## Paramètres communs des steps
+
+Chaque step partage quelques paramètres, visibles dans le panneau latéral du step dans le builder :
+
+- **Ignorer l'erreur sur ce step** (`ignore_errors`) : l'exécution continue avec le step suivant même si celui-ci échoue.
+- **Désactiver pendant l'exécution** (`disabled`) : le step reste dans le scénario mais n'est pas exécuté.
+- **Capabilities personnalisées** (`use_capabilities`, `capabilities`) : ajuster ou remplacer le comportement d'exécution pour ce step uniquement.
+
+Les steps qui ciblent un élément partagent aussi les paramètres IA : une **description** en langage naturel, un **selector manuel** optionnel (XPath dans l'arbre UI de l'application), et une **stratégie IA** qui détermine quand l'IA localise l'élément par rapport au selector enregistré. Sur les steps d'interaction smartphone, l'IA est désactivée par défaut ; activez-la par step ou via la stratégie du test. Voir [Selectors IA](/fr/ai/selectors).
+
+## Des résultats aux analytiques
+
+Chaque step enregistre son timing, son statut et ses captures d'écran, ainsi que les variables créées. Au niveau du test, chaque exécution alimente la mesure `test` utilisée par les [Analytiques](/fr/monitoring/dashboards) : durée, compteurs de succès/avertissement/échec, et en cas d'échec, quel type de step a provoqué l'erreur. Les métriques personnalisées créées dans les steps remontent au même endroit.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
+
+    Comment les steps sont ajoutés, configurés et organisés en groupes
+
+</Card>
+  <Card title="Canal smartphone" icon="mobile-screen" href="/fr/agents-devices/smartphone">
+
+    Comment les vrais appareils exécutent votre application
+
+</Card>
+</Columns>

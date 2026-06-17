@@ -1,0 +1,59 @@
+---
+title: "list_alert_definitions"
+description: "Lister les définitions d'alerts configurées sur la plateforme Kapptivate."
+sidebarTitle: "list_alert_definitions"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les définitions d'alerts configurées sur la plateforme Kapptivate.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `archived` | string | Non | Filtrer par statut d'archivage : true ou false |
+| `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (par défaut : false) |
+| `name` | string | Non | Filtrer par nom d'alert |
+| `operator` | string | Oui | Slug de l'opérateur |
+| `types` | string | Non | Types d'alerts séparés par des virgules : raw_alert, availability, metric, agent_availability, availability_last_point |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Ce sont des règles persistantes qui déclenchent automatiquement des incidents lorsque les conditions sont remplies.
+
+Différent de evaluate_alert qui effectue un calcul analytique local à la demande. Pour vérifier le statut des alerts de la plateforme, utilisez list_incidents.
+
+Filtres : name, types (séparés par des virgules : raw_alert, availability, metric, agent_availability, availability_last_point), archived (bool).
+```
+
+## Associé
+
+- [`evaluate_alert`](/fr/mcp/tools/metrics/evaluate_alert)
+- [`list_incidents`](/fr/mcp/tools/alerting/list_incidents)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

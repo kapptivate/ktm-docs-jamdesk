@@ -1,0 +1,71 @@
+---
+title: Download File
+description: Téléchargez un fichier via HTTP et mesurez le débit avec un détail complet des temps.
+---
+
+Téléchargez un fichier via la connexion data de la SIM et mesurez le débit descendant, avec la cascade de temps complète : DNS, connexion TCP, TLS, temps jusqu'au premier octet, transfert. L'action de référence pour suivre les performances de téléchargement cellulaire.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Url | `command.url` | Oui | URL du fichier à télécharger. |
+| Ignorer le certificat SSL | `command.insecure_skip_verify` | Non | Ignorer la vérification du certificat. Par défaut : désactivé. |
+| Activer les cookies | `command.enable_cookies` | Non | Conserver les cookies entre les redirections. Par défaut : désactivé. |
+| Le téléchargement doit échouer | `expect_failure` | Non | Inverse le verdict, pour du contenu qui doit être bloqué. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_HTTP_DOWNLOAD",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "url": "https://files.example.com/10MB.bin",
+    "insecure_skip_verify": false,
+    "enable_cookies": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `throughput_in_kbps` | Débit de téléchargement. |
+| `size_in_bytes` | Octets téléchargés. |
+| `status_code` | Code de statut HTTP de la réponse. |
+| `md5sum` | Hash du fichier téléchargé, pour vérifier l'intégrité. |
+| `dnslookup_duration`, `connect_duration`, `appconnect_duration`, `pretransfer_duration`, `starttransfer_duration`, `contenttransfer_duration`, `total_duration` | La cascade de temps : DNS, connexion TCP, handshake TLS, requête, temps jusqu'au premier octet, transfert, total. |
+
+Dans Analytics, chaque exécution alimente la mesure HTTP download avec `throughput_kbps`, `downloaded_bytes`, chaque durée de la cascade (`namelookup_duration_seconds`, `connect_duration_seconds`, `starttransfer_duration_seconds`...) et `duration_seconds`, étiquetée par statut, URL, code de statut, APN, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="HTTP Upload" icon="cloud-arrow-up" href="/fr/tests/actions/cellular/http-upload">
+
+    Mesurez la direction montante
+
+</Card>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/fr/tests/actions/cellular/speedtest">
+
+    Les deux directions plus la latence, contre les serveurs Ookla
+
+</Card>
+</Columns>

@@ -1,0 +1,58 @@
+---
+title: "send_shell_command"
+description: "Envoyer une commande shell à un appareil (carte SIM ou web agent) pour exécution immédiate."
+sidebarTitle: "send_shell_command"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Envoyer une commande shell à un appareil (carte SIM ou web agent) pour exécution immédiate.
+
+<Info>
+  **Écriture de données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `command` | string | Oui | Payload de commande en chaîne JSON. Les champs dépendent du type d'action, utilisez list_shell_action_types pour référence. |
+| `owner` | string | Oui | Identifiant de l'appareil : MSISDN pour SIM (par ex. 0789800356), hostname pour Ethernet (par ex. my-web-agent) |
+| `product_id` | number | Oui | Identifiant du produit propriétaire de l'appareil |
+| `type` | string | Oui | Type d'action (par ex. USSD, ETH_HTTP_API, DATA_PING). Utilisez list_shell_action_types pour voir les options. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product_id": 0,
+  "owner": "string",
+  "type": "string",
+  "command": "string"
+}
+```
+
+## Description
+
+```text
+PRÉREQUIS : appelez platform_guide topic=shell pour la navigation USSD, la gestion de contention de ressources et les modèles d'événements asynchrones. Contrairement aux tests, les commandes shell n'ont pas d'assertions, elles lancent une commande et renvoient le résultat brut. Utilisez list_shell_action_types pour découvrir les types d'actions disponibles et leurs champs de commande requis. Renvoie l'identifiant shell pour interroger avec get_shell_result. USSD fonctionne par session : composez d'abord le code court racine (par ex. {"input":"*199#"}), puis vérifiez get_shell_result. Si la session est OPEN, envoyez les options de menu de suivi comme des commandes séparées (par ex. {"input":"1"}, {"input":"2"}). Préférez la navigation étape par étape aux codes courts longs comme *199*5#, n'utilisez les codes courts longs que lorsque l'utilisateur en fournit un explicitement. Les sessions expirent après ~30s.
+```
+
+## Associé
+
+- [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
+- [`list_shell_action_types`](/fr/mcp/tools/shell/list_shell_action_types)
+- [`get_shell_result`](/fr/mcp/tools/shell/get_shell_result)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

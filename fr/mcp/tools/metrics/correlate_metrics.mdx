@@ -1,0 +1,62 @@
+---
+title: "correlate_metrics"
+description: "Détecter les relations entre métriques : ces métriques sont-elles liées ?"
+sidebarTitle: "correlate_metrics"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Détecter les relations entre métriques : ces métriques sont-elles liées ?
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `mode` | string (quick \| full \| shift) | Non | Mode d'analyse : 'quick' (par défaut, corrélation uniquement), 'full' (corrélation + test KS de décalage + scan de lag), 'shift' (décalage de distribution KS uniquement) |
+| `operator` | string | Oui | Slug de l'opérateur (= nom de la base InfluxDB) |
+| `queries` | string | Oui | Tableau JSON de 2 à 10 requêtes InfluxQL GROUP BY time() |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "queries": "string"
+}
+```
+
+## Description
+
+```text
+Ont-elles changé en même temps ? L'une cause-t-elle l'autre ?
+
+Fournissez 2 à 10 requêtes InfluxQL GROUP BY time(). Les résultats incluent des résumés de santé par requête et une corrélation par paires avec significativité statistique.
+
+3 modes d'analyse (--mode) :
+- quick (par défaut) : Spearman/Pearson par paires + p-values. Rapide, répond à "sont-elles corrélées ?"
+- full : ajoute la détection de décalage de distribution (test KS) et le scan de lag (±50 pas). Répond à "ont-elles changé ensemble ?" et "l'une cause-t-elle l'autre ?"
+- shift : décalage de distribution KS par requête uniquement. Répond à "quelles métriques ont changé récemment ?"
+
+Utilisez des intervalles GROUP BY time() identiques pour un meilleur alignement. Prérequis : découvrez le schéma avec query_metrics SHOW MEASUREMENTS d'abord.
+```
+
+## Associé
+
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

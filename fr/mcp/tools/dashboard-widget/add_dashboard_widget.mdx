@@ -1,0 +1,65 @@
+---
+title: "add_dashboard_widget"
+description: "Ajouter un widget à un dashboard."
+sidebarTitle: "add_dashboard_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Ajouter un widget à un dashboard.
+
+<Warning>
+  **Destructif · Écriture de données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Définir à true après que l'utilisateur approuve la poursuite au-delà de la limite d'édition. NE JAMAIS définir sans approbation explicite de l'utilisateur. |
+| `dashboard_uid` | string | Oui | UID du dashboard (depuis list_dashboards ou create_dashboard) |
+| `h` | number | Non | Hauteur en lignes de la grille. Omettre pour la valeur par défaut du type. |
+| `preview` | boolean | Non | Mode simulation : valide, normalise et positionne automatiquement sans PATCHer le dashboard ni consommer le budget d'édition. Renvoie la grille ASCII + données normalisées + avertissements. |
+| `w` | number | Non | Largeur en colonnes de la grille. Omettre pour la valeur par défaut du type. |
+| `widget_json` | string | Oui | Chaîne JSON de la section données du widget (depuis get_widget_template, remplie avec des valeurs réelles, sans _metadata) |
+| `x` | number | Non | Position x dans la grille (0-23). Omettre pour le positionnement automatique. |
+| `y` | number | Non | Position y dans la grille. Omettre pour le positionnement automatique (ajouté en bas). |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "dashboard_uid": "string",
+  "widget_json": "string"
+}
+```
+
+## Description
+
+```text
+Valide le widget, génère un identifiant unique, le positionne automatiquement et l'ajoute à la disposition du dashboard via PATCH.
+
+Prérequis : utilisez query_metrics avec SHOW MEASUREMENTS et SHOW FIELD KEYS pour découvrir le schéma InfluxDB avant de construire les requêtes du widget. Les valeurs placeholder seront REJETÉES.
+
+Workflow : get_widget_template → remplir avec des valeurs réelles → validate_widget → add_dashboard_widget → get_dashboard (vérifier).
+```
+
+## Associé
+
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+- [`get_widget_template`](/fr/mcp/tools/dashboard-widget/get_widget_template)
+- [`validate_widget`](/fr/mcp/tools/dashboard-widget/validate_widget)
+- [`get_dashboard`](/fr/mcp/tools/dashboard/get_dashboard)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

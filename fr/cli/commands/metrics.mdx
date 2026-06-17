@@ -1,0 +1,53 @@
+---
+title: "ktm metrics"
+description: "Metrics — interroger les KPI des monitors, les données des collecteurs passifs et l'utilisation des appareils depuis InfluxDB"
+sidebarTitle: "metrics"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Metrics — interroger les KPI des monitors, les données des collecteurs passifs et l'utilisation des appareils depuis InfluxDB
+
+## Utilisation
+
+```bash
+ktm metrics [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="alert-eval" icon="angle-right" href="/fr/cli/commands/metrics/alert-eval">
+    Évaluer des métriques par rapport à des règles d'alerte
+  </Card>
+  <Card title="correlate" icon="angle-right" href="/fr/cli/commands/metrics/correlate">
+    Détecter les relations entre métriques : corrélation, changement de distribution, décalage
+  </Card>
+  <Card title="peak-usage" icon="angle-right" href="/fr/cli/commands/metrics/peak-usage">
+    Obtenir l'utilisation maximale P95 des ressources par fenêtres d'agrégation temporelle
+  </Card>
+  <Card title="query" icon="angle-right" href="/fr/cli/commands/metrics/query">
+    Exécuter une requête InfluxQL brute sur la base de métriques de l'opérateur
+  </Card>
+  <Card title="resource-usage" icon="angle-right" href="/fr/cli/commands/metrics/resource-usage">
+    Obtenir l'utilisation des ressources d'appareils par intervalles d'une heure et de 5 minutes
+  </Card>
+  <Card title="slo" icon="angle-right" href="/fr/cli/commands/metrics/slo">
+    Calculer les métriques SLI/SLO selon la méthodologie burn-rate de Google SRE
+  </Card>
+</Columns>
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

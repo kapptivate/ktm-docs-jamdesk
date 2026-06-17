@@ -1,0 +1,57 @@
+---
+title: Verify with AI
+sidebarTitle: Vérifier avec l'IA
+description: Vérifier n'importe quoi sur l'écran actuel en langage naturel, évalué par l'IA.
+---
+
+Vérifiez ce qu'un selector ne peut pas exprimer : "le carrousel d'onboarding affiche 3 points", "le total du panier correspond à la somme des articles", "aucune bannière d'erreur n'est visible". L'IA examine l'écran actuel et juge si votre assertion est vraie.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Assertion | `assertion` | Oui | Ce qui doit être vrai, en langage naturel. Par exemple : "The cart shows 2 items and a total of 39,98 €". Supporte les variables. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-visual-assert",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "assertion": [{ "type": "value", "data": { "value": "The order confirmation banner is visible and mentions a delivery date" } }],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès lorsque l'IA juge l'assertion vraie sur l'écran actuel, échec sinon, avec l'explication de l'IA dans le résultat.
+- **Capture d'écran** : prise pour l'état vérifié, afin que vous puissiez examiner ce que l'IA a évalué.
+- **Utilisation de l'IA** : le coût IA de l'évaluation est ajouté à l'exécution.
+
+Pour rédiger des assertions fiables, consultez [Verify with AI](/fr/ai/verify-with-ai).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Guide Verify with AI" icon="sparkles" href="/fr/ai/verify-with-ai">
+
+    Bonnes pratiques pour rédiger des assertions que l'IA évalue de manière fiable
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+
+    Vérifications déterministes d'éléments, quand un selector suffit
+
+</Card>
+</Columns>

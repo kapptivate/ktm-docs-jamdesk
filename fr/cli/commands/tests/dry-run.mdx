@@ -1,0 +1,73 @@
+---
+title: "ktm tests dry-run"
+description: "Prévisualiser l'impact de la modification d'un test sans appliquer les changements"
+sidebarTitle: "dry-run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Prévisualiser l'impact de la modification d'un test sans appliquer les changements
+
+## Utilisation
+
+```bash
+ktm tests dry-run <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Prévisualiser l'impact de la modification des actions
+ktm tests dry-run 16480 --from-file updated.json
+
+# Prévisualiser un changement de nom
+ktm tests dry-run 16480 --name "New Name"
+
+# Prévisualiser l'impact du changement de variant pour le groupe API
+ktm tests dry-run 16480 --variant API:Dev
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--auto-correct-kinds` | boolean | — | Réécrire les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. |
+| `--description` | string | — | Remplacer la description du test |
+| `--from-file` | string | — | Chemin vers le fichier JSON avec la définition de test mise à jour |
+| `--name` | string | — | Remplacer le nom du test |
+| `--variant` | string[] | — | Fixer à nouveau un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant. |
+
+## Détails
+
+Exécuter un dry-run de modification de test pour voir quels tests seraient invalidés et quels
+monitors seraient désactivés. Aucun changement n'est appliqué.
+
+Utilisez cette commande avant "tests edit" pour comprendre le rayon d'impact. Accepte les
+mêmes flags --variant et --auto-correct-kinds que edit pour prévisualiser
+ce que le changement de variant invaliderait.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests edit`](/fr/cli/commands/tests/edit)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

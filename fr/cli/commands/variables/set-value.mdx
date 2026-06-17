@@ -1,0 +1,65 @@
+---
+title: "ktm variables set-value"
+description: "Définir la valeur d'UN variant sur une variable groupée (conserve les autres variants)"
+sidebarTitle: "set-value"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Définir la valeur d'UN variant sur une variable groupée (conserve les autres variants)
+
+## Utilisation
+
+```bash
+ktm variables set-value <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables set-value 17 --variant prod --value prod.db.example.com
+ktm variables set-value 17 --variant 42 --value 0.0.0.0
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--value` | string | — | Nouvelle valeur pour ce variant |
+| `--variant` | string | — | Identifiant ou nom du variant (requis) |
+
+## Détails
+
+Modification atomique de la valeur par variant. --variant accepte un identifiant ou un nom de variant ; le
+variant cible doit exister sur la variable. Erreur lorsqu'elle est appelée sur une variable
+globale (sans variants) : utilisez 'ktm variables update --default-value' à la place.
+
+## Notes
+
+- Définit la valeur d'UN variant sur une variable groupée, en conservant les autres variants. Pour changer le nom, la description ou la valeur par défaut d'une variable, utilisez [`ktm variables update`](/fr/cli/commands/variables/update).
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+- [`ktm variables update`](/fr/cli/commands/variables/update)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

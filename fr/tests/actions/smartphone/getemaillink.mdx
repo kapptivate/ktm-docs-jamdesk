@@ -1,0 +1,63 @@
+---
+title: Get email link
+sidebarTitle: Lien par email
+description: Attendre un email et extraire un lien dans une variable.
+---
+
+Capturez un lien envoyé par email dans le cadre du flux : confirmation de compte, réinitialisation de mot de passe, connexion par lien magique. Le step attend l'email, demande à l'IA le lien correspondant à votre intention, et le stocke dans une variable pour les steps suivants.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Email de réception du lien | `mailbox` | Oui | L'adresse de la boîte de test qui doit recevoir l'email contenant le lien. |
+| Variable | `variable` | Oui | Nom de la variable qui reçoit le lien. Par défaut : `MailLink`. |
+| Intention | `intent` | Non | Quel lien l'IA doit extraire. Par défaut : `The first link in the text`. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si aucun lien n'est trouvé. Par défaut : désactivé. |
+
+Utilisez l'intention pour désambiguïser les emails contenant plusieurs liens : "The password reset link", "The link in the Confirm my account button".
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "ai-get-mail-link",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@example.com" } }],
+    "intent": [{ "type": "value", "data": { "value": "The link in the Confirm my account button" } }],
+    "variable": "MailLink",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Variable** : le lien extrait est stocké dans la variable. Ouvrez-le avec un step de navigation pour continuer le flux.
+- **Timing** : début, fin et durée (en secondes). La durée inclut l'attente de réception de l'email.
+- **Statut** : échec si aucun email n'arrive ou si l'IA ne trouve pas de lien correspondant à l'intention.
+- **Utilisation de l'IA** : le coût IA de l'extraction est ajouté à l'exécution.
+
+Consultez [Email et SMS dans les tests](/fr/tests/email-sms) pour comprendre le fonctionnement des boîtes de test.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Fill input" icon="keyboard" href="/fr/tests/actions/smartphone/input">
+
+    Utiliser le lien extrait dans un step ultérieur
+
+</Card>
+  <Card title="Email et SMS dans les tests" icon="envelope" href="/fr/tests/email-sms">
+
+    Comment fonctionnent les boîtes de test
+
+</Card>
+</Columns>

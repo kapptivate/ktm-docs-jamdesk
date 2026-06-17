@@ -1,0 +1,54 @@
+---
+title: "list_resources"
+description: "Liste les ressources (SIM, web agents, smartphones) pour l'exécution et la création de tests."
+sidebarTitle: "list_resources"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les ressources (SIM, web agents, smartphones) pour l'exécution et la création de tests.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `available` | boolean | Non | Filtrer par statut en ligne/disponible (défaut : true). Passez false pour inclure les ressources hors ligne. |
+| `configured` | boolean | Non | Filtrer par statut configuré (défaut : true). Configuré signifie : SIM a un national_msisdn, agent a un hostname, smartphone a des props. |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de résumés compacts (défaut : false) |
+| `product` | string | Oui | Slug du produit (requis, format : operator~product) |
+| `type` | string (sim \| web-agent \| smartphone) | Non | Filtre par type de ressource : sim, web-agent, smartphone (omettez pour les trois) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List resources (SIMs, web agents, smartphones) for test execution and test creation. Resource identifiers become action owners: SIM→national_msisdn, web agent→hostname, smartphone→UUID. Defaults to online/available and configured resources. To list installable apps on a specific smartphone, use get_smartphone_apps instead.
+```
+
+## Associés
+
+- [`get_smartphone_apps`](/fr/mcp/tools/discovery/get_smartphone_apps)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

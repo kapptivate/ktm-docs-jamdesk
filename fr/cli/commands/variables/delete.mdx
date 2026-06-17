@@ -1,0 +1,54 @@
+---
+title: "ktm variables delete"
+description: "Supprimer une variable ; refuse si un test la référence"
+sidebarTitle: "delete"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Supprimer une variable ; refuse si un test la référence
+
+## Utilisation
+
+```bash
+ktm variables delete <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables delete 17
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Refuse si un test référence la variable, en listant les références. Le
+endpoint DELETE de la plateforme applique la même protection côté serveur et n'expose aucun
+mécanisme de contournement, donc il n'y a pas de flag --force ici : supprimez d'abord les références via
+'ktm tests edit' (ou supprimez les tests concernés) puis relancez la suppression.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

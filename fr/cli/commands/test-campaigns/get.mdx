@@ -1,0 +1,57 @@
+---
+title: "ktm test-campaigns get"
+description: "Récupérer une Tests campaign avec sa test_list complète"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupérer une Tests campaign avec sa test_list complète
+
+## Utilisation
+
+```bash
+ktm test-campaigns get <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm test-campaigns get 42
+ktm test-campaigns get 42 -o json | jq '.test_list[].name'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Retourne la forme complète de la Tests campaign, incluant la test_list ordonnée. Chaque
+entrée est \{position, test (id), name, owners, input_variables\} : owners et
+input_variables sont des surcharges par campaign appliquées uniquement lors de l'exécution.
+
+Pour l'exécuter : ktm ci build --test-campaign &lt;id&gt; | ktm ci run --stdin.
+
+## Voir aussi
+
+- [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
+- [`ktm ci build`](/fr/cli/commands/ci/build)
+- [`ktm ci run`](/fr/cli/commands/ci/run)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

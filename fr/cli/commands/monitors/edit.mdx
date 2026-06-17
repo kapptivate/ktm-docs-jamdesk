@@ -1,0 +1,96 @@
+---
+title: "ktm monitors edit"
+description: "Modifier un monitor existant"
+sidebarTitle: "edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Modifier un monitor existant
+
+## Utilisation
+
+```bash
+ktm monitors edit <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Change scheduling
+ktm monitors edit 42 --scheduling '{"type":"simple/v2","definition":{"frequency":{"every":10,"unit":"minutes"}}}'
+
+# Pause a monitor
+ktm monitors edit 42 --active false
+
+# Override a variable (re-builds owners + input_variables from test definition)
+ktm monitors edit 42 --set-var "SIM_A=0699999999"
+
+# Re-pin a variant (V3): re-resolve buckets for the named group
+ktm monitors edit 42 --variant "API:Staging"
+
+# Edit from a JSON file
+ktm monitors edit 42 --from-file patch.json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Nouveau statut actif (true/false) |
+| `--from-file` | string | — | Fichier JSON avec les champs à mettre à jour |
+| `--name` | string | — | Nouveau nom du monitor |
+| `--scheduling` | string | — | Nouveau JSON de planification |
+| `--set-var` | string[] | — | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE). Reconstruit owners + input_variables depuis la définition du test. |
+| `--variant` | string[] | — | Re-fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant ; pour les monitors legacy en cours de migration, les groupes non fixés utilisent le défaut par variable. |
+
+## Détails
+
+Met à jour la configuration du monitor via PATCH. Seuls les champs fournis sont modifiés.
+
+Utilisez --set-var pour mettre à jour des valeurs de variables individuelles (reconstruit automatiquement owners + input_variables).
+Utilisez --variant pour re-fixer le variant d'un groupe de variables (répétable ; même format que tests create).
+Utilisez --from-file pour les mises à jour en masse ou des flags individuels pour des changements ciblés.
+Les valeurs des flags ont priorité sur les valeurs de --from-file.
+
+Auto-migration V3 à l'édition :
+  Les monitors legacy (créés avant V3) portent un champ variable_group de premier niveau
+  et n'ont pas de buckets par variable. L'édition d'un tel monitor le migre automatiquement vers
+  le format V3 : chaque input_variable reçoit un bucket, et le champ legacy variable_group
+  est effacé (défini à null sur le réseau). La migration est idempotente :
+  ré-éditer un monitor déjà V3 est un no-op côté bucket. Il n'y a
+  pas d'opt-out : la migration est correcte par construction et se déclenche toujours
+  pour les monitors legacy.
+
+  Quand le test sous-jacent référence plusieurs groupes de variables, les variables
+  des groupes AUTRES que le variable_group legacy utilisent le variant par défaut
+  de leur propre groupe (sauf si --variant le remplace). Utilisez --variant pour fixer
+  des variants non par défaut pour des groupes spécifiques lors de l'édition de migration.
+
+Champs protégés : test_id et product_id ne peuvent pas être changés via edit.
+Pour changer le test sous-jacent, supprimez le monitor et créez-en un nouveau.
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

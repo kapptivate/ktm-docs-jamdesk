@@ -1,0 +1,64 @@
+---
+title: "build_dashboard"
+description: "Créer un dashboard avec tous les widgets en un seul appel atomique."
+sidebarTitle: "build_dashboard"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un dashboard avec tous les widgets en un seul appel atomique.
+
+<Info>
+  **Écriture de données · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `bucket` | string | Non | Bucket InfluxDB pour les données d'agent passif (optionnel) |
+| `name` | string | Oui | Nom du dashboard |
+| `operator` | string | Oui | Slug de l'opérateur |
+| `preview` | boolean | Non | Mode simulation : valide, normalise et positionne automatiquement tous les widgets sans créer le dashboard. Renvoie la grille ASCII + données normalisées + avertissements. |
+| `widgets` | string | Oui | Tableau JSON d'objets widget (même format que widget_json dans add_dashboard_widget, sans _metadata). Optionnel _w/_h par widget pour remplacer la taille par défaut. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "name": "string",
+  "widgets": "string"
+}
+```
+
+## Description
+
+```text
+Valide tous les widgets en amont : si UN SEUL échoue, AUCUN n'est créé. Positionne automatiquement les widgets en utilisant les valeurs par défaut du type (remplaçables avec _w/_h par widget). Renvoie un aperçu en grille ASCII + tous les identifiants de widgets.
+
+PRÉREQUIS : appelez platform_guide topic=dashboards pour les types de widgets, les règles de disposition en grille et le workflow complet de création. Utilisez query_metrics avec SHOW MEASUREMENTS et SHOW FIELD KEYS pour découvrir le schéma InfluxDB avant de construire les requêtes de widgets.
+
+Chaque objet widget utilise le même format que widget_json dans add_dashboard_widget (sans _metadata). Les champs optionnels _w/_h remplacent les dimensions par défaut du type. La position (_x/_y) est toujours calculée automatiquement, ne la fournissez pas.
+
+Atomique : si UN SEUL widget échoue la validation, AUCUN n'est créé. Corrigez toutes les erreurs et soumettez à nouveau.
+```
+
+## Associé
+
+- [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+- [`add_dashboard_widget`](/fr/mcp/tools/dashboard-widget/add_dashboard_widget)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

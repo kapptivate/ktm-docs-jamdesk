@@ -1,0 +1,44 @@
+---
+title: Consulter et gérer les clés API
+description: Recherchez, modifiez, rafraîchissez et révoquez les clés API de votre workspace.
+---
+
+![Le panneau latéral de modification d'une clé API avec le champ nom, le sélecteur d'équipes et le bouton Révoquer la clé API](/images/api-key-edit-panel.webp)
+
+La liste des clés API affiche chaque clé créée dans votre workspace, vous permettant d'auditer les accès et de remplacer les identifiants si nécessaire. Chaque ligne affiche :
+
+- **Nom** de la clé.
+- **Token** : masqué, avec une icône de rafraîchissement en ligne pour en générer un nouveau.
+- **Accès** : combien d'équipes peuvent utiliser la clé (ou `-` si aucune).
+- **Menu ⋮** : les actions **Modifier** et **Révoquer**.
+
+## Rechercher des clés API
+
+Utilisez la barre de recherche pour filtrer les clés par nom. La recherche est insensible à la casse et se met à jour en temps réel.
+
+## Modifier une clé API
+
+Cliquez n'importe où sur la ligne d'une clé, ou ouvrez son menu **⋮** et choisissez **Modifier**. Le panneau "Modifier la clé API" glisse depuis la droite, où vous pouvez :
+
+- **Renommer** la clé.
+- **Ajuster les équipes** autorisées à l'utiliser.
+- **Révoquer** la clé, avec le bouton rouge en bas du panneau.
+
+Cliquez sur **Enregistrer** pour appliquer vos modifications.
+
+## Rafraîchir un token
+
+Pour remplacer le token d'une clé sans modifier son nom ou ses équipes, cliquez sur l'**icône de rafraîchissement** à côté du token masqué sur la ligne de la clé. Une fenêtre "Rafraîchir le token ?" avertit que les applications utilisant la clé perdront l'accès ; confirmez avec **Rafraîchir le token**. Kapptivate génère un nouveau token et l'affiche dans une fenêtre. L'ancien token cesse de fonctionner immédiatement.
+
+Copiez le nouveau token avant de fermer la fenêtre. Il n'est affiché qu'une seule fois.
+
+## Révoquer une clé API
+
+Révoquer une clé la désactive définitivement. Toute application l'utilisant échouera à s'authentifier.
+
+Pour révoquer :
+
+1. Ouvrez le menu **⋮** sur la ligne de la clé et choisissez **Révoquer**, ou cliquez sur **Révoquer la clé API** en bas du panneau de modification
+2. Confirmez la révocation dans la boîte de dialogue
+
+Cette action est irréversible.

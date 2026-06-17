@@ -1,0 +1,53 @@
+---
+title: Actions Ethernet
+description: Exécutez les actions de mesure réseau via la connexion filaire d'un agent au lieu d'une SIM.
+---
+
+<Danger>
+  **Déprécié.** Les actions Ethernet sont un héritage. Les actions existantes continuent de fonctionner, mais aucun nouveau développement n'est prévu.
+</Danger>
+
+Les actions Ethernet sont les jumelles filaires des [actions DATA SIM](/fr/tests/actions/cellular/overview) : les mêmes mesures (ping, téléchargements, speedtest, traceroute...) exécutées via la connexion Ethernet de l'agent au lieu d'une session data cellulaire. Utilisez-les pour surveiller la connectivité filaire, ou comme référence filaire pour comparer vos mesures cellulaires.
+
+Elles précèdent les constructeurs actuels et sont considérées comme un héritage, mais les tests existants continuent de fonctionner et les actions restent disponibles sur les agents compatibles Ethernet.
+
+## Actions disponibles
+
+Chaque action prend les mêmes paramètres et produit le même rapport et les mêmes métriques Analytics que son équivalent SIM, moins tout ce qui est cellulaire : pas d'APN, pas de technologie d'accès, pas d'étiquettes d'antenne.
+
+| Action Ethernet | Type JSON | Équivalent SIM |
+|-----------------|-----------|----------------|
+| Ping | `ETH_PING` | [Ping](/fr/tests/actions/cellular/ping) |
+| TCP Ping | `ETH_TCP_PING` | [TCP Ping](/fr/tests/actions/cellular/tcp-ping) |
+| HTTP Ping | `ETH_HTTP_PING` | [HTTP Ping](/fr/tests/actions/cellular/http-ping) |
+| DNS Lookup | `ETH_DNS_LOOKUP` | [DNS Lookup](/fr/tests/actions/cellular/dns-lookup) |
+| HTTP Download | `ETH_HTTP_DOWNLOAD` | [Download File](/fr/tests/actions/cellular/download-file) |
+| HTTP Upload | `ETH_HTTP_UPLOAD` | [HTTP Upload](/fr/tests/actions/cellular/http-upload) |
+| FTP Download | `ETH_FTP_DOWNLOAD` | [FTP Download](/fr/tests/actions/cellular/ftp-download) |
+| FTP Upload | `ETH_FTP_UPLOAD` | [FTP Upload](/fr/tests/actions/cellular/ftp-upload) |
+| Email Send | `ETH_EMAIL_SEND` | [Send Mail](/fr/tests/actions/cellular/send-mail) |
+| API Call | `ETH_HTTP_API` | [API Call](/fr/tests/actions/cellular/api-call) |
+| Ookla Speedtest | `ETH_OOKLA_SPEEDTEST` | [Ookla Speedtest](/fr/tests/actions/cellular/speedtest) |
+| Traceroute | `ETH_TRACEROUTE` | [Traceroute](/fr/tests/actions/cellular/traceroute) |
+| Check SSL/TLS Certificate | `ETH_CHECK_CERTIFICATE` | [Check SSL/TLS Certificate](/fr/tests/actions/cellular/check-certificate) |
+| Streaming video | `ETH_STREAMING_VIDEO` | [Youtube](/fr/tests/actions/cellular/youtube) |
+| JS Web Script | `ETH_JS_WEB_SCRIPT` | [Web Script](/fr/tests/actions/cellular/web-script) |
+
+## Les actions derrière les tests web
+
+Deux autres types `ETH_` existent que vous ne créez normalement jamais manuellement : `ETH_WEB_SCRIPT` est l'ancienne [action script web](/fr/tests/actions/legacy/script-actions), et `ETH_WEB_SCRIPT_V2` est ce que devient un test construit avec le [constructeur web](/fr/tests/actions/web/overview) actuel quand il s'exécute. Si vous les rencontrez dans un JSON de scénario, c'est ce qu'ils sont.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vue d'ensemble des actions SIM" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    La référence complète des paramètres et métriques que ces actions partagent
+
+</Card>
+  <Card title="Actions script" icon="code" href="/fr/tests/actions/legacy/script-actions">
+
+    Les anciens scripts web JavaScript qui s'exécutent sur les agents Ethernet
+
+</Card>
+</Columns>

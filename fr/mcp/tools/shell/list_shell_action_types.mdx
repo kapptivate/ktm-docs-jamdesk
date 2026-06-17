@@ -1,0 +1,51 @@
+---
+title: "list_shell_action_types"
+description: "Lister les types d'actions disponibles en mode shell."
+sidebarTitle: "list_shell_action_types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les types d'actions disponibles en mode shell.
+
+<Note>
+  **Lecture seule.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `owner_kind` | string | Non | Filtrer par type d'appareil : S (SIM) ou E (Ethernet). Omettre pour tout afficher. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "owner_kind": "string"
+}
+```
+
+## Description
+
+```text
+Les actions shell sont un sous-ensemble organisé : uniquement les opérations directes sur appareil/réseau (USSD, ping, HTTP API, etc.). Les actions d'exécution de scripts et de contrôle de tests sont exclues. Utilisez cet outil avant send_shell_command pour voir les types disponibles et leurs champs requis. Pour l'historique des commandes déjà envoyées, utilisez list_shell_actions.
+```
+
+## Associé
+
+- [`send_shell_command`](/fr/mcp/tools/shell/send_shell_command)
+- [`list_shell_actions`](/fr/mcp/tools/shell/list_shell_actions)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

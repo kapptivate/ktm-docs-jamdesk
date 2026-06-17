@@ -1,0 +1,93 @@
+---
+title: Live session
+description: Pilotez un vrai appareil SIM, smartphone ou agent web de manière interactive, puis transformez vos actions en test.
+sidebarTitle: Live session
+---
+
+![Le sélecteur d'appareil de la live session avec les onglets Remote control et History, les catégories SIMs, Smartphones et Web, et les cartes d'appareils disponibles](/images/live-session-picker.webp)
+
+Une live session vous donne le contrôle interactif d'un vrai appareil (une SIM, un smartphone ou un agent web) depuis votre navigateur. Utilisez-la pour explorer une application, déboguer un parcours en échec, ou exécuter des actions manuelles et les capturer dans un test.
+
+La page comporte deux onglets : **Remote control**, où vous pilotez un appareil, et **History**, où chaque action manuelle est journalisée et peut devenir un test.
+
+## Choisir un appareil
+
+Dans **Remote control**, basculez entre les catégories **SIMs**, **Smartphones** et **Web**. Le panneau de gauche liste les appareils disponibles pour la catégorie sélectionnée, regroupés par emplacement :
+
+- Chaque carte affiche le nom de l'appareil, son statut de connexion et ses tags : l'agent hébergeur, la version de l'OS et les slots SIM pour les smartphones, l'opérateur et la technologie réseau pour les SIM.
+- Utilisez la barre de recherche pour filtrer par nom.
+- Sélectionnez un appareil pour ouvrir sa session. En attendant, la zone principale affiche **Pick a device to launch session**.
+
+## Sessions SIM
+
+Sélectionner une SIM ouvre une interface de commande. Le menu déroulant d'action en haut regroupe les actions manuelles que vous pouvez exécuter sur la SIM :
+
+- **USSD** : USSD Command
+- **SMS** : Send SMS
+- **Data** : PDP Activation, Ping, TCP Ping, HTTP Ping, DNS Lookup, Download File, HTTP Upload, FTP Download, FTP Upload, Send Mail, API Call, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate, Youtube
+- **Call** : Wait Call, Place Call
+
+Chaque action manuelle correspond à un step scripté de la [bibliothèque de steps SIM](/fr/tests/actions/cellular/overview), donc ce que vous exécutez ici se traduit directement en test.
+
+Chaque action affiche son propre formulaire. Pour un **USSD Command**, saisissez le code court et choisissez l'**Access technology** (Default, AUTO, 5G, 4G, 3G ou 2G). Pour un **Send SMS**, définissez le numéro de destination et le message, éventuellement un temps **Wait for delivery report** en secondes, et un remplacement **Change default SMSC**.
+
+Les résultats apparaissent dans le fil en dessous du formulaire à mesure que chaque action se termine, avec le contenu de la réponse, le statut et le temps.
+
+## Sessions Smartphone
+
+Sélectionner un smartphone diffuse son écran en direct. Cliquez et faites glisser directement sur le flux ; vos gestes sont envoyés à l'appareil physique en temps réel.
+
+Le panneau de droite ajoute des outils pour l'appareil :
+
+- **Information** : batterie, CPU, RAM, stockage, agent hébergeur, modèle, OS et version, résolution, et combien d'utilisateurs sont sur le téléphone.
+- **Control Panel** : actions au niveau de l'appareil comme redémarrer le téléphone, installer un APK, prendre une capture d'écran, enregistrer l'écran, le pivoter, ou récupérer la hiérarchie d'interface avec **Get XML**.
+- **Quick Access** : équivalents logiciels des boutons physiques : Back, Home, Recent apps, Lock, Volume et Power.
+
+### Inspecter l'interface avec le visualiseur XML
+
+**Get XML** ouvre un visualiseur avec la hiérarchie d'éléments de l'écran actuel. Survolez un noeud pour mettre en surbrillance l'élément correspondant sur une prévisualisation de capture d'écran, et utilisez **Copy** pour copier le XML dans votre travail de sélecteur.
+
+## Sessions Web
+
+Sélectionner un agent web vous donne accès aux actions réseau et web exécutées depuis l'emplacement de cet agent : API Call, DNS Lookup, Send Mail, FTP Download, FTP Upload, Get webpage or file, HTTP Upload, HTTP Ping, Ping, TCP Ping, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate et Youtube.
+
+Un **API Call** prend l'URL du endpoint avec les onglets **Headers** et **Body**, plus des options d'exécution : proxy personnalisé, remplacement DNS, ignorer le certificat SSL, conserver les cookies et suivre la redirection.
+
+## Macros et spectating
+
+Deux contrôles se trouvent en haut des sessions SIM et web :
+
+- **Record Macro** : capturez la séquence d'actions manuelles que vous exécutez, pour qu'une configuration ou vérification répétée n'ait pas à être reconstruite action par action.
+- **Spectate** : observez les autres actions manuelles en cours sur l'appareil sélectionné, utile quand plusieurs personnes travaillent sur le même équipement.
+
+## History
+
+L'onglet **History** journalise chaque action manuelle avec son statut, son résultat et son horodatage. Filtrez par **Creator** et **Resource**, et ajustez la plage de dates (par défaut : dernières 24 heures).
+
+Cliquez sur **Add** sur les entrées que vous souhaitez conserver : elles arrivent dans le panneau **Action List**, où deux boutons transforment votre travail manuel en ressources :
+
+- **Create test** : convertissez les actions sélectionnées en un nouveau test, chaque action devenant un step.
+- **Report** : générez un rapport formaté des actions sélectionnées à partager.
+
+## Conseils pour les live sessions
+
+**Commencez simplement** : quelques commandes vous aident à comprendre l'appareil avant d'automatiser des tests complets.
+
+**Capturez les parcours complexes** : pour les parcours utilisateur complexes, les exécuter en direct et convertir l'historique est plus rapide que de créer les steps manuellement.
+
+**Déboguez les échecs** : rejouez les actions d'un test en échec dans une live session pour voir exactement où il échoue et ce que l'appareil retourne réellement.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Affinez le test créé à partir d'une session, avec des checks et des variables
+
+</Card>
+  <Card title="Parc d'appareils" icon="mobile-screen" href="/fr/equipment/devices-lab">
+
+    Parcourez et gérez les SIM et smartphones derrière vos sessions
+
+</Card>
+</Columns>

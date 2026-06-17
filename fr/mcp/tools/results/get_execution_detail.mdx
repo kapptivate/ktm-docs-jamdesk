@@ -1,0 +1,51 @@
+---
+title: "get_execution_detail"
+description: "Récupère les résultats détaillés d'une exécution de test (exécutions de campaign ou de test campaign)."
+sidebarTitle: "get_execution_detail"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupère les résultats détaillés d'une exécution de test (exécutions de campaign ou de test campaign).
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `include_full_json` | boolean | Non | Passez à true pour inclure le champ json brut contenant le payload complet de l'exécution avec tous les détails des steps d'action. Attention : cela peut être très volumineux pour les campaigns multi-tests. À utiliser uniquement quand vous avez besoin de détails au niveau des steps au-delà de ce que fournit execution_summary. |
+| `result_id` | string | Oui | L'identifiant d'exécution/résultat. Obtenez-le depuis la réponse de run_campaign, poll_execution, start_execution ou les résultats de list_executions. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "result_id": "string"
+}
+```
+
+## Description
+
+```text
+Returns metadata, tests_overview, and execution_summary with per-test/per-action status, duration, variables, and error messages — sufficient for diagnosing failures and analyzing performance. Set include_full_json=true only when you need step-level details (selectors, HTTP payloads). For monitoring (scheduled) runs use get_monitoring_result instead.
+```
+
+## Associés
+
+- [`get_monitoring_result`](/fr/mcp/tools/monitoring-results/get_monitoring_result)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

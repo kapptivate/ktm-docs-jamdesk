@@ -1,0 +1,71 @@
+---
+title: Send SMS
+description: Envoyez un SMS depuis une vraie SIM, avec accusé de réception optionnel.
+---
+
+Envoyez un SMS depuis la SIM vers n'importe quel numéro. Associez-le à un [Wait SMS](/fr/tests/actions/cellular/wait-sms) sur une seconde SIM pour vérifier le chemin de livraison complet, ou activez l'accusé de réception pour vérifier l'acquittement du réseau.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Technologie d'accès | `command.access_technology` | Non | Technologie réseau à utiliser. Par défaut : automatique. |
+| Numéro du destinataire | `command.dest_number` | Oui | Le numéro de téléphone de destination. Supporte les variables. |
+| Message | `command.sms_text` | Oui | Le corps du SMS. Les textes longs sont envoyés en SMS multi-parties. |
+| Attendre la livraison | `command.with_delivery_report`, `command.delivery_report_timeout` | Non | Attendre l'accusé de réception du réseau, avec un délai en secondes. Par défaut : désactivé, 10s. |
+| Changer le SMSC par défaut | `command.use_custom_smsc`, `command.smsc` | Non | Envoyer via un centre de service SMS spécifique. |
+| Exécuter plusieurs fois | `command.send_multiple_times`, `command.repetition_number` | Non | Répéter l'envoi de 1 à 30 fois. |
+| Le SMS doit échouer | `expect_failure` | Non | Inverse le verdict : l'action réussit uniquement si l'envoi échoue (tests d'interdiction, par exemple). |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "SMS_SEND",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "dest_number": "+33600000000",
+    "sms_text": "Test message",
+    "access_technology": "",
+    "with_delivery_report": true,
+    "delivery_report_timeout": 10,
+    "use_custom_smsc": false,
+    "smsc": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `duration` | Temps d'envoi, en secondes. |
+| `result` | Résultat de l'envoi depuis le réseau. |
+| `part_count` | Nombre de parties SMS envoyées. |
+| `retries_count` | Tentatives nécessaires avant que l'envoi réussisse. |
+| `smsc` | Le centre de service SMS utilisé. |
+| `sms_delivery_report` | Quand activé : statut de livraison et délai de livraison. |
+
+Dans Analytics, chaque exécution alimente la mesure d'envoi SMS avec `duration_seconds`, étiquetée par statut, SMSC, antenne et technologie d'accès. Quand l'accusé de réception est activé, son statut est aussi étiqueté.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Wait SMS" icon="envelope" href="/fr/tests/actions/cellular/wait-sms">
+
+    Vérifiez la réception sur la SIM de destination
+
+</Card>
+  <Card title="Place Call" icon="phone" href="/fr/tests/actions/cellular/place-call">
+
+    Le même schéma à deux SIM pour la voix
+
+</Card>
+</Columns>

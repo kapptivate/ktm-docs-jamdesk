@@ -1,10 +1,29 @@
 ---
 title: SIM (Cellular)
 description: USSD, SMS, network, and data tests on real SIM cards, run by the Cellular agent.
-sidebarTitle: SIM
+sidebarTitle: USSD
 ---
 
 The Cellular channel tests cellular networks, USSD flows, and SMS messaging on real SIM cards. Tests run on physical SIMs inside your on-premise **Cellular agent**.
+
+## Quickstart
+
+Create your first SIM test in four steps.
+
+<Steps>
+  <Step>
+    **Create the test.** Open the **Tests** section for your product, click **+ Create new test**, choose **Classic**, and pick the **Cellular** channel. Name the test.
+  </Step>
+  <Step>
+    **Add steps.** Build the flow with cellular actions: send a USSD command and assert the response, or send and receive an SMS. Save the test.
+  </Step>
+  <Step>
+    **Run it on a SIM.** Click **Run** on the test's row, then pick a SIM in a Cellular agent slot on the [run confirmation](/executions/run) page and launch.
+  </Step>
+  <Step>
+    **Read the result.** Open the execution under **Executions** to see status, the USSD or SMS responses, and timing.
+  </Step>
+</Steps>
 
 <Info>
   Cellular covers data communication, USSD menu flows, and SMS send/receive. These are all part of one channel, not separate test types.

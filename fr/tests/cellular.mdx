@@ -1,0 +1,177 @@
+---
+title: Tests cellulaires (USSD & SMS)
+description: Créez et exécutez des tests qui interagissent avec de vraies cartes SIM sur les réseaux cellulaires, y compris les flux de menus USSD et la messagerie SMS.
+sidebarTitle: Cellulaire
+---
+
+Créez et exécutez des tests qui s'exécutent sur de vraies cartes SIM via de vrais réseaux cellulaires. Les tests cellulaires vous permettent de naviguer dans les menus USSD, d'envoyer et de recevoir des SMS, et de vérifier le comportement du réseau, le tout depuis vos agents cellulaires sur site.
+
+## Quand utiliser un test cellulaire
+
+Lancez un test cellulaire quand vous devez :
+
+- **Naviguer dans les menus USSD** : envoyez des codes de menu (par ex., `#100#`) et vérifiez les réponses, puis enchaînez les sélections dans des menus multi-étapes pour tester les consultations de solde, les flux d'activation ou les menus du service client.
+- **Tester les flux SMS** : attendez les SMS entrants et vérifiez l'expéditeur, le contenu et le nombre de parties des messages multi-parties. Utile pour tester la livraison d'OTP, les notifications ou l'authentification à deux facteurs.
+- **Gérer les USSD push initiés par le réseau** : attendez les messages USSD non sollicités (push) que le réseau envoie à la SIM sans que votre test n'envoie de commande.
+- **Tester la connectivité data** : vérifiez que vos SIM peuvent établir des connexions data et maintenir l'enregistrement sur le réseau de l'opérateur.
+
+## Types d'actions cellulaires
+
+Chaque test cellulaire est construit à partir de trois types d'actions. Toutes s'exécutent sur de vraies SIM dans votre agent cellulaire. Cette page couvre le flux ; la [référence des actions SIM](/fr/tests/actions/cellular/overview) documente les paramètres de chaque action, y compris les actions Data et Call non présentées ici.
+
+### [USSD](/fr/tests/actions/cellular/ussd) (envoyer et attendre la réponse)
+
+Envoyez une commande USSD et attendez que le réseau retourne un menu ou une réponse.
+
+**Ce qui se passe :**
+1. Votre test envoie un code USSD (par ex., `#100#`, `*123*456#`)
+2. L'agent cellulaire le soumet à la passerelle USSD du réseau
+3. La passerelle répond avec un menu ou un message
+4. Votre test vérifie la réponse par rapport aux résultats attendus
+
+**Assertions disponibles :**
+- `message` : le texte de réponse du menu USSD (correspondance exacte, regex, contient, commence par, se termine par)
+- `session_status` : l'état de la session : `alive` (menu actif), `close` (fermé), ou erreurs CUSD comme `Ussd session closed by operator (+CUSD:2)`
+- `duration` : temps de réponse en secondes (comparaison numérique)
+- `access_technology` : la technologie réseau utilisée (GSM, GPRS, EDGE, HSPA, UMTS, LTE)
+- `variable` : capture du texte de la réponse dans une variable personnalisée pour les actions suivantes
+
+**Exemple :** Pour tester une consultation de solde, envoyez `#100#`, puis vérifiez que le message de réponse contient "Balance: $" et que la session est active.
+
+### [SMS_GET](/fr/tests/actions/cellular/wait-sms) (attendre un SMS entrant)
+
+Attendez un SMS entrant et vérifiez son expéditeur et son contenu.
+
+**Ce qui se passe :**
+1. Votre test attend qu'un SMS arrive sur la SIM
+2. L'agent cellulaire reçoit le SMS du réseau
+3. Votre test vérifie le numéro de l'expéditeur, le texte du message et les autres propriétés
+
+**Assertions disponibles :**
+- `sms_sender` : le numéro de téléphone qui a envoyé le SMS (correspondance exacte)
+- `message` : le corps du SMS (correspondance exacte, regex, contient, commence par, se termine par)
+- `concatenated_sms` : le nombre de parties du SMS, pour les messages multi-parties (comparaison numérique)
+- `variable` : capture du texte du SMS dans une variable personnalisée pour une utilisation ultérieure
+
+**Exemple :** Pour tester la livraison d'un OTP, attendez un SMS de "+1234567890", vérifiez que le message contient "code:", et capturez la valeur du code dans une variable.
+
+### [USSD_PUSH](/fr/tests/actions/cellular/ussd-push) (attendre un USSD non sollicité du réseau)
+
+Attendez un message USSD initié par le réseau (non sollicité). Votre test n'envoie pas de commande ; il surveille la SIM pour détecter un message USSD push envoyé par le réseau.
+
+**Ce qui se passe :**
+1. Votre test attend un USSD push non sollicité du réseau (par ex., une notification de solde ou un rappel d'abonnement)
+2. L'agent cellulaire reçoit le push
+3. Votre test vérifie le message et l'état de la session
+
+**Assertions disponibles :**
+- `session_status` : l'état après l'arrivée du push (par ex., `close`, `alive`)
+- `variable` : capture du texte dans une variable personnalisée
+
+**Exemple :** Pour tester une notification de solde initiée par le réseau, attendez un USSD push et vérifiez qu'il contient "balance".
+
+## Créer un test cellulaire
+
+### Créez votre test
+
+1. Allez dans **Tests** et cliquez sur **Créer un test**
+2. Donnez un nom et une description à votre test
+3. Ajoutez des **variables d'entrée** si vous devez passer des paramètres (par ex., numéros de téléphone, sélections de menu)
+4. Ajoutez des **variables de propriétaire** pour spécifier quelle SIM exécute chaque action
+
+### Construisez vos actions
+
+1. Cliquez sur **Ajouter une action** et sélectionnez le type d'action (USSD, SMS_GET ou USSD_PUSH)
+2. Choisissez le **propriétaire** (quelle SIM exécute cette action)
+3. Pour USSD : entrez le code à envoyer (par ex., `#100#`)
+4. Pour SMS_GET et USSD_PUSH : (pas de commande nécessaire ; le test attend)
+5. Ajoutez des assertions pour définir les résultats attendus :
+   - Cliquez sur **Ajouter une assertion**
+   - Choisissez la source de l'assertion (par ex., `message`, `sms_sender`)
+   - Sélectionnez un opérateur de comparaison (égal, contient, correspondance regex, etc.)
+   - Entrez la valeur attendue
+6. Répétez pour chaque étape de votre flux
+
+### Variables de test
+
+Les **variables d'entrée** sont des paramètres que vous passez à votre test. Vous pouvez les remplir avec des valeurs par défaut au niveau du produit ou les surcharger au niveau de la campagne.
+
+Les **variables de propriétaire** spécifient quelle SIM exécute quelle action. Vous pouvez surcharger les assignations de propriétaire au niveau de la campagne, pour que le même test puisse s'exécuter sur différentes SIM dans différentes campagnes.
+
+### Historique des versions
+
+Chaque fois que vous enregistrez votre test, Kapptivate crée automatiquement un instantané de version. Vous pouvez parcourir l'historique des versions, voir qui a fait des modifications et quand, et restaurer n'importe quelle version passée. Les tests restaurés sont marqués comme restaurés et incluent un enregistrement de toutes les variables qui ont été supprimées.
+
+## Organiser les tests en campagnes
+
+Une **campagne** (aussi appelée [suite](/fr/tests/suites)) regroupe plusieurs tests et vous permet de les exécuter ensemble avec une configuration partagée.
+
+**Fonctionnalités de la campagne :**
+
+- **Liste de tests** : ordonnez les tests à exécuter
+- **Surcharges de variables** : définissez les valeurs des variables d'entrée pour tous les tests de la campagne (surcharge des valeurs par défaut du test)
+- **Surcharges de propriétaire** : assignez quelle SIM exécute chaque action dans tous les tests de la campagne (surcharge des assignations de propriétaire du test)
+- **Options d'exécution** : contrôlez les délais d'expiration, le délai d'observation SMS et les indicateurs de réception optionnelle pour chaque test
+
+**Exemple :** Vous avez trois tests (consultation de solde, recharge, historique) et deux SIM (prod, staging). Créez une campagne, ajoutez les trois tests, surchargez le propriétaire avec `staging`, puis exécutez une fois. Plus tard, surchargez le propriétaire avec `prod` et exécutez à nouveau sur les SIM de production.
+
+## Exécuter les tests
+
+### Configurez l'exécution
+
+1. Sélectionnez votre test ou campagne
+2. Cliquez sur **Exécuter**
+3. Dans le formulaire d'exécution, confirmez ou surchargez :
+   - **Assignations SIM** (quels emplacements SIM physiques utiliser)
+   - **Variables d'entrée** (par ex., numéros de téléphone, codes)
+   - **Délais d'expiration :**
+     - Délai USSD : 30 à 120 secondes (temps d'attente pour une réponse USSD)
+     - Délai SMS : 30 à 120 secondes (temps d'attente pour un SMS entrant)
+   - **Délai d'observation SMS** : 0 à 60 secondes (délai avant de vérifier les SMS après une action susceptible d'en déclencher un)
+   - **Indicateurs de réception optionnelle** : marquez les actions SMS ou USSD push comme optionnelles s'il est acceptable qu'elles n'arrivent pas
+
+### Modes d'exécution
+
+- **Tout exécuter** : exécuter toutes les étapes du début à la fin
+- **Rejouer à partir de l'étape N** : reprendre à partir d'une action spécifique (utile si une action ultérieure a échoué et que vous voulez réessayer sans tout relancer)
+- **Rejouer cette étape uniquement** : exécuter une seule action pour le débogage
+
+## Consulter les résultats
+
+Après l'exécution de votre test, Kapptivate capture :
+
+- **Résultats action par action** : chaque réponse USSD, chaque SMS reçu, les horodatages, et si les assertions ont réussi
+- **Données réseau** : traces du réseau cellulaire, journaux de commandes AT, puissance du signal et statut d'enregistrement
+- **Variables capturées** : toutes les valeurs que vous avez extraites via les assertions `variable`
+
+### Correction en masse des résultats attendus
+
+Si un test échoue parce que vous avez fourni la mauvaise valeur attendue (par ex., le texte de la réponse USSD a changé), vous pouvez le corriger en masse :
+
+1. Allez dans **Résultats** et ouvrez le résultat en échec
+2. Cliquez sur l'action en échec (USSD, SMS ou USSD_PUSH)
+3. Cliquez sur **Mettre à jour** pour entrer la bonne valeur attendue
+4. Kapptivate trouve tous les tests qui utilisent la même ancienne valeur attendue
+5. Sélectionnez les tests que vous voulez corriger
+6. Cliquez sur **Mettre à jour**. Tous les tests sélectionnés sont corrigés d'un coup
+
+Cela fonctionne pour :
+
+- **Messages USSD** : corriger le texte de réponse attendu dans plusieurs tests
+- **Messages SMS** : corriger le texte ou l'expéditeur SMS attendu dans plusieurs tests
+- **Messages USSD push** : corriger le texte du message push attendu dans plusieurs tests
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Référence des actions SIM" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    Chaque action USSD, SMS, Data et Call avec ses paramètres
+
+</Card>
+  <Card title="Session live" icon="satellite-dish" href="/fr/tests/live-session">
+
+    Pilotez une SIM manuellement et transformez vos actions en test
+
+</Card>
+</Columns>

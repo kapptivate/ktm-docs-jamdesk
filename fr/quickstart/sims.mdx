@@ -1,0 +1,37 @@
+---
+title: Premier test SIM
+description: Lancez un flux USSD ou SMS sur une vraie carte SIM.
+sidebarTitle: Démarrage rapide
+---
+
+Les tests cellulaires s'exécutent sur des cartes SIM physiques dans un agent Cellular : envoi et réception de SMS, navigation dans les menus USSD et vérification de l'enregistrement réseau. Voici votre premier test SIM.
+
+<Steps>
+  <Step>
+    **Créez le test.** Ouvrez la section **Tests** de votre produit, cliquez sur **+ Create new test**, choisissez **Classic** et sélectionnez le canal **Cellular**. Nommez le test.
+  </Step>
+  <Step>
+    **Ajoutez des steps.** Construisez le flux avec des actions cellulaires : envoyez une commande USSD et faites un assert sur la réponse, ou envoyez et recevez un SMS. Enregistrez le test.
+  </Step>
+  <Step>
+    **Lancez-le sur une SIM.** Cliquez sur **Run** sur la ligne du test, puis sélectionnez une SIM dans un slot d'agent Cellular sur la page de [confirmation d'exécution](/fr/executions/run) et lancez.
+  </Step>
+  <Step>
+    **Lisez le résultat.** Ouvrez l'exécution dans **Executions** pour voir le statut, les réponses USSD ou SMS et le temps d'exécution.
+  </Step>
+</Steps>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Canal SIM (Cellular)" icon="sim-card" href="/fr/agents-devices/sim">
+
+    Fonctionnement du canal Cellular, des SIMs et de l'agent
+
+</Card>
+  <Card title="Tests cellulaires (USSD & SMS)" icon="comment-sms" href="/fr/tests/cellular">
+
+    Le guide complet pour créer des flux USSD et SMS
+
+</Card>
+</Columns>

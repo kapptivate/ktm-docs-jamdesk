@@ -1,0 +1,64 @@
+---
+title: "ktm test-campaigns list"
+description: "Lister les Tests campaigns"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les Tests campaigns
+
+## Utilisation
+
+```bash
+ktm test-campaigns list [flags]
+```
+
+## Exemples
+
+```bash
+ktm test-campaigns list --product acme~web
+ktm test-campaigns list --product acme~web --creator john.doe
+ktm test-campaigns list --ids 10,11,12 -o json
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--creator` | string | — | Filtrer par identifiant(s) d'utilisateur créateur, séparés par des virgules |
+| `--ids` | string | — | Identifiants de Tests campaigns séparés par des virgules |
+| `--page` | int | — | Numéro de page |
+| `--page-size` | int | `50` | Éléments par page |
+| `--product` | string | — | Filtrer par slug ou short_name du produit |
+
+## Détails
+
+Lister les Tests campaigns accessibles avec la clé API actuelle.
+
+Filtrez avec --product pour limiter à un produit, --creator pour un utilisateur spécifique,
+ou --ids pour une liste explicite d'identifiants de Tests campaigns séparés par des virgules. Combinez selon
+vos besoins.
+
+Pour en exécuter une : ktm ci build --test-campaign &lt;id&gt; | ktm ci run --stdin.
+
+## Voir aussi
+
+- [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
+- [`ktm ci build`](/fr/cli/commands/ci/build)
+- [`ktm ci run`](/fr/cli/commands/ci/run)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

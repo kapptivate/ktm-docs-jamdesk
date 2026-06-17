@@ -1,0 +1,78 @@
+---
+title: Browser presets
+description: Configurations de navigateur réutilisables pour vos tests web.
+sidebarTitle: Browser presets
+---
+
+![La liste des Browser presets avec les colonnes type d'appareil, taille d'écran et langue du navigateur, les presets par défaut Chrome et Pixel 7, et l'action Create browser preset](/images/browser-presets-list.webp)
+
+Un browser preset regroupe les paramètres du navigateur (user agent, langue, headers, cookies, proxy, géolocalisation, fuseau horaire) dans une configuration réutilisable. Au lieu de coder ces valeurs en dur dans chaque test, appliquez un preset pour exécuter le même test dans des conditions différentes sans le modifier.
+
+## Pourquoi les presets sont importants
+
+Tester avec différentes configurations est courant : viewport desktop vs. mobile, langues différentes, sessions authentifiées vs. anonymes. Les presets vous permettent de :
+
+- **Réutiliser le même test** avec différentes configurations de navigateur
+- **Tester les fonctionnalités de géolocalisation** en définissant la latitude et la longitude
+- **Simuler du trafic via un proxy** à travers un réseau d'entreprise
+- **Inclure des cookies d'authentification** pour que les tests démarrent connectés
+- **Ajouter des headers personnalisés** pour les tests API ou les feature flags
+
+## Créer un preset
+
+Cliquez sur Create Preset dans la liste des Presets. Remplissez l'onglet About, puis configurez les paramètres optionnels.
+
+**Section About** : obligatoire :
+- **Preset name** : un nom clair (par ex. "Mobile Safari", "Authenticated User", "US Location")
+- **Device type** : Desktop, Mobile ou Tablet
+- **Browser** : Chrome, Firefox ou Edge
+
+Optionnel :
+- **Version** : version du navigateur (si nécessaire)
+
+**Section Headers** : ajoutez des headers HTTP (non disponible sur Firefox).
+- Paires clé-valeur
+- Exemples : `X-Feature-Flag: new-feature`, `Authorization: Bearer token`
+
+**Section Cookies** : ajoutez des cookies que le navigateur inclura dans les requêtes.
+- Nom du cookie (obligatoire)
+- Valeur
+- Path, domaine, flag secure, flag http-only
+- Réutilisez une fenêtre d'ajout/modification pour les cookies individuels
+
+**Section Proxy** : activez le proxy et configurez l'URL.
+- Type de proxy (HTTP)
+- URL du proxy (par ex. `http://proxy.company.com:8080`)
+
+**Paramètres supplémentaires** (disponibles dans toutes les sections) :
+- **Timezone** : définissez le fuseau horaire du navigateur (liste avec recherche)
+- **Language** : sélectionnez parmi les langues disponibles avec noms d'affichage (par ex. "en-US - English")
+- **Geolocation** : définissez la latitude et la longitude pour les tests basés sur la localisation
+- **User agent suffix** : ajoutez du texte au user agent du navigateur (non disponible sur Edge ou mobile/tablette)
+- **Screen size** : options prédéfinies (1920×1080, 768×1024, etc.) ou largeur × hauteur personnalisées
+
+## Consulter et modifier les presets
+
+La liste des Presets affiche tous les presets dans un tableau avec les colonnes : Nom, Browser, Appareil, Langue, Taille d'écran, Fuseau horaire et Actions.
+
+**Les presets système** (fournis par Kapptivate) sont marqués comme défaut. Vous pouvez les consulter et les dupliquer, mais pas les modifier ni les supprimer.
+
+**Les presets personnalisés** peuvent être modifiés en cliquant sur le preset et en changeant n'importe quel champ. Les modifications sont enregistrées immédiatement.
+
+## Appliquer un preset à un test
+
+Lors de la création ou de la modification d'un test web, choisissez un browser preset dans la configuration du test. Le test s'exécutera avec tous les paramètres définis dans le preset, sans avoir à les reconfigurer à chaque fois.
+
+## Limitations spécifiques aux navigateurs
+
+- **Firefox** : les headers personnalisés ne sont pas pris en charge ; les paramètres de localisation et de langue sont effacés à la sauvegarde.
+- **Edge** : le suffixe user agent n'est pas pris en charge ; le user agent personnalisé est effacé à la sauvegarde.
+- **Mobile et Tablet** : le suffixe user agent n'est pas pris en charge.
+
+Ces limitations sont imposées par l'éditeur du navigateur. Les autres paramètres (cookies, proxy, géolocalisation, fuseau horaire) fonctionnent sur tous les navigateurs.
+
+## Dupliquer et rechercher
+
+**Dupliquer un preset** : cliquez sur le menu et sélectionnez Duplicate. Une copie est créée avec "(copy)" ajouté au nom. Les duplications sont indépendantes ; modifier l'une n'affecte pas l'originale.
+
+**Rechercher des presets** : saisissez dans la barre de recherche pour trouver des presets par nom. Le filtrage est instantané.

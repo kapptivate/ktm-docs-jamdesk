@@ -1,0 +1,62 @@
+---
+title: "ktm collections search"
+description: "Rechercher des collections et éléments dans un sous-arbre de collection"
+sidebarTitle: "search"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Rechercher des collections et éléments dans un sous-arbre de collection
+
+## Utilisation
+
+```bash
+ktm collections search [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections search --operator my-op --collection-uid <tests_root> --query login
+ktm collections search --operator my-op --collection-uid <uid> --query "Verify" -o json
+ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --owner-id 5
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--collection-uid` | string | — | Sous-arbre dans lequel chercher (requis ; utilisez l'UID tests_root du produit pour la portée la plus large) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--owner-id` | int | — | Filtrer par ID utilisateur propriétaire |
+| `--query` | string | — | Terme de recherche en texte libre |
+| `--tags` | string | — | ID de tags séparés par des virgules |
+
+## Détails
+
+L'endpoint de recherche de collections limite les résultats à un sous-arbre, passez
+--collection-uid (le tests_root_collection_uid du produit pour la portée la plus large).
+Sans --collection-uid, le service retourne HTTP 400.
+
+La recherche parcourt les sous-collections de manière récursive. Les éléments sont trouvés par
+correspondance de sous-chaîne sur meta.name (le client envoie fields=name par défaut). Retourne un payload avec
+deux tableaux : collections (sous-collections dont le nom correspond) et items.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,67 @@
+---
+title: "ktm test-campaigns"
+description: "Tests campaigns : packs de tests nommés et ordonnés"
+sidebarTitle: "test-campaigns"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Tests campaigns : packs de tests nommés et ordonnés
+
+## Utilisation
+
+```bash
+ktm test-campaigns [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="create" icon="angle-right" href="/fr/cli/commands/test-campaigns/create">
+    Créer une nouvelle Tests campaign
+  </Card>
+  <Card title="creators" icon="angle-right" href="/fr/cli/commands/test-campaigns/creators">
+    Lister les créateurs distincts de Tests campaigns (pour filtrer la liste)
+  </Card>
+  <Card title="delete" icon="angle-right" href="/fr/cli/commands/test-campaigns/delete">
+    Supprimer une Tests campaign (suppression définitive, pas de corbeille)
+  </Card>
+  <Card title="get" icon="angle-right" href="/fr/cli/commands/test-campaigns/get">
+    Récupérer une Tests campaign avec sa test_list complète
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/test-campaigns/list">
+    Lister les Tests campaigns
+  </Card>
+  <Card title="update" icon="angle-right" href="/fr/cli/commands/test-campaigns/update">
+    Mise à jour partielle d'une Tests campaign (PATCH)
+  </Card>
+</Columns>
+
+## Détails
+
+Les Tests campaigns sont des packs de tests persistants, nommés et ordonnés, rattachés à un
+seul produit (l'entité que l'interface produit appelle "Tests campaign").
+
+Une Tests campaign est l'objet SAUVEGARDÉ que vous gérez ici (CRUD). Pour l'EXÉCUTER, construisez une campaign
+à partir de celle-ci et envoyez-la au runner :
+  ktm ci build --test-campaign &lt;id&gt; [--variant "Group:Variant"] | ktm ci run --stdin
+
+## Voir aussi
+
+- [`ktm ci build`](/fr/cli/commands/ci/build)
+- [`ktm ci run`](/fr/cli/commands/ci/run)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

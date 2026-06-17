@@ -1,0 +1,58 @@
+---
+title: Google Gemini
+description: Connectez le serveur MCP de Kapptivate à Google Gemini, du Gemini CLI aux agents d'entreprise.
+sidebarTitle: Gemini
+---
+
+Les outils Gemini de Google parlent le Model Context Protocol. Le chemin le plus direct est le Gemini CLI, qui se connecte au serveur MCP de Kapptivate via HTTP streamable avec un en-tête d'authentification personnalisé. Le même endpoint et le même en-tête fonctionnent partout où Gemini prend en charge les outils MCP.
+
+## Gemini CLI
+
+Ajoutez le serveur avec une seule commande :
+
+```bash
+gemini mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
+  --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
+```
+
+Ou configurez-le dans `~/.gemini/settings.json` (tous les projets) ou `.gemini/settings.json` (un seul projet) :
+
+```json
+{
+  "mcpServers": {
+    "kapptivate": {
+      "httpUrl": "https://mcp.kapptivate.com/mcp",
+      "headers": {
+        "X-Kapptivate-API-Key": "${KAPPTIVATE_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Utilisez `httpUrl` pour le transport HTTP streamable (le champ `url` est pour SSE, que le serveur n'utilise pas). Les valeurs d'en-tête supportent la substitution `${VAR}`, donc conservez la clé dans une variable d'environnement plutôt que de la commiter.
+
+<Warning>
+  La clé API porte le même accès que votre compte Kapptivate. Traitez-la comme un mot de passe et utilisez un compte de service dédié pour les agents partagés ou automatisés.
+</Warning>
+
+## À l'échelle de l'organisation
+
+Pour les déploiements à grande échelle, configurez vos outils d'agent Gemini (y compris les constructeurs d'agents Vertex AI et Gemini Enterprise) sur le même endpoint :
+
+```
+https://mcp.kapptivate.com/mcp
+```
+
+Envoyez l'en-tête `X-Kapptivate-API-Key` à chaque requête et stockez la clé dans votre gestionnaire de secrets. Scopez une clé par environnement pour pouvoir la faire tourner ou la révoquer indépendamment.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Exemples de prompts" icon="robot" href="/fr/mcp/examples">
+    Que demander une fois Gemini connecté.
+  </Card>
+  <Card title="Copilot Studio" icon="robot" href="/fr/mcp/integrations/copilot-studio">
+    Connectez Microsoft 365 Copilot Studio.
+  </Card>
+</Columns>

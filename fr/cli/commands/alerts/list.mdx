@@ -1,0 +1,64 @@
+---
+title: "ktm alerts list"
+description: "Lister les définitions d'alertes configurées sur la plateforme"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les définitions d'alertes configurées sur la plateforme
+
+## Utilisation
+
+```bash
+ktm alerts list [flags]
+```
+
+## Exemples
+
+```bash
+# List all alert definitions for an operator
+ktm alerts list --operator my-operator
+
+# List only availability alerts
+ktm alerts list --operator my-operator --types availability
+
+# List archived alerts
+ktm alerts list --operator my-operator --archived true
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--archived` | string | — | Filtrer par statut d'archivage : true ou false |
+| `--name` | string | — | Filtrer par nom d'alerte |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--types` | string | — | Types d'alertes séparés par des virgules |
+
+## Détails
+
+Lister les définitions d'alertes d'un opérateur. Ce sont des règles persistantes qui
+déclenchent automatiquement des incidents quand les conditions sont remplies.
+
+Ce n'est PAS la même chose que 'metrics alert-eval' qui effectue des analyses locales à la demande.
+
+## Voir aussi
+
+- [`ktm alerts`](/fr/cli/commands/alerts)
+- [`ktm metrics alert-eval`](/fr/cli/commands/metrics/alert-eval)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

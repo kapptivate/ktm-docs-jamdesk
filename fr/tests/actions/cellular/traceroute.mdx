@@ -1,0 +1,71 @@
+---
+title: Traceroute
+description: Cartographiez le chemin réseau de la SIM vers un hôte, saut par saut.
+---
+
+Tracez la route de la SIM vers un hôte et mesurez les temps de réponse à chaque saut. Quand un ping se dégrade, le traceroute vous indique où dans le chemin la latence ou la perte apparaît.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Hôte | `command.host` | Oui | Destination à tracer. |
+| Protocole | `command.protocol` | Non | `icmp` (par défaut). |
+| Nombre max de sauts | `command.max_hops` | Non | Arrêter après ce nombre de sauts. Par défaut : 30. |
+| Paquets par saut | `command.nb_packets` | Non | Paquets envoyés à chaque saut. Par défaut : 10. |
+| Taille du paquet | `command.packet_size_bytes` | Non | Taille du paquet en octets. Par défaut : 64. |
+| Afficher l'IP | `command.show_ip` | Non | Afficher les IP des sauts au lieu des noms d'hôtes. Par défaut : désactivé. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_TRACEROUTE",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "host": "kapptivate.com",
+    "protocol": "icmp",
+    "max_hops": 30,
+    "nb_packets": 10,
+    "packet_size_bytes": 64,
+    "show_ip": false,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `total_hops` | Nombre de sauts jusqu'à la destination. |
+| `hops[]` | Par saut : `host`, `packet_loss_percent`, `avg_res_time_ms`, `min_res_time_ms`, `max_res_time_ms`, `standard_deviation_ms`. |
+| `duration` | Temps d'exécution total en secondes. |
+
+Dans Analytics, chaque exécution alimente la mesure traceroute : `total_hops` plus, par saut (étiqueté `hop_number`), la moyenne, le min, le max et l'écart-type des temps de réponse et la perte de paquets du saut. Les étiquettes incluent l'hôte source et destination, les paramètres du protocole, l'antenne et la technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/fr/tests/actions/cellular/ping">
+
+    La mesure de bout en bout qui déclenche un traceroute
+
+</Card>
+  <Card title="DNS Lookup" icon="globe" href="/fr/tests/actions/cellular/dns-lookup">
+
+    Éliminez la résolution avant d'incriminer le chemin
+
+</Card>
+</Columns>

@@ -1,0 +1,61 @@
+---
+title: Dépannage des erreurs techniques
+description: Que faire lorsque les monitorings affichent des erreurs techniques grises.
+---
+
+Des résultats gris sur un monitoring indiquent une erreur technique : le test n'a pas pu s'exécuter correctement, généralement parce que l'agent qui l'exécute a un problème. Remontez de la ressource à l'agent, puis redémarrez le bon élément.
+
+<Steps>
+  <Step title="Identifier la ressource">
+    Ouvrez la page des résultats du monitoring et vérifiez quelle ressource (carte SIM, agent web, smartphone) exécute les tests.
+
+    <Frame caption="La ressource sur la page des résultats">
+      ![Ressource dans les résultats](/images/hardware/technical-errors-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Trouver l'agent et son statut">
+    Pour une SIM ou un smartphone, ouvrez **Sims** ou **Smartphones** pour trouver à quel agent il est connecté.
+
+    <Frame caption="Trouver l'agent derrière la ressource">
+      ![Agent derrière la ressource](/images/hardware/technical-errors-02.webp)
+    </Frame>
+
+    Puis dans la section administration, trouvez cet agent cellulaire/web/smartphone et vérifiez son statut.
+
+    <Frame caption="Le statut de l'agent dans l'administration">
+      ![Statut de l'agent](/images/hardware/technical-errors-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Redémarrer l'agent (statut disponible)">
+    Si l'agent affiche **available**, redémarrez-le depuis la plateforme : cliquez sur **...** puis **Set agent in maintenance**, ensuite **...** puis **Reboot this agent**. Attendez 3 minutes, puis cliquez sur **Unset agent from maintenance**.
+
+    <Frame caption="Mettre l'agent en maintenance avant de redémarrer">
+      ![Mettre l'agent en maintenance](/images/hardware/technical-errors-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Redémarrer le robot (statut injoignable)">
+    Si l'agent affiche **unreachable**, éteignez physiquement le robot puis rallumez-le.
+  </Step>
+  <Step title="Toujours en échec ?">
+    Vérifiez le robot lui-même. S'il est allumé (LED avant) et que l'agent reste injoignable, exécutez les vérifications de [dépannage réseau](/fr/hardware/network-troubleshooting).
+  </Step>
+</Steps>
+
+<Note>
+  Si le problème revient sans cesse, même lorsque ces étapes le résolvent, signalez les détails à support@kapptivate.com.
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Les vérifications de connectivité, étape par étape
+
+</Card>
+  <Card title="Alertes" icon="bell" href="/fr/monitoring/alerts">
+
+    Être notifié lorsqu'un agent devient indisponible
+
+</Card>
+</Columns>

@@ -1,0 +1,58 @@
+---
+title: Construire et exécuter des campagnes
+description: Transformez des tests en campagne exécutable, fixez un environnement, exécutez et lisez les résultats.
+sidebarTitle: Exécuter des campagnes
+---
+
+Une campagne est un lot éphémère de tests que vous construisez, remplissez et exécutez. Le schéma est construire, exécuter, lire les résultats, et il est identique sur votre poste de travail et en CI, ce qui facilite le scripting ou la délégation à un agent.
+
+## Construire, exécuter, lire
+
+<Steps>
+  <Step title="Construire un template de campagne">
+    `ktm ci build --test-ids 16480,16838 --product my-operator~my-product > campaign.json`
+  </Step>
+  <Step title="Exécuter">
+    `ktm ci run --test-config-path campaign.json --junit-file results.xml --output-file summary.json`
+  </Step>
+  <Step title="Lire les résultats">
+    `ktm executions get <result-id>` pour une exécution, ou `ktm executions list --product my-operator~my-product --status FAILED`.
+  </Step>
+</Steps>
+
+Ou faites-le en un seul pipe :
+
+```bash
+ktm ci build --test-ids 16480 --product acme~web --variant "API:Staging" | ktm ci run --stdin
+```
+
+## Fixer un environnement avec les variants
+
+Passez `--variant` par groupe (par nom `group:variant` ou par ID numérique). Les groupes non fixés utilisent leur variant par défaut :
+
+```bash
+ktm ci build --test-ids 16480 --product acme~web \
+  --variant "API:Staging" --variant "Database:Replica" > campaign.json
+```
+
+Gérez les valeurs que contiennent ces variants avec `ktm variables` :
+
+```bash
+ktm variables list --product acme~web
+ktm variables set-value <variable-id> --variant Staging --value "https://staging.acme.test"
+```
+
+## Dans votre pipeline
+
+Les deux mêmes commandes alimentent la CI, avec une sortie JUnit et un code de sortie non nul quand un test échoue. Sur GitHub Actions, `ktm` émet aussi des annotations natives et un résumé de job. Voir [CI/CD](/fr/cli/ci-cd).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="CI/CD" icon="gear" href="/fr/cli/ci-cd">
+    Intégrez build et run dans votre pipeline.
+  </Card>
+  <Card title="Monitors et incidents" icon="gauge-high" href="/fr/cli/guides/monitors-incidents">
+    Exécutez des tests selon un planning et réagissez aux échecs.
+  </Card>
+</Columns>

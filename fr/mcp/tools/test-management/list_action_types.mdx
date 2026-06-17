@@ -1,0 +1,51 @@
+---
+title: "list_action_types"
+description: "Renvoie le catalogue des types d'action disponibles pour la création de tests, groupés par owner_kind (ETHERNET, SIM, SMARTPHONE, OWNERLESS)."
+sidebarTitle: "list_action_types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renvoie le catalogue des types d'action disponibles pour la création de tests, groupés par owner_kind (ETHERNET, SIM, SMARTPHONE, OWNERLESS).
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `owner_kind` | string | Non | Filtrer par owner kind : ETHERNET, SIM, SMARTPHONE ou OWNERLESS |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "owner_kind": "string"
+}
+```
+
+## Description
+
+```text
+Use get_test_template with specific type(s) for ready-to-use test structures with default command fields. For V2 step-based tests, use list_step_types instead.
+```
+
+## Associés
+
+- [`get_test_template`](/fr/mcp/tools/test-management/get_test_template)
+- [`list_step_types`](/fr/mcp/tools/test-management/list_step_types)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

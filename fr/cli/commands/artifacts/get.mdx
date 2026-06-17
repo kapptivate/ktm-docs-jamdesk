@@ -1,0 +1,63 @@
+---
+title: "ktm artifacts get"
+description: "Télécharger un artefact par URL ou chemin relatif"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Télécharger un artefact par URL ou chemin relatif
+
+## Utilisation
+
+```bash
+ktm artifacts get [flags]
+```
+
+## Exemples
+
+```bash
+# Fetch by full URL, save to file
+ktm artifacts get --url https://app.kapptivate.com/robot/path/screenshot.png --output shot.png
+
+# Fetch by relative path
+ktm artifacts get --path path/screenshot.png --output shot.png
+
+# Text artifact to stdout
+ktm artifacts get --url https://app.kapptivate.com/robot/path/trace.xml
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--max-size` | int | `5242880` | Taille maximale de l'artefact en octets |
+| `--output` | string | — | Chemin du fichier de sortie (requis pour les artefacts binaires) |
+| `--path` | string | — | Chemin relatif de l'artefact (préfixe hôte ajouté automatiquement) |
+| `--url` | string | — | URL complète de l'artefact (mutuellement exclusif avec --path) |
+
+## Détails
+
+Récupérer un artefact de test (capture d'écran, audio, log, etc.) depuis la plateforme.
+
+Fournissez soit --url (URL complète) soit --path (chemin relatif, le préfixe hôte est ajouté automatiquement).
+Les artefacts texte sont affichés sur stdout. Les artefacts binaires nécessitent --output pour spécifier un fichier.
+
+## Voir aussi
+
+- [`ktm artifacts`](/fr/cli/commands/artifacts)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

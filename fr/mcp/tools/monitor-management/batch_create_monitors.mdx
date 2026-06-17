@@ -1,0 +1,87 @@
+---
+title: "batch_create_monitors"
+description: "Créer plusieurs monitors en un seul appel."
+sidebarTitle: "batch_create_monitors"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer plusieurs monitors en un seul appel.
+
+<Warning>
+  **Destructif · Écriture de données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Non | État actif par défaut pour tous les monitors (par défaut : true). L'option active par monitor prend le dessus. |
+| `confirmed` | boolean | Non | Définir à true pour soumettre le lot. NE JAMAIS définir sans approbation explicite de l'utilisateur sur l'aperçu. |
+| `monitors` | string | Oui | Tableau JSON de spécifications de monitors. Chaque spec : \{"test_id": &lt;int&gt;, "variants": ["API:Staging"], "name": "&lt;str&gt;", "active": &lt;bool&gt;, "overrides": \{"VAR": "val"\}, "scheduling": \{...\}, "options": \{...\}\}. test_id est requis ; variants est optionnel (les valeurs par défaut du groupe sont utilisées en cas d'absence). |
+| `options` | string | Non | Options par défaut pour tous les monitors. Les options par monitor prennent le dessus. Exemple : \{"timeout_sms":30,"ignore_errors":false,"auto_retry_failed_test":0\} |
+| `product` | string | Oui | Slug du produit (format : operator~product). Tous les monitors du lot appartiennent à ce produit. |
+| `scheduling` | string | Non | Planification par défaut pour tous les monitors. La planification par monitor prend le dessus. Exemple : \{"type":"simple/v2","definition":\{"frequency":\{"every":5,"unit":"minutes"\}\}\} |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "monitors": "string"
+}
+```
+
+## Description
+
+```text
+Tous les monitors doivent appartenir au même produit.
+Réduit les allers-retours de ~30 (10 appels individuels create_monitor) à 2 (un aperçu + une confirmation).
+
+Workflow en deux étapes (OBLIGATOIRE — l'aperçu ne peut pas être ignoré) :
+1. batch_create_monitors product=<slug> monitors=<json_array> → renvoie l'APERÇU DU LOT
+2. Montrez l'aperçu à l'utilisateur. Obtenez son approbation explicite.
+3. batch_create_monitors product=<slug> monitors=<same_array> confirmed=true → SOUMETTRE TOUT
+
+IMPORTANT : NE JAMAIS définir confirmed=true sans avoir montré l'aperçu à l'utilisateur au préalable.
+
+Épinglez les variants par entrée via le tableau variants (même format que create_monitor).
+Les globales émettent toujours {type:"global"}. Les variables dans des groupes non épinglés utilisent le variant par défaut de ce groupe. Les variables d'entrée locales au test (sans variable produit associée) conservent leur varDef.Value. Les monitors créés avec active=false sont défensivement basculés après création pour que le planificateur de la plateforme les arrête effectivement.
+
+Paramètre monitors — tableau JSON de spécifications de monitors :
+[
+  {"test_id": 100, "variants": ["API:Staging"]},
+  {"test_id": 101, "variants": ["API:Staging", "Database:Replica"], "name": "Custom", "overrides": {"SIM_A": "069..."}},
+  {"test_id": 102, "active": false, "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":15,"unit":"minutes"}}}}
+]
+
+Champs de chaque spécification de monitor :
+  test_id (requis, int)   — test à surveiller
+  variants (array of str) — épingler un variant par groupe. Formats : "5" (ID numérique) ou "API:Staging" (groupe:variant). Répétable. Omettre pour utiliser les valeurs par défaut du groupe.
+  name (string)           — nom du monitor (par défaut : nom du test)
+  active (bool)           — remplacer le active de niveau supérieur (par défaut : true)
+  overrides (object)      — remplacements de valeurs de variables : {"VAR_NAME": "value"}
+  scheduling (object)     — remplacer la planification de niveau supérieur
+  options (object)        — remplacer les options de niveau supérieur
+
+Valeurs par défaut en cascade : scheduling/options/active de niveau supérieur s'appliquent à tous les monitors sauf remplacement par monitor.
+Maximum 20 monitors par lot. Le produit doit avoir le monitoring activé.
+Échec partiel : si certains monitors échouent, les monitors réussis sont conservés (pas de rollback).
+```
+
+## Associé
+
+- [`create_monitor`](/fr/mcp/tools/monitor-management/create_monitor)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

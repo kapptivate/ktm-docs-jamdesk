@@ -1,0 +1,34 @@
+---
+title: Scénarios API
+description: Tester les services REST et HTTP avec des steps API dans vos tests web et mobile.
+sidebarTitle: API
+---
+
+Les tests API dans Kapptivate couvrent les services REST et HTTP : méthodes, headers, corps JSON, assertions sur les réponses, extraction de variables et timing détaillé par requête. Les actions API sont des steps à l'intérieur des tests web ou mobile, ajoutés depuis le [test builder](/fr/tests/builder) comme tout autre step ; l'action et les métriques sont identiques dans les deux cas, seul le type de test environnant diffère.
+
+## Actions API
+
+Les actions API HTTP sont disponibles dans les tests existants :
+
+- **Dans un test web** : ajoutez des requêtes HTTP aux côtés des steps navigateur. Identifiant d'action : `ETH_HTTP_API`.
+- **Dans un test mobile** : ajoutez des requêtes HTTP aux côtés des steps smartphone. Identifiant d'action : `DATA_API_HTTP`.
+
+Les deux partagent la même configuration de requête et le même modèle d'assertion sur les réponses, avec quelques différences de routage spécifiques au canal.
+
+## Configuration de la requête
+
+- **Méthodes HTTP** : `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
+- **URL** avec variables templatisées.
+- **Headers personnalisés** avec autocomplétion pour les headers standards.
+- **Corps** : payload JSON ou brut.
+- **Routage** : remplacement DNS, proxy, contournement SSL, conservation des cookies, gestion des redirections.
+
+## Validation de la réponse
+
+- Vérification du **code de statut**.
+- Assertions sur le **corps** et les **headers**.
+- **Extraction de variables** depuis la réponse pour utilisation dans les steps suivants.
+
+## Métriques par requête
+
+Chaque requête HTTP émet un détail de timing complet : résolution DNS, connexion TCP, handshake TLS, génération du contenu, transfert et total. Cela vous permet de repérer les régressions de performance, pas seulement les échecs fonctionnels.

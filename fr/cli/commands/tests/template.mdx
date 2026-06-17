@@ -1,0 +1,76 @@
+---
+title: "ktm tests template"
+description: "Générer un modèle de test pour un ou plusieurs types d'action"
+sidebarTitle: "template"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Générer un modèle de test pour un ou plusieurs types d'action
+
+## Utilisation
+
+```bash
+ktm tests template <action-types...> [flags]
+```
+
+## Exemples
+
+```bash
+# Test avec un seul appel API
+ktm tests template ETH_HTTP_API > api_test.json
+
+# Navigation USSD + réception SMS (3 étapes)
+ktm tests template USSD USSD SMS_GET > ussd_test.json
+
+# Flux API authentifié (3 étapes)
+ktm tests template ETH_HTTP_API JAVASCRIPT ETH_HTTP_API > auth_test.json
+
+# Puis créer le test :
+ktm tests create --from-file api_test.json --product my-operator~my-product
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `action-types...` | Oui |
+
+## Détails
+
+Générer un modèle JSON de test complet, minimal et valide pour les types d'action spécifiés.
+
+Le modèle inclut une action par type spécifié, avec les champs de commande par défaut,
+des assertions d'exemple et une section variables pré-structurée. Les valeurs placeholder
+marquées avec &lt;...&gt; doivent être remplies avant de créer le test.
+
+Un test peut avoir plusieurs actions qui s'exécutent séquentiellement. Spécifiez plusieurs
+types d'action pour créer un modèle de test multi-étapes.
+
+Syntaxe de la propriété store (dans la sortie du modèle) :
+  message_part (USSD/SMS) : property est \{INPUT_VAR->output_var\}, INPUT_VAR contient une regex
+  json_body (types API) :   property est un JSONPath (ex. $.userId)
+  header :                  property est le nom de l'en-tête HTTP
+  status_code, body :       property est vide, stocke la valeur entière
+
+Remplacez les placeholders &lt;...&gt; par de vrais identifiants d'appareils depuis 'resources list'.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm resources list`](/fr/cli/commands/resources/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

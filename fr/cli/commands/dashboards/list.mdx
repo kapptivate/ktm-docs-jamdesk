@@ -1,0 +1,71 @@
+---
+title: "ktm dashboards list"
+description: "Lister les dashboards d'un opérateur"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les dashboards d'un opérateur
+
+## Utilisation
+
+```bash
+ktm dashboards list [flags]
+```
+
+## Exemples
+
+```bash
+# List all dashboards for an operator
+ktm dashboards list --operator my-operator
+
+# List in table format
+ktm dashboards list --operator my-operator -o table
+
+# Filter by name
+ktm dashboards list --operator my-operator --name "SLA"
+
+# Only favorites
+ktm dashboards list --operator my-operator --favorite true
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--favorite` | string | — | Filtrer par statut favori (true/false) |
+| `--name` | string | — | Filtrer par nom (contient, insensible à la casse) |
+| `--operator` | string | — | Filtrer par slug d'opérateur (recommandé) |
+| `--page` | string | — | Numéro de page |
+| `--page-size` | string | — | Éléments par page (défaut : 20) |
+
+## Détails
+
+Liste les dashboards non archivés accessibles avec la clé API courante.
+
+Les dashboards ont une portée opérateur. Utilisez --operator pour limiter les résultats à un opérateur
+spécifique, puis utilisez l'UID de la sortie pour obtenir les détails complets du dashboard.
+
+Champs de sortie JSON : uid, name, owner, operator, version, layouts, global_filters,
+                    is_favorite, bucket, created, modified
+Colonnes de table :      UID, NAME, OWNER, VERSION, WIDGETS, FAVORITE
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

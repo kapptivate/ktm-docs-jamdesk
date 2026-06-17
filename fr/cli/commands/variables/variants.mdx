@@ -1,0 +1,63 @@
+---
+title: "ktm variables variants"
+description: "Variants : déclinaisons d'environnement au sein d'un groupe de variables (dev, staging, prod, ...)"
+sidebarTitle: "variants"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Variants : déclinaisons d'environnement au sein d'un groupe de variables (dev, staging, prod, ...)
+
+<Note>Alias : variants, variant</Note>
+
+## Utilisation
+
+```bash
+ktm variables variants [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="add" icon="angle-right" href="/fr/cli/commands/variables/variants/add">
+    Ajouter un nouveau variant à un groupe de variables
+  </Card>
+  <Card title="copy-values" icon="angle-right" href="/fr/cli/commands/variables/variants/copy-values">
+    Promouvoir les valeurs de variants : copier la valeur du variant --from vers --to pour chaque variable du groupe
+  </Card>
+  <Card title="remove" icon="angle-right" href="/fr/cli/commands/variables/variants/remove">
+    Supprimer un variant ; refuse si une variable contient des données non-défaut sauf avec --force
+  </Card>
+  <Card title="rename" icon="angle-right" href="/fr/cli/commands/variables/variants/rename">
+    Renommer un variant dans un groupe de manière atomique
+  </Card>
+  <Card title="set-default" icon="angle-right" href="/fr/cli/commands/variables/variants/set-default">
+    Promouvoir un variant en défaut (rétrograde l'ancien défaut de manière atomique)
+  </Card>
+</Columns>
+
+## Détails
+
+Gérer les variants sous un groupe de variables : ajouter, supprimer (sécurisé par défaut),
+renommer, définir le défaut et copier des valeurs entre variants. Utilisez
+'ktm variables groups show &lt;id&gt;' pour lister les variants actuels.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+- [`ktm variables groups show`](/fr/cli/commands/variables/groups/show)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

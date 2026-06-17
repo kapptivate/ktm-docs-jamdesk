@@ -1,0 +1,79 @@
+---
+title: "create_monitor"
+description: "Créer un nouveau monitor pour un test existant."
+sidebarTitle: "create_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un nouveau monitor pour un test existant.
+
+<Warning>
+  **Destructif · Écriture de données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Non | Démarrer le monitor immédiatement (par défaut : true) |
+| `confirmed` | boolean | Non | Définir à true pour soumettre le monitor. NE JAMAIS définir sans approbation explicite de l'utilisateur sur l'aperçu. Nécessite que owners soit fourni. |
+| `input_variables` | string | Non | Objet JSON : nom de variable → \{kind, value, public, actions, owner_kind\}. Requis avec owners pour la soumission. Le gestionnaire de soumission injecte automatiquement les sous-clés bucket depuis le tableau variants, vous n'avez pas besoin de les ajouter. |
+| `name` | string | Non | Nom du monitor (par défaut : nom du test côté backend si omis) |
+| `options` | string | Non | Options JSON : \{timeout_sms, ignore_errors, auto_retry_failed_test\}. Valeurs par défaut : timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0. |
+| `overrides` | string | Non | Objet JSON associant nom de variable → nouvelle valeur string. Appliqué au modèle d'aperçu. Exemple : \{"SIM_A": "0699999999", "TODO_INDEX": "42"\} |
+| `owners` | string | Non | Objet JSON : identifiant d'appareil → \{kind, hostname/national_msisdn/uuid\}. Requis pour la soumission. |
+| `product` | string | Oui | Slug du produit (format : operator~product) |
+| `scheduling` | string | Non | Objet JSON de planification. Si omis, par défaut simple/v2 toutes les 5 minutes. Exemple : \{"type":"simple/v2","definition":\{"frequency":\{"every":5,"unit":"minutes"\}\}\} |
+| `test_id` | number | Oui | Identifiant du test à surveiller |
+| `variants` | array | Non | Épingler les variants pour le monitor. Chaque entrée est "5" (ID numérique du variant) ou "GroupName:VariantName" (par ex. "API:Staging"). Les groupes non épinglés utilisent leur variant par défaut. Les globales émettent toujours \{type:"global"\}. Répétable pour épingler plusieurs groupes dans les tests multi-groupes. Optionnel, omettre pour le comportement par défaut. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Les monitors exécutent des tests selon un planning et suivent le statut succès/échec au fil du temps.
+
+PRÉREQUIS : appelez platform_guide topic=monitoring pour le workflow complet de création et les formats de planification.
+
+Épinglez les variants par groupe via le tableau variants. Chaque entrée épingle le variant d'un groupe ("5" pour l'ID numérique du variant, ou "API:Staging" pour groupe:variant par nom). Les groupes non épinglés utilisent leur variant par défaut. Les globales émettent toujours {type:"global"}. Le payload soumis définit variable_group: null sur le réseau ; les buckets par variable portent l'information du groupe.
+
+Workflow en deux étapes (OBLIGATOIRE — l'aperçu ne peut pas être ignoré) :
+1. create_monitor product=<slug> test_id=<id> variants=[...] → renvoie l'APERÇU du payload auto-construit avec les buckets résolus
+2. Montrez l'aperçu à l'utilisateur. Obtenez son approbation explicite.
+3. create_monitor ... owners=<json> input_variables=<json> variants=[...] confirmed=true → SOUMETTRE
+
+L'étape 1 construit automatiquement owners et input_variables depuis la définition du test avec les buckets V3 attachés.
+L'étape 3 nécessite confirmed=true ET des owners explicites. Le gestionnaire de soumission RE-EXÉCUTE le résolveur avec les variants fournis et injecte les buckets dans input_variables — vous n'avez PAS besoin de construire les sous-objets bucket vous-même, passez simplement les mêmes variants qu'à l'étape 1.
+
+IMPORTANT : NE JAMAIS définir confirmed=true sans avoir montré l'aperçu à l'utilisateur et obtenu son approbation explicite.
+
+Utilisez overrides pour modifier des valeurs spécifiques dans le modèle d'aperçu.
+Le produit doit avoir le monitoring activé (has_monitoring=true depuis list_products detail=true).
+```
+
+## Associé
+
+- [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
+- [`list_products`](/fr/mcp/tools/discovery/list_products)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

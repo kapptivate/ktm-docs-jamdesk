@@ -1,0 +1,61 @@
+---
+title: "ktm tests list"
+description: "Lister les tests, avec filtrage optionnel par operator et produit"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les tests, avec filtrage optionnel par operator et produit
+
+## Utilisation
+
+```bash
+ktm tests list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister les tests pour un produit
+ktm tests list --product acme~web
+
+# Lister les tests archivés
+ktm tests list --product acme~web --archived true
+
+# Lister les tests avec un nom contenant "login"
+ktm tests list --product acme~web --name login
+
+# Format tableau
+ktm tests list --product acme~web -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--archived` | string | — | Filtrer par statut archivé : true ou false |
+| `--name` | string | — | Filtrer par nom de test (correspondance partielle) |
+| `--operator` | string | — | Slug de l'operator pour limiter les résultats |
+| `--page` | int | — | Numéro de page |
+| `--page-size` | int | — | Éléments par page |
+| `--product` | string | — | Slug du produit pour limiter les résultats |
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

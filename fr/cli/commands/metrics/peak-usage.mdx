@@ -1,0 +1,66 @@
+---
+title: "ktm metrics peak-usage"
+description: "Obtenir l'utilisation maximale P95 des ressources par fenêtres d'agrégation temporelle"
+sidebarTitle: "peak-usage"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir l'utilisation maximale P95 des ressources par fenêtres d'agrégation temporelle
+
+## Utilisation
+
+```bash
+ktm metrics peak-usage [flags]
+```
+
+## Exemples
+
+```bash
+# Peak hourly and daily usage for a SIM over one week
+ktm metrics peak-usage --operator acme --resources 0612345678 --aggregations 1h,24h --start 2024-01-01T00:00:00Z --end 2024-01-07T00:00:00Z
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--aggregations` | string | `1h` | Fenêtres d'agrégation séparées par des virgules (ex. '1h,24h') |
+| `--end` | string | — | Heure de fin au format ISO 8601 (ex. '2024-01-02T00:00:00Z') |
+| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--resources` | string | — | ID d'appareils séparés par des virgules |
+| `--start` | string | — | Heure de début au format ISO 8601 (ex. '2024-01-01T00:00:00Z') |
+
+## Détails
+
+Obtenir l'utilisation maximale P95 des ressources par fenêtres d'agrégation temporelle spécifiées.
+
+Retourne le pourcentage d'utilisation maximale P95 par ressource pour les fenêtres d'agrégation temporelle.
+Un seul appel répond aux questions de capacité comme « quelle est l'utilisation maximale horaire/journalière
+pour ces appareils ? »
+
+Interroge le measurement "resource_usage" dans InfluxDB. Les ID d'appareils correspondent
+aux ressources découvertes via 'ktm resources list' (SIM : national_msisdn,
+web-agent : hostname, smartphone : UUID).
+
+Plage temporelle maximale recommandée : 90 jours.
+
+## Voir aussi
+
+- [`ktm metrics`](/fr/cli/commands/metrics)
+- [`ktm resources`](/fr/cli/commands/resources)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

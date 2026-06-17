@@ -1,0 +1,46 @@
+---
+title: Campagnes de test
+description: Regroupez des tests dans une campagne, remplacez les paramètres par test, et exécutez-les en batch.
+sidebarTitle: Campagnes de test
+---
+
+![L'onglet Campagnes de test listant les campagnes avec leur nombre de tests, dernière mise à jour et créateur](/images/campaigns-list.webp)
+
+Certains scénarios n'ont de sens qu'ensemble : un parcours utilisateur complet, une passe de smoke-test sur plusieurs environnements, une checklist de release. Une campagne de test (aussi appelée suite) regroupe des tests à exécuter en un seul batch, avec un contexte partagé et des paramètres personnalisés par test, pour composer des parcours à partir de tests existants au lieu de les dupliquer. Les campagnes se trouvent dans l'onglet **Tests campaigns**, à côté de Tests et Reusable components.
+
+## La liste des campagnes
+
+Le tableau affiche le nom de chaque campagne, le nombre de tests qu'elle contient, la dernière mise à jour et son créateur. Une barre latérale filtre les campagnes par collection, et chaque ligne propose :
+
+- **Run** : lancer la campagne via la confirmation d'exécution.
+- Un menu à trois points avec **Move test campaign** (choisir une collection de destination) et **Delete** (déplace vers la corbeille, où elle peut être restaurée).
+- Une **case à cocher** (survolez la gauche de la ligne) pour sélectionner plusieurs campagnes et agir dessus depuis la barre supérieure.
+
+## Créer une campagne
+
+1. Dans l'onglet Tests campaigns, créez une campagne et donnez-lui un nom (obligatoire) et une description
+2. Cliquez sur **Add Test** et sélectionnez un ou plusieurs tests dans la fenêtre
+3. Configurez les paramètres de chaque test (voir ci-dessous)
+4. Enregistrez ; la campagne nécessite un nom et au moins un test valide
+
+## L'éditeur de campagne
+
+L'éditeur affiche une section **About** (nom, description) et une chronologie **Your tests** : la liste ordonnée des tests qui s'exécutent séquentiellement entre les marqueurs "Campaign start" et "Campaign end". Glissez les tests pour les réordonner, et retirez un test depuis sa ligne (le test lui-même n'est pas supprimé).
+
+## Paramètres par test
+
+Le même test peut jouer différents rôles dans différentes campagnes. Cliquez sur la ligne d'un test pour développer ses **Execution parameters** :
+
+- **Starting URL** : un point d'entrée différent de celui par défaut du test (staging vs. production).
+- **Device** et **Browser preset** : à choisir dans les menus déroulants.
+- **Variables** : sélectionnez un environnement prédéfini dans le menu déroulant (par exemple Default, production, dev-1) pour remplir les variables d'entrée du test d'un coup, ou remplacez des valeurs individuelles pour ce test uniquement, dans cette campagne uniquement.
+
+Les remplacements sont stockés dans la campagne. La définition du test original ne change jamais, et plusieurs campagnes peuvent référencer le même test avec des valeurs différentes.
+
+## Exécuter une campagne
+
+Cliquez sur **Run** depuis le tableau des campagnes ou depuis l'éditeur ; l'exécution passe par une étape de confirmation avant le lancement. Consultez [Exécuter une campagne](/fr/executions/run-campaign) pour le déroulement de l'exécution.
+
+## Tests invalides et modifications non enregistrées
+
+Si un test de votre campagne devient invalide (appareil manquant, steps cassés), un bandeau d'avertissement apparaît et la campagne ne peut pas être exécutée tant que le problème n'est pas corrigé. L'éditeur suit également les modifications non enregistrées et affiche une confirmation si vous quittez la page sans sauvegarder ; appuyez sur `Cmd+S` / `Ctrl+S` pour enregistrer rapidement.

@@ -1,0 +1,50 @@
+---
+title: "cancel_shell"
+description: "Annuler une commande shell en attente ou en cours."
+sidebarTitle: "cancel_shell"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Annuler une commande shell en attente ou en cours.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `shell_id` | number | Oui | Identifiant de la commande shell à annuler |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "shell_id": 0
+}
+```
+
+## Description
+
+```text
+Le statut de la commande passe à Canceled et la tâche runner est terminée. Trouvez les shell_ids actifs via list_shell_actions.
+```
+
+## Associé
+
+- [`list_shell_actions`](/fr/mcp/tools/shell/list_shell_actions)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

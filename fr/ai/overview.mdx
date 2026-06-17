@@ -1,0 +1,60 @@
+---
+title: L'IA dans Kapptivate
+description: Où l'IA travaille pour vous sur la plateforme, des selectors résilients aux vérifications en langage naturel et à l'extraction d'OTP.
+sidebarTitle: Vue d'ensemble
+---
+
+Les tests UI cassent pour de mauvaises raisons : un changement de DOM renomme un selector, un code à usage unique arrive dans une boîte de réception, un bug visuel passe à travers une assertion en correspondance exacte. Kapptivate intègre l'IA dans le cycle de vie des tests pour absorber précisément ce type de fragilité, tout en vous laissant le contrôle sur son périmètre d'action.
+
+Vous décidez de l'empreinte : l'IA peut être complètement désactivée, limitée à des steps individuels, ou piloter chaque selector, par test, avec une [stratégie](/fr/ai/selectors#ai-strategies) qui définit quand elle s'engage.
+
+## Les capacités IA
+
+<Columns cols={2}>
+  <Card title="Selectors IA" icon="crosshairs" href="/fr/ai/selectors">
+
+    Trouvez des éléments par intention et survivez aux changements de DOM
+
+</Card>
+  <Card title="Vérifier avec l'IA" icon="badge-check" href="/fr/ai/verify-with-ai">
+
+    Validez ce qu'une page devrait afficher en langage naturel
+
+</Card>
+  <Card title="Vérification orthographique IA" icon="spell-check" href="/fr/ai/spell-check">
+
+    Relisez la page en cours pour l'orthographe et la grammaire
+
+</Card>
+  <Card title="Extraction email et SMS" icon="envelope" href="/fr/tests/email-sms">
+
+    Extrayez les codes OTP et les liens d'activation de vrais messages
+
+</Card>
+</Columns>
+
+## Où vous le contrôlez
+
+- **À la création** : la case **AI usage** active l'IA dès le premier step ([Créer un test](/fr/tests/create)).
+- **Par test** : le toggle **Enable AI** et la stratégie dans **Test settings > AI** ([Test builder](/fr/tests/builder)).
+- **Par step** : le toggle **Turn on AI for this step** surcharge le paramètre du test là où vous en avez besoin.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Selectors IA" icon="crosshairs" href="/fr/ai/selectors">
+
+    Commencez par la capacité qui supprime le plus de maintenance
+
+</Card>
+  <Card title="Test builder" icon="vial" href="/fr/tests/builder">
+
+    Où les toggles IA se trouvent dans le flux de création
+
+</Card>
+  <Card title="Kapptivate pour les agents IA" icon="robot" href="/fr/ai/agents">
+
+    Pilotez la plateforme depuis Claude Code, Copilot et d'autres agents
+
+</Card>
+</Columns>

@@ -1,0 +1,34 @@
+---
+title: Vérification orthographique IA
+description: Faites relire la page en cours par l'IA pour détecter les fautes d'orthographe et de grammaire en tant que step de test.
+sidebarTitle: Vérification orthographique IA
+---
+
+Les fautes de frappe passent plus facilement que les bugs : aucun test n'échoue quand un libellé affiche "Confrim". **Verify Spell Check** transforme la relecture en step de test : l'IA lit la page en cours et signale les problèmes d'orthographe et de grammaire, pour que la qualité du contenu soit vérifiée à chaque exécution, pas seulement quand quelqu'un regarde par hasard.
+
+## Ajouter le step
+
+Dans le builder, choisissez **Add step... > Verifications > Verify Spell Check**. Au moment de l'exécution, l'IA examine le contenu visible de la page et le step échoue lorsqu'elle détecte des problèmes d'orthographe ou de grammaire.
+
+## Quand l'utiliser
+
+- **Pages riches en contenu** : pages d'atterrissage, centres d'aide, parcours de paiement où le texte change souvent.
+- **Sites localisés** : détectez les traductions cassées et les problèmes d'encodage par langue en exécutant le même test dans plusieurs langues.
+- **Portes de qualité récurrentes** : ajoutez-le à un moniteur pour que le contenu en production reste propre au fil du temps.
+
+La référence JSON se trouve dans [aispellcheck](/fr/tests/actions/web/aispellcheck) (et sa [variante smartphone](/fr/tests/actions/smartphone/aispellcheck)).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vérifier avec l'IA" icon="badge-check" href="/fr/ai/verify-with-ai">
+
+    Validez les états de page en langage naturel
+
+</Card>
+  <Card title="Tests email et SMS" icon="envelope" href="/fr/tests/email-sms">
+
+    Les steps IA qui extraient les codes et liens de vrais messages
+
+</Card>
+</Columns>

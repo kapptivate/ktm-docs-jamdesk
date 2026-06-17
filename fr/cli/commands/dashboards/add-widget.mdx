@@ -1,0 +1,90 @@
+---
+title: "ktm dashboards add-widget"
+description: "Ajouter un widget à un dashboard depuis un fichier JSON ou stdin"
+sidebarTitle: "add-widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Ajouter un widget à un dashboard depuis un fichier JSON ou stdin
+
+## Utilisation
+
+```bash
+ktm dashboards add-widget <uid> [flags]
+```
+
+## Exemples
+
+```bash
+# Add widget from a file (auto-positioned)
+ktm dashboards add-widget abc123 --json widget.json
+
+# Pipe from template
+ktm dashboards widget-template title | ktm dashboards add-widget abc123 --json -
+
+# With explicit position and size
+ktm dashboards add-widget abc123 --json widget.json --x 0 --y 0 --w 24 --h 1
+
+# Full-width chart
+ktm dashboards add-widget abc123 --json chart.json --w 24 --h 8
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--h` | int | — | Hauteur de grille en lignes |
+| `--json` | string | — | Chemin du fichier JSON du widget, ou "-" pour stdin (requis) |
+| `--w` | int | — | Largeur de grille en colonnes |
+| `--x` | int | — | Position x dans la grille (0-23) |
+| `--y` | int | — | Position y dans la grille |
+
+## Détails
+
+Valide une définition de widget et l'ajoute à la disposition du dashboard.
+
+Le JSON du widget est la section data (même format que la sortie de widget-template,
+sans _metadata). Utilisez --json pour spécifier un fichier ou "-" pour lire depuis stdin.
+
+DISPOSITION DE GRILLE : 24 colonnes, 30px de hauteur par ligne, compaction verticale.
+  - Pleine largeur : --w 24. Moitié : --w 12. Quart : --w 6.
+  - x + w doit être &lt;= 24. Les widgets ne peuvent pas se chevaucher.
+  - Omettez --x et --y pour le positionnement automatique (remplit les espaces de gauche à droite, de haut en bas).
+  - Tailles par défaut par type : charts/tables/custom 6x8, counter 6x3, title 6x2.
+
+PATTERNS DE DISPOSITION :
+  - Ligne de KPI : 2-4 counters. --w 12 pour 2, --w 8 pour 3, --w 6 pour 4.
+  - Paire de charts : 2 charts côte à côte, --w 12 chacun.
+  - Séparateur de section : title --w 24 --h 2, puis contenu en dessous.
+
+customDisplay : nécessite un script IIFE, utilise queries[] et non series[], script de 20Ko max.
+Les scripts peuvent calculer (ratios, stats, corrélation) mais ne disposent pas du moteur statistique de la plateforme
+(EWMA, détection d'anomalies, SLO). Utilisez InfluxQL ou les outils MCP/CLI pour ceux-ci.
+Ne codez pas en dur des valeurs pré-calculées : les widgets sont dynamiques et ré-interrogent lors des changements de plage temporelle.
+Exécutez validate-widget ou consultez widget-template _metadata.notes pour la documentation de l'API script.
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

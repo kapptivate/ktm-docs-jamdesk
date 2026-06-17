@@ -1,0 +1,108 @@
+---
+title: "ktm ci build"
+description: "Générer un template JSON de campagne à partir d'ID de tests ou d'une campagne de tests enregistrée (local uniquement, pas d'exécution)"
+sidebarTitle: "build"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Générer un template JSON de campagne à partir d'ID de tests ou d'une campagne de tests enregistrée (local uniquement, pas d'exécution)
+
+## Utilisation
+
+```bash
+ktm ci build [flags]
+```
+
+## Exemples
+
+```bash
+# Build template for two tests (no variant pinning — backend uses defaults)
+ktm ci build --test-ids 16480,16838
+
+# Pin a single group's variant
+ktm ci build --product acme~web --test-ids 16480 \
+  --variant "API:Staging"
+
+# Multi-group pinning
+ktm ci build --product acme~web --test-ids 16480 \
+  --variant "API:Staging" --variant "Database:Replica" --variant "Frontend:Canary"
+
+# Numeric variant id (when stable across environments)
+ktm ci build --product acme~web --test-ids 16480 --variant 691
+
+# Build from a saved Tests campaign (product auto-derived from the campaign)
+ktm ci build --test-campaign 42
+
+# Build from a Tests campaign and pin a variant
+ktm ci build --test-campaign 42 --variant "API:Staging"
+
+# Full Tests-campaign pipeline: build → run with one-off override
+ktm ci build --test-campaign 42 --variant "API:Staging" | \
+  ktm ci run --stdin --set-var "GLOBAL_VAR=override-value"
+
+# Full pipeline: build → fill values → run
+ktm ci build --product acme~web --test-ids 16480 --variant "API:Staging" | \
+  jq '.tests[0].input_variables.TODO_INDEX.value = "42"' | \
+  ktm ci run --stdin
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nom de la campagne (optionnel, vide par défaut) |
+| `--product` | string | — | Slug du produit (format : operator~product). Requis avec --test-ids (résout les buckets de variables V3) ; non nécessaire avec --test-campaign (déduit automatiquement). |
+| `--test-campaign` | int | — | ID de campagne de tests enregistrée (mutuellement exclusif avec --test-ids ; produit déduit automatiquement) |
+| `--test-ids` | string | — | ID de tests séparés par des virgules (depuis 'tests list') ; mutuellement exclusif avec --test-campaign |
+| `--variant` | string[] | — | Fixer un variant par groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les variables des groupes non fixés utilisent le variant par défaut du groupe. |
+
+## Détails
+
+Construit un template JSON de campagne en récupérant les détails des tests et en émettant une
+structure auto-documentée prête à être pipée dans "ci run --stdin".
+
+La sortie est un template JSON avec une clé "_meta" qui indique à un agent IA de quel
+type est chaque variable et quel type de ressource chaque propriétaire attend. L'agent
+remplit les valeurs et pipe le résultat vers "ci run --stdin".
+
+La clé "_meta" est supprimée automatiquement par "ci run --stdin". La clé "_meta"
+fournit les noms de tests qui apparaissent dans la sortie de résultats par test quand la campagne
+est exécutée via "ci run --stdin".
+
+--variant est répétable, par groupe. Chaque spécification fixe un groupe de variables.
+Les globales émettent toujours un bucket "global". Les variables des groupes non fixés utilisent
+le variant par défaut du groupe. L'ancien flag --variable-group à portée unique
+a été supprimé.
+
+Schéma JSON de campagne :
+  name              — nom de la campagne (optionnel)
+  run_origin        — 1 (depuis des ID de tests) ou 2 (depuis une campagne de tests enregistrée)
+  tests[]           — tableau d'entrées de tests :
+    id              — ID du test (depuis tests list)
+    input_variables — map clé/valeur des noms de variables vers des paires \{value, bucket\}
+    direct_owners   — map clé/valeur des labels de propriétaires vers des identifiants de ressources
+
+## Notes
+
+- Construit un template de campagne localement et affiche du JSON, il n'exécute **rien**. Remplissez les valeurs, puis pipez vers [`ktm ci run`](/fr/cli/commands/ci/run) avec `--stdin`.
+
+## Voir aussi
+
+- [`ktm ci`](/fr/cli/commands/ci)
+- [`ktm tests list`](/fr/cli/commands/tests/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

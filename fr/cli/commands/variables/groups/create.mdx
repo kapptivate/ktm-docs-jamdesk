@@ -1,0 +1,57 @@
+---
+title: "ktm variables groups create"
+description: "Créer un groupe de variables avec des variants"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un groupe de variables avec des variants
+
+## Utilisation
+
+```bash
+ktm variables groups create [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables groups create --product acme~web --name "Envs" --variants "Dev,Staging,Prod"
+ktm variables groups create --product acme~web --name "Regions" --variants "US,EU,APAC" -o json
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nom du groupe (requis) |
+| `--product` | string | — | Slug du produit (requis) |
+| `--variants` | string | — | Noms de variants séparés par des virgules (requis) |
+
+## Détails
+
+Créer un nouveau groupe de variables sous un produit. --variants est une liste séparée par des virgules
+de noms de variants (ex. "Dev,Staging,Prod"). Le PREMIER variant devient le
+défaut selon la convention de la plateforme. Après la création, gérez les variants via
+'ktm variables variants &lt;verb&gt;'.
+
+## Voir aussi
+
+- [`ktm variables groups`](/fr/cli/commands/variables/groups)
+- [`ktm variables variants`](/fr/cli/commands/variables/variants)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,106 @@
+---
+title: "Référence des commandes CLI"
+description: "Toutes les commandes ktm, regroupées par ressource (22 commandes de premier niveau)."
+sidebarTitle: "Présentation"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Le CLI `ktm` regroupe les commandes par ressource. Il expose **134 commandes** réparties en 22 groupes de premier niveau. Choisissez un groupe ci-dessous ou utilisez la barre latérale.
+
+## Flags globaux
+
+Ces flags s'appliquent à toutes les commandes :
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--api-key-file` | string | — | Chemin vers le fichier contenant la clé API (alternative à la variable d'environnement KAPPTIVATE_API_KEY) |
+| `-d, --debug` | boolean | — | Active la sortie de débogage : requêtes HTTP, timing et erreurs détaillées sur stderr |
+| `--host` | string | — | Hôte API (env : KAPPTIVATE_HOST, défaut : app.kapptivate.com) |
+| `--no-color` | boolean | — | Désactive la sortie colorée (aussi : variable NO_COLOR, TERM=dumb) |
+| `--no-proxy` | boolean | — | Désactive le proxy HTTP de l'environnement |
+| `-o, --output` | string | `json` | Format de sortie : json, table ou plain (TSV) |
+| `-q, --quiet` | boolean | — | Supprime les lignes de log de niveau info sur stderr, affiche uniquement les erreurs |
+| `--skip-tls` | boolean | — | Ignore la vérification des certificats TLS (non sécurisé) |
+
+## Commandes
+
+<Columns cols={2}>
+  <Card title="adb" icon="angle-right" href="/fr/cli/commands/adb">
+    ADB — tunnel distant Android Debug Bridge vers les robots smartphone
+  </Card>
+  <Card title="agents" icon="angle-right" href="/fr/cli/commands/agents">
+    Agents — santé de l'infrastructure, capacité et gestion
+  </Card>
+  <Card title="alerts" icon="angle-right" href="/fr/cli/commands/alerts">
+    Définitions d'alertes — règles persistantes qui déclenchent automatiquement des incidents sur la plateforme
+  </Card>
+  <Card title="artifacts" icon="angle-right" href="/fr/cli/commands/artifacts">
+    Artifacts — récupérer des captures d'écran, enregistrements et autres artefacts de test
+  </Card>
+  <Card title="ci" icon="angle-right" href="/fr/cli/commands/ci">
+    Exécution de tests CI/CD — exécuter des tests depuis des fichiers de configuration JSON et rapporter les résultats
+  </Card>
+  <Card title="collections" icon="angle-right" href="/fr/cli/commands/collections">
+    Collections — arborescence hiérarchique de tests et dashboards
+  </Card>
+  <Card title="dashboards" icon="angle-right" href="/fr/cli/commands/dashboards">
+    Dashboards — tableaux de bord analytiques au niveau opérateur avec des widgets de métriques
+  </Card>
+  <Card title="executions" icon="angle-right" href="/fr/cli/commands/executions">
+    Executions — résultats d'exécution de campagnes avec données de réussite/échec par test
+  </Card>
+  <Card title="incidents" icon="angle-right" href="/fr/cli/commands/incidents">
+    Incidents — alertes déclenchées sur la plateforme (OPEN, CLOSED, MANUALLY_CLOSED)
+  </Card>
+  <Card title="metrics" icon="angle-right" href="/fr/cli/commands/metrics">
+    Metrics — interroger les KPI des monitors, les données des collecteurs passifs et l'utilisation des appareils depuis InfluxDB
+  </Card>
+  <Card title="monitoring-results" icon="angle-right" href="/fr/cli/commands/monitoring-results">
+    Résultats de monitoring — résultats d'exécution des monitors planifiés
+  </Card>
+  <Card title="monitors" icon="angle-right" href="/fr/cli/commands/monitors">
+    Monitors — exécutions récurrentes planifiées de tests avec suivi de statut
+  </Card>
+  <Card title="operators" icon="angle-right" href="/fr/cli/commands/operators">
+    Operators — entités organisationnelles de premier niveau qui possèdent les produits, tests et utilisateurs
+  </Card>
+  <Card title="products" icon="angle-right" href="/fr/cli/commands/products">
+    Products — applications ou services sous un opérateur contenant des tests et monitors
+  </Card>
+  <Card title="resources" icon="angle-right" href="/fr/cli/commands/resources">
+    Resources — SIM, agents web et smartphones disponibles pour l'exécution de tests
+  </Card>
+  <Card title="reusables" icon="angle-right" href="/fr/cli/commands/reusables">
+    Reusables — fragments de tests partagés (tests avec kind=2) intégrés via des actions d'import
+  </Card>
+  <Card title="shell" icon="angle-right" href="/fr/cli/commands/shell">
+    Shell — sessions interactives en direct sur des cartes SIM et agents web
+  </Card>
+  <Card title="status" icon="angle-right" href="/fr/cli/commands/status">
+    Vérifier la connectivité, l'authentification et la version du CLI
+  </Card>
+  <Card title="test-campaigns" icon="angle-right" href="/fr/cli/commands/test-campaigns">
+    Campagnes de tests — lots ordonnés de tests nommés
+  </Card>
+  <Card title="tests" icon="angle-right" href="/fr/cli/commands/tests">
+    Tests — scénarios de test automatisés pouvant être exécutés et surveillés
+  </Card>
+  <Card title="users" icon="angle-right" href="/fr/cli/commands/users">
+    Users — utilisateurs humains et comptes de service ayant accès à la plateforme
+  </Card>
+  <Card title="variables" icon="angle-right" href="/fr/cli/commands/variables">
+    Variables, groupes et variants — configuration au niveau du produit
+  </Card>
+</Columns>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installez le CLI et authentifiez-vous.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/fr/cli/ci-cd">
+    Exécutez des tests depuis votre pipeline.
+  </Card>
+</Columns>

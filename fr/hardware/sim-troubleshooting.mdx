@@ -1,0 +1,63 @@
+---
+title: Dépannage des cartes SIM
+description: Diagnostiquer les SIM bloquées en recherche ou non enregistrées, et les erreurs courantes USSD, SMS et appels.
+---
+
+Une SIM défaillante se manifeste soit par son statut (recherche, non enregistrée), soit par des erreurs récurrentes dans les résultats de test. Voici le diagnostic pour chaque cas.
+
+## Statut : recherche
+
+1. Redémarrez le slot, ou le robot.
+2. Si le statut reste **searching** après 10 minutes, insérez la SIM dans un téléphone et vérifiez si elle se connecte au réseau.
+3. Si elle se connecte dans un téléphone, l'IMEI du modem a probablement été bloqué par l'opérateur : investiguez de ce côté.
+4. Si elle ne se connecte pas non plus dans un téléphone, la SIM elle-même a un problème ou la couverture réseau est très faible.
+
+## Statut : non enregistrée
+
+La SIM a probablement été désactivée par l'opérateur parce qu'elle est toujours restée connectée à la même antenne. Redémarrez le modem ; si elle reste non enregistrée, testez la SIM dans un téléphone et remplacez-la si elle ne se connecte pas.
+
+## Erreur : Network Timeout (+CUSD 5)
+
+Le réseau cellulaire n'a pas répondu à une demande d'ouverture de session USSD. Causes possibles : mauvaise couverture réseau, licence USSD expirée ou serveur USSD surchargé.
+
+Pour confirmer que la requête a bien quitté le modem, ouvrez les artefacts pcap (radioframes) joints au résultat du test et cherchez :
+
+- `UplinkDirectTransfer ... invoke processUnstructuredSS-Request` : la requête a été envoyée.
+- `DownlinkDirectTransfer ... invoke unstructuredSS-Request` : le réseau a répondu.
+
+Si la requête est envoyée mais ne reçoit jamais de réponse, contactez votre fournisseur USSD.
+
+## Erreur : CME 100
+
+Redémarrez le modem, puis contactez le support si le problème persiste.
+
+## Erreur : Connection problem or invalid MMI code (CME 258)
+
+La SIM refuse les actions USSD. Redémarrez ; si cela ne résout pas le problème, escaladez vers l'équipe réseau de l'opérateur.
+
+## Erreur : pas de SMS reçu
+
+Vérifiez l'historique de la SIM dans la plateforme : le SMS est peut-être simplement arrivé après le délai d'attente.
+
+## Erreur : appel émis mais coupé brutalement
+
+Soit la SIM n'a plus de crédit, soit elle n'est pas autorisée à appeler ce numéro (numéros courts, ou indisponible en itinérance).
+
+## Erreur : robot injoignable
+
+Soit le robot n'est pas connecté ([dépannage réseau](/fr/hardware/network-troubleshooting)), soit, si l'agent apparaît comme disponible dans l'administration, l'horloge du robot est désynchronisée : demandez au support de vérifier.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Remplacer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
+
+    Remplacer une SIM défectueuse
+
+</Card>
+  <Card title="Commande USSD" icon="hashtag" href="/fr/tests/actions/cellular/ussd">
+
+    Les états de session sur lesquels un test USSD peut vérifier
+
+</Card>
+</Columns>

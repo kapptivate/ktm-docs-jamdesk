@@ -1,0 +1,68 @@
+---
+title: "ktm variables create"
+description: "Créer une variable (single | secret | choice)"
+sidebarTitle: "create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer une variable (single | secret | choice)
+
+## Utilisation
+
+```bash
+ktm variables create [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost
+ktm variables create --product acme~web --name ENV --type choice --default-value "dev,staging,prod"
+ktm variables create --product acme~web --name DB_HOST --type single --default-value localhost --group 42
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--default-value` | string | — | Valeur par défaut (pour choice : séparée par des virgules) |
+| `--description` | string | — | Description (optionnelle, recommandée) : explique l'objectif de la variable ; les agents et humains l'utilisent pour désambiguïser sémantiquement |
+| `--group` | int | — | Identifiant optionnel du groupe de variables |
+| `--name` | string | — | Nom de la variable (requis) |
+| `--product` | string | — | Slug du produit (requis) |
+| `--type` | string | — | single \| secret \| choice (requis) |
+
+## Détails
+
+Types :
+  single  valeur scalaire de type chaîne dans --default-value
+  secret  chaîne scalaire ; la plateforme masque à la lecture
+  choice  --default-value est une liste séparée par des virgules de valeurs autorisées
+
+Pour les variables rattachées à un groupe, fournissez --group &lt;id&gt; ; omettez pour une variable globale. Lorsque
+--group est défini, l'outil distribue automatiquement les variable_values en une entrée par variant de
+ce groupe, toutes initialisées à --default-value. Ajustez les variants individuels
+ensuite avec 'ktm variables set-value'.
+
+Secrets : n'intégrez jamais un vrai secret dans l'historique shell. Créez via l'interface web
+ou transmettez la valeur via une variable d'environnement ($MY_SECRET) sur des shells éphémères.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

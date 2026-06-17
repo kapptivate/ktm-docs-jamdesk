@@ -1,0 +1,54 @@
+---
+title: "delete_collection"
+description: "Déplace une collection dans la corbeille de l'organisation."
+sidebarTitle: "delete_collection"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplace une collection dans la corbeille de l'organisation.
+
+<Warning>
+  **Destructif · Écrit des données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Oui | Doit être true : confirme que l'appelant accepte de déplacer cette collection dans la corbeille (suppression réversible, récupérable tant qu'un admin n'a pas vidé la corbeille) |
+| `operator` | string | Oui | Slug de l'operator |
+| `uid` | string | Oui | UID de la collection à supprimer |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "uid": "string",
+  "acknowledge": false
+}
+```
+
+## Description
+
+```text
+The collection is recoverable until an admin empties the trash on the collections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
+```
+
+## Associés
+
+- [`list_collection_items`](/fr/mcp/tools/collections/list_collection_items)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

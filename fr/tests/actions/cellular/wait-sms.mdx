@@ -1,0 +1,65 @@
+---
+title: Wait SMS
+description: Attendez un SMS entrant sur une vraie SIM et vérifiez l'expéditeur et le contenu.
+---
+
+Attendez qu'un SMS arrive sur la SIM et vérifiez-le : livraison d'OTP, notifications, alertes. L'action vérifie l'expéditeur, le texte du message et le nombre de parties pour les messages longs.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Message attendu | `expected_result.message` | Non | Le contenu du SMS que vous attendez. Le résultat enregistre le ratio de correspondance. |
+| Vérifier la réception SMS depuis une étape précédente | `command.wait_from` | Non | Commencer la surveillance depuis la position d'une action précédente, pour les SMS déclenchés plus tôt dans le flux (un Send SMS ou une action USSD, par exemple). |
+| La réception SMS est optionnelle | `optional_reception` | Non | Le test réussit même si aucun SMS n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "SMS_GET",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "wait_from": null,
+    "options": { "artifacts": {} }
+  },
+  "expected_result": {
+    "message": "Your verification code is"
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`), pour chaque SMS reçu :
+
+| Champ | Description |
+|-------|-------------|
+| `sender` | Numéro de téléphone qui a envoyé le SMS. |
+| `message` | Le corps du SMS. |
+| `count` | Nombre de parties, pour les messages multi-parties (concaténés). |
+| `ratio` | Ratio de correspondance (0 à 100) par rapport au message attendu. |
+| `relative_duration` | Temps écoulé depuis le début de la surveillance jusqu'à l'arrivée du SMS, en secondes. |
+| `dynamic_variables` | Valeurs extraites du SMS (un code OTP, par exemple) dans les variables. |
+
+Dans Analytics, chaque exécution alimente la mesure de réception SMS avec `reception_duration_seconds` et `duration_seconds`, étiquetée par statut, antenne et technologie d'accès.
+
+Les assertions peuvent cibler `sms_sender`, `message`, `concatenated_sms` (nombre de parties), ou extraire une `variable`.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Send SMS" icon="message" href="/fr/tests/actions/cellular/send-sms">
+
+    Envoyez le SMS depuis une autre SIM et vérifiez les deux côtés
+
+</Card>
+  <Card title="Vue d'ensemble des actions SIM" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    Assertions, variables stockées et options partagées
+
+</Card>
+</Columns>

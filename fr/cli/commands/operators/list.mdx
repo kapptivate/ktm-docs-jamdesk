@@ -1,0 +1,65 @@
+---
+title: "ktm operators list"
+description: "Lister tous les operators accessibles avec la clé API actuelle"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister tous les operators accessibles avec la clé API actuelle
+
+## Utilisation
+
+```bash
+ktm operators list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister tous les operators (JSON)
+ktm operators list
+
+# Lister les operators au format tableau
+ktm operators list -o table
+
+# Filtrer par groupe d'organisation
+ktm operators list --organisation-group my-org
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--organisation-group` | string | — | Filtrer les operators appartenant à ce groupe d'organisation (par slug) |
+| `--short-name` | string | — | Filtrer par nom court exact de l'operator |
+
+## Détails
+
+Lister les operators auxquels la clé API authentifiée a accès.
+
+Les operators sont les entités de premier niveau dans Kapptivate. Chaque operator possède des produits,
+qui contiennent à leur tour des tests et des monitors. Commencez ici pour découvrir votre slug
+d'operator, puis utilisez-le comme --operator dans les commandes products/tests/monitors/users.
+
+Champs de sortie JSON : name, active, organisation_group, slug, logo
+Colonnes du tableau :   SLUG, NAME, ACTIVE, ORG GROUP
+
+## Voir aussi
+
+- [`ktm operators`](/fr/cli/commands/operators)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

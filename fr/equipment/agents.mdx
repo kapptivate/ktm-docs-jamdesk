@@ -1,0 +1,125 @@
+---
+title: Agents
+description: Gérez vos agents SIM, smartphone, web et passifs.
+sidebarTitle: Agents
+---
+
+![The Agents area on the Smartphone Agents tab, with SIM, Smartphone, Web, and Passive tabs, a search box, Status and Zone filters, and an agent card](/images/agents-list.webp)
+
+La zone Agents vous permet de gérer et surveiller l'ensemble de votre équipement de test : agents Cellular (avec des emplacements SIM), agents Smartphone, agents Web et agents Passive, en un seul endroit. Vous pouvez rechercher et filtrer les agents, ouvrir un agent pour inspecter ses appareils et moniteurs, et exécuter des tâches de maintenance comme les redémarrages, les mises à jour et le mode maintenance.
+
+## Types d'agents
+
+Kapptivate regroupe les agents en quatre types, chacun affiché dans son propre onglet. Les libellés des onglets indiquent combien d'agents de chaque type vous possédez.
+
+**SIM** (aussi appelé Cellular) : agents avec des emplacements pour cartes SIM. Ils exécutent des tests sur les réseaux cellulaires, SMS, USSD et les flux dépendants de la SIM. Chaque agent affiche le nombre d'emplacements SIM actifs et configurés.
+
+**Smartphone** : agents qui exécutent des tests d'applications natives iOS et Android. Chacun affiche ses téléphones connectés et leur statut.
+
+**Web** : agents qui exécutent des tests basés sur le navigateur. Ils exposent une capacité configurable de tests parallèles et une heatmap d'utilisation à la place d'une liste d'appareils.
+
+**Passive** : agents en lecture seule qui remontent des données de monitoring sans exécuter de tests. Leur interface est plus simple, centrée sur le monitoring, sans contrôles de redémarrage ni de maintenance.
+
+## Parcourir et filtrer les agents
+
+Lorsque vous ouvrez la zone Agents, vous voyez les agents de l'onglet actif sous forme de cartes, chacune affichant son nom, sa zone, son statut et ses emplacements. Utilisez **Create agent** (en haut à droite) pour en ajouter un nouveau.
+
+Pour affiner la liste :
+
+- **Recherchez** par nom d'hôte ou UUID. Les résultats se mettent à jour au fur et à mesure de la saisie.
+- **Filtrez par Status** : Online, Offline, Maintenance, Waiting for configuration ou Test-only.
+- **Filtrez par Zone** : choisissez une zone ou une localisation. Les zones sont alimentées par vos agents, seules les zones qui contiennent effectivement des agents apparaissent.
+
+Les agents Passive ne prennent en charge que la recherche ; les filtres Status et Zone ne s'appliquent pas à eux.
+
+## Détails de la carte agent
+
+Chaque carte agent affiche :
+
+- **Badge de statut** : Online, Offline, Maintenance, Waiting for configuration ou Test-only
+- **Nom** : le nom d'affichage ou le nom d'hôte
+- **Zone** : la localisation configurée de l'agent (agents SIM, Smartphone et Web)
+- **Tags d'emplacements** : nombre d'emplacements actifs et total (agents SIM et Smartphone)
+- **Version** : la version du logiciel, avec un indicateur lorsqu'une mise à jour est disponible
+- **Menu d'actions** : un menu à trois points pour modifier, redémarrer, mettre en maintenance ou supprimer l'agent
+
+Pour savoir ce que signifie chaque statut, consultez [Statuts](/fr/equipment/statuses).
+
+## Ouvrir un agent
+
+Cliquez sur une carte agent pour ouvrir sa page de détails. Les onglets dépendent du type d'agent :
+
+- **Agents SIM et Smartphone** : General, Connected devices, Monitors, Settings, Event logs
+- **Agents Web** : General, Usage, Capacity, Monitors, Settings, Event logs
+
+Le nom et le statut de l'agent se trouvent en haut, avec les actions **Reboot agent**, **Set agent in maintenance** et (pour les agents SIM, Smartphone et Web) **Test-only mode** en haut à droite.
+
+### General
+
+Informations de base sur l'agent : nom d'hôte, localisation, version du logiciel et UUID. Utilisez **Edit agent** pour modifier le nom et les autres détails modifiables.
+
+### Connected devices
+
+Affiché pour les agents SIM et Smartphone.
+
+- Les **agents SIM** listent chaque emplacement avec le numéro de la SIM, son statut, le réseau, un badge de santé (survolez-le pour voir l'utilisation moyenne hebdomadaire), un compteur d'accès (survolez-le pour voir les produits qui peuvent utiliser la SIM) et les moniteurs actifs.
+- Les **agents Smartphone** listent chaque téléphone avec son modèle, statut, UUID, badge d'utilisation, compteur d'accès et nombre de moniteurs.
+
+Les statuts des appareils et de santé sont expliqués dans [Statuts](/fr/equipment/statuses).
+
+### Monitors
+
+Affiché pour les agents SIM, Smartphone et Web. Liste les moniteurs exécutés sur l'agent, regroupés par suite, avec le statut, la fréquence et la localisation de chaque moniteur. Mettez en pause un moniteur individuel depuis le menu de sa ligne, ou utilisez **Pause all monitors** pour mettre en pause tous les moniteurs de l'agent.
+
+### Settings
+
+Une sous-navigation à gauche regroupe la configuration de l'agent :
+
+- **About** : informations générales sur l'agent
+- **Software update** : activez les mises à jour logicielles automatiques et choisissez quand elles s'exécutent (tous les jours à une heure définie)
+- **Automatic reboot** : activez les redémarrages planifiés et définissez leur calendrier (nous recommandons de redémarrer au moins une fois par semaine)
+- **Agent credentials** : l'ID et le mot de passe de l'agent, avec une action **Reset password**. Utilisez-les pour configurer le robot.
+- **Network configuration** : une vue JSON en lecture seule des interfaces réseau, adresses IP et adresses MAC de l'agent (disponible pour tous les types d'agents)
+- **Danger zone** : supprimer l'agent
+
+### Event logs
+
+Un historique d'événements par agent, avec les mêmes filtres Type et User, le sélecteur de période et l'action **Export CSV** que le [journal d'événements](/fr/administration/event-log) global du workspace. Utilisez le sélecteur de période pour affiner les résultats.
+
+### Usage (agents Web)
+
+Les agents Web disposent d'un onglet **Usage** affichant une heatmap d'utilisation moyenne hebdomadaire, le pourcentage d'occupation de l'agent heure par heure sur les jours de la semaine. Utilisez-le pour repérer quand un agent est surchargé et équilibrer la charge.
+
+### Capacity (agents Web)
+
+L'onglet **Capacity** définit combien de tests un agent Web exécute simultanément, de 1 à 10 tests parallèles. Le maximum est déterminé par votre licence ; l'augmenter rend plus de navigateurs disponibles pour les tests web.
+
+## Modes maintenance et test-only
+
+**Mode maintenance** : utilisez **Set agent in maintenance** (en haut à droite) pour retirer temporairement un agent du service. Il reste visible dans la liste mais cesse d'exécuter les scénarios et moniteurs planifiés jusqu'à ce que vous cliquiez sur **Remove from maintenance**. Seuls les administrateurs peuvent activer ou désactiver la maintenance.
+
+**Mode test-only** : disponible pour les agents SIM, Smartphone et Web. L'activation met en pause tous les moniteurs actifs de l'agent et réserve sa capacité aux tests manuels. Une boîte de dialogue de confirmation apparaît avant l'activation. Tant que le mode est actif, un indicateur s'affiche à côté du nom de l'agent et le bouton d'en-tête devient **Exit test-only mode** ; la désactivation ouvre une boîte de dialogue confirmant que les moniteurs en pause seront repris.
+
+## Redémarrage et suppression
+
+**Redémarrez un agent** depuis le bouton **Reboot agent** ou le menu d'actions de la carte. Vous verrez une confirmation puis une notification de succès ou d'erreur ; les redémarrages expirent après 3 minutes.
+
+**Supprimez un agent** depuis le menu d'actions ou la section **Danger zone** des Settings. Une boîte de dialogue de confirmation apparaît, et la suppression est définitive.
+
+## États vides
+
+Si aucun agent n'existe dans un onglet, vous voyez un état vide sans filtres. Une fois les agents ajoutés, les filtres apparaissent. Si des filtres sont appliqués mais qu'aucun résultat ne correspond, une carte indique quels filtres sont actifs pour que vous puissiez les effacer.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Statuts" icon="list-check" href="/fr/equipment/statuses">
+    Décodez chaque statut d'agent, d'appareil et de SIM que vous voyez sur ces écrans
+  </Card>
+  <Card title="Parc d'appareils" icon="mobile-screen-button" href="/fr/equipment/devices-lab">
+    Parcourez les SIM et smartphones connectés à l'ensemble de vos agents
+  </Card>
+  <Card title="Matériel" icon="server" href="/fr/hardware/overview">
+    Installez, maintenez et dépannez les robots physiques derrière ces agents
+  </Card>
+</Columns>

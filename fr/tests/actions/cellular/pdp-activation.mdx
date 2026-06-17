@@ -1,0 +1,66 @@
+---
+title: PDP Activation
+description: Ouvrez une session data sur la SIM et mesurez le temps d'activation.
+---
+
+Activez un contexte PDP (la session data cellulaire) et vérifiez que le réseau attribue une configuration IP. C'est l'équivalent data de "cette SIM peut-elle se connecter", et le temps d'activation lui-même est un indicateur clé de qualité réseau.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Technologie d'accès | `command.access_technology` | Non | Technologie réseau à utiliser. Par défaut : automatique. |
+| Utiliser les identifiants APN par défaut | `command.default_apn` | Non | Utiliser l'APN configuré pour la SIM. Par défaut : activé. |
+| Nom APN, Login, Mot de passe | `command.apn`, `command.login`, `command.password` | Quand l'APN par défaut est désactivé | Identifiants APN personnalisés. |
+| Conserver le contexte PDP | `command.keep_alive` | Non | Maintenir la session data ouverte pour les actions suivantes. Par défaut : désactivé. |
+| Vérifier la connexion internet avant l'exécution | `command.check_network.active` | Non | Vérifier la connectivité d'abord. Par défaut : activé. |
+| PDP Activation doit échouer | `expect_failure` | Non | Inverse le verdict, pour les SIM qui ne doivent pas avoir d'accès data. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_PDP_ACTIVATION",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "access_technology": "",
+    "default_apn": true,
+    "apn": "",
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `duration` | Temps d'activation de la session data, en secondes. |
+| `ip_address`, `mask`, `ip_gateway` | La configuration IP attribuée par le réseau. |
+| `ip_dns1`, `ip_dns2` | Les serveurs DNS attribués. |
+| `apn` | L'APN utilisé. |
+
+Dans Analytics, chaque exécution alimente la mesure PDP activation avec `duration_seconds`, étiquetée par statut, APN, antenne (MCC, MNC, LAC, cell ID) et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/fr/tests/actions/cellular/ping">
+
+    Mesurez la latence une fois la session établie
+
+</Card>
+  <Card title="Ookla Speedtest" icon="gauge-high" href="/fr/tests/actions/cellular/speedtest">
+
+    Mesurez la bande passante complète de la connexion
+
+</Card>
+</Columns>

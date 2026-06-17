@@ -1,0 +1,92 @@
+---
+title: "ktm monitors batch-create"
+description: "Créer plusieurs monitors depuis un fichier de spécification batch"
+sidebarTitle: "batch-create"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer plusieurs monitors depuis un fichier de spécification batch
+
+## Utilisation
+
+```bash
+ktm monitors batch-create [flags]
+```
+
+## Exemples
+
+```bash
+# Preview: see the batch creation plan (does NOT create)
+ktm monitors batch-create --from-file batch.json
+
+# Submit after reviewing the preview
+ktm monitors batch-create --from-file batch.json --confirm
+
+# CI/CD: skip preview, auto-build and submit
+ktm monitors batch-create --from-file batch.json --force
+
+# batch.json format:
+# {
+#   "product": "operator~product",
+#   "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":5,"unit":"minutes"}}},
+#   "active": true,
+#   "monitors": [
+#     {"test_id": 100, "variants": ["API:Staging"]},
+#     {"test_id": 101, "variants": ["API:Staging", "Database:Replica"], "overrides": {"SIM_A": "069..."}},
+#     {"test_id": 102, "scheduling": {"type":"simple/v2","definition":{"frequency":{"every":15,"unit":"minutes"}}}}
+#   ]
+# }
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--confirm` | boolean | — | Soumettre tous les monitors après avoir examiné l'aperçu |
+| `--force` | boolean | — | Ignorer l'aperçu, construire et soumettre automatiquement (uniquement pour l'automatisation CI/CD) |
+| `--from-file` | string | — | Chemin vers le fichier JSON de spécification batch (requis) |
+
+## Détails
+
+Créer plusieurs monitors en une seule commande depuis un fichier de spécification JSON batch.
+Tous les monitors doivent appartenir au même produit.
+
+Le fichier de spécification batch contient un slug de produit, un planning et des options par défaut optionnels,
+et un tableau de spécifications de monitors, chacune avec un test_id, un tableau de variants
+optionnel (même format que monitors create) et des overrides optionnels.
+
+Trois modes :
+  Aperçu (défaut) : affiche le plan de création batch. Vérifiez les slots d'appareils vides
+  ou les valeurs manquantes avant de relancer avec --confirm.
+  Confirmer (--confirm) : soumet tous les monitors après avoir examiné l'aperçu.
+  Forcer (--force) : ignore complètement l'aperçu, construit et soumet automatiquement.
+  Utilisez --force uniquement dans les pipelines CI/CD et les scripts d'automatisation.
+
+Échec partiel : si certains monitors échouent à la création, ceux qui ont réussi sont conservés.
+La sortie indique lesquels ont réussi et lesquels ont échoué.
+
+Fixez les variants par entrée via le tableau variants (même format que monitors create).
+Les variables sont auto-résolues depuis les variants ; les overrides restent disponibles pour dévier
+des valeurs stockées dans les variants. Les monitors créés avec active=false passent par un
+toggle post-création pour que le planificateur de la plateforme les arrête effectivement. La création
+batch seule ne suffit pas.
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

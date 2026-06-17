@@ -1,0 +1,51 @@
+---
+title: "move_collection_items"
+description: "Déplace des tests et/ou dashboards dans une collection cible."
+sidebarTitle: "move_collection_items"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Déplace des tests et/ou dashboards dans une collection cible.
+
+<Info>
+  **Écrit des données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialise le budget d'édition après approbation de l'utilisateur pour des mutations supplémentaires |
+| `item_uids` | string | Oui | Liste d'identifiants d'éléments séparés par des virgules à déplacer |
+| `operator` | string | Oui | Slug de l'operator |
+| `target_collection_uid` | string | Oui | UID de la collection de destination |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string",
+  "target_collection_uid": "string",
+  "item_uids": "string"
+}
+```
+
+## Description
+
+```text
+item_uids accepts a comma-separated list of item UIDs (for dashboards) or numeric ids prefixed with "test:" (for tests). The collections service routes them to the right table. Example: "test:3402,a1b2c3d4".
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

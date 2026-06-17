@@ -1,0 +1,48 @@
+---
+title: "delete_test_campaign"
+description: "Supprime une test campaign."
+sidebarTitle: "delete_test_campaign"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Supprime une test campaign.
+
+<Warning>
+  **Destructif · Écrit des données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Oui | Doit être true pour confirmer |
+| `test_campaign_id` | number | Oui | Identifiant de la test campaign |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_campaign_id": 0,
+  "acknowledge": false
+}
+```
+
+## Description
+
+```text
+HARD DELETE (no trash) per platform semantics. Refuses without acknowledge=true.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

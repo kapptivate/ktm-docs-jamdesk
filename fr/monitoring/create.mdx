@@ -1,0 +1,95 @@
+---
+title: Créer un moniteur
+description: Transformez un test en moniteur, seul ou en lot.
+sidebarTitle: Créer un moniteur
+---
+
+Créez un moniteur depuis l'espace Tests ou directement depuis la liste des moniteurs. Un moniteur associe un test à une planification, une attribution d'appareil et des [règles d'alerte](/fr/monitoring/alerts) pour qu'il s'exécute en continu en production.
+
+## Créer un nouveau moniteur
+
+<Steps>
+<Step>
+Ouvrez **Monitors** et cliquez sur le bouton **Create**, ou ouvrez un test, sélectionnez-le dans le menu contextuel et choisissez **Create Monitors**. Vous pouvez aussi promouvoir une exécution que vous venez de consulter : sur la page de résultat d'exécution, cliquez sur **Create a monitor** (en haut à droite) et le formulaire s'ouvre pré-rempli avec les détails du test.
+</Step>
+
+<Step>
+Sélectionnez le test que vous souhaitez surveiller. Une fois sélectionné, le formulaire se charge avec les variables et les exigences d'appareil du test.
+</Step>
+
+<Step>
+**About**
+- Saisissez un nom pour le moniteur (obligatoire ; 200 caractères maximum). Par défaut, le nom du test est utilisé.
+</Step>
+
+<Step>
+**Variables** (si le test en possède)
+- Renseignez chaque variable : variables globales, groupes de variables et paramètres d'appareil de type owner.
+- Les variables de type owner nécessitent de sélectionner un appareil pour chacune d'entre elles.
+- Toutes les variables doivent avoir une valeur avant de pouvoir sauvegarder.
+</Step>
+
+<Step>
+**Device**
+- Sélectionnez le ou les appareils sur lesquels le test s'exécutera : SIM, Smartphone ou Web agent.
+- N'apparaît que si le test nécessite des appareils.
+</Step>
+
+<Step>
+**Scheduling**
+- Choisissez une planification simple (toutes les X secondes/minutes/heures) ou avancée (jours spécifiques, horaires, fuseaux horaires). Consultez [Planification](/fr/monitoring/scheduling) pour toutes les options.
+- La valeur par défaut est toutes les 5 minutes.
+</Step>
+
+<Step>
+**Options** (facultatif)
+- Activez le auto-retry (1 à 3 tentatives) en cas d'échec du test. Un avertissement indique que les nouvelles tentatives peuvent être retardées lorsque la capacité parallèle de l'agent est saturée.
+- Activez **Ignore errors** pour marquer le test comme réussi même si les assertions échouent.
+- Définissez le délai d'attente SMS (en secondes) si le test attend un SMS.
+</Step>
+
+<Step>
+Cliquez sur **Create** pour sauvegarder le moniteur. Il commencera à s'exécuter selon sa planification immédiatement.
+</Step>
+</Steps>
+
+## Modifier un moniteur
+
+Ouvrez un moniteur et cliquez sur **Configure**. Vous pouvez modifier le nom, la planification, les appareils et les options du moniteur. Si le moniteur est en pause, une boîte de dialogue vous demande si vous souhaitez le réactiver lors de la sauvegarde.
+
+<Info>
+Vous ne pouvez pas changer le test après la création du moniteur. Pour utiliser un test différent, dupliquez le moniteur et créez-en un nouveau à partir d'un autre test.
+</Info>
+
+## Dupliquer un moniteur
+
+La duplication copie tous les paramètres d'un moniteur existant. Ouvrez le menu du moniteur et cliquez sur **Duplicate**, ou ouvrez la page de détails du moniteur et cliquez sur le menu à trois points.
+
+Vous pouvez renommer le moniteur et réattribuer les appareils avant de sauvegarder. Le nouveau moniteur est créé comme une copie avec la même planification et les mêmes variables.
+
+## Créer des moniteurs en lot à partir de tests
+
+Sélectionnez un ou plusieurs tests (ils doivent tous être du même type), ouvrez le menu contextuel et cliquez sur **Create Monitors**. Une modale apparaît :
+
+1. Sélectionnez un seul appareil que tous les moniteurs utiliseront.
+2. Configurez la planification.
+3. Cliquez sur **Create X Monitors**, où X est le nombre de tests sélectionnés.
+
+Le système crée un moniteur par test avec l'appareil et la planification partagés. Chaque moniteur utilise les variables et la configuration par défaut du test.
+
+## Validation du formulaire
+
+Avant de pouvoir sauvegarder, le formulaire vérifie :
+
+- Le nom du moniteur n'est pas vide.
+- Toutes les variables obligatoires ont des valeurs.
+- Toutes les variables de type owner ont un appareil attribué.
+- Pour la planification simple : la fréquence est définie.
+- Pour la planification avancée : au moins un jour de la semaine est sélectionné, et la date de début n'est pas postérieure à la date de fin.
+- Pour les tests web : un preset de navigateur est sélectionné.
+
+En cas d'échec de la validation, le formulaire défile jusqu'à la première erreur et affiche un message.
+
+<Tip>
+Vous créez de nombreux moniteurs ou vous les gérez depuis des scripts ? Le CLI couvre les mêmes opérations : consultez [Moniteurs et incidents depuis le CLI](/fr/cli/guides/monitors-incidents).
+</Tip>

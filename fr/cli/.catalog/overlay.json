@@ -1,0 +1,79 @@
+{
+  "commands": {
+    "ci_build": {
+      "notes": [
+        "Builds a campaign template locally and prints JSON — it does **not** execute anything. Fill in the values, then pipe it to [`ktm ci run`](/cli/commands/ci/run) with `--stdin`."
+      ]
+    },
+    "ci_run": {
+      "notes": [
+        "Executes a campaign produced by [`ktm ci build`](/cli/commands/ci/build) (from a file or `--stdin`). Use `--junit-file` / `--output-file` for CI reporting; the exit code is non-zero when any test fails."
+      ]
+    },
+    "tests_get": {
+      "notes": [
+        "Fast, minimal detail (required variables and owner slots), ideal before building a campaign. For the full definition with actions and dependencies, use [`ktm tests inspect`](/cli/commands/tests/inspect)."
+      ]
+    },
+    "tests_inspect": {
+      "notes": [
+        "Full test definition (actions, dependencies, configuration). If you only need the variables and owners to build a campaign, [`ktm tests get`](/cli/commands/tests/get) is faster."
+      ]
+    },
+    "tests_archive": {
+      "notes": [
+        "Hides a test without deleting it; reversible with [`ktm tests unarchive`](/cli/commands/tests/unarchive). To move a test to trash instead, use [`ktm tests delete`](/cli/commands/tests/delete)."
+      ]
+    },
+    "tests_delete": {
+      "notes": [
+        "Soft-deletes to trash, recoverable with [`ktm tests undelete`](/cli/commands/tests/undelete). To merely hide a test from listings, use [`ktm tests archive`](/cli/commands/tests/archive)."
+      ]
+    },
+    "tests_undelete": {
+      "notes": [
+        "Restores tests from trash — the counterpart to [`ktm tests delete`](/cli/commands/tests/delete)."
+      ]
+    },
+    "tests_unarchive": {
+      "notes": [
+        "Un-hides an archived test — the counterpart to [`ktm tests archive`](/cli/commands/tests/archive)."
+      ]
+    },
+    "variables_set-value": {
+      "notes": [
+        "Sets ONE variant's value on a grouped variable, preserving the other variants. To change a variable's name, description, or default value, use [`ktm variables update`](/cli/commands/variables/update)."
+      ]
+    },
+    "variables_update": {
+      "notes": [
+        "Updates a variable's properties (name, description, default value). To set a single variant's value, use [`ktm variables set-value`](/cli/commands/variables/set-value)."
+      ]
+    },
+    "test-campaigns_create": {
+      "notes": [
+        "Creates a saved, named, reusable pack of tests. For a one-off run from explicit test IDs, skip this and use [`ktm ci build`](/cli/commands/ci/build) with `--test-ids` instead."
+      ]
+    },
+    "monitors_create": {
+      "notes": [
+        "Creates a scheduled, recurring execution of a test. For a single ad-hoc run, use [`ktm ci build`](/cli/commands/ci/build) then [`ktm ci run`](/cli/commands/ci/run) instead."
+      ]
+    },
+    "metrics_query": {
+      "notes": [
+        "Raw InfluxQL against monitor KPIs. For SLO compliance use [`ktm metrics slo`](/cli/commands/metrics/slo); for cross-signal correlation use [`ktm metrics correlate`](/cli/commands/metrics/correlate)."
+      ]
+    },
+    "alerts": {
+      "notes": [
+        "Alert definitions are the persistent rules that trigger incidents. The incidents they raise are managed under [`ktm incidents`](/cli/commands/incidents)."
+      ]
+    },
+    "incidents": {
+      "notes": [
+        "Incidents are triggered alert occurrences (OPEN / CLOSED). The rules that create them live under [`ktm alerts`](/cli/commands/alerts)."
+      ]
+    }
+  }
+}

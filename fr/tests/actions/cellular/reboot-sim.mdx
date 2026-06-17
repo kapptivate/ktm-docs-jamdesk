@@ -1,0 +1,55 @@
+---
+title: Reboot sim
+description: Redémarrez le modem de la SIM et mesurez le temps de ré-enregistrement réseau.
+---
+
+Redémarrez le modem hébergeant la SIM et mesurez le temps nécessaire pour revenir et se ré-enregistrer sur le réseau. Utilisez-le pour réinitialiser l'état entre les scénarios, ou comme mesure en soi : le temps d'enregistrement est un KPI réseau significatif.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Attendre l'enregistrement réseau après le redémarrage | `command.wait_network.active`, `command.wait_network.duration` | Non | Attendre que la SIM soit à nouveau enregistrée, avec un délai de 60 à 240 secondes. Par défaut : activé, 120s. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "RESTART",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "wait_network": { "active": true, "duration": 120 },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `restart_duration_ms` | Temps de redémarrage du modem. |
+| `wait_network_duration_ms` | Temps de ré-enregistrement sur le réseau. |
+| `duration` | Temps d'exécution total en secondes. |
+
+Dans Analytics, chaque exécution alimente la mesure de redémarrage avec `restart_ms`, `wait_network_registration_ms` et `duration_seconds`, étiquetée par statut, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="PDP Activation" icon="network-wired" href="/fr/tests/actions/cellular/pdp-activation">
+
+    Vérifiez que les données reviennent après le redémarrage
+
+</Card>
+  <Card title="USSD Command" icon="hashtag" href="/fr/tests/actions/cellular/ussd">
+
+    Reprenez le scénario sur un modem dans un état propre
+
+</Card>
+</Columns>

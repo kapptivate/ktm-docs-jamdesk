@@ -1,0 +1,74 @@
+---
+title: "ktm users list"
+description: "Lister les utilisateurs, avec filtrage optionnel par operator"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les utilisateurs, avec filtrage optionnel par operator
+
+## Utilisation
+
+```bash
+ktm users list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister tous les utilisateurs pour un operator
+ktm users list --operator my-operator
+
+# Rechercher un utilisateur par nom ou email
+ktm users list --operator my-operator --search alice
+
+# Lister uniquement les utilisateurs actifs
+ktm users list --operator my-operator --active true
+
+# Lister uniquement les comptes de service
+ktm users list --operator my-operator --type server
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filtrer par statut actif : true ou false |
+| `--operator` | string | — | Slug de l'operator (depuis 'operators list') pour limiter les résultats |
+| `--search` | string | — | Rechercher dans le nom d'utilisateur, l'email, le prénom et le nom de famille |
+| `--type` | string | — | Filtrer par type de compte : 'user' (humain) ou 'server' (compte de service) |
+
+## Détails
+
+Lister les comptes utilisateurs sur la plateforme, incluant les utilisateurs humains et les comptes de service.
+
+Utilisez --operator pour limiter les résultats à un operator spécifique. Utilisez --type pour distinguer
+les utilisateurs humains ("user") des comptes de service API ("server").
+
+Note : sans --active, retourne TOUS les utilisateurs y compris les inactifs. Cela peut produire
+plus de 600 résultats. Utilisez --active true pour limiter aux utilisateurs actifs, et --operator et/ou
+--search pour affiner davantage les résultats.
+
+Champs de sortie JSON : id, username, first_name, last_name, email, is_active, is_superuser, type, roles, groups
+Colonnes du tableau :   ID, USERNAME, EMAIL, NAME, ACTIVE, TYPE
+
+## Voir aussi
+
+- [`ktm users`](/fr/cli/commands/users)
+- [`ktm operators list`](/fr/cli/commands/operators/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

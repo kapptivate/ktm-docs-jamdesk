@@ -1,0 +1,56 @@
+---
+title: Get mail
+sidebarTitle: Récupérer un mail
+description: Attendre qu'un e-mail arrive dans une boîte mail de test.
+---
+
+Vérifiez que votre application envoie bien un e-mail : un message de bienvenue, une confirmation de commande, une facture. Le step attend que l'e-mail arrive dans une boîte mail de test et échoue si rien n'arrive.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Boîte mail | `mailbox` | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si aucun e-mail n'arrive. Par défaut : désactivé. |
+
+## Dans le scénario JSON
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "get-mail",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@example.com" } }],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Contenu de l'e-mail** : l'e-mail reçu est joint au résultat du step, vous pouvez donc le lire lors de la revue de l'exécution.
+- **Temps d'exécution** : début, fin et durée (en secondes). La durée indique le temps de livraison.
+- **Statut** : échec si aucun e-mail n'arrive dans la boîte mail.
+
+Consultez [Email & SMS dans les tests](/fr/tests/email-sms) pour savoir comment les boîtes mail de test fonctionnent et comment les adresser.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Get email code" icon="envelope" href="/fr/tests/actions/web/getemailcode">
+
+    Extraire un code de vérification de l'e-mail à la place
+
+</Card>
+  <Card title="Get email link" icon="link" href="/fr/tests/actions/web/getemaillink">
+
+    Extraire un lien de l'e-mail et continuer le flux
+
+</Card>
+</Columns>

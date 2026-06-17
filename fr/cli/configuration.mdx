@@ -1,0 +1,62 @@
+---
+title: Configuration
+description: Authentification, variables d'environnement, formats de sortie et codes de sortie du CLI ktm.
+sidebarTitle: Configuration
+---
+
+`ktm` se configure via des variables d'environnement et des flags globaux. Il n'y a pas de fichier de configuration à gérer.
+
+## Authentification
+
+Fournissez votre clé API de deux façons :
+
+- Définissez la variable d'environnement `KAPPTIVATE_API_KEY` (recommandé).
+- Passez `--api-key-file <path>` pour lire la clé depuis un fichier.
+
+Toutes les commandes nécessitent une clé, sauf la validation locale (`--validate`). Les clés sont créées et gérées par les administrateurs de l'espace de travail sous [Administration > Clés API](/fr/administration/api-keys).
+
+## Variables d'environnement
+
+| Variable | Fonction |
+| --- | --- |
+| `KAPPTIVATE_API_KEY` | Votre clé API. Porte les mêmes droits d'accès que votre compte. |
+| `KAPPTIVATE_HOST` | Hôte API. Par défaut `app.kapptivate.com`. |
+
+## Flags globaux
+
+Ces flags s'appliquent à toutes les commandes :
+
+| Flag | Description |
+| --- | --- |
+| `-o, --output` | Format de sortie : `json` (défaut), `table` ou `plain`. |
+| `-d, --debug` | Affiche les requêtes HTTP, le timing et les erreurs détaillées sur stderr. |
+| `--host` | Remplace l'hôte API (aussi `KAPPTIVATE_HOST`). |
+| `--api-key-file` | Lit la clé API depuis un fichier au lieu de l'environnement. |
+| `-q, --quiet` | Supprime les lignes de log de niveau info ; affiche uniquement les erreurs. |
+| `--no-color` | Désactive la sortie colorée. |
+| `--no-proxy` | Ignore les paramètres de proxy HTTP de l'environnement. |
+| `--skip-tls` | Ignore la vérification des certificats TLS (non sécurisé). |
+
+## Codes de sortie
+
+`ktm` utilise des codes de sortie stables pour que les pipelines puissent prendre des décisions selon le résultat :
+
+| Code | Signification |
+| --- | --- |
+| `0` | Succès |
+| `1` | Erreur générale |
+| `2` | Erreur d'authentification |
+| `3` | Timeout (délai de polling dépassé) |
+| `4` | Configuration invalide |
+| `5` | Les tests ont été exécutés mais certains ont échoué |
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Toutes les commandes, flags et arguments.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/fr/cli/ci-cd">
+    Utilisez ces paramètres dans votre pipeline.
+  </Card>
+</Columns>

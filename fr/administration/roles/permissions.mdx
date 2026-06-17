@@ -1,0 +1,40 @@
+---
+title: Permissions
+description: Comprenez comment les groupes de permissions, les dépendances et les restrictions fonctionnent lors de la configuration des rôles.
+---
+
+![Les permissions d'un rôle affichées sous forme de groupes dépliables, chacun révélant des cases à cocher Voir et Modifier, avec une note indiquant que les rôles par défaut ne peuvent pas être modifiés](/images/role-edit.webp)
+
+Les rôles organisent les permissions en groupes logiques qui contrôlent l'accès aux fonctionnalités de la plateforme. Comprendre comment ces groupes et dépendances fonctionnent vous aide à construire des rôles qui donnent aux utilisateurs exactement l'accès dont ils ont besoin.
+
+## Groupes de permissions
+
+Les permissions sont organisées en groupes, un par domaine fonctionnel. Dépliez un groupe pour voir ses permissions individuelles :
+
+- **Admin Opérateur** : voir et modifier le panneau d'administration : utilisateurs, équipes, produits et autres paramètres d'administration
+- **Événements** : voir le journal des événements, avec une vue supplémentaire de niveau administrateur pour les événements opérateur
+- **Tests manuels** : voir et modifier les tests manuels
+- **Tests automatisés** : voir et modifier les tests automatisés
+- **Supervision** : voir et gérer la supervision de production et les incidents
+- **Analytique** : voir et gérer l'analytique de monitoring et les dashboards
+- **Fonctionnalités bêta** : accéder aux fonctionnalités expérimentales
+
+La plupart des groupes exposent une permission Voir (accès en lecture seule) et une permission Modifier (créer, modifier ou supprimer). Modifier implique Voir automatiquement, accorder l'accès Modifier inclut toujours l'accès Voir.
+
+## Dépendances entre permissions
+
+Le système applique la logique des permissions automatiquement :
+
+- **Modifier implique Voir** : si vous accordez l'accès Modifier à une fonctionnalité, Voir est automatiquement activé
+- **Dépendances en cascade** : décocher Voir décoche automatiquement la permission Modifier correspondante
+- **Permissions désactivées** : les permissions que vous ne possédez pas sont affichées sous forme de cases à cocher désactivées avec une infobulle explicative
+
+Cela garantit que les permissions des rôles sont toujours cohérentes et suivent une hiérarchie logique.
+
+## Restrictions de permissions
+
+Vous ne pouvez assigner que des permissions que vous possédez déjà vous-même. Les permissions que vous ne possédez pas sont affichées sous forme de cases à cocher désactivées.
+
+Par exemple, si vous avez "Voir Admin Opérateur" mais pas "Modifier Admin Opérateur", vous pouvez créer des rôles avec Voir mais pas Modifier pour cette permission.
+
+Les super administrateurs peuvent assigner n'importe quelle permission sans restriction.

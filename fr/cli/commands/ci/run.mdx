@@ -1,0 +1,114 @@
+---
+title: "ktm ci run"
+description: "Exécuter des tests Kapptivate depuis des fichiers de configuration JSON ou un JSON de campagne, attendre les résultats et rapporter"
+sidebarTitle: "run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Exécuter des tests Kapptivate depuis des fichiers de configuration JSON ou un JSON de campagne, attendre les résultats et rapporter
+
+## Utilisation
+
+```bash
+ktm ci run [flags]
+```
+
+## Exemples
+
+```bash
+# Single config
+ktm ci run --test-config-path tests/smoke.json
+
+# Multiple configs via glob
+ktm ci run --test-config-path "tests/*.json" --junit-file report.xml
+
+# Directory of configs
+ktm ci run --test-config-dir tests/ --output-file results.json
+
+# Validate configs without running (no API key needed)
+ktm ci run --test-config-path tests/smoke.json --validate
+
+# Read campaign JSON from stdin (e.g. piped from "ci build")
+ktm ci build --test-ids 16480 | ktm ci run --stdin
+
+# Override a variable value at run time (preserves bucket)
+ktm ci build --test-ids 16480 | ktm ci run --stdin --set-var "HOST=staging.example.com"
+
+# Run a saved Tests campaign with variant pinning and one-off value override
+ktm ci build --test-campaign 42 --variant "API:Staging" | \
+  ktm ci run --stdin --set-var "GLOBAL_VAR=override-value" --junit-file results.xml
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--ignore-errors` | boolean | — | Ignorer les échecs pour tous les types d'actions (définit options.ignore_failed pour tous les codes d'actions) ; l'exécution se termine quand même mais le statut par test peut être modifié |
+| `--junit-file` | string | — | Écrire un rapport JUnit XML dans ce fichier (pour l'upload d'artefacts CI) |
+| `--max-poll-duration` | duration | `30m0s` | Durée maximale d'attente pour chaque résultat de test avant timeout |
+| `--output-file` | string | — | Écrire le résumé JSON d'exécution dans ce fichier |
+| `--parallel` | boolean | — | Exécuter les tests en parallèle (définit options.parallel_test_execution=-1 ; superadmin + tests ethernet uniquement) |
+| `--set-var` | string[] | — | Remplacer une valeur de variable : NAME=VALUE. Répétable. Appliqué en mode --stdin (campagne) avant exécution ; le bucket est préservé. Les noms inconnus sont ignorés silencieusement. |
+| `--stdin` | boolean | — | Lire un seul JSON de campagne depuis stdin (mutuellement exclusif avec --test-config-path/--test-config-dir) |
+| `--test-config-dir` | string | — | Répertoire de fichiers de configuration JSON de tests (tous les fichiers *.json sont chargés) |
+| `--test-config-path` | string[] | — | Chemin vers un fichier de configuration JSON de test (répétable, supporte les patterns glob) |
+| `--validate` | boolean | — | Valider la structure du fichier de configuration et quitter (pas besoin de clé API ou réseau) |
+
+## Détails
+
+Exécute des tests Kapptivate, attend la complétion et affiche les résultats en JSON,
+JUnit XML et/ou annotations GitHub Actions.
+
+Modes d'entrée (mutuellement exclusifs) :
+  --test-config-path / --test-config-dir   Fichiers de configuration JSON (ID de tests + variables d'entrée)
+
+En utilisant --stdin, toute clé "_meta" dans le JSON est supprimée automatiquement pour que vous
+puissiez piper directement la sortie de "ci build" après avoir rempli les valeurs de variables.
+
+Pour exécuter une campagne de tests enregistrée, construisez d'abord une campagne et pipez le résultat :
+
+  ktm ci build --test-campaign 42 --variant "API:Staging" | ktm ci run --stdin
+
+En utilisant --stdin, la sortie inclut des résultats par test avec des statuts individuels,
+des ID de tests, des noms et les variables d'entrée utilisées, permettant aux agents automatisés
+d'identifier exactement quels tests ont réussi ou échoué.
+
+--set-var NAME=VALUE définit (ou remplace) la valeur d'une variable dans tous les tests de
+la campagne avant exécution. Répétable. La variable doit être déclarée dans au moins un test ;
+les noms inconnus sont ignorés silencieusement. Les assignations de buckets sont préservées,
+seul le champ valeur change.
+
+Formats de sortie (produits en parallèle quand les flags sont combinés) :
+  stdout        Résumé JSON (supprimé quand GITHUB_ACTIONS=true)
+  --output-file Résumé JSON écrit dans un fichier
+  GITHUB_ACTIONS=true  Annotations de workflow (::notice / ::error) sur stdout
+  GITHUB_STEP_SUMMARY  Résumé de job en markdown ajouté au fichier
+
+Codes de sortie :
+  0 = tous les tests ont réussi
+  1 = un ou plusieurs tests ont échoué, ont expiré ou erreur de sortie
+
+## Notes
+
+- Exécute une campagne produite par [`ktm ci build`](/fr/cli/commands/ci/build) (depuis un fichier ou `--stdin`). Utilisez `--junit-file` / `--output-file` pour le reporting CI ; le code de sortie est non nul quand un test échoue.
+
+## Voir aussi
+
+- [`ktm ci`](/fr/cli/commands/ci)
+- [`ktm ci build`](/fr/cli/commands/ci/build)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

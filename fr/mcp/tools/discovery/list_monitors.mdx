@@ -1,0 +1,52 @@
+---
+title: "list_monitors"
+description: "Liste les monitors de test planifiés."
+sidebarTitle: "list_monitors"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les monitors de test planifiés.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `active` | boolean | Non | Filtrer par statut actif |
+| `archived` | boolean | Non | Filtrer par statut archivé lors de l'utilisation de device_type/device_id (défaut : false) |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de résumés compacts (défaut : false) |
+| `device_id` | string | Non | Identifiant du device pour lequel interroger les monitors. SIM : national_msisdn, web-agent : hostname, smartphone : UUID. Doit être utilisé avec device_type et operator. |
+| `device_type` | string (sim \| web-agent \| smartphone) | Non | Type de device pour lequel interroger les monitors : sim, web-agent ou smartphone. Doit être utilisé avec device_id et operator. Renvoie les monitors assignés au device spécifique. |
+| `operator` | string | Oui | Slug de l'operator (depuis list_operators). Requis pour toutes les requêtes. |
+| `product` | string | Non | Filtrer par slug de produit (format : operator~product) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "operator": "string"
+}
+```
+
+## Description
+
+```text
+Returns compact summaries by default; use detail=true for full JSON. List scheduled test monitors. Monitors run tests on recurring schedules and write KPI metrics to InfluxDB. Can filter by operator/product or by specific device (device_type + device_id).
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

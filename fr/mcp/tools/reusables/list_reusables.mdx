@@ -1,0 +1,51 @@
+---
+title: "list_reusables"
+description: "Liste les composants de test reusable (kind=2) pour un produit."
+sidebarTitle: "list_reusables"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Liste les composants de test reusable (kind=2) pour un produit.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Renvoie le JSON complet au lieu de lignes compactes (défaut : false) |
+| `page` | number | Non | Numéro de page (défaut : 1) |
+| `page_size` | number | Non | Éléments par page (défaut : 25) |
+| `product` | string | Oui | Slug du produit (ex. operator~product) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string"
+}
+```
+
+## Description
+
+```text
+Reusables are V2-only — they work exclusively with step-based tests (ETH_WEB_SCRIPT_V2 / SMARTPHONE_APP_SCRIPT_V2) and are embedded via step_group.import in V2 test definitions. Classic script-based tests cannot use reusables.
+
+Resolves the product's reusable_tests_root_collection_uid, fetches its items via the collections service, and returns them with [R] one-liners.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

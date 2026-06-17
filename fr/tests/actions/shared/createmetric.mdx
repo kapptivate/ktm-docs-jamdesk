@@ -1,0 +1,51 @@
+---
+title: Créer une métrique
+description: Enregistrer une métrique de performance personnalisée pendant l'exécution d'un test.
+---
+
+Enregistrez des métriques de performance personnalisées pendant vos tests. Les métriques sont stockées au format InfluxDB et peuvent être utilisées pour le monitoring de performance, les alertes et l'analyse de tendances entre les exécutions.
+
+## Canaux
+
+- ✅ Web
+- ✅ Smartphone (Android/iOS)
+- ✅ Cellular
+
+Tous les canaux supportent l'enregistrement de métriques de la même manière.
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+|-------|------|--------|-------------|
+| measurement | String | Oui | Nom de la métrique (ex. `form_submit_time`, `api_response_ms`). |
+| fields | Object | Oui | Paires clé-valeur de mesures numériques ou booléennes (les valeurs mesurées). |
+| tags | Object | Non | Paires clé-valeur pour le regroupement et le filtrage des métriques (ex. nom du test, type d'utilisateur, région). |
+
+## Exemple
+
+```json
+{
+  "type": "createmetric",
+  "version": "v1.0.0",
+  "inputs": {
+    "measurement": "checkout_duration",
+    "fields": {
+      "duration_ms": 1234,
+      "items_count": 3,
+      "success": true
+    },
+    "tags": {
+      "user_type": "premium",
+      "payment_method": "credit_card"
+    }
+  }
+}
+```
+
+## Notes
+
+- `measurement` est le nom de la métrique (ex. "page_load_time").
+- `fields` contient les valeurs numériques ou booléennes à enregistrer.
+- `tags` sont des dimensions optionnelles pour le filtrage et le regroupement des métriques dans les dashboards.
+- Les métriques sont agrégées entre les exécutions pour l'analyse de tendances et les alertes.
+- Usages courants : suivre des durées personnalisées, enregistrer des indicateurs de succès/échec, mesurer des résultats métier.

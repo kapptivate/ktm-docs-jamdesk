@@ -1,0 +1,46 @@
+---
+title: "platform_guide"
+description: "Récupère un guide structuré de la plateforme Kapptivate."
+sidebarTitle: "platform_guide"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupère un guide structuré de la plateforme Kapptivate.
+
+<Note>
+  **Lecture seule.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `topic` | string (overview \| execution \| test_creation \| test_editing \| variables \| test_campaigns \| collections \| reusables \| monitoring \| metrics \| dashboards \| shell \| alerts) | Non | Sujet du guide (défaut : overview). L'un des sujets listés. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "topic": "overview"
+}
+```
+
+## Description
+
+```text
+Call with no topic for the entity hierarchy map and common workflows. Call with a specific topic for step-by-step workflow guidance. Topics: overview, execution, test_creation, test_editing, variables, test_campaigns, collections, reusables, monitoring, metrics, dashboards, shell, alerts.
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

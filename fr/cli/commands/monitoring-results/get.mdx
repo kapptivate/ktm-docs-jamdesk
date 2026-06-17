@@ -1,0 +1,76 @@
+---
+title: "ktm monitoring-results get"
+description: "Obtenir les résultats détaillés d'une exécution de monitoring"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les résultats détaillés d'une exécution de monitoring
+
+## Utilisation
+
+```bash
+ktm monitoring-results get <id> [flags]
+```
+
+## Exemples
+
+```bash
+# Get monitoring result detail as table
+ktm monitoring-results get 155461270 -o table
+
+# Get with raw action results
+ktm monitoring-results get 155461270 --include-actions -o table
+
+# Get as JSON
+ktm monitoring-results get 155461270
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `-a, --include-actions` | boolean | — | Inclure les résultats bruts des actions (captures d'écran, artefacts, logs) |
+
+## Détails
+
+Récupère un seul résultat de monitoring par ID et affiche ses résultats détaillés.
+
+La réponse inclut :
+  - Métadonnées du résultat de monitoring : nom, statut, ID de monitoring, horodatages
+  - Résumé analysé : raison de l'échec, statut par test, statut par action, variables
+  - Avec --include-actions : résultats bruts des actions (captures d'écran, artefacts, logs)
+
+Les ID de résultats proviennent de 'monitoring-results list'. Limitez toujours cette commande par
+--monitoring-id d'abord (via 'monitors list --operator &lt;slug&gt;') pour vous assurer que les résultats
+appartiennent au bon opérateur.
+
+En mode table, un résumé lisible est affiché avec la raison de l'échec et les tableaux test/action.
+En mode JSON, le détail structuré est retourné incluant le résumé analysé.
+
+## Voir aussi
+
+- [`ktm monitoring-results`](/fr/cli/commands/monitoring-results)
+- [`ktm monitoring-results list`](/fr/cli/commands/monitoring-results/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

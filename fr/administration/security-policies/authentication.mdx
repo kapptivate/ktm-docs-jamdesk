@@ -1,0 +1,22 @@
+---
+title: Configurer les paramètres d'authentification
+description: Configurez l'authentification à deux facteurs et les politiques de connexion.
+---
+
+Les paramètres d'authentification contrôlent comment les utilisateurs prouvent leur identité lors de la connexion. Ils se trouvent dans les sections **Authentification à deux facteurs** et **Politique de connexion** du formulaire de politique.
+
+## Authentification à deux facteurs
+
+Cochez **Activer l'authentification à deux facteurs** pour exiger un second facteur de vérification pour les utilisateurs assignés à cette politique. L'activation révèle ces options :
+
+- **Durée d'expiration du token** : combien de temps un token de vérification reste valide (par exemple, 10 minutes).
+- **Limiter le nombre de tentatives** : plafonnez le nombre de fois qu'un utilisateur peut saisir le second facteur avant que le compte ne soit verrouillé.
+- **Verrouiller le compte indéfiniment après le maximum de tentatives** : maintient le compte verrouillé jusqu'à l'intervention d'un administrateur. Lorsque cette option est désactivée, définissez une **Durée de verrouillage du compte** (par exemple, 1 heure) après laquelle le compte se déverrouille automatiquement.
+- **Avertir avant le verrouillage du compte** : notifie l'utilisateur avant que son compte ne soit verrouillé.
+
+## Politique de connexion
+
+Dans la section **Politique de connexion** :
+
+- **Limiter le nombre de tentatives de connexion** : restreignez le nombre de fois qu'un utilisateur peut échouer à se connecter avant d'être bloqué.
+- **Empêcher les sessions multiples** : empêche le même compte d'être connecté depuis plus d'une session à la fois.

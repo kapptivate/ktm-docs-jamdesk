@@ -1,0 +1,57 @@
+---
+title: "ktm tests restore"
+description: "Restaurer un test à une version précédente"
+sidebarTitle: "restore"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Restaurer un test à une version précédente
+
+## Utilisation
+
+```bash
+ktm tests restore <history-id> [flags]
+```
+
+## Exemples
+
+```bash
+# Trouver les versions de l'historique
+ktm tests history 16480 --date 2026-03-06
+
+# Restaurer à une version spécifique
+ktm tests restore 42
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `history-id` | Oui |
+
+## Détails
+
+Restaurer un test à une version historique par son identifiant d'historique.
+Utilisez "tests history &lt;test-id&gt; --date &lt;date&gt;" pour trouver les identifiants d'historique disponibles.
+
+Cette opération est destructive : elle écrase la définition actuelle du test.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

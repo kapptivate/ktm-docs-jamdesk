@@ -1,0 +1,66 @@
+---
+title: "ktm adb connect"
+description: "Ouvrir un tunnel ADB vers un téléphone distant"
+sidebarTitle: "connect"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Ouvrir un tunnel ADB vers un téléphone distant
+
+## Utilisation
+
+```bash
+ktm adb connect <phone-serial> [flags]
+```
+
+## Exemples
+
+```bash
+# Connect to a phone (auto-registers with local ADB server)
+ktm adb connect RF8NB07VDGA
+
+# Custom port
+ktm adb connect RF8NB07VDGA --port 7037
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `phone-serial` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--port` | int | `6037` | Port local d'écoute |
+
+## Détails
+
+Démarre un tunnel ADB local vers un téléphone spécifique sur un robot smartphone distant.
+
+Un relais TCP léger fait le pont entre votre serveur ADB local et le téléphone distant via un
+tunnel WebSocket sécurisé. L'appareil s'enregistre automatiquement auprès de votre serveur ADB local,
+pour qu'Android Studio le détecte. Support complet du port forwarding,
+du reverse forwarding et du débogage JDWP : votre vrai serveur ADB local gère
+toutes les questions de protocole.
+
+## Voir aussi
+
+- [`ktm adb`](/fr/cli/commands/adb)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

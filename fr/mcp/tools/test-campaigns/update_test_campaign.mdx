@@ -1,0 +1,59 @@
+---
+title: "update_test_campaign"
+description: "Mise à jour partielle d'une test campaign (PATCH)."
+sidebarTitle: "update_test_campaign"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Mise à jour partielle d'une test campaign (PATCH).
+
+<Info>
+  **Écrit des données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialise le budget d'édition après approbation de l'utilisateur |
+| `description` | string | Non | Nouvelle description |
+| `name` | string | Non | Nouveau nom |
+| `test_campaign_id` | number | Oui | Identifiant de la test campaign |
+| `test_list` | string | Non | Tableau JSON : remplacement complet de test_list |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_campaign_id": 0
+}
+```
+
+## Description
+
+```text
+Any subset of name, description, test_list is accepted.
+
+WARNING: test_list is a FULL REPLACEMENT, not a merge. To add or remove tests, first call get_test_campaign to read the current test_list, modify it, then pass the complete list.
+
+Use list_test_versions on the member tests before replacing test_list to avoid surprises. Edit-budget gated.
+```
+
+## Associés
+
+- [`get_test_campaign`](/fr/mcp/tools/test-campaigns/get_test_campaign)
+- [`list_test_versions`](/fr/mcp/tools/test-editing/list_test_versions)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

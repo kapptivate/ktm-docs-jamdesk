@@ -1,0 +1,94 @@
+---
+title: Quel port RJ45 est configuré sur votre robot ?
+description: Trouver quel port Ethernet porte l'IP statique, sur toutes les générations de robots.
+sidebarTitle: Identifier le port RJ45
+---
+
+Lorsqu'un robot a une IP statique configurée, vous devez savoir à quel port Ethernet cette configuration s'applique. La méthode dépend de la génération de matériel.
+
+## Robots Mac mini
+
+Un seul port Ethernet, rien à identifier.
+
+## Derniers robots Linux (interface graphique)
+
+La numérotation des ports et les connexions `lan1`/`lan2`/`lan3` correspondantes sont décrites dans [Installer un robot (logiciel)](/fr/hardware/install-software).
+
+## Anciens robots Linux sous Ubuntu (sans interface graphique)
+
+Connectez-vous avec vos identifiants. Ubuntu vous accueille avec un prompt complet :
+
+<Frame caption="Écran de connexion Ubuntu">
+  ![Prompt Ubuntu](/images/hardware/rj45-port-02.webp)
+</Frame>
+
+Listez les interfaces :
+
+```bash
+ifconfig -s
+```
+
+<Frame caption="Repérer l'interface active">
+  ![Sortie ifconfig](/images/hardware/rj45-port-03.webp)
+</Frame>
+
+Regardez les lignes commençant par `enp` et repérez celle dont les valeurs RX/TX ne sont pas 0 : cette interface est celle physiquement connectée au câble RJ45.
+
+Trouvez ensuite le fichier netplan et lisez la configuration :
+
+```bash
+ls /etc/netplan
+vim /etc/netplan/01-netcfg.yaml
+```
+
+<Frame caption="Le fichier netplan et son contenu">
+  ![Répertoire netplan](/images/hardware/rj45-port-04.webp)
+  ![Configuration netplan](/images/hardware/rj45-port-05.webp)
+</Frame>
+
+L'interface configurée avec une IP statique est celle dont `dhcp` est défini sur `no` (quittez vim avec `:q!`). Si elle diffère de l'interface active trouvée avec `ifconfig`, déplacez le câble vers un autre port RJ45 et vérifiez à nouveau.
+
+## Anciens robots Linux sous Fedora (sans interface graphique)
+
+Fedora affiche un prompt minimal après la connexion :
+
+<Frame caption="Prompt de connexion Fedora">
+  ![Prompt Fedora](/images/hardware/rj45-port-06.webp)
+</Frame>
+
+Listez les interfaces de la même manière :
+
+```bash
+ifconfig -s
+```
+
+<Frame caption="Repérer l'interface active">
+  ![Sortie ifconfig](/images/hardware/rj45-port-07.webp)
+</Frame>
+
+Repérez l'interface `enp` avec des RX/TX non nuls, puis lisez sa configuration :
+
+```bash
+nmcli device show
+```
+
+<Frame caption="La configuration de l'interface : IP, passerelle, DNS">
+  ![Sortie nmcli](/images/hardware/rj45-port-08.webp)
+</Frame>
+
+Faites défiler jusqu'à votre interface `enp` : la configuration IP, passerelle et DNS s'y trouve. Comme sous Ubuntu, si l'interface configurée en statique n'est pas l'interface active, déplacez le câble vers un autre port et vérifiez à nouveau.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    La checklist complète de connectivité
+
+</Card>
+  <Card title="Accès au robot sans écran" icon="terminal" href="/fr/hardware/headless-login">
+
+    Obtenir une console sur les robots sans sortie vidéo
+
+</Card>
+</Columns>

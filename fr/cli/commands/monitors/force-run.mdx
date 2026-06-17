@@ -1,0 +1,55 @@
+---
+title: "ktm monitors force-run"
+description: "Forcer l'exécution immédiate d'un monitor, en dehors de son planning normal"
+sidebarTitle: "force-run"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Forcer l'exécution immédiate d'un monitor, en dehors de son planning normal
+
+## Utilisation
+
+```bash
+ktm monitors force-run <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm monitors force-run 42
+ktm monitors force-run 42 -o json
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Déclenche une exécution immédiate hors planning d'un monitor.
+
+Le monitor s'exécute une fois immédiatement, indépendamment de son planning configuré.
+Utilisez 'monitoring-results list' avec --monitor pour suivre le statut de l'exécution.
+
+## Voir aussi
+
+- [`ktm monitors`](/fr/cli/commands/monitors)
+- [`ktm monitoring-results list`](/fr/cli/commands/monitoring-results/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

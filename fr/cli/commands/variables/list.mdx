@@ -1,0 +1,67 @@
+---
+title: "ktm variables list"
+description: "Lister les variables d'un produit (avec filtres de portée, groupe, type, utilisation et variant)"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les variables d'un produit (avec filtres de portée, groupe, type, utilisation et variant)
+
+## Utilisation
+
+```bash
+ktm variables list [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables list --product acme~web
+ktm variables list --product acme~web --scope global
+ktm variables list --product acme~web --group 42 --type secret
+ktm variables list --product acme~web --used false
+ktm variables list --product acme~web --variant prod
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--group` | int | — | Identifiant optionnel du groupe de variables |
+| `--product` | string | — | Slug du produit (requis) |
+| `--scope` | string | `all` | global \| grouped \| all |
+| `--type` | string | — | single \| secret \| choice |
+| `--used` | string | — | true \| false : filtrer par état d'utilisation |
+| `--variant` | string | — | Nom ou identifiant du variant : ne conserver que les variables portant ce variant |
+
+## Détails
+
+La portée par défaut retourne TOUTES les variables (globales + groupées). Filtrez le résultat avec :
+
+  --scope global|grouped|all   défaut : all
+  --group &lt;id&gt;                 restreindre à un groupe de variables
+  --type single|secret|choice  filtrer par type
+  --used true|false            filtrer par état d'utilisation
+  --variant &lt;name|id&gt;          restreindre aux variables portant le variant
+
+Les secrets sont retournés masqués par la plateforme.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

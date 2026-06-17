@@ -1,0 +1,77 @@
+---
+title: "edit_monitor"
+description: "Appliquer des modifications à un monitor existant."
+sidebarTitle: "edit_monitor"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Appliquer des modifications à un monitor existant.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Définir à true après que l'utilisateur approuve la poursuite au-delà de la limite d'édition. NE JAMAIS définir sans approbation explicite de l'utilisateur. |
+| `active` | boolean | Non | Nouveau statut actif (true/false) |
+| `environment` | string | Non | Nouveau JSON d'environnement |
+| `input_variables` | string | Non | Nouveau JSON d'input variables. Les buckets sont injectés automatiquement depuis le tableau variants (ou préservés depuis le monitor existant lors de l'auto-migration), vous n'avez pas besoin de les construire manuellement. |
+| `monitor_id` | number | Oui | Identifiant du monitor à modifier |
+| `name` | string | Non | Nouveau nom du monitor |
+| `owners` | string | Non | Nouveau JSON d'owners |
+| `scheduling` | string | Non | Nouveau JSON de planification |
+| `test_only` | boolean | Non | Définir le flag test_only |
+| `variants` | array | Non | Épingler les variants pour les groupes de variables du monitor. Chaque entrée est "5" (ID numérique du variant) ou "GroupName:VariantName". Les groupes non épinglés conservent leur bucket existant ; pour les monitors legacy en cours de migration, les groupes non épinglés utilisent le défaut par variable. Utilisez ceci pour ré-épingler des groupes spécifiques pendant l'édition. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "monitor_id": 0
+}
+```
+
+## Description
+
+```text
+Prévisualisez TOUJOURS en premier avec preview_monitor_edit.
+
+Auto-migration :
+  Les monitors legacy (variable_group != 0 ou input_variables sans buckets)
+  migrent automatiquement vers la forme V3 lors de l'édition : chaque input_variable
+  reçoit un bucket, et le champ legacy variable_group est vidé. La migration est
+  idempotente — ré-éditer un monitor déjà V3 n'a aucun effet côté bucket.
+  La migration est inconditionnelle : elle est correcte par construction, il n'y a
+  pas d'opt-out.
+
+  Lorsque le test sous-jacent référence plusieurs groupes de variables, les variables
+  dans des groupes AUTRES que le variable_group legacy utilisent le variant par défaut
+  de leur propre groupe (sauf si variants remplace). Utilisez le tableau variants pour
+  épingler des variants non-défaut pour des groupes spécifiques lors de l'édition de migration.
+
+Champs protégés : test_id et product_id NE PEUVENT PAS être modifiés (verrouillés par l'API). Pour changer le test sous-jacent, supprimez le monitor et créez-en un nouveau.
+Une limite d'édition par monitor est appliquée (10 par session). Vérifiez edits_remaining dans la réponse.
+Si l'opération échoue avec HTTP 400/404, le monitor a peut-être été supprimé — vérifiez d'abord avec get_monitor.
+```
+
+## Associé
+
+- [`preview_monitor_edit`](/fr/mcp/tools/monitor-management/preview_monitor_edit)
+- [`get_monitor`](/fr/mcp/tools/monitor-management/get_monitor)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

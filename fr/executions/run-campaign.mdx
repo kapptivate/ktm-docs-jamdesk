@@ -1,0 +1,32 @@
+---
+title: Lancer une campaign
+description: Vérifiez les tests, appareils et variables d'une campaign, puis lancez-les en un seul batch.
+sidebarTitle: Exécutions de campaign
+---
+
+![The campaign editor with the ordered tests between the Campaign start and Campaign end markers, each with its device and variable values, and the Run button](/images/campaign-editor-run.webp)
+
+Une [campaign](/fr/tests/suites) regroupe des tests qui ont du sens ensemble ; la lancer les exécute en un seul batch. Vous la lancez directement depuis l'éditeur de campaign, où tout ce que l'exécution utilisera est affiché pour vérification.
+
+## Vérifier la campaign
+
+Ouvrez une campaign depuis l'onglet **Tests campaigns**. L'éditeur affiche son nom et sa description, puis **Your tests** : les tests que la campaign exécute, dans l'ordre, entre les marqueurs **Campaign start** et **Campaign end**.
+
+Chaque ligne de test indique avec quoi ce test sera exécuté :
+
+- **Device** : l'agent ou l'appareil assigné au test, affiché à droite de la ligne.
+- **Variables** : les valeurs de variables du test, affichées sous forme de pastilles sous son nom, avec les valeurs secrètes masquées.
+
+Faites glisser la poignée d'une ligne pour réordonner les tests, et cliquez sur **Add test(s)** pour étendre le batch. **Save** enregistre vos modifications sans lancer l'exécution.
+
+## Lancement
+
+Cliquez sur **Run** (en haut à droite) pour exécuter la campaign. Les tests s'exécutent dans l'ordre affiché en un seul batch.
+
+## Suivre l'exécution
+
+La campaign apparaît dans la [liste des exécutions](/fr/executions/overview) et s'ouvre comme une [exécution multi-test](/fr/executions/results#exécutions-multi-test) : compteurs de synthèse, graphique de durée d'exécution, et les résultats détaillés de chaque test accessibles en un clic dans la barre latérale.
+
+<Tip>
+Pour lancer des campaigns depuis un script ou un pipeline au lieu de l'interface, consultez [Lancer des campaigns depuis le CLI](/fr/cli/guides/run-campaigns).
+</Tip>

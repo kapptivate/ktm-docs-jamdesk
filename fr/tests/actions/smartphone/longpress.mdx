@@ -1,0 +1,63 @@
+---
+title: Long press
+sidebarTitle: Appui long
+description: Appui long sur un élément pour ouvrir les actions contextuelles.
+---
+
+Appuyez longuement sur un élément : ouvrir un menu contextuel sur un élément de liste, démarrer une poignée de glissement, ou déclencher tout geste d'appui long supporté par l'application.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
+| Selector manuel | `locator.selector` | Non | Selector XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Utilisation de l'IA | `ai_strategy` | Non | `smart` (par défaut), `always` ou `inherit`. |
+| Activer l'IA | `enable_ai` | Non | Par défaut : désactivé. Activez-le pour localiser l'élément à partir de la description. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "long-press",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The first conversation in the inbox list" } }]
+    },
+    "enable_ai": false,
+    "ai_strategy": "smart",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
+- **Capture d'écran** : prise après l'appui long, montrant généralement les actions contextuelles ouvertes.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tap" icon="hand-pointer" href="/fr/tests/actions/smartphone/tap">
+
+    Sélectionner une action dans le menu ouvert par l'appui long
+
+</Card>
+  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+
+    Vérifier que les actions contextuelles sont apparues
+
+</Card>
+</Columns>

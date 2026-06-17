@@ -1,0 +1,50 @@
+---
+title: "get_full_test"
+description: "Récupère la définition complète du test, y compris les actions, variables, dépendances, monitors et toutes les métadonnées."
+sidebarTitle: "get_full_test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Récupère la définition complète du test, y compris les actions, variables, dépendances, monitors et toutes les métadonnées.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `test_id` | number | Oui | L'identifiant du test (depuis list_tests) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Returns a summary object plus the full test object. Use get_test_detail instead when you only need variables and owners for campaign building.
+```
+
+## Associés
+
+- [`get_test_detail`](/fr/mcp/tools/discovery/get_test_detail)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,69 @@
+---
+title: TCP Ping
+description: Mesurez la latence de connexion au niveau TCP via la connexion cellulaire.
+---
+
+Mesurez la latence en ouvrant des connexions TCP vers un hôte au lieu d'envoyer des paquets ICMP. Utilisez-le quand les pare-feu filtrent ICMP, ou pour mesurer la latence réellement vécue par vos applications au niveau transport.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Url | `command.url` | Oui | Hôte (et port) à atteindre. |
+| Nombre de pings | `command.count` | Non | Nombre de tentatives de connexion. Par défaut : 10. |
+| Le TCP Ping doit échouer | `expect_failure` | Non | Inverse le verdict. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_TCP_PING",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "url": "kapptivate.com:443",
+    "count": 10,
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "override_dns": false,
+    "dns": [],
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `rtt_mean` | Temps moyen d'établissement de la connexion TCP. |
+| `packet_loss_pct` | Pourcentage de tentatives échouées. |
+| `ping_count` | Nombre de tentatives. |
+| `dns_server` | Serveurs DNS utilisés pour la résolution. |
+| `duration` | Temps d'exécution total en secondes. |
+
+Dans Analytics, chaque exécution alimente la mesure TCP ping avec `rtt_seconds`, `packet_loss_percent` et `duration_seconds`, étiquetée par statut, APN, serveur DNS, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/fr/tests/actions/cellular/ping">
+
+    Latence ICMP simple
+
+</Card>
+  <Card title="API Call" icon="cloud" href="/fr/tests/actions/cellular/api-call">
+
+    Requêtes HTTP complètes avec statut et détail des temps
+
+</Card>
+</Columns>

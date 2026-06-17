@@ -1,0 +1,63 @@
+---
+title: "ktm variables groups"
+description: "Groupes de variables : configurations d'environnement contenant un ensemble de variants"
+sidebarTitle: "groups"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Groupes de variables : configurations d'environnement contenant un ensemble de variants
+
+<Note>Alias : groups, group</Note>
+
+## Utilisation
+
+```bash
+ktm variables groups [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="create" icon="angle-right" href="/fr/cli/commands/variables/groups/create">
+    Créer un groupe de variables avec des variants
+  </Card>
+  <Card title="delete" icon="angle-right" href="/fr/cli/commands/variables/groups/delete">
+    Supprimer un groupe de variables ; refuse s'il n'est pas vide sauf avec --force
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/variables/groups/list">
+    Lister les groupes de variables d'un produit
+  </Card>
+  <Card title="show" icon="angle-right" href="/fr/cli/commands/variables/groups/show">
+    Obtenir les détails d'un groupe de variables incluant les variants et définitions de variables
+  </Card>
+  <Card title="update" icon="angle-right" href="/fr/cli/commands/variables/groups/update">
+    Renommer un groupe de variables (la gestion des variants est dans 'variables variants')
+  </Card>
+</Columns>
+
+## Détails
+
+Gérer les groupes de variables sous l'arbre variables.
+
+La gestion des variants se trouve sous 'ktm variables variants' (add | remove | rename
+| set-default | copy-values). La commande 'groups update' sert uniquement au renommage.
+
+## Voir aussi
+
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

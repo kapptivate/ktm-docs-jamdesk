@@ -1,0 +1,64 @@
+---
+title: "edit_dashboard_widget"
+description: "Modifier un widget existant dans un dashboard."
+sidebarTitle: "edit_dashboard_widget"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Modifier un widget existant dans un dashboard.
+
+<Warning>
+  **Destructif · Écriture de données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Définir à true après que l'utilisateur approuve la poursuite au-delà de la limite d'édition. |
+| `dashboard_uid` | string | Oui | UID du dashboard |
+| `h` | number | Non | Nouvelle hauteur dans la grille (optionnel) |
+| `w` | number | Non | Nouvelle largeur dans la grille (optionnel) |
+| `widget_id` | string | Oui | Identifiant du widget dans le dashboard (le champ 'i' depuis le layout de get_dashboard) |
+| `widget_json` | string | Oui | Chaîne JSON de la nouvelle section données du widget |
+| `x` | number | Non | Nouvelle position x dans la grille (optionnel, conserve la position actuelle si omis) |
+| `y` | number | Non | Nouvelle position y dans la grille (optionnel) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "dashboard_uid": "string",
+  "widget_id": "string",
+  "widget_json": "string"
+}
+```
+
+## Description
+
+```text
+Remplace la section données du widget. La position (x/y/w/h) est préservée sauf si explicitement fournie.
+
+Prérequis : utilisez query_metrics avec SHOW MEASUREMENTS et SHOW FIELD KEYS si vous modifiez les champs de requête.
+
+Workflow : get_dashboard → edit_dashboard_widget → get_dashboard (vérifier).
+```
+
+## Associé
+
+- [`query_metrics`](/fr/mcp/tools/metrics/query_metrics)
+- [`get_dashboard`](/fr/mcp/tools/dashboard/get_dashboard)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

@@ -1,0 +1,56 @@
+---
+title: "ktm tests inspect"
+description: "Définition complète du test avec actions, dépendances et configuration"
+sidebarTitle: "inspect"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Définition complète du test avec actions, dépendances et configuration
+
+## Utilisation
+
+```bash
+ktm tests inspect <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm tests inspect 99
+ktm tests inspect 99 -o json | jq '.actions[0]'
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Détails
+
+Récupérer la forme complète du test, incluant les actions, les variables et la configuration.
+C'est le payload complet de la définition de test, utile pour comprendre exactement ce qu'un test
+fait avant de le modifier ou de le cloner.
+
+Pour un résumé plus léger (sans les actions), utilisez 'ktm tests get'.
+
+## Voir aussi
+
+- [`ktm tests`](/fr/cli/commands/tests)
+- [`ktm tests get`](/fr/cli/commands/tests/get)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

@@ -1,0 +1,88 @@
+---
+title: Parc d'appareils
+description: Parcourez et gérez les SIM et smartphones disponibles dans votre workspace.
+sidebarTitle: Parc d'appareils
+---
+
+![The Devices lab on the SIMs tab, listing SIM cards with status, network, usage, access, monitors, and host columns, plus search and filters](/images/devices-lab-sims.webp)
+
+Le parc d'appareils (Devices lab) est l'endroit central pour gérer chaque appareil de test de votre workspace. Il affiche toutes les cartes SIM physiques et les smartphones connectés à vos agents dans une vue unique avec recherche, où vous pouvez vérifier le statut d'un appareil, contrôler quels produits l'utilisent, et l'ouvrir pour inspecter l'utilisation, les moniteurs et les paramètres.
+
+## Voir vos appareils
+
+Le Devices lab comporte deux onglets : **SIMs** et **Smartphones**. Chacun liste ses appareils dans un tableau.
+
+**SIMs** liste les cartes SIM connectées à vos agents SIM (Cellular). Les colonnes affichent le nom et le numéro de la SIM, le statut, le réseau et le signal, l'utilisation, le compteur d'accès, les moniteurs et l'agent hôte (avec son emplacement). Utilisez **Learn how to setup a SIM** pour le guide d'installation.
+
+**Smartphones** liste les téléphones connectés à vos agents Smartphone, avec leur modèle, statut, UUID, utilisation, accès, moniteurs et hôte. Utilisez **Learn how to setup a new device** pour le guide d'installation.
+
+Plusieurs colonnes révèlent plus d'informations au survol : le badge réseau affiche le réseau connecté et le niveau de signal, le badge d'utilisation affiche le pourcentage exact d'utilisation, et le chip d'hôte affiche le statut et la localisation de l'agent.
+
+Pour savoir ce que signifie chaque statut et badge d'utilisation, consultez [Statuts](/fr/equipment/statuses).
+
+## Rechercher et filtrer les appareils
+
+Au-dessus de chaque tableau :
+
+- **Recherchez** par nom, IMSI ou MSISDN (pour les SIM) ou par nom ou UUID (pour les smartphones). Les résultats se mettent à jour au fur et à mesure de la saisie.
+- **Filtre de statut** : choisissez **Active** (en cours d'utilisation) ou **Archived** (retiré). Active est la valeur par défaut.
+- **Filtre de produits** : une liste déroulante à sélection multiple qui limite la liste aux appareils attribués au(x) produit(s) que vous choisissez.
+
+## Ouvrir un appareil
+
+Cliquez sur une ligne d'appareil pour ouvrir sa page de détails. Les onglets sont **General**, **Usage**, **Monitors**, **Settings** et **Event logs**, avec le nom et le statut de l'appareil en haut.
+
+Trois actions se trouvent en haut à droite :
+
+- **Reboot slot** (cartes SIM) : redémarre à distance l'emplacement de la SIM sur son agent.
+- **Test-only mode** : met en pause tous les moniteurs de l'appareil et le réserve aux tests manuels.
+- **Launch live session** : ouvre une [session live](/fr/tests/live-session) interactive avec l'appareil.
+
+### General
+
+L'onglet General affiche les informations principales de l'appareil (pour une SIM : emplacement, agent hôte, numéro de téléphone, localisation, réseau et utilisation ; pour un smartphone : modèle, agent hôte et localisation, avec un bouton **Edit smartphone**) et une section **Products** qui contrôle quels produits peuvent utiliser l'appareil.
+
+Laissez **This device can be used by all the products** activé pour accorder l'accès à tous les produits, ou désactivez-le et utilisez **Add product** pour restreindre l'accès à une liste sélectionnée.
+
+### Usage
+
+L'onglet Usage affiche une heatmap d'utilisation moyenne hebdomadaire, le pourcentage d'occupation de l'appareil heure par heure sur les jours de la semaine. Utilisez-le pour repérer les schémas d'utilisation et équilibrer la charge entre les appareils.
+
+### Monitors
+
+L'onglet Monitors liste les moniteurs utilisant actuellement l'appareil, regroupés par suite, avec le statut, la fréquence et la localisation de chaque moniteur. Mettez en pause un moniteur individuel depuis sa ligne, ou utilisez **Pause all monitors**.
+
+### Settings
+
+Settings regroupe les champs modifiables et les détails techniques en lecture seule de l'appareil dans une sous-navigation à gauche.
+
+**Pour une carte SIM :**
+
+- **About** : modifiez le MSISDN national et international et le nom de l'appareil, puis cliquez sur **Save changes**.
+- **SIM Details** : informations techniques en lecture seule : IMSI, ICCID, type, code ISO, pays, opérateur, nom de réseau enregistré et PLMN, et firmware du modem.
+- **Default APN** : la configuration du point d'accès par défaut de la SIM.
+
+**Pour un smartphone :**
+
+- **About** : renommez l'appareil.
+- **Smartphone Details** : détails de connexion, UUID, URL, type et modèle.
+- **Props** : un objet JSON de propriétés spécifiques à l'appareil telles que la résolution d'écran, le fabricant et les versions de build de l'OS.
+
+### Event logs
+
+Un historique d'événements par appareil, avec les mêmes filtres Type et User, le sélecteur de période et l'action **Export CSV** que le [journal d'événements](/fr/administration/event-log) global du workspace.
+
+## États vides
+
+Si aucun agent d'un type n'existe (par exemple, pas d'agents SIM), vous voyez un message suggérant de contacter les ventes, avec un lien vers le guide d'installation de l'agent. Si des agents existent mais qu'aucun appareil n'est encore configuré, vous voyez une invitation à configurer les appareils avec un lien vers le guide de configuration.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Statuts" icon="list-check" href="/fr/equipment/statuses">
+    Décodez chaque statut d'appareil, de SIM, de signal et d'utilisation affiché dans ces tableaux
+  </Card>
+  <Card title="Agents" icon="robot" href="/fr/equipment/agents">
+    Gérez les agents auxquels ces SIM et smartphones sont connectés
+  </Card>
+</Columns>

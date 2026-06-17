@@ -1,0 +1,55 @@
+---
+title: "ktm incidents get"
+description: "Obtenir les détails d'un incident"
+sidebarTitle: "get"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir les détails d'un incident
+
+## Utilisation
+
+```bash
+ktm incidents get [flags]
+```
+
+## Exemples
+
+```bash
+# Get incident details
+ktm incidents get --operator my-operator --id 99
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--id` | int | — | ID de l'incident (depuis 'incidents list') |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Obtenir un seul incident par ID, incluant ses tags, statut, niveau, durée et source d'alerte.
+
+Utilisez 'incidents list' pour trouver les ID d'incidents.
+
+## Voir aussi
+
+- [`ktm incidents`](/fr/cli/commands/incidents)
+- [`ktm incidents list`](/fr/cli/commands/incidents/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

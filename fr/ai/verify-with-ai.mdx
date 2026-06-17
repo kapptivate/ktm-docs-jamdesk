@@ -1,0 +1,42 @@
+---
+title: Vérifier avec l'IA
+description: Validez ce qu'une page devrait afficher en langage naturel au lieu de vérifications en correspondance exacte fragiles.
+sidebarTitle: Vérifier avec l'IA
+---
+
+![A Verify with AI step asserting that the login page is displayed, with its reference screenshot](/images/ai-verify-step.webp)
+
+Les assertions en correspondance exacte ne peuvent pas exprimer "la page de connexion est affichée" : elles vérifient un selector, une valeur, un pixel. **Verify with AI** évalue la page entière par rapport à une phrase que vous écrivez en langage naturel, de sorte que la vérification tient même lorsque la mise en page change.
+
+## Ajouter le step
+
+Dans le builder, choisissez **Add step... > Verifications > Verify with AI**, puis écrivez ce que vous attendez : "The login page is displayed", "The cart shows 2 items", "The checkout button is enabled".
+
+Au moment de l'exécution, l'IA capture l'état de la page et le juge par rapport à votre assertion. Le step échoue lorsque la description n'est pas satisfaite, comme toute autre vérification.
+
+## Assertions dynamiques avec des variables
+
+Les prompts acceptent les [variables](/fr/tests/variables) : cliquez sur l'icône `{}` pour insérer des valeurs provenant de steps précédents, de générateurs aléatoires ou de vos variables configurées. Cela rend possibles des assertions comme "The confirmation page shows the name `{Firstname}`", où `Firstname` a été saisi (ou généré) plus tôt dans le test.
+
+## Quand l'utiliser
+
+- **Résultats au niveau de la page** : "the dashboard loaded", "the form was submitted successfully", là où aucun selector unique ne capture l'état.
+- **États visuels** : couleurs de boutons, bannières, présence d'images, des choses que les vérifications en correspondance exacte ont du mal à gérer.
+- **Smoke checks résilients** : assertions qui doivent survivre aux redesigns.
+
+Pour des vérifications déterministes sur un élément ou une valeur spécifique, préférez les [checks](/fr/tests/builder#checks) standard ; ils sont plus rapides et reproductibles. La référence JSON se trouve dans [aivisualassert](/fr/tests/actions/web/aivisualassert).
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vérification orthographique IA" icon="spell-check" href="/fr/ai/spell-check">
+
+    Relisez le contenu de la page, pas seulement sa structure
+
+</Card>
+  <Card title="Variables dans les tests" icon="brackets-curly" href="/fr/tests/variables">
+
+    Alimentez vos prompts IA avec des valeurs dynamiques
+
+</Card>
+</Columns>

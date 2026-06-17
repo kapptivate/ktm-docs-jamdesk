@@ -1,0 +1,63 @@
+---
+title: Premiers pas
+description: Visite guidée de cinq minutes du CLI ktm, de la découverte de vos slugs à l'exécution de tests.
+sidebarTitle: Premiers pas
+---
+
+Cette visite suppose que `ktm` est installé et que `KAPPTIVATE_API_KEY` est défini. Si ce n'est pas le cas, commencez par [Installation](/fr/cli/installation).
+
+## 1. Découvrez vos slugs
+
+Presque toutes les commandes prennent un slug d'opérateur et de produit. Trouvez-les en premier :
+
+```bash
+ktm operators list
+ktm products list --operator my-operator
+```
+
+Les slugs de produit prennent la forme `operator~product`.
+
+## 2. Parcourir et inspecter les tests
+
+```bash
+# Lister les tests d'un produit, sous forme de tableau
+ktm tests list --operator my-operator --product my-operator~my-product -o table
+
+# Inspecter un test, y compris les variables et propriétaires nécessaires
+ktm tests get <test-id>
+```
+
+## 3. Exécuter des tests, en mode CI
+
+Construisez une campagne, puis exécutez-la. C'est le même parcours que celui utilisé par votre pipeline :
+
+```bash
+ktm ci build \
+  --test-ids 16480,16838 \
+  --product my-operator~my-product \
+  --variant "API:Staging" > campaign.json
+
+ktm ci run \
+  --test-config-path campaign.json \
+  --junit-file results.xml \
+  --output-file summary.json
+```
+
+## Formats de sortie
+
+Ajoutez `-o` (ou `--output`) à n'importe quelle commande :
+
+- `json` (défaut) : un tableau JSON, idéal pour le piping vers `jq`
+- `table` : colonnes alignées et colorées pour les humains
+- `plain` : valeurs séparées par des tabulations pour `awk`, `cut` et `sort`
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Référence des commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Toutes les commandes, flags et arguments.
+  </Card>
+  <Card title="CI/CD" icon="gear" href="/fr/cli/ci-cd">
+    Exécutez ce même flux depuis votre pipeline.
+  </Card>
+</Columns>

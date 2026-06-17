@@ -1,0 +1,110 @@
+---
+title: Configurations et variables
+description: Gérez les variables d'environnement et les groupes de variables utilisés dans vos tests.
+sidebarTitle: Configuration et variables
+---
+
+Coder en dur des identifiants, mots de passe ou adresses email dans chaque test rend les scénarios fragiles et difficiles à maintenir. Les variables vous permettent de stocker ces valeurs une seule fois et de les réutiliser partout, pour qu'une seule modification mette à jour chaque test qui en dépend. Kapptivate les organise de deux manières : les **variables simples** avec une seule valeur globale, et les **groupes de variables** qui contiennent des valeurs différentes par variante.
+
+Les variables appartiennent à un espace produit. La page Configurations les liste toutes dans un tableau affichant le nom, la valeur et l'`Usage` de chaque variable, c'est-à-dire les tests qui la référencent actuellement.
+
+## Variables simples
+
+Une variable simple appartient à un espace produit et contient une seule valeur utilisée partout où elle est référencée. Choisissez un type de variable lors de la création.
+
+<Tabs>
+  <Tab title="Single value">
+    Une valeur fixe (texte, nombre, clé) qui ne change pas. Utilisez-la pour des éléments comme un identifiant client ou une clé publique.
+  </Tab>
+  <Tab title="Secret">
+    Pour les données sensibles comme les mots de passe ou les tokens API. La valeur est encodée dans l'interface et dans la base de données.
+
+    Une fois enregistrée, la valeur n'est **plus jamais affichée**. Pour la modifier, le champ apparaît vide et vous devez saisir à nouveau la valeur complète pour écraser l'ancienne.
+  </Tab>
+  <Tab title="Choice">
+    Une liste prédéfinie de valeurs (Choice 1, Choice 2, Choice 3...). L'utilisateur de la variable choisit l'une des options.
+  </Tab>
+</Tabs>
+
+**Créer une variable simple :**
+
+<Steps>
+  <Step title="Ouvrir le formulaire de création">
+    Cliquez sur **Create variable**.
+  </Step>
+  <Step title="La nommer">
+    Saisissez un nom sans espaces ni caractères spéciaux.
+  </Step>
+  <Step title="Choisir un type">
+    Sélectionnez **Single value**, **Secret** ou **Choice**.
+  </Step>
+  <Step title="La décrire">
+    Ajoutez une description. Optionnel, mais recommandé pour que vos coéquipiers sachent à quoi sert la variable.
+  </Step>
+  <Step title="Définir la valeur">
+    Saisissez la valeur, ou la liste de valeurs pour une variable Choice, puis cliquez sur **Create**.
+  </Step>
+</Steps>
+
+## Groupes de variables et variantes
+
+Un groupe de variables regroupe plusieurs variables sous une même entité et donne à chacune une valeur différente par **variante**. Changer de variante remplace toutes les valeurs du groupe d'un coup.
+
+C'est idéal pour des profils utilisateur distincts, des environnements séparés (staging, production), ou des jeux de données de test complexes. Par exemple, un groupe `User Profiles` avec les variantes *Alexandre*, *Marc* et *Julie* vous permet d'exécuter le même scénario en tant que personne différente sans toucher au test.
+
+**Créer un groupe de variables :**
+
+<Steps>
+  <Step title="Ouvrir le formulaire de groupe">
+    Cliquez sur **Create variable group**.
+  </Step>
+  <Step title="Nommer le groupe">
+    Par exemple, `User Profiles`.
+  </Step>
+  <Step title="Définir les variantes">
+    Ajoutez chaque variante : pour des profils utilisateur, cela pourrait être *Alexandre*, *Marc*, *Julie*. Marquez-en une comme `Default`.
+  </Step>
+  <Step title="Ajouter des variables">
+    Ajoutez les variables dont le groupe a besoin, comme `email` et `password`.
+  </Step>
+  <Step title="Définir une valeur par variante">
+    Pour chaque variable, renseignez la valeur pour chaque variante. Pour `email` : Alexandre → `alexandre@mail.com`, Marc → `marc@mail.com`.
+  </Step>
+</Steps>
+
+Changer de variante depuis le menu déroulant du groupe met à jour toutes ses valeurs d'un coup pour refléter le profil sélectionné.
+
+## Utiliser les variables dans les tests
+
+Une fois vos variables configurées, injectez-les directement dans vos steps de test.
+
+**Injecter une variable dans un step :**
+
+<Steps>
+  <Step title="Ouvrir le sélecteur de variables">
+    Lors de la création ou de la modification d'un step (une action **Click**, une saisie de texte, etc.), cliquez sur l'icône `{}` à côté du champ cible.
+  </Step>
+  <Step title="Aller dans l'onglet Variables">
+    Le sélecteur propose aussi des valeurs provenant de steps précédents et des générateurs aléatoires ; vos variables configurées se trouvent dans l'onglet **Variables**. Consultez [Variables dans les tests](/fr/tests/variables) pour le sélecteur complet.
+  </Step>
+  <Step title="Choisir la variable">
+    Parcourez l'arborescence (par exemple `User Profiles` > `email`) et sélectionnez la variable pour l'insérer dans le step.
+  </Step>
+</Steps>
+
+### Changer de variante lors de la configuration du test
+
+Dans le panneau latéral de l'éditeur de test, l'onglet **Environment** liste vos groupes de variables. Utilisez le menu déroulant pour changer la variante utilisée par le test. Passez d'*Alexandre* à *Marc* et le test s'exécute avec les données de Marc.
+
+### Changer de variante au moment de l'exécution
+
+Sur l'écran final de **Run confirmation**, Kapptivate affiche les variables que l'exécution va utiliser. C'est votre dernière chance de changer la variante depuis un menu déroulant, pour exécuter le même scénario avec un profil ou un jeu de données complètement différent à la volée.
+
+## Rechercher et gérer
+
+La page Configurations regroupe toutes les variables et groupes au même endroit.
+
+- **Recherche** : Trouvez les variables et groupes par nom
+- **Suivi d'utilisation** : Voyez quels tests dépendent d'une variable avant de la modifier
+- **Dupliquer** : Clonez une variable pour en créer une similaire
+- **Supprimer** : Supprimez une variable ou un groupe de variables

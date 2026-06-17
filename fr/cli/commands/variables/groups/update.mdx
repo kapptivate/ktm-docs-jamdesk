@@ -1,0 +1,58 @@
+---
+title: "ktm variables groups update"
+description: "Renommer un groupe de variables (la gestion des variants est dans 'variables variants')"
+sidebarTitle: "update"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renommer un groupe de variables (la gestion des variants est dans 'variables variants')
+
+## Utilisation
+
+```bash
+ktm variables groups update <id> [flags]
+```
+
+## Exemples
+
+```bash
+ktm variables groups update 42 --name "Environments v2"
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `id` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nouveau nom (requis) |
+
+## Détails
+
+Renommage uniquement. Pour ajouter, supprimer, renommer, définir le défaut ou copier des valeurs entre
+variants, utilisez les sous-commandes dédiées 'ktm variables variants'.
+
+## Voir aussi
+
+- [`ktm variables groups`](/fr/cli/commands/variables/groups)
+- [`ktm variables`](/fr/cli/commands/variables)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

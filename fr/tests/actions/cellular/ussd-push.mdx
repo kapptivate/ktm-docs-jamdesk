@@ -1,0 +1,62 @@
+---
+title: Wait USSD Push
+description: Attendez un message USSD non sollicité envoyé par le réseau.
+---
+
+Attendez un USSD push initié par le réseau : une alerte de solde, une notification d'abonnement, un message promotionnel. L'action n'envoie rien ; elle surveille la SIM et vérifie le message à son arrivée.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Message attendu | `expected_result.message` | Non | Le contenu du push que vous attendez. Le résultat enregistre le ratio de correspondance. |
+| Vérifier la réception depuis une étape précédente | `command.wait_from` | Non | Commencer la surveillance depuis la position d'une action précédente, pour les push déclenchés plus tôt dans le flux. |
+| La réception est optionnelle | `optional_reception` | Non | Le test réussit même si aucun push n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "USSD_PUSH",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "wait_from": null,
+    "options": { "artifacts": {} }
+  },
+  "expected_result": {
+    "message": "Your balance is below 1.00"
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `message` | Le contenu du push reçu. |
+| `session` | État de la session après le push : `alive` ou `close`. |
+| `ratio` | Ratio de correspondance (0 à 100) par rapport au message attendu. |
+| `relative_duration` | Temps écoulé depuis le début de la surveillance jusqu'à l'arrivée du push, en secondes. |
+| `dynamic_variables` | Valeurs extraites du push dans les variables. |
+
+Dans Analytics, chaque exécution alimente la mesure USSD push avec `reception_duration_seconds` et `duration_seconds`, étiquetée par statut, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="USSD Command" icon="hashtag" href="/fr/tests/actions/cellular/ussd">
+
+    Déclenchez le flux qui provoque le push
+
+</Card>
+  <Card title="Wait SMS" icon="envelope" href="/fr/tests/actions/cellular/wait-sms">
+
+    Le même principe pour les SMS entrants
+
+</Card>
+</Columns>

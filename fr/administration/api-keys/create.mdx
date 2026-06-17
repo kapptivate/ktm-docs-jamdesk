@@ -1,0 +1,26 @@
+---
+title: Créer une clé API
+description: Générez une nouvelle clé API et assignez-la à des équipes.
+---
+
+![La fenêtre de création d'une nouvelle clé API avec le champ nom et le sélecteur d'équipes](/images/api-key-create.webp)
+
+Les clés API authentifient les applications externes, telles que les pipelines CI/CD et les services tiers, avec votre workspace Kapptivate. Chaque clé est liée à des équipes spécifiques et génère un token que vous utilisez pour l'authentification.
+
+## Créer une clé
+
+1. Allez dans **Administration** > **Clés API**
+2. Cliquez sur **Créer une clé API** (en haut à droite)
+3. Saisissez un **Nom**. Cela vous aide à identifier l'usage de la clé
+4. Sous **Sélectionner les équipes autorisées à utiliser cette clé**, choisissez les équipes auxquelles la clé doit avoir accès
+5. Cliquez sur **Créer**
+
+Après la création, une fenêtre confirme *"Votre nouveau token a été généré"* et affiche le token. Copiez-le immédiatement avec le bouton de copie. Il n'est visible qu'à ce moment-là. Si vous le perdez, vous devrez [rafraîchir le token](/fr/administration/api-keys/manage#rafraîchir-un-token) pour en générer un nouveau.
+
+## Stocker le token de manière sécurisée
+
+Stockez le token dans votre application ou environnement CI/CD en tant que variable d'environnement ou secret. Ne commitez jamais de clés API dans le contrôle de version.
+
+<Warning>
+Le token n'est affiché qu'une seule fois lors de la création. Si vous fermez la fenêtre sans le copier, vous devez rafraîchir le token pour en obtenir un nouveau.
+</Warning>

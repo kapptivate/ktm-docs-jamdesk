@@ -1,0 +1,76 @@
+---
+title: Verify element
+sidebarTitle: Vérifier l'élément
+description: Vérifier qu'un élément est (ou n'est pas) affiché, cliquable, activé ou présent.
+---
+
+Vérifiez l'état d'un élément dans l'application : l'écran de confirmation est affiché, le bouton Continuer est activé, le spinner de chargement a disparu. Le step attend que la condition soit remplie et échoue si elle ne l'est jamais dans le temps imparti. C'est le step de vérification principal pour les tests smartphone, et une alternative robuste aux délais fixes.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément à vérifier. |
+| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Condition | `<state>.reverse` | Oui | `is` ou `is not`. "is not" définit `reverse: true` sur l'état choisi. |
+| État | `displayed`, `clickable`, `enabled` ou `exist` | Oui | L'état à vérifier. Par défaut : `displayed`. `exist` est libellé "present" dans le builder : l'élément est dans l'arbre UI, visible ou non. |
+| Temps d'attente max. | `<state>.timeout` | Non | Combien de temps attendre la condition avant l'échec, en secondes. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+Les quatre états :
+
+- **displayed** : l'élément est visible à l'écran.
+- **clickable** : l'élément est visible et peut recevoir un clic ou un tap.
+- **enabled** : l'élément est actif (pas désactivé).
+- **present** : l'élément existe dans l'arbre UI, même s'il est masqué.
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test. Son type interne est `wait-for`, et l'état choisi est la clé dans `inputs`.
+
+```json
+{
+  "id": "step-1",
+  "type": "wait-for",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "" } }],
+      "description": [{ "type": "value", "data": { "value": "The order confirmation banner" } }]
+    },
+    "displayed": {
+      "reverse": false,
+      "timeout": [{ "type": "value", "data": { "value": "30" } }]
+    },
+    "enable_ai": false,
+    "ai_strategy": "smart",
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+Pour vérifier qu'un élément a disparu, conservez l'état et définissez `"reverse": true`.
+
+## Résultats et métriques
+
+- **Timing** : début, fin et durée (en secondes). La durée indique combien de temps la condition a mis à devenir vraie, un signal utile en soi.
+- **Statut** : succès dès que la condition est remplie, échec si le temps d'attente expire.
+- **Capture d'écran** : prise pour l'état vérifié.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Verify with AI" icon="sparkles" href="/fr/tests/actions/smartphone/aivisualassert">
+
+    Vérifier l'état complet de l'écran en langage naturel plutôt qu'un seul élément
+
+</Card>
+  <Card title="Wait for delay" icon="clock" href="/fr/tests/actions/smartphone/waitfordelay">
+
+    Mettre en pause pendant un temps fixe quand il n'y a rien à observer
+
+</Card>
+</Columns>

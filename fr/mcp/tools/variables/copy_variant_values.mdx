@@ -1,0 +1,59 @@
+---
+title: "copy_variant_values"
+description: "Workflow avancé : copier la valeur de chaque variable du variant source vers le variant de destination pour l'ensemble du groupe."
+sidebarTitle: "copy_variant_values"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Workflow avancé : copier la valeur de chaque variable du variant source vers le variant de destination pour l'ensemble du groupe.
+
+<Info>
+  **Écriture de données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `from_variant` | string | Oui | Identifiant ou nom du variant source |
+| `group_id` | number | Oui | Identifiant du groupe de variables |
+| `to_variant` | string | Oui | Identifiant ou nom du variant de destination |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "group_id": 0,
+  "from_variant": "string",
+  "to_variant": "string"
+}
+```
+
+## Description
+
+```text
+Un seul appel promeut staging → prod (ou copie dev → canary, etc.) de manière atomique.
+
+from_variant et to_variant acceptent des identifiants de variant (number) ou des noms (string). Les variables sans valeur sur le variant source sont ignorées. Renvoie le nombre de variables effectivement modifiées.
+
+Cet outil copie TOUTES les variables du groupe en une seule fois. Pour définir la valeur d'une seule variable dans un variant, utilisez set_variable_value à la place.
+```
+
+## Associé
+
+- [`set_variable_value`](/fr/mcp/tools/variables/set_variable_value)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

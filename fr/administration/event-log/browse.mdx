@@ -1,0 +1,54 @@
+---
+title: Parcourir et filtrer les événements
+description: Consultez le journal des événements, filtrez par date, type et utilisateur, et inspectez les détails des événements.
+---
+
+![Le panneau Détails affichant le type, la source, l'heure et les métadonnées JSON d'un événement](/images/event-log-details.webp)
+
+Le tableau du journal des événements affiche les événements les plus récents en premier, avec une pagination pour parcourir les événements plus anciens (30 événements par page). Allez dans **Administration** > **Journal des événements** pour l'ouvrir.
+
+## Colonnes des événements
+
+Chaque événement affiche :
+
+- **Heure** : quand l'événement s'est produit (formaté dans le fuseau horaire sélectionné)
+- **Type** : le type d'événement (par exemple `user_logged_in`, `smartphone_connected`, `service_credentials_created`)
+- **Source** : ce qui a déclenché l'événement (par exemple "user@example.com" ou une ressource spécifique)
+- **Métadonnées** : détails supplémentaires sur l'événement (sur les grands écrans, affichés en ligne ; sur les écrans plus petits, cliquez sur "Voir plus")
+
+## Filtrer les événements par date
+
+Deux contrôles en haut à droite restreignent les résultats à une période donnée. Choisissez une plage rapide pour les fenêtres courantes, ou définissez une plage exacte avec le sélecteur de dates.
+
+Le menu déroulant des plages rapides couvre les fenêtres les plus courantes : 1h, 2h, 6h, 12h, 24h ou 48h passées, ainsi que Aujourd'hui, Hier, 7 derniers jours et 30 derniers jours.
+
+Pour une fenêtre exacte, utilisez le champ de plage de dates à côté :
+
+1. Cliquez sur le champ de plage de dates
+2. Sélectionnez une date de début et une date de fin
+3. Le tableau se met à jour automatiquement
+
+Toutes les dates sont affichées dans le fuseau horaire que vous sélectionnez dans le sélecteur de dates. Votre choix de fuseau horaire est enregistré dans votre navigateur.
+
+## Filtrer par type d'événement
+
+Utilisez le filtre déroulant **Type** pour n'afficher que des types d'événements spécifiques (par exemple, uniquement les événements de connexion). Sélectionnez un ou plusieurs types, ou laissez vide pour afficher tous les types.
+
+## Filtrer par utilisateur
+
+Utilisez le filtre déroulant **Utilisateur** pour n'afficher que les événements déclenchés par un utilisateur spécifique. Sélectionnez un ou plusieurs utilisateurs, ou laissez vide pour afficher tous les utilisateurs.
+
+Les filtres peuvent être combinés. Par exemple, filtrez par type "user_login" et utilisateur "john@example.com" pour voir quand cet utilisateur s'est connecté pour la dernière fois.
+
+## Consulter les détails d'un événement
+
+Les événements peuvent afficher des métadonnées supplémentaires en ligne. Pour les détails complets, cliquez sur la ligne de l'événement (ou son bouton **Voir plus** sur les écrans plus petits) pour ouvrir le panneau **Détails**.
+
+Le panneau affiche :
+
+- **Type** : le type d'événement
+- **Source** : les informations complètes de la source
+- **Heure** : l'horodatage formaté de l'événement
+- **Métadonnées** : les données complètes de l'événement, avec les charges utiles structurées affichées en JSON formaté
+
+Cliquez sur le bouton de fermeture pour masquer le panneau.

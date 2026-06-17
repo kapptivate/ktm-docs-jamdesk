@@ -1,0 +1,73 @@
+---
+title: Place Call
+description: Passez un appel vocal depuis une vraie SIM et mesurez la connexion et la qualité d'appel.
+---
+
+Passez un appel vocal depuis la SIM : vers une autre SIM de la plateforme pour un test vocal de bout en bout, ou vers n'importe quel numéro. Mesurez le temps de connexion, maintenez l'appel pendant une durée choisie, jouez optionnellement un fichier audio et enregistrez l'appel pour l'évaluation de la qualité.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Technologie d'accès | `command.access_technology` | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
+| Numéro du destinataire | `command.receiver` | Oui | Le numéro à appeler. Supporte les variables. |
+| Temps d'attente max | `command.max_wait_connect_time_seconds` | Non | Temps d'attente pour la connexion de l'appel. Par défaut : 30. |
+| Durée de l'appel | `command.call_duration_seconds` | Non | Durée de maintien de l'appel une fois connecté. Par défaut : 10. |
+| Jouer un fichier pendant l'appel | `command.play_file`, `command.filename` | Non | Jouer un fichier audio de référence dans l'appel (utilisé pour l'évaluation MOS côté réception). |
+| Enregistrer l'appel | `command.record` | Non | Enregistrer l'audio de l'appel. Par défaut : désactivé. |
+| Calculer le MOS audio | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | Non | Évaluer l'audio enregistré par rapport à un fichier de référence. Nécessite l'enregistrement. |
+| L'appel doit échouer | `expect_failure` | Non | Inverse le verdict, pour les numéros interdits. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "CALL_PLACE",
+  "owner": "SIM_1",
+  "skip": false,
+  "expect_failure": false,
+  "command": {
+    "receiver": "+33600000000",
+    "max_wait_connect_time_seconds": 30,
+    "call_duration_seconds": 10,
+    "play_file": true,
+    "filename": "voice-10s",
+    "record": false,
+    "mos": { "active": false, "algo": "", "ref_file": "voice-10s" },
+    "access_technology": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `wait_connect_duration_in_seconds` | Temps de connexion de l'appel. |
+| `post_dial_delay_in_seconds` | Délai entre la numérotation et la sonnerie. |
+| `call_duration_in_seconds` | Durée de l'appel maintenu. |
+| `total_duration_in_seconds` | Durée totale de l'action de bout en bout. |
+| `ceer_response` | Le rapport de fin d'appel du réseau, pour diagnostiquer les coupures. |
+| `access_technology_report` | La technologie utilisée pour l'appel. |
+
+Dans Analytics, chaque exécution alimente la mesure d'appel avec `cellular_call_duration_seconds`, `cellular_call_connect_duration_seconds`, `cellular_call_post_dial_delay_seconds` et `duration_seconds`, étiquetée par statut, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Wait Call" icon="phone" href="/fr/tests/actions/cellular/wait-call">
+
+    Recevez l'appel sur une seconde SIM et évaluez l'audio
+
+</Card>
+  <Card title="Vue d'ensemble des actions SIM" icon="sim-card" href="/fr/tests/actions/cellular/overview">
+
+    Assertions, variables stockées et options partagées
+
+</Card>
+</Columns>

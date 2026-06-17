@@ -1,0 +1,66 @@
+---
+title: Ookla Speedtest
+description: Lancez un speedtest Ookla sur la connexion cellulaire : débit descendant, montant, latence, gigue.
+---
+
+Lancez un speedtest Ookla complet via la connexion data de la SIM : débit descendant et montant, latence, gigue et perte de paquets, contre les mêmes serveurs que l'application publique Speedtest. La mesure de bande passante la plus complète disponible sur une SIM.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Utiliser le serveur par défaut | `command.use_default_server` | Non | Laisser Ookla choisir le serveur le plus proche. Par défaut : activé. |
+| Nom d'hôte du serveur | `command.server_hostname` | Quand le serveur par défaut est désactivé | Un serveur Ookla spécifique pour le test. |
+
+Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "DATA_OOKLA_SPEEDTEST",
+  "owner": "SIM_1",
+  "skip": false,
+  "command": {
+    "use_default_server": true,
+    "server_hostname": "",
+    "access_technology": "",
+    "default_apn": true,
+    "keep_alive": false,
+    "check_network": { "active": true },
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `download.throughput_bps`, `download.bytes`, `download.elapsed_ms` | Débit descendant, volume et durée. |
+| `upload.throughput_bps`, `upload.bytes`, `upload.elapsed_ms` | Débit montant, volume et durée. |
+| `ping.latency_ms`, `ping.jitter_ms` | Latence et gigue vers le serveur de test. |
+| `packet_loss_percent` | Perte de paquets pendant le test. |
+| `server` | Le serveur Ookla utilisé : nom, localisation, hôte, IP. |
+| `isp` | L'opérateur tel que vu par Ookla. |
+
+Dans Analytics, chaque exécution alimente la mesure speedtest avec `download_throughput_bps`, `upload_throughput_bps`, `latency_ms`, `jitter_ms`, `packet_loss_percent` et les volumes transférés, étiquetée par statut, serveur (nom, localisation, pays), ISP, APN, antenne et technologie d'accès.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Download File" icon="cloud-arrow-down" href="/fr/tests/actions/cellular/download-file">
+
+    Débit contre votre propre infrastructure
+
+</Card>
+  <Card title="Ping" icon="arrow-right-arrow-left" href="/fr/tests/actions/cellular/ping">
+
+    Suivi léger de la latence entre les speedtests
+
+</Card>
+</Columns>

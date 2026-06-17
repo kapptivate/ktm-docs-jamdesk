@@ -1,0 +1,64 @@
+---
+title: "preview_test_edit"
+description: "Affiche un aperçu du diff."
+sidebarTitle: "preview_test_edit"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Affiche un aperçu du diff.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `actions` | string | Non | Tableau JSON d'actions (remplace les actions actuelles) |
+| `auto_correct_kinds` | boolean | Non | Réécrit les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Défaut false : les incohérences de kind sont des erreurs bloquantes. |
+| `description` | string | Non | Nouvelle description du test (uniquement si modification explicite) |
+| `name` | string | Non | Nouveau nom du test (uniquement si modification explicite) |
+| `test_id` | number | Oui | Identifiant du test pour lequel prévisualiser les modifications |
+| `variables` | string | Non | Objet JSON variables (remplace les variables actuelles) |
+| `variants` | array | Non | Spécificateurs de variant pin pour la résolution de bucket V3. Chaque élément est '5' (ID numérique) ou 'API:Staging' (group:variant par nom). Mode édition : les groupes non épinglés conservent leurs buckets existants. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "test_id": 0
+}
+```
+
+## Description
+
+```text
+Protected fields (cannot change): product_id, collection_uid.
+
+Preview the impact of editing a test WITHOUT applying changes. Returns which tests would be invalidated and which monitorings would be deactivated.
+
+V3 buckets: pass variants=["API:Staging", ...] (repeatable, same forms as create_test) to preview re-pinning. In edit mode, groups not pinned retain their existing buckets. Pre-V3 tests get default variants filled in automatically.
+
+Workflow: get_full_test → preview_test_edit → (review impact) → edit_test.
+```
+
+## Associés
+
+- [`create_test`](/fr/mcp/tools/test-management/create_test)
+- [`get_full_test`](/fr/mcp/tools/discovery/get_full_test)
+- [`edit_test`](/fr/mcp/tools/test-editing/edit_test)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

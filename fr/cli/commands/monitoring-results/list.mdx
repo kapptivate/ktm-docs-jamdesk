@@ -1,0 +1,76 @@
+---
+title: "ktm monitoring-results list"
+description: "Lister les résultats de monitoring récents"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les résultats de monitoring récents
+
+## Utilisation
+
+```bash
+ktm monitoring-results list [flags]
+```
+
+## Exemples
+
+```bash
+# List recent results for a monitor
+ktm monitoring-results list --monitoring-id 2180
+
+# Filter by product
+ktm monitoring-results list --product my-operator~my-product
+
+# Table format
+ktm monitoring-results list --monitoring-id 2180 -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--end` | string | — | Résultats avant cette date (ISO 8601) |
+| `--monitoring-id` | string | — | Filtrer par ID de monitor (depuis 'monitors list'). Requis pour les résultats avec portée opérateur, sans quoi les résultats couvrent tous les opérateurs. |
+| `--ordering` | string | — | Tri : -modified (défaut) ou modified |
+| `--page` | string | — | Numéro de page (défaut : 1) |
+| `--page-size` | string | — | Résultats par page (défaut : 20) |
+| `--product` | string | — | Slug du produit (format : operator~product) |
+| `--start` | string | — | Résultats après cette date (ISO 8601) |
+| `--test-id` | string | — | Filtrer par ID de test |
+
+## Détails
+
+Lister les résultats de monitoring (résultats d'exécution des monitors planifiés).
+
+Chaque résultat représente une seule exécution de monitor avec un statut global.
+Les résultats sont toujours légers : le payload lourd est exclu. Utilisez
+'monitoring-results get &lt;id&gt;' pour investiguer des résultats spécifiques.
+
+Prérequis : Sans --monitoring-id ou --product, les résultats couvrent TOUS les opérateurs
+auxquels la clé API a accès. Exécutez toujours 'monitors list --operator &lt;slug&gt;' d'abord
+pour obtenir les ID de monitors, puis passez --monitoring-id ici pour limiter les résultats au
+bon opérateur.
+
+Codes de statut : S=success, F=failed, O=ongoing, P=pending, WA=waiting, B=broken, DI=dismissed
+
+## Voir aussi
+
+- [`ktm monitoring-results`](/fr/cli/commands/monitoring-results)
+- [`ktm monitors list`](/fr/cli/commands/monitors/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

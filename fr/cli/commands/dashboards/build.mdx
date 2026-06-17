@@ -1,0 +1,65 @@
+---
+title: "ktm dashboards build"
+description: "Créer un dashboard avec tous les widgets de manière atomique"
+sidebarTitle: "build"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Créer un dashboard avec tous les widgets de manière atomique
+
+## Utilisation
+
+```bash
+ktm dashboards build [flags]
+```
+
+## Exemples
+
+```bash
+# Build a dashboard (dry-run)
+ktm dashboards build --operator my-op --name "SLA" --widgets widgets.json --dry-run
+
+# Build for real
+ktm dashboards build --operator my-op --name "SLA" --widgets widgets.json
+
+# With bucket
+ktm dashboards build --operator my-op --name "Passive" --widgets w.json --bucket my-bucket
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--bucket` | string | — | Bucket InfluxDB (optionnel) |
+| `--dry-run` | boolean | — | Prévisualiser la disposition sans créer le dashboard |
+| `--name` | string | — | Nom du dashboard (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+| `--widgets` | string | — | Fichier JSON avec le tableau de widgets (requis) |
+
+## Détails
+
+Crée un dashboard avec tous les widgets en un seul appel atomique.
+Valide tous les widgets en amont : si UN échoue, AUCUN n'est créé.
+Positionne automatiquement les widgets selon les tailles par défaut du type.
+
+Utilisez --dry-run pour prévisualiser la disposition en ASCII sans rien créer.
+
+## Voir aussi
+
+- [`ktm dashboards`](/fr/cli/commands/dashboards)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

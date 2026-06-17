@@ -1,0 +1,67 @@
+---
+title: "ktm products list"
+description: "Lister les produits, avec filtrage optionnel par operator"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les produits, avec filtrage optionnel par operator
+
+## Utilisation
+
+```bash
+ktm products list [flags]
+```
+
+## Exemples
+
+```bash
+# Lister tous les produits d'un operator
+ktm products list --operator my-operator
+
+# Lister uniquement les produits actifs (tableau)
+ktm products list --operator my-operator --active true -o table
+
+# Filtrer par nom de produit
+ktm products list --operator my-operator --name "Web Portal"
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--active` | string | — | Filtrer par statut actif : true ou false |
+| `--name` | string | — | Filtrer par correspondance exacte du nom de produit |
+| `--operator` | string | — | Slug de l'operator (depuis 'operators list') pour limiter les résultats |
+
+## Détails
+
+Lister les produits (applications/services) enregistrés sur la plateforme.
+
+Chaque produit appartient à un operator et contient des tests et des monitors. Utilisez
+--operator pour limiter les résultats à un seul operator. Le slug du produit (format :
+"&lt;operator-slug&gt;~&lt;product-name&gt;") est utilisé comme --product dans les commandes tests/monitors.
+
+Champs de sortie JSON : id, name, slug, short_name, active, operator, has_monitoring, icon_name, groups, environments
+Colonnes du tableau :   ID, SLUG, NAME, OPERATOR, ACTIVE, MONITORING
+
+## Voir aussi
+
+- [`ktm products`](/fr/cli/commands/products)
+- [`ktm operators list`](/fr/cli/commands/operators/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

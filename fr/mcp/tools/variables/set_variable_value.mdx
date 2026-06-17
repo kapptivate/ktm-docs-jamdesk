@@ -1,0 +1,58 @@
+---
+title: "set_variable_value"
+description: "Définir la valeur d'UN variant sur une variable groupée, en préservant tous les autres variants."
+sidebarTitle: "set_variable_value"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Définir la valeur d'UN variant sur une variable groupée, en préservant tous les autres variants.
+
+<Info>
+  **Écriture de données · Idempotent · Appelle des systèmes externes.**
+</Info>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `acknowledge` | boolean | Non | Réinitialiser le budget d'édition après approbation de l'utilisateur |
+| `value` | string | Oui | Nouvelle valeur pour ce variant |
+| `variable_id` | number | Oui | Identifiant de la variable (doit être liée à un groupe) |
+| `variant` | string | Oui | Identifiant du variant (number) ou nom (string) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "variable_id": 0,
+  "variant": "string",
+  "value": "string"
+}
+```
+
+## Description
+
+```text
+variant accepte l'identifiant du variant (number) ou le nom (string) ; la résolution de nom charge les variants du groupe parent. Renvoie une erreur lorsqu'il est appelé sur une variable globale (les globales n'ont pas de variants ; utilisez plutôt update_variable default_value). Renvoie une erreur lorsque le variant n'est pas présent sur la variable.
+
+Cet outil définit UNE variable dans UN variant. Pour copier en masse TOUTES les valeurs de variables d'un variant vers un autre dans l'ensemble du groupe, utilisez copy_variant_values à la place.
+```
+
+## Associé
+
+- [`update_variable`](/fr/mcp/tools/variables/update_variable)
+- [`copy_variant_values`](/fr/mcp/tools/variables/copy_variant_values)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

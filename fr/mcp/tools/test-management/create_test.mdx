@@ -1,0 +1,72 @@
+---
+title: "create_test"
+description: "Crée un nouveau test à partir d'une définition JSON."
+sidebarTitle: "create_test"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Crée un nouveau test à partir d'une définition JSON.
+
+<Warning>
+  **Destructif · Écrit des données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
+</Warning>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `actions` | string | Oui | Tableau JSON d'actions |
+| `auto_correct_kinds` | boolean | Non | Réécrit les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Défaut false : les incohérences de kind sont des erreurs bloquantes. |
+| `description` | string | Oui | Description du test (requise) : expliquez ce que ce test vérifie |
+| `kind` | number | Non | Kind du test : 1=test (défaut), 2=composant reusable V2 (types d'action V2 uniquement : ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2) |
+| `name` | string | Oui | Nom du test |
+| `product` | string | Oui | Slug du produit (résolu automatiquement en ID + root collection UID) |
+| `variables` | string | Oui | Objet JSON variables avec input_variables, output_variables, owners |
+| `variants` | array | Non | Spécificateurs de variant pin (résolution de bucket V3). Chaque élément est soit '5' (ID numérique de variant) soit 'API:Staging' (group:variant par nom, sensible à la casse). Répétez pour multi-group : ["API:Staging", "Database:Replica", "Frontend:Canary"]. Les groupes non épinglés utilisent leur variant par défaut. |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "product": "string",
+  "name": "string",
+  "description": "string",
+  "actions": "string",
+  "variables": "string"
+}
+```
+
+## Description
+
+```text
+Runs structural validation before submitting. Product slug is resolved to ID + root collection UID automatically.
+
+V3 buckets: every non-global input_variable gets an auto-resolved bucket pointing at (variable_group, variant). Pass variants=["API:Staging", "Database:Replica"] (repeatable forms: numeric variant ID or 'group:variant' name) to pin specific variants per group; groups not pinned use their default variant. Globals always emit {type:"global"}.
+
+Kind validation: declared input_variable.kind must match the platform's variable type (1/3 → "regular", 2 → "secret"). Mismatches are hard errors by default. Pass auto_correct_kinds=true to rewrite mismatches in-place.
+
+PREREQUISITE: call platform_guide topic=test_creation for the full workflow, owner mapping, and variable substitution rules.
+Workflow: list_action_types → get_test_template → list_resources → customize → validate_test → create_test.
+```
+
+## Associés
+
+- [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
+- [`list_action_types`](/fr/mcp/tools/test-management/list_action_types)
+- [`get_test_template`](/fr/mcp/tools/test-management/get_test_template)
+- [`list_resources`](/fr/mcp/tools/discovery/list_resources)
+- [`validate_test`](/fr/mcp/tools/test-management/validate_test)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>

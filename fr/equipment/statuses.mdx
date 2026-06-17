@@ -1,0 +1,88 @@
+---
+title: Statuts
+description: Statuts des agents, appareils, enregistrement SIM, signal et utilisation dans Kapptivate, en une seule référence.
+sidebarTitle: Statuts
+---
+
+![A Smartphone agent (Online) and its connected devices, each showing a Status (Available) and a Usage indicator (Not used, Overused)](/images/agent-device-statuses.webp)
+
+Les agents et les appareils qu'ils contrôlent rapportent chacun leur propre statut opérationnel. Cette page rassemble tous les statuts en un seul endroit : les états communs à tous les agents, les états communs aux smartphones et aux cartes SIM, et les états réseau et signal spécifiques aux SIM.
+
+## Statuts des agents
+
+Tous les agents rapportent les mêmes états opérationnels :
+
+| Statut | Signification |
+|--------|---------------|
+| **Online** | L'agent est joignable et prêt à exécuter des tests |
+| **Offline** | L'agent est injoignable ou arrêté |
+| **Rebooting** | L'agent est en cours de redémarrage |
+| **Maintenance** | L'agent est en mode maintenance (manuel ou planifié) |
+| **Waiting for Config** | L'agent est initialisé mais manque de configuration requise (agents Web uniquement) |
+| **Test-only** | L'agent est réservé aux exécutions test-only ; ne peut pas exécuter de tests de production |
+
+## Statuts des appareils
+
+Les smartphones et les cartes SIM partagent le même ensemble de statuts :
+
+| Statut | Signification |
+|--------|---------------|
+| **Available** | L'appareil est prêt et peut accepter des tests |
+| **Configuration** | L'appareil est en cours de configuration ou de mise à jour |
+| **Unavailable** | L'appareil est hors ligne, ne répond pas ou est injoignable |
+| **Disconnected** | L'appareil a perdu la connexion avec son agent |
+| **Degraded** | L'appareil est partiellement fonctionnel (par exemple utilisation élevée des ressources, connexion intermittente) |
+| **Archived** | L'appareil a été retiré et n'est plus utilisé |
+| **Test-only** | L'appareil est réservé aux exécutions de tests hors production |
+
+## Statuts d'enregistrement SIM
+
+Les cartes SIM rapportent aussi leur état d'enregistrement réseau :
+
+| Statut | Signification |
+|--------|---------------|
+| **REGISTERED** | Enregistré sur le réseau d'origine |
+| **REGISTERED (ROAMING)** | Enregistré sur un réseau partenaire |
+| **SEARCHING** | Recherche d'un réseau disponible |
+| **NOT REGISTERED** | Non enregistré (pas de signal ou hors service) |
+| **NOT REGISTERED (DENIED)** | La tentative d'enregistrement a été rejetée par le réseau |
+| **DENIED** | Le réseau a refusé l'enregistrement |
+| **PIN REQUIRED** | La SIM est verrouillée ; code PIN nécessaire pour la déverrouiller |
+| **PUK REQUIRED** | La SIM est verrouillée ; code PUK (code de déverrouillage) nécessaire |
+| **LIMITED SERVICE** | Service d'urgence ou limité uniquement |
+| **UNKNOWN** | Le statut d'enregistrement ne peut pas être déterminé |
+
+## Force du signal SIM
+
+| Niveau | Signification |
+|--------|---------------|
+| **Low** | Signal utilisable le plus faible ; les tests risquent d'échouer |
+| **Marginal** | En dessous de la moyenne ; les tests peuvent être instables |
+| **OK** | Signal acceptable pour la plupart des tests |
+| **Good** | Signal fort |
+| **Excellent** | Signal le plus fort |
+
+## Statut d'utilisation
+
+Kapptivate suit l'utilisation des ressources de chaque appareil sur 24 heures pour vous aider à repérer les problèmes de capacité :
+
+| Statut | Plage d'utilisation | Signification |
+|--------|---------------------|---------------|
+| **Not Used** | 0% | Aucun test exécuté dans les dernières 24 heures |
+| **Healthy** | 0–60% | Fonctionne normalement avec de la capacité disponible |
+| **Stressed** | 60–85% | Proche de la capacité maximale ; envisagez l'équilibrage de charge |
+| **Overused** | >85% | À capacité maximale ou au-delà ; les tests peuvent être mis en file d'attente ou expirer |
+| **Unavailable** | - | L'appareil est hors ligne et ne peut pas exécuter de tests |
+
+## Règles de disponibilité des appareils
+
+Un appareil est disponible pour les tests lorsque :
+
+1. Son statut est **Available**
+2. Son agent est **Online**
+3. Pour les SIM : la SIM est enregistrée sur un réseau (REGISTERED ou REGISTERED ROAMING)
+
+Vérifications supplémentaires optionnelles :
+- L'appareil ne doit pas être en configuration
+- L'appareil ne doit pas être en cours de redémarrage
+- L'appareil ne doit pas être en mode maintenance

@@ -1,0 +1,90 @@
+---
+title: Concepts fondamentaux
+description: Le modèle d'entités, le système de variables, les budgets d'édition et les annotations de sécurité derrière les outils MCP.
+sidebarTitle: Concepts
+---
+
+Les outils MCP reflètent le modèle de données de Kapptivate. Quelques concepts expliquent comment les outils s'articulent entre eux et pourquoi certains demandent une confirmation avant d'agir.
+
+## Hiérarchie des entités
+
+Tout repose sur un operator et un produit :
+
+```
+Operator (organisation)
+└─ Product  (slug: operator~product)
+   ├─ Tests
+   ├─ Monitors
+   ├─ Variables
+   ├─ Test campaigns
+   ├─ Collections
+   └─ Resources (SIM, web agents, smartphones)
+```
+
+Les slugs de produit prennent toujours la forme `operator~product`. Les dashboards et agents sont rattachés à l'operator, pas au produit. Les définitions d'alertes et les incidents qu'elles génèrent sont également rattachés à l'operator.
+
+<Tip>
+  Commencez une session avec `list_operators`, puis `list_products`, pour découvrir les slugs que vous passerez à presque tous les autres outils.
+</Tip>
+
+## Variables et variants
+
+Les valeurs de configuration vivent dans un système à trois niveaux, scopé par produit :
+
+| Niveau | Description |
+| --- | --- |
+| Variable | Une valeur typée utilisée à l'exécution : `single`, `secret` ou `choice`. |
+| Groupe de variables | Un conteneur qui regroupe un ensemble de variants (une configuration d'environnement). |
+| Variant | Une tranche d'environnement au sein d'un groupe, par exemple `Dev`, `Staging` ou `Prod`. |
+
+Les variables globales n'ont pas de groupe et possèdent une seule valeur constante. Les variables rattachées à un groupe contiennent une valeur par variant. À l'exécution, vous sélectionnez les valeurs à injecter en passant un tableau `variants` (par exemple `variants=["API:Staging"]`) à `build_campaign`, `run_campaign` ou `create_monitor`.
+
+## Reusables
+
+Les reusables sont des fragments de test partagés : des tests avec `kind=2`, intégrés dans d'autres tests V2 via un step d'import. Seuls les types d'action V2 les prennent en charge. Utilisez `list_reusables` et `get_reusable` pour les inspecter.
+
+## Annotations de sécurité
+
+Chaque outil déclare des indicateurs de comportement pour qu'un client puisse décider quand demander une confirmation :
+
+| Annotation | Signification |
+| --- | --- |
+| Lecture seule | Ne modifie pas les données. Peut être appelé librement. |
+| Destructif | Peut modifier ou supprimer des données. Vérifiez les arguments au préalable. |
+| Idempotent | Répéter l'appel produit le même résultat. |
+| Open-world | Communique avec la plateforme Kapptivate en production. |
+
+Les outils en lecture seule peuvent être explorés sans risque. Traitez les outils destructifs comme vous traiteriez une modification manuelle dans l'interface.
+
+## Budgets d'édition
+
+Pour éviter les modifications incontrôlées, le serveur limite le nombre de mutations qu'une session peut effectuer sur une ressource donnée :
+
+| Ressource | Limite |
+| --- | --- |
+| Tests | 5 par test |
+| Monitors | 10 par monitor |
+| Dashboards | 50 par dashboard |
+| Collections | 20 par session |
+| Variables | 10 par session |
+| Test campaigns | 20 par session |
+
+Quand une limite est atteinte, l'outil s'arrête et demande une approbation. Après confirmation, l'agent passe `acknowledge=true` pour réinitialiser le budget et continuer.
+
+## Deux systèmes d'alertes
+
+Ne confondez pas les deux :
+
+- **`evaluate_alert`** exécute une analyse locale, à la demande, des métriques. Il est sans état et ne persiste rien. Utilisez-le pour explorer.
+- **Les définitions d'alertes et les incidents** constituent le système persistant de la plateforme. Utilisez `list_alert_definitions` et `list_incidents` pour vérifier l'état réel des alertes, pas `evaluate_alert`.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Workflows courants" icon="diagram-project" href="/fr/mcp/workflows">
+    Mettez ces concepts en pratique : exécutez des tests, monitorez, interrogez les métriques.
+  </Card>
+  <Card title="Référence des outils" icon="robot" href="/fr/mcp/tools/overview">
+    Tous les outils, classés par catégorie.
+  </Card>
+</Columns>

@@ -1,0 +1,79 @@
+---
+title: "ktm shell"
+description: "Shell : sessions interactives en temps réel sur les cartes SIM et les web agents"
+sidebarTitle: "shell"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Shell : sessions interactives en temps réel sur les cartes SIM et les web agents
+
+## Utilisation
+
+```bash
+ktm shell [command]
+```
+
+## Sous-commandes
+
+<Columns cols={2}>
+  <Card title="cancel" icon="angle-right" href="/fr/cli/commands/shell/cancel">
+    Annuler une commande shell en attente ou en cours
+  </Card>
+  <Card title="get" icon="angle-right" href="/fr/cli/commands/shell/get">
+    Obtenir le résultat complet d'une commande shell
+  </Card>
+  <Card title="list" icon="angle-right" href="/fr/cli/commands/shell/list">
+    Lister les actions shell récentes
+  </Card>
+  <Card title="progress" icon="angle-right" href="/fr/cli/commands/shell/progress">
+    Lister les commandes shell en attente et en cours
+  </Card>
+  <Card title="send" icon="angle-right" href="/fr/cli/commands/shell/send">
+    Envoyer une commande shell à un appareil
+  </Card>
+  <Card title="types" icon="angle-right" href="/fr/cli/commands/shell/types">
+    Lister les types d'action shell disponibles
+  </Card>
+</Columns>
+
+## Détails
+
+Envoyez des commandes directement aux appareils et consultez les résultats en temps réel.
+Contrairement aux tests, les commandes shell n'ont pas d'assertions : elles envoient une commande et retournent le résultat brut.
+
+Types d'appareils pris en charge :
+  SIM (owner_kind=S) :      USSD, SMS, appels, opérations de données via réseau cellulaire
+  Ethernet (owner_kind=E) : HTTP API, ping, DNS, transferts via web agents
+
+Les smartphones ne sont pas pris en charge (architecture WebSocket uniquement).
+
+Les sessions USSD sont avec état : composer un shortcode ouvre une session, et envoyer des numéros
+d'option de menu (1, 2, 3) permet de naviguer plus profondément dans l'arborescence du menu. Les sessions expirent après
+environ 30s d'inactivité. Utilisez --wait pour voir le texte du menu en ligne.
+
+Certains flux déclenchent des événements asynchrones (ex. attente SMS après une sélection USSD ou un appel API).
+Utilisez 'shell list --from-date &lt;timestamp&gt;' pour interroger les nouveaux shells depuis le début de votre session.
+
+Note : les cartes SIM et les web agents sont des ressources partagées. Les monitors actifs exécutent des tests sur les mêmes
+appareils selon un calendrier. Si un shell retourne Blocked ou Timeout de manière inattendue, il peut s'agir d'une
+contention de ressources : attendez 15-30s et réessayez. Utilisez 'monitors toggle' pour mettre en pause les monitors si nécessaire.
+
+## Voir aussi
+
+- [`ktm monitors toggle`](/fr/cli/commands/monitors/toggle)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

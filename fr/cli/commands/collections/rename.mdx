@@ -1,0 +1,57 @@
+---
+title: "ktm collections rename"
+description: "Renommer une collection"
+sidebarTitle: "rename"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renommer une collection
+
+## Utilisation
+
+```bash
+ktm collections rename <uid> [flags]
+```
+
+## Exemples
+
+```bash
+ktm collections rename --operator my-op <uid> --name "Auth regression (v2)"
+```
+
+## Arguments
+
+| Argument | Requis |
+| --- | --- |
+| `uid` | Oui |
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--name` | string | — | Nouveau nom (requis) |
+| `--operator` | string | — | Slug de l'opérateur (requis) |
+
+## Détails
+
+Change le nom de la collection. Le parent et le contenu ne sont pas modifiés.
+
+## Voir aussi
+
+- [`ktm collections`](/fr/cli/commands/collections)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

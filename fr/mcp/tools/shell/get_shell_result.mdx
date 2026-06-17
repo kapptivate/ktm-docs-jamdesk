@@ -1,0 +1,50 @@
+---
+title: "get_shell_result"
+description: "Obtenir le résultat complet d'une commande shell."
+sidebarTitle: "get_shell_result"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Obtenir le résultat complet d'une commande shell.
+
+<Note>
+  **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `shell_id` | number | Oui | Identifiant de la commande shell (depuis send_shell_command) |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "shell_id": 0
+}
+```
+
+## Description
+
+```text
+À utiliser après send_shell_command pour vérifier le statut et récupérer la sortie. Interrogez régulièrement jusqu'à ce que le statut soit terminal (Done/Timeout/Blocked/Canceled/Maintenance). Pour USSD : vérifiez si la session est OPEN ou CLOSED. Si OPEN, envoyez une entrée de suivi avec send_shell_command pour naviguer dans le menu.
+```
+
+## Associé
+
+- [`send_shell_command`](/fr/mcp/tools/shell/send_shell_command)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourir la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+  </Card>
+</Columns>

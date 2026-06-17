@@ -1,0 +1,67 @@
+---
+title: Wait Call
+description: Attendez un appel entrant sur une vraie SIM, décrochez et évaluez la qualité audio.
+---
+
+Attendez un appel entrant sur la SIM et décrochez. Associé à [Place Call](/fr/tests/actions/cellular/place-call) sur une autre SIM, il vérifie le chemin vocal complet ; avec l'enregistrement et le MOS activés, il évalue la qualité audio réellement entendue par le destinataire.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Technologie d'accès | `command.access_technology` | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
+| Temps d'attente | `command.wait_time_seconds` | Non | Temps d'attente pour l'appel. Par défaut : 30. |
+| Enregistrer l'appel | `command.record` | Non | Enregistrer l'audio reçu. Par défaut : désactivé. |
+| Calculer le MOS audio | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | Non | Évaluer l'audio enregistré par rapport au fichier de référence joué par l'appelant. Nécessite l'enregistrement. |
+| Bloquer jusqu'à réception de l'appel | `command.asynchronous` | Non | Exécuter de manière synchrone (bloquer le scénario) ou surveiller en arrière-plan. |
+| La réception de l'appel est optionnelle | `optional_reception` | Non | Le test réussit même si aucun appel n'arrive. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+```json
+{
+  "type": "CALL_WAIT",
+  "owner": "SIM_2",
+  "skip": false,
+  "command": {
+    "wait_time_seconds": 30,
+    "record": true,
+    "mos": { "active": true, "algo": "polqa", "ref_file": "voice-10s" },
+    "asynchronous": false,
+    "access_technology": "",
+    "options": { "artifacts": {} }
+  },
+  "assertions": [],
+  "store": []
+}
+```
+
+## Résultats et métriques
+
+Dans le rapport de l'action (`result`) :
+
+| Champ | Description |
+|-------|-------------|
+| `seconds_elapsed_until_accept` | Temps avant l'arrivée et le décrochage de l'appel. |
+| `call_duration_seconds` | Durée de l'appel maintenu. |
+| `caller_number` | Le numéro de l'appelant. |
+| `audio_mos` | Le score de qualité audio (MOS), quand l'enregistrement et le MOS sont activés. |
+| `ceer_response` | Le rapport de fin d'appel du réseau. |
+| `access_technology_report` | La technologie utilisée pour l'appel. |
+
+Dans Analytics, chaque exécution alimente la mesure d'appel avec `cellular_call_duration_seconds`, `cellular_audio_mos` et `duration_seconds`, étiquetée par statut, numéro de l'appelant, antenne et technologie d'accès. `cellular_audio_mos` est la série à surveiller pour la dégradation de la qualité vocale.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Place Call" icon="phone-volume" href="/fr/tests/actions/cellular/place-call">
+
+    L'autre extrémité du test vocal
+
+</Card>
+  <Card title="Alertes" icon="bell" href="/fr/monitoring/alerts">
+
+    Alertez quand le MOS passe sous votre seuil
+
+</Card>
+</Columns>

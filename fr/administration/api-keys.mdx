@@ -1,0 +1,41 @@
+---
+title: Clés API
+description: Créez et gérez des clés API pour les intégrations externes.
+sidebarTitle: Vue d'ensemble
+---
+
+![La liste des clés API avec les colonnes Token et Accès](/images/api-keys-list.webp)
+
+Les clés API authentifient les applications externes et les intégrations, telles que les pipelines CI/CD et les services tiers, avec votre workspace Kapptivate. Chaque clé est liée à des équipes spécifiques et génère un token pour l'authentification.
+
+<Info>
+Seuls les administrateurs du workspace peuvent créer, modifier et révoquer des clés API.
+</Info>
+
+<Warning>
+Traitez les clés API comme des mots de passe et gardez-les secrètes. Utilisez-les comme variables d'environnement au lieu de les coder en dur dans vos programmes.
+</Warning>
+
+## Ce que vous pouvez faire
+
+- [**Créer une clé API**](/fr/administration/api-keys/create) : générez une nouvelle clé, assignez-la à des équipes et copiez le token d'authentification.
+- [**Consulter et gérer les clés API**](/fr/administration/api-keys/manage) : recherchez, modifiez, rafraîchissez les tokens et révoquez les clés dans votre workspace.
+
+Pour gérer les utilisateurs et les équipes auxquels les clés API sont associées, consultez [utilisateurs](/fr/administration/users) et [équipes](/fr/administration/teams). Pour appliquer des règles d'authentification à votre workspace, consultez les [politiques de sécurité](/fr/administration/security-policies).
+
+## Utiliser votre clé
+
+Une clé API est l'identifiant pour tout ce qui communique avec Kapptivate depuis l'extérieur de l'application :
+
+<Columns cols={2}>
+  <Card title="CLI" icon="terminal" href="/cli/installation">
+
+    Installez ktm et authentifiez-le avec votre clé pour scripter la plateforme depuis un terminal ou un CI
+
+</Card>
+  <Card title="Serveur MCP" icon="robot" href="/mcp/connect">
+
+    Connectez Claude, Cursor ou Copilot à Kapptivate avec votre clé
+
+</Card>
+</Columns>

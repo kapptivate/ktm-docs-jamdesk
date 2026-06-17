@@ -1,0 +1,82 @@
+---
+title: "ktm executions list"
+description: "Lister les exécutions de tests récentes d'un produit"
+sidebarTitle: "list"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Lister les exécutions de tests récentes d'un produit
+
+## Utilisation
+
+```bash
+ktm executions list [flags]
+```
+
+## Exemples
+
+```bash
+# List recent executions for a product
+ktm executions list --product my-operator~my-product
+
+# Filter by status
+ktm executions list --product my-operator~my-product --status failed
+
+# Search by name
+ktm executions list --product my-operator~my-product --search "regression"
+
+# Filter by date range
+ktm executions list --product my-operator~my-product --from-date 2025-01-01T00:00:00Z
+
+# Table format
+ktm executions list --product my-operator~my-product -o table
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--creator` | string | — | Filtrer par nom d'utilisateur créateur |
+| `--from-date` | string | — | Inclure uniquement les exécutions après cette date (ISO 8601, ex. 2025-01-01T00:00:00Z) |
+| `--operator` | string | — | Slug de l'opérateur (depuis 'operators list') |
+| `--ordering` | string | — | Champ de tri : created ou -created (défaut : -created) |
+| `--page` | string | — | Numéro de page à récupérer (défaut : 1) |
+| `--page-size` | string | — | Nombre d'exécutions par page (défaut : 20, max : 4000) |
+| `--product` | string | — | Slug du produit (format : operator~product, depuis 'products list') |
+| `--search` | string | — | Recherche en texte libre sur le nom et les tags de l'exécution |
+| `--status` | string | — | Filtrer par statut : success, failed, ongoing, pending, canceled, timed out, maintenance |
+| `--to-date` | string | — | Inclure uniquement les exécutions avant cette date (ISO 8601) |
+
+## Détails
+
+Lister les exécutions de tests (exécutions de campagnes) depuis la plateforme.
+
+Une exécution est un seul lancement de campagne contenant un ou plusieurs tests avec leurs
+résultats. Chaque exécution a un statut global et des compteurs de réussite/échec par test.
+
+Valeurs de statut : success, failed, ongoing, pending, canceled, timed out, maintenance.
+
+Utilisez cette commande pour examiner l'historique des exécutions, trouver les échecs, identifier des patterns
+ou localiser une exécution spécifique par nom ou plage temporelle.
+
+## Voir aussi
+
+- [`ktm executions`](/fr/cli/commands/executions)
+- [`ktm products list`](/fr/cli/commands/products/list)
+- [`ktm operators list`](/fr/cli/commands/operators/list)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

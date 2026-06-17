@@ -1,0 +1,78 @@
+---
+title: "ktm metrics alert-eval"
+description: "Évaluer des métriques par rapport à des règles d'alerte"
+sidebarTitle: "alert-eval"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Évaluer des métriques par rapport à des règles d'alerte
+
+## Utilisation
+
+```bash
+ktm metrics alert-eval [flags]
+```
+
+## Exemples
+
+```bash
+# Inline rules
+ktm metrics alert-eval --operator acme   --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)"   --rules '[{"type":"threshold","metric":"p95","operator":">","value":5}]'
+
+# Rules from file
+ktm metrics alert-eval --operator acme   --query "SELECT mean(duration_seconds) FROM test WHERE time > now() - 7d GROUP BY time(1h)"   --rules-file rules.json
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--precision` | string | — | Précision temporelle de la requête (s, ms, u, ns) |
+| `--query` | string | — | Chaîne de requête InfluxQL |
+| `--rules` | string | — | Tableau JSON de règles d'alerte en ligne |
+| `--rules-file` | string | — | Chemin vers un fichier JSON avec le tableau de règles d'alerte |
+
+## Détails
+
+Évaluer des métriques InfluxDB par rapport à des règles d'alerte sans Kapacitor.
+
+Prérequis : Découvrez d'abord les measurements et fields disponibles avec
+'metrics query --operator &lt;slug&gt; --query "SHOW MEASUREMENTS"' et
+'metrics query --operator &lt;slug&gt; --query "SHOW FIELD KEYS FROM &lt;measurement&gt;"'.
+N'inventez pas de noms de measurement ou de field.
+
+Exécute une requête InfluxQL, calcule des statistiques, puis vérifie chaque règle.
+
+8 types de règles :
+  - threshold :     vérifier une métrique par rapport à une valeur (opérateurs : &gt;, &lt;, &gt;=, &lt;=, ==, !=)
+  - level_shift :   détecter des changements significatifs de moyenne (filtre optionnel min_shift_pct)
+  - missing_data :  vérifier les lacunes dans les séries temporelles (max_gaps, défaut 0)
+  - flatline :      détecter les valeurs bloquées (max_flatline_len, défaut 3)
+  - rate_change :   détecter les pics ou taux excessifs (max_spikes défaut 0, max_abs_rate)
+  - outlier :       vérifier le pourcentage de valeurs aberrantes (max_outlier_pct, défaut 5.0)
+  - counter_reset : détecter les diminutions de compteurs (max_resets, défaut 0)
+  - anomaly :       détecter les dépassements soutenus de résidus EWMA (sensitivity 1-5, sustained_periods défaut 3)
+
+Fournissez les règles via --rules (JSON en ligne) ou --rules-file (chemin vers un fichier JSON).
+Workflow SRE typique : metrics query (explorer les données) puis metrics alert-eval (vérifier les règles).
+
+## Voir aussi
+
+- [`ktm metrics`](/fr/cli/commands/metrics)
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Premiers pas" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

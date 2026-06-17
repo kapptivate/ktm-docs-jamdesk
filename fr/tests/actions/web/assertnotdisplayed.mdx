@@ -1,0 +1,63 @@
+---
+title: Assert not displayed
+description: Step obsolète qui vérifie qu'un élément est masqué ou absent. Utilisez Vérifier un élément à la place.
+---
+
+<Danger>
+  **Obsolète.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Vérifier un élément](/fr/tests/actions/web/verifyelement) avec la condition **is not** et l'état **displayed**.
+</Danger>
+
+Vérifiez qu'un élément est masqué ou absent : une bannière d'erreur qui ne devrait pas s'afficher, un spinner qui devrait avoir disparu.
+
+## Paramètres
+
+| Paramètre | Champ JSON | Requis | Description |
+|-----------|------------|--------|-------------|
+| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description de l'élément qui ne doit pas être visible. |
+| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS de l'élément qui ne doit pas être visible. |
+| Délai d'attente | `timeout` | Non | Durée d'attente avant que l'élément disparaisse, avant l'échec. Par défaut : `30s`. |
+| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+
+## Dans le JSON du scénario
+
+Le step se trouve dans `step_groups[].steps` du scénario de test.
+
+```json
+{
+  "id": "step-1",
+  "type": "assert-not-displayed",
+  "version": "v1.0.0",
+  "disabled": false,
+  "inputs": {
+    "locator": {
+      "selector": [{ "type": "value", "data": { "value": "//div[@class='loading-spinner']" } }],
+      "description": [{ "type": "value", "data": { "value": "" } }]
+    },
+    "timeout": [{ "type": "value", "data": { "value": "30s" } }],
+    "ignore_errors": false
+  },
+  "use_capabilities": false,
+  "capabilities": {}
+}
+```
+
+## Résultats et métriques
+
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Statut** : succès si l'élément est absent ou masqué dans le délai imparti, échec s'il reste visible.
+- **Capture d'écran** : prise pour l'état vérifié.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+
+    Le step actuel pour les vérifications d'éléments, y compris les vérifications négatives
+
+</Card>
+  <Card title="Attendre un délai" icon="clock" href="/fr/tests/actions/web/waitfordelay">
+
+    Mettez en pause avant de vérifier, si le timing compte
+
+</Card>
+</Columns>

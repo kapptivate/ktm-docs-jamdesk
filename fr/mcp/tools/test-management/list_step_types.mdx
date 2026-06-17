@@ -1,0 +1,52 @@
+---
+title: "list_step_types"
+description: "Renvoie le catalogue des types de step disponibles pour les actions de test v2 (ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2)."
+sidebarTitle: "list_step_types"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Renvoie le catalogue des types de step disponibles pour les actions de test v2 (ETH_WEB_SCRIPT_V2, SMARTPHONE_APP_SCRIPT_V2).
+
+<Note>
+  **Lecture seule.** Appel sûr : cet outil ne modifie pas les données.
+</Note>
+
+## Paramètres
+
+| Champ | Type | Requis | Description |
+| --- | --- | --- | --- |
+| `detail` | boolean | Non | Si true, renvoie le JSON complet avec les schémas d'entrée. Défaut : format compact une ligne. |
+| `platform` | string (web \| smartphone) | Non | Filtrer par plateforme : web, smartphone, ou omettez pour tout |
+
+## Exemple d'arguments
+
+Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
+
+```json
+{
+  "detail": false,
+  "platform": "web"
+}
+```
+
+## Description
+
+```text
+Each step type has a versioned identifier (e.g. "click/v1.0.0"), platform compatibility, and whether it requires a locator. Use this to discover what steps can be added to a v2 no-code test. For classic test types (SIM, ETH non-web), use list_action_types instead.
+```
+
+## Associés
+
+- [`list_action_types`](/fr/mcp/tools/test-management/list_action_types)
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
+    Parcourez la référence complète des outils par catégorie.
+  </Card>
+  <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
+  </Card>
+</Columns>
