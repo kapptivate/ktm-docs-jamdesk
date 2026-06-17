@@ -144,17 +144,17 @@
                     "group": "Production supervision",
                     "expanded": false,
                     "pages": [
-                      "monitoring/incidents",
-                      "monitoring/alerts",
+                      "alerting/incidents",
+                      "alerting/alerts",
                       {
                         "group": "Analytics",
                         "expanded": false,
                         "pages": [
-                          "monitoring/dashboards",
-                          "monitoring/tests-metrics",
-                          "monitoring/public-dashboards",
-                          "monitoring/mail-reports",
-                          "monitoring/exports"
+                          "analytics/dashboards",
+                          "analytics/tests-metrics",
+                          "analytics/public-dashboards",
+                          "analytics/mail-reports",
+                          "analytics/exports"
                         ]
                       }
                     ]
@@ -1198,17 +1198,17 @@
                     "group": "Supervision de production",
                     "expanded": false,
                     "pages": [
-                      "fr/monitoring/incidents",
-                      "fr/monitoring/alerts",
+                      "fr/alerting/incidents",
+                      "fr/alerting/alerts",
                       {
                         "group": "Analyses",
                         "expanded": false,
                         "pages": [
-                          "fr/monitoring/dashboards",
-                          "fr/monitoring/tests-metrics",
-                          "fr/monitoring/public-dashboards",
-                          "fr/monitoring/mail-reports",
-                          "fr/monitoring/exports"
+                          "fr/analytics/dashboards",
+                          "fr/analytics/tests-metrics",
+                          "fr/analytics/public-dashboards",
+                          "fr/analytics/mail-reports",
+                          "fr/analytics/exports"
                         ]
                       }
                     ]

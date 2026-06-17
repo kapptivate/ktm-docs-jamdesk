@@ -1,0 +1,27 @@
+---
+title: Métriques de tests
+description: Dashboards d'analyse prêts à l'emploi, générés automatiquement pour chaque moniteur.
+sidebarTitle: Métriques de tests
+---
+
+![The Tests metrics tab listing every monitored test with its creation date](/images/tests-metrics-list.webp)
+
+Construire un dashboard par test à la main ne passerait pas à l'échelle. L'onglet **Tests metrics** de la zone Analytics vous donne une vue d'analyse prête à l'emploi pour chaque moniteur de la plateforme, sans configuration : dès qu'un test est surveillé, son dashboard de métriques existe.
+
+## Parcourir les métriques de tests
+
+L'onglet liste chaque test surveillé avec son nom, son produit et sa date de création. Utilisez la barre de recherche pour trouver un test par nom, et cliquez dessus pour ouvrir sa vue de métriques.
+
+## La vue par test
+
+Chaque test ouvre un dashboard prédéfini construit à partir de ses données d'exécution :
+
+- **Success rate** : la proportion d'exécutions réussies et échouées.
+- **Error type** : la répartition des catégories d'erreurs.
+- **Global availability** : succès et échecs dans le temps.
+- **Error count over time** : erreurs ventilées par type.
+- **Step by step performances** : durée de chaque step du test, appareil par appareil.
+
+Utilisez la barre supérieure pour ajuster l'**intervalle d'agrégation**, le **fuseau horaire**, l'**intervalle d'actualisation automatique** et la **période** (par exemple "Past 48h (Realtime)").
+
+Pour une vue personnalisée combinant plusieurs tests ou d'autres sources de données, créez un [dashboard](/fr/monitoring/dashboards) à la place.

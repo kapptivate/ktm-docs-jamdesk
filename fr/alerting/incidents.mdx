@@ -1,0 +1,44 @@
+---
+title: Incidents
+description: Suivez et gérez les incidents levés par vos alertes, avec filtrage par statut et actions groupées.
+sidebarTitle: Incidents
+---
+
+![The Incidents page with counter cards, the status filter set to Ongoing, and the incident list grouped by day](/images/incidents-overview.webp)
+
+Lorsqu'une [alerte](/fr/monitoring/alerts) détecte un problème, elle lève un incident : un enregistrement suivi de la panne avec sa chronologie, son statut et son contexte. La page Incidents est l'endroit où vous les triez, de la détection de ce qui brûle en ce moment à la clôture de ce qui a été résolu.
+
+## Compteurs
+
+Quatre cartes compteurs en haut de page résument l'état actuel en un coup d'oeil :
+
+- **Daily active alerts** : nombre d'alertes déclenchées aujourd'hui.
+- **Critical incident** : incidents ouverts de sévérité critique.
+- **Warning incident** : incidents ouverts de sévérité warning.
+- **Closed incident** : incidents qui ont été résolus.
+
+## Liste des incidents
+
+Le tableau liste les incidents regroupés par date de création, avec des séparateurs de jours entre les groupes. Chaque ligne affiche :
+
+- **Type** : une icône colorée indiquant la sévérité de l'incident.
+- **Alert triggered** : le nom de l'alerte avec l'ID de l'incident, l'horodatage du déclenchement et le temps écoulé depuis.
+- **Status** : un tag coloré : Ongoing (rouge), Resolved ou Canceled.
+- **Tags** : contexte clé-valeur tel que Zone, Product ID, Product name, Monitoring ID, Monitoring name, Test name et plateforme.
+
+Cliquez sur une ligne pour ouvrir les détails de l'incident, ou utilisez le menu de la ligne pour les actions.
+
+## Filtrage et période
+
+Un workspace accumule rapidement des incidents ; les filtres vous amènent à ceux qui nécessitent votre attention. La vue par défaut affiche les incidents **Ongoing**, ceux qui requièrent activement une action.
+
+- **Filtre de statut** : basculez entre Ongoing, Resolved et Canceled, ou effacez-le pour tout afficher.
+- **Période** : affichez uniquement les incidents créés dans une période donnée. Le sélecteur prend en compte le fuseau horaire et conserve votre préférence d'une session à l'autre.
+
+## Sélection et actions groupées
+
+Activez le mode sélection multiple à l'aide du bouton bascule pour sélectionner plusieurs incidents. Une fois activé, des cases à cocher apparaissent sur chaque ligne. Sélectionnez les incidents que vous souhaitez modifier en lot, et un bandeau flottant affiche le nombre d'éléments sélectionnés avec les boutons d'action.
+
+Seuls les incidents en cours peuvent être sélectionnés pour les actions groupées ; les incidents clôturés affichent des cases à cocher désactivées. Appuyez sur ESC pour effacer toutes les sélections et quitter le mode sélection multiple.
+
+Les actions en lot vous permettent de changer le statut, supprimer ou clôturer plusieurs incidents à la fois. Confirmez toute action irréversible.

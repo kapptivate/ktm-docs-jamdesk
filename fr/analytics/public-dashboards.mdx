@@ -1,0 +1,58 @@
+---
+title: Dashboards publics
+description: Partagez des dashboards publiquement sans nécessiter de connexion, protégés par un mot de passe.
+---
+
+Partagez vos dashboards avec des parties prenantes externes, des partenaires ou le grand public sans que les utilisateurs aient besoin de se connecter. Les dashboards publics sont des liens partageables en lecture seule qui affichent vos visualisations de dashboard avec une interactivité complète.
+
+## Rendre un dashboard public
+
+Depuis la liste des dashboards, choisissez **Share public link** dans le menu de la ligne du dashboard. Définissez un mot de passe d'au moins 8 caractères (obligatoire), puis cliquez sur **Generate share link**. Les visiteurs ont besoin de ce mot de passe pour voir le dashboard. Vous pouvez aussi utiliser l'onglet **Send by email** pour que Kapptivate envoie le lien protégé et le mot de passe directement à un destinataire.
+
+Votre URL partageable suit le format `public/dashboard/:link`, où `:link` est un identifiant unique. Partagez cette URL par email, messagerie, ou intégrez-la sur votre site web.
+
+## Protection par mot de passe
+
+Chaque lien public est protégé par mot de passe. Lorsqu'un visiteur accède à un dashboard partagé :
+
+1. Il arrive sur une page de saisie de mot de passe
+2. Après avoir saisi le mot de passe, il est redirigé vers la vue du dashboard
+3. Sa session est maintenue pendant la durée de sa session navigateur
+
+Les tentatives de mot de passe sont limitées en fréquence pour prévenir les attaques par force brute. Vous pouvez mettre à jour ou supprimer le mot de passe à tout moment depuis les paramètres de partage du dashboard. Si vous devez changer le mot de passe, désactivez le lien actuel et créez-en un nouveau.
+
+## Ce que les visiteurs peuvent utiliser
+
+Les visiteurs de votre dashboard public peuvent ajuster plusieurs contrôles sans modifier le dashboard sous-jacent :
+
+### Plages de dates
+Sélectionnez parmi des plages prédéfinies comme les dernières 24 heures, les 7 derniers jours ou ce mois-ci. Vous pouvez aussi définir des plages de dates absolues personnalisées fixées à des dates précises. Les plages de dates relatives se mettent à jour automatiquement : "past 24h" signifie toujours les dernières 24 heures.
+
+### Fuseau horaire
+Choisissez n'importe quel fuseau horaire depuis une liste déroulante avec recherche. Toutes les dates et tous les graphiques s'affichent automatiquement dans le fuseau horaire sélectionné. Le dashboard utilise par défaut le fuseau horaire du navigateur du visiteur.
+
+### Agrégation des données
+Contrôlez la granularité des graphiques en sélectionnant les intervalles d'agrégation : auto, 1 minute, 5 minutes, 10 minutes, 30 minutes, 1 heure, 6 heures, 12 heures ou 1 jour.
+
+### Actualisation automatique
+Lorsque vous utilisez des plages de dates relatives ou en temps réel, les visiteurs peuvent activer l'actualisation automatique pour mettre à jour le dashboard toutes les 10 secondes à 10 minutes. L'actualisation manuelle est toujours disponible. L'actualisation automatique est désactivée par défaut.
+
+### Variables du dashboard
+Si le dashboard original possède des variables (champs texte, listes déroulantes ou filtres à sélection multiple), les visiteurs peuvent les ajuster pour filtrer les données. Les valeurs des variables sont appliquées à tous les graphiques du dashboard.
+
+### Filtres globaux
+Des tags colorés indiquent le périmètre du dashboard : bleu pour les produits, violet pour les groupes de variables et orange pour les tests. Ceux-ci sont définis par vous et ne peuvent pas être modifiés par les visiteurs.
+
+## Créer et gérer les liens publics
+
+### Créer un nouveau lien public
+Depuis la boîte de dialogue de partage du dashboard, définissez le mot de passe et cliquez sur **Generate share link**. Le système génère un lien unique et fournit une URL partageable.
+
+### Voir et mettre à jour les liens existants
+Accédez aux paramètres de partage pour voir tous les liens publics actifs du dashboard. Mettez à jour le mot de passe, réactivez un lien désactivé ou désactivez-le pour révoquer l'accès.
+
+### Désactiver un lien
+La désactivation d'un lien révoque immédiatement l'accès public. Les visiteurs qui tentent d'y accéder verront une erreur "not found". Vous pouvez réactiver un lien désactivé à tout moment.
+
+### Envoyer par email
+Envoyez optionnellement le lien public et le mot de passe directement aux visiteurs par email. Les destinataires reçoivent l'URL partageable et le mot de passe dans un seul email.
