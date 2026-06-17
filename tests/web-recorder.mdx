@@ -1,52 +1,81 @@
 ---
 title: Web recorder
-description: Record a web journey in Chrome and turn it into a test script.
+description: Record a web journey with the Kompagnon Chrome extension and turn it into test steps.
 ---
 
-The Kapptivate web recorder is a Chrome extension that records a browsing session, clicks, typing, navigation, and exports it as a script you can paste into a test. Walk through your scenario once in the browser, and the test writes itself.
+![The Kompagnon side panel recording live next to the page under test, with a captured click step](/images/web-recorder-kompagnon.webp)
 
-## Install the extension
+Recording is the fastest way to build a web test: walk through your scenario in a real browser, and each click, input, and navigation becomes a step in the builder. The recorder runs through **Kompagnon**, a Chrome extension that drives the recording and adds verifications without leaving the page.
 
-The recorder ships as an unpacked Chrome extension (`kapptivate-web-recorder.zip`):
+## Install Kompagnon
 
-<Steps>
-  <Step title="Open Chrome's Extensions page">
-    Download and unzip the package, then navigate to `chrome://extensions`.
-  </Step>
-  <Step title="Load the extension">
-    Enable **Developer mode** (top right), click **Load unpacked**, and select the unzipped folder. The Kapptivate icon appears in the toolbar.
-  </Step>
-</Steps>
+You install the extension once, from the builder. Create or open a **Web (New experience)** test, then click **Use recorder**. If Kompagnon isn't installed yet, an **Install the Kompagnon extension** modal lists what it does and offers **Add to Chrome**, which opens the Chrome Web Store. Install it there and return to the builder.
 
 ## Record a test
 
-Click the Kapptivate icon to open the recorder.
+With Kompagnon installed, **Use recorder** opens your start URL in a new tab with the recorder attached.
 
-1. Click **Record**, navigate to your starting page, and walk through the scenario: every click and input is captured as an action.
-2. Click the icon again to review the recorded actions.
-3. Click **Stop**, then **Export** and **CopyToClipboard**.
+<Steps>
+  <Step title="Walk through your scenario">
+    Browse the page normally. Clicks, inputs, and navigations are captured as steps in real time. A draggable widget overlays the page, showing the recording status and the number of actions captured, with **Pause**, **Stop**, and **Open sidepanel** buttons.
+  </Step>
+  <Step title="Open the side panel">
+    Click **Open sidepanel** to dock Kompagnon in Chrome's native side panel. It shows the current state (**RECORDING LIVE** or **ASSERTION MODE**), the live list of captured actions with their selectors, and the same pause, stop, and assertion controls.
+  </Step>
+  <Step title="Stop and review">
+    Click **Stop**. The recorded steps appear in your builder's step canvas, grouped and ready to edit, reorder, or enrich with [variables](/tests/variables) and [checks](/tests/builder#checks).
+  </Step>
+</Steps>
 
-## Import the recording
+## Add verifications while recording
 
-In your workspace, create a test with a **Web Script** action. Select the default Ethernet agent, switch to **raw script**, and paste the recording.
+You can assert on the page without leaving the recorder. Click the **eye icon** to enter assertion mode, then click the element you want to verify. A **Verify element** modal opens to configure the check:
 
-Save and run the test once before wiring it into a monitor.
+![The Verify element modal with Displayed, Clickable, and the expanded Enabled and Present options](/images/web-recorder-verify-element.webp)
+
+- **Displayed**: the element is visible.
+- **Clickable**: the element can be clicked.
+
+**More options** reveals two more conditions:
+
+- **Enabled**: the element is active.
+- **Present**: the element exists in the DOM.
+
+Pick a condition and the verification is recorded as a [Verify element](/tests/actions/web/verifyelement) step alongside your interactions.
 
 <Note>
-  The recorder generates a [script action](/tests/actions/legacy/script-actions): JavaScript you can then edit freely, add assertions to, or enrich with [variables and custom metrics](/tests/actions/legacy/script-actions-variables).
+Recorded steps are ordinary builder steps. Each web step's **General** tab includes a **Reference screenshot** of the page captured during the step's last run, so you can see exactly what it targets. Before the first run it shows "No reference screenshot available for this step".
 </Note>
+
+## Legacy: script export recorder
+
+Before Kompagnon, web recording shipped as a standalone Chrome extension that exported a JavaScript **Web Script** you pasted into a test. It still works for existing scripts, but new web tests should use Kompagnon and the visual builder above.
+
+<Steps>
+  <Step title="Load the extension">
+    Download and unzip `kapptivate-web-recorder.zip`, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select the unzipped folder.
+  </Step>
+  <Step title="Record and export">
+    Click the Kapptivate icon, click **Record**, walk through your scenario, then **Stop**, **Export**, and **CopyToClipboard**.
+  </Step>
+  <Step title="Import the recording">
+    Create a test with a **Web Script** action, select the default Ethernet agent, switch to **raw script**, and paste the recording. Save and run it once before wiring it into a monitor.
+  </Step>
+</Steps>
+
+The export is a [script action](/tests/actions/legacy/script-actions): JavaScript you can edit freely, add assertions to, or enrich with [variables and custom metrics](/tests/actions/legacy/script-actions-variables).
 
 ## What's Next?
 
 <Columns cols={2}>
-  <Card title="Script actions" icon="code" href="/tests/actions/legacy/script-actions">
+  <Card title="Test builder" icon="vial" href="/tests/builder">
 
-    Understand and edit the generated script
+    Edit, group, and verify the steps you recorded
 
 </Card>
-  <Card title="Test builder" icon="hammer" href="/tests/builder">
+  <Card title="Verify element" icon="circle-check" href="/tests/actions/web/verifyelement">
 
-    The visual alternative for building web tests
+    Every condition you can assert on a web element
 
 </Card>
 </Columns>
