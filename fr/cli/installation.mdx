@@ -6,18 +6,28 @@ sidebarTitle: Installation
 
 `ktm` est distribué sous la forme d'un binaire unique et autonome pour Linux, macOS et Windows. Une fois placé sur votre PATH, vous vous authentifiez avec votre clé API Kapptivate et vous êtes prêt.
 
-<Note>
-  Les liens de téléchargement de la version actuelle sont en cours de finalisation. Si vous avez besoin d'un build maintenant, demandez le binaire pour votre plateforme à votre contact Kapptivate.
-</Note>
+## Installer ktm
 
-## Placer ktm sur votre PATH
+Exécutez la commande correspondant à votre plateforme :
 
-Après avoir téléchargé le binaire pour votre plateforme, rendez-le exécutable et déplacez-le sur votre PATH :
+<Tabs>
+  <Tab title="macOS / Linux">
 
 ```bash
-chmod +x ktm
-sudo mv ktm /usr/local/bin/ktm
+curl -fsSL https://kapptivate-tools.s3.fr-par.scw.cloud/ktm/install.sh | bash
 ```
+
+  </Tab>
+  <Tab title="Windows">
+
+```powershell
+irm https://kapptivate-tools.s3.fr-par.scw.cloud/ktm/install.ps1 | iex
+```
+
+  </Tab>
+</Tabs>
+
+Le script télécharge la dernière version stable de `ktm`, vérifie son checksum et l'ajoute à votre PATH. Définissez `KAPPTIVATE_VERSION=1.4.0` pour fixer une version spécifique.
 
 Vérifiez l'installation :
 
