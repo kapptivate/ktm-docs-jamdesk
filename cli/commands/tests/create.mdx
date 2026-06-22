@@ -97,7 +97,7 @@ USSD/SMS rules:
   - If expected text is unknown, use a single space " " as placeholder — NOT "-" with a message assertion.
   - Assertions on USSD/SMS are ONLY for non-message validation: session_status, duration, variable.
   - Variable extraction via store with message_part is a separate feature.
-  - Do NOT add fields not shown in the template — the backend rejects them.
+  - Do NOT add fields not shown in the template — the platform rejects them.
 
 Script actions (Mocha/Chai structure):
   All script types have command.script_name and command.script_description — always fill

@@ -881,6 +881,8 @@
                       "cli/commands/incidents/list"
                     ]
                   },
+                  "cli/commands/login",
+                  "cli/commands/logout",
                   {
                     "group": "metrics",
                     "pages": [
@@ -994,6 +996,7 @@
                       "cli/commands/tests/validate"
                     ]
                   },
+                  "cli/commands/update",
                   {
                     "group": "users",
                     "pages": [
@@ -1028,7 +1031,8 @@
                       "cli/commands/variables/variants/rename",
                       "cli/commands/variables/variants/set-default"
                     ]
-                  }
+                  },
+                  "cli/commands/whoami"
                 ]
               }
             ]

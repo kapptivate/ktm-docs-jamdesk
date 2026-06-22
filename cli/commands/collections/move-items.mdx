@@ -36,9 +36,9 @@ ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<
 ## Details
 
 Relocate items between collections in a single call. --items takes a
-comma-separated list of collections item UIDs (NOT the numeric test id; use
-'ktm collections items &lt;src_uid&gt;' to discover the UIDs). The service moves
-every listed item into --target atomically.
+comma-separated list of collection item UIDs (NOT the numeric test id; use
+'ktm collections items &lt;src_uid&gt;' to discover the UIDs). Every listed item
+is moved into --target atomically.
 
 ## Related
 

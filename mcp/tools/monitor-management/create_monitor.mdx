@@ -19,7 +19,7 @@ Create a new monitor for an existing test.
 | `active` | boolean | No | Start the monitor immediately (default: true) |
 | `confirmed` | boolean | No | Set to true to submit the monitor. NEVER set without explicit user approval of the preview. Requires owners to be provided. |
 | `input_variables` | string | No | JSON object: variable name → \{kind, value, public, actions, owner_kind\}. Required with owners for submission. The submit handler injects bucket sub-keys automatically from the variants array — you do not need to add them. |
-| `name` | string | No | Monitor name (defaults to test name on backend if omitted) |
+| `name` | string | No | Monitor name (defaults to the test name if omitted) |
 | `options` | string | No | JSON options: \{timeout_sms, ignore_errors, auto_retry_failed_test\}. Defaults: timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0. |
 | `overrides` | string | No | JSON object mapping variable name → new value string. Applied to preview template. Example: \{"SIM_A": "0699999999", "TODO_INDEX": "42"\} |
 | `owners` | string | No | JSON object: device identifier → \{kind, hostname/national_msisdn/uuid\}. Required for submission. |

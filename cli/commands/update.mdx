@@ -1,0 +1,77 @@
+---
+title: "ktm update"
+description: "Update ktm to the latest release (or a specific version)"
+sidebarTitle: "update"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Update ktm to the latest release (or a specific version)
+
+<Note>Aliases: update, upgrade, self-update</Note>
+
+## Usage
+
+```bash
+ktm update [flags]
+```
+
+## Examples
+
+```bash
+# Update to the latest stable release
+ktm update
+
+# Only check whether an update is available (no install)
+ktm update --check
+
+# Follow the pre-release channel
+ktm update --channel beta
+
+# Pin / roll back to an exact version
+ktm update --version 1.3.2 --yes
+
+# Reinstall the current version
+ktm update --force
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--channel` | string | — | Release channel: stable or beta (default: install marker, else stable) |
+| `--check` | boolean | — | Report whether an update is available; do not install |
+| `--force` | boolean | — | Reinstall even if already up to date |
+| `--verify-signature` | boolean | — | Require cosign signature verification of checksums.txt |
+| `--version` | string | — | Install a specific bare version (e.g. 1.3.2); enables rollback |
+| `-y, --yes` | boolean | — | Skip the confirmation prompt (auto-yes when not a TTY) |
+
+## Details
+
+Download and install a newer ktm from the Kapptivate release server.
+
+By default, updates to the newest version on your install channel:
+  stable   production releases only (default)
+  beta     includes pre-releases
+
+The running binary is verified (sha256, mandatory) and atomically replaced.
+The channel and download source are read from the install marker written by the
+installer; flags override them. Pin or roll back with --version &lt;X&gt;.
+
+This command talks only to the public release server — it does not require
+authentication.
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

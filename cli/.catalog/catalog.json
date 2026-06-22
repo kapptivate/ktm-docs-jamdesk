@@ -3,8 +3,8 @@
     "kind": "cli",
     "source": "cli-binary",
     "cliName": "ktm",
-    "cliVersion": "dev",
-    "count": 134
+    "cliVersion": "1.4.0",
+    "count": 138
   },
   "globalFlags": [
     {
@@ -74,6 +74,8 @@
     "dashboards",
     "executions",
     "incidents",
+    "login",
+    "logout",
     "metrics",
     "monitoring-results",
     "monitors",
@@ -85,8 +87,10 @@
     "status",
     "test-campaigns",
     "tests",
+    "update",
     "users",
-    "variables"
+    "variables",
+    "whoami"
   ],
   "items": [
     {
@@ -571,7 +575,7 @@
           "description": "Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant."
         }
       ],
-      "examples": "# Build template for two tests (no variant pinning — backend uses defaults)\nktm ci build --test-ids 16480,16838\n\n# Pin a single group's variant\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\"\n\n# Multi-group pinning\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\" --variant \"Database:Replica\" --variant \"Frontend:Canary\"\n\n# Numeric variant id (when stable across environments)\nktm ci build --product acme~web --test-ids 16480 --variant 691\n\n# Build from a saved Tests campaign (product auto-derived from the campaign)\nktm ci build --test-campaign 42\n\n# Build from a Tests campaign and pin a variant\nktm ci build --test-campaign 42 --variant \"API:Staging\"\n\n# Full Tests-campaign pipeline: build → run with one-off override\nktm ci build --test-campaign 42 --variant \"API:Staging\" | \\\n  ktm ci run --stdin --set-var \"GLOBAL_VAR=override-value\"\n\n# Full pipeline: build → fill values → run\nktm ci build --product acme~web --test-ids 16480 --variant \"API:Staging\" | \\\n  jq '.tests[0].input_variables.TODO_INDEX.value = \"42\"' | \\\n  ktm ci run --stdin",
+      "examples": "# Build template for two tests (no variant pinning — group defaults are used)\nktm ci build --test-ids 16480,16838\n\n# Pin a single group's variant\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\"\n\n# Multi-group pinning\nktm ci build --product acme~web --test-ids 16480 \\\n  --variant \"API:Staging\" --variant \"Database:Replica\" --variant \"Frontend:Canary\"\n\n# Numeric variant id (when stable across environments)\nktm ci build --product acme~web --test-ids 16480 --variant 691\n\n# Build from a saved Tests campaign (product auto-derived from the campaign)\nktm ci build --test-campaign 42\n\n# Build from a Tests campaign and pin a variant\nktm ci build --test-campaign 42 --variant \"API:Staging\"\n\n# Full Tests-campaign pipeline: build → run with one-off override\nktm ci build --test-campaign 42 --variant \"API:Staging\" | \\\n  ktm ci run --stdin --set-var \"GLOBAL_VAR=override-value\"\n\n# Full pipeline: build → fill values → run\nktm ci build --product acme~web --test-ids 16480 --variant \"API:Staging\" | \\\n  jq '.tests[0].input_variables.TODO_INDEX.value = \"42\"' | \\\n  ktm ci run --stdin",
       "isLeaf": true,
       "subcommands": []
     },
@@ -704,7 +708,7 @@
       "top": "collections",
       "slug": "collections/can-edit",
       "summary": "Check whether the current user can edit a collection",
-      "description": "Permission probe. Useful before calling rename/move/delete to avoid a\n403. The service returns a bare JSON boolean which this command wraps as\n{can_edit: true|false}.",
+      "description": "Permission probe. Useful before calling rename/move/delete to avoid a\n403. The platform returns a bare JSON boolean which this command wraps as\n{can_edit: true|false}.",
       "usage": "ktm collections can-edit <uid> [flags]",
       "aliases": "",
       "args": [
@@ -777,7 +781,7 @@
       "top": "collections",
       "slug": "collections/delete",
       "summary": "Move a collection to the organisation's trash (soft-delete)",
-      "description": "Move the collection to the organisation's trash collection. The collection\nand its items are recoverable until the trash is emptied (which requires a\nseparate admin action on the collections service). Despite the \"delete\" name\nthis is NOT a hard delete.\n\nThe command still refuses without --yes because agents should confirm scope\nbefore moving collections around.",
+      "description": "Move the collection to the organisation's trash collection. The collection\nand its items are recoverable until the trash is emptied (a separate admin\naction). Despite the \"delete\" name this is NOT a hard delete.\n\nThe command still refuses without --yes because agents should confirm scope\nbefore moving collections around.",
       "usage": "ktm collections delete <uid> [flags]",
       "aliases": "",
       "args": [
@@ -848,7 +852,7 @@
       "top": "collections",
       "slug": "collections/items",
       "summary": "List items (tests + dashboards) inside a collection",
-      "description": "Paginated list of items directly inside the collection (sub-collections\nare NOT included — use 'ktm collections list' for those). Items are tests,\nreusable_tests, or dashboards; human-readable name / status come from the\ncollections meta blob.\n\nThe collections service defaults sort_by=updated_at order=desc when the\nclient doesn't specify; this matches the web UI.",
+      "description": "Paginated list of items directly inside the collection (sub-collections\nare NOT included — use 'ktm collections list' for those). Items are tests,\nreusable_tests, or dashboards; human-readable name / status come from each\nitem's meta blob.\n\nThe platform defaults sort_by=updated_at order=desc when the\nclient doesn't specify; this matches the web UI.",
       "usage": "ktm collections items <uid> [flags]",
       "aliases": "",
       "args": [
@@ -894,7 +898,7 @@
       "top": "collections",
       "slug": "collections/list",
       "summary": "List sub-collections under a parent UID",
-      "description": "List the direct children of a collection (flat array; the collections\nservice does not paginate this endpoint).\n\nCollections are operator-scoped. Start from a product's tests_root_collection_uid\n(for the test tree) or an operator's dashboards_root_collection_uid (for the\ndashboard tree) and drill down.",
+      "description": "List the direct children of a collection (flat array; this listing\nis not paginated).\n\nCollections are operator-scoped. Start from a product's tests_root_collection_uid\n(for the test tree) or an operator's dashboards_root_collection_uid (for the\ndashboard tree) and drill down.",
       "usage": "ktm collections list [flags]",
       "aliases": "",
       "args": [],
@@ -967,7 +971,7 @@
       "top": "collections",
       "slug": "collections/move-items",
       "summary": "Move tests/dashboards into a target collection",
-      "description": "Relocate items between collections in a single call. --items takes a\ncomma-separated list of collections item UIDs (NOT the numeric test id; use\n'ktm collections items <src_uid>' to discover the UIDs). The service moves\nevery listed item into --target atomically.",
+      "description": "Relocate items between collections in a single call. --items takes a\ncomma-separated list of collection item UIDs (NOT the numeric test id; use\n'ktm collections items <src_uid>' to discover the UIDs). Every listed item\nis moved into --target atomically.",
       "usage": "ktm collections move-items [flags]",
       "aliases": "",
       "args": [],
@@ -1047,7 +1051,7 @@
       "top": "collections",
       "slug": "collections/search",
       "summary": "Search collections and items in a collection sub-tree",
-      "description": "The collections search endpoint scopes results to a sub-tree — pass\n--collection-uid (the product's tests_root_collection_uid for the broadest\nscope). Missing --collection-uid returns HTTP 400 from the service.\n\nThe search walks sub-collections recursively. Items are matched by substring\non meta.name (the client sends fields=name by default). Returns a payload with\ntwo arrays: collections (sub-collections whose name matches) and items.",
+      "description": "Search scopes results to a collection sub-tree — pass\n--collection-uid (the product's tests_root_collection_uid for the broadest\nscope). Omitting --collection-uid fails with HTTP 400.\n\nThe search walks sub-collections recursively. Items are matched by substring\non meta.name (the client sends fields=name by default). Returns a payload with\ntwo arrays: collections (sub-collections whose name matches) and items.",
       "usage": "ktm collections search [flags]",
       "aliases": "",
       "args": [],
@@ -1912,6 +1916,93 @@
         }
       ],
       "examples": "# List open incidents\nktm incidents list --operator my-operator --status OPEN\n\n# List incidents for a specific alert\nktm incidents list --operator my-operator --alert-id 42\n\n# List incidents created after a date\nktm incidents list --operator my-operator --created-after 2026-03-01T00:00:00Z",
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "login",
+      "name": "ktm login",
+      "path": [
+        "login"
+      ],
+      "top": "login",
+      "slug": "login",
+      "summary": "Authenticate against Kapptivate via OAuth 2.1 + PKCE",
+      "description": "Log in to Kapptivate using the OAuth 2.1 + PKCE browser flow.\n\nA browser window opens, you log in to Kapptivate (with 2FA if enabled) and\nauthorize the ktm CLI. The resulting access token is stored in your OS\nkeychain (macOS Keychain, Linux Secret Service, Windows Credential\nManager). Subsequent ktm commands use this token automatically — no need\nto set KAPPTIVATE_API_KEY.\n\nThe target host comes from --host or $KAPPTIVATE_HOST (default\napp.kapptivate.com). The OAuth Authorization Server URL is derived as\nhttps://<host>, so a single value drives both API calls and authentication\n— matching the way every other ktm command resolves the API host.\n\nHeadless / SSH: pass --no-browser to print the URL instead of opening one.\nYou'll need network access to the loopback port on this machine, so this\nonly works if you can run a browser somewhere that can reach 127.0.0.1\non this machine (e.g. local SSH port forwarding).",
+      "usage": "ktm login [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "creds-file",
+          "type": "string",
+          "default": null,
+          "description": "Path to the fallback credentials file (default: $KAPPTIVATE_CREDENTIALS_FILE, else ~/.config/kapptivate/credentials.json). Set the env var instead of the flag if other ktm commands must read the same custom path."
+        },
+        {
+          "short": null,
+          "long": "no-browser",
+          "type": "bool",
+          "default": null,
+          "description": "Print the authorization URL instead of opening a browser (for headless / SSH sessions)"
+        },
+        {
+          "short": null,
+          "long": "no-keychain",
+          "type": "bool",
+          "default": null,
+          "description": "Skip OS keychain; store token in a file at ~/.config/kapptivate/credentials.json (0600)"
+        },
+        {
+          "short": null,
+          "long": "timeout",
+          "type": "duration",
+          "default": "2m0s",
+          "description": "How long to wait for the browser callback before failing"
+        }
+      ],
+      "examples": "# Log in to the production AS (default: app.kapptivate.com)\nktm login\n\n# Log in to a different Kapptivate environment\nktm login --host my-tenant.kapptivate.com\n\n# Or via env var (useful for CI / per-shell pinning)\nKAPPTIVATE_HOST=my-tenant.kapptivate.com ktm login\n\n# Add admin scope for shell on agents, reboot, incident closure\nktm login --scope read --scope write --scope admin\n\n# Read-only session (override the default read+write)\nktm login --scope read\n\n# Headless: print URL, don't open browser\nktm login --no-browser",
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "logout",
+      "name": "ktm logout",
+      "path": [
+        "logout"
+      ],
+      "top": "logout",
+      "slug": "logout",
+      "summary": "Clear the stored OAuth token (and revoke it server-side)",
+      "description": "Remove the access + refresh tokens from your OS keychain (or the\nfallback credentials file), and best-effort revoke them at the\nAuthorization Server.\n\nServer-side revocation needs the token's issuer to be reachable. If the\nnetwork is down, the local tokens are still cleared (use --keep-remote\nto skip the revoke call entirely — the tokens will simply expire on\ntheir own schedule).",
+      "usage": "ktm logout [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "creds-file",
+          "type": "string",
+          "default": null,
+          "description": "Path to the fallback credentials file"
+        },
+        {
+          "short": null,
+          "long": "keep-remote",
+          "type": "bool",
+          "default": null,
+          "description": "Skip server-side revocation (only clear the local store)"
+        },
+        {
+          "short": null,
+          "long": "no-keychain",
+          "type": "bool",
+          "default": null,
+          "description": "Operate on the file fallback instead of the OS keychain"
+        }
+      ],
+      "examples": "",
       "isLeaf": true,
       "subcommands": []
     },
@@ -3079,7 +3170,7 @@
       "top": "reusables",
       "slug": "reusables/list",
       "summary": "List reusable tests for a product",
-      "description": "Resolves the product's reusable_tests_root_collection_uid and lists items\nin that collection via the collections service.",
+      "description": "Resolves the product's reusable_tests_root_collection_uid and lists items\nin that collection. The collection tree is the authoritative source for\nreusables — flat test listings do not filter reliably by kind.",
       "usage": "ktm reusables list [flags]",
       "aliases": "",
       "args": [],
@@ -3432,7 +3523,7 @@
       "top": "test-campaigns",
       "slug": "test-campaigns/create",
       "summary": "Create a new Tests campaign",
-      "description": "Create a new Tests campaign scoped to a single product. --test-list points\nto a JSON file (or '-' for stdin) containing an array of TestCampaignMember\nentries:\n  [{\"position\": 0, \"test\": 123, \"owners\": {}, \"input_variables\": {}}]\n\nAll tests must belong to --product. Owners and input_variables can be\nempty objects but must be present per backend validation.\n\n--collection-uid nests the Tests campaign under a specific collection. When\nomitted, it defaults to the product's campaigns root\n(test_campaigns_root_collection_uid). A Tests campaign must never live under a\ntests root — that collection renders it as a test row in the UI and crashes the\ntest list, so a tests-root --collection-uid is rejected.",
+      "description": "Create a new Tests campaign scoped to a single product. --test-list points\nto a JSON file (or '-' for stdin) containing an array of TestCampaignMember\nentries:\n  [{\"position\": 0, \"test\": 123, \"owners\": {}, \"input_variables\": {}}]\n\nAll tests must belong to --product. Owners and input_variables can be\nempty objects but must be present.\n\n--collection-uid nests the Tests campaign under a specific collection. When\nomitted, it defaults to the product's campaigns root\n(test_campaigns_root_collection_uid). A Tests campaign must never live under a\ntests root — that collection renders it as a test row in the UI and crashes the\ntest list, so a tests-root --collection-uid is rejected.",
       "usage": "ktm test-campaigns create [flags]",
       "aliases": "",
       "args": [],
@@ -3632,7 +3723,7 @@
       "top": "test-campaigns",
       "slug": "test-campaigns/update",
       "summary": "Partial-update a Tests campaign (PATCH)",
-      "description": "Apply a partial update. Any combination of --name, --description, or\n--test-list is allowed. If --test-list is given it fully replaces the\ncurrent test_list (backend semantics: old entries deleted, new ones created).",
+      "description": "Apply a partial update. Any combination of --name, --description, or\n--test-list is allowed. If --test-list is given it fully replaces the\ncurrent test_list (existing entries are replaced).",
       "usage": "ktm test-campaigns update <id> [flags]",
       "aliases": "",
       "args": [
@@ -3765,7 +3856,7 @@
       "top": "tests",
       "slug": "tests/create",
       "summary": "Create a new test from a JSON file",
-      "description": "Create a new classic test by posting a JSON definition to the API.\n\nThe JSON file should contain the full test definition with actions, variables,\nand metadata. Use \"tests template\" to generate a valid starting structure.\n\nThe --product flag resolves the product slug to a product ID and root collection\nUID. The collection_uid is always auto-resolved from the product — no overrides allowed.\n\nOwner mapping (which device identifier goes in the \"owner\" field):\n  ETHERNET actions  → web agent hostname  (from 'resources list --type web-agent')\n  SIM actions       → national_msisdn     (from 'resources list --type sim')\n  SMARTPHONE actions → UUID               (from 'resources list --type smartphone')\n  OWNERLESS actions → \"\" (empty string, no device needed)\n\nEvery non-OWNERLESS action needs an owner AND a matching entry in variables.owners.\n\nVariable V3 buckets:\n  Every non-global input_variable needs a per-variable bucket pointing at\n  (variable_group, variant). Buckets are auto-resolved from the product's\n  variable groups — the JSON file does not need to include them. Pass\n  --variant <spec> (repeatable) to pin a specific variant per group; groups\n  without a pin use their group's default variant.\n\n  Spec forms:\n    --variant 5             numeric variant ID (parent group inferred)\n    --variant API:Staging   group:variant by name (case-sensitive exact match)\n\n  Mixing forms is allowed: --variant API:Staging --variant 31\n\n  Kind validation: declared input_variable.kind must match the platform's\n  variable type (1/3 → \"regular\", 2 → \"secret\"). Mismatches are hard errors\n  by default. Pass --auto-correct-kinds to rewrite mismatches in-place.\n\nVariable substitution:\n  API command fields (url, header values, body) support {MYVAR} to inject input variables.\n  Declare the variable in variables.input_variables with kind=regular.\n  Header format: [{\"name\": \"Header-Name\", \"value\": \"header-value\"}] — use \"name\" not \"key\".\n\n  JSON body limitation: {VAR} conflicts with JSON braces. Do NOT write body='{\"k\":\"{V}\"}'.\n  Instead, add a JAVASCRIPT action before the API call to build the body via\n  test.variables.get()/set(), then set body=\"{API_BODY}\" in the API action.\n\nUSSD/SMS rules:\n  - USSD and SMS_GET use expected_result.message for response validation — NOT assertions.\n  - expected_result.message must contain the LITERAL expected text (or \"-\" for any).\n  - If expected text is unknown, use a single space \" \" as placeholder — NOT \"-\" with a message assertion.\n  - Assertions on USSD/SMS are ONLY for non-message validation: session_status, duration, variable.\n  - Variable extraction via store with message_part is a separate feature.\n  - Do NOT add fields not shown in the template — the backend rejects them.\n\nScript actions (Mocha/Chai structure):\n  All script types have command.script_name and command.script_description — always fill\n  these in with a short name and a plain-English summary of what the script does.\n  All script types use Mocha with function() (not arrow functions).\n  Three rules:\n    1. Each logical action gets its own it() block — do NOT put everything in one it()\n    2. Use before() hooks for variable initialization — load test.variables.get() there\n    3. Declare shared variables at describe() root scope with let — required for\n       data shared between before() and it() blocks\n  JAVASCRIPT (ownerless) for data processing between steps:\n    Pattern: describe('Suite', function() { let val;\n      before(function() { val = test.variables.get('MY_VAR'); });\n      it('should process', function() { /* use val */ });\n      it('should store', function() { test.variables.set('RESULT', val); });\n    });\n    Available: Lodash, Moment.js, Chai, xml2json.\n  WebDriverIO scripts (ETH_JS_WEB_SCRIPT, DATA_JS_WEB_SCRIPT, SMARTPHONE_*):\n    Same pattern, plus driver for browser/phone automation.\n    App scripts: the platform launches the app automatically, script handles in-app interaction.\n      Android (SMARTPHONE_JS_APP_SCRIPT): app_package + app_activity required in command.\n      iOS (SMARTPHONE_IOS_JS_APP_SCRIPT): bundle_id required in command.\n    APIs: browser.url(), browser.getTitle(), $(), $$(), scrollIntoView(), expect (Chai).\n    WebDriverIO v7 — full API available, $() works without driver/browser prefix.\n\nExample JSON structure:\n  {\n    \"name\": \"My API Test\",\n    \"description\": \"Tests the login endpoint returns 200\",\n    \"kind\": 1,\n    \"is_valid\": true,\n    \"variables\": {\n      \"input_variables\": {},\n      \"output_variables\": {},\n      \"owners\": {\"my-agent\": {\"owner_kind\": \"ETHERNET\", \"value\": \"my-agent\", \"actions\": [0]}}\n    },\n    \"actions\": [\n      {\n        \"type\": \"ETH_HTTP_API\",\n        \"owner\": \"my-agent\",\n        \"command\": {\"http_method\": \"GET\", \"url\": \"https://api.example.com\", \"header\": [], \"body\": \"\", \"follow_redirect\": true},\n        \"assertions\": [{\"source\": \"status_code\", \"compare\": \"==\", \"value\": \"200\"}]\n      }\n    ]\n  }",
+      "description": "Create a new classic test by posting a JSON definition to the API.\n\nThe JSON file should contain the full test definition with actions, variables,\nand metadata. Use \"tests template\" to generate a valid starting structure.\n\nThe --product flag resolves the product slug to a product ID and root collection\nUID. The collection_uid is always auto-resolved from the product — no overrides allowed.\n\nOwner mapping (which device identifier goes in the \"owner\" field):\n  ETHERNET actions  → web agent hostname  (from 'resources list --type web-agent')\n  SIM actions       → national_msisdn     (from 'resources list --type sim')\n  SMARTPHONE actions → UUID               (from 'resources list --type smartphone')\n  OWNERLESS actions → \"\" (empty string, no device needed)\n\nEvery non-OWNERLESS action needs an owner AND a matching entry in variables.owners.\n\nVariable V3 buckets:\n  Every non-global input_variable needs a per-variable bucket pointing at\n  (variable_group, variant). Buckets are auto-resolved from the product's\n  variable groups — the JSON file does not need to include them. Pass\n  --variant <spec> (repeatable) to pin a specific variant per group; groups\n  without a pin use their group's default variant.\n\n  Spec forms:\n    --variant 5             numeric variant ID (parent group inferred)\n    --variant API:Staging   group:variant by name (case-sensitive exact match)\n\n  Mixing forms is allowed: --variant API:Staging --variant 31\n\n  Kind validation: declared input_variable.kind must match the platform's\n  variable type (1/3 → \"regular\", 2 → \"secret\"). Mismatches are hard errors\n  by default. Pass --auto-correct-kinds to rewrite mismatches in-place.\n\nVariable substitution:\n  API command fields (url, header values, body) support {MYVAR} to inject input variables.\n  Declare the variable in variables.input_variables with kind=regular.\n  Header format: [{\"name\": \"Header-Name\", \"value\": \"header-value\"}] — use \"name\" not \"key\".\n\n  JSON body limitation: {VAR} conflicts with JSON braces. Do NOT write body='{\"k\":\"{V}\"}'.\n  Instead, add a JAVASCRIPT action before the API call to build the body via\n  test.variables.get()/set(), then set body=\"{API_BODY}\" in the API action.\n\nUSSD/SMS rules:\n  - USSD and SMS_GET use expected_result.message for response validation — NOT assertions.\n  - expected_result.message must contain the LITERAL expected text (or \"-\" for any).\n  - If expected text is unknown, use a single space \" \" as placeholder — NOT \"-\" with a message assertion.\n  - Assertions on USSD/SMS are ONLY for non-message validation: session_status, duration, variable.\n  - Variable extraction via store with message_part is a separate feature.\n  - Do NOT add fields not shown in the template — the platform rejects them.\n\nScript actions (Mocha/Chai structure):\n  All script types have command.script_name and command.script_description — always fill\n  these in with a short name and a plain-English summary of what the script does.\n  All script types use Mocha with function() (not arrow functions).\n  Three rules:\n    1. Each logical action gets its own it() block — do NOT put everything in one it()\n    2. Use before() hooks for variable initialization — load test.variables.get() there\n    3. Declare shared variables at describe() root scope with let — required for\n       data shared between before() and it() blocks\n  JAVASCRIPT (ownerless) for data processing between steps:\n    Pattern: describe('Suite', function() { let val;\n      before(function() { val = test.variables.get('MY_VAR'); });\n      it('should process', function() { /* use val */ });\n      it('should store', function() { test.variables.set('RESULT', val); });\n    });\n    Available: Lodash, Moment.js, Chai, xml2json.\n  WebDriverIO scripts (ETH_JS_WEB_SCRIPT, DATA_JS_WEB_SCRIPT, SMARTPHONE_*):\n    Same pattern, plus driver for browser/phone automation.\n    App scripts: the platform launches the app automatically, script handles in-app interaction.\n      Android (SMARTPHONE_JS_APP_SCRIPT): app_package + app_activity required in command.\n      iOS (SMARTPHONE_IOS_JS_APP_SCRIPT): bundle_id required in command.\n    APIs: browser.url(), browser.getTitle(), $(), $$(), scrollIntoView(), expect (Chai).\n    WebDriverIO v7 — full API available, $() works without driver/browser prefix.\n\nExample JSON structure:\n  {\n    \"name\": \"My API Test\",\n    \"description\": \"Tests the login endpoint returns 200\",\n    \"kind\": 1,\n    \"is_valid\": true,\n    \"variables\": {\n      \"input_variables\": {},\n      \"output_variables\": {},\n      \"owners\": {\"my-agent\": {\"owner_kind\": \"ETHERNET\", \"value\": \"my-agent\", \"actions\": [0]}}\n    },\n    \"actions\": [\n      {\n        \"type\": \"ETH_HTTP_API\",\n        \"owner\": \"my-agent\",\n        \"command\": {\"http_method\": \"GET\", \"url\": \"https://api.example.com\", \"header\": [], \"body\": \"\", \"follow_redirect\": true},\n        \"assertions\": [{\"source\": \"status_code\", \"compare\": \"==\", \"value\": \"200\"}]\n      }\n    ]\n  }",
       "usage": "ktm tests create [flags]",
       "aliases": "",
       "args": [],
@@ -3827,7 +3918,7 @@
       "top": "tests",
       "slug": "tests/delete",
       "summary": "Soft-delete one or more tests (move to trash; recoverable via 'tests undelete')",
-      "description": "Sends tests to the product's test-trash collection. Despite the \"delete\"\nname this is reversible — run 'ktm tests undelete <id>' to pull a test back\nout of trash. The collections service supports an admin 'empty trash' action\nthat purges the trash permanently; that is out of scope for this CLI.\n\n--kind controls which test-kind table the backend looks in:\n  1  regular test (default)\n  2  reusable test\n\nRefuses without --yes.",
+      "description": "Sends tests to the product's test-trash collection. Despite the \"delete\"\nname this is reversible — run 'ktm tests undelete <id>' to pull a test back\nout of trash. The platform supports an admin 'empty trash' action that\npurges the trash permanently; that is out of scope for this CLI.\n\n--kind selects which kind of test to delete:\n  1  regular test (default)\n  2  reusable test\n\nRefuses without --yes.",
       "usage": "ktm tests delete <id>... [flags]",
       "aliases": "",
       "args": [
@@ -3926,7 +4017,7 @@
       "top": "tests",
       "slug": "tests/edit",
       "summary": "Edit an existing test (creates a new version automatically)",
-      "description": "Update a test by merging changes from a JSON file or flags with the current definition.\nProtected fields (product, collection_uid) are always locked to current values.\nName and description only change when explicitly provided via flags.\nEvery edit creates a restorable history version on the backend.\n\nV3 buckets are auto-resolved against the test's product. Without --variant,\nexisting buckets are preserved; --variant API:Staging re-pins the API group\nand leaves other groups' existing buckets untouched. Pre-V3 tests\n(no buckets) get default variants filled in automatically.\n\nUse \"tests dry-run\" first to preview the impact before applying changes.",
+      "description": "Update a test by merging changes from a JSON file or flags with the current definition.\nProtected fields (product, collection_uid) are always locked to current values.\nName and description only change when explicitly provided via flags.\nEvery edit creates a restorable history version on the platform.\n\nV3 buckets are auto-resolved against the test's product. Without --variant,\nexisting buckets are preserved; --variant API:Staging re-pins the API group\nand leaves other groups' existing buckets untouched. Pre-V3 tests\n(no buckets) get default variants filled in automatically.\n\nUse \"tests dry-run\" first to preview the impact before applying changes.",
       "usage": "ktm tests edit <id> [flags]",
       "aliases": "",
       "args": [
@@ -3969,7 +4060,7 @@
           "long": "skip-validation",
           "type": "bool",
           "default": null,
-          "description": "Bypass the client-side validator (backend still validates). Use for tests with action types the CLI registry doesn't know about (future types, archive-only edits)."
+          "description": "Bypass the client-side validator (the platform still validates). Use for tests with action types the CLI registry doesn't know about (future types, archive-only edits)."
         },
         {
           "short": null,
@@ -4335,6 +4426,67 @@
       "subcommands": []
     },
     {
+      "id": "update",
+      "name": "ktm update",
+      "path": [
+        "update"
+      ],
+      "top": "update",
+      "slug": "update",
+      "summary": "Update ktm to the latest release (or a specific version)",
+      "description": "Download and install a newer ktm from the Kapptivate release server.\n\nBy default, updates to the newest version on your install channel:\n  stable   production releases only (default)\n  beta     includes pre-releases\n\nThe running binary is verified (sha256, mandatory) and atomically replaced.\nThe channel and download source are read from the install marker written by the\ninstaller; flags override them. Pin or roll back with --version <X>.\n\nThis command talks only to the public release server — it does not require\nauthentication.",
+      "usage": "ktm update [flags]",
+      "aliases": "update, upgrade, self-update",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "channel",
+          "type": "string",
+          "default": null,
+          "description": "Release channel: stable or beta (default: install marker, else stable)"
+        },
+        {
+          "short": null,
+          "long": "check",
+          "type": "bool",
+          "default": null,
+          "description": "Report whether an update is available; do not install"
+        },
+        {
+          "short": null,
+          "long": "force",
+          "type": "bool",
+          "default": null,
+          "description": "Reinstall even if already up to date"
+        },
+        {
+          "short": null,
+          "long": "verify-signature",
+          "type": "bool",
+          "default": null,
+          "description": "Require cosign signature verification of checksums.txt"
+        },
+        {
+          "short": null,
+          "long": "version",
+          "type": "string",
+          "default": null,
+          "description": "Install a specific bare version (e.g. 1.3.2); enables rollback"
+        },
+        {
+          "short": "y",
+          "long": "yes",
+          "type": "bool",
+          "default": null,
+          "description": "Skip the confirmation prompt (auto-yes when not a TTY)"
+        }
+      ],
+      "examples": "# Update to the latest stable release\nktm update\n\n# Only check whether an update is available (no install)\nktm update --check\n\n# Follow the pre-release channel\nktm update --channel beta\n\n# Pin / roll back to an exact version\nktm update --version 1.3.2 --yes\n\n# Reinstall the current version\nktm update --force",
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
       "id": "users",
       "name": "ktm users",
       "path": [
@@ -4559,7 +4711,7 @@
       "top": "variables",
       "slug": "variables/delete",
       "summary": "Delete a variable; refuses if any test references it",
-      "description": "Refuses if any test references the variable, listing the references. The\nplatform's DELETE endpoint enforces the same guard server-side and exposes no\noverride, so there is no --force flag here — remove the references first via\n'ktm tests edit' (or delete the referencing tests) and re-run delete.",
+      "description": "Refuses if any test references the variable, listing the references. The\nplatform enforces the same guard server-side and exposes no\noverride, so there is no --force flag here — remove the references first via\n'ktm tests edit' (or delete the referencing tests) and re-run delete.",
       "usage": "ktm variables delete <id> [flags]",
       "aliases": "",
       "args": [
@@ -4716,7 +4868,7 @@
       "top": "variables",
       "slug": "variables/groups/list",
       "summary": "List variable groups for a product",
-      "description": "List variable groups (environment configurations) for a single product.\n\nThe CLI mirrors the web UI's per-product scoping: there is intentionally no\noperator-wide aggregation — that would surface groups across products the\ncaller may not have UI access to, and the platform's permission gating on\nthe cross-product endpoint isn't independently verified.\n\nArchived groups are filtered out (matching the web UI).",
+      "description": "List variable groups (environment configurations) for a single product.\n\nThe CLI mirrors the web UI's per-product scoping: there is intentionally no\noperator-wide aggregation — that would surface groups across products the\ncaller may not have UI access to, and the platform's permission gating on\ncross-product listing isn't independently verified.\n\nArchived groups are filtered out (matching the web UI).",
       "usage": "ktm variables groups list [flags]",
       "aliases": "",
       "args": [],
@@ -4863,7 +5015,7 @@
       "top": "variables",
       "slug": "variables/name-available",
       "summary": "Pre-flight: check whether a variable name is free under a product",
-      "description": "Returns \"available\" or \"taken\" so you can surface name conflicts client-side\nbefore attempting create. Takes the product's NUMERIC ID (find via 'ktm products\nlist -o table'), not the slug.\n\nImplementation note: the platform's check_variable_exist endpoint is\nunreliable, so the check is performed client-side by listing the product's\nvariables and matching by name.",
+      "description": "Returns \"available\" or \"taken\" so you can surface name conflicts client-side\nbefore attempting create. Takes the product's NUMERIC ID (find via 'ktm products\nlist -o table'), not the slug.\n\nImplementation note: the platform's own name check is unreliable, so the\ncheck is performed client-side by listing the product's variables and\nmatching by name.",
       "usage": "ktm variables name-available [flags]",
       "aliases": "",
       "args": [],
@@ -5216,6 +5368,39 @@
       ],
       "flags": [],
       "examples": "ktm variables variants set-default 42 7",
+      "isLeaf": true,
+      "subcommands": []
+    },
+    {
+      "id": "whoami",
+      "name": "ktm whoami",
+      "path": [
+        "whoami"
+      ],
+      "top": "whoami",
+      "slug": "whoami",
+      "summary": "Show the currently logged-in user (from the stored OAuth token)",
+      "description": "Display the identity carried by the stored OAuth token: subject (user ID),\nemail, granted scopes, issuer, and time until expiry.\n\nThis is a local-only read; it does NOT call the Authorization Server.\nInformation shown is read directly from the JWT payload (unverified\ndisplay only).",
+      "usage": "ktm whoami [flags]",
+      "aliases": "",
+      "args": [],
+      "flags": [
+        {
+          "short": null,
+          "long": "creds-file",
+          "type": "string",
+          "default": null,
+          "description": "Path to the fallback credentials file"
+        },
+        {
+          "short": null,
+          "long": "no-keychain",
+          "type": "bool",
+          "default": null,
+          "description": "Operate on the file fallback instead of the OS keychain"
+        }
+      ],
+      "examples": "",
       "isLeaf": true,
       "subcommands": []
     }
