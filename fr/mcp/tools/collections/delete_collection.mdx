@@ -1,12 +1,12 @@
 ---
 title: "delete_collection"
-description: "Déplace une collection dans la corbeille de l'organisation."
+description: "Déplace une collection dans la corbeille de l'organisation (suppression réversible)."
 sidebarTitle: "delete_collection"
 ---
 
 {/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Déplace une collection dans la corbeille de l'organisation.
+Déplace une collection dans la corbeille de l'organisation (suppression réversible).
 
 <Warning>
   **Destructif · Écrit des données · Idempotent · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
@@ -35,7 +35,7 @@ Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
 ## Description
 
 ```text
-The collection is recoverable until an admin empties the trash on the collections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
+The collection is recoverable until an admin empties the trash; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
 ```
 
 ## Associés

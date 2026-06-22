@@ -34,9 +34,9 @@ ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --ow
 
 ## Détails
 
-L'endpoint de recherche de collections limite les résultats à un sous-arbre, passez
+La recherche limite les résultats à un sous-arbre de collection — passez
 --collection-uid (le tests_root_collection_uid du produit pour la portée la plus large).
-Sans --collection-uid, le service retourne HTTP 400.
+Sans --collection-uid, la requête échoue avec HTTP 400.
 
 La recherche parcourt les sous-collections de manière récursive. Les éléments sont trouvés par
 correspondance de sous-chaîne sur meta.name (le client envoie fields=name par défaut). Retourne un payload avec
@@ -47,7 +47,7 @@ deux tableaux : collections (sous-collections dont le nom correspond) et items.
 - [`ktm collections`](/fr/cli/commands/collections)
 
 <Note>
-  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
 </Note>
 
 ## Et ensuite ?

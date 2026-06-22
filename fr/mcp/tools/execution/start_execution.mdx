@@ -19,7 +19,7 @@ Démarre l'exécution d'une campaign sans attendre les résultats.
 | `campaign_json` | string | Oui | Template JSON de la campaign (depuis build_campaign) |
 | `ignore_errors` | boolean | Non | Ignore les échecs pour tous les types d'action (options.ignore_failed = &lt;all action codes&gt;). |
 | `overrides` | string | Non | Objet JSON mappant les identifiants de test à leurs valeurs de variables et assignations d'owners. Même format que les overrides de run_campaign. |
-| `parallel` | boolean | Non | Exécute les tests de la campaign en parallèle (options.parallel_test_execution=-1). Superadmin uniquement ; le backend rejette les listes de tests qui utilisent des actions SIM ou SMARTPHONE, ou sleep sur des ressources non verrouillées. |
+| `parallel` | boolean | Non | Exécute les tests de la campaign en parallèle (options.parallel_test_execution=-1). Superadmin uniquement ; la plateforme rejette les listes de tests qui utilisent des actions SIM ou SMARTPHONE, ou sleep sur des ressources non verrouillées. |
 
 ## Exemple d'arguments
 

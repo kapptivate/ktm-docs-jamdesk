@@ -19,7 +19,7 @@ Créer un nouveau monitor pour un test existant.
 | `active` | boolean | Non | Démarrer le monitor immédiatement (par défaut : true) |
 | `confirmed` | boolean | Non | Définir à true pour soumettre le monitor. NE JAMAIS définir sans approbation explicite de l'utilisateur sur l'aperçu. Nécessite que owners soit fourni. |
 | `input_variables` | string | Non | Objet JSON : nom de variable → \{kind, value, public, actions, owner_kind\}. Requis avec owners pour la soumission. Le gestionnaire de soumission injecte automatiquement les sous-clés bucket depuis le tableau variants, vous n'avez pas besoin de les ajouter. |
-| `name` | string | Non | Nom du monitor (par défaut : nom du test côté backend si omis) |
+| `name` | string | Non | Nom du monitor (par défaut : nom du test si omis) |
 | `options` | string | Non | Options JSON : \{timeout_sms, ignore_errors, auto_retry_failed_test\}. Valeurs par défaut : timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0. |
 | `overrides` | string | Non | Objet JSON associant nom de variable → nouvelle valeur string. Appliqué au modèle d'aperçu. Exemple : \{"SIM_A": "0699999999", "TODO_INDEX": "42"\} |
 | `owners` | string | Non | Objet JSON : identifiant d'appareil → \{kind, hostname/national_msisdn/uuid\}. Requis pour la soumission. |
@@ -62,7 +62,7 @@ Utilisez overrides pour modifier des valeurs spécifiques dans le modèle d'aper
 Le produit doit avoir le monitoring activé (has_monitoring=true depuis list_products detail=true).
 ```
 
-## Associé
+## Associés
 
 - [`platform_guide`](/fr/mcp/tools/discovery/platform_guide)
 - [`list_products`](/fr/mcp/tools/discovery/list_products)
@@ -71,9 +71,9 @@ Le produit doit avoir le monitoring activé (has_monitoring=true depuis list_pro
 
 <Columns cols={2}>
   <Card title="Tous les outils MCP" icon="robot" href="/fr/mcp/tools/overview">
-    Parcourir la référence complète des outils par catégorie.
+    Parcourez la référence complète des outils par catégorie.
   </Card>
   <Card title="Connecter un client" icon="plug" href="/fr/mcp/connect">
-    Configurer Claude, Cursor ou Claude Code pour se connecter au serveur.
+    Configurez Claude, Cursor ou Claude Code avec le serveur.
   </Card>
 </Columns>

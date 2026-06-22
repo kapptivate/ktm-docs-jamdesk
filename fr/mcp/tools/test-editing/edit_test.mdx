@@ -23,7 +23,7 @@ Applique des modifications à un test existant.
 | `description` | string | Non | Nouvelle description du test (uniquement si modification explicite) |
 | `is_favorite` | boolean | Non | Bascule le flag is_favorite |
 | `name` | string | Non | Nouveau nom du test (uniquement si modification explicite) |
-| `skip_validation` | boolean | Non | Contourne le validateur côté client (le backend valide toujours). À utiliser pour les types d'action que le CLI ne reconnaît pas ou pour les modifications de métadonnées de premier niveau. |
+| `skip_validation` | boolean | Non | Contourne le validateur côté client (la plateforme valide toujours). À utiliser pour les types d'action que le CLI ne reconnaît pas ou pour les modifications de métadonnées de premier niveau. |
 | `status` | string | Non | Change le statut du test (ex. DRA, APP) |
 | `test_id` | number | Oui | Identifiant du test à modifier |
 | `variables` | string | Non | Objet JSON variables (remplace les variables actuelles) |
@@ -51,7 +51,7 @@ A per-test edit limit is enforced (5 per session). Check edits_remaining in the 
 
 Top-level metadata that's now always preserved on PUT and editable via this tool: archived, is_favorite, status. Pass archived=true to archive the test without touching actions; use manage_test_lifecycle action=archive (or action=unarchive) for the common case.
 
-skip_validation=true bypasses the client-side validator. Use only when the test has an action type this MCP server's registry doesn't know (future types), or when you're only flipping a top-level flag like archived. The backend will still validate.
+skip_validation=true bypasses the client-side validator. Use only when the test has an action type this MCP server's registry doesn't know (future types), or when you're only flipping a top-level flag like archived. The platform still validates.
 ```
 
 ## Associés

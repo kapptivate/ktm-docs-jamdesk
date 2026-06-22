@@ -41,7 +41,7 @@ vers un fichier JSON (ou '-' pour stdin) contenant un tableau d'entrées TestCam
   [\{"position": 0, "test": 123, "owners": \{\}, "input_variables": \{\}\}]
 
 Tous les tests doivent appartenir au --product. Owners et input_variables peuvent être
-des objets vides mais doivent être présents selon la validation du backend.
+des objets vides mais doivent être présents.
 
 --collection-uid place la Tests campaign sous une collection spécifique. Lorsqu'il est
 omis, le défaut est la racine des campaigns du produit
@@ -53,7 +53,7 @@ planter la liste de tests, donc un --collection-uid de racine de tests est rejet
 
 - Crée un pack de tests sauvegardé, nommé et réutilisable. Pour une exécution ponctuelle à partir d'identifiants de tests explicites, ignorez cette commande et utilisez [`ktm ci build`](/fr/cli/commands/ci/build) avec `--test-ids` à la place.
 
-## Voir aussi
+## Associés
 
 - [`ktm test-campaigns`](/fr/cli/commands/test-campaigns)
 

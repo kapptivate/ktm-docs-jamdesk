@@ -1,12 +1,12 @@
 ---
 title: "CLI command reference"
-description: "Every ktm command, grouped by resource (22 top-level commands)."
+description: "Every ktm command, grouped by resource (26 top-level commands)."
 sidebarTitle: "Overview"
 ---
 
 {/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-The `ktm` CLI groups commands by resource. It exposes **134 commands** across 22 top-level groups. Pick a group below, or use the sidebar.
+The `ktm` CLI groups commands by resource. It exposes **138 commands** across 26 top-level groups. Pick a group below, or use the sidebar.
 
 ## Global flags
 
@@ -53,6 +53,12 @@ These flags apply to every command:
   <Card title="incidents" icon="angle-right" href="/cli/commands/incidents">
     Incidents — triggered alerts on the platform (OPEN, CLOSED, MANUALLY_CLOSED)
   </Card>
+  <Card title="login" icon="angle-right" href="/cli/commands/login">
+    Authenticate against Kapptivate via OAuth 2.1 + PKCE
+  </Card>
+  <Card title="logout" icon="angle-right" href="/cli/commands/logout">
+    Clear the stored OAuth token (and revoke it server-side)
+  </Card>
   <Card title="metrics" icon="angle-right" href="/cli/commands/metrics">
     Metrics — query monitor KPIs, passive collector data, and device utilization from InfluxDB
   </Card>
@@ -86,11 +92,17 @@ These flags apply to every command:
   <Card title="tests" icon="angle-right" href="/cli/commands/tests">
     Tests — automated test scenarios that can be executed and monitored
   </Card>
+  <Card title="update" icon="angle-right" href="/cli/commands/update">
+    Update ktm to the latest release (or a specific version)
+  </Card>
   <Card title="users" icon="angle-right" href="/cli/commands/users">
     Users — human users and service accounts with access to the platform
   </Card>
   <Card title="variables" icon="angle-right" href="/cli/commands/variables">
     Variables, groups, and variants — product-scoped configuration
+  </Card>
+  <Card title="whoami" icon="angle-right" href="/cli/commands/whoami">
+    Show the currently logged-in user (from the stored OAuth token)
   </Card>
 </Columns>
 

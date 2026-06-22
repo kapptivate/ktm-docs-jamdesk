@@ -37,8 +37,8 @@ ktm collections move-items --operator my-op --target <dst_uid> --items "<uid1>,<
 
 Déplace des éléments entre collections en un seul appel. --items prend une
 liste d'UID d'éléments de collection séparés par des virgules (PAS l'ID numérique du test ; utilisez
-'ktm collections items &lt;src_uid&gt;' pour découvrir les UID). Le service déplace
-chaque élément listé dans --target de manière atomique.
+'ktm collections items &lt;src_uid&gt;' pour découvrir les UID). Chaque élément listé
+est déplacé dans --target de façon atomique.
 
 ## Voir aussi
 
@@ -46,7 +46,7 @@ chaque élément listé dans --target de manière atomique.
 - [`ktm collections items`](/fr/cli/commands/collections/items)
 
 <Note>
-  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Voir la [présentation de la référence des commandes](/fr/cli/commands/overview).
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
 </Note>
 
 ## Et ensuite ?

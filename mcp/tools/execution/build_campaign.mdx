@@ -43,7 +43,7 @@ Two distinct concepts — don't confuse them: a "Tests campaign" is the SAVED, n
 
 The template includes empty variable slots. Use get_test_detail to understand what each test needs, and list_resources to find device identifiers for direct_owners. Pass the template to run_campaign with an overrides map to fill or override values.
 
-Pin variants per group via the variants array — same shape as create_monitor. Globals always emit a "global" bucket. Variables in unpinned groups use that group's default variant. The backend's _resolve_empty_variable handler fills values at launch from each variable's own bucket.
+Pin variants per group via the variants array — same shape as create_monitor. Globals always emit a "global" bucket; variables in unpinned groups use that group's default variant. IMPORTANT (test_ids source): grouped (variable-group) variables and secrets are emitted with EMPTY values and are NOT auto-bucketed — pin the variant with variants=[…] (use get_test_detail to read each variable's variable_group_id / variant_id), or run_campaign / start_execution will reject the launch as empty + unresolvable. (With test_campaign_id, buckets come from the saved campaign.)
 ```
 
 ## Related

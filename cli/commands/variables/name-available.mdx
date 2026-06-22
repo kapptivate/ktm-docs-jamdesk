@@ -34,9 +34,9 @@ Returns "available" or "taken" so you can surface name conflicts client-side
 before attempting create. Takes the product's NUMERIC ID (find via 'ktm products
 list -o table'), not the slug.
 
-Implementation note: the platform's check_variable_exist endpoint is
-unreliable, so the check is performed client-side by listing the product's
-variables and matching by name.
+Implementation note: the platform's own name check is unreliable, so the
+check is performed client-side by listing the product's variables and
+matching by name.
 
 ## Related
 

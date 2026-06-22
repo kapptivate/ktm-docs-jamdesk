@@ -97,7 +97,7 @@ Règles USSD/SMS :
   - Si le texte attendu est inconnu, utilisez un espace simple " " comme placeholder, PAS "-" avec une assertion de message.
   - Les assertions sur USSD/SMS servent UNIQUEMENT à la validation non-message : session_status, duration, variable.
   - L'extraction de variables via store avec message_part est une fonctionnalité séparée.
-  - N'ajoutez PAS de champs non présents dans le modèle : le backend les rejette.
+  - N'ajoutez PAS de champs non présents dans le modèle : la plateforme les rejette.
 
 Actions de script (structure Mocha/Chai) :
   Tous les types de script ont command.script_name et command.script_description : remplissez
@@ -144,7 +144,7 @@ Exemple de structure JSON :
     ]
   \}
 
-## Voir aussi
+## Associés
 
 - [`ktm tests`](/fr/cli/commands/tests)
 - [`ktm tests template`](/fr/cli/commands/tests/template)

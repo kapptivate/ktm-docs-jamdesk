@@ -34,9 +34,9 @@ ktm collections search --operator my-op --collection-uid <uid> --tags 12,34 --ow
 
 ## Details
 
-The collections search endpoint scopes results to a sub-tree — pass
+Search scopes results to a collection sub-tree — pass
 --collection-uid (the product's tests_root_collection_uid for the broadest
-scope). Missing --collection-uid returns HTTP 400 from the service.
+scope). Omitting --collection-uid fails with HTTP 400.
 
 The search walks sub-collections recursively. Items are matched by substring
 on meta.name (the client sends fields=name by default). Returns a payload with
