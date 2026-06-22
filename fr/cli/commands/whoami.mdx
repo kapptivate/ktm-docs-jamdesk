@@ -1,0 +1,46 @@
+---
+title: "ktm whoami"
+description: "Afficher l'utilisateur actuellement connecté (depuis le token OAuth stocké)"
+sidebarTitle: "whoami"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Afficher l'utilisateur actuellement connecté (depuis le token OAuth stocké)
+
+## Utilisation
+
+```bash
+ktm whoami [flags]
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--creds-file` | string | — | Chemin vers le fichier d'identifiants de secours |
+| `--no-keychain` | boolean | — | Opère sur le fichier de secours plutôt que sur le trousseau de clés OS |
+
+## Détails
+
+Affiche l'identité portée par le token OAuth stocké : sujet (ID utilisateur),
+e-mail, portées accordées, émetteur et durée avant expiration.
+
+Il s'agit d'une lecture locale uniquement ; elle ne fait PAS appel au serveur d'autorisation.
+Les informations affichées sont lues directement depuis le payload JWT (affichage
+non vérifié uniquement).
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

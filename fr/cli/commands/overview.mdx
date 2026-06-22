@@ -1,12 +1,12 @@
 ---
 title: "Référence des commandes CLI"
-description: "Toutes les commandes ktm, regroupées par ressource (22 commandes de premier niveau)."
+description: "Toutes les commandes ktm, regroupées par ressource (26 commandes de premier niveau)."
 sidebarTitle: "Présentation"
 ---
 
 {/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Le CLI `ktm` regroupe les commandes par ressource. Il expose **134 commandes** réparties en 22 groupes de premier niveau. Choisissez un groupe ci-dessous ou utilisez la barre latérale.
+Le CLI `ktm` regroupe les commandes par ressource. Il expose **138 commandes** réparties en 26 groupes de premier niveau. Choisissez un groupe ci-dessous ou utilisez la barre latérale.
 
 ## Flags globaux
 
@@ -53,6 +53,12 @@ Ces flags s'appliquent à toutes les commandes :
   <Card title="incidents" icon="angle-right" href="/fr/cli/commands/incidents">
     Incidents — alertes déclenchées sur la plateforme (OPEN, CLOSED, MANUALLY_CLOSED)
   </Card>
+  <Card title="login" icon="angle-right" href="/fr/cli/commands/login">
+    S'authentifier auprès de Kapptivate via OAuth 2.1 + PKCE
+  </Card>
+  <Card title="logout" icon="angle-right" href="/fr/cli/commands/logout">
+    Effacer le token OAuth stocké (et le révoquer côté serveur)
+  </Card>
   <Card title="metrics" icon="angle-right" href="/fr/cli/commands/metrics">
     Metrics — interroger les KPI des monitors, les données des collecteurs passifs et l'utilisation des appareils depuis InfluxDB
   </Card>
@@ -86,11 +92,17 @@ Ces flags s'appliquent à toutes les commandes :
   <Card title="tests" icon="angle-right" href="/fr/cli/commands/tests">
     Tests — scénarios de test automatisés pouvant être exécutés et surveillés
   </Card>
+  <Card title="update" icon="angle-right" href="/fr/cli/commands/update">
+    Mettre à jour ktm vers la dernière version (ou une version spécifique)
+  </Card>
   <Card title="users" icon="angle-right" href="/fr/cli/commands/users">
     Users — utilisateurs humains et comptes de service ayant accès à la plateforme
   </Card>
   <Card title="variables" icon="angle-right" href="/fr/cli/commands/variables">
     Variables, groupes et variants — configuration au niveau du produit
+  </Card>
+  <Card title="whoami" icon="angle-right" href="/fr/cli/commands/whoami">
+    Afficher l'utilisateur actuellement connecté (depuis le token OAuth stocké)
   </Card>
 </Columns>
 

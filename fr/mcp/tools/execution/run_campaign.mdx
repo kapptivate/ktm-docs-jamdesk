@@ -1,12 +1,12 @@
 ---
 title: "run_campaign"
-description: "Exécute une campaign et attend les résultats."
+description: "Exécute une campaign et attend les résultats — bloque jusqu'à la fin et renvoie les résultats par test."
 sidebarTitle: "run_campaign"
 ---
 
 {/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Exécute une campaign et attend les résultats.
+Exécute une campaign et attend les résultats — bloque jusqu'à la fin et renvoie les résultats par test.
 
 <Warning>
   **Destructif · Écrit des données · Appelle des systèmes externes.** Cet outil peut modifier ou supprimer des données. Vérifiez les arguments avant de laisser un agent l'appeler.
@@ -19,8 +19,8 @@ Exécute une campaign et attend les résultats.
 | `campaign_json` | string | Oui | Template JSON de la campaign (depuis build_campaign) |
 | `ignore_errors` | boolean | Non | Ignore les échecs pour tous les types d'action (options.ignore_failed = &lt;all action codes&gt;). Les statuts par test peuvent être réécrits en success. |
 | `max_poll_duration` | string | Non | Durée maximale d'attente des résultats (défaut : 10m). Format : chaîne de durée Go (ex. 5m, 15m) |
-| `overrides` | string | Non | Objet JSON mappant les identifiants de test à leurs valeurs de variables et assignations d'owners. Format : \{"&lt;test_id&gt;": \{"input_variables": \{...\}, "direct_owners": \{...\}\}\}. direct_owners mappe l'identifiant de device à la valeur (ex. \{"sim_owner": "SIM-001"\}). V3 : les valeurs d'input_variables peuvent être soit des chaînes plates (legacy) soit des objets \{value, bucket\} pour cibler un variant spécifique (variables_v3.md Bucket System). |
-| `parallel` | boolean | Non | Exécute les tests de la campaign en parallèle (options.parallel_test_execution=-1). Superadmin uniquement ; le backend rejette les listes de tests qui utilisent des actions SIM ou SMARTPHONE, ou sleep sur des ressources non verrouillées. |
+| `overrides` | string | Non | Objet JSON mappant les identifiants de test à leurs valeurs de variables et assignations d'owners. Format : \{"&lt;test_id&gt;": \{"input_variables": \{...\}, "direct_owners": \{...\}\}\}. direct_owners mappe l'identifiant de device à la valeur (ex. \{"sim_owner": "SIM-001"\}). Les valeurs d'input_variables sont des chaînes plates (ex. "42"). Pour cibler un variant spécifique, épinglez-le au moment du build via build_campaign variants=[…] — la forme objet \{value, bucket\} n'est PAS acceptée ici. |
+| `parallel` | boolean | Non | Exécute les tests de la campaign en parallèle (options.parallel_test_execution=-1). Superadmin uniquement ; la plateforme rejette les listes de tests qui utilisent des actions SIM ou SMARTPHONE, ou sleep sur des ressources non verrouillées. |
 
 ## Exemple d'arguments
 
@@ -35,7 +35,7 @@ Arguments illustratifs qu'un agent fournit lors de l'appel de cet outil :
 ## Description
 
 ```text
-This is the recommended way to run tests — it blocks until completion and returns per-test results. For very long campaigns (>10 minutes), use start_execution + poll_execution instead.
+Best for quick ad-hoc / CI runs. It holds ONE connection open for the entire run, so on the hosted (HTTP) MCP transport a longer run can be reset by the gateway; for anything beyond a quick smoke test prefer start_execution + poll_execution (start returns a result_id immediately, then poll until terminal).
 
 For ad-hoc runs: build_campaign(test_ids=…) → run_campaign. For a saved Tests campaign: build_campaign(test_campaign_id=…) → run_campaign(overrides=…).
 ```
