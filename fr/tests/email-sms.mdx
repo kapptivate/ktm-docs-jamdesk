@@ -22,6 +22,12 @@ Chaque nom de step renvoie à sa page de référence, avec les paramètres et le
 
 Les steps attendent l'arrivée du message, puis l'analysent avec l'IA : aucune configuration de format, quelle que soit la formulation ou la mise en page de l'expéditeur.
 
+## Adresses et numéros de téléphone
+
+**L'email** fonctionne immédiatement. Toute adresse sur le domaine `kappti.dev` est une boîte mail de test active, vous pouvez donc en utiliser une nouvelle à chaque exécution : `signup-test@kappti.dev`, `qa-reset@kappti.dev`, ou ce qui convient à votre parcours. Pour garantir une boîte unique à chaque exécution, construisez l'adresse depuis l'onglet **Random** du sélecteur de variables, par exemple `{Random text}@kappti.dev`, afin qu'une inscription n'entre jamais en collision avec une exécution précédente. Voir [Variables dans les tests](/fr/tests/variables) pour les presets aléatoires.
+
+**Les numéros de téléphone** sont rattachés à votre organisation. Pour le moment, demandez à votre account manager de provisionner les numéros dont vos tests SMS ont besoin, puis utilisez-les dans le step **Get sms code**.
+
 ## Cibler le bon lien avec Intent
 
 Un email contient souvent plusieurs liens (le lien d'action, mais aussi les pieds de page de désinscription, les logos, les pages d'aide). Sélectionnez un step **Get email link** et remplissez le champ **Intent** dans son onglet **General** pour indiquer à l'IA lequel vous voulez, en langage naturel : "Le lien pour activer mon compte".
@@ -38,10 +44,6 @@ Chaque step Email & SMS se documente lui-même dans le résultat d'exécution :
 
 - **Steps email** : capturent des captures d'écran de l'email reçu au format mobile, tablette et desktop, pour que vous obteniez aussi une vérification visuelle de vos emails transactionnels.
 - **Steps SMS** : capturent le texte brut du message à côté des variables extraites.
-
-<Note>
-Ces steps reposent sur le service de mail et SMS de Kapptivate : les boîtes mail et les numéros de téléphone qu'ils surveillent doivent être provisionnés pour votre espace de travail.
-</Note>
 
 ## Et ensuite ?
 

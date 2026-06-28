@@ -22,6 +22,12 @@ Each step name links to its reference page, with parameters and the JSON format.
 
 The steps wait for the message to arrive, then parse it with AI: no format configuration, whatever the sender's wording or layout.
 
+## Addresses and phone numbers
+
+**Email** works out of the box. Any address on the `kappti.dev` domain is a live test mailbox, so you can use a fresh one per run: `signup-test@kappti.dev`, `qa-reset@kappti.dev`, or whatever fits your flow. To guarantee a unique inbox on every execution, build the address from the **Random** tab in the variable picker, for example `{Random text}@kappti.dev`, so a sign-up never collides with a previous run. See [Variables in tests](/tests/variables) for the random presets.
+
+**Phone numbers** are attached to your organization. For now, ask your account manager to provision the numbers your SMS tests need, then use them in the **Get sms code** step.
+
 ## Target the right link with Intent
 
 An email often carries several links (the action link, but also unsubscribe footers, logos, help pages). Select a **Get email link** step and fill the **Intent** field in its **General** tab to tell the AI which one you mean, in plain language: "The link to activate my account".
@@ -38,10 +44,6 @@ Each Email & SMS step documents itself in the execution result:
 
 - **Email steps** capture screenshots of the received email rendered in mobile, tablet, and desktop formats, so you also get a visual check of your transactional emails.
 - **SMS steps** capture the raw text of the message alongside the extracted variables.
-
-<Note>
-These steps rely on Kapptivate's mail and SMS service: the mailboxes and phone numbers they watch must be provisioned for your workspace.
-</Note>
 
 ## What's Next?
 
