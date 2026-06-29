@@ -1,0 +1,89 @@
+---
+title: "Types d'étapes web"
+description: "Tour d'horizon des actions disponibles pour construire vos tests web automatisés."
+---
+
+Chaque étape d'un test web correspond à une action précise. Ce guide présente les différentes catégories d'actions et leur usage.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Web__Les_differents_types_detapes_Copy__hCONKSrOQMmaY9IX8AaCfw?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Interactions
+
+| Action | Description | Champs requis |
+|--------|-------------|---------------|
+| **Clic / Double-clic / Clic droit / Survol** | Simule un clic ou un survol sur un élément | Nom de l'étape, sélecteur |
+| **Import de fichier** | Envoie un fichier (photo, document) | URL publique du fichier (Cloud) |
+| **Touches clavier** | Simule des combinaisons de touches | Aucun sélecteur requis |
+| **Saisie de texte** | Remplit un champ de formulaire | Nom, sélecteur, valeur |
+| **Scroll** | Fait défiler la page jusqu'à un élément | Sélecteur (rarement nécessaire, le scroll est automatique) |
+
+<Tip>
+Pour l'import de fichier depuis Google Drive, utilisez le format : `https://drive.usercontent.google.com/download?id={id}&export=download&authuser=1`
+</Tip>
+
+## Email et SMS
+
+Ces actions permettent de récupérer des codes de vérification ou des liens envoyés par email/SMS.
+
+| Action | Variable créée | Pré-requis |
+|--------|---------------|------------|
+| **Code SMS** | `CodeSms` | Licence IA, numéro de téléphone |
+| **Code e-mail** | `CodeMail` | Licence IA, adresse @kappti.dev |
+| **Obtenir un e-mail** | (aucune) | Adresse @kappti.dev |
+| **Lien e-mail** | `LienMail` | Licence IA, adresse @kappti.dev |
+
+Pour utiliser une variable récupérée dans une étape suivante, ajoutez une étape **Saisie de texte**, cliquez sur **{ }** et sélectionnez la variable correspondante (par exemple `CodeSms` ou `LienMail`).
+
+<Note>
+Les actions Email et SMS utilisent l'IA pour extraire le code ou le lien pertinent du message. Une licence IA est requise.
+</Note>
+
+## Vérifications
+
+| Action | Description |
+|--------|-------------|
+| **Vérifier un élément** | Vérifie la présence d'un élément avec les options : Affiché, Cliquable, Activé, Présent (dans le DOM). Attend aussi l'apparition de l'élément. |
+| **Vérification orthographique** | Détecte les erreurs sur la page (licence IA requise). |
+| **Vérification IA** | Décrivez ce que vous voulez vérifier visuellement, par exemple "la page de paiement s'affiche" (licence IA requise). |
+
+## Navigation
+
+| Action | Description |
+|--------|-------------|
+| **Changer de fenêtre** | Bascule vers un autre onglet ou une autre fenêtre (URL ou nom de l'onglet requis). |
+| **Accéder à une URL** | Charge une nouvelle page dans le navigateur. |
+
+## Attente
+
+| Action | Description |
+|--------|-------------|
+| **Attendre un délai** | Pause d'une durée fixe (millisecondes, secondes ou minutes). |
+
+<Tip>
+Préférez **Vérifier un élément** à **Attendre un délai** quand c'est possible. La vérification attend l'apparition de l'élément et passe à la suite dès qu'il est visible, sans attente inutile.
+</Tip>
+
+## Autres
+
+| Action | Description |
+|--------|-------------|
+| **Script personnalisé** | Exécute du JavaScript pour les cas avancés. Cliquez sur **Modifier l'étape** pour écrire votre script. |
+| **Définir une variable** | Crée une variable interne au test. Utilisez **{ }** puis **Aléatoire** pour générer des données de test. |
+| **Extraire une valeur** | Capture le contenu d'un élément de la page dans une variable pour l'utiliser plus tard. |
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Créer un test web" icon="circle-play" href="/fr/guides/web-create-test">
+    Enregistrez et exécutez votre premier test web.
+  </Card>
+  <Card title="Modifier vos tests" icon="pen" href="/fr/guides/web-update-tests">
+    Organisez vos étapes, ajoutez des variables et affinez les sélecteurs.
+  </Card>
+</Columns>

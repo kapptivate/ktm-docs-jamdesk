@@ -1,0 +1,73 @@
+---
+title: "Créer et supprimer des monitors"
+description: "Configurez des monitors pour exécuter vos tests automatiquement et supprimez ceux qui ne sont plus nécessaires."
+---
+
+Un monitor exécute un test à intervalle régulier. Ce guide explique comment en créer un, comprendre ses statuts et le supprimer.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Comment_creer_et_supprimer_des_monitors__Nm_VUkQYTDiyaZod4J06eQ?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Créer un monitor
+
+<Steps>
+  <Step title="Trouver le test">
+    Recherchez le test que vous souhaitez monitorer.
+  </Step>
+  <Step title="Ouvrir le menu">
+    Cliquez sur **...** à côté du test, puis sélectionnez **Créer un monitor**.
+  </Step>
+  <Step title="Configurer le monitor">
+    Modifiez le nom si nécessaire, sélectionnez la ressource qui exécutera le test et ajustez les options par défaut (preset navigateur, variables, etc.).
+  </Step>
+  <Step title="Définir la fréquence">
+    Réglez la fréquence d'exécution selon vos besoins.
+  </Step>
+  <Step title="Options avancées de planification">
+    Cliquez sur **Avancé** pour configurer des plages horaires ou des jours spécifiques si vous ne souhaitez pas un monitoring 24/7.
+  </Step>
+  <Step title="Créer">
+    Cliquez sur **Créer un monitor** pour activer la surveillance.
+  </Step>
+</Steps>
+
+<Accordion title="Options avancées">
+- **Relancer en cas d'échec** : relance automatiquement le test s'il échoue. Non recommandé par défaut pour éviter de surcharger les ressources.
+- **Ignorer les erreurs** : exécute toutes les étapes même en cas d'échec. Utile pour les scénarios où chaque étape doit être jouée.
+</Accordion>
+
+## Comprendre les statuts
+
+| Statut | Signification |
+|--------|--------------|
+| **Programmé** | Le monitor est créé et attend sa prochaine exécution |
+| **En cours** | Le test est en train de s'exécuter |
+| **En succès** | La dernière exécution a réussi |
+| **En échec** | La dernière exécution a échoué |
+
+## Supprimer un monitor
+
+<Steps>
+  <Step title="Ouvrir le menu">
+    Cliquez sur **...** à côté du monitor à supprimer.
+  </Step>
+  <Step title="Supprimer">
+    Sélectionnez **Supprimer** et confirmez la suppression.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Mettre en pause les monitors" icon="pause" href="/fr/guides/monitors-pause-resume">
+    Apprenez à suspendre et reprendre vos monitors.
+  </Card>
+  <Card title="Gérer les alertes" icon="bell" href="/fr/guides/alerts-manage">
+    Configurez des alertes pour être notifié en cas de problème.
+  </Card>
+</Columns>

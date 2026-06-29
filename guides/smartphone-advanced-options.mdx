@@ -1,0 +1,82 @@
+---
+title: "Smartphone test advanced options"
+description: "Configure advanced mobile test settings: environment, delays, hooks, and version history."
+---
+
+Each smartphone test has advanced settings to adjust its behavior. This guide presents the available configuration tabs.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Smartphone__Options_avancees_du_scenario_Copy__ft71PtX_T1uvOd8Av95O3w?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Overview
+
+The **Overview** tab displays the latest test executions. Click an execution to see the details of the failing step.
+
+## Environment
+
+In the **Environment** tab, you can:
+
+- Change the application used for the test
+- Change the default resource (phone)
+
+## Test settings
+
+The **Test settings** tab groups general configuration options.
+
+<Steps>
+  <Step title="Description and tags">
+    Add a description to document the test and tags to make sorting easier.
+  </Step>
+  <Step title="AI settings">
+    Click **AI** to modify AI settings. The **Smart** option is recommended.
+  </Step>
+  <Step title="Delays and timeouts">
+    Click **Delays and timeouts** to adjust the delay between each step and maximum wait times.
+  </Step>
+</Steps>
+
+## Hooks
+
+Hooks run actions before or after the test.
+
+<Steps>
+  <Step title="Configure a hook">
+    In the **Hooks** section, click **Before test** (or After test).
+  </Step>
+  <Step title="Add a reusable component">
+    Click **Add** and select the reusable component to run.
+  </Step>
+</Steps>
+
+## Advanced options
+
+Click the **Advanced** tab to access the following settings:
+
+- **Reset application**: resets the application to its initial state before each execution
+
+## Version history
+
+<Steps>
+  <Step title="View history">
+    Go to the **Version history** tab to see past modifications.
+  </Step>
+  <Step title="Restore a version">
+    Select the desired version, click the action icon, and choose **Restore this version**.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Modify steps" icon="pen" href="/guides/smartphone-modify-steps">
+    Add or modify steps in your smartphone test.
+  </Card>
+  <Card title="Reusable components" icon="recycle" href="/tests/reusable-components">
+    Create shared components across multiple tests.
+  </Card>
+</Columns>

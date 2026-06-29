@@ -1,0 +1,106 @@
+---
+title: "Update your web tests"
+description: "Organize tests into groups, modify selectors, add steps, and use variables."
+---
+
+After recording a test, you will often want to reorganize it, fix a selector, or insert new steps. This guide covers the most common modifications.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Web__Mettre_a_jour_les_tests_Copy___R24MHKvROmhihSd2YbWPw?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Organize steps into groups
+
+Groups make long tests more readable and let you structure the flow by feature.
+
+<Steps>
+  <Step title="Create a group from a step">
+    Right-click on the step where you want the group to start, then select **Create a step group from here**.
+  </Step>
+  <Step title="Rename the group">
+    Click the group to expand it, then edit its name (for example "Free trial", "Login").
+  </Step>
+  <Step title="Create an empty group">
+    Click **Create a new group** to add an empty group you can fill later.
+  </Step>
+  <Step title="Delete a group">
+    Click the **...** icon on the group, then click **Delete**.
+  </Step>
+</Steps>
+
+<Warning>
+Deleting a group also deletes all the steps it contains.
+</Warning>
+
+## Insert reusable components
+
+<Steps>
+  <Step title="Add a component">
+    Click the **+** icon, then select **Insert a reusable component**.
+  </Step>
+  <Step title="Choose the component">
+    Select the desired component from the list. The corresponding steps are inserted into your test.
+  </Step>
+  <Step title="Clean up duplicates">
+    If any steps duplicate the inserted component, right-click them and select **Delete**.
+  </Step>
+</Steps>
+
+## Modify selectors
+
+<Steps>
+  <Step title="Open the selector panel">
+    Click the arrow on the right side of a step to display the selector side panel.
+  </Step>
+  <Step title="Find a new selector">
+    Use the **Kompagnon** extension and click **Find selector** to identify a more reliable selector.
+  </Step>
+  <Step title="Apply the selector">
+    Copy the selector from the extension and paste it into the corresponding field. A green icon confirms the selector is valid.
+  </Step>
+</Steps>
+
+## Add and reorder steps
+
+<Steps>
+  <Step title="Insert a step">
+    Click the add icon between two existing steps, or click **Add a step** at the end of a group.
+  </Step>
+  <Step title="Choose the action type">
+    Select the action type from the dropdown (click, text input, etc.).
+  </Step>
+  <Step title="Configure the step">
+    Fill in the required fields: step name, selector, value. The name matters because it identifies the step in results.
+  </Step>
+  <Step title="Reorder with drag and drop">
+    Drag and drop steps to change their execution order.
+  </Step>
+</Steps>
+
+## Use variables
+
+Instead of hardcoded values, use variables to make your tests reusable.
+
+<Steps>
+  <Step title="Insert a variable">
+    In a value field, click the **{ }** icon.
+  </Step>
+  <Step title="Choose the source">
+    Select a variable from a previous step, a random value, or a global variable.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Web step types" icon="list" href="/guides/web-step-types">
+    Explore all available actions for your web tests.
+  </Card>
+  <Card title="Variables" icon="brackets-curly" href="/tests/variables">
+    Learn more about variable management in your tests.
+  </Card>
+</Columns>

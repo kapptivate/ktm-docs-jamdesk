@@ -1,0 +1,106 @@
+---
+title: "Modifier vos tests web"
+description: "Organisez vos tests en groupes, modifiez les sélecteurs, ajoutez des étapes et utilisez des variables."
+---
+
+Après avoir enregistré un test, vous voudrez souvent le réorganiser, corriger un sélecteur ou insérer de nouvelles étapes. Ce guide couvre les modifications les plus courantes.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Web__Mettre_a_jour_les_tests_Copy___R24MHKvROmhihSd2YbWPw?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Organiser les étapes en groupes
+
+Les groupes rendent un test long plus lisible et permettent de structurer le parcours par fonctionnalité.
+
+<Steps>
+  <Step title="Créer un groupe à partir d'une étape">
+    Faites un clic droit sur l'étape à partir de laquelle vous souhaitez créer un groupe, puis sélectionnez **Créer un groupe d'étapes à partir d'ici**.
+  </Step>
+  <Step title="Renommer le groupe">
+    Cliquez sur le groupe pour le déplier, puis modifiez son nom (par exemple "Essai gratuit", "Connexion").
+  </Step>
+  <Step title="Créer un groupe vide">
+    Cliquez sur **Créer un nouveau groupe** pour ajouter un groupe vide que vous remplirez ensuite.
+  </Step>
+  <Step title="Supprimer un groupe">
+    Cliquez sur l'icône **...** du groupe, puis sur **Supprimer**.
+  </Step>
+</Steps>
+
+<Warning>
+Supprimer un groupe supprime aussi toutes les étapes qu'il contient.
+</Warning>
+
+## Insérer des composants réutilisables
+
+<Steps>
+  <Step title="Ajouter un composant">
+    Cliquez sur l'icône **+**, puis sélectionnez **Insérer un composant réutilisable**.
+  </Step>
+  <Step title="Choisir le composant">
+    Sélectionnez le composant souhaité dans la liste. Les étapes correspondantes sont insérées dans votre test.
+  </Step>
+  <Step title="Nettoyer les doublons">
+    Si des étapes font doublon avec le composant inséré, faites un clic droit dessus et sélectionnez **Supprimer**.
+  </Step>
+</Steps>
+
+## Modifier les sélecteurs
+
+<Steps>
+  <Step title="Ouvrir le panneau de sélecteur">
+    Cliquez sur la flèche à droite d'une étape pour afficher le panneau latéral du sélecteur.
+  </Step>
+  <Step title="Trouver un nouveau sélecteur">
+    Utilisez l'extension **Kompagnon** et cliquez sur **Find selector** pour identifier un sélecteur plus fiable.
+  </Step>
+  <Step title="Appliquer le sélecteur">
+    Copiez le sélecteur depuis l'extension et collez-le dans le champ correspondant. Une icône verte confirme que le sélecteur est valide.
+  </Step>
+</Steps>
+
+## Ajouter et réordonner des étapes
+
+<Steps>
+  <Step title="Insérer une étape">
+    Cliquez sur l'icône d'ajout entre deux étapes existantes, ou sur **Ajouter une étape** en fin de groupe.
+  </Step>
+  <Step title="Choisir le type d'action">
+    Sélectionnez le type d'action dans le menu déroulant (clic, saisie de texte, etc.).
+  </Step>
+  <Step title="Configurer l'étape">
+    Remplissez les champs requis : nom de l'étape, sélecteur, valeur. Le nom est important pour identifier l'étape dans les résultats.
+  </Step>
+  <Step title="Réordonner par glisser-déposer">
+    Glissez-déposez les étapes pour modifier leur ordre d'exécution.
+  </Step>
+</Steps>
+
+## Utiliser des variables
+
+Au lieu de valeurs en dur, utilisez des variables pour rendre vos tests réutilisables.
+
+<Steps>
+  <Step title="Insérer une variable">
+    Dans un champ de valeur, cliquez sur l'icône **{ }**.
+  </Step>
+  <Step title="Choisir la source">
+    Sélectionnez une variable provenant d'une étape précédente, une valeur aléatoire, ou une variable globale.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Types d'étapes web" icon="list" href="/fr/guides/web-step-types">
+    Découvrez toutes les actions disponibles pour vos tests web.
+  </Card>
+  <Card title="Variables" icon="brackets-curly" href="/fr/tests/variables">
+    Approfondissez la gestion des variables dans vos tests.
+  </Card>
+</Columns>

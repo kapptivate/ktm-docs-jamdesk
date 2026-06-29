@@ -1,0 +1,89 @@
+---
+title: "Web step types"
+description: "Overview of all available actions for building automated web tests."
+---
+
+Each step in a web test corresponds to a specific action. This guide presents the different action categories and their usage.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Web__Les_differents_types_detapes_Copy__hCONKSrOQMmaY9IX8AaCfw?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Interactions
+
+| Action | Description | Required fields |
+|--------|-------------|----------------|
+| **Click / Double-click / Right-click / Hover** | Simulates a click or hover on an element | Step name, selector |
+| **File upload** | Uploads a file (photo, document) | Public cloud URL |
+| **Keyboard keys** | Simulates key combinations | No selector needed |
+| **Text input** | Fills a form field | Name, selector, value |
+| **Scroll** | Scrolls the page to an element | Selector (rarely needed, scroll is automatic) |
+
+<Tip>
+For file uploads from Google Drive, use this format: `https://drive.usercontent.google.com/download?id={id}&export=download&authuser=1`
+</Tip>
+
+## Email and SMS
+
+These actions retrieve verification codes or links sent by email/SMS.
+
+| Action | Variable created | Requirements |
+|--------|-----------------|-------------|
+| **SMS code** | `CodeSms` | AI license, phone number |
+| **Email code** | `CodeMail` | AI license, @kappti.dev address |
+| **Get email** | (none) | @kappti.dev address |
+| **Email link** | `LienMail` | AI license, @kappti.dev address |
+
+To use a retrieved variable in a subsequent step, add a **Text input** step, click **{ }**, and select the corresponding variable (for example `CodeSms` or `LienMail`).
+
+<Note>
+Email and SMS actions use AI to extract the relevant code or link from the message. An AI license is required.
+</Note>
+
+## Verifications
+
+| Action | Description |
+|--------|-------------|
+| **Verify element** | Checks for an element with options: Displayed, Clickable, Enabled, Present (in DOM). Also waits for the element to appear. |
+| **Spell check** | Detects errors on the page (AI license required). |
+| **AI verification** | Describe what you want to verify visually, for example "the payment page is displayed" (AI license required). |
+
+## Navigation
+
+| Action | Description |
+|--------|-------------|
+| **Switch window** | Switches to another tab or window (URL or tab name required). |
+| **Navigate to URL** | Loads a new page in the browser. |
+
+## Wait
+
+| Action | Description |
+|--------|-------------|
+| **Wait for delay** | Pauses for a fixed duration (milliseconds, seconds, or minutes). |
+
+<Tip>
+Prefer **Verify element** over **Wait for delay** when possible. The verification waits for the element to appear and moves on as soon as it is visible, without unnecessary waiting.
+</Tip>
+
+## Other
+
+| Action | Description |
+|--------|-------------|
+| **Custom script** | Runs JavaScript for advanced use cases. Click **Edit step** to write your script. |
+| **Set variable** | Creates a test-internal variable. Use **{ }** then **Random** to generate test data. |
+| **Extract value** | Captures the content of a page element into a variable for later use. |
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Create a web test" icon="circle-play" href="/guides/web-create-test">
+    Record and run your first web test.
+  </Card>
+  <Card title="Update your tests" icon="pen" href="/guides/web-update-tests">
+    Organize steps, add variables, and refine selectors.
+  </Card>
+</Columns>

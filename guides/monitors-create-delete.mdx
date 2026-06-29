@@ -1,0 +1,73 @@
+---
+title: "Create and delete monitors"
+description: "Set up monitors to run your tests automatically and remove the ones you no longer need."
+---
+
+A monitor runs a test at regular intervals. This guide explains how to create one, understand its statuses, and delete it.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Comment_creer_et_supprimer_des_monitors__Nm_VUkQYTDiyaZod4J06eQ?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Create a monitor
+
+<Steps>
+  <Step title="Find the test">
+    Search for the test you want to monitor.
+  </Step>
+  <Step title="Open the menu">
+    Click **...** next to the test, then select **Create a monitor**.
+  </Step>
+  <Step title="Configure the monitor">
+    Edit the name if needed, select the resource that will execute the test, and adjust default options (browser preset, variables, etc.).
+  </Step>
+  <Step title="Set the frequency">
+    Adjust the execution frequency to match your needs.
+  </Step>
+  <Step title="Advanced scheduling">
+    Click **Advanced** to configure specific time windows or days if you do not want 24/7 monitoring.
+  </Step>
+  <Step title="Create">
+    Click **Create a monitor** to activate it.
+  </Step>
+</Steps>
+
+<Accordion title="Advanced options">
+- **Retry on failure**: automatically reruns the test if it fails. Not recommended by default to avoid overloading resources.
+- **Ignore errors**: executes all steps even if some fail. Useful for scenarios where every step must run.
+</Accordion>
+
+## Monitor statuses
+
+| Status | Meaning |
+|--------|---------|
+| **Scheduled** | The monitor is created and waiting for its next execution |
+| **Running** | The test is currently executing |
+| **Success** | The last execution passed |
+| **Failed** | The last execution failed |
+
+## Delete a monitor
+
+<Steps>
+  <Step title="Open the menu">
+    Click **...** next to the monitor you want to delete.
+  </Step>
+  <Step title="Delete">
+    Select **Delete** and confirm the deletion.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Pause and resume monitors" icon="pause" href="/guides/monitors-pause-resume">
+    Temporarily suspend and resume your monitors.
+  </Card>
+  <Card title="Manage alerts" icon="bell" href="/guides/alerts-manage">
+    Get notified when a monitor detects a problem.
+  </Card>
+</Columns>

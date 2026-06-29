@@ -1,0 +1,70 @@
+---
+title: "Create a web test"
+description: "Record and run your first automated web test in Kapptivate."
+---
+
+This guide walks you through creating a web test, recording browser interactions, and reading the first execution results.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Web__Creer_un_nouveau_test_automatique_dans_kapptivate_Copy__Dy-vNgOYTPyUtq41a7DAuQ?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Create the test
+
+<Steps>
+  <Step title="Open the test list">
+    In the main menu, click **Tests**.
+  </Step>
+  <Step title="Select the product">
+    Make sure the correct product is selected in the selector at the top of the page.
+  </Step>
+  <Step title="Start creation">
+    Click **Create new test**, then select **Web (New experience)**.
+  </Step>
+  <Step title="Set the start URL">
+    Enter the URL where the test should begin, then click **Create**.
+  </Step>
+</Steps>
+
+## Record the steps
+
+<Steps>
+  <Step title="Start the recorder">
+    Click **Use recorder**, then confirm with **OK**. Every action you perform in the browser is recorded automatically.
+  </Step>
+  <Step title="Walk through the flow">
+    Navigate the site as a real user would: click buttons, fill in fields, follow links.
+  </Step>
+  <Step title="Add assertions">
+    To verify that an element is visible, select the **Displayed** option in the recorder. This adds a verification step to the scenario.
+  </Step>
+  <Step title="Stop recording">
+    Right-click to stop the recorder, then click **Save** to preserve the steps.
+  </Step>
+</Steps>
+
+## Run the test
+
+<Steps>
+  <Step title="Execute the test">
+    Click **Run**. The test launches on the selected resource.
+  </Step>
+  <Step title="Check the results">
+    Once the execution completes, click the execution ID to access the details. Each step shows its status (pass or fail) and a screenshot.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Update your tests" icon="pen" href="/guides/web-update-tests">
+    Organize steps into groups, add variables, and refine selectors.
+  </Card>
+  <Card title="Web step types" icon="list" href="/guides/web-step-types">
+    Explore all available actions for your web tests.
+  </Card>
+</Columns>

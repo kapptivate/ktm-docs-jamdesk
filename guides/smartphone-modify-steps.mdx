@@ -1,0 +1,79 @@
+---
+title: "Modify smartphone test steps"
+description: "Add, modify, or reorganize steps in your mobile tests."
+---
+
+This guide explains how to refine a smartphone test after the initial recording: change an action type, add verifications, retrieve email codes.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Mobile__Modifier_les_etapes_de_votre_test_Copy__hkc78qe2ROOeR-_MqgxApg?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Change the action type
+
+<Steps>
+  <Step title="Open the action selector">
+    Click the action type of an existing step (for example "Tap").
+  </Step>
+  <Step title="Choose the new type">
+    Select the desired type from the list. For example, replace a **Tap** with a **Long press**.
+  </Step>
+</Steps>
+
+## Add steps
+
+<Steps>
+  <Step title="Hide the keyboard">
+    Add a step and choose **Hide keyboard** if the keyboard is blocking your flow.
+  </Step>
+  <Step title="Wait for a delay">
+    Add a **Wait for delay** step and set the duration if your scenario needs a pause.
+  </Step>
+</Steps>
+
+## Retrieve emails and codes
+
+<Steps>
+  <Step title="Verify email reception">
+    Add a **Get email** step and enter the receiving address (must end with `@kappti.dev`).
+  </Step>
+  <Step title="Retrieve an OTP code by email">
+    Add a **Get email code** step with the `@kappti.dev` address. The code is stored in the `MailCode` variable for later use.
+  </Step>
+  <Step title="Retrieve a link by email">
+    Add a **Get email link** step with the `@kappti.dev` address. The link is stored in the `MailLink` variable.
+  </Step>
+</Steps>
+
+<Note>
+All email addresses used for retrieval must end with `@kappti.dev`.
+</Note>
+
+## Add verifications
+
+<Steps>
+  <Step title="Add an element verification">
+    Add a **Verify element** step.
+  </Step>
+  <Step title="Configure the condition">
+    Choose whether the element **should** or **should not** match the condition.
+  </Step>
+  <Step title="Choose the verification type">
+    Select from: **Displayed**, **Clickable**, **Enabled**, or **Present**.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Advanced options" icon="gear" href="/guides/smartphone-advanced-options">
+    Configure delays, hooks, and AI settings.
+  </Card>
+  <Card title="Create a smartphone test" icon="circle-play" href="/guides/smartphone-create-scenario">
+    Go back to the basics of creating a mobile test.
+  </Card>
+</Columns>

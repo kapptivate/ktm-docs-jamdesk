@@ -1,0 +1,82 @@
+---
+title: "Options avancées des tests smartphone"
+description: "Configurez les paramètres avancés de vos tests mobiles : environnement, délais, hooks et historique."
+---
+
+Chaque test smartphone dispose de paramètres avancés pour ajuster son comportement. Ce guide présente les onglets de configuration disponibles.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Smartphone__Options_avancees_du_scenario_Copy__ft71PtX_T1uvOd8Av95O3w?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Aperçu
+
+L'onglet **Aperçu** affiche les dernières exécutions du test. Cliquez sur une exécution pour voir le détail de l'étape en échec.
+
+## Environnement
+
+Dans l'onglet **Environnement**, vous pouvez :
+
+- Modifier l'application utilisée pour le test
+- Changer la ressource (téléphone) par défaut
+
+## Paramètres du test
+
+L'onglet **Paramètres de test** regroupe les réglages généraux.
+
+<Steps>
+  <Step title="Description et tags">
+    Ajoutez une description pour documenter le test et des tags pour faciliter le tri.
+  </Step>
+  <Step title="Paramètres IA">
+    Cliquez sur **IA** pour modifier les paramètres d'intelligence artificielle. L'option **Smart** est recommandée.
+  </Step>
+  <Step title="Délais et timeouts">
+    Cliquez sur **Délais et timeouts** pour ajuster le délai entre chaque étape et les durées maximales d'attente.
+  </Step>
+</Steps>
+
+## Hooks
+
+Les hooks exécutent des actions avant ou après le test.
+
+<Steps>
+  <Step title="Configurer un hook">
+    Dans la section **Hooks**, cliquez sur **Before test** (ou After test).
+  </Step>
+  <Step title="Ajouter un composant réutilisable">
+    Cliquez sur **Ajouter** et sélectionnez le composant réutilisable à exécuter.
+  </Step>
+</Steps>
+
+## Options avancées
+
+Cliquez sur l'onglet **Avancé** pour accéder aux paramètres suivants :
+
+- **Réinitialiser l'application** : remet l'application dans son état initial avant chaque exécution
+
+## Historique des versions
+
+<Steps>
+  <Step title="Consulter l'historique">
+    Accédez à l'onglet **Historique des versions** pour voir les modifications passées.
+  </Step>
+  <Step title="Restaurer une version">
+    Sélectionnez la version souhaitée, cliquez sur l'icône d'action et choisissez **Restaurer cette version**.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Modifier les étapes" icon="pen" href="/fr/guides/smartphone-modify-steps">
+    Ajoutez ou modifiez des étapes dans votre test smartphone.
+  </Card>
+  <Card title="Composants réutilisables" icon="recycle" href="/fr/tests/reusable-components">
+    Créez des composants partagés entre plusieurs tests.
+  </Card>
+</Columns>

@@ -1,0 +1,72 @@
+---
+title: "Créer et gérer des alertes"
+description: "Configurez des alertes par email, Slack ou Microsoft Teams pour être informé des problèmes détectés par vos monitors."
+---
+
+Les alertes vous préviennent quand vos tests échouent de manière répétée. Ce guide explique comment créer une alerte, définir ses seuils et configurer les canaux de notification.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Comment_creer_et_gerer_des_alertes__rR4aw8UtQhqIIj2_h9O9zg?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Créer une alerte
+
+<Steps>
+  <Step title="Accéder aux alertes">
+    Depuis le menu principal, allez dans **Incidents**, puis sélectionnez l'onglet **Alertes**.
+  </Step>
+  <Step title="Nouvelle alerte">
+    Cliquez sur **Créer une alerte**, puis sur **Ajouter une nouvelle alerte** dans la section des alertes de taux de succès.
+  </Step>
+  <Step title="Nommer l'alerte">
+    Donnez un nom explicite à votre alerte.
+  </Step>
+  <Step title="Définir la fenêtre d'analyse">
+    Réglez le nombre de derniers points à vérifier. Par exemple, **3** pour ne prendre en compte que les 3 dernières exécutions.
+  </Step>
+  <Step title="Définir le seuil Warning">
+    Réglez le seuil Warning. Par exemple, **2** : si 2 des 3 derniers tests échouent, une alerte Warning est déclenchée. Ce seuil est optionnel.
+  </Step>
+  <Step title="Définir le seuil Critical">
+    Réglez le seuil Critical. Par exemple, **3** : si les 3 derniers tests échouent, une alerte Critical est déclenchée.
+  </Step>
+  <Step title="Filtrer par produit ou test">
+    Sélectionnez un produit ou des tests spécifiques si l'alerte ne doit pas s'appliquer à tout le workspace.
+  </Step>
+</Steps>
+
+## Configurer les notifications
+
+<Steps>
+  <Step title="Email">
+    Activez **Email Notification**, saisissez l'adresse du destinataire et cliquez sur **Create option** pour l'ajouter.
+  </Step>
+  <Step title="Slack">
+    Activez **Slack Notification**, puis cliquez sur le lien pour générer un webhook Slack. Collez l'URL du webhook dans le champ.
+  </Step>
+  <Step title="Microsoft Teams">
+    Activez **Microsoft Teams Notification**, suivez les instructions pour créer un webhook Teams et collez l'URL dans le champ.
+  </Step>
+  <Step title="Enregistrer">
+    Cliquez sur **Enregistrer** pour créer l'alerte.
+  </Step>
+</Steps>
+
+## Modifier ou supprimer une alerte
+
+Depuis la liste des alertes, cliquez sur le menu **Actions** pour modifier ou supprimer une alerte existante.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Incidents" icon="triangle-exclamation" href="/fr/alerting/incidents">
+    Consultez et gérez les incidents déclenchés par vos alertes.
+  </Card>
+  <Card title="Créer des monitors" icon="chart-line" href="/fr/guides/monitors-create-delete">
+    Mettez en place des monitors pour surveiller vos tests en continu.
+  </Card>
+</Columns>

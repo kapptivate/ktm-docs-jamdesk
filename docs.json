@@ -1043,7 +1043,16 @@
                 "expanded": true,
                 "pages": [
                   "guides/overview",
-                  "guides/first-integration"
+                                    "guides/web-create-test",
+                  "guides/web-update-tests",
+                  "guides/web-step-types",
+                  "guides/smartphone-create-scenario",
+                  "guides/smartphone-modify-steps",
+                  "guides/smartphone-advanced-options",
+                  "guides/api-create-test",
+                  "guides/monitors-create-delete",
+                  "guides/monitors-pause-resume",
+                  "guides/alerts-manage"
                 ]
               },
               {
@@ -2097,7 +2106,16 @@
                 "expanded": true,
                 "pages": [
                   "fr/guides/overview",
-                  "fr/guides/first-integration"
+                                    "fr/guides/web-create-test",
+                  "fr/guides/web-update-tests",
+                  "fr/guides/web-step-types",
+                  "fr/guides/smartphone-create-scenario",
+                  "fr/guides/smartphone-modify-steps",
+                  "fr/guides/smartphone-advanced-options",
+                  "fr/guides/api-create-test",
+                  "fr/guides/monitors-create-delete",
+                  "fr/guides/monitors-pause-resume",
+                  "fr/guides/alerts-manage"
                 ]
               },
               {

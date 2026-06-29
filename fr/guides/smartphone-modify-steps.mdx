@@ -1,0 +1,79 @@
+---
+title: "Modifier les étapes d'un test smartphone"
+description: "Ajoutez, modifiez ou réorganisez les étapes de vos tests mobiles."
+---
+
+Ce guide explique comment affiner un test smartphone après l'enregistrement initial : changer un type d'action, ajouter des vérifications, récupérer des codes email.
+
+## Tutoriel interactif
+
+<iframe src="https://scribehow.com/embed/Mobile__Modifier_les_etapes_de_votre_test_Copy__hkc78qe2ROOeR-_MqgxApg?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Guide pas à pas
+
+## Modifier le type d'action
+
+<Steps>
+  <Step title="Ouvrir le sélecteur d'action">
+    Cliquez sur le type d'action d'une étape existante (par exemple "Clic").
+  </Step>
+  <Step title="Choisir le nouveau type">
+    Sélectionnez le type souhaité dans la liste. Par exemple, remplacez un **Clic** par un **Appui long**.
+  </Step>
+</Steps>
+
+## Ajouter des étapes
+
+<Steps>
+  <Step title="Masquer le clavier">
+    Ajoutez une étape et choisissez **Masquer le clavier** si le clavier gêne votre parcours.
+  </Step>
+  <Step title="Attendre un délai">
+    Ajoutez une étape **Attendre un délai** et définissez la durée si votre scénario nécessite une pause.
+  </Step>
+</Steps>
+
+## Récupérer des emails et codes
+
+<Steps>
+  <Step title="Vérifier la réception d'un email">
+    Ajoutez une étape **Obtenir un e-mail** et saisissez l'adresse de réception (doit se terminer par `@kappti.dev`).
+  </Step>
+  <Step title="Récupérer un code OTP par email">
+    Ajoutez une étape **Obtenir le code e-mail** avec l'adresse `@kappti.dev`. Le code est stocké dans la variable `MailCode` que vous pouvez réutiliser plus tard.
+  </Step>
+  <Step title="Récupérer un lien par email">
+    Ajoutez une étape **Obtenir le lien e-mail** avec l'adresse `@kappti.dev`. Le lien est stocké dans la variable `MailLink`.
+  </Step>
+</Steps>
+
+<Note>
+Toutes les adresses email utilisées pour la récupération doivent se terminer par `@kappti.dev`.
+</Note>
+
+## Ajouter des vérifications
+
+<Steps>
+  <Step title="Ajouter une vérification d'élément">
+    Ajoutez une étape **Vérifier un élément**.
+  </Step>
+  <Step title="Configurer la condition">
+    Choisissez si l'élément **doit** ou **ne doit pas** correspondre à la condition.
+  </Step>
+  <Step title="Choisir le type de vérification">
+    Sélectionnez parmi : **Affiché**, **Cliquable**, **Activé** ou **Présent**.
+  </Step>
+</Steps>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Options avancées" icon="gear" href="/fr/guides/smartphone-advanced-options">
+    Configurez les délais, les hooks et les paramètres IA.
+  </Card>
+  <Card title="Créer un test smartphone" icon="circle-play" href="/fr/guides/smartphone-create-scenario">
+    Revenez aux bases de la création d'un test mobile.
+  </Card>
+</Columns>

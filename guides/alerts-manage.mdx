@@ -1,0 +1,72 @@
+---
+title: "Create and manage alerts"
+description: "Set up email, Slack, or Microsoft Teams alerts to get notified when your monitors detect issues."
+---
+
+Alerts notify you when your tests fail repeatedly. This guide explains how to create an alert, set its thresholds, and configure notification channels.
+
+## Interactive tutorial
+
+<iframe src="https://scribehow.com/embed/Comment_creer_et_gerer_des_alertes__rR4aw8UtQhqIIj2_h9O9zg?skipIntro=true" width="100%" height="640" allowFullScreen frameBorder="0"></iframe>
+
+---
+
+## Step-by-step guide
+
+## Create an alert
+
+<Steps>
+  <Step title="Go to alerts">
+    From the main menu, navigate to **Incidents**, then select the **Alerts** tab.
+  </Step>
+  <Step title="New alert">
+    Click **Create an alert**, then click **Add a new alert** in the success rate alerts section.
+  </Step>
+  <Step title="Name the alert">
+    Give your alert a clear name.
+  </Step>
+  <Step title="Set the analysis window">
+    Set the number of last points to check. For example, **3** to only consider the last 3 executions.
+  </Step>
+  <Step title="Set the Warning threshold">
+    Set the Warning threshold. For example, **2**: if 2 of the last 3 tests fail, a Warning alert is triggered. This threshold is optional.
+  </Step>
+  <Step title="Set the Critical threshold">
+    Set the Critical threshold. For example, **3**: if all 3 last tests fail, a Critical alert is triggered.
+  </Step>
+  <Step title="Filter by product or test">
+    Select a product or specific tests if the alert should not apply to the entire workspace.
+  </Step>
+</Steps>
+
+## Configure notifications
+
+<Steps>
+  <Step title="Email">
+    Enable **Email Notification**, enter the recipient address, and click **Create option** to add it.
+  </Step>
+  <Step title="Slack">
+    Enable **Slack Notification**, then click the link to generate a Slack webhook. Paste the webhook URL into the field.
+  </Step>
+  <Step title="Microsoft Teams">
+    Enable **Microsoft Teams Notification**, follow the instructions to create a Teams webhook, and paste the URL into the field.
+  </Step>
+  <Step title="Save">
+    Click **Save** to create the alert.
+  </Step>
+</Steps>
+
+## Edit or delete an alert
+
+From the alerts list, click the **Actions** menu to edit or delete an existing alert.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Incidents" icon="triangle-exclamation" href="/alerting/incidents">
+    View and manage incidents triggered by your alerts.
+  </Card>
+  <Card title="Create monitors" icon="chart-line" href="/guides/monitors-create-delete">
+    Set up monitors to watch your tests continuously.
+  </Card>
+</Columns>
