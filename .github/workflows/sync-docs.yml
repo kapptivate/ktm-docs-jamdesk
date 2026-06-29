@@ -31,14 +31,31 @@ jobs:
         with:
           node-version: 22
 
+      # The prod ktm CLI, installed via the official install script (always latest stable).
+      # $KAPPTIVATE_INSTALL_BASE (a repo Actions variable) is the install origin, including the
+      # /ktm namespace; it falls back to the prod default when unset. We pin the install dir and
+      # export KTM_BIN so the generator introspects exactly this binary (the installer's sudo
+      # fallback is TTY-gated, so under curl|bash a non-writable /usr/local/bin would silently
+      # land in $HOME/.local/bin, off PATH — pinning the dir removes that ambiguity).
+      - name: Install ktm CLI
+        if: ${{ inputs.source == 'all' || inputs.source == 'cli' }}
+        env:
+          KAPPTIVATE_INSTALL_BASE: ${{ vars.KAPPTIVATE_INSTALL_BASE }}
+        run: |
+          base="${KAPPTIVATE_INSTALL_BASE:-https://kapptivate-tools.s3.fr-par.scw.cloud/ktm}"
+          dir="$RUNNER_TEMP/ktm-bin"
+          mkdir -p "$dir"
+          curl -fsSL "$base/install.sh" \
+            | KAPPTIVATE_INSTALL_BASE="$base" KAPPTIVATE_INSTALL_DIR="$dir" bash
+          echo "KTM_BIN=$dir/ktm" >> "$GITHUB_ENV"
+
       # MCP  → live tools/list against $MCP_URL using the X-Kapptivate-API-Key header.
-      # CLI  → the prod ktm Linux binary downloaded from $KTM_CLI_URL, introspected via --help.
-      # Both URLs fall back to prod defaults in scripts/generate.mjs when the vars are unset.
+      # CLI  → the ktm binary installed above, introspected via --help ($KTM_BIN).
+      # $MCP_URL falls back to the prod default in scripts/generate.mjs when unset.
       - name: Generate reference from prod
         env:
           KAPPTIVATE_API_KEY: ${{ secrets.KAPPTIVATE_API_KEY }}
           MCP_URL: ${{ vars.MCP_URL }}
-          KTM_CLI_URL: ${{ vars.KTM_CLI_URL }}
         run: node scripts/generate.mjs --source=${{ inputs.source }}
 
       # Non-blocking quality gates: surface MDX / broken-link issues on the run without

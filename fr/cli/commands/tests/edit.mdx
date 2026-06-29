@@ -48,7 +48,7 @@ ktm tests edit 16480 --from-file updated.json
 | `--description` | string | — | Remplacer la description du test |
 | `--from-file` | string | — | Chemin vers le fichier JSON avec la définition de test mise à jour |
 | `--name` | string | — | Remplacer le nom du test |
-| `--skip-validation` | boolean | — | Contourner le validateur côté client (le backend valide toujours). Utilisez pour les tests avec des types d'action que le registre CLI ne connaît pas (types futurs, modifications d'archive uniquement). |
+| `--skip-validation` | boolean | — | Contourner le validateur côté client (la plateforme valide toujours). Utilisez pour les tests avec des types d'action que le registre CLI ne connaît pas (types futurs, modifications d'archive uniquement). |
 | `--variant` | string[] | — | Fixer à nouveau un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant ; les nouvelles variables obtiennent le variant par défaut du groupe. |
 
 ## Détails
@@ -56,7 +56,7 @@ ktm tests edit 16480 --from-file updated.json
 Mettre à jour un test en fusionnant les changements d'un fichier JSON ou de flags avec la définition actuelle.
 Les champs protégés (product, collection_uid) sont toujours verrouillés sur les valeurs actuelles.
 Le nom et la description ne changent que lorsqu'ils sont explicitement fournis via des flags.
-Chaque modification crée une version d'historique restaurable sur le backend.
+Chaque modification crée une version d'historique restaurable sur la plateforme.
 
 Les buckets V3 sont résolus automatiquement contre le produit du test. Sans --variant,
 les buckets existants sont conservés ; --variant API:Staging fixe à nouveau le groupe API
@@ -65,7 +65,7 @@ et laisse les buckets des autres groupes intacts. Les tests pré-V3
 
 Utilisez "tests dry-run" d'abord pour prévisualiser l'impact avant d'appliquer les changements.
 
-## Voir aussi
+## Associés
 
 - [`ktm tests`](/fr/cli/commands/tests)
 - [`ktm tests dry-run`](/fr/cli/commands/tests/dry-run)

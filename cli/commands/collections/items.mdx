@@ -40,10 +40,10 @@ ktm collections items --operator my-op <uid> --page-size 10 --page 2
 
 Paginated list of items directly inside the collection (sub-collections
 are NOT included — use 'ktm collections list' for those). Items are tests,
-reusable_tests, or dashboards; human-readable name / status come from the
-collections meta blob.
+reusable_tests, or dashboards; human-readable name / status come from each
+item's meta blob.
 
-The collections service defaults sort_by=updated_at order=desc when the
+The platform defaults sort_by=updated_at order=desc when the
 client doesn't specify; this matches the web UI.
 
 ## Related

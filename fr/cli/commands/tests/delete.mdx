@@ -39,10 +39,10 @@ ktm tests delete 117 --kind 2 --yes           # reusable
 
 Envoie les tests dans la collection test-trash du produit. Malgré le nom "delete",
 cette opération est réversible : exécutez 'ktm tests undelete &lt;id&gt;' pour récupérer un test
-depuis la corbeille. Le service collections prend en charge une action admin 'empty trash'
+depuis la corbeille. La plateforme prend en charge une action admin 'empty trash'
 qui purge la corbeille de manière permanente ; cela est hors du périmètre de ce CLI.
 
---kind contrôle dans quelle table de kind de test le backend cherche :
+--kind sélectionne le kind de test à supprimer :
   1  test standard (défaut)
   2  test reusable
 
@@ -52,7 +52,7 @@ Refuse sans --yes.
 
 - Suppression vers la corbeille, récupérable avec [`ktm tests undelete`](/fr/cli/commands/tests/undelete). Pour simplement masquer un test des listes, utilisez [`ktm tests archive`](/fr/cli/commands/tests/archive).
 
-## Voir aussi
+## Associés
 
 - [`ktm tests`](/fr/cli/commands/tests)
 - [`ktm tests undelete`](/fr/cli/commands/tests/undelete)

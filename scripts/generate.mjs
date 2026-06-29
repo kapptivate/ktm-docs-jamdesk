@@ -6,7 +6,7 @@
 //
 // Sources are read from prod by default:
 //   MCP  — live `tools/list` against $MCP_URL using $KAPPTIVATE_API_KEY (X-Kapptivate-API-Key header).
-//   CLI  — the `ktm` binary's --help tree ($KTM_BIN path, or downloaded $KTM_CLI_URL on Linux CI).
+//   CLI  — the `ktm` binary's --help tree ($KTM_BIN path; in CI the binary is installed via the official install.sh and $KTM_BIN points at it).
 //
 // --mode=catalog re-renders from the committed catalog.json files without any introspection —
 // use it to apply template or sanitizer changes offline.
@@ -27,8 +27,6 @@ import { renderMcp, navPages as mcpNavPages } from './lib/render-mcp.mjs';
 
 const ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
 const MCP_URL = process.env.MCP_URL || 'https://mcp.kapptivate.com/mcp';
-const KTM_CLI_URL =
-  process.env.KTM_CLI_URL || 'https://kapptivate-tools.s3.fr-par.scw.cloud/k-cli/latest/ktm';
 
 const MANAGED_DIRS = { mcp: 'mcp/tools', cli: 'cli/commands' };
 const CATALOG = { mcp: 'mcp/.catalog/catalog.json', cli: 'cli/.catalog/catalog.json' };
@@ -116,7 +114,6 @@ async function buildCli(args) {
     const raw = await introspectCli({
       mode: args.mode === 'file' ? 'file' : 'binary',
       bin: process.env.KTM_BIN,
-      url: KTM_CLI_URL,
       file: args.file,
     });
     ({ catalog, warnings } = normalizeCli(raw, { source: 'cli-binary' }));

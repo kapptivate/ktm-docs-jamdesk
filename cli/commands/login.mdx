@@ -1,0 +1,81 @@
+---
+title: "ktm login"
+description: "Authenticate against Kapptivate via OAuth 2.1 + PKCE"
+sidebarTitle: "login"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Authenticate against Kapptivate via OAuth 2.1 + PKCE
+
+## Usage
+
+```bash
+ktm login [flags]
+```
+
+## Examples
+
+```bash
+# Log in to the production AS (default: app.kapptivate.com)
+ktm login
+
+# Log in to a different Kapptivate environment
+ktm login --host my-tenant.kapptivate.com
+
+# Or via env var (useful for CI / per-shell pinning)
+KAPPTIVATE_HOST=my-tenant.kapptivate.com ktm login
+
+# Add admin scope for shell on agents, reboot, incident closure
+ktm login --scope read --scope write --scope admin
+
+# Read-only session (override the default read+write)
+ktm login --scope read
+
+# Headless: print URL, don't open browser
+ktm login --no-browser
+```
+
+## Flags
+
+| Flag | Type | Default | Description |
+| --- | --- | --- | --- |
+| `--creds-file` | string | — | Path to the fallback credentials file (default: $KAPPTIVATE_CREDENTIALS_FILE, else ~/.config/kapptivate/credentials.json). Set the env var instead of the flag if other ktm commands must read the same custom path. |
+| `--no-browser` | boolean | — | Print the authorization URL instead of opening a browser (for headless / SSH sessions) |
+| `--no-keychain` | boolean | — | Skip OS keychain; store token in a file at ~/.config/kapptivate/credentials.json (0600) |
+| `--timeout` | duration | `2m0s` | How long to wait for the browser callback before failing |
+
+## Details
+
+Log in to Kapptivate using the OAuth 2.1 + PKCE browser flow.
+
+A browser window opens, you log in to Kapptivate (with 2FA if enabled) and
+authorize the ktm CLI. The resulting access token is stored in your OS
+keychain (macOS Keychain, Linux Secret Service, Windows Credential
+Manager). Subsequent ktm commands use this token automatically — no need
+to set KAPPTIVATE_API_KEY.
+
+The target host comes from --host or $KAPPTIVATE_HOST (default
+app.kapptivate.com). The OAuth Authorization Server URL is derived as
+https://&lt;host&gt;, so a single value drives both API calls and authentication
+— matching the way every other ktm command resolves the API host.
+
+Headless / SSH: pass --no-browser to print the URL instead of opening one.
+You'll need network access to the loopback port on this machine, so this
+only works if you can run a browser somewhere that can reach 127.0.0.1
+on this machine (e.g. local SSH port forwarding).
+
+<Note>
+  Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
+</Note>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="All commands" icon="terminal" href="/cli/commands/overview">
+    Browse the full CLI reference.
+  </Card>
+  <Card title="Get started" icon="rocket" href="/cli/getting-started">
+    Install the CLI and authenticate.
+  </Card>
+</Columns>

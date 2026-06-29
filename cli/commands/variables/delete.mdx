@@ -29,7 +29,7 @@ ktm variables delete 17
 ## Details
 
 Refuses if any test references the variable, listing the references. The
-platform's DELETE endpoint enforces the same guard server-side and exposes no
+platform enforces the same guard server-side and exposes no
 override, so there is no --force flag here — remove the references first via
 'ktm tests edit' (or delete the referencing tests) and re-run delete.
 

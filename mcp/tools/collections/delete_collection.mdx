@@ -1,12 +1,12 @@
 ---
 title: "delete_collection"
-description: "Move a collection to the organisation's trash."
+description: "Move a collection to the organisation's trash (soft-delete)."
 sidebarTitle: "delete_collection"
 ---
 
 {/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Move a collection to the organisation's trash.
+Move a collection to the organisation's trash (soft-delete).
 
 <Warning>
   **Destructive · Writes data · Idempotent · Calls external systems.** This tool can modify or delete data. Review the arguments before letting an agent call it.
@@ -35,7 +35,7 @@ Illustrative arguments an agent supplies when calling this tool:
 ## Description
 
 ```text
-The collection is recoverable until an admin empties the trash on the collections service; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
+The collection is recoverable until an admin empties the trash; there is no direct hard-delete. Refuses unless acknowledge=true. Recommended flow: list_collection_items (review the contents) → delete_collection with acknowledge=true.
 ```
 
 ## Related

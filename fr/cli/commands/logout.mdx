@@ -1,0 +1,49 @@
+---
+title: "ktm logout"
+description: "Effacer le token OAuth stocké (et le révoquer côté serveur)"
+sidebarTitle: "logout"
+---
+
+{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+
+Effacer le token OAuth stocké (et le révoquer côté serveur)
+
+## Utilisation
+
+```bash
+ktm logout [flags]
+```
+
+## Flags
+
+| Flag | Type | Défaut | Description |
+| --- | --- | --- | --- |
+| `--creds-file` | string | — | Chemin vers le fichier d'identifiants de secours |
+| `--keep-remote` | boolean | — | Ignore la révocation côté serveur (efface uniquement le stockage local) |
+| `--no-keychain` | boolean | — | Opère sur le fichier de secours plutôt que sur le trousseau de clés OS |
+
+## Détails
+
+Supprime les tokens d'accès et de rafraîchissement de votre trousseau de clés OS (ou du
+fichier d'identifiants de secours), et tente de les révoquer auprès du
+serveur d'autorisation.
+
+La révocation côté serveur nécessite que l'émetteur du token soit joignable. Si le
+réseau est indisponible, les tokens locaux sont quand même effacés (utilisez --keep-remote
+pour ignorer complètement l'appel de révocation ; les tokens expireront simplement
+selon leur propre calendrier).
+
+<Note>
+  Les flags globaux (`--output`, `--debug`, `--host`, ...) s'appliquent à toutes les commandes. Consultez la [vue d'ensemble de la référence des commandes](/fr/cli/commands/overview).
+</Note>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Toutes les commandes" icon="terminal" href="/fr/cli/commands/overview">
+    Parcourir la référence complète du CLI.
+  </Card>
+  <Card title="Démarrage" icon="rocket" href="/fr/cli/getting-started">
+    Installer le CLI et s'authentifier.
+  </Card>
+</Columns>

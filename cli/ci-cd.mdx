@@ -6,7 +6,10 @@ sidebarTitle: CI/CD
 
 `ktm` is built for pipelines. The pattern is always the same: build a campaign, run it, publish the results. The CLI returns JSON, writes JUnit XML, and exits non-zero when tests fail, so your pipeline reacts automatically.
 
-## GitHub Actions
+## Pipeline examples
+
+<Tabs>
+  <Tab title="GitHub Actions">
 
 ```yaml
 name: Kapptivate Tests
@@ -24,9 +27,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install ktm
-        run: |
-          # Put the ktm binary on the PATH (see Installation), then:
-          ktm --version
+        run: curl -fsSL https://kapptivate-tools.s3.fr-par.scw.cloud/ktm/install.sh | bash
 
       - name: Build campaign
         env:
@@ -55,6 +56,35 @@ jobs:
             summary.json
 ```
 
+  </Tab>
+  <Tab title="GitLab CI">
+
+```yaml
+stages: [test]
+
+kapptivate-tests:
+  stage: test
+  image: ubuntu:24.04
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
+    - curl -fsSL https://kapptivate-tools.s3.fr-par.scw.cloud/ktm/install.sh | bash
+  script:
+    - ktm ci build --test-ids 16480,16838 --product acme~web --variant "API:Staging" > campaign.json
+    - ktm ci run --test-config-path campaign.json --junit-file results.xml --output-file summary.json
+  artifacts:
+    when: always
+    paths:
+      - results.xml
+      - summary.json
+    reports:
+      junit: results.xml
+```
+
+  </Tab>
+</Tabs>
+
+For GitLab, add `KAPPTIVATE_API_KEY` as a masked CI/CD variable in your project settings (Settings > CI/CD > Variables), the same way GitHub Actions uses `secrets.KAPPTIVATE_API_KEY`.
+
 ### Native GitHub integration
 
 When `GITHUB_ACTIONS=true` (set automatically), `ktm` produces native output with no extra configuration:
@@ -66,7 +96,7 @@ The JSON summary is suppressed on stdout in that mode, so pass `--output-file su
 
 ## Other platforms
 
-The same build-then-run pattern works on GitLab CI, Jenkins, and any runner. Set `KAPPTIVATE_API_KEY` as a secret, put `ktm` on the PATH, then call `ktm ci build` and `ktm ci run`. Commit your campaign JSON or test configs to the repo and point `ktm ci run --test-config-dir ./tests/` at them.
+For Jenkins and other runners, the pattern is the same: install `ktm`, set `KAPPTIVATE_API_KEY`, then call `ktm ci build` and `ktm ci run`. Commit your campaign JSON or test configs to the repo and point `ktm ci run --test-config-dir ./tests/` at them.
 
 ## Exit codes
 
