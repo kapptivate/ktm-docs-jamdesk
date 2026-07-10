@@ -7,49 +7,18 @@ Send a full HTTP request (method, headers, body) over the SIM's data connection 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| HTTP Method | `command.http_method` | Yes | `GET` (default), `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`. |
-| URL | `command.url` | Yes | The endpoint to call. Supports variables. |
-| Headers | `command.header` | No | Key/value list (Authorization, Content-Type...). |
-| Body | `command.body` | No | Request body, for methods that send one. |
-| Follow redirect | `command.follow_redirect` | No | Follow 3xx responses. Default: on. |
-| Ignore SSL certificate | `command.insecure_skip_verify` | No | Skip certificate verification. Default: off. |
-| Enable cookies | `command.enable_cookies` | No | Keep cookies across redirects. Default: off. |
-| Web access should fail | `expect_failure` | No | Invert the verdict. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| HTTP Method | Yes | `GET` (default), `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`. |
+| URL | Yes | The endpoint to call. Supports variables. |
+| Headers | No | Key/value list (Authorization, Content-Type...). |
+| Body | No | Request body, for methods that send one. |
+| Follow redirect | No | Follow 3xx responses. Default: on. |
+| Ignore SSL certificate | No | Skip certificate verification. Default: off. |
+| Enable cookies | No | Keep cookies across redirects. Default: off. |
+| Web access should fail | No | Invert the verdict. |
 
 Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings) and DNS override. The action ships with a default assertion: `status_code == 200`.
-
-## In the scenario JSON
-
-```json
-{
-  "type": "DATA_API_HTTP",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "http_method": "POST",
-    "url": "https://api.example.com/v1/login",
-    "header": [{ "Content-Type": "application/json" }],
-    "body": "{\"username\": \"qa\", \"password\": \"secret\"}",
-    "follow_redirect": true,
-    "insecure_skip_verify": false,
-    "enable_cookies": false,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [
-    { "type": "response", "source": "result", "property": "status_code", "compare": "==", "value": 200, "evaluate": true }
-  ],
-  "store": []
-}
-```
 
 ## Results and metrics
 

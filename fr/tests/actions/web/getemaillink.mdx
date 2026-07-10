@@ -8,35 +8,14 @@ Suivez un lien d'e-mail dans le cadre du flux : confirmation de compte, réiniti
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| E-mail destinataire | `mailbox` | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail contenant le lien. |
-| Variable | `variable` | Oui | Nom de la variable qui reçoit le lien. Par défaut : `MailLink`. |
-| Intention | `intent` | Non | Quel lien l'IA doit extraire. Par défaut : `The first link in the text`. |
-| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si aucun lien n'est trouvé. Par défaut : désactivé. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| E-mail destinataire | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail contenant le lien. |
+| Variable | Oui | Nom de la variable qui reçoit le lien. Par défaut : `MailLink`. |
+| Intention | Non | Quel lien l'IA doit extraire. Par défaut : `The first link in the text`. |
+| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun lien n'est trouvé. Par défaut : désactivé. |
 
 Utilisez l'intention pour désambiguïser les e-mails contenant plusieurs liens : "The password reset link", "The link in the Confirm my account button".
-
-## Dans le scénario JSON
-
-Le step se trouve dans `step_groups[].steps` du scénario de test.
-
-```json
-{
-  "id": "step-1",
-  "type": "ai-get-mail-link",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@kappti.dev" } }],
-    "intent": [{ "type": "value", "data": { "value": "The link in the Confirm my account button" } }],
-    "variable": "MailLink",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
 
 ## Résultats et métriques
 

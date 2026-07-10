@@ -7,39 +7,14 @@ Ping a host over the SIM's data connection and measure round-trip time, jitter, 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Host | `command.host` | Yes | Host to ping, for example `8.8.8.8` or `google.fr`. |
-| Ping count | `command.count` | No | Number of pings. Default: 10. |
-| Packet size | `command.packet_size` | No | Packet size in bytes. Default: 64. |
-| Ping should fail | `expect_failure` | No | Invert the verdict. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Host | Yes | Host to ping, for example `8.8.8.8` or `google.fr`. |
+| Ping count | No | Number of pings. Default: 10. |
+| Packet size | No | Packet size in bytes. Default: 64. |
+| Ping should fail | No | Invert the verdict. |
 
 Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings): access technology, APN, keep PDP context, check network. The action ships with a default assertion: `packet_loss == 0`.
-
-## In the scenario JSON
-
-```json
-{
-  "type": "DATA_PING",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "host": "8.8.8.8",
-    "count": 10,
-    "packet_size": 64,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [
-    { "type": "response", "source": "result", "property": "packet_loss_pct", "compare": "==", "value": 0, "evaluate": true }
-  ],
-  "store": []
-}
-```
 
 ## Results and metrics
 

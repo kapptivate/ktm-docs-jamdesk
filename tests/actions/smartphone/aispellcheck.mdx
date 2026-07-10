@@ -7,29 +7,10 @@ Catch typos and grammar mistakes in your app before your users do. The AI reads 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Language | `language` | Yes | The language the visible text is expected to be written in (for example `French`). |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "ai-spell-check",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "language": "French",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Language | Yes | The language the visible text is expected to be written in (for example `French`). |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 ## Results and metrics
 

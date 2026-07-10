@@ -7,30 +7,11 @@ Wait for an SMS to arrive on the SIM and verify it: OTP delivery, notifications,
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Expected Message | `expected_result.message` | No | The SMS content you expect. The result records the match ratio. |
-| Check SMS reception from a previous step | `command.wait_from` | No | Start watching from a previous action's position, for SMS triggered earlier in the flow (a Send SMS or USSD action, for example). |
-| SMS reception is optional | `optional_reception` | No | The test passes even if no SMS arrives; variables get their default values. Default: off. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "SMS_GET",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_from": null,
-    "options": { "artifacts": {} }
-  },
-  "expected_result": {
-    "message": "Your verification code is"
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Expected Message | No | The SMS content you expect. The result records the match ratio. |
+| Check SMS reception from a previous step | No | Start watching from a previous action's position, for SMS triggered earlier in the flow (a Send SMS or USSD action, for example). |
+| SMS reception is optional | No | The test passes even if no SMS arrives; variables get their default values. Default: off. |
 
 ## Results and metrics
 

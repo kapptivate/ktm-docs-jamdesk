@@ -7,40 +7,14 @@ Envoyez un fichier d'une taille choisie vers un serveur FTP via la connexion dat
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Lien d'envoi | `command.upload_link` | Oui | URL FTP de destination. |
-| Taille du fichier | `command.file_size_in_byte` | Oui | Taille du contenu généré, en octets. |
-| Identifiants FTP | `command.ftp_username`, `command.ftp_password` | Non | Login pour le serveur FTP. |
-| L'envoi doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Lien d'envoi | Oui | URL FTP de destination. |
+| Taille du fichier | Oui | Taille du contenu généré, en octets. |
+| Identifiants FTP | Non | Login pour le serveur FTP. |
+| L'envoi doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_FTP_UPLOAD",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "upload_link": "ftp://files.example.com/incoming/",
-    "file_size_in_byte": 5000000,
-    "ftp_username": "test",
-    "ftp_password": "secret",
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

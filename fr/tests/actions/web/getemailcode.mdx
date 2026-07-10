@@ -8,31 +8,11 @@ Testez un flux de vérification par e-mail de bout en bout. Le step surveille un
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| E-mail destinataire | `mailbox` | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail contenant le code. |
-| Variable | `variable` | Oui | Nom de la variable qui reçoit le code. Par défaut : `MailCode`. |
-| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si aucun code n'est trouvé. Par défaut : désactivé. |
-
-## Dans le scénario JSON
-
-Le step se trouve dans `step_groups[].steps` du scénario de test.
-
-```json
-{
-  "id": "step-1",
-  "type": "ai-get-mail-code",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@kappti.dev" } }],
-    "variable": "MailCode",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| E-mail destinataire | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail contenant le code. |
+| Variable | Oui | Nom de la variable qui reçoit le code. Par défaut : `MailCode`. |
+| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun code n'est trouvé. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

@@ -7,30 +7,11 @@ Attendez un USSD push initié par le réseau : une alerte de solde, une notifica
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Message attendu | `expected_result.message` | Non | Le contenu du push que vous attendez. Le résultat enregistre le ratio de correspondance. |
-| Vérifier la réception depuis une étape précédente | `command.wait_from` | Non | Commencer la surveillance depuis la position d'une action précédente, pour les push déclenchés plus tôt dans le flux. |
-| La réception est optionnelle | `optional_reception` | Non | Le test réussit même si aucun push n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "USSD_PUSH",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_from": null,
-    "options": { "artifacts": {} }
-  },
-  "expected_result": {
-    "message": "Your balance is below 1.00"
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Message attendu | Non | Le contenu du push que vous attendez. Le résultat enregistre le ratio de correspondance. |
+| Vérifier la réception depuis une étape précédente | Non | Commencer la surveillance depuis la position d'une action précédente, pour les push déclenchés plus tôt dans le flux. |
+| La réception est optionnelle | Non | Le test réussit même si aucun push n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

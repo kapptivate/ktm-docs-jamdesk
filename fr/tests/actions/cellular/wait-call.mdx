@@ -7,34 +7,14 @@ Attendez un appel entrant sur la SIM et décrochez. Associé à [Place Call](/fr
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Technologie d'accès | `command.access_technology` | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
-| Temps d'attente | `command.wait_time_seconds` | Non | Temps d'attente pour l'appel. Par défaut : 30. |
-| Enregistrer l'appel | `command.record` | Non | Enregistrer l'audio reçu. Par défaut : désactivé. |
-| Calculer le MOS audio | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | Non | Évaluer l'audio enregistré par rapport au fichier de référence joué par l'appelant. Nécessite l'enregistrement. |
-| Bloquer jusqu'à réception de l'appel | `command.asynchronous` | Non | Exécuter de manière synchrone (bloquer le scénario) ou surveiller en arrière-plan. |
-| La réception de l'appel est optionnelle | `optional_reception` | Non | Le test réussit même si aucun appel n'arrive. Par défaut : désactivé. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "CALL_WAIT",
-  "owner": "SIM_2",
-  "skip": false,
-  "command": {
-    "wait_time_seconds": 30,
-    "record": true,
-    "mos": { "active": true, "algo": "polqa", "ref_file": "voice-10s" },
-    "asynchronous": false,
-    "access_technology": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Technologie d'accès | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
+| Temps d'attente | Non | Temps d'attente pour l'appel. Par défaut : 30. |
+| Enregistrer l'appel | Non | Enregistrer l'audio reçu. Par défaut : désactivé. |
+| Calculer le MOS audio | Non | Évaluer l'audio enregistré par rapport au fichier de référence joué par l'appelant. Nécessite l'enregistrement. |
+| Bloquer jusqu'à réception de l'appel | Non | Exécuter de manière synchrone (bloquer le scénario) ou surveiller en arrière-plan. |
+| La réception de l'appel est optionnelle | Non | Le test réussit même si aucun appel n'arrive. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

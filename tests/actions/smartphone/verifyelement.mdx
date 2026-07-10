@@ -7,14 +7,14 @@ Verify the state of an element in the app: the confirmation screen is displayed,
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element to verify. |
-| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
-| Condition | `<state>.reverse` | Yes | `is` or `is not`. "is not" sets `reverse: true` on the chosen state. |
-| State | `displayed`, `clickable`, `enabled`, or `exist` | Yes | The state to check. Default: `displayed`. `exist` is labeled "present" in the builder: the element is in the UI tree, visible or not. |
-| Max. waiting time | `<state>.timeout` | No | How long to wait for the condition before failing, in seconds. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Target element | Yes, unless a manual selector is set | Natural-language description of the element to verify. |
+| Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| Condition | Yes | `is` or `is not`. "is not" sets `reverse: true` on the chosen state. |
+| State | Yes | The state to check. Default: `displayed`. `exist` is labeled "present" in the builder: the element is in the UI tree, visible or not. |
+| Max. waiting time | No | How long to wait for the condition before failing, in seconds. |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 The four states:
 
@@ -22,36 +22,6 @@ The four states:
 - **clickable**: the element is visible and can receive a click or tap.
 - **enabled**: the element is active (not disabled).
 - **present**: the element exists in the UI tree, even if hidden.
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario. Its internal type is `wait-for`, and the chosen state is the key inside `inputs`.
-
-```json
-{
-  "id": "step-1",
-  "type": "wait-for",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The order confirmation banner" } }]
-    },
-    "displayed": {
-      "reverse": false,
-      "timeout": [{ "type": "value", "data": { "value": "30" } }]
-    },
-    "enable_ai": false,
-    "ai_strategy": "smart",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-To check that an element disappeared, keep the state and set `"reverse": true`.
 
 ## Results and metrics
 

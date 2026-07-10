@@ -7,40 +7,16 @@ Passez un appel vocal depuis la SIM : vers une autre SIM de la plateforme pour u
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Technologie d'accès | `command.access_technology` | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
-| Numéro du destinataire | `command.receiver` | Oui | Le numéro à appeler. Supporte les variables. |
-| Temps d'attente max | `command.max_wait_connect_time_seconds` | Non | Temps d'attente pour la connexion de l'appel. Par défaut : 30. |
-| Durée de l'appel | `command.call_duration_seconds` | Non | Durée de maintien de l'appel une fois connecté. Par défaut : 10. |
-| Jouer un fichier pendant l'appel | `command.play_file`, `command.filename` | Non | Jouer un fichier audio de référence dans l'appel (utilisé pour l'évaluation MOS côté réception). |
-| Enregistrer l'appel | `command.record` | Non | Enregistrer l'audio de l'appel. Par défaut : désactivé. |
-| Calculer le MOS audio | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | Non | Évaluer l'audio enregistré par rapport à un fichier de référence. Nécessite l'enregistrement. |
-| L'appel doit échouer | `expect_failure` | Non | Inverse le verdict, pour les numéros interdits. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "CALL_PLACE",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "receiver": "+33600000000",
-    "max_wait_connect_time_seconds": 30,
-    "call_duration_seconds": 10,
-    "play_file": true,
-    "filename": "voice-10s",
-    "record": false,
-    "mos": { "active": false, "algo": "", "ref_file": "voice-10s" },
-    "access_technology": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Technologie d'accès | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
+| Numéro du destinataire | Oui | Le numéro à appeler. Supporte les variables. |
+| Temps d'attente max | Non | Temps d'attente pour la connexion de l'appel. Par défaut : 30. |
+| Durée de l'appel | Non | Durée de maintien de l'appel une fois connecté. Par défaut : 10. |
+| Jouer un fichier pendant l'appel | Non | Jouer un fichier audio de référence dans l'appel (utilisé pour l'évaluation MOS côté réception). |
+| Enregistrer l'appel | Non | Enregistrer l'audio de l'appel. Par défaut : désactivé. |
+| Calculer le MOS audio | Non | Évaluer l'audio enregistré par rapport à un fichier de référence. Nécessite l'enregistrement. |
+| L'appel doit échouer | Non | Inverse le verdict, pour les numéros interdits. |
 
 ## Résultats et métriques
 

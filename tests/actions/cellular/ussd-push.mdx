@@ -7,30 +7,11 @@ Wait for a network-initiated USSD push: a balance alert, a subscription notifica
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Expected Message | `expected_result.message` | No | The push content you expect. The result records the match ratio. |
-| Check reception from a previous step | `command.wait_from` | No | Start watching from a previous action's position instead of this one, for pushes triggered earlier in the flow. |
-| Reception is optional | `optional_reception` | No | The test passes even if no push arrives; variables get their default values. Default: off. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "USSD_PUSH",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_from": null,
-    "options": { "artifacts": {} }
-  },
-  "expected_result": {
-    "message": "Your balance is below 1.00"
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Expected Message | No | The push content you expect. The result records the match ratio. |
+| Check reception from a previous step | No | Start watching from a previous action's position instead of this one, for pushes triggered earlier in the flow. |
+| Reception is optional | No | The test passes even if no push arrives; variables get their default values. Default: off. |
 
 ## Results and metrics
 

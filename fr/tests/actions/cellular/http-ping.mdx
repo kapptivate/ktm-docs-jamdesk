@@ -7,39 +7,14 @@ Interrogez une URL de façon répétée et mesurez la latence de réponse. Le pl
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Hôte | `command.url` | Oui | URL à pinger, par exemple `http://kapptivate.com`. |
-| Nombre de pings | `command.count` | Non | Nombre de requêtes. Par défaut : 10. |
-| Ignorer le certificat SSL | `command.insecure_skip_verify` | Non | Ignorer la vérification du certificat. Par défaut : désactivé. |
-| Le HTTP Ping doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Hôte | Oui | URL à pinger, par exemple `http://kapptivate.com`. |
+| Nombre de pings | Non | Nombre de requêtes. Par défaut : 10. |
+| Ignorer le certificat SSL | Non | Ignorer la vérification du certificat. Par défaut : désactivé. |
+| Le HTTP Ping doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_HTTP_PING",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "url": "https://kapptivate.com",
-    "count": 10,
-    "insecure_skip_verify": false,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

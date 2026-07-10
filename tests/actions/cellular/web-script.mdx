@@ -7,32 +7,12 @@ Run a JavaScript web scenario (page loads, clicks, form fills) with the traffic 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Script | `command` script fields | Yes | The JavaScript web scenario to execute. |
-| Asynchronous | `command.asynchronous` | No | Run the script without blocking the following actions. Default: off. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Script | Yes | The JavaScript web scenario to execute. |
+| Asynchronous | No | Run the script without blocking the following actions. Default: off. |
 
 Plus the shared [connection settings](/tests/actions/cellular/overview#connection-settings).
-
-## In the scenario JSON
-
-```json
-{
-  "type": "DATA_JS_WEB_SCRIPT",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "asynchronous": false,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Results and metrics
 

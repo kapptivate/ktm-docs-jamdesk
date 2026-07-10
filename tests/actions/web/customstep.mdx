@@ -7,37 +7,17 @@ Run your own JavaScript inside the test: handle a flow no built-in step covers, 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Step title | `name` | No | The name shown for this step in the builder and in results. |
-| Script | `script` | Yes | JavaScript code, edited in a dedicated modal. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if the script throws. Default: off. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Step title | No | The name shown for this step in the builder and in results. |
+| Script | Yes | JavaScript code, edited in a dedicated modal. |
+| Ignore error on this step | No | The run continues with the next step if the script throws. Default: off. |
 
 Inside the script you can use the WebdriverIO `browser` object to drive the session, and the `test` helpers, for example:
 
 ```javascript
 // Push a custom metric to Analytics
 test.metrics.create("checkout", { basket_total: 39.98 }, { currency: "EUR" });
-```
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "custom-step",
-  "version": "v1.0.0",
-  "disabled": false,
-  "name": "Accept the cookie banner if present",
-  "inputs": {
-    "script": "const banner = await browser.$('#cookie-accept');\nif (await banner.isDisplayed()) {\n  await banner.click();\n}",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
 ```
 
 ## Results and metrics

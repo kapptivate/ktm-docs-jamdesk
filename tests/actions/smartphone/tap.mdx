@@ -7,56 +7,15 @@ Tap an element on the screen: a button, a list item, a tab. Locate it with an XP
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Target element | `locator.description` | Yes in Selector mode, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
-| Manual selector | `locator.selector` | No | XPath selector in the app's UI tree, used when AI is disabled or as the saved selector. |
-| Approach | `locator.approach` | No | `0` = Selector (default), `1` = Coordinates. Toggle in the step's details panel. |
-| X Position, Y Position | `locator.coordinates.x`, `locator.coordinates.y` | Yes in Coordinates mode | Screen position to tap, in pixels from the top-left corner. |
-| AI usage | `ai_strategy` | No | `smart` (default), `always`, or `inherit`. |
-| Enable AI | `enable_ai` | No | Default: off. Turn it on to locate the element from the description. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario. Selector mode:
-
-```json
-{
-  "id": "step-1",
-  "type": "tap",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "approach": 0,
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The Log in button" } }]
-    },
-    "enable_ai": false,
-    "ai_strategy": "smart",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-Coordinates mode replaces the targeting part of `locator`:
-
-```json
-{
-  "locator": {
-    "approach": 1,
-    "selector": [{ "type": "value", "data": { "value": "" } }],
-    "description": [{ "type": "value", "data": { "value": "Center of the map" } }],
-    "coordinates": {
-      "x": [{ "type": "value", "data": { "value": "540" } }],
-      "y": [{ "type": "value", "data": { "value": "960" } }]
-    }
-  }
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Target element | Yes in Selector mode, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
+| Manual selector | No | XPath selector in the app's UI tree, used when AI is disabled or as the saved selector. |
+| Approach | No | `0` = Selector (default), `1` = Coordinates. Toggle in the step's details panel. |
+| X Position, Y Position | Yes in Coordinates mode | Screen position to tap, in pixels from the top-left corner. |
+| AI usage | No | `smart` (default), `always`, or `inherit`. |
+| Enable AI | No | Default: off. Turn it on to locate the element from the description. |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 ## Results and metrics
 

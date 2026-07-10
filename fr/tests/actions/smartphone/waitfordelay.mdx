@@ -12,29 +12,9 @@ Mettez le test en pause pendant un temps fixe. Utilisez-le quand rien d'observab
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Durée | `duration` | Oui | Durée de la pause. Un nombre suivi d'une unité : `ms`, `s` ou `m`. Par défaut : `10s`. |
-
-## Dans le JSON du scénario
-
-Le step se trouve dans `step_groups[].steps` du scénario de test. Son type interne est `pause`.
-
-```json
-{
-  "id": "step-1",
-  "type": "pause",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "duration": [{ "type": "value", "data": { "value": "10s" } }]
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-Les valeurs de durée valides correspondent à `^(\d+)(ms|s|m)$` : par exemple `500ms`, `10s` ou `2m`.
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Durée | Oui | Durée de la pause. Un nombre suivi d'une unité : `ms`, `s` ou `m`. Par défaut : `10s`. |
 
 ## Résultats et métriques
 

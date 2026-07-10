@@ -8,49 +8,10 @@ Définissez une valeur une fois et réutilisez-la dans tout le test : un nom d'u
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Nom de la variable | `name` | Oui | Nom de la variable à créer ou écraser. |
-| Valeur | `value` | Oui | La valeur à stocker. Supporte le texte, d'autres variables et des fonctions comme le texte aléatoire. |
-
-## Dans le JSON du scénario
-
-Le step se trouve dans `step_groups[].steps` du scénario de test.
-
-```json
-{
-  "id": "step-1",
-  "type": "set-variable",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "name": "Username",
-    "value": [
-      { "type": "value", "data": { "value": "qa-" } },
-      {
-        "type": "function",
-        "data": {
-          "name": "random_text",
-          "args": {
-            "length": 8,
-            "include_uppercase": false,
-            "include_lowercase": true,
-            "include_numerical": true,
-            "include_special": false,
-            "min_numerical": 0,
-            "min_special": 0
-          }
-        }
-      }
-    ],
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-Cet exemple stocke `qa-` suivi de 8 caractères aléatoires, ce qui vous donne un nom d'utilisateur unique à chaque exécution.
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Nom de la variable | Oui | Nom de la variable à créer ou écraser. |
+| Valeur | Oui | La valeur à stocker. Supporte le texte, d'autres variables et des fonctions comme le texte aléatoire. |
 
 ## Résultats et métriques
 

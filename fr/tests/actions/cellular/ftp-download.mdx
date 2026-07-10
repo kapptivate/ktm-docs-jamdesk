@@ -7,40 +7,14 @@ Téléchargez un fichier depuis un serveur FTP via la connexion data de la SIM e
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Lien de téléchargement | `command.download_link` | Oui | URL FTP du fichier. |
-| Limite de taille de téléchargement | `command.download_size_limit` | Non | Arrêter après ce nombre d'octets. |
-| Identifiants FTP | `command.ftp_username`, `command.ftp_password` | Non | Login pour le serveur FTP. |
-| Le téléchargement doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Lien de téléchargement | Oui | URL FTP du fichier. |
+| Limite de taille de téléchargement | Non | Arrêter après ce nombre d'octets. |
+| Identifiants FTP | Non | Login pour le serveur FTP. |
+| Le téléchargement doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_FTP_DOWNLOAD",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "download_link": "ftp://files.example.com/10MB.bin",
-    "download_size_limit": "",
-    "ftp_username": "test",
-    "ftp_password": "secret",
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

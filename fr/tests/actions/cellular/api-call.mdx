@@ -7,49 +7,18 @@ Envoyez une requête HTTP complète (méthode, en-têtes, corps) via la connexio
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Méthode HTTP | `command.http_method` | Oui | `GET` (par défaut), `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`. |
-| URL | `command.url` | Oui | Le point d'accès à appeler. Supporte les variables. |
-| En-têtes | `command.header` | Non | Liste clé/valeur (Authorization, Content-Type...). |
-| Corps | `command.body` | Non | Corps de la requête, pour les méthodes qui en envoient un. |
-| Suivre les redirections | `command.follow_redirect` | Non | Suivre les réponses 3xx. Par défaut : activé. |
-| Ignorer le certificat SSL | `command.insecure_skip_verify` | Non | Ignorer la vérification du certificat. Par défaut : désactivé. |
-| Activer les cookies | `command.enable_cookies` | Non | Conserver les cookies entre les redirections. Par défaut : désactivé. |
-| L'accès web doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Méthode HTTP | Oui | `GET` (par défaut), `POST`, `PUT`, `PATCH`, `DELETE`, `OPTIONS`, `HEAD`. |
+| URL | Oui | Le point d'accès à appeler. Supporte les variables. |
+| En-têtes | Non | Liste clé/valeur (Authorization, Content-Type...). |
+| Corps | Non | Corps de la requête, pour les méthodes qui en envoient un. |
+| Suivre les redirections | Non | Suivre les réponses 3xx. Par défaut : activé. |
+| Ignorer le certificat SSL | Non | Ignorer la vérification du certificat. Par défaut : désactivé. |
+| Activer les cookies | Non | Conserver les cookies entre les redirections. Par défaut : désactivé. |
+| L'accès web doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS. L'action est livrée avec une assertion par défaut : `status_code == 200`.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_API_HTTP",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "http_method": "POST",
-    "url": "https://api.example.com/v1/login",
-    "header": [{ "Content-Type": "application/json" }],
-    "body": "{\"username\": \"qa\", \"password\": \"secret\"}",
-    "follow_redirect": true,
-    "insecure_skip_verify": false,
-    "enable_cookies": false,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [
-    { "type": "response", "source": "result", "property": "status_code", "compare": "==", "value": 200, "evaluate": true }
-  ],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

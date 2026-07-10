@@ -7,38 +7,13 @@ Upload a file through an `<input type="file">` element. You point the step at th
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Target element | `locator.description` | Yes, unless a manual selector is set | The file input (or its visible upload control). The AI uses the description to find it. |
-| File url path | `url` | Yes | URL of the file to upload. The file must be reachable from the agent running the test. Supports variables. |
-| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
-| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "upload-file",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The attachment file input in the claim form" } }]
-    },
-    "url": [{ "type": "value", "data": { "value": "https://files.example.com/fixtures/id-card.png" } }],
-    "enable_ai": true,
-    "ai_strategy": "inherit",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Target element | Yes, unless a manual selector is set | The file input (or its visible upload control). The AI uses the description to find it. |
+| File url path | Yes | URL of the file to upload. The file must be reachable from the agent running the test. Supports variables. |
+| Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| AI usage | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 ## Results and metrics
 

@@ -8,56 +8,15 @@ Appuyez sur un élément à l'écran : un bouton, un élément de liste, un ongl
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Élément cible | `locator.description` | Oui en mode Selector, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
-| Selector manuel | `locator.selector` | Non | Selector XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Approche | `locator.approach` | Non | `0` = Selector (par défaut), `1` = Coordinates. Basculez dans le panneau de détails du step. |
-| Position X, Position Y | `locator.coordinates.x`, `locator.coordinates.y` | Oui en mode Coordinates | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
-| Utilisation de l'IA | `ai_strategy` | Non | `smart` (par défaut), `always` ou `inherit`. |
-| Activer l'IA | `enable_ai` | Non | Par défaut : désactivé. Activez-le pour localiser l'élément à partir de la description. |
-| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
-
-## Dans le JSON du scénario
-
-Le step se trouve dans `step_groups[].steps` du scénario de test. Mode Selector :
-
-```json
-{
-  "id": "step-1",
-  "type": "tap",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "approach": 0,
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The Log in button" } }]
-    },
-    "enable_ai": false,
-    "ai_strategy": "smart",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-Le mode Coordinates remplace la partie ciblage de `locator` :
-
-```json
-{
-  "locator": {
-    "approach": 1,
-    "selector": [{ "type": "value", "data": { "value": "" } }],
-    "description": [{ "type": "value", "data": { "value": "Center of the map" } }],
-    "coordinates": {
-      "x": [{ "type": "value", "data": { "value": "540" } }],
-      "y": [{ "type": "value", "data": { "value": "960" } }]
-    }
-  }
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Élément cible | Oui en mode Selector, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
+| Selector manuel | Non | Selector XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Approche | Non | `0` = Selector (par défaut), `1` = Coordinates. Basculez dans le panneau de détails du step. |
+| Position X, Position Y | Oui en mode Coordinates | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
+| Utilisation de l'IA | Non | `smart` (par défaut), `always` ou `inherit`. |
+| Activer l'IA | Non | Par défaut : désactivé. Activez-le pour localiser l'élément à partir de la description. |
+| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

@@ -7,36 +7,13 @@ Résolvez un domaine via la connexion data de la SIM. Vérifiez que le DNS de l'
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Hôte | `command.host` | Oui | Domaine à résoudre, par exemple `kapptivate.com`. |
-| Surcharge DNS | `command.override_dns`, `command.dns` | Non | Interroger des serveurs DNS spécifiques au lieu de ceux de l'opérateur. |
-| Le DNS Lookup doit échouer | `expect_failure` | Non | Inverse le verdict, pour les domaines qui doivent être bloqués. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Hôte | Oui | Domaine à résoudre, par exemple `kapptivate.com`. |
+| Surcharge DNS | Non | Interroger des serveurs DNS spécifiques au lieu de ceux de l'opérateur. |
+| Le DNS Lookup doit échouer | Non | Inverse le verdict, pour les domaines qui doivent être bloqués. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_DNS_LOOKUP",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "host": "kapptivate.com",
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

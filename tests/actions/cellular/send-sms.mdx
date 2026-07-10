@@ -7,38 +7,15 @@ Send an SMS from the SIM to any number. Pair it with a [Wait SMS](/tests/actions
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Access technology | `command.access_technology` | No | Network technology to use. Default: automatic. |
-| Recipient Number | `command.dest_number` | Yes | The destination phone number. Supports variables. |
-| Message | `command.sms_text` | Yes | The SMS body. Long texts are sent as multi-part SMS. |
-| Wait for delivery | `command.with_delivery_report`, `command.delivery_report_timeout` | No | Wait for the network delivery report, with a timeout in seconds. Default: off, 10s. |
-| Change default SMSC | `command.use_custom_smsc`, `command.smsc` | No | Send through a specific SMS service center. |
-| Execute multiple times | `command.send_multiple_times`, `command.repetition_number` | No | Repeat the send 1 to 30 times. |
-| SMS should fail | `expect_failure` | No | Invert the verdict: the action succeeds only if the send fails (barring tests, for example). |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "SMS_SEND",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "dest_number": "+33600000000",
-    "sms_text": "Test message",
-    "access_technology": "",
-    "with_delivery_report": true,
-    "delivery_report_timeout": 10,
-    "use_custom_smsc": false,
-    "smsc": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Access technology | No | Network technology to use. Default: automatic. |
+| Recipient Number | Yes | The destination phone number. Supports variables. |
+| Message | Yes | The SMS body. Long texts are sent as multi-part SMS. |
+| Wait for delivery | No | Wait for the network delivery report, with a timeout in seconds. Default: off, 10s. |
+| Change default SMSC | No | Send through a specific SMS service center. |
+| Execute multiple times | No | Repeat the send 1 to 30 times. |
+| SMS should fail | No | Invert the verdict: the action succeeds only if the send fails (barring tests, for example). |
 
 ## Results and metrics
 

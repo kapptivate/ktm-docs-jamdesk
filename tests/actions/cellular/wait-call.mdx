@@ -7,34 +7,14 @@ Wait for an incoming call on the SIM and answer it. Paired with [Place Call](/te
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Access technology | `command.access_technology` | No | Network technology, including VoLTE profiles. Default: automatic. |
-| Wait time | `command.wait_time_seconds` | No | How long to wait for the call. Default: 30. |
-| Record call | `command.record` | No | Record the received audio. Default: off. |
-| Compute Audio MOS | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | No | Score the recorded audio against the reference file played by the caller. Requires recording. |
-| Block until call received | `command.asynchronous` | No | Run synchronously (block the scenario) or watch in the background. |
-| Call reception is optional | `optional_reception` | No | The test passes even if no call arrives. Default: off. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "CALL_WAIT",
-  "owner": "SIM_2",
-  "skip": false,
-  "command": {
-    "wait_time_seconds": 30,
-    "record": true,
-    "mos": { "active": true, "algo": "polqa", "ref_file": "voice-10s" },
-    "asynchronous": false,
-    "access_technology": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Access technology | No | Network technology, including VoLTE profiles. Default: automatic. |
+| Wait time | No | How long to wait for the call. Default: 30. |
+| Record call | No | Record the received audio. Default: off. |
+| Compute Audio MOS | No | Score the recorded audio against the reference file played by the caller. Requires recording. |
+| Block until call received | No | Run synchronously (block the scenario) or watch in the background. |
+| Call reception is optional | No | The test passes even if no call arrives. Default: off. |
 
 ## Results and metrics
 

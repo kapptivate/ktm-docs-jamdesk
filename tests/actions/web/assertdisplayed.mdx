@@ -11,38 +11,13 @@ Verify that an element is visible on the page, failing if it does not appear wit
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the element that must be visible. |
-| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
-| Timeout | `timeout` | No | How long to wait for the element before failing. Default: `30s`. |
-| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "assert-displayed",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The order confirmation banner" } }]
-    },
-    "timeout": [{ "type": "value", "data": { "value": "30s" } }],
-    "enable_ai": true,
-    "ai_strategy": "inherit",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Target element | Yes, unless a manual selector is set | Natural-language description of the element that must be visible. |
+| Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| Timeout | No | How long to wait for the element before failing. Default: `30s`. |
+| AI usage | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 ## Results and metrics
 

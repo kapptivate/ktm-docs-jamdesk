@@ -7,36 +7,15 @@ Send a USSD code (`#100#`, `*123*1#`) on a real SIM and wait for the network's r
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Access technology | `command.access_technology` | No | Network technology to use (2G, 3G, 4G...). Default: automatic. |
-| Command | `command.input` | Yes | The USSD code to send, for example `#100#`. Supports variables. |
-| Expected Message | `expected_result.message` | No | The response you expect. The result records how closely the actual response matches. |
-| Enable strict text comparison | `command.enable_strict_mode` | No | Exact comparison instead of fuzzy matching. Default: off. |
-| Execute multiple times | `command.send_multiple_times`, `command.repetition_number` | No | Repeat the command 1 to 30 times. |
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Access technology | No | Network technology to use (2G, 3G, 4G...). Default: automatic. |
+| Command | Yes | The USSD code to send, for example `#100#`. Supports variables. |
+| Expected Message | No | The response you expect. The result records how closely the actual response matches. |
+| Enable strict text comparison | No | Exact comparison instead of fuzzy matching. Default: off. |
+| Execute multiple times | No | Repeat the command 1 to 30 times. |
 
 Like every SIM action, it also supports [assertions, stored variables, and artifacts](/tests/actions/cellular/overview#common-options).
-
-## In the scenario JSON
-
-```json
-{
-  "type": "USSD",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "input": "#100#",
-    "access_technology": "",
-    "enable_strict_mode": false,
-    "options": { "artifacts": {} }
-  },
-  "expected_result": {
-    "message": "Balance: 50.00"
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Results and metrics
 

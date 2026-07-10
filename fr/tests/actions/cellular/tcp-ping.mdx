@@ -7,37 +7,13 @@ Mesurez la latence en ouvrant des connexions TCP vers un hôte au lieu d'envoyer
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Url | `command.url` | Oui | Hôte (et port) à atteindre. |
-| Nombre de pings | `command.count` | Non | Nombre de tentatives de connexion. Par défaut : 10. |
-| Le TCP Ping doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Url | Oui | Hôte (et port) à atteindre. |
+| Nombre de pings | Non | Nombre de tentatives de connexion. Par défaut : 10. |
+| Le TCP Ping doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés et la surcharge DNS (`command.override_dns`, `command.dns`).
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_TCP_PING",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "url": "kapptivate.com:443",
-    "count": 10,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "override_dns": false,
-    "dns": [],
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

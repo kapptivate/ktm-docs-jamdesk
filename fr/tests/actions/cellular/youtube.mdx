@@ -7,35 +7,13 @@ Diffusez une vidéo via la connexion data de la SIM et mesurez l'expérience : t
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Url | `command.url` | Oui | L'URL de la vidéo à diffuser. |
-| Qualité | `command.quality` | Non | Qualité vidéo demandée. Par défaut : `144p`. |
-| Durée de lecture | `command.duration_to_play` | Non | Combien de temps diffuser, en secondes. Par défaut : 10. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Url | Oui | L'URL de la vidéo à diffuser. |
+| Qualité | Non | Qualité vidéo demandée. Par défaut : `144p`. |
+| Durée de lecture | Non | Combien de temps diffuser, en secondes. Par défaut : 10. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "STREAMING_VIDEO",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "quality": "360p",
-    "duration_to_play": 30,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

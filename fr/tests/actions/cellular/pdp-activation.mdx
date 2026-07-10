@@ -7,35 +7,14 @@ Activez un contexte PDP (la session data cellulaire) et vérifiez que le réseau
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Technologie d'accès | `command.access_technology` | Non | Technologie réseau à utiliser. Par défaut : automatique. |
-| Utiliser les identifiants APN par défaut | `command.default_apn` | Non | Utiliser l'APN configuré pour la SIM. Par défaut : activé. |
-| Nom APN, Login, Mot de passe | `command.apn`, `command.login`, `command.password` | Quand l'APN par défaut est désactivé | Identifiants APN personnalisés. |
-| Conserver le contexte PDP | `command.keep_alive` | Non | Maintenir la session data ouverte pour les actions suivantes. Par défaut : désactivé. |
-| Vérifier la connexion internet avant l'exécution | `command.check_network.active` | Non | Vérifier la connectivité d'abord. Par défaut : activé. |
-| PDP Activation doit échouer | `expect_failure` | Non | Inverse le verdict, pour les SIM qui ne doivent pas avoir d'accès data. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_PDP_ACTIVATION",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "access_technology": "",
-    "default_apn": true,
-    "apn": "",
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Technologie d'accès | Non | Technologie réseau à utiliser. Par défaut : automatique. |
+| Utiliser les identifiants APN par défaut | Non | Utiliser l'APN configuré pour la SIM. Par défaut : activé. |
+| Nom APN, Login, Mot de passe | Quand l'APN par défaut est désactivé | Identifiants APN personnalisés. |
+| Conserver le contexte PDP | Non | Maintenir la session data ouverte pour les actions suivantes. Par défaut : désactivé. |
+| Vérifier la connexion internet avant l'exécution | Non | Vérifier la connectivité d'abord. Par défaut : activé. |
+| PDP Activation doit échouer | Non | Inverse le verdict, pour les SIM qui ne doivent pas avoir d'accès data. |
 
 ## Résultats et métriques
 

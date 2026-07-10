@@ -7,25 +7,9 @@ Redémarrez le modem hébergeant la SIM et mesurez le temps nécessaire pour rev
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Attendre l'enregistrement réseau après le redémarrage | `command.wait_network.active`, `command.wait_network.duration` | Non | Attendre que la SIM soit à nouveau enregistrée, avec un délai de 60 à 240 secondes. Par défaut : activé, 120s. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "RESTART",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_network": { "active": true, "duration": 120 },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Attendre l'enregistrement réseau après le redémarrage | Non | Attendre que la SIM soit à nouveau enregistrée, avec un délai de 60 à 240 secondes. Par défaut : activé, 120s. |
 
 ## Résultats et métriques
 

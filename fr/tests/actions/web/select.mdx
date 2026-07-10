@@ -11,44 +11,16 @@ Choisissez une option dans un élément `<select>` natif, par texte visible, par
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Élément cible | `locator.description` | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément select. |
-| Selector manuel | `locator.selector` | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Sélectionner l'option par | `by` | Oui | `visible_text` (par défaut), `index`, ou `attribute`. |
-| Valeur | `visible_text.value` | Quand by est `visible_text` | Le texte visible de l'option. |
-| Index | `index.value` | Quand by est `index` | La position de l'option, à partir de 0. |
-| Nom et valeur de l'attribut | `attribute.name`, `attribute.value` | Quand by est `attribute` | L'attribut HTML à faire correspondre, par exemple `value` = `FR`. |
-| Utilisation IA | `ai_strategy` | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
-| Ignorer l'erreur sur ce step | `ignore_errors` | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
-
-## Dans le JSON du scénario
-
-Le step se trouve dans `step_groups[].steps` du scénario de test. Seul le sous-objet correspondant à `by` est conservé.
-
-```json
-{
-  "id": "step-1",
-  "type": "select",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The country dropdown in the shipping form" } }]
-    },
-    "by": "visible_text",
-    "visible_text": {
-      "value": [{ "type": "value", "data": { "value": "France" } }]
-    },
-    "enable_ai": true,
-    "ai_strategy": "inherit",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément select. |
+| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Sélectionner l'option par | Oui | `visible_text` (par défaut), `index`, ou `attribute`. |
+| Valeur | Quand by est `visible_text` | Le texte visible de l'option. |
+| Index | Quand by est `index` | La position de l'option, à partir de 0. |
+| Nom et valeur de l'attribut | Quand by est `attribute` | L'attribut HTML à faire correspondre, par exemple `value` = `FR`. |
+| Utilisation IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
+| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

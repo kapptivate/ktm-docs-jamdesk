@@ -7,39 +7,14 @@ Effectuez un ping vers un hôte via la connexion data de la SIM et mesurez le te
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Hôte | `command.host` | Oui | Hôte à pinger, par exemple `8.8.8.8` ou `google.fr`. |
-| Nombre de pings | `command.count` | Non | Nombre de pings. Par défaut : 10. |
-| Taille du paquet | `command.packet_size` | Non | Taille du paquet en octets. Par défaut : 64. |
-| Le Ping doit échouer | `expect_failure` | Non | Inverse le verdict. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Hôte | Oui | Hôte à pinger, par exemple `8.8.8.8` ou `google.fr`. |
+| Nombre de pings | Non | Nombre de pings. Par défaut : 10. |
+| Taille du paquet | Non | Taille du paquet en octets. Par défaut : 64. |
+| Le Ping doit échouer | Non | Inverse le verdict. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés : technologie d'accès, APN, conserver le contexte PDP, vérifier le réseau. L'action est livrée avec une assertion par défaut : `packet_loss == 0`.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_PING",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "host": "8.8.8.8",
-    "count": 10,
-    "packet_size": 64,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [
-    { "type": "response", "source": "result", "property": "packet_loss_pct", "compare": "==", "value": 0, "evaluate": true }
-  ],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

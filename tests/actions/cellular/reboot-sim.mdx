@@ -7,25 +7,9 @@ Restart the modem hosting the SIM and measure how long it takes to come back and
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Wait for network registration after reboot | `command.wait_network.active`, `command.wait_network.duration` | No | Wait until the SIM is registered again, with a timeout of 60 to 240 seconds. Default: on, 120s. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "RESTART",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_network": { "active": true, "duration": 120 },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Wait for network registration after reboot | No | Wait until the SIM is registered again, with a timeout of 60 to 240 seconds. Default: on, 120s. |
 
 ## Results and metrics
 

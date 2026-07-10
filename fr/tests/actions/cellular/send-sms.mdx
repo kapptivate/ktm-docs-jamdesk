@@ -7,38 +7,15 @@ Envoyez un SMS depuis la SIM vers n'importe quel numéro. Associez-le à un [Wai
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Technologie d'accès | `command.access_technology` | Non | Technologie réseau à utiliser. Par défaut : automatique. |
-| Numéro du destinataire | `command.dest_number` | Oui | Le numéro de téléphone de destination. Supporte les variables. |
-| Message | `command.sms_text` | Oui | Le corps du SMS. Les textes longs sont envoyés en SMS multi-parties. |
-| Attendre la livraison | `command.with_delivery_report`, `command.delivery_report_timeout` | Non | Attendre l'accusé de réception du réseau, avec un délai en secondes. Par défaut : désactivé, 10s. |
-| Changer le SMSC par défaut | `command.use_custom_smsc`, `command.smsc` | Non | Envoyer via un centre de service SMS spécifique. |
-| Exécuter plusieurs fois | `command.send_multiple_times`, `command.repetition_number` | Non | Répéter l'envoi de 1 à 30 fois. |
-| Le SMS doit échouer | `expect_failure` | Non | Inverse le verdict : l'action réussit uniquement si l'envoi échoue (tests d'interdiction, par exemple). |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "SMS_SEND",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "dest_number": "+33600000000",
-    "sms_text": "Test message",
-    "access_technology": "",
-    "with_delivery_report": true,
-    "delivery_report_timeout": 10,
-    "use_custom_smsc": false,
-    "smsc": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Technologie d'accès | Non | Technologie réseau à utiliser. Par défaut : automatique. |
+| Numéro du destinataire | Oui | Le numéro de téléphone de destination. Supporte les variables. |
+| Message | Oui | Le corps du SMS. Les textes longs sont envoyés en SMS multi-parties. |
+| Attendre la livraison | Non | Attendre l'accusé de réception du réseau, avec un délai en secondes. Par défaut : désactivé, 10s. |
+| Changer le SMSC par défaut | Non | Envoyer via un centre de service SMS spécifique. |
+| Exécuter plusieurs fois | Non | Répéter l'envoi de 1 à 30 fois. |
+| Le SMS doit échouer | Non | Inverse le verdict : l'action réussit uniquement si l'envoi échoue (tests d'interdiction, par exemple). |
 
 ## Résultats et métriques
 

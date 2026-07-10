@@ -7,39 +7,10 @@ Load a page by URL: jump to a deep link mid-scenario, or open a link extracted f
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| URL | `url` | Yes | The address to load, for example `https://www.example.com`. Supports [variables](/tests/variables), so you can navigate to an extracted link. |
-| Checks | `checks` | No | Step checks evaluated after the page loads: URL, loading time, and step duration. Each check can fail the step or only raise a warning. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario. This example adds a loading time check that raises a warning above 3 seconds.
-
-```json
-{
-  "id": "step-1",
-  "type": "navigate-to-url",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "url": [{ "type": "test_variable", "data": { "name": "MailLink" } }]
-  },
-  "checks": [
-    {
-      "id": "check-1",
-      "type": "check",
-      "entity": "loading_time",
-      "operator": "lt",
-      "value": [{ "type": "value", "data": { "value": "3" } }],
-      "logicalOperator": "and",
-      "statusModifier": "warning"
-    }
-  ],
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| URL | Yes | The address to load, for example `https://www.example.com`. Supports [variables](/tests/variables), so you can navigate to an extracted link. |
+| Checks | No | Step checks evaluated after the page loads: URL, loading time, and step duration. Each check can fail the step or only raise a warning. |
 
 ## Results and metrics
 

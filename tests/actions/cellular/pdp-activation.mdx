@@ -7,35 +7,14 @@ Activate a PDP context (the cellular data session) and verify the network assign
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Access technology | `command.access_technology` | No | Network technology to use. Default: automatic. |
-| Use default APN credentials | `command.default_apn` | No | Use the APN configured for the SIM. Default: on. |
-| APN Name, Login, Password | `command.apn`, `command.login`, `command.password` | When default APN is off | Custom APN credentials. |
-| Keep pdp context | `command.keep_alive` | No | Leave the data session open for the following actions. Default: off. |
-| Check internet connection before running action | `command.check_network.active` | No | Verify connectivity first. Default: on. |
-| PDP Activation should fail | `expect_failure` | No | Invert the verdict, for SIMs that must not have data access. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "DATA_PDP_ACTIVATION",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "access_technology": "",
-    "default_apn": true,
-    "apn": "",
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Access technology | No | Network technology to use. Default: automatic. |
+| Use default APN credentials | No | Use the APN configured for the SIM. Default: on. |
+| APN Name, Login, Password | When default APN is off | Custom APN credentials. |
+| Keep pdp context | No | Leave the data session open for the following actions. Default: off. |
+| Check internet connection before running action | No | Verify connectivity first. Default: on. |
+| PDP Activation should fail | No | Invert the verdict, for SIMs that must not have data access. |
 
 ## Results and metrics
 

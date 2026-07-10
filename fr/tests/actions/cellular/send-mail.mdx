@@ -7,42 +7,16 @@ Envoyez un e-mail via un serveur SMTP sur la connexion data de la SIM. Vérifiez
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Serveur SMTP | `command.smtp_url` | Oui | L'adresse du serveur SMTP. |
-| Compte SMTP | `command.smtp_user_email`, `command.smtp_password` | Oui | Identifiants utilisés pour l'envoi. |
-| Destinataire | `command.mail_receiver` | Oui | Adresse e-mail de destination. |
-| Objet | `command.email_subject` | Non | Objet de l'e-mail. |
-| Corps | `command.email_body` | Non | Contenu de l'e-mail. |
-| L'envoi doit échouer | `expect_failure` | Non | Inverse le verdict, pour le SMTP qui doit être bloqué. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Serveur SMTP | Oui | L'adresse du serveur SMTP. |
+| Compte SMTP | Oui | Identifiants utilisés pour l'envoi. |
+| Destinataire | Oui | Adresse e-mail de destination. |
+| Objet | Non | Objet de l'e-mail. |
+| Corps | Non | Contenu de l'e-mail. |
+| L'envoi doit échouer | Non | Inverse le verdict, pour le SMTP qui doit être bloqué. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_EMAIL_SEND",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "smtp_url": "smtp.example.com:587",
-    "smtp_user_email": "qa@example.com",
-    "smtp_password": "secret",
-    "mail_receiver": "inbox@example.com",
-    "email_subject": "Cellular SMTP check",
-    "email_body": "Sent from a real SIM",
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

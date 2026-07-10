@@ -11,38 +11,13 @@ Set a checkbox to a target state. The step only clicks when the current state di
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Target element | `locator.description` | Yes, unless a manual selector is set | Natural-language description of the checkbox. |
-| Manual selector | `locator.selector` | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
-| Set as checked | `checked` | No | The target state. Default: off (unchecked). |
-| AI usage | `ai_strategy` | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if this one fails. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "checkbox",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "locator": {
-      "selector": [{ "type": "value", "data": { "value": "" } }],
-      "description": [{ "type": "value", "data": { "value": "The terms and conditions checkbox" } }]
-    },
-    "checked": true,
-    "enable_ai": true,
-    "ai_strategy": "inherit",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Target element | Yes, unless a manual selector is set | Natural-language description of the checkbox. |
+| Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
+| Set as checked | No | The target state. Default: off (unchecked). |
+| AI usage | No | `inherit` (default, follows the test strategy), `smart`, or `always`. |
+| Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
 ## Results and metrics
 

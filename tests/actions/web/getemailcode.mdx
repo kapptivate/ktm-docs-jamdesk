@@ -7,31 +7,11 @@ Test an email verification flow end to end. The step watches a test mailbox, wai
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Email to receive code | `mailbox` | Yes | The test mailbox address that should receive the email containing the code. |
-| Variable | `variable` | Yes | Name of the variable that receives the code. Default: `MailCode`. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no code is found. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "ai-get-mail-code",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "mailbox": [{ "type": "value", "data": { "value": "qa-signup@kappti.dev" } }],
-    "variable": "MailCode",
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Email to receive code | Yes | The test mailbox address that should receive the email containing the code. |
+| Variable | Yes | Name of the variable that receives the code. Default: `MailCode`. |
+| Ignore error on this step | No | The run continues with the next step if no code is found. Default: off. |
 
 ## Results and metrics
 

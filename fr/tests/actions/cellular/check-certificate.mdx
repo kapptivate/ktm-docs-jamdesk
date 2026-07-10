@@ -7,31 +7,11 @@ Récupérez et inspectez le certificat TLS servi par un domaine, tel que vu depu
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Nom de domaine | `command.domain_name` | Oui | Le domaine dont il faut vérifier le certificat. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Nom de domaine | Oui | Le domaine dont il faut vérifier le certificat. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_CHECK_CERTIFICATE",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "domain_name": "kapptivate.com",
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

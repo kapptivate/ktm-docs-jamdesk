@@ -7,29 +7,10 @@ Continue the test in another tab or window: a payment page that opened in a new 
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Tab name or URL | `matcher` | Yes | Text matched against the title and URL of open tabs. The first matching tab becomes the active one. Supports variables. |
-| Ignore error on this step | `ignore_errors` | No | The run continues with the next step if no tab matches. Default: off. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario.
-
-```json
-{
-  "id": "step-1",
-  "type": "switch-window",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "matcher": [{ "type": "value", "data": { "value": "checkout.stripe.com" } }],
-    "ignore_errors": false
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Tab name or URL | Yes | Text matched against the title and URL of open tabs. The first matching tab becomes the active one. Supports variables. |
+| Ignore error on this step | No | The run continues with the next step if no tab matches. Default: off. |
 
 ## Results and metrics
 

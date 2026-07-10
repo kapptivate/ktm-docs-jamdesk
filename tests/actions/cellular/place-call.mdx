@@ -7,40 +7,16 @@ Place a voice call from the SIM: to another SIM in the platform for an end-to-en
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Access technology | `command.access_technology` | No | Network technology, including VoLTE profiles. Default: automatic. |
-| Call Receiver Number | `command.receiver` | Yes | The number to call. Supports variables. |
-| Max wait time | `command.max_wait_connect_time_seconds` | No | How long to wait for the call to connect. Default: 30. |
-| Call duration | `command.call_duration_seconds` | No | How long to hold the call once connected. Default: 10. |
-| Play file during call | `command.play_file`, `command.filename` | No | Play a reference audio file into the call (used for MOS scoring on the receiving side). |
-| Record call | `command.record` | No | Record the call audio. Default: off. |
-| Compute Audio MOS | `command.mos.active`, `command.mos.algo`, `command.mos.ref_file` | No | Score the recorded audio against a reference file. Requires recording. |
-| Call should fail | `expect_failure` | No | Invert the verdict, for barred numbers. |
-
-## In the scenario JSON
-
-```json
-{
-  "type": "CALL_PLACE",
-  "owner": "SIM_1",
-  "skip": false,
-  "expect_failure": false,
-  "command": {
-    "receiver": "+33600000000",
-    "max_wait_connect_time_seconds": 30,
-    "call_duration_seconds": 10,
-    "play_file": true,
-    "filename": "voice-10s",
-    "record": false,
-    "mos": { "active": false, "algo": "", "ref_file": "voice-10s" },
-    "access_technology": "",
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Access technology | No | Network technology, including VoLTE profiles. Default: automatic. |
+| Call Receiver Number | Yes | The number to call. Supports variables. |
+| Max wait time | No | How long to wait for the call to connect. Default: 30. |
+| Call duration | No | How long to hold the call once connected. Default: 10. |
+| Play file during call | No | Play a reference audio file into the call (used for MOS scoring on the receiving side). |
+| Record call | No | Record the call audio. Default: off. |
+| Compute Audio MOS | No | Score the recorded audio against a reference file. Requires recording. |
+| Call should fail | No | Invert the verdict, for barred numbers. |
 
 ## Results and metrics
 

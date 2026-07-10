@@ -7,32 +7,12 @@ Exécutez un scénario web JavaScript (chargements de pages, clics, remplissage 
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Script | Champs script de `command` | Oui | Le scénario web JavaScript à exécuter. |
-| Asynchrone | `command.asynchronous` | Non | Exécuter le script sans bloquer les actions suivantes. Par défaut : désactivé. |
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Script | Oui | Le scénario web JavaScript à exécuter. |
+| Asynchrone | Non | Exécuter le script sans bloquer les actions suivantes. Par défaut : désactivé. |
 
 Ainsi que les [paramètres de connexion](/fr/tests/actions/cellular/overview#paramètres-de-connexion) partagés.
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "DATA_JS_WEB_SCRIPT",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "asynchronous": false,
-    "access_technology": "",
-    "default_apn": true,
-    "keep_alive": false,
-    "check_network": { "active": true },
-    "options": { "artifacts": {} }
-  },
-  "assertions": [],
-  "store": []
-}
-```
 
 ## Résultats et métriques
 

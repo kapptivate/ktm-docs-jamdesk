@@ -7,30 +7,11 @@ Attendez qu'un SMS arrive sur la SIM et vérifiez-le : livraison d'OTP, notifica
 
 ## Paramètres
 
-| Paramètre | Champ JSON | Requis | Description |
-|-----------|------------|--------|-------------|
-| Message attendu | `expected_result.message` | Non | Le contenu du SMS que vous attendez. Le résultat enregistre le ratio de correspondance. |
-| Vérifier la réception SMS depuis une étape précédente | `command.wait_from` | Non | Commencer la surveillance depuis la position d'une action précédente, pour les SMS déclenchés plus tôt dans le flux (un Send SMS ou une action USSD, par exemple). |
-| La réception SMS est optionnelle | `optional_reception` | Non | Le test réussit même si aucun SMS n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
-
-## Dans le JSON du scénario
-
-```json
-{
-  "type": "SMS_GET",
-  "owner": "SIM_1",
-  "skip": false,
-  "command": {
-    "wait_from": null,
-    "options": { "artifacts": {} }
-  },
-  "expected_result": {
-    "message": "Your verification code is"
-  },
-  "assertions": [],
-  "store": []
-}
-```
+| Paramètre | Requis | Description |
+| ----------- | -------- | ------------- |
+| Message attendu | Non | Le contenu du SMS que vous attendez. Le résultat enregistre le ratio de correspondance. |
+| Vérifier la réception SMS depuis une étape précédente | Non | Commencer la surveillance depuis la position d'une action précédente, pour les SMS déclenchés plus tôt dans le flux (un Send SMS ou une action USSD, par exemple). |
+| La réception SMS est optionnelle | Non | Le test réussit même si aucun SMS n'arrive ; les variables reçoivent leurs valeurs par défaut. Par défaut : désactivé. |
 
 ## Résultats et métriques
 

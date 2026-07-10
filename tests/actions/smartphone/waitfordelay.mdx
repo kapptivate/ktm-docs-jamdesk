@@ -11,29 +11,9 @@ Pause the test for a fixed time. Reach for it when nothing observable signals re
 
 ## Parameters
 
-| Parameter | JSON field | Required | Description |
-|-----------|------------|----------|-------------|
-| Duration | `duration` | Yes | How long to pause. A number followed by a unit: `ms`, `s`, or `m`. Default: `10s`. |
-
-## In the scenario JSON
-
-The step lives in `step_groups[].steps` of the test scenario. Its internal type is `pause`.
-
-```json
-{
-  "id": "step-1",
-  "type": "pause",
-  "version": "v1.0.0",
-  "disabled": false,
-  "inputs": {
-    "duration": [{ "type": "value", "data": { "value": "10s" } }]
-  },
-  "use_capabilities": false,
-  "capabilities": {}
-}
-```
-
-Valid duration values match `^(\d+)(ms|s|m)$`: for example `500ms`, `10s`, or `2m`.
+| Parameter | Required | Description |
+| ----------- | ---------- | ------------- |
+| Duration | Yes | How long to pause. A number followed by a unit: `ms`, `s`, or `m`. Default: `10s`. |
 
 ## Results and metrics
 
