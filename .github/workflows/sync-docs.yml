@@ -42,7 +42,7 @@ jobs:
         env:
           KAPPTIVATE_INSTALL_BASE: ${{ vars.KAPPTIVATE_INSTALL_BASE }}
         run: |
-          base="${KAPPTIVATE_INSTALL_BASE:-https://kapptivate-tools.s3.fr-par.scw.cloud/ktm}"
+          base="${KAPPTIVATE_INSTALL_BASE:-https://artefacts.kapptivate.com/ktm}"
           dir="$RUNNER_TEMP/ktm-bin"
           mkdir -p "$dir"
           curl -fsSL "$base/install.sh" \
