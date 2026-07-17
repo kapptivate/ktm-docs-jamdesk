@@ -29,21 +29,24 @@ irm https://artefacts.kapptivate.com/ktm/install.ps1 | iex
 
 Le script télécharge la dernière version stable de `ktm`, vérifie son checksum et l'ajoute à votre PATH. Définissez `KAPPTIVATE_VERSION=1.4.0` pour fixer une version spécifique.
 
-<Accordion title="Installer depuis le canal beta">
+Les préversions sont publiées sur le canal **beta**. Définissez `KAPPTIVATE_CHANNEL=beta` pour installer la dernière :
 
-  Les préversions sont publiées sur le canal **beta**. Définissez `KAPPTIVATE_CHANNEL=beta` pour installer la dernière :
+<Tabs>
+  <Tab title="macOS / Linux">
 
-  ```bash
-  curl -fsSL https://artefacts.kapptivate.com/ktm/install.sh | KAPPTIVATE_CHANNEL=beta bash
-  ```
+```bash
+curl -fsSL https://artefacts.kapptivate.com/ktm/install.sh | KAPPTIVATE_CHANNEL=beta bash
+```
 
-  Sous Windows :
+  </Tab>
+  <Tab title="Windows">
 
-  ```powershell
-  $env:KAPPTIVATE_CHANNEL = "beta"; irm https://artefacts.kapptivate.com/ktm/install.ps1 | iex
-  ```
+```powershell
+$env:KAPPTIVATE_CHANNEL = "beta"; irm https://artefacts.kapptivate.com/ktm/install.ps1 | iex
+```
 
-</Accordion>
+  </Tab>
+</Tabs>
 
 Vérifiez l'installation :
 
