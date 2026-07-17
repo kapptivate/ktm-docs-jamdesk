@@ -29,6 +29,22 @@ irm https://artefacts.kapptivate.com/ktm/install.ps1 | iex
 
 The installer fetches the latest stable `ktm`, verifies its checksum, and adds it to your PATH. Set `KAPPTIVATE_VERSION=1.4.0` to pin a specific version.
 
+<Accordion title="Install from the beta channel">
+
+  Prereleases ship on the **beta** channel. Set `KAPPTIVATE_CHANNEL=beta` to install the latest one:
+
+  ```bash
+  curl -fsSL https://artefacts.kapptivate.com/ktm/install.sh | KAPPTIVATE_CHANNEL=beta bash
+  ```
+
+  On Windows:
+
+  ```powershell
+  $env:KAPPTIVATE_CHANNEL = "beta"; irm https://artefacts.kapptivate.com/ktm/install.ps1 | iex
+  ```
+
+</Accordion>
+
 Confirm the install:
 
 ```bash
