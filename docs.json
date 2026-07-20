@@ -775,6 +775,14 @@
                 ]
               },
               {
+                "group": "Configure your agents",
+                "icon": "robot",
+                "pages": [
+                  "cli/agents/cursor",
+                  "cli/agents/claude-code"
+                ]
+              },
+              {
                 "group": "Guides",
                 "icon": "compass",
                 "pages": [
@@ -1839,6 +1847,14 @@
                   "fr/cli/getting-started",
                   "fr/cli/configuration",
                   "fr/cli/ci-cd"
+                ]
+              },
+              {
+                "group": "Configurer vos agents",
+                "icon": "robot",
+                "pages": [
+                  "fr/cli/agents/cursor",
+                  "fr/cli/agents/claude-code"
                 ]
               },
               {

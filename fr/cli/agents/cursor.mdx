@@ -1,0 +1,193 @@
+---
+title: Configurer Cursor
+description: Créez un workspace d'écriture de tests Kapptivate avec ktm init et connectez-le à Cursor.
+sidebarTitle: Cursor
+---
+
+Écrire un test Kapptivate à la main suppose de connaître la grammaire JSON, le catalogue d'actions et les sélecteurs qui fonctionnent réellement sur votre application. `ktm init` crée un workspace qui confie tout cela à votre agent de code : les skills d'écriture, un catalogue de vos tests et variables, et une connexion vivante à un robot capable de piloter de vrais navigateurs et appareils.
+
+Cette page décrit la configuration pour Cursor. Le même workspace fonctionne dans Claude Code, Codex et Copilot sans modification.
+
+## Avant de commencer
+
+Il vous faut `ktm` installé et une clé API. Si ce n'est pas encore le cas, suivez d'abord [Installation](/fr/cli/installation), puis créez une clé depuis les Paramètres de votre organisation, rubrique Clés API.
+
+Cursor doit déjà être installé. `ktm init` le détecte et propose de le configurer.
+
+## Créer le workspace
+
+Créez un dossier vide et lancez l'assistant dedans. Un dossier correspond aux tests d'un produit.
+
+```bash
+mkdir mes-tests
+cd mes-tests
+ktm init
+```
+
+L'assistant pose cinq questions. Appuyez sur Entrée pour accepter la valeur par défaut à tout moment.
+
+<Steps>
+  <Step title="Environnement">
+    `app.kapptivate.com`, sauf si un hôte spécifique vous a été fourni.
+  </Step>
+  <Step title="Clé API">
+    Collez votre clé, ou réutilisez celle déjà enregistrée pour cet hôte. La clé part dans le trousseau de votre système, jamais dans un fichier du dossier.
+  </Step>
+  <Step title="Opérateur et produit">
+    Un produit est l'application ou le site que vous testez. Si votre clé n'atteint qu'un seul opérateur, l'assistant le choisit pour vous. Changez plus tard avec `ktm use <produit>`.
+  </Step>
+  <Step title="Automatisation des appareils">
+    L'assistant cherche un robot capable de piloter navigateurs et appareils pour votre opérateur, puis le configure. Rien à coller.
+  </Step>
+  <Step title="Agents de code">
+    Rien n'est coché par défaut. Cochez Cursor. L'assistant écrit `.cursor/mcp.json` pour vous.
+  </Step>
+</Steps>
+
+À la fin, vous obtenez un dossier de cette forme :
+
+```
+mes-tests/
+  .agents/skills/          les skills d'écriture, lus par Cursor
+  .claude/skills/          liens vers les mêmes skills, pour Claude Code
+  .cursor/mcp.json         connexion au robot pour Cursor
+  .mcp.json                connexion au robot pour les autres agents
+  AGENTS.md                contrat du workspace pour les agents de code
+  CLAUDE.md                le même contrat pour Claude Code
+  catalog/                 instantané de vos tests, variables et réutilisables
+  pages/                   sélecteurs vérifiés lors d'une exécution réelle
+  .ktm.json                opérateur et produit ciblés par ce dossier
+```
+
+<Note>
+  Les fichiers porteurs d'un secret (`.mcp.json`, `.cursor/mcp.json`, `.ktm.local.json`) sont ajoutés au `.gitignore` automatiquement. Le dossier peut être versionné tel quel.
+</Note>
+
+## Ouvrir le dossier dans Cursor
+
+Passez par File, puis Open Folder, et choisissez le dossier que vous venez de créer.
+
+<Frame caption="Ouvrir le dossier créé comme workspace Cursor">
+  ![Menu File de Cursor avec Open Folder en surbrillance](/images/cli/cursor-setup-01.webp)
+</Frame>
+
+C'est l'ouverture du dossier qui active la configuration du workspace. Cursor lit `.cursor/mcp.json` et `.agents/skills/` relativement au dossier ouvert : ouvrir un dossier parent ne fonctionnera pas.
+
+## Activer la connexion au robot
+
+`ktm init` écrit la configuration MCP, mais Cursor demande de l'activer une fois par workspace.
+
+<Steps>
+  <Step title="Ouvrir Customize">
+    Cliquez sur Customize dans la barre latérale, puis sur l'onglet MCPs.
+
+    <Frame caption="L'onglet MCPs sous Customize">
+      ![Panneau Customize de Cursor, onglet MCPs](/images/cli/cursor-setup-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Sélectionner kapptivate-automation">
+    Il apparaît sous Connected, marqué Workspace et Disabled.
+
+    <Frame caption="Le serveur est détecté mais pas encore activé">
+      ![kapptivate-automation affiché comme Disabled](/images/cli/cursor-setup-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Activer la source Workspace">
+    Basculez l'interrupteur en face de la source `.cursor/mcp.json`.
+
+    <Frame caption="L'interrupteur Workspace, avant activation">
+      ![Fenêtre de configuration avec la source Workspace désactivée](/images/cli/cursor-setup-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Vérifier la connexion">
+    Local passe à Connected et la liste des outils apparaît. Cliquez sur Done.
+
+    <Frame caption="Connecté, avec les outils d'automatisation listés">
+      ![Fenêtre de configuration affichant Connected et les outils activés](/images/cli/cursor-setup-05.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+Si Local reste sur Disconnected, le robot n'est pas joignable. Vérifiez qu'il est en ligne, puis lancez `ktm init --reconfigure` pour le récupérer.
+
+## Remplir le catalogue
+
+Les skills sont disponibles dès que le dossier est ouvert. Tapez `/` dans le panneau de l'agent pour les voir.
+
+<Frame caption="Les skills Kapptivate, accessibles depuis le panneau de l'agent">
+  ![Autocomplétion des skills affichant sync-kapptivate-catalog](/images/cli/cursor-setup-06.webp)
+</Frame>
+
+Lancez d'abord `sync-kapptivate-catalog`. Il récupère vos tests, variables et réutilisables dans `catalog/`, ce qui permet à l'agent de référencer un groupe de variables existant par son id au lieu d'écrire un mot de passe en dur.
+
+Rafraîchissez-le dès que le catalogue dépasse une quinzaine de jours, ou après une modification des tests sur la plateforme.
+
+## Écrire votre premier test
+
+Demandez en langage courant. Le skill `write-kapptivate-test` porte la grammaire JSON et le catalogue d'actions, vous n'avez pas à les connaître.
+
+```
+Écris un test qui se connecte à la boutique avec les identifiants de staging
+et vérifie que la page compte affiche le nom de l'utilisateur.
+```
+
+L'agent rédige le test, l'exécute sur un vrai navigateur via le robot, et corrige ce qui échoue. Un test n'est pas terminé tant qu'il ne renvoie pas `success` : la validation structurelle ne détecte pas un mauvais sélecteur, seule une exécution réelle le fait.
+
+<Tip>
+  Après une exécution verte, demandez à l'agent d'enregistrer dans `pages/` les sélecteurs qu'il a vérifiés. Le test suivant sur les mêmes écrans partira de sélecteurs éprouvés au lieu de les redécouvrir.
+</Tip>
+
+## Maintenir le workspace à jour
+
+Les skills sont verrouillés sur la version du CLI : ils documentent les options et le comportement du binaire qui les a écrits. Après une mise à jour de `ktm`, rafraîchissez-les.
+
+```bash
+ktm update
+ktm init --refresh-skills
+```
+
+<Warning>
+  `--refresh-skills` supprime et réécrit les dossiers de skills. Si vous y conservez des fichiers personnels, prévisualisez d'abord avec `ktm init --refresh-skills --dry-run`, qui liste tout ce qui serait supprimé.
+</Warning>
+
+## Résolution de problèmes
+
+<AccordionGroup>
+  <Accordion title="Les skills n'apparaissent pas quand je tape /">
+    Cursor les lit dans `.agents/skills/` relativement au dossier ouvert. Vérifiez que vous avez bien ouvert le dossier créé, et non son parent. Si le dossier est le bon, fermez-le et rouvrez-le.
+  </Accordion>
+  <Accordion title="kapptivate-automation est absent de l'onglet MCPs">
+    Cursor n'a probablement pas été coché pendant l'assistant, donc `.cursor/mcp.json` n'a jamais été écrit. Lancez `ktm init --reconfigure` dans le dossier et cochez Cursor cette fois.
+  </Accordion>
+  <Accordion title="Le robot se connecte mais les commandes échouent en 401">
+    La clé API atteint la plateforme mais pas le robot. Lancez `ktm operators list` puis `ktm reusables list --product <operateur>~<produit>`. Si la seconde échoue, votre clé n'a pas les accès au niveau produit : créez une nouvelle clé sur une équipe qui les possède.
+  </Accordion>
+  <Accordion title="ktm init indique qu'aucun robot n'a répondu">
+    Aucun agent d'automatisation n'était en ligne pour votre opérateur au moment de l'assistant. `.mcp.json` conserve une URL de remplacement. Lancez `ktm init --reconfigure` une fois un robot démarré, ou passez `--automation-url <endpoint>` si vous la connaissez.
+  </Accordion>
+</AccordionGroup>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Écrire des tests avec un agent" icon="wand-magic-sparkles" href="/fr/cli/guides/create-tests">
+
+    Approfondir le prompting, les sélecteurs et l'obtention d'un test vert
+
+</Card>
+  <Card title="Configuration du CLI" icon="gear" href="/fr/cli/configuration">
+
+    Variables d'environnement, hôtes et stockage des identifiants
+
+</Card>
+  <Card title="Configurer Claude Code" icon="terminal" href="/fr/cli/agents/claude-code">
+
+    Le même workspace, configuré pour Claude Code
+
+</Card>
+  <Card title="Exécuter les tests en CI" icon="rocket" href="/fr/cli/ci-cd">
+
+    Emmener les tests écrits ici dans votre pipeline
+
+</Card>
+</Columns>

@@ -1,3 +1,18 @@
-references/*.mp4
 node_modules/
 images/*.bak
+
+# macOS
+.DS_Store
+
+# Local env / secrets
+.envrc
+
+# Reference videos (large binaries, kept locally only)
+references/*.mp4
+references/video/*.mp4
+
+# Local working material
+knowledge/
+
+# Local clone of the product repo, used for reference only
+references/kapptigalaxy/

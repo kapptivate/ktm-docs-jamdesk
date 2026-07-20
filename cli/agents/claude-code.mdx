@@ -1,0 +1,160 @@
+---
+title: Set up Claude Code
+description: Scaffold a Kapptivate test-authoring workspace with ktm init and connect it to Claude Code.
+sidebarTitle: Claude Code
+---
+
+Writing a Kapptivate test by hand means knowing the JSON grammar, the action catalog, and which selectors actually work on your app. `ktm init` scaffolds a workspace that hands all of that to Claude Code: the authoring skills, a catalog of your tests and variables, and a live connection to a robot that can drive real browsers and devices.
+
+This page walks through the setup for Claude Code. The same workspace works in Cursor, Codex, and Copilot without changes.
+
+## Before you start
+
+You need `ktm` installed and an API key. If you do not have them yet, follow [Installation](/cli/installation) first, then create a key from your organization's Settings, then API Keys.
+
+## Scaffold the workspace
+
+Create an empty folder and run the wizard inside it. One folder holds one product's tests.
+
+```bash
+mkdir my-tests
+cd my-tests
+ktm init
+```
+
+The wizard asks for your environment, your API key, the operator and product to target, and which robot to drive. Press Enter to take the default at any point.
+
+Claude Code needs no answer to the "coding agents" question: `ktm init` always wires it. It writes `.mcp.json` for the robot connection and adds the server to `.claude/settings.local.json` so Claude Code actually enables it.
+
+When it finishes you have a folder like this:
+
+```
+my-tests/
+  .agents/skills/          the authoring skills, real files
+  .claude/skills/          links to those skills, read by Claude Code
+  .mcp.json                robot connection
+  CLAUDE.md                workspace contract for Claude Code
+  AGENTS.md                the same contract for other agents
+  catalog/                 snapshot of your tests, variables, and reusables
+  pages/                   selectors you have verified on a real run
+  .ktm.json                which operator and product this folder targets
+```
+
+<Note>
+  Files that carry a secret (`.mcp.json`, `.ktm.local.json`) are added to `.gitignore` automatically. The folder is safe to commit as-is.
+</Note>
+
+## Start Claude Code in the folder
+
+```bash
+cd my-tests
+claude
+```
+
+Claude Code reads `CLAUDE.md`, `.mcp.json`, and `.claude/skills/` relative to where you start it. Starting from a parent directory will not pick them up.
+
+If you already had Claude Code running in this folder, restart it or run `/mcp`, otherwise it will not see the server that was just added.
+
+## Check the robot connected
+
+Run `/mcp` in Claude Code. `kapptivate-automation` should be listed as connected.
+
+If it is missing or failing, the robot is probably not reachable. Check that it is online, then run `ktm init --reconfigure` to pick it up again.
+
+## Fill the catalog
+
+The skills are available as slash commands. Run this one first:
+
+```
+/sync-kapptivate-catalog
+```
+
+It pulls your tests, variables, and reusables into `catalog/`, which is what lets Claude reference an existing variable group by id instead of hardcoding a password.
+
+Refresh it whenever the catalog is more than about two weeks old, or after someone changes tests on the platform.
+
+## Write your first test
+
+Ask in plain language, or start from the skill directly.
+
+```
+/write-kapptivate-test a test that logs into the shop with the staging
+credentials and checks that the account page shows the user's name
+```
+
+Claude drafts the test, runs it on a real browser through the robot, and fixes what fails. A test is not done until it returns `success`: structural validation does not catch a wrong selector, only a real run does.
+
+<Tip>
+  After a green run, ask Claude to record the selectors it verified into `pages/`. The next test against the same screens starts from known-good selectors instead of rediscovering them.
+</Tip>
+
+## Keep the workspace current
+
+The skills are version-locked to the CLI: they document the flags and behavior of the binary that wrote them. After upgrading `ktm`, refresh them.
+
+```bash
+ktm update
+ktm init --refresh-skills
+```
+
+<Warning>
+  `--refresh-skills` deletes and rewrites the skill folders. If you keep your own files there, preview first with `ktm init --refresh-skills --dry-run`, which lists everything it would remove.
+</Warning>
+
+## Sharing the workspace with a Windows teammate
+
+`.claude/skills/` holds links into `.agents/skills/`, and git stores those as symlinks. A Windows checkout without symlink support materializes each one as a small text file containing a path, so Claude Code finds a file where it expects a skill folder.
+
+The fix is one command, run once after cloning:
+
+```bash
+ktm init --refresh-skills
+```
+
+On a Windows host that cannot create symlinks, this writes real copies instead of links, and everything works from there.
+
+<Note>
+  Cursor and Codex are not affected: they read `.agents/skills/`, which is always real files. This only touches Claude Code, and only on a Windows clone of a workspace committed elsewhere.
+</Note>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The slash commands do not appear">
+    Claude Code reads them from `.claude/skills/` relative to where you started it. Confirm you started in the scaffolded folder, not its parent, then restart the session.
+  </Accordion>
+  <Accordion title="/mcp does not list kapptivate-automation">
+    The server is declared in `.mcp.json` but Claude Code enables it through `.claude/settings.local.json`. If you answered no to the enablement prompt at some point, run `ktm init --reconfigure` to restore it, then restart Claude Code.
+  </Accordion>
+  <Accordion title="The robot connects but commands fail with 401">
+    The API key reached the platform but not the robot. Run `ktm operators list` and `ktm reusables list --product <operator>~<product>`. If the second one fails, your key lacks product-level access: create a new key on a team that has it.
+  </Accordion>
+  <Accordion title="ktm init says no robot answered">
+    No device-automation agent was online for your operator when the wizard ran. `.mcp.json` keeps a placeholder URL. Run `ktm init --reconfigure` once a robot is up, or pass `--automation-url <endpoint>` if you know it.
+  </Accordion>
+</AccordionGroup>
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Set up Cursor" icon="arrow-pointer" href="/cli/agents/cursor">
+
+    The same workspace, configured for Cursor
+
+</Card>
+  <Card title="Write tests with an agent" icon="wand-magic-sparkles" href="/cli/guides/create-tests">
+
+    Go deeper on prompting, selectors, and getting a test to green
+
+</Card>
+  <Card title="CLI configuration" icon="gear" href="/cli/configuration">
+
+    Environment variables, hosts, and where credentials are stored
+
+</Card>
+  <Card title="Run tests in CI" icon="rocket" href="/cli/ci-cd">
+
+    Take the tests you authored here into your pipeline
+
+</Card>
+</Columns>
