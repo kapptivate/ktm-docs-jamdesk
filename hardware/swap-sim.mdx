@@ -1,60 +1,78 @@
 ---
 title: Swap a SIM in a cellular robot
-description: Replace a SIM card and reconfigure its slot in the platform.
+description: Install a SIM card, give it its number, and hand over the settings of the card it replaces.
 ---
 
-Swapping a SIM is a mix of physical and platform work: put the robot in maintenance, change the card, then update the slot configuration so tests target the right number.
+Putting a SIM to work takes three moves: install the card, reboot its slot, then give the new SIM its number. What happens after you save depends on the number you type. A number that already belongs to another SIM in your workspace triggers a swap, and Kapptivate carries the old card's settings and monitors over for you. A number nobody uses yet starts a fresh SIM.
 
 <Warning>
   Every SIM card used in a robot must be configured **without a PIN code**.
 </Warning>
 
 <Steps>
-  <Step title="Identify the robot and put it in maintenance">
-    In the **Administration** section, choose **Cellular robots**.
+  <Step title="Install the card">
+    Withdraw the card currently in the slot, if there is one, and install the new card. No PIN code.
+  </Step>
+  <Step title="Reboot the slot">
+    Under **Equipments**, open **Agents** and stay on the **SIM Agents** tab. Search the agent by hostname, or narrow the list with the Status and Zone filters.
 
-    <Frame caption="The Administration section">
-      ![Administration section](/images/hardware/swap-sim-01.webp)
+    <Frame caption="The SIM Agents tab of the Agents area">
+      ![The Agents area on the SIM Agents tab, with the SIM, Smartphone, Web, and Passive tabs, a search box, Status and Zone filters, and two agent cards showing status, zone, slots, and version](/images/hardware/swap-sim-01.webp)
     </Frame>
 
-    <Frame caption="The cellular robots list">
-      ![Cellular robots](/images/hardware/swap-sim-02.webp)
-    </Frame>
+    Open the agent, go to its **Connected devices** tab, then open the three dots menu on the slot you changed and click **Reboot slot**.
 
-    Click the three dots on the robot's box and select **Set agent in maintenance**.
-
-    <Frame caption="Set the agent in maintenance">
-      ![Set agent in maintenance](/images/hardware/swap-sim-03.webp)
+    <Frame caption="The slot menu on the Connected devices tab">
+      ![The Slots table of a cellular agent, with one slot holding a SIM and its open action menu offering Edit, Activate test-only mode, and Reboot slot](/images/hardware/swap-sim-02.webp)
     </Frame>
   </Step>
-  <Step title="Swap the card">
-    Withdraw the current SIM and install the new one (no PIN code).
+  <Step title="Wait for the slot to pick up the card">
+    The slot detects the card and lists it as **Unnamed**, with the status **Configuration**. Every status is listed in [Statuses](/equipment/statuses).
+
+    <Frame caption="A card waiting to be configured">
+      ![The Slots table of a cellular agent showing one configured SIM with the status Available and two unnamed SIMs with the status Configuration](/images/hardware/swap-sim-03.webp)
+    </Frame>
   </Step>
-  <Step title="Reconfigure the slot">
-    Click the robot's three dots, select **Edit**, and browse to the **slots** section.
+  <Step title="Give the SIM its number">
+    Click the SIM to open its page, then open the **Settings** tab. Fill the **National MSISDN**. The **International MSISDN** is optional: fill it, and its country selector, when your tests need the number in international format.
 
-    <Frame caption="The slots section of the robot">
-      ![Slots section](/images/hardware/swap-sim-04.webp)
+    Click **Save changes**. The SIM's name is generated from the number, so there is nothing to type in the Name field.
+
+    <Frame caption="The About section of the SIM settings">
+      ![The Settings tab of a SIM, with the About, SIM Details, and Default APN sub-navigation and the About form holding National MSISDN, International MSISDN with a country selector, Name, and a Save changes button](/images/hardware/swap-sim-04.webp)
     </Frame>
-
-    Click the three dots left of the slot and select **Reboot this slot**. After a minute, click them again and select **Edit**.
-
-    <Frame caption="Reboot, then edit the slot">
-      ![Reboot this slot](/images/hardware/swap-sim-05.webp)
-    </Frame>
-
-    Update the values for the new SIM: **National msisdn**, **International msisdn** (without `+`), and **Phone prefix**. Assign the necessary products, add the APN data if needed, and save.
-  </Step>
-  <Step title="Reboot and release">
-    From the slots section, reboot the slot once more.
-
-    <Frame caption="Final slot reboot">
-      ![Final reboot](/images/hardware/swap-sim-06.webp)
-    </Frame>
-
-    Back in the cellular robots menu, release the robot with **Unset agent in maintenance**.
   </Step>
 </Steps>
+
+## Reusing the number of an old SIM
+
+This is the case when you replace a card that was already running tests, and you want the new card to take its place.
+
+Type the old SIM's number and save. Kapptivate finds the SIM that already holds it and opens the **Swap SIM values?** dialog.
+
+<Frame caption="The dialog that offers to hand over the old SIM's settings">
+  ![The Swap SIM values dialog, warning that another SIM is already using this MSISDN and listing the information it would move over: International MSISDN, Products, Phone prefix, and APN address and credentials, with Cancel and Swap values buttons](/images/hardware/swap-sim-05.webp)
+</Frame>
+
+Click **Swap values**. The international MSISDN, the products, the phone prefix, and the APN move from the old SIM to the new one, and the monitors that ran on the old card resume on the new card. Nothing else to configure.
+
+Click **Cancel** to keep both SIMs as they were.
+
+## Setting up a number for the first time
+
+A number nobody used before arrives with no settings, so give the SIM what it needs to run tests.
+
+Open the SIM's **General** tab and go to **Products**. Turn on **This SIM can be used by all the products**, or leave it off and use **Add product** to build a restricted list.
+
+<Frame caption="The products allowed to use the SIM">
+  ![The Products section of a SIM, with the toggle This SIM can be used by all the products, a list of nine products with their operator, and an Add product button](/images/hardware/swap-sim-06.webp)
+</Frame>
+
+Data tests also need an access point. Back in **Settings**, fill **Default APN** and click **Save changes**.
+
+<Frame caption="The default APN of the SIM">
+  ![The Default APN section with APN name, APN login, and APN password fields and a Save changes button](/images/hardware/swap-sim-07.webp)
+</Frame>
 
 ## What's Next?
 
@@ -62,6 +80,11 @@ Swapping a SIM is a mix of physical and platform work: put the robot in maintena
   <Card title="SIM cards troubleshooting" icon="sim-card" href="/hardware/sim-troubleshooting">
 
     If the new SIM does not register
+
+</Card>
+  <Card title="Devices lab" icon="mobile-screen-button" href="/equipment/devices-lab">
+
+    Browse every SIM in your workspace and check its usage
 
 </Card>
   <Card title="SIM tests" icon="bolt" href="/tests/actions/cellular/overview">
