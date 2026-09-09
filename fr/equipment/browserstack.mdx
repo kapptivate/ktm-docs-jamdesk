@@ -1,0 +1,167 @@
+---
+title: BrowserStack
+description: Connectez un compte BrowserStack, importez les devices dont vous avez besoin, et faites-y tourner vos tests smartphone.
+sidebarTitle: BrowserStack
+---
+
+![L'onglet General d'un agent BrowserStack : un panneau About avec le username du compte, le fournisseur, la date de connexion et le nombre de devices importés, et un panneau Plan and capacity avec le plan, les sessions parallèles en cours et les sessions en file](/images/browserstack-agent-general.webp)
+
+Kapptivate peut exécuter vos tests d'applications natives sur les devices d'un compte [BrowserStack](https://www.browserstack.com), plutôt que sur des téléphones branchés à un robot. Vous connectez le compte, vous choisissez les devices qui valent la peine d'être importés, et ces devices apparaissent dans votre Devices lab, à côté de vos devices physiques. Les tests, les monitors et les résultats fonctionnent de la même façon sur les deux.
+
+Vous montez quand même un agent, et il se range dans la liste des Agents à côté des autres. Ce qui change, c'est ce que monter veut dire ici : vous connectez un compte, sans rien à installer ni matériel à recevoir.
+
+## Avant de commencer
+
+- Un compte BrowserStack avec un plan Automate ou App Automate.
+- Ses **username** et **access key**, à copier depuis [votre profil BrowserStack](https://www.browserstack.com/accounts/profile/details).
+- L'application à tester, uploadée dans l'App Management de BrowserStack. Kapptivate ne peut lancer que les applications que votre compte BrowserStack héberge, jamais celles préinstallées sur un device public du cloud.
+
+## Démarrage rapide
+
+<Steps>
+  <Step>
+    **Connectez le compte.** Ouvrez **Agents**, cliquez sur **Create agent**, puis choisissez **BrowserStack** dans le groupe **From a provider**. Collez vos username et access key, puis **Connect**. Kapptivate vérifie les identifiants auprès de BrowserStack avant d'aller plus loin.
+  </Step>
+  <Step>
+    **Importez vos devices.** L'écran suivant liste tous les devices que le compte propose. Cherchez ou filtrez par marque, cochez ceux que vos utilisateurs ont vraiment, et enregistrez la sélection.
+  </Step>
+  <Step>
+    **Donnez-y accès à vos produits.** Une dernière étape demande quels produits peuvent lancer des tests sur ce que vous venez d'importer, pour ne pas avoir à ouvrir chaque device un par un.
+  </Step>
+  <Step>
+    **Lancez un test sur un device cloud.** Créez ou ouvrez un [test Smartphone](/fr/agents-devices/smartphone), sélectionnez un device importé, choisissez l'application, et lancez.
+  </Step>
+</Steps>
+
+## Connecter un compte BrowserStack
+
+Connecter un compte, c'est le même geste que créer un agent : **Agents** > **Create agent**. La ligne BrowserStack se trouve dans le groupe **From a provider**, sous les agents qui tournent sur votre propre infrastructure.
+
+![La modal Create agent, intitulée What do you want to connect, avec les lignes Web, Smartphone, SIM et Passive sous On your infrastructure, et une ligne BrowserStack sous From a provider](/images/browserstack-create-agent.webp)
+
+Le formulaire demande deux champs :
+
+- **Username** : votre username BrowserStack.
+- **Access key** : la clé qui figure sur la même page de profil. Elle est stockée chiffrée et n'est plus jamais affichée, gardez-en donc une copie du côté de BrowserStack.
+
+Kapptivate teste le couple à la validation. Trois réponses sont possibles :
+
+- **Connexion établie**, avec le nom du plan et le nombre de sessions parallèles qu'il autorise. La connexion enchaîne sur l'import des devices.
+- **Identifiants refusés** : le username ou la clé est incorrect. Vérifiez les deux sur votre page de profil, puis réessayez.
+- **BrowserStack injoignable** : vos identifiants ne sont pas en cause, c'est le fournisseur qui n'a pas répondu. Réessayez dans un moment.
+
+![Le formulaire de connexion, avec un champ Username, un champ Access key masqué, la mention que la clé est stockée chiffrée et jamais réaffichée, et un lien Where do I find my username and access key](/images/browserstack-connect-account.webp)
+
+Un compte ne peut être connecté qu'une fois par agent. Si le username est déjà déclaré, le formulaire le signale au lieu de créer un doublon.
+
+Une fois connecté, le compte apparaît sous forme de carte dans l'onglet **Smartphone** de la liste des agents, avec son statut, son username et le nombre de devices qu'il apporte. Le filtre **Type** de cet onglet sépare les agents **Robot** des agents **BrowserStack**.
+
+## Choisir les devices que vous importez
+
+BrowserStack propose bien plus de devices qu'une équipe n'en teste. Plutôt que de déverser tout le catalogue dans votre workspace, vous y puisez : **seuls les devices que vous sélectionnez apparaissent dans votre Devices lab et dans les formulaires de test**.
+
+Le sélecteur liste les devices du compte avec leur OS et sa version. Pour trouver les vôtres :
+
+- **Cherchez** par nom.
+- **Filtrez par marque**, Apple étant regroupé sous son nom plutôt que par ligne de modèles.
+- **Unselect all** vide la sélection, quand repartir de zéro est plus rapide que décocher un catalogue.
+- Le bouton de validation compte ce qui est retenu, par exemple **Save (12)**.
+
+![Le sélecteur de devices, avec un champ de recherche, un filtre All brands, un bouton Unselect all, une ligne par device avec sa version d'OS, et un bouton Save qui compte la sélection](/images/browserstack-import-devices.webp)
+
+Enregistrez la sélection et les devices arrivent sur l'agent. Vous pouvez rouvrir le sélecteur à tout moment depuis l'onglet **Connected devices** de l'agent, avec **Edit the selection**, pour ajouter un device que vous supportez désormais ou retirer un device que vous ne testez plus.
+
+<Note>
+  Retirer un device ne supprime rien chez BrowserStack. Il retourne au catalogue et peut être réimporté plus tard. Les tests et les monitors qui tournaient dessus s'arrêtent en revanche : vérifiez ce qui utilise un device avant de le retirer.
+</Note>
+
+## Donner à vos produits accès aux devices importés
+
+Juste après un import, Kapptivate demande quels produits peuvent utiliser les devices. Un device que personne ne peut utiliser est un device avec lequel personne ne teste, et cocher les mêmes produits sur cinquante devices un par un est précisément le travail que cette étape supprime.
+
+![L'étape qui suit un import : une phrase indiquant combien de devices ont été importés, un multi-select Products, et les boutons Not now et Save](/images/browserstack-products.webp)
+
+Choisissez un ou plusieurs produits et enregistrez, ou passez avec **Not now**. Le choix n'est jamais définitif : vous pouvez le changer plus tard sur l'onglet **General** de chaque device, ou depuis les [devices du produit](/fr/administration/products/devices).
+
+## La page de l'agent BrowserStack
+
+Cliquez sur une carte BrowserStack dans la liste des agents pour ouvrir l'agent. Il a les mêmes onglets que les autres agents.
+
+### General
+
+**About** montre le compte avec lequel il se connecte, le fournisseur, depuis quand il est connecté, et combien de devices il a importés parmi ceux que le compte propose. **Edit agent** mène à l'onglet Settings.
+
+**Plan and capacity** montre ce que le compte peut exécuter en simultané, la seule consommation que BrowserStack rapporte :
+
+- **Plan** : le plan Automate rattaché au compte.
+- **Parallel sessions** : combien tournent sur le maximum autorisé par le plan, avec une barre de progression.
+- **Queued sessions** : combien d'exécutions attendent une session libre.
+
+Quand toutes les sessions parallèles sont occupées, un avertissement le dit : un test lancé à ce moment-là attend dans la file plutôt que d'échouer. BrowserStack n'expose aucun décompte de minutes consommées via son API : lisez-les sur son propre tableau de bord d'usage, vers lequel le panneau renvoie.
+
+### Connected devices
+
+Les devices importés depuis le compte, dans le même tableau que le reste de vos smartphones. **Edit the selection** rouvre le sélecteur. Avant le premier import, cet onglet vous invite à choisir des devices au lieu d'afficher un tableau vide.
+
+![L'onglet Connected devices d'un agent BrowserStack, qui liste les téléphones importés avec leur statut, leur source, leur usage, leurs accès, leurs monitors et leur host](/images/browserstack-connected-devices.webp)
+
+### Monitors
+
+Les monitors qui tournent sur les devices importés, groupés par suite, avec leur statut, leur fréquence et leur localisation. Mettez-en un en pause depuis sa ligne, ou mettez-les tous en pause.
+
+### Settings
+
+- **About** : renommez l'agent. Ce nom est celui qui apparaît sur la carte de l'agent, dans le Devices lab et dans les formulaires de test.
+- **Account** : le username et l'access key masquée. **Edit** remplace les identifiants, par exemple après une rotation de clé chez BrowserStack. Laissez le champ de la clé vide pour conserver l'actuelle. **Open BrowserStack** ouvre la page de profil où vivent les identifiants. **Disconnect** retire le compte et les devices qu'il a importés, et arrête les monitors qui les utilisent.
+- **Danger zone** : supprimez l'agent. La suppression retire l'agent, les devices qu'il a importés, et arrête les monitors qui les utilisent. Elle est irréversible.
+
+![L'onglet Settings d'un agent BrowserStack, avec un panneau About qui porte le nom de l'agent et un panneau Account qui montre le username, l'access key masquée, et les actions Edit et Disconnect](/images/browserstack-settings.webp)
+
+### Event logs
+
+L'historique des événements de l'agent, avec les mêmes filtres Type et User, le même sélecteur de période et la même action **Export CSV** que le [journal des événements](/fr/administration/event-log) du workspace.
+
+### Maintenance et reboot
+
+L'en-tête porte les mêmes actions **Set in maintenance mode** et **Reboot agent** que les autres agents. La maintenance est ce qui met les monitors en pause quand c'est le compte lui-même qui pose problème : une clé changée, un quota épuisé, ou un incident chez le fournisseur.
+
+## Les devices cloud dans votre lab
+
+Les devices importés se rangent dans le [Devices lab](/fr/equipment/devices-lab), onglet **Smartphones**, aux côtés des téléphones branchés à vos robots. Quelques colonnes se lisent différemment pour eux :
+
+- **Source** affiche **BrowserStack** avec le compte en dessous, là où un device du lab montre son UUID. Utilisez le filtre Source pour ne garder que les devices **Lab** ou que les devices **BrowserStack**.
+- **Host** renvoie vers l'agent BrowserStack qui a importé le device, comme un téléphone physique renvoie vers son robot.
+- **Status** ne dit jamais qu'une chose : **Available**. BrowserStack rapporte le modèle, l'OS et une limite de capacité, mais rien sur la santé d'un device : Kapptivate ne prétend donc pas à une vérification que personne ne fait. Un device cloud n'est pas occupé non plus : il est alloué le temps d'une session, et le plafond qui compte est celui des sessions parallèles du plan.
+- **Usage** affiche **Not used** plutôt qu'un pourcentage : pour un device cloud, ce qu'il faut surveiller est la capacité du compte, sur l'onglet General de l'agent. Sur la page du device, **Location** indique **BrowserStack cloud**.
+
+![Le Devices lab sur l'onglet Smartphones, avec la colonne Source qui affiche BrowserStack et le compte pour les devices importés, et son filtre qui propose Lab et BrowserStack](/images/browserstack-devices-lab.webp)
+
+**Remove from the selection**, dans le menu de la ligne d'un device, le retire de votre workspace. Il reste disponible chez BrowserStack et peut être réimporté.
+
+## Lancer des tests sur un device cloud
+
+Un device importé se comporte comme n'importe quel autre dans un [test Smartphone](/fr/agents-devices/smartphone) : choisissez-le à la création du test, au [lancement](/fr/executions/run), ou dans un [monitor](/fr/monitoring/create).
+
+Deux différences méritent d'être connues :
+
+- **La liste des applications vient de BrowserStack.** Seules les applications uploadées sur votre compte BrowserStack apparaissent, et les applications déjà installées sur un device public du cloud ne sont pas testables : BrowserStack en bloque l'accès. Uploadez l'application à tester, y compris native, depuis l'App Management de BrowserStack.
+- **L'exécution renvoie vers la session du fournisseur.** Une exécution lancée sur un device cloud porte un lien **BrowserStack session** dans ses détails, où vous retrouvez la vidéo et les logs de BrowserStack. BrowserStack purge les anciennes sessions, au bout d'une trentaine de jours selon le plan, et le lien meurt avec elles : Kapptivate vous prévient donc quand un lien a probablement expiré.
+
+Tout le reste, captures par étape, statuts, variables, campagnes et [monitoring](/fr/monitoring/overview), fonctionne exactement comme sur un device du lab.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Smartphone" icon="mobile-screen-button" href="/fr/agents-devices/smartphone">
+    Écrivez et lancez les tests d'applications natives que ces devices exécutent
+  </Card>
+  <Card title="Devices lab" icon="mobile-screen-button" href="/fr/equipment/devices-lab">
+    Gérez les devices importés à côté des téléphones branchés à vos robots
+  </Card>
+  <Card title="Agents" icon="robot" href="/fr/equipment/agents">
+    Parcourez, filtrez et maintenez tous les agents de votre workspace
+  </Card>
+  <Card title="Statuses" icon="list-check" href="/fr/equipment/statuses">
+    Décodez les statuts d'agents et de devices affichés sur ces écrans
+  </Card>
+</Columns>
