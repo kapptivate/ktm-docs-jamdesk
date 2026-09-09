@@ -14,23 +14,23 @@ Mettre une SIM en service tient en trois gestes : installer la carte, redémarre
     Retirez la carte présente dans le slot, s'il y en a une, et installez la nouvelle carte. Sans code PIN.
   </Step>
   <Step title="Redémarrer le slot">
-    Sous **Equipments**, ouvrez **Agents** et restez sur l'onglet **SIM Agents**. Recherchez l'agent par son hostname, ou réduisez la liste avec les filtres Status et Zone.
+    Sous **Equipments**, ouvrez **Agents** et restez sur l'onglet **SIM**. Recherchez l'agent par son hostname, ou réduisez la liste avec les filtres Status et Zone.
 
-    <Frame caption="L'onglet SIM Agents de la section Agents">
-      ![La section Agents sur l'onglet SIM Agents, avec les onglets SIM, Smartphone, Web et Passive, un champ de recherche, les filtres Status et Zone, et deux cartes d'agent affichant statut, zone, slots et version](/images/hardware/swap-sim-01.webp)
+    <Frame caption="L'onglet SIM de la section Agents">
+      ![La section Agents sur l'onglet SIM, avec les onglets Web, Smartphone, SIM et Passive, un champ de recherche, les filtres Status et Zone, et deux cartes d'agent affichant statut, zone, type de robot, slots et version](/images/hardware/swap-sim-01.webp)
     </Frame>
 
     Ouvrez l'agent, allez dans son onglet **Connected devices**, puis ouvrez le menu à trois points du slot que vous avez changé et cliquez sur **Reboot slot**.
 
     <Frame caption="Le menu du slot dans l'onglet Connected devices">
-      ![La table Slots d'un agent cellulaire, avec un slot portant une SIM et son menu d'actions ouvert proposant Edit, Activate test-only mode et Reboot slot](/images/hardware/swap-sim-02.webp)
+      ![La table Slots d'un agent cellulaire, avec deux SIM sans nom et le menu d'actions du premier slot ouvert, proposant Edit, Activate test-only mode, Reboot slot et Archive SIM](/images/hardware/swap-sim-02.webp)
     </Frame>
   </Step>
   <Step title="Attendre que le slot détecte la carte">
     Le slot détecte la carte et l'affiche en **Unnamed**, avec le statut **Configuration**. Tous les statuts sont listés dans [Statuts](/fr/equipment/statuses).
 
     <Frame caption="Une carte en attente de configuration">
-      ![La table Slots d'un agent cellulaire montrant une SIM configurée au statut Available et deux SIM sans nom au statut Configuration](/images/hardware/swap-sim-03.webp)
+      ![La table Slots d'un agent cellulaire montrant deux SIM sans nom au statut Configuration et au réseau Searching, et un slot sans SIM](/images/hardware/swap-sim-03.webp)
     </Frame>
   </Step>
   <Step title="Donner son numéro à la SIM">
@@ -65,7 +65,7 @@ Un numéro jamais utilisé arrive sans aucun réglage, donnez donc à la SIM ce 
 Ouvrez l'onglet **General** de la SIM et allez dans **Products**. Activez **This SIM can be used by all the products**, ou laissez l'option désactivée et utilisez **Add product** pour constituer une liste restreinte.
 
 <Frame caption="Les produits autorisés à utiliser la SIM">
-  ![La section Products d'une SIM, avec l'interrupteur This SIM can be used by all the products, une liste de neuf produits et leur opérateur, et un bouton Add product](/images/hardware/swap-sim-06.webp)
+  ![La section Products d'une SIM, avec l'interrupteur This SIM can be used by all the products, une liste de produits vide, et un bouton Add product](/images/hardware/swap-sim-06.webp)
 </Frame>
 
 Les tests data ont aussi besoin d'un point d'accès. De retour dans **Settings**, renseignez **Default APN** et cliquez sur **Save changes**.
