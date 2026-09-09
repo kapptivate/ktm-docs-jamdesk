@@ -4,6 +4,10 @@ images/*.bak
 # macOS
 .DS_Store
 
+# Python bytecode (redact tooling)
+__pycache__/
+*.pyc
+
 # Local env / secrets
 .envrc
 
