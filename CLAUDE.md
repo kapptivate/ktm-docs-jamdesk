@@ -24,7 +24,7 @@ Jamdesk docs project. Pages are MDX (Markdown + React components). Config is in 
 Every page follows this structure:
 
     ---
-    title: Clear, Specific Title
+    title: Clear, specific title (sentence case)
     description: One sentence. Used in search results and social previews.
     ---
 
@@ -61,6 +61,47 @@ One idea per paragraph. If you reach for "also" or "additionally", start a new p
 Code examples must actually work. Never show partial code or pseudocode. Every block should be complete and copy-pasteable.
 
 Write like a person. Skip filler like "It's important to note that", "This allows you to", or "seamlessly". Drop the hedging ("you might want to consider"). Read your output back, and if it sounds like a chatbot wrote it, rewrite it shorter and more direct.
+
+## Kapptivate Design System
+
+The product has a design system, including a tone-of-voice page: <https://drafts.kappti.dev/design-system/tone-of-voice> (Google login with a kapptivate.com account). Those rules govern text **inside the product UI**. This repo documents that product, so they apply in two different ways.
+
+**Rules we follow in our own prose:**
+
+- Sentence case for page titles, `sidebarTitle`, headings, table headers, and Card titles. Capitalize the first word and proper nouns only: "Create a monitor", not "Create A Monitor". Acronyms stay uppercase (API, CI/CD, DNS, SSL, USSD, ADB).
+- The product name is always "Kapptivate", capital K, never "kapptivate" or "KAPPTIVATE".
+- No em dashes (—) and no double hyphens (--), in English or French. The design system states this for docs explicitly.
+- Second person, contractions, no emoji in body text.
+- French docs use `vous`, never `tu`.
+
+**Rules we quote rather than imitate:** the microcopy patterns (buttons and CTAs, empty states, toasts, confirmation dialogs, form labels, validation, banners, tooltips) describe strings the product displays. Don't write our prose in that style, but when a page names a button, a dialog, or an error message, reproduce the string exactly as the UI shows it, in the UI's own case. The product predates the design system in places: the action catalog really is titled "Place Call" and "Download File", so those pages keep Title Case. Match the UI, not the design system, when the two disagree.
+
+### Terminology
+
+The docs use the same verbs as the product. They are not interchangeable:
+
+| Verb | Means |
+|------|-------|
+| Create | New entity from scratch |
+| Delete | Permanent removal |
+| Remove | Detach from a list, the entity still exists |
+| Archive | Soft-delete, can be restored |
+| Pause / Unpause | Toggle monitor activity (never "stop" or "start" a monitor) |
+| Revoke | Invalidate credentials (API keys, tokens) |
+| Publish | Make reusable component changes live |
+
+For an irreversible action, the UI string is exactly "This action cannot be undone." Quote it as-is.
+
+### French Pages
+
+`fr/` pages follow French typography and the product's French vocabulary:
+
+- A space before `? ! : ;` (regular space, not a narrow no-break space): "Supprimer le test ?", "Conseil de sécurité : ...". The last section of a French page is "## Et ensuite ?", never "## What's Next?".
+- Loanwords that stay in English are masculine: **le** monitor, **le** dashboard, **le** device, **le** agent, **le** run, **le** tag. Native terms keep their gender: **la** variable, **l'**exécution, **la** collection, **la** campagne, **la** version, **l'**alerte.
+- Button labels quoted in a procedure use the infinitive, like the UI: "cliquez sur **Enregistrer**", not "cliquez sur **Enregistrez**".
+- `vous` throughout, never `tu`.
+
+The rest of the design system (Colors, Typography, Icons, and the component pages) describes `@kapptivate/ui-kit` for prototypes. It does not carry over here: the docs renderer uses its own theme from `docs.json` and Font Awesome icon names, not Lucide `Icon*` components.
 
 ## Components
 
