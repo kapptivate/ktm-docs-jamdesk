@@ -1,8 +1,6 @@
 ---
 title: Swap a SIM in a cellular robot
-description: >-
-  Learn how to swap a SIM in a cellular robot, install a new card, reboot the
-  slot, and transfer settings between SIMs in Kapptivate.
+description: Install a SIM card, give it its number, and carry over the settings of the card it replaces.
 ---
 
 Putting a SIM to work takes three moves: install the card, reboot its slot, then give the new SIM its number. What happens after you save depends on the number you type. A number that already belongs to another SIM in your workspace triggers a swap, and Kapptivate carries the old card's settings and monitors over for you. A number nobody uses yet starts a fresh SIM.
@@ -13,26 +11,26 @@ Putting a SIM to work takes three moves: install the card, reboot its slot, then
 
 <Steps>
   <Step title="Install the card">
-    Withdraw the card currently in the slot, if there is one, and install the new card. No PIN code.
+    Remove the card currently in the slot, if there is one, and install the new card. No PIN code.
   </Step>
   <Step title="Reboot the slot">
-    Under **Equipments**, open **Agents** and stay on the **SIM Agents** tab. Search the agent by hostname, or narrow the list with the Status and Zone filters.
+    Under **Equipments**, open **Agents** and stay on the **SIM** tab. Search the agent by hostname, or narrow the list with the Status and Zone filters.
 
-    <Frame caption="The SIM Agents tab of the Agents area">
-      ![The Agents area on the SIM Agents tab, with the SIM, Smartphone, Web, and Passive tabs, a search box, Status and Zone filters, and two agent cards showing status, zone, slots, and version](/images/hardware/swap-sim-01.webp)
+    <Frame caption="The SIM tab of the Agents area">
+      ![The Agents area on the SIM tab, with the Web, Smartphone, SIM, and Passive tabs, a search box, Status and Zone filters, and two agent cards showing status, zone, robot type, slots, and version](/images/hardware/swap-sim-01.webp)
     </Frame>
 
     Open the agent, go to its **Connected devices** tab, then open the three dots menu on the slot you changed and click **Reboot slot**.
 
     <Frame caption="The slot menu on the Connected devices tab">
-      ![The Slots table of a cellular agent, with one slot holding a SIM and its open action menu offering Edit, Activate test-only mode, and Reboot slot](/images/hardware/swap-sim-02.webp)
+      ![The Slots table of a cellular agent, with two unnamed SIMs and the action menu of the first slot open, offering Edit, Activate test-only mode, Reboot slot, and Archive SIM](/images/hardware/swap-sim-02.webp)
     </Frame>
   </Step>
   <Step title="Wait for the slot to pick up the card">
     The slot detects the card and lists it as **Unnamed**, with the status **Configuration**. Every status is listed in [Statuses](/equipment/statuses).
 
     <Frame caption="A card waiting to be configured">
-      ![The Slots table of a cellular agent showing one configured SIM with the status Available and two unnamed SIMs with the status Configuration](/images/hardware/swap-sim-03.webp)
+      ![The Slots table of a cellular agent showing two unnamed SIMs with the status Configuration and the network Searching, and one slot with no SIM inserted](/images/hardware/swap-sim-03.webp)
     </Frame>
   </Step>
   <Step title="Give the SIM its number">
@@ -67,7 +65,7 @@ A number nobody used before arrives with no settings, so give the SIM what it ne
 Open the SIM's **General** tab and go to **Products**. Turn on **This SIM can be used by all the products**, or leave it off and use **Add product** to build a restricted list.
 
 <Frame caption="The products allowed to use the SIM">
-  ![The Products section of a SIM, with the toggle This SIM can be used by all the products, a list of nine products with their operator, and an Add product button](/images/hardware/swap-sim-06.webp)
+  ![The Products section of a SIM, with the toggle This SIM can be used by all the products, an empty product list, and an Add product button](/images/hardware/swap-sim-06.webp)
 </Frame>
 
 Data tests also need an access point. Back in **Settings**, fill **Default APN** and click **Save changes**.
