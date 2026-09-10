@@ -4,7 +4,11 @@ description: Install, maintain, and troubleshoot the Kapptivate robots deployed 
 sidebarTitle: Overview
 ---
 
-Kapptivate agents (robots) run on hardware deployed in your network: web robots, smartphone robots, and cellular robots hosting real SIM cards. This section covers the physical side of the platform: installing a new robot, day-to-day maintenance, and troubleshooting.
+Kapptivate runs your tests from robots deployed in your own network: web, smartphone, and cellular robots holding real SIM cards. This section covers installing one, keeping it running, and finding the fault when it stops answering.
+
+A robot is the hardware: box, power cable, antennas, SIM cards, Ethernet ports. The agent is the software running on it, and the agent is what you manage from the platform. That split runs through the pages below: you power a robot off, you restart an agent.
+
+The installation pages cover the latest robot generation; contact support before installing an older one. Maintenance and troubleshooting cover both generations.
 
 ## Installation
 
@@ -26,7 +30,7 @@ Kapptivate agents (robots) run on hardware deployed in your network: web robots,
 <Columns cols={2}>
   <Card title="Swap a SIM" icon="sim-card" href="/hardware/swap-sim">
 
-    Replace a card and reconfigure its slot
+    Install the card, then decide: reuse an old SIM's number and its monitors, or start a fresh one
 
 </Card>
   <Card title="Swap the battery" icon="battery-half" href="/hardware/swap-battery">
@@ -36,7 +40,7 @@ Kapptivate agents (robots) run on hardware deployed in your network: web robots,
 </Card>
   <Card title="Headless robot access" icon="terminal" href="/hardware/headless-login">
 
-    Get a console on robots without display output
+    The mini cellular robot has no display output: reach it over a serial line
 
 </Card>
 </Columns>
@@ -46,22 +50,22 @@ Kapptivate agents (robots) run on hardware deployed in your network: web robots,
 <Columns cols={2}>
   <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
 
-    From the cable to the flows toward Kapptivate
+    When a robot is unreachable: the cable, the flows, then DNS
 
 </Card>
   <Card title="Technical errors" icon="wrench" href="/hardware/technical-errors">
 
-    When monitorings go grey
+    When a result turns grey: trace it back to the agent, then restart the right thing
 
 </Card>
   <Card title="SIM cards troubleshooting" icon="sim-card" href="/hardware/sim-troubleshooting">
 
-    Searching, unregistered, and USSD errors
+    A bad SIM shows through its status, or through USSD, SMS, and call errors that keep coming back
 
 </Card>
   <Card title="Identify the RJ45 port" icon="ethernet" href="/hardware/rj45-port">
 
-    Find which port carries the static IP
+    Which Ethernet port carries the static IP, when the robot has more than one
 
 </Card>
 </Columns>
@@ -71,12 +75,12 @@ Kapptivate agents (robots) run on hardware deployed in your network: web robots,
 <Columns cols={2}>
   <Card title="Agents" icon="server" href="/equipment/agents">
 
-    What agents are and how they appear in the platform
+    Where the robot's agent lives once it's wired: its devices, its monitors, its maintenance
 
 </Card>
   <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
 
-    Monitor the health of your deployed robots
+    Every status in one place: agent, device, SIM registration, signal, and usage
 
 </Card>
 </Columns>
