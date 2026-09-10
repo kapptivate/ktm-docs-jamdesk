@@ -4,7 +4,11 @@ description: Installer, maintenir et dépanner les robots Kapptivate déployés 
 sidebarTitle: Vue d'ensemble
 ---
 
-Les agents Kapptivate (robots) fonctionnent sur du matériel déployé dans votre réseau : robots web, robots smartphone et robots cellulaires hébergeant de vraies cartes SIM. Cette section couvre le côté physique de la plateforme : installer un nouveau robot, la maintenance quotidienne et le dépannage.
+Les robots Kapptivate exécutent vos tests depuis votre propre réseau : robots web, robots smartphone et robots cellulaires équipés de vraies cartes SIM. Cette section suit la vie de ce matériel, de l'installation à la maintenance, jusqu'à la recherche de panne quand un robot ne répond plus.
+
+Deux objets à ne pas confondre. Le robot est le matériel : boîtier, alimentation, antennes, cartes SIM, ports Ethernet. L'agent est le logiciel embarqué, celui que vous pilotez depuis la plateforme. D'où le découpage des pages ci-dessous : un robot se met hors tension, un agent redémarre.
+
+Les pages d'installation décrivent la dernière génération de robots. Pour installer un robot plus ancien, passez par le support. La maintenance et le dépannage, eux, couvrent les deux générations.
 
 ## Installation
 
@@ -26,7 +30,7 @@ Les agents Kapptivate (robots) fonctionnent sur du matériel déployé dans votr
 <Columns cols={2}>
   <Card title="Remplacer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
 
-    Remplacer une carte et reconfigurer son slot
+    Ce que devient la carte selon le numéro saisi : reprise d'une ancienne SIM, ou mise en service neuve
 
 </Card>
   <Card title="Remplacer la batterie" icon="battery-half" href="/fr/hardware/swap-battery">
@@ -36,7 +40,7 @@ Les agents Kapptivate (robots) fonctionnent sur du matériel déployé dans votr
 </Card>
   <Card title="Accès au robot sans écran" icon="terminal" href="/fr/hardware/headless-login">
 
-    Obtenir une console sur les robots sans sortie vidéo
+    Ouvrir une console sur un mini robot cellulaire, dépourvu de sortie vidéo, par une liaison série
 
 </Card>
 </Columns>
@@ -46,22 +50,22 @@ Les agents Kapptivate (robots) fonctionnent sur du matériel déployé dans votr
 <Columns cols={2}>
   <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
 
-    Du câble aux flux vers Kapptivate
+    Trois causes possibles quand un robot est injoignable : le mauvais port, les flux fermés, le DNS
 
 </Card>
   <Card title="Erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
 
-    Quand les monitorings passent au gris
+    Un résultat gris signale une erreur technique : remontez jusqu'à l'agent avant de redémarrer quoi que ce soit
 
 </Card>
   <Card title="Dépannage des cartes SIM" icon="sim-card" href="/fr/hardware/sim-troubleshooting">
 
-    Recherche, non enregistrée et erreurs USSD
+    Statut bloqué, USSD sans réponse, SMS jamais reçu : le diagnostic cas par cas
 
 </Card>
   <Card title="Identifier le port RJ45" icon="ethernet" href="/fr/hardware/rj45-port">
 
-    Trouver quel port porte l'IP statique
+    Sur un robot à plusieurs ports Ethernet, savoir lequel porte l'IP statique, et déplacer le câble s'il le faut
 
 </Card>
 </Columns>
@@ -71,12 +75,12 @@ Les agents Kapptivate (robots) fonctionnent sur du matériel déployé dans votr
 <Columns cols={2}>
   <Card title="Agents" icon="server" href="/fr/equipment/agents">
 
-    Ce que sont les agents et comment ils apparaissent dans la plateforme
+    Rechercher un agent, ouvrir ses devices et ses monitors, lancer un redémarrage ou une mise à jour
 
 </Card>
   <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
 
-    Surveiller la santé de vos robots déployés
+    Quand un statut vous surprend, la page qui les liste tous, agent comme device
 
 </Card>
 </Columns>
