@@ -1,0 +1,145 @@
+---
+title: Prepare an Android smartphone
+description: Set up a Samsung phone so a smartphone robot can keep it awake, reach it over USB, and run mobile app tests on it.
+---
+
+A phone straight out of the box fights automation: it sleeps, it optimizes battery behind your back, and it updates itself in the middle of a test run. This page turns that off, setting by setting, until the phone shows up as a device under its robot's agent.
+
+<Note>
+  The menu paths below are Samsung's, on One UI. Another Android manufacturer has the same settings under similar names, rarely in the same place. [Samsung is the only fully supported Android brand](/questions/devices-os-versions): other makers ship customized OS layers that can interfere with mobile automation, and investigations on those devices come out of your support package.
+</Note>
+
+## Before you start
+
+- The robot is installed, with its USB hub powered on: see [install a robot](/hardware/install-robot).
+- The robot's agent shows **Online** in the platform: see [configure the robot network](/hardware/configure-network).
+- The phone runs a [supported Android version](/questions/devices-os-versions) and has at least 4 GB of RAM.
+- A USB cable for the phone. The hub ships with the robot, the phone cables do not.
+
+## First boot
+
+Turn the phone on and go through the Android setup: pick **English** and your country, then skip every account. Every label quoted below is the English one.
+
+<Warning>
+  Do not set a lock password, PIN, or pattern. The screen has to stay unlocked for the platform to use the phone.
+</Warning>
+
+## Set up the phone
+
+<Steps>
+  <Step title="Make Chrome the default browser">
+    In **Settings > Apps > Choose default apps > Browser app**, select **Chrome**. Install Chrome from the Play Store first if it isn't there.
+  </Step>
+  <Step title="Unlock the developer options">
+    In **Settings > About phone > Software information**, tap **Build number** repeatedly until Android confirms that developer mode is on.
+  </Step>
+  <Step title="Set the developer options">
+    In **Settings > Developer options**, set these seven:
+
+    | Setting | State |
+    |---------|-------|
+    | Stay awake | On |
+    | Auto update system | Off |
+    | USB debugging | On |
+    | Revoke USB debugging authorizations | On |
+    | Disable adb authorization timeout | On |
+    | Verify apps over USB | Off |
+    | Verify bytecode of debuggable apps | Off |
+
+    **USB debugging** is the one that makes the phone drivable over the cable at all. **Disable adb authorization timeout** keeps that authorization from expiring, so the phone stays reachable after a long idle period.
+
+    <Frame caption="The developer options, set">
+      ![The seven developer options with their toggles in the required state](/images/hardware/prepare-android-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Turn off the automation settings">
+    In **Settings > Battery and device care**, open the menu icon at the top right and choose **Automation**.
+
+    <Frame caption="The menu icon in Battery and device care">
+      ![The menu icon at the top right of the Battery and device care screen](/images/hardware/prepare-android-02.webp)
+    </Frame>
+
+    Turn both of these off:
+
+    | Setting | State |
+    |---------|-------|
+    | Auto optimize daily | Off |
+    | Adaptive power saving | Off |
+
+    <Frame caption="The Automation options, set">
+      ![Auto optimize daily and Adaptive power saving both off](/images/hardware/prepare-android-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Stop Android from sleeping the apps">
+    Back in **Battery and device care > Battery > Background usage limits**, turn **Put unused apps to sleep** off. Samsung suspends apps it considers unused, and a phone on a robot has to stay reachable between campaigns.
+
+    <Frame caption="Background usage limits">
+      ![Put unused apps to sleep, off](/images/hardware/prepare-android-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Set the battery options">
+    In **Battery > More battery settings**, set these four:
+
+    | Setting | State |
+    |---------|-------|
+    | Adaptive battery | Off |
+    | Enhanced processing | Off |
+    | Fast charging | Off |
+    | Protect battery | On |
+
+    A phone on the hub charges permanently, and [that is what makes smartphone batteries swell](/hardware/swap-battery#smartphone-batteries-swelling). **Protect battery** slows that down; the durable fix is a phone that supports pass-through charging.
+
+    <Frame caption="More battery settings, set">
+      ![The four battery options with their toggles in the required state](/images/hardware/prepare-android-05.webp)
+    </Frame>
+  </Step>
+  <Step title="Turn off automatic updates">
+    In **Settings > Software update**, turn **Auto download over Wi-Fi** off. The platform supports [Android 8 to 16](/questions/devices-os-versions), and an update can push the phone past the versions it covers.
+
+    <Frame caption="Software update settings">
+      ![Auto download over Wi-Fi, off](/images/hardware/prepare-android-06.webp)
+    </Frame>
+  </Step>
+  <Step title="Connect the phone to the robot">
+    Plug the phone into a free USB port of the hub. If it was already plugged in, unplug it and plug it back: the popup only fires on connection.
+
+    On the phone, tick **Always allow from this computer** and press **OK**.
+
+    <Frame caption="The USB debugging popup on the phone">
+      ![The USB debugging authorization popup with Always allow from this computer ticked](/images/hardware/prepare-android-07.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Check that it worked
+
+Open the Kapptivate platform, find the robot's agent under **Agents**, and open it. The phone appears in its device list and shows **Available** once it is ready to take tests.
+
+A device only becomes available when its own status is **Available** and its agent is **Online**. If the phone shows nothing, check the agent first.
+
+If the phone never appears, unplug and replug it and watch for the authorization popup: a dismissed popup is the usual cause, and it only comes back on reconnection.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Prepare an iPhone" icon="apple" href="/hardware/prepare-iphone">
+
+    The same job on iOS, where support finishes the pairing
+
+</Card>
+  <Card title="Supported devices and OS versions" icon="mobile-screen" href="/questions/devices-os-versions">
+
+    Which phones and Android versions the platform runs tests on
+
+</Card>
+  <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
+
+    What Available means on a device, and what the usage indicator adds
+
+</Card>
+  <Card title="Technical errors" icon="wrench" href="/hardware/technical-errors">
+
+    When results turn grey on a phone that used to work
+
+</Card>
+</Columns>

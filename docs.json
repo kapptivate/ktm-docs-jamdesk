@@ -2,6 +2,26 @@
   "$schema": "https://jamdesk.com/docs.json",
   "redirects": [
     {
+      "source": "/hardware/install-hardware",
+      "destination": "/hardware/install-robot",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/install-hardware",
+      "destination": "/fr/hardware/install-robot",
+      "permanent": true
+    },
+    {
+      "source": "/hardware/install-software",
+      "destination": "/hardware/configure-network",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/install-software",
+      "destination": "/fr/hardware/configure-network",
+      "permanent": true
+    },
+    {
       "source": "/hardware/macmini-network",
       "destination": "/hardware/overview",
       "permanent": true
@@ -1127,8 +1147,17 @@
                 "icon": "screwdriver-wrench",
                 "expanded": true,
                 "pages": [
-                  "hardware/install-hardware",
-                  "hardware/install-software"
+                  "hardware/install-robot",
+                  "hardware/configure-network"
+                ]
+              },
+              {
+                "group": "Smartphones",
+                "icon": "mobile",
+                "expanded": true,
+                "pages": [
+                  "hardware/prepare-android",
+                  "hardware/prepare-iphone"
                 ]
               },
               {
@@ -2217,8 +2246,17 @@
                 "icon": "screwdriver-wrench",
                 "expanded": true,
                 "pages": [
-                  "fr/hardware/install-hardware",
-                  "fr/hardware/install-software"
+                  "fr/hardware/install-robot",
+                  "fr/hardware/configure-network"
+                ]
+              },
+              {
+                "group": "Smartphones",
+                "icon": "mobile",
+                "expanded": true,
+                "pages": [
+                  "fr/hardware/prepare-android",
+                  "fr/hardware/prepare-iphone"
                 ]
               },
               {

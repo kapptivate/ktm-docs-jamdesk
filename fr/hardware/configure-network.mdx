@@ -1,0 +1,133 @@
+---
+title: Configurer le réseau du robot
+description: Donner son IP statique à un robot câblé pour que son agent passe Online dans la plateforme Kapptivate.
+---
+
+Un robot câblé n'est encore rien pour la plateforme : il lui manque son adresse. Vous la lui donnez sur place, écran et clavier branchés dessus, et c'est dans la plateforme que vous en lisez l'effet.
+
+<Note>
+  Cette procédure vise la dernière génération de robots Kapptivate, et seulement les modèles pourvus d'une sortie vidéo : le mini robot cellulaire, qui n'en a pas, se rejoint par une liaison série (voir [se connecter à un robot sans sortie vidéo](/fr/hardware/headless-login)). Pour un robot plus ancien, contactez le support.
+</Note>
+
+Quel que soit son type, un robot passe par cette page. Les robots smartphone enchaînent ensuite sur la préparation de chaque téléphone, avec une page par système.
+
+## Prérequis réseau
+
+Des flux doivent être ouverts du robot vers Kapptivate. Lesquels ? Cela dépend de la plateforme par laquelle vous accédez au produit, et la liste figure dans le document des exigences IP, que le support vous fournira.
+
+Faites-les ouvrir avant de commencer, car un robot bien adressé dont les flux restent fermés se comporte exactement comme un robot mal adressé.
+
+## Avant de commencer
+
+- Le robot est en baie, sous tension et câblé : voir [installer un robot](/fr/hardware/install-robot).
+- Un clavier USB, une souris USB, un écran et un câble HDMI. Rien de tout cela n'est livré avec le robot.
+- Les identifiants du robot. Demandez-les au support si vous ne les avez pas.
+- L'IP statique, le masque, la passerelle et les adresses des serveurs DNS, fournis par votre service informatique.
+
+## Définir l'IP statique
+
+<Steps>
+  <Step title="Repérer le port du câble">
+    Le câble RJ45 doit être dans le port Ethernet numéroté **1**, ou à défaut dans le 2 ou le 3, à condition de configurer plus bas `lan2` ou `lan3` au lieu de `lan1`. Le port 4, lui, ne fonctionne pas.
+
+    <Frame caption="Numérotation des ports Ethernet">
+      ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/configure-network-11.webp)
+    </Frame>
+  </Step>
+  <Step title="Brancher les périphériques">
+    Branchez le clavier, la souris et le câble HDMI à l'arrière du robot.
+
+    <Frame caption="Connexion des périphériques à l'arrière">
+      ![Clavier, souris et câble HDMI branchés à l'arrière du robot](/images/hardware/configure-network-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Allumer et se connecter">
+    Allumez le robot avec le bouton en façade, puis saisissez les identifiants fournis sur l'écran de connexion. Vous arrivez sur un bureau Linux.
+
+    <Frame caption="Le bouton d'alimentation en façade">
+      ![Le bouton d'alimentation sur la face avant du robot](/images/hardware/configure-network-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Ouvrir l'éditeur de connexion">
+    Cliquez sur l'icône de configuration réseau, puis sélectionnez **Edit Connections**.
+
+    <Frame caption="Edit Connections dans le menu réseau">
+      ![Le menu réseau ouvert sur l'entrée Edit Connections](/images/hardware/configure-network-03.webp)
+    </Frame>
+
+    Ici la connexion s'appelle `lan1`, mais la vôtre peut porter un autre nom, « Wired connection 1 » par exemple : retenez celle qui correspond au port repéré à l'étape 1, et modifiez-la.
+
+    <Frame caption="Sélectionner la connexion et la modifier">
+      ![La liste des connexions avec lan1 sélectionnée](/images/hardware/configure-network-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Vérifier l'onglet General">
+    Dans **General**, vérifiez que **Connect automatically with priority** est coché, avec la valeur `-999`.
+
+    <Frame caption="Onglet General">
+      ![L'onglet General de l'éditeur de connexion](/images/hardware/configure-network-05.webp)
+    </Frame>
+
+    <Frame caption="Connect automatically with priority -999">
+      ![Connect automatically with priority réglé sur -999](/images/hardware/configure-network-06.webp)
+    </Frame>
+  </Step>
+  <Step title="Passer en adressage manuel">
+    Ouvrez **IPV4 Settings**, puis faites passer la méthode de **Automatic (DHCP)** à **Manual**.
+
+    <Frame caption="Onglet IPV4 Settings">
+      ![L'onglet IPV4 Settings](/images/hardware/configure-network-07.webp)
+    </Frame>
+
+    <Frame caption="Passer de DHCP à Manual">
+      ![La liste déroulante de méthode réglée sur Manual](/images/hardware/configure-network-08.webp)
+    </Frame>
+  </Step>
+  <Step title="Saisir les adresses">
+    Cliquez sur **Add**. Saisissez l'adresse IP, le masque et la passerelle fournis par votre service informatique, puis renseignez le champ **DNS servers** : sans DNS, le robot joint Kapptivate par IP, jamais par nom.
+
+    <Frame caption="Saisir l'adresse, le masque, la passerelle et les DNS">
+      ![Les champs adresse, masque, passerelle et DNS renseignés](/images/hardware/configure-network-09.webp)
+    </Frame>
+  </Step>
+  <Step title="Enregistrer">
+    Cliquez sur **Save**. La connexion remonte avec sa nouvelle adresse.
+
+    <Frame caption="Enregistrer la connexion">
+      ![Le bouton Save de l'éditeur de connexion](/images/hardware/configure-network-10.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Vérifier que c'est bon
+
+Ouvrez la plateforme Kapptivate, section **Agents**, et retrouvez l'agent du robot : il affiche **Online** dès qu'il a joint la plateforme.
+
+S'il reste **Offline**, déroulez le [dépannage réseau](/fr/hardware/network-troubleshooting), qui part du câble et du port avant de regarder les flux, puis la résolution DNS.
+
+Un robot smartphone, lui, n'en a pas fini : son agent est en ligne, mais aucun de ses téléphones n'acceptera de test avant d'avoir été préparé.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
+
+    Les réglages Samsung qui gardent un téléphone éveillé et joignable en USB
+
+</Card>
+  <Card title="Préparer un iPhone" icon="apple" href="/fr/hardware/prepare-iphone">
+
+    Faire confiance au robot, puis laisser le support terminer l'appairage
+
+</Card>
+  <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Quand l'agent reste hors ligne une fois la configuration faite
+
+</Card>
+  <Card title="Remplacer ou configurer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
+
+    Déclarer les SIM d'un robot cellulaire
+
+</Card>
+</Columns>

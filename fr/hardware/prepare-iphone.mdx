@@ -1,0 +1,125 @@
+---
+title: Préparer un iPhone
+description: Mettre en service un iPhone sur un robot smartphone, des réglages iOS à la session d'appairage avec le support Kapptivate.
+---
+
+Sur iPhone, la préparation se joue à deux. Les réglages vous reviennent : quelques interrupteurs qui empêchent iOS de verrouiller l'écran, de se mettre à jour ou de refuser le câble. L'activation, elle, passe par le support Kapptivate, parce qu'Apple exige que le téléphone soit enregistré avant d'accepter les tests automatisés.
+
+Prévoyez donc le délai : l'enregistrement chez Apple demande 24 à 72 heures, et un iPhone neuf n'est pas testable le jour même.
+
+## Avant de commencer
+
+- Le robot est installé et son hub USB est sous tension : voir [installer un robot](/fr/hardware/install-robot).
+- L'agent du robot affiche **Online** dans la plateforme : voir [configurer le réseau du robot](/fr/hardware/configure-network).
+- L'iPhone tourne sous une [version d'iOS supportée](/fr/questions/devices-os-versions).
+- Un câble Lightning ou USB-C pour le téléphone. Le hub est livré avec le robot, les câbles des téléphones non.
+
+<Warning>
+  L'iPhone a besoin d'un accès internet en permanence, en Wi-Fi ou par le réseau mobile. iOS vérifie en ligne les certificats utilisés par la plateforme : sans connexion, le téléphone n'apparaît jamais correctement dans Kapptivate.
+</Warning>
+
+## Premier démarrage
+
+Allumez le téléphone et déroulez l'assistant iOS : choisissez **English** et votre pays, passez tous les comptes, et raccordez-le au Wi-Fi. Les libellés cités plus bas sont ceux de la version anglaise.
+
+<Warning>
+  Ne définissez ni code, ni Face ID, ni Touch ID. L'écran doit rester déverrouillé pour que la plateforme puisse se servir du téléphone.
+</Warning>
+
+## Régler iOS
+
+<Steps>
+  <Step title="Couper les mises à jour automatiques">
+    Dans **Settings > General > Software Update > Automatic Updates**, désactivez chaque entrée **iOS Updates**. La plateforme couvre [iOS 11 à 26](/fr/questions/devices-os-versions), et une mise à jour peut pousser le téléphone au-delà des versions prises en charge.
+
+    <Frame caption="Automatic Updates, désactivé">
+      ![L'interrupteur iOS Updates désactivé](/images/hardware/prepare-iphone-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Empêcher l'écran de se verrouiller">
+    Dans **Settings > Display & Brightness > Auto-Lock**, sélectionnez **Never**.
+  </Step>
+  <Step title="Activer le Web Inspector">
+    Dans **Settings > Safari > Advanced**, activez **Web Inspector**.
+
+    <Frame caption="Web Inspector, activé">
+      ![L'interrupteur Web Inspector activé](/images/hardware/prepare-iphone-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Autoriser les accessoires filaires (iOS 26 et suivants)">
+    Dans **Settings > Privacy & Security > Wired accessories**, sélectionnez **Always allow**. Ce réglage n'existe pas sur les versions antérieures d'iOS : passez l'étape dans ce cas.
+
+    <Frame caption="Privacy & Security, puis Wired accessories">
+      ![L'écran Privacy and Security](/images/hardware/prepare-iphone-03.webp)
+      ![Wired accessories réglé sur Always allow](/images/hardware/prepare-iphone-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Brancher le téléphone au robot">
+    Branchez le téléphone sur un port USB libre du hub. S'il était déjà branché, débranchez-le et rebranchez-le : la popup ne se déclenche qu'à la connexion.
+
+    Quand l'iPhone demande s'il faut faire confiance à l'ordinateur, appuyez sur **Trust**. Fermez toute autre popup avec l'option qui la ferme.
+
+    <Frame caption="La popup de confiance sur l'iPhone">
+      ![La popup demandant de faire confiance à l'ordinateur, avec l'option Trust](/images/hardware/prepare-iphone-05.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Terminer avec le support
+
+Ces trois étapes viennent des exigences d'Apple et s'enchaînent dans cet ordre. Toutes les trois passent par le support.
+
+<Steps>
+  <Step title="Le support relève l'identifiant du téléphone">
+    Signalez au support que l'iPhone est branché et prêt. Si vous avez suivi les étapes ci-dessus et appuyé sur **Trust**, vous n'avez plus rien à faire : le support relève l'identifiant (UDID) directement depuis le robot.
+
+    Dites-lui aussi si la popup de confiance ne s'est jamais affichée. Il la fait réapparaître pendant la session ci-dessous.
+  </Step>
+  <Step title="Apple enregistre le téléphone">
+    Le support fait enregistrer l'UDID auprès d'Apple, ce qui autorise les tests automatisés sur cet iPhone précis. Comptez 24 à 72 heures.
+
+    Cette étape ne concerne qu'un iPhone jamais utilisé avec Kapptivate. Un téléphone déjà enregistré passe directement à la session.
+  </Step>
+  <Step title="Appairage et Developer Mode, avec le support">
+    Demandez au support un créneau de cinq minutes pour finir la mise en service. Pendant la session, vous confirmez les popups sur le téléphone, puis vous vérifiez un dernier réglage :
+
+    1. Si la popup de confiance ne s'est jamais affichée, le support la déclenche. Appuyez sur **Trust**.
+    2. Le support déclenche ensuite la popup d'activation du Developer Mode. Confirmez-la. L'iPhone peut redémarrer ensuite.
+    3. Vérifiez que **Enable UI Automation** est activé dans les réglages du Developer Mode.
+
+    Si iOS réclame un redémarrage en cours de route, redémarrez le téléphone et laissez-le branché au robot.
+  </Step>
+</Steps>
+
+## Vérifier que c'est bon
+
+Ouvrez la plateforme Kapptivate, retrouvez l'agent du robot dans **Agents**, puis ouvrez-le. L'iPhone figure dans sa liste de devices et affiche **Available** dès qu'il est prêt à prendre des tests.
+
+Un device ne devient disponible que si son propre statut est **Available** et si son agent est **Online**. Si le téléphone n'affiche rien, commencez donc par regarder l'agent.
+
+Un téléphone enregistré, appairé, et pourtant absent ? Les deux causes habituelles sont une connexion internet perdue et une popup de confiance fermée trop vite. Vérifiez le Wi-Fi, puis débranchez et rebranchez le câble pour faire revenir la popup.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
+
+    Le même travail sur Samsung, sans enregistrement à attendre
+
+</Card>
+  <Card title="Téléphones et versions d'OS supportés" icon="mobile-screen" href="/fr/questions/devices-os-versions">
+
+    Quels téléphones et quelles versions d'iOS la plateforme accepte
+
+</Card>
+  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+
+    Ce que dit le statut Available d'un device, et ce que son utilisation ajoute
+
+</Card>
+  <Card title="Erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
+
+    Quand les résultats passent au gris sur un téléphone qui marchait
+
+</Card>
+</Columns>

@@ -1,0 +1,125 @@
+---
+title: Prepare an iPhone
+description: Set up an iPhone for a smartphone robot, from the iOS settings to the pairing session with Kapptivate support.
+---
+
+Preparing an iPhone splits in two. The settings are yours: a handful of toggles that stop iOS from locking, updating, or refusing the cable. The activation is not: Apple requires the device to be registered before it accepts automated testing, and that part goes through Kapptivate support.
+
+Plan for it. The Apple registration takes 24 to 72 hours, so a new iPhone is not testable the same day.
+
+## Before you start
+
+- The robot is installed, with its USB hub powered on: see [install a robot](/hardware/install-robot).
+- The robot's agent shows **Online** in the platform: see [configure the robot network](/hardware/configure-network).
+- The iPhone runs a [supported iOS version](/questions/devices-os-versions).
+- A Lightning or USB-C cable for the phone. The hub ships with the robot, the phone cables do not.
+
+<Warning>
+  The iPhone needs internet access, over Wi-Fi or the mobile network, at all times. iOS checks the certificates the platform uses online, so without a connection the device never shows up correctly in Kapptivate.
+</Warning>
+
+## First boot
+
+Turn the phone on and go through the iOS setup: pick **English** and your country, skip every account, and connect it to Wi-Fi. Every label quoted below is the English one.
+
+<Warning>
+  Do not set a passcode, Face ID, or Touch ID. The screen has to stay unlocked for the platform to use the phone.
+</Warning>
+
+## Set up iOS
+
+<Steps>
+  <Step title="Turn off automatic updates">
+    In **Settings > General > Software Update > Automatic Updates**, turn off every **iOS Updates** entry. The platform supports [iOS 11 to 26](/questions/devices-os-versions), and an update can push the phone past the versions it covers.
+
+    <Frame caption="Automatic Updates, off">
+      ![The iOS Updates toggle turned off](/images/hardware/prepare-iphone-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Stop the screen from locking">
+    In **Settings > Display & Brightness > Auto-Lock**, select **Never**.
+  </Step>
+  <Step title="Enable the Web Inspector">
+    In **Settings > Safari > Advanced**, turn **Web Inspector** on.
+
+    <Frame caption="Web Inspector, on">
+      ![The Web Inspector toggle turned on](/images/hardware/prepare-iphone-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Allow wired accessories (iOS 26 and later)">
+    In **Settings > Privacy & Security > Wired accessories**, select **Always allow**. Earlier versions of iOS don't have this setting, so skip the step there.
+
+    <Frame caption="Privacy & Security, then Wired accessories">
+      ![The Privacy and Security screen](/images/hardware/prepare-iphone-03.webp)
+      ![Wired accessories set to Always allow](/images/hardware/prepare-iphone-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Connect the phone to the robot">
+    Plug the phone into a free USB port of the hub. If it was already plugged in, unplug it and plug it back: the popup only fires on connection.
+
+    When the iPhone asks whether to trust the computer, tap **Trust**. Dismiss any other popup with whichever option closes it.
+
+    <Frame caption="The trust popup on the iPhone">
+      ![The popup asking whether to trust the computer, with the Trust option](/images/hardware/prepare-iphone-05.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Finish with support
+
+These three stages are Apple's requirements and they run in this order. All three go through support.
+
+<Steps>
+  <Step title="Support reads the device identifier">
+    Contact support to say the iPhone is connected and ready. If you went through the steps above and tapped **Trust**, there is nothing left to do on your side: support reads the device identifier (UDID) directly from the robot.
+
+    Tell support if the trust popup never appeared. They can make it appear again during the session below.
+  </Step>
+  <Step title="Apple registers the device">
+    Support registers the UDID with Apple, which is what allows automated testing on that specific iPhone. Count 24 to 72 hours.
+
+    This stage only concerns an iPhone that has never been used with Kapptivate. A device already registered goes straight to the session.
+  </Step>
+  <Step title="Pairing and Developer Mode, with support">
+    Ask support for a 5-minute slot to finish the setup. During the session you confirm the popups on the phone, then check one last setting:
+
+    1. If the trust popup never appeared, support triggers it. Tap **Trust**.
+    2. Support then triggers the Developer Mode activation popup. Confirm it. The iPhone may reboot afterwards.
+    3. Check that **Enable UI Automation** is on in the Developer Mode settings.
+
+    If iOS asks for a restart at any point, restart the phone and leave it connected to the robot.
+  </Step>
+</Steps>
+
+## Check that it worked
+
+Open the Kapptivate platform, find the robot's agent under **Agents**, and open it. The iPhone appears in its device list and shows **Available** once it is ready to take tests.
+
+A device only becomes available when its own status is **Available** and its agent is **Online**. If the phone shows nothing, check the agent first.
+
+If the phone is registered, paired, and still absent, the two usual causes are a lost internet connection and a dismissed trust popup. Check the Wi-Fi, then unplug and replug the cable to bring the popup back.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
+
+    The same job on Samsung, with no registration to wait for
+
+</Card>
+  <Card title="Supported devices and OS versions" icon="mobile-screen" href="/questions/devices-os-versions">
+
+    Which phones and iOS versions the platform runs tests on
+
+</Card>
+  <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
+
+    What Available means on a device, and what the usage indicator adds
+
+</Card>
+  <Card title="Technical errors" icon="wrench" href="/hardware/technical-errors">
+
+    When results turn grey on a phone that used to work
+
+</Card>
+</Columns>
