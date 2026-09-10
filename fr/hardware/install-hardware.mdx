@@ -17,23 +17,23 @@ Assurez-vous d'avoir le robot, un câble d'alimentation noir et un câble RJ45 :
   ![Robot, câble d'alimentation et câble RJ45](/images/hardware/install-hardware-01.webp)
 </Frame>
 
-Selon le type de robot, vous aurez également besoin de :
+Les antennes et le hub USB sont livrés avec le robot, en quantité adaptée à son type :
 
-| Type de robot | Éléments supplémentaires |
-|---------------|--------------------------|
-| Cellulaire 5G | 8 antennes, 4 par modem |
-| Cellulaire 4G | 4 antennes, 1 par modem, plus un outil d'éjection de tiroir SIM (non inclus) |
+| Type de robot | Contenu de la livraison |
+|---------------|-------------------------|
+| Cellulaire 5G | 8 antennes, 4 pour chacun des 2 modems |
+| Cellulaire 4G | 4 antennes, 1 pour chacun des 4 modems |
 | Smartphone | Un hub USB, un câble USB bleu et une alimentation pour le hub |
 
-Ces nombres supposent le nombre de modems habituel : deux modems sur un robot 5G, quatre sur un robot 4G. Comptez les connecteurs d'antenne à l'arrière avant de commander, car certains robots 4G embarquent deux ou huit modems.
+Seule exception, l'outil d'éjection des tiroirs SIM d'un robot 4G : celui-là, il faut vous le procurer à part.
 
-<Frame caption="Antennes 5G (gauche), antennes 4G et outil d'éjection (centre), kit USB smartphone (droite)">
+<Frame caption="De haut en bas : antennes 5G, antennes 4G avec l'outil d'éjection, kit USB smartphone">
   ![Antennes 5G](/images/hardware/install-hardware-02.webp)
   ![Antennes 4G et éjecteur SIM](/images/hardware/install-hardware-03.webp)
   ![Kit hub USB](/images/hardware/install-hardware-04.webp)
 </Frame>
 
-Installez le robot dans une baie pour une meilleure circulation d'air et une meilleure accessibilité : glissez-le dans un emplacement et serrez deux vis de chaque côté. Cette étape est optionnelle, mais notez que l'air entre par l'avant et sort par l'arrière.
+Installez le robot dans une baie : l'air y circule mieux et vous y accédez plus facilement. Glissez-le dans un emplacement, puis serrez deux vis de chaque côté. Rien ne vous y oblige, mais gardez en tête que l'air entre par l'avant et ressort par l'arrière.
 
 ## Brancher l'alimentation et le réseau
 
@@ -43,13 +43,13 @@ Branchez le câble d'alimentation noir à l'arrière du robot :
   ![Câble d'alimentation](/images/hardware/install-hardware-05.webp)
 </Frame>
 
-Connectez le câble RJ45 au port Ethernet numéroté **1** à l'arrière, si votre robot a plusieurs ports. Les ports 2 et 3 fonctionnent aussi, mais il faut alors configurer `lan2` ou `lan3` au lieu de `lan1` pendant la [configuration logicielle](/fr/hardware/install-software). Le port 4 ne fonctionne pas.
+Connectez le câble RJ45 au port Ethernet numéroté **1** à l'arrière. Les ports 2 et 3 conviennent aussi, à condition de configurer `lan2` ou `lan3` au lieu de `lan1` lors de la [configuration logicielle](/fr/hardware/install-software). Le port 4, lui, ne fonctionne pas.
 
 <Frame caption="Utilisez le port Ethernet 1 (2 et 3 fonctionnent aussi, le 4 non)">
   ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/install-hardware-06.webp)
 </Frame>
 
-Un robot web n'a besoin de rien d'autre : l'alimentation et le réseau sont toute son installation. Les robots cellulaires et smartphone continuent ci-dessous.
+Pour un robot web, l'installation s'arrête ici : l'alimentation et le réseau suffisent. La suite ne concerne que les robots cellulaires et smartphone.
 
 ## Connecter les antennes (robots cellulaires 5G)
 
