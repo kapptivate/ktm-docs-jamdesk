@@ -3,7 +3,7 @@ title: Installer un robot (matériel)
 description: Déballer, installer en rack et câbler un robot Kapptivate, cellulaire, smartphone ou web.
 ---
 
-Qu'il s'agisse d'un robot cellulaire, smartphone ou digital/web, l'installation physique suit les mêmes étapes : le placer en rack, le brancher, câbler le réseau, puis ajouter les antennes ou le hub USB selon le type de robot.
+Qu'il s'agisse d'un robot cellulaire, smartphone ou web, l'installation physique suit les mêmes étapes : le placer en rack, le brancher, câbler le réseau, puis ajouter les antennes ou le hub USB selon le type de robot.
 
 <Note>
   Cette procédure s'applique à la dernière génération de robots Kapptivate. Pour un robot plus ancien, contactez le support.
@@ -21,9 +21,11 @@ Selon le type de robot, vous aurez également besoin de :
 
 | Type de robot | Éléments supplémentaires |
 |---------------|--------------------------|
-| Cellulaire 5G | 8 antennes |
-| Cellulaire 4G | 4 antennes, plus un outil d'éjection de tiroir SIM (non inclus) |
+| Cellulaire 5G | 8 antennes, 4 par modem |
+| Cellulaire 4G | 4 antennes, 1 par modem, plus un outil d'éjection de tiroir SIM (non inclus) |
 | Smartphone | Un hub USB, un câble USB bleu et une alimentation pour le hub |
+
+Ces nombres supposent le nombre de modems habituel : deux modems sur un robot 5G, quatre sur un robot 4G. Comptez les connecteurs d'antenne à l'arrière avant de commander, car certains robots 4G embarquent deux ou huit modems.
 
 <Frame caption="Antennes 5G (gauche), antennes 4G et outil d'éjection (centre), kit USB smartphone (droite)">
   ![Antennes 5G](/images/hardware/install-hardware-02.webp)
@@ -31,7 +33,7 @@ Selon le type de robot, vous aurez également besoin de :
   ![Kit hub USB](/images/hardware/install-hardware-04.webp)
 </Frame>
 
-Nous recommandons d'installer le robot dans une baie de stockage pour une meilleure circulation d'air et une meilleure accessibilité : glissez-le dans un emplacement et serrez deux vis de chaque côté. Cette étape est optionnelle ; notez que l'air entre par l'avant et sort par l'arrière.
+Installez le robot dans une baie pour une meilleure circulation d'air et une meilleure accessibilité : glissez-le dans un emplacement et serrez deux vis de chaque côté. Cette étape est optionnelle, mais notez que l'air entre par l'avant et sort par l'arrière.
 
 ## Brancher l'alimentation et le réseau
 
@@ -41,11 +43,13 @@ Branchez le câble d'alimentation noir à l'arrière du robot :
   ![Câble d'alimentation](/images/hardware/install-hardware-05.webp)
 </Frame>
 
-Connectez le câble RJ45 au port Ethernet numéroté **1** à l'arrière. Les ports 2 et 3 fonctionnent aussi ; le port 4 ne fonctionne pas.
+Connectez le câble RJ45 au port Ethernet numéroté **1** à l'arrière, si votre robot a plusieurs ports. Les ports 2 et 3 fonctionnent aussi, mais il faut alors configurer `lan2` ou `lan3` au lieu de `lan1` pendant la [configuration logicielle](/fr/hardware/install-software). Le port 4 ne fonctionne pas.
 
-<Frame caption="Utilisez le port Ethernet 1 (ou 2/3, jamais le 4)">
-  ![Port RJ45](/images/hardware/install-hardware-06.webp)
+<Frame caption="Utilisez le port Ethernet 1 (2 et 3 fonctionnent aussi, le 4 non)">
+  ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/install-hardware-06.webp)
 </Frame>
+
+Un robot web n'a besoin de rien d'autre : l'alimentation et le réseau sont toute son installation. Les robots cellulaires et smartphone continuent ci-dessous.
 
 ## Connecter les antennes (robots cellulaires 5G)
 
@@ -61,7 +65,7 @@ L'arrière du robot dispose de 4 connecteurs par modem. Connectez les antennes :
   ![Connecteurs d'antenne](/images/hardware/install-hardware-08.webp)
 </Frame>
 
-Pour insérer une carte SIM, poussez-la dans le slot SIM jusqu'à entendre un clic, puis répétez pour les tiroirs restants.
+Pour insérer une carte SIM, poussez-la dans le slot SIM jusqu'à entendre un clic, puis répétez pour les slots restants.
 
 <Frame caption="Poussez la SIM jusqu'au clic">
   ![Insertion SIM](/images/hardware/install-hardware-09.webp)
@@ -81,7 +85,7 @@ Un robot 4G utilise 1 antenne par modem, avec 3 câbles par antenne : le câble 
   ![Connecteurs antenne 4G](/images/hardware/install-hardware-11.webp)
 </Frame>
 
-Pour insérer une carte SIM, appuyez sur le bouton en haut à droite du slot SIM avec l'outil d'éjection, placez la SIM dans le tiroir et repoussez-le. Répétez pour tous les tiroirs.
+Pour insérer une carte SIM, appuyez avec l'outil d'éjection sur le bouton en haut à droite du tiroir SIM, placez la SIM dans le tiroir et repoussez-le. Répétez pour tous les tiroirs.
 
 <Frame caption="Éjectez le tiroir avec l'outil, placez la SIM, repoussez">
   ![Éjection du tiroir SIM](/images/hardware/install-hardware-12.webp)
