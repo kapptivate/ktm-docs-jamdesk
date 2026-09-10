@@ -1,0 +1,133 @@
+---
+title: Configure the robot network
+description: Give a wired robot its static IP so its agent comes online in the Kapptivate platform.
+---
+
+The robot is racked and cabled, but the platform still knows nothing about it. This page gives it its static IP. You work on the robot itself, with a screen and a keyboard, and you read the result in the platform.
+
+<Note>
+  This procedure applies to the latest generation of Kapptivate robots, on the models with display output. The mini cellular robot has none: reach it over a serial line instead, see [log in on a robot without display output](/hardware/headless-login). For an older robot, contact support.
+</Note>
+
+Every robot goes through this page, whatever its type. Smartphone robots then need their phones prepared, on a separate page per operating system.
+
+## Network prerequisites
+
+Some network flows have to be open from the robot toward Kapptivate. Which ones depends on the platform you use to reach the product, and the list is in the IP requirements document: ask support if you don't have it.
+
+Get those flows opened before you start. A robot with a correct IP and closed flows looks exactly like a robot with a bad IP.
+
+## Before you start
+
+- The robot is racked, powered, and cabled: see [install a robot](/hardware/install-robot).
+- A USB keyboard, a USB mouse, a screen, and an HDMI cable. None of these ship with the robot.
+- The robot's credentials. Ask support if you don't have them.
+- The static IP, mask, gateway, and DNS server addresses, from your IT department.
+
+## Set the static IP
+
+<Steps>
+  <Step title="Check which port the cable is in">
+    The RJ45 cable belongs in the Ethernet port labeled **1**. Ports 2 and 3 work too, but you then configure `lan2` or `lan3` further down instead of `lan1`. Port 4 does not work.
+
+    <Frame caption="How the Ethernet ports are numbered">
+      ![The numbered Ethernet ports at the back of the robot](/images/hardware/configure-network-11.webp)
+    </Frame>
+  </Step>
+  <Step title="Connect the peripherals">
+    Plug the keyboard, mouse, and HDMI cable into the back of the robot.
+
+    <Frame caption="Peripheral connections at the back">
+      ![Keyboard, mouse, and HDMI cable plugged into the back of the robot](/images/hardware/configure-network-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Power on and log in">
+    Turn the robot on with the front button. At the login screen, use the provided credentials. You land on a Linux desktop.
+
+    <Frame caption="The front power button">
+      ![The power button on the front panel of the robot](/images/hardware/configure-network-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Open the connection editor">
+    Click the network configuration icon and select **Edit Connections**.
+
+    <Frame caption="Edit Connections in the network menu">
+      ![The network menu open on the Edit Connections entry](/images/hardware/configure-network-03.webp)
+    </Frame>
+
+    The connection here is named `lan1`; yours may differ (for example "Wired connection 1"). Pick the one matching the port you checked in step 1, then edit it.
+
+    <Frame caption="Select the connection and edit it">
+      ![The connection list with lan1 selected](/images/hardware/configure-network-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Check the General tab">
+    In **General**, make sure **Connect automatically with priority** is checked, with the value `-999`.
+
+    <Frame caption="General tab">
+      ![The General tab of the connection editor](/images/hardware/configure-network-05.webp)
+    </Frame>
+
+    <Frame caption="Connect automatically with priority -999">
+      ![Connect automatically with priority set to -999](/images/hardware/configure-network-06.webp)
+    </Frame>
+  </Step>
+  <Step title="Switch to manual addressing">
+    Open **IPV4 Settings** and change the method from **Automatic (DHCP)** to **Manual**.
+
+    <Frame caption="IPV4 Settings tab">
+      ![The IPV4 Settings tab](/images/hardware/configure-network-07.webp)
+    </Frame>
+
+    <Frame caption="Switch from DHCP to Manual">
+      ![The method dropdown set to Manual](/images/hardware/configure-network-08.webp)
+    </Frame>
+  </Step>
+  <Step title="Enter the addresses">
+    Click **Add**, then enter the IP address, mask, and gateway from your IT department. Fill the **DNS servers** field too: without DNS the robot reaches Kapptivate by IP but not by name.
+
+    <Frame caption="Enter the address, mask, gateway, and DNS">
+      ![The address, mask, gateway, and DNS fields filled in](/images/hardware/configure-network-09.webp)
+    </Frame>
+  </Step>
+  <Step title="Save">
+    Click **Save**. The connection comes back up with its new address.
+
+    <Frame caption="Save the connection">
+      ![The Save button of the connection editor](/images/hardware/configure-network-10.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Check that it worked
+
+Open the Kapptivate platform and find the robot's agent under **Agents**. It shows **Online** once it reaches the platform.
+
+If it stays **Offline**, work through [network troubleshooting](/hardware/network-troubleshooting): the checks there start with the cable and the port, then the flows, then DNS resolution.
+
+A smartphone robot is not finished at this point. Its agent is online, but each phone still has to be prepared before it can accept tests.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
+
+    The Samsung settings that keep a phone awake and reachable over USB
+
+</Card>
+  <Card title="Prepare an iPhone" icon="apple" href="/hardware/prepare-iphone">
+
+    Trust the robot, then let support finish the pairing
+
+</Card>
+  <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
+
+    When the agent stays offline once you have saved
+
+</Card>
+  <Card title="Swap or configure a SIM" icon="sim-card" href="/hardware/swap-sim">
+
+    Declare the SIMs of a cellular robot
+
+</Card>
+</Columns>

@@ -1,0 +1,145 @@
+---
+title: Préparer un smartphone Android
+description: Régler un téléphone Samsung pour qu'un robot smartphone le garde éveillé, le joigne en USB et y exécute des tests d'application mobile.
+---
+
+Sorti du carton, un téléphone travaille contre l'automatisation. Il s'endort, il optimise sa batterie sans rien vous demander, il se met à jour en plein run. Les réglages ci-dessous lui retirent ces réflexes un par un, jusqu'à ce qu'il apparaisse dans la liste des devices de son agent.
+
+<Note>
+  Les chemins de menu ci-dessous sont ceux de Samsung, sous One UI. Chez un autre constructeur Android, les mêmes réglages existent sous des noms voisins, rarement au même endroit. [Samsung est la seule marque Android pleinement supportée](/fr/questions/devices-os-versions) : les autres livrent des surcouches qui peuvent interférer avec l'automatisation mobile, et les investigations sur ces téléphones sont décomptées de votre package de support.
+</Note>
+
+## Avant de commencer
+
+- Le robot est installé et son hub USB est sous tension : voir [installer un robot](/fr/hardware/install-robot).
+- L'agent du robot affiche **Online** dans la plateforme : voir [configurer le réseau du robot](/fr/hardware/configure-network).
+- Le téléphone tourne sous une [version d'Android supportée](/fr/questions/devices-os-versions) et dispose d'au moins 4 Go de RAM.
+- Un câble USB pour le téléphone. Le hub est livré avec le robot, les câbles des téléphones non.
+
+## Premier démarrage
+
+Allumez le téléphone et déroulez l'assistant Android : choisissez **English** et votre pays, puis passez tous les comptes. Les libellés cités plus bas sont ceux de la version anglaise.
+
+<Warning>
+  Ne définissez ni mot de passe, ni code PIN, ni schéma de verrouillage. L'écran doit rester déverrouillé pour que la plateforme puisse se servir du téléphone.
+</Warning>
+
+## Régler le téléphone
+
+<Steps>
+  <Step title="Mettre Chrome en navigateur par défaut">
+    Dans **Settings > Apps > Choose default apps > Browser app**, sélectionnez **Chrome**. S'il est absent, installez-le d'abord depuis le Play Store.
+  </Step>
+  <Step title="Débloquer les options de développement">
+    Dans **Settings > About phone > Software information**, appuyez plusieurs fois de suite sur **Build number**, jusqu'à ce qu'Android confirme l'activation du mode développeur.
+  </Step>
+  <Step title="Régler les options de développement">
+    Dans **Settings > Developer options**, réglez ces sept options :
+
+    | Réglage | État |
+    |---------|------|
+    | Stay awake | Activé |
+    | Auto update system | Désactivé |
+    | USB debugging | Activé |
+    | Revoke USB debugging authorizations | Activé |
+    | Disable adb authorization timeout | Activé |
+    | Verify apps over USB | Désactivé |
+    | Verify bytecode of debuggable apps | Désactivé |
+
+    **USB debugging** est celui qui rend le téléphone pilotable par le câble. **Disable adb authorization timeout** empêche cette autorisation d'expirer : le téléphone reste joignable après une longue période d'inactivité.
+
+    <Frame caption="Les options de développement, réglées">
+      ![Les sept options de développement avec leurs interrupteurs dans l'état attendu](/images/hardware/prepare-android-01.webp)
+    </Frame>
+  </Step>
+  <Step title="Couper les réglages d'Automation">
+    Dans **Settings > Battery and device care**, ouvrez l'icône de menu en haut à droite, puis choisissez **Automation**.
+
+    <Frame caption="L'icône de menu dans Battery and device care">
+      ![L'icône de menu en haut à droite de l'écran Battery and device care](/images/hardware/prepare-android-02.webp)
+    </Frame>
+
+    Désactivez ces deux options :
+
+    | Réglage | État |
+    |---------|------|
+    | Auto optimize daily | Désactivé |
+    | Adaptive power saving | Désactivé |
+
+    <Frame caption="Les options d'Automation, réglées">
+      ![Auto optimize daily et Adaptive power saving tous deux désactivés](/images/hardware/prepare-android-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Empêcher Android d'endormir les applications">
+    De retour dans **Battery and device care > Battery > Background usage limits**, désactivez **Put unused apps to sleep**. Samsung met en veille les applications qu'il juge inutilisées ; or un téléphone monté sur un robot doit rester joignable entre deux campagnes.
+
+    <Frame caption="Background usage limits">
+      ![Put unused apps to sleep, désactivé](/images/hardware/prepare-android-04.webp)
+    </Frame>
+  </Step>
+  <Step title="Régler les options de batterie">
+    Dans **Battery > More battery settings**, réglez ces quatre options :
+
+    | Réglage | État |
+    |---------|------|
+    | Adaptive battery | Désactivé |
+    | Enhanced processing | Désactivé |
+    | Fast charging | Désactivé |
+    | Protect battery | Activé |
+
+    Sur le hub, un téléphone charge en permanence, et [c'est ce qui fait gonfler les batteries de smartphones](/fr/hardware/swap-battery#gonflement-des-batteries-de-smartphones). **Protect battery** ralentit le phénomène, et la vraie parade reste un téléphone qui accepte le pass-through charging.
+
+    <Frame caption="More battery settings, réglées">
+      ![Les quatre options de batterie avec leurs interrupteurs dans l'état attendu](/images/hardware/prepare-android-05.webp)
+    </Frame>
+  </Step>
+  <Step title="Couper les mises à jour automatiques">
+    Dans **Settings > Software update**, désactivez **Auto download over Wi-Fi**. La plateforme couvre [Android 8 à 16](/fr/questions/devices-os-versions), et une mise à jour peut pousser le téléphone au-delà des versions prises en charge.
+
+    <Frame caption="Paramètres de mise à jour logicielle">
+      ![Auto download over Wi-Fi, désactivé](/images/hardware/prepare-android-06.webp)
+    </Frame>
+  </Step>
+  <Step title="Brancher le téléphone au robot">
+    Branchez le téléphone sur un port USB libre du hub. S'il était déjà branché, débranchez-le et rebranchez-le : la popup ne se déclenche qu'à la connexion.
+
+    Sur le téléphone, cochez **Always allow from this computer**, puis appuyez sur **OK**.
+
+    <Frame caption="La popup de débogage USB sur le téléphone">
+      ![La popup d'autorisation de débogage USB avec Always allow from this computer cochée](/images/hardware/prepare-android-07.webp)
+    </Frame>
+  </Step>
+</Steps>
+
+## Vérifier que c'est bon
+
+Ouvrez la plateforme Kapptivate, retrouvez l'agent du robot dans **Agents**, puis ouvrez-le. Le téléphone figure dans sa liste de devices et affiche **Available** dès qu'il est prêt à prendre des tests.
+
+Un device ne devient disponible que si son propre statut est **Available** et si son agent est **Online**. Si le téléphone n'affiche rien, commencez donc par regarder l'agent.
+
+Et s'il n'apparaît pas du tout, débranchez puis rebranchez le câble en guettant la popup d'autorisation : une popup fermée trop vite est la cause habituelle, et elle ne revient qu'à la reconnexion.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Préparer un iPhone" icon="apple" href="/fr/hardware/prepare-iphone">
+
+    Le même travail sous iOS, où le support termine l'appairage
+
+</Card>
+  <Card title="Téléphones et versions d'OS supportés" icon="mobile-screen" href="/fr/questions/devices-os-versions">
+
+    Quels téléphones et quelles versions d'Android la plateforme accepte
+
+</Card>
+  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+
+    Ce que dit le statut Available d'un device, et ce que son utilisation ajoute
+
+</Card>
+  <Card title="Erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
+
+    Quand les résultats passent au gris sur un téléphone qui marchait
+
+</Card>
+</Columns>

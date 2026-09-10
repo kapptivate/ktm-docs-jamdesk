@@ -4,7 +4,7 @@ description: Installer, maintenir et dépanner les robots Kapptivate déployés 
 sidebarTitle: Vue d'ensemble
 ---
 
-Les robots Kapptivate exécutent vos tests depuis votre propre réseau : robots web, robots smartphone et robots cellulaires équipés de vraies cartes SIM. Cette section suit la vie de ce matériel, de l'installation à la maintenance, jusqu'à la recherche de panne quand un robot ne répond plus.
+Les robots Kapptivate exécutent vos tests depuis votre propre réseau : robots web, robots smartphone et robots cellulaires équipés de vraies cartes SIM. Cette section suit la vie de ce matériel : l'installation, la préparation des téléphones qu'il pilote, la maintenance, et la recherche de panne quand un robot ne répond plus.
 
 Deux objets à ne pas confondre. Le robot est le matériel : boîtier, alimentation, antennes, cartes SIM, ports Ethernet. L'agent est le logiciel embarqué, celui que vous pilotez depuis la plateforme. D'où le découpage des pages ci-dessous : un robot se met hors tension, un agent redémarre.
 
@@ -13,14 +13,29 @@ Les pages d'installation décrivent la dernière génération de robots. Pour in
 ## Installation
 
 <Columns cols={2}>
-  <Card title="Installer un robot (matériel)" icon="screwdriver-wrench" href="/fr/hardware/install-hardware">
+  <Card title="Installer un robot" icon="screwdriver-wrench" href="/fr/hardware/install-robot">
 
     Placer en rack, brancher et câbler un robot neuf, quel que soit son type
 
 </Card>
-  <Card title="Installer un robot (logiciel)" icon="gear" href="/fr/hardware/install-software">
+  <Card title="Configurer le réseau du robot" icon="gear" href="/fr/hardware/configure-network">
 
-    Pour qu'un robot câblé apparaisse disponible dans la plateforme
+    L'IP statique qui fait passer l'agent Online, quel que soit le type de robot
+
+</Card>
+</Columns>
+
+## Smartphones
+
+<Columns cols={2}>
+  <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
+
+    Les réglages Samsung qui gardent un téléphone éveillé et joignable en USB
+
+</Card>
+  <Card title="Préparer un iPhone" icon="apple" href="/fr/hardware/prepare-iphone">
+
+    Faire confiance au robot, puis laisser le support terminer l'appairage
 
 </Card>
 </Columns>

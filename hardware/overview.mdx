@@ -4,7 +4,7 @@ description: Install, maintain, and troubleshoot the Kapptivate robots deployed 
 sidebarTitle: Overview
 ---
 
-Kapptivate runs your tests from robots deployed in your own network: web, smartphone, and cellular robots holding real SIM cards. This section covers installing one, keeping it running, and finding the fault when it stops answering.
+Kapptivate runs your tests from robots deployed in your own network: web, smartphone, and cellular robots holding real SIM cards. This section covers installing one, preparing the phones it drives, keeping it running, and finding the fault when it stops answering.
 
 A robot is the hardware: box, power cable, antennas, SIM cards, Ethernet ports. The agent is the software running on it, and the agent is what you manage from the platform. That split runs through the pages below: you power a robot off, you restart an agent.
 
@@ -13,14 +13,29 @@ The installation pages cover the latest robot generation; contact support before
 ## Installation
 
 <Columns cols={2}>
-  <Card title="Install a robot (hardware)" icon="screwdriver-wrench" href="/hardware/install-hardware">
+  <Card title="Install a robot" icon="screwdriver-wrench" href="/hardware/install-robot">
 
     Rack, power, and cable a new robot, whatever its type
 
 </Card>
-  <Card title="Install a robot (software)" icon="gear" href="/hardware/install-software">
+  <Card title="Configure the robot network" icon="gear" href="/hardware/configure-network">
 
-    Get a wired robot to show up as available in the platform
+    The static IP that brings the agent online, required for every robot type
+
+</Card>
+</Columns>
+
+## Smartphones
+
+<Columns cols={2}>
+  <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
+
+    The Samsung settings that keep a phone awake and reachable over USB
+
+</Card>
+  <Card title="Prepare an iPhone" icon="apple" href="/hardware/prepare-iphone">
+
+    Trust the robot, then let support finish the pairing
 
 </Card>
 </Columns>
