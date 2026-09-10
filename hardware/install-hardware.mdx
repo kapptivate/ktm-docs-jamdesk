@@ -1,11 +1,9 @@
 ---
 title: Install a robot (hardware)
-description: >-
-  Learn how to install a Kapptivate robot's hardware, including power, network,
-  antennas, or USB hub, based on the robot type.
+description: Unpack, rack, and cable a Kapptivate cellular, smartphone, or web robot.
 ---
 
-Whether it is a cellular, smartphone, or digital/web robot, the physical installation follows the same steps: rack it, power it, wire the network, then add the antennas or the USB hub depending on the robot type.
+Whether it is a cellular, smartphone, or web robot, the physical installation follows the same steps: rack it, power it, wire the network, then add the antennas or the USB hub depending on the robot type.
 
 <Note>
   This procedure applies to the latest generation of Kapptivate robots. For an older robot, contact support.
@@ -23,9 +21,11 @@ Depending on the robot type, you also need:
 
 | Robot type | Additional items |
 |------------|------------------|
-| Cellular 5G | 8 antennas |
-| Cellular 4G | 4 antennas, plus a SIM tray ejector tool (not included) |
+| Cellular 5G | 8 antennas, 4 per modem |
+| Cellular 4G | 4 antennas, 1 per modem, plus a SIM tray ejector tool (not included) |
 | Smartphone | A USB hub, a blue USB cable, and a power supply for the hub |
+
+Those counts assume the usual modem count: two modems on a 5G robot, four on a 4G robot. Count the antenna connectors at the back before you order, since some 4G robots ship with two or eight modems.
 
 <Frame caption="5G antennas (left), 4G antennas and ejector tool (middle), smartphone USB kit (right)">
   ![5G antennas](/images/hardware/install-hardware-02.webp)
@@ -33,7 +33,7 @@ Depending on the robot type, you also need:
   ![USB hub kit](/images/hardware/install-hardware-04.webp)
 </Frame>
 
-We recommend installing the robot in a storage bay for better airflow and accessibility: slide it into a slot and tighten two screws on each side. This is optional; note that air enters at the front and exits at the back.
+Install the robot in a rack for better airflow and accessibility: slide it into a slot and tighten two screws on each side. This is optional, but note that air enters at the front and exits at the back.
 
 ## Connect power and network
 
@@ -43,11 +43,13 @@ Plug the black power cable into the back of the robot:
   ![Power cable](/images/hardware/install-hardware-05.webp)
 </Frame>
 
-Connect the RJ45 cable to the Ethernet port labelled **1** at the back. Ports 2 and 3 also work; port 4 does not.
+Connect the RJ45 cable to the Ethernet port labeled **1** at the back, if your robot has more than one port. Ports 2 and 3 work too, but you then configure `lan2` or `lan3` instead of `lan1` during the [software setup](/hardware/install-software). Port 4 does not work.
 
-<Frame caption="Use Ethernet port 1 (or 2/3, never 4)">
-  ![RJ45 port](/images/hardware/install-hardware-06.webp)
+<Frame caption="Use Ethernet port 1 (2 and 3 work too, 4 does not)">
+  ![The numbered Ethernet ports at the back of the robot](/images/hardware/install-hardware-06.webp)
 </Frame>
+
+A web robot needs nothing else: power and network are its whole installation. Cellular and smartphone robots continue below.
 
 ## Connect the antennas (5G cellular robots)
 
@@ -63,7 +65,7 @@ The back of the robot has 4 connectors per modem. Connect the antennas:
   ![Antenna connectors](/images/hardware/install-hardware-08.webp)
 </Frame>
 
-To insert a SIM card, push it into the SIM slot until you hear a click, and repeat for the remaining trays.
+To insert a SIM card, push it into the SIM slot until you hear a click, and repeat for the remaining slots.
 
 <Frame caption="Push the SIM in until it clicks">
   ![SIM insertion](/images/hardware/install-hardware-09.webp)
@@ -83,7 +85,7 @@ On the back, each modem has 3 connectors: the top row takes the blue cables, the
   ![4G antenna connectors](/images/hardware/install-hardware-11.webp)
 </Frame>
 
-To insert a SIM card, press the button at the top right corner of the SIM slot with the ejector tool, place the SIM in the tray, and push it back in. Repeat for all trays.
+To insert a SIM card, press the button at the top right corner of the SIM tray with the ejector tool, place the SIM in the tray, and push it back in. Repeat for all trays.
 
 <Frame caption="Eject the tray with the tool, place the SIM, push back">
   ![SIM tray ejection](/images/hardware/install-hardware-12.webp)
