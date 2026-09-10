@@ -1,5 +1,17 @@
 {
   "$schema": "https://jamdesk.com/docs.json",
+  "redirects": [
+    {
+      "source": "/hardware/macmini-network",
+      "destination": "/hardware/overview",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/macmini-network",
+      "destination": "/fr/hardware/overview",
+      "permanent": true
+    }
+  ],
   "name": "Kapptivate",
   "description": "Kapptivate product documentation",
   "theme": "nebula",
@@ -1126,7 +1138,6 @@
                 "pages": [
                   "hardware/swap-sim",
                   "hardware/swap-battery",
-                  "hardware/macmini-network",
                   "hardware/headless-login"
                 ]
               },
@@ -2217,7 +2228,6 @@
                 "pages": [
                   "fr/hardware/swap-sim",
                   "fr/hardware/swap-battery",
-                  "fr/hardware/macmini-network",
                   "fr/hardware/headless-login"
                 ]
               },
