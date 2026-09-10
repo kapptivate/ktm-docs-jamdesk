@@ -342,6 +342,14 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
   box-shadow: inset 0 0 0 0.5px rgba(209, 213, 219, 0.8) !important;
 }
 
+/* Images are display:block with max-width:100% and no width, so any source
+   narrower than the 758px prose column sat flush left with a gutter on its
+   right. Center them instead. */
+.prose img,
+.frame-content img {
+  margin-inline: auto !important;
+}
+
 .dark .prose img {
   background-color: #0f1419 !important;
   box-shadow: inset 0 0 0 0.5px rgba(107, 114, 128, 0.3) !important;
