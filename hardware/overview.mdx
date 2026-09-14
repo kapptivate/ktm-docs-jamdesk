@@ -1,14 +1,12 @@
 ---
 title: Hardware
-description: Install, maintain, and troubleshoot the Kapptivate robots deployed in your network.
+description: Install, maintain, and troubleshoot the Kapptivate robots that run your tests.
 sidebarTitle: Overview
 ---
 
-Kapptivate runs your tests from robots deployed in your own network: web, smartphone, and cellular robots holding real SIM cards. This section covers installing one, preparing the phones it drives, keeping it running, and finding the fault when it stops answering.
+Kapptivate runs your tests on real hardware. Some robots drive a browser, some drive phones over USB, and some carry live SIM cards. These pages take one from the day you rack it to the morning it stops answering, the phones it drives included.
 
-A robot is the hardware: box, power cable, antennas, SIM cards, Ethernet ports. The agent is the software running on it, and the agent is what you manage from the platform. That split runs through the pages below: you power a robot off, you restart an agent.
-
-The installation pages cover the latest robot generation; contact support before installing an older one. Maintenance and troubleshooting cover both generations.
+A robot doesn't always sit in your building. Yours may run in your own racks, at Kapptivate, or as a virtual machine with no box to touch. What follows assumes you host it yourself, on the latest generation of hardware, though maintenance and troubleshooting hold for older robots too.
 
 ## Installation
 
@@ -20,7 +18,7 @@ The installation pages cover the latest robot generation; contact support before
 </Card>
   <Card title="Configure the robot network" icon="gear" href="/hardware/configure-network">
 
-    The static IP that brings the agent online, required for every robot type
+    Every robot needs a static IP before the platform shows it **Online**
 
 </Card>
 </Columns>
@@ -45,7 +43,7 @@ The installation pages cover the latest robot generation; contact support before
 <Columns cols={2}>
   <Card title="Swap a SIM" icon="sim-card" href="/hardware/swap-sim">
 
-    Install the card, then decide: reuse an old SIM's number and its monitors, or start a fresh one
+    The number you type decides: a swap that carries the old card's settings and monitors over, or a fresh SIM
 
 </Card>
   <Card title="Swap the battery" icon="battery-half" href="/hardware/swap-battery">
@@ -70,32 +68,32 @@ The installation pages cover the latest robot generation; contact support before
 </Card>
   <Card title="Technical errors" icon="wrench" href="/hardware/technical-errors">
 
-    When a result turns grey: trace it back to the agent, then restart the right thing
+    Grey results start at the robot: trace the error back before restarting anything
 
 </Card>
   <Card title="SIM cards troubleshooting" icon="sim-card" href="/hardware/sim-troubleshooting">
 
-    A bad SIM shows through its status, or through USSD, SMS, and call errors that keep coming back
+    Spot a bad SIM from its status, or from USSD, SMS, and call errors that keep coming back
 
 </Card>
   <Card title="Identify the RJ45 port" icon="ethernet" href="/hardware/rj45-port">
 
-    Which Ethernet port carries the static IP, when the robot has more than one
+    Which Ethernet port carries the static IP when the robot has more than one
 
 </Card>
 </Columns>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="Agents" icon="server" href="/equipment/agents">
 
-    Where the robot's agent lives once it's wired: its devices, its monitors, its maintenance
+    Agents is where the platform lists your robots: devices, monitors, reboots, and maintenance
 
 </Card>
   <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
 
-    Every status in one place: agent, device, SIM registration, signal, and usage
+    Every status in one place: robot, device, SIM registration, signal, and usage
 
 </Card>
 </Columns>
