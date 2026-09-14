@@ -1,52 +1,93 @@
 ---
-title: Log in on a robot without display output
-description: >-
-  Learn how to log in on a mini cellular robot without display output using a
-  serial-to-USB adapter and a serial terminal application.
-sidebarTitle: Headless robot access
+title: Log in to a robot with no display output
+description: Get a console on the mini cellular robot over a serial line, from plugging in the adapter to the login prompt.
+sidebarTitle: Serial access
 ---
 
-Some robot models have no display output. To interact with them, you connect over a serial line instead of plugging a screen. This concerns the mini cellular robot:
+The mini cellular robot has no video output. Plugging a screen into it gets you nowhere: the only way in is the DB9 socket on its back panel. Connect a serial-to-USB adapter there and open a terminal application on your computer. You get the same console every other robot shows on a monitor.
+
+<Note>
+  This model belongs to the previous generation of Kapptivate hardware and is being replaced. Its back panel gives it away: a DB9 socket where the other models carry a video output. Those take a screen and a keyboard instead.
+</Note>
 
 <Frame caption="The mini cellular robot">
-  ![Mini cellular robot](/images/hardware/headless-login-01.webp)
+  ![The mini cellular robot, a flat red box with two antennas](/images/hardware/headless-login-01.webp)
 </Frame>
 
 ## What you need
 
-- A **serial-to-USB adapter**:
+- The robot, powered on and within reach. A serial line is a cable, so you can't do this from your desk.
+- A serial-to-USB adapter: DB9 on the robot side, USB-A on the computer side.
+- The adapter's driver, installed on your computer. Ask support for the download link that matches your adapter model.
+- A serial terminal application. The steps below use **CoolTerm**, which is free and runs on macOS, Windows, and Linux.
+- The robot's credentials, the ones support gave you with the robot.
 
-<Frame caption="Serial to USB adapter">
-  ![Serial to USB adapter](/images/hardware/headless-login-02.webp)
+<Frame caption="The serial-to-USB adapter">
+  ![A serial-to-USB adapter, with a DB9 connector at one end and a USB-A plug at the other](/images/hardware/headless-login-02.webp)
 </Frame>
 
-- The adapter's **driver** installed on your computer (ask support for the download link for your adapter model).
-- A serial terminal application, for example **CoolTerm** (available for macOS, Windows, and Linux).
+## Open the console
 
-## Connect
+<Steps>
+  <Step title="Connect the adapter">
+    Plug the DB9 end into the serial socket on the back panel of the robot, and the USB end into your computer.
+  </Step>
+  <Step title="Select the port">
+    Open CoolTerm and list the available ports. Plugging the adapter in added one: `/dev/tty.usbserial-*` on macOS, a `COM` number on Windows, and `/dev/ttyUSB0` on Linux. Select it. No new port means the driver isn't installed, or the adapter is plugged into a dead USB port.
+  </Step>
+  <Step title="Set the port parameters">
+    | Parameter | Value |
+    |-----------|-------|
+    | Baud rate | 115200 |
+    | Data bits | 8 |
+    | Parity | None |
+    | Stop bits | 1 |
+    | Flow control | None |
+  </Step>
+  <Step title="Open the connection">
+    The window stays black.
+  </Step>
+  <Step title="Press Enter">
+    The robot's login prompt appears.
+  </Step>
+  <Step title="Log in">
+    Enter the robot's credentials. You land in a shell.
+  </Step>
+</Steps>
 
-Configure the serial connection with:
+<Note>
+  A black window before you press Enter is the normal state, not a failure: a serial line shows nothing until something travels over it.
+</Note>
 
-| Parameter | Value |
-|-----------|-------|
-| Baudrate | 115200 |
-| Data bits | 8 |
-| Parity | None |
-| Stop bit | 1 |
+## Check that the console answers
 
-Open the connection: you get the robot's console and can log in with your credentials.
+Run a command that proves the shell is alive:
 
-## What's Next?
+```bash
+hostname
+```
+
+The robot returns its name. From there the console behaves like any other, starting with [identifying the RJ45 port](/hardware/rj45-port) that carries the static IP.
+
+## When nothing shows up
+
+| What you see | What to do |
+|--------------|------------|
+| A black window after you press Enter | Check that the robot is powered on, then that flow control is set to None. |
+| Garbled characters | The baud rate is wrong. Set it back to 115200. |
+| No serial port in the list | The driver isn't installed, or the adapter is plugged into a dead USB port. Unplug it, plug it back in, and look at the port list again. |
+
+## What's next?
 
 <Columns cols={2}>
-  <Card title="Which RJ45 port is configured?" icon="ethernet" href="/hardware/rj45-port">
+  <Card title="Identify the RJ45 port" icon="ethernet" href="/hardware/rj45-port">
 
-    Find the right network port from the command line
+    Find the port that carries the static IP, from the console you just opened
 
 </Card>
   <Card title="Network troubleshooting" icon="network-wired" href="/hardware/network-troubleshooting">
 
-    Diagnose connectivity from the console
+    Diagnose connectivity from the robot itself
 
 </Card>
 </Columns>

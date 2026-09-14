@@ -1175,8 +1175,7 @@
                 "expanded": true,
                 "pages": [
                   "hardware/swap-sim",
-                  "hardware/swap-battery",
-                  "hardware/headless-login"
+                  "hardware/swap-battery"
                 ]
               },
               {
@@ -1187,6 +1186,7 @@
                   "hardware/network-troubleshooting",
                   "hardware/technical-errors",
                   "hardware/sim-troubleshooting",
+                  "hardware/headless-login",
                   "hardware/rj45-port"
                 ]
               }
@@ -2283,8 +2283,7 @@
                 "expanded": true,
                 "pages": [
                   "fr/hardware/swap-sim",
-                  "fr/hardware/swap-battery",
-                  "fr/hardware/headless-login"
+                  "fr/hardware/swap-battery"
                 ]
               },
               {
@@ -2295,6 +2294,7 @@
                   "fr/hardware/network-troubleshooting",
                   "fr/hardware/technical-errors",
                   "fr/hardware/sim-troubleshooting",
+                  "fr/hardware/headless-login",
                   "fr/hardware/rj45-port"
                 ]
               }
