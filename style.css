@@ -469,3 +469,105 @@ div[style*="width: 28px"][style*="height: 28px"][style*="border-radius: 50%"] {
   background-color: rgba(239, 68, 68, 0.15) !important;
   color: #ef4444 !important;
 }
+
+/* Inline code inside callouts: tint it with the callout's own color
+   instead of the neutral grey chip, which reads as a foreign element. */
+div[class*="warning-bg"] .callout-content code,
+div[class*="info-bg"] .callout-content code,
+div[class*="note-bg"] .callout-content code,
+div[class*="tip-bg"] .callout-content code {
+  background-color: rgba(237, 120, 70, 0.14) !important;
+  border-color: rgba(237, 120, 70, 0.28) !important;
+  color: inherit !important;
+}
+
+.dark div[class*="warning-bg"] .callout-content code,
+.dark div[class*="info-bg"] .callout-content code,
+.dark div[class*="note-bg"] .callout-content code,
+.dark div[class*="tip-bg"] .callout-content code {
+  background-color: rgba(237, 120, 70, 0.18) !important;
+  border-color: rgba(237, 120, 70, 0.35) !important;
+}
+
+/* Product logos at the top of the integration pages: exported at 3x,
+   displayed at 52px so they stay sharp on retina screens. */
+img[src*="/images/logo-"] {
+  width: 52px;
+  height: auto;
+}
+
+/* ------------------------------------------------------------------
+ *  Integration pages (Slack, Jira, Microsoft Teams)
+ *  Scoped through the product logo these pages carry, so nothing here
+ *  leaks onto the rest of the documentation.
+ * ------------------------------------------------------------------ */
+
+/* The product logo belongs next to the page title, not as a block at
+   the top of the body. The theme renders the title itself and MDX can
+   only write below it, so the image is taken out of the flow and drawn
+   again as the leading icon of the h1. Sized in em: the title goes from
+   24px on a phone to 36px on a wide screen, the logo follows. */
+article:has(.prose img[src*="/images/logo-"]) .prose > p:has(> img[src*="/images/logo-"]) {
+  display: none;
+}
+
+article:has(.prose img[src*="/images/logo-"]) header h1::before {
+  content: "";
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.4em;
+  vertical-align: -0.22em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+article:has(.prose img[src$="logo-slack.webp"]) header h1::before {
+  background-image: url("/_jd/images/logo-slack.webp");
+}
+article:has(.prose img[src$="logo-jira.webp"]) header h1::before {
+  background-image: url("/_jd/images/logo-jira.webp");
+}
+article:has(.prose img[src$="logo-teams.webp"]) header h1::before {
+  background-image: url("/_jd/images/logo-teams.webp");
+}
+
+/* The "coming soon" callout announces a release date. The house style
+   paints every callout in the same warm orange (see the .light block
+   above), which is right for a note or a warning but wrong here: this
+   one is not advice about the procedure, it says the procedure cannot
+   be run yet. Violet takes it out of that family, text included, since
+   the inherited orange on a violet ground reads as a rendering bug. */
+.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child,
+article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
+  border-color: #d6d0f5 !important;
+  background-color: #f3f1fd !important;
+}
+
+.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i,
+article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
+  color: #4a3faf !important;
+}
+
+/* Inline code keeps the orange tint everywhere else in the docs, so it
+   gets the violet treatment here too. */
+article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content code {
+  background-color: rgba(99, 91, 214, 0.12) !important;
+  border-color: rgba(99, 91, 214, 0.28) !important;
+}
+
+.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
+  border-color: rgba(139, 130, 246, 0.42) !important;
+  background-color: rgba(139, 130, 246, 0.14) !important;
+}
+
+.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
+  color: #c3bcff !important;
+}

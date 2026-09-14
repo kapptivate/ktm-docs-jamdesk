@@ -1,0 +1,86 @@
+---
+title: Jira
+description: Connect Jira to Kapptivate so an incident can become a ticket in the project your team already works from.
+---
+
+<Info>
+**Coming in September 2026.** Integrations are not available in Kapptivate yet. This page is published ahead of the release so you can prepare the Atlassian side in advance: everything up to the **Connect** step can be done today.
+</Info>
+
+![Jira](/images/logo-jira.webp)
+
+Connecting Jira lets Kapptivate create and sync issues between its incidents and your Jira projects, so a failing monitor turns into a ticket in the backlog instead of a message someone has to transcribe. The connection happens once, from **Administration → Integrations**, and it relies on an OAuth integration you create in the Atlassian developer console.
+
+You need two things: permission to create an app in your Atlassian organization, and admin access to your Kapptivate workspace.
+
+<Warning>
+Register the callback URL (step 3 below) **before** the first connection attempt. If the URL is not registered, the authorization never comes back to Kapptivate, and the connection stays pending.
+</Warning>
+
+## Create the Atlassian integration
+
+<Steps>
+  <Step title="Create the integration">
+    Go to [developer.atlassian.com/console](https://developer.atlassian.com/console), click **Create**, and choose **OAuth 2.0 integration**.
+  </Step>
+  <Step title="Add the permissions">
+    Open **Permissions**, find **Jira API**, click **Configure**, and add these three scopes:
+
+    | Scope | What it allows |
+    |---|---|
+    | `read:jira-work` | Read projects and issue types, to fill the pickers |
+    | `write:jira-work` | Create and update the issues raised from incidents |
+    | `offline_access` | Keep the connection alive past the first hour |
+
+    <Warning>
+    `offline_access` is not optional. Without it Atlassian issues no refresh token, and the connection dies after an hour.
+    </Warning>
+  </Step>
+  <Step title="Add the callback URL">
+    Open **Authorization**, and on the **OAuth 2.0 (3LO)** line click **Configure**. In **Callback URL**, paste the URL below, with your own Kapptivate domain in place of `<your-domain>`.
+
+    ```text Callback URL
+    https://<your-domain>/api/integrations/oauth/callback/jira
+    ```
+
+    Example: `https://app.kapptivate.com/api/integrations/oauth/callback/jira`
+  </Step>
+  <Step title="Copy the credentials">
+    Open **Settings** and copy the **Client ID** and the **Secret**.
+  </Step>
+</Steps>
+
+## Connect from Kapptivate
+
+![The Jira panel open on the Integrations page, with the Client ID and Client secret fields](/images/integrations-jira-connect.webp)
+
+Go to **Administration → Integrations** and open the **Jira** card. Paste the **Client ID** and the **Client secret**, then click **Connect**.
+
+A window opens and asks you to grant the integration access to your Atlassian site. Once you approve, you land back in Kapptivate and the Jira card shows **Connected**.
+
+## Choose the default project and issue type
+
+A connected integration still needs to know where to file. In the **Integration details** panel, under **Default settings**, pick a **Default project** and an **Issue type**, then click **Save**. An alert that does not name a project of its own files here.
+
+![The connected Jira panel, with the default project, the issue type and the Save button](/images/integrations-jira-details.webp)
+
+The pickers list what the integration can see with the scopes you granted. If a project is missing, check that the account that authorized the integration has access to it in Jira.
+
+## Disconnect
+
+In the **Integration details** panel, click **Disconnect**. Kapptivate stops creating issues, and the card goes back to **Not connected**. Issues already created in Jira stay where they are.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Slack" icon="comments" href="/administration/integrations/slack">
+
+    Send the same incidents to a Slack channel
+
+</Card>
+  <Card title="Incidents" icon="triangle-exclamation" href="/alerting/incidents">
+
+    See the incidents these tickets come from
+
+</Card>
+</Columns>

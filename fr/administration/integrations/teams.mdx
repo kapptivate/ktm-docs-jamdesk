@@ -1,0 +1,114 @@
+---
+title: Microsoft Teams
+description: Connectez Microsoft Teams à Kapptivate pour recevoir les alertes d'incident et les digests de monitoring dans un canal que votre équipe lit déjà.
+---
+
+<Info>
+**Disponible en septembre 2026.** Les intégrations ne sont pas encore disponibles dans Kapptivate. Cette page est publiée en avance pour que vous puissiez préparer le côté Microsoft dès maintenant : tout ce qui précède l'étape **Connect** peut être fait aujourd'hui.
+</Info>
+
+![Microsoft Teams](/images/logo-teams.webp)
+
+Connecter Microsoft Teams permet à Kapptivate de publier les alertes d'incident et les digests de monitoring directement dans un canal Teams, plutôt que dans une boîte mail que personne n'ouvre. La connexion se fait une seule fois, depuis **Administration → Integrations**, et elle s'appuie sur une application que vous déclarez dans Microsoft Entra ID (anciennement Azure Active Directory).
+
+Il vous faut deux choses : le droit de déclarer une application dans votre tenant Microsoft, et un accès administrateur à votre workspace Kapptivate.
+
+<Warning>
+Deux réglages décident si la connexion fonctionne, tout simplement : le type de compte doit être **multi-locataire**, et l'URI de redirection doit correspondre au caractère près à l'URL de callback de Kapptivate. Les deux se règlent à la déclaration (étape 1 ci-dessous). Si l'un des deux est faux, Microsoft interrompt le parcours avant même d'afficher l'écran de consentement.
+</Warning>
+
+## Déclarez l'application
+
+<Steps>
+  <Step title="Créez l'inscription">
+    Rendez-vous sur [portal.azure.com](https://portal.azure.com), ouvrez **Microsoft Entra ID → Inscriptions d'applications**, et cliquez sur **Nouvelle inscription**.
+
+    Donnez-lui le nom que vous voulez, du moment qu'il parlera à la personne qui tombera dessus plus tard, par exemple `Kapptivate Integration Center`.
+  </Step>
+  <Step title="Choisissez le type de compte multi-locataire">
+    Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel quelconque (tout annuaire Microsoft Entra ID, multi-locataire)**.
+
+    <Warning>
+    Ce n'est pas une préférence, c'est une obligation. Kapptivate passe par l'endpoint partagé `/common` de Microsoft, que Microsoft refuse de servir à une application mono-locataire déclarée après octobre 2018. La connexion échoue avec le code **AADSTS50194** avant même l'écran de consentement, et rien n'est journalisé côté Kapptivate.
+    </Warning>
+  </Step>
+  <Step title="Ajoutez l'URI de redirection">
+    Toujours sur le formulaire d'inscription, sous **URI de redirection**, choisissez la plateforme **Web** et collez l'URL ci-dessous, avec votre propre domaine Kapptivate à la place de `<votre-domaine>`. Puis cliquez sur **Inscrire**.
+
+    ```text URI de redirection
+    https://<votre-domaine>/api/integrations/oauth/callback/teams
+    ```
+
+    Exemple : `https://app.kapptivate.com/api/integrations/oauth/callback/teams`
+
+    Recopiez-la exactement. Un slash en trop, un `http` au lieu de `https` ou le mauvais domaine suffisent à ce que Microsoft refuse la redirection avec le code **AADSTS50011**.
+  </Step>
+  <Step title="Ajoutez les permissions">
+    Ouvrez **Autorisations d'API → Ajouter une autorisation → Microsoft Graph**, choisissez **Autorisations déléguées**, et ajoutez ces quatre permissions :
+
+    | Permission | Ce qu'elle autorise |
+    |---|---|
+    | `ChannelMessage.Send` | Publier le message d'alerte dans le canal |
+    | `Channel.ReadBasic.All` | Lister les canaux dans le sélecteur de canal |
+    | `Team.ReadBasic.All` | Lister les équipes dans le sélecteur d'équipe |
+    | `offline_access` | Maintenir la connexion au-delà du premier jeton |
+
+    <Warning>
+    `offline_access` n'est pas optionnelle. Sans elle, Microsoft n'émet pas de refresh token, et l'intégration bascule en **Reconnection required** dès l'expiration du premier jeton.
+    </Warning>
+  </Step>
+  <Step title="Copiez les identifiants">
+    Deux valeurs sont à récupérer sur l'inscription.
+
+    | Valeur | Où la trouver |
+    |---|---|
+    | **Client ID** | La page **Vue d'ensemble**, champ **ID d'application (client)** |
+    | **Client secret** | **Certificats et secrets → Secrets client → Nouveau secret client**, puis la colonne **Valeur** |
+
+    <Warning>
+    Copiez le secret tout de suite. La colonne **Valeur** n'est lisible que tant que vous êtes sur cette page : si vous la quittez, il faut créer un nouveau secret. Et prenez bien la **Valeur**, pas l'**ID de secret** affiché à côté, qui n'est pas l'identifiant attendu.
+    </Warning>
+  </Step>
+</Steps>
+
+## Connectez depuis Kapptivate
+
+Allez dans **Administration → Integrations** et ouvrez la carte **Microsoft Teams**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connect**.
+
+Une fenêtre s'ouvre et vous demande de consentir aux permissions pour votre organisation. Une fois que vous validez, vous revenez dans Kapptivate et la carte Microsoft Teams affiche **Connected**.
+
+Les deux valeurs sont stockées chiffrées, et ne se retrouvent jamais dans un fichier de configuration.
+
+## Choisissez l'équipe et le canal par défaut
+
+Une intégration connectée doit encore savoir où publier. Dans le panneau **Integration details**, sous **Default settings**, choisissez une **Default team** et un **Default channel**, puis cliquez sur **Save**. Une alerte qui ne précise pas de canal atterrit ici.
+
+Les sélecteurs listent ce que l'intégration peut voir avec les permissions accordées, pour le compte qui a donné son consentement. Si une équipe manque dans la liste, vérifiez que ce compte en est bien membre dans Teams.
+
+## Si la connexion échoue
+
+La fenêtre d'autorisation se referme sur une erreur générique et ne journalise rien, parce que l'échec se produit côté Microsoft, avant le retour vers Kapptivate. Pour lire la vraie raison, ouvrez l'URL d'autorisation dans un onglet normal : Microsoft affiche alors sa propre page d'erreur, avec un code.
+
+| Code | Ce qu'il signifie | Correction |
+|---|---|---|
+| `AADSTS50194` | L'application est déclarée en mono-locataire | Passez **Types de comptes pris en charge** en multi-locataire, dans **Authentification** |
+| `AADSTS50011` | L'URI de redirection ne correspond pas à celle que Kapptivate appelle | Comparez l'URI au caractère près avec celle de l'étape 3 |
+
+## Déconnectez
+
+Dans le panneau **Integration details**, cliquez sur **Disconnect**. Kapptivate arrête de publier dans Teams, et la carte repasse en **Not connected**. L'inscription d'application, elle, reste dans votre tenant : une reconnexion plus tard ne demande que de recoller les identifiants.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Slack" icon="comments" href="/fr/administration/integrations/slack">
+
+    Envoyez les mêmes alertes dans un canal Slack
+
+</Card>
+  <Card title="Alertes" icon="triangle-exclamation" href="/fr/alerting/alerts">
+
+    Décidez quels résultats de monitor déclenchent une alerte
+
+</Card>
+</Columns>

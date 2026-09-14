@@ -1,0 +1,86 @@
+---
+title: Jira
+description: Connectez Jira à Kapptivate pour transformer un incident en ticket dans le projet où votre équipe travaille déjà.
+---
+
+<Info>
+**Disponible en septembre 2026.** Les intégrations ne sont pas encore disponibles dans Kapptivate. Cette page est publiée en avance pour que vous puissiez préparer le côté Atlassian dès maintenant : tout ce qui précède l'étape **Connect** peut être fait aujourd'hui.
+</Info>
+
+![Jira](/images/logo-jira.webp)
+
+Connecter Jira permet à Kapptivate de créer et de synchroniser des tickets entre ses incidents et vos projets Jira : un monitor en échec devient un ticket dans le backlog, au lieu d'un message que quelqu'un doit recopier. La connexion se fait une seule fois, depuis **Administration → Integrations**, et elle s'appuie sur une intégration OAuth que vous créez dans la console développeur Atlassian.
+
+Il vous faut deux choses : le droit de créer une application dans votre organisation Atlassian, et un accès administrateur à votre workspace Kapptivate.
+
+<Warning>
+Enregistrez la callback URL (étape 3 ci-dessous) **avant** la première tentative de connexion. Si l'URL n'est pas enregistrée, l'autorisation ne revient jamais jusqu'à Kapptivate, et la connexion reste en attente.
+</Warning>
+
+## Créez l'intégration Atlassian
+
+<Steps>
+  <Step title="Créez l'intégration">
+    Rendez-vous sur [developer.atlassian.com/console](https://developer.atlassian.com/console), cliquez sur **Create**, et choisissez **OAuth 2.0 integration**.
+  </Step>
+  <Step title="Ajoutez les permissions">
+    Ouvrez **Permissions**, trouvez **Jira API**, cliquez sur **Configure**, et ajoutez ces trois scopes :
+
+    | Scope | Ce qu'il autorise |
+    |---|---|
+    | `read:jira-work` | Lire les projets et les types de ticket, pour remplir les sélecteurs |
+    | `write:jira-work` | Créer et mettre à jour les tickets issus des incidents |
+    | `offline_access` | Maintenir la connexion au-delà de la première heure |
+
+    <Warning>
+    `offline_access` n'est pas optionnel. Sans lui, Atlassian ne délivre pas de refresh token, et la connexion meurt au bout d'une heure.
+    </Warning>
+  </Step>
+  <Step title="Ajoutez la callback URL">
+    Ouvrez **Authorization**, et sur la ligne **OAuth 2.0 (3LO)** cliquez sur **Configure**. Dans **Callback URL**, collez l'URL ci-dessous, avec votre propre domaine Kapptivate à la place de `<votre-domaine>`.
+
+    ```text Callback URL
+    https://<votre-domaine>/api/integrations/oauth/callback/jira
+    ```
+
+    Exemple : `https://app.kapptivate.com/api/integrations/oauth/callback/jira`
+  </Step>
+  <Step title="Copiez les identifiants">
+    Ouvrez **Settings** et copiez le **Client ID** et le **Secret**.
+  </Step>
+</Steps>
+
+## Connectez depuis Kapptivate
+
+![Le panneau Jira ouvert sur la page Integrations, avec les champs Client ID et Client secret](/images/integrations-jira-connect.webp)
+
+Allez dans **Administration → Integrations** et ouvrez la carte **Jira**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connect**.
+
+Une fenêtre s'ouvre et vous demande d'autoriser l'intégration à accéder à votre site Atlassian. Une fois que vous validez, vous revenez dans Kapptivate et la carte Jira affiche **Connected**.
+
+## Choisissez le projet et le type de ticket par défaut
+
+Une intégration connectée doit encore savoir où déposer ses tickets. Dans le panneau **Integration details**, sous **Default settings**, choisissez un **Default project** et un **Issue type**, puis cliquez sur **Save**. Une alerte qui ne précise pas de projet crée son ticket ici.
+
+![Le panneau Jira connecté, avec le projet par défaut, le type de ticket et le bouton Save](/images/integrations-jira-details.webp)
+
+Les sélecteurs listent ce que l'intégration peut voir avec les scopes accordés. Si un projet manque, vérifiez que le compte qui a autorisé l'intégration y a bien accès dans Jira.
+
+## Déconnectez
+
+Dans le panneau **Integration details**, cliquez sur **Disconnect**. Kapptivate arrête de créer des tickets, et la carte repasse en **Not connected**. Les tickets déjà créés dans Jira restent en place.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Slack" icon="comments" href="/fr/administration/integrations/slack">
+
+    Envoyez les mêmes incidents dans un canal Slack
+
+</Card>
+  <Card title="Incidents" icon="triangle-exclamation" href="/fr/alerting/incidents">
+
+    Consultez les incidents à l'origine de ces tickets
+
+</Card>
+</Columns>

@@ -1,0 +1,83 @@
+---
+title: Slack
+description: Connectez votre workspace Slack à Kapptivate pour recevoir les alertes d'incident et les digests de monitoring dans un canal que votre équipe lit déjà.
+---
+
+<Info>
+**Disponible en septembre 2026.** Les intégrations ne sont pas encore disponibles dans Kapptivate. Cette page est publiée en avance pour que vous puissiez préparer le côté Slack dès maintenant : tout ce qui précède l'étape **Connect** peut être fait aujourd'hui.
+</Info>
+
+![Slack](/images/logo-slack.webp)
+
+Connecter Slack permet à Kapptivate de publier les alertes d'incident et les digests de monitoring directement dans un canal Slack, plutôt que dans une boîte mail que personne n'ouvre. La connexion se fait une seule fois, depuis **Administration → Integrations**, et elle s'appuie sur une application Slack que vous créez dans votre propre workspace.
+
+Il vous faut deux choses : le droit de créer une application dans votre workspace Slack, et un accès administrateur à votre workspace Kapptivate.
+
+<Warning>
+Enregistrez la redirect URL (étape 2 ci-dessous) **avant** la première tentative de connexion. Si Slack ne reconnaît pas l'URL, il ne redirige pas : il affiche sa propre page d'erreur, et la connexion reste en attente côté Kapptivate.
+</Warning>
+
+## Créez l'application Slack
+
+<Steps>
+  <Step title="Créez l'application">
+    Rendez-vous sur [api.slack.com/apps](https://api.slack.com/apps), cliquez sur **Create New App**, choisissez **From scratch**, et sélectionnez le workspace qui doit recevoir les alertes.
+  </Step>
+  <Step title="Ajoutez la redirect URL">
+    Ouvrez **OAuth & Permissions**, et sous **Redirect URLs** ajoutez l'URL ci-dessous, avec votre propre domaine Kapptivate à la place de `<votre-domaine>`. Puis cliquez sur **Save URLs**.
+
+    ```text Redirect URL
+    https://<votre-domaine>/api/integrations/oauth/callback/slack
+    ```
+
+    Exemple : `https://app.kapptivate.com/api/integrations/oauth/callback/slack`
+  </Step>
+  <Step title="Ajoutez les permissions">
+    Sur la même page, sous **Scopes → Bot Token Scopes**, ajoutez ces quatre permissions :
+
+    | Permission | Ce qu'elle autorise |
+    |---|---|
+    | `chat:write` | Publier le message d'alerte dans le canal |
+    | `channels:read` | Lister les canaux publics dans le sélecteur de canal |
+    | `groups:read` | Lister les canaux privés dans le sélecteur de canal |
+    | `team:read` | Identifier le workspace connecté |
+  </Step>
+  <Step title="Copiez les identifiants">
+    Ouvrez **Basic Information → App Credentials**. Copiez le **Client ID**, puis cliquez sur **Show** pour afficher et copier le **Client Secret**.
+  </Step>
+</Steps>
+
+## Connectez depuis Kapptivate
+
+![Le panneau Slack ouvert sur la page Integrations, avec les champs Client ID et Client secret](/images/integrations-slack-connect.webp)
+
+Allez dans **Administration → Integrations** et ouvrez la carte **Slack**. Collez le **Client ID** et le **Client secret** de votre application Slack, puis cliquez sur **Connect**.
+
+Une fenêtre s'ouvre et vous demande d'autoriser l'application pour votre workspace. Une fois que vous validez, vous revenez dans Kapptivate et la carte Slack affiche **Connected**.
+
+## Choisissez le canal par défaut
+
+Une intégration connectée doit encore savoir où publier. Dans le panneau **Integration details**, sous **Default settings**, choisissez un canal dans **Default channel** et cliquez sur **Save**. Une alerte qui ne précise pas de canal atterrit ici.
+
+![Le panneau Slack connecté, avec le canal par défaut et le bouton Save](/images/integrations-slack-details.webp)
+
+Le sélecteur liste les canaux que l'application peut voir : les canaux publics, et les canaux privés auxquels l'application a été ajoutée. Si un canal privé manque dans la liste, ajoutez l'application à ce canal dans Slack, puis rouvrez le sélecteur.
+
+## Déconnectez
+
+Dans le panneau **Integration details**, cliquez sur **Disconnect**. Kapptivate arrête de publier dans Slack, et la carte repasse en **Not connected**. L'application Slack, elle, reste dans votre workspace : une reconnexion plus tard ne demande que de recoller les identifiants.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Notifications" icon="bell" href="/fr/administration/notifications">
+
+    Définissez où sont envoyées les alertes de disponibilité des robots
+
+</Card>
+  <Card title="Alertes" icon="triangle-exclamation" href="/fr/alerting/alerts">
+
+    Décidez quels résultats de monitor déclenchent une alerte
+
+</Card>
+</Columns>

@@ -235,6 +235,7 @@
                       "administration/account/profile",
                       "administration/account/password",
                       "administration/account/preferences",
+                      "administration/account/display-mode",
                       "administration/account/delete"
                     ]
                   },
@@ -271,6 +272,14 @@
                     ]
                   },
                   "administration/notifications",
+                  {
+                    "group": "Integrations",
+                    "pages": [
+                      "administration/integrations/slack",
+                      "administration/integrations/jira",
+                      "administration/integrations/teams"
+                    ]
+                  },
                   {
                     "group": "API keys",
                     "pages": [
@@ -1334,6 +1343,7 @@
                       "fr/administration/account/profile",
                       "fr/administration/account/password",
                       "fr/administration/account/preferences",
+                      "fr/administration/account/display-mode",
                       "fr/administration/account/delete"
                     ]
                   },
@@ -1370,6 +1380,14 @@
                     ]
                   },
                   "fr/administration/notifications",
+                  {
+                    "group": "Intégrations",
+                    "pages": [
+                      "fr/administration/integrations/slack",
+                      "fr/administration/integrations/jira",
+                      "fr/administration/integrations/teams"
+                    ]
+                  },
                   {
                     "group": "Clés API",
                     "pages": [

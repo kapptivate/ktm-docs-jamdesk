@@ -1,0 +1,114 @@
+---
+title: Microsoft Teams
+description: Connect Microsoft Teams to Kapptivate so incident alerts and monitoring digests land in a channel your team already reads.
+---
+
+<Info>
+**Coming in September 2026.** Integrations are not available in Kapptivate yet. This page is published ahead of the release so you can prepare the Microsoft side in advance: everything up to the **Connect** step can be done today.
+</Info>
+
+![Microsoft Teams](/images/logo-teams.webp)
+
+Connecting Microsoft Teams lets Kapptivate post incident alerts and monitoring digests straight into a Teams channel, instead of an inbox nobody opens. The connection happens once, from **Administration → Integrations**, and it relies on an application you register in Microsoft Entra ID (formerly Azure Active Directory).
+
+You need two things: permission to register an application in your Microsoft tenant, and admin access to your Kapptivate workspace.
+
+<Warning>
+Two settings decide whether the connection works at all: the account type must be **multitenant**, and the redirect URI must match Kapptivate's callback URL character for character. Both are set at registration (step 1 below). Get either one wrong and Microsoft stops the flow before the consent screen ever appears.
+</Warning>
+
+## Register the application
+
+<Steps>
+  <Step title="Create the registration">
+    Go to [portal.azure.com](https://portal.azure.com), open **Microsoft Entra ID → App registrations**, and click **New registration**.
+
+    Give it any name that will make sense to whoever finds it later, for example `Kapptivate Integration Center`.
+  </Step>
+  <Step title="Choose the multitenant account type">
+    Under **Supported account types**, select **Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)**.
+
+    <Warning>
+    This one is not a preference, it is a requirement. Kapptivate authorizes through Microsoft's shared `/common` endpoint, which Microsoft refuses to serve to a single-tenant application registered after October 2018. The sign-in fails with **AADSTS50194** before you ever reach the consent screen, and nothing is logged on the Kapptivate side.
+    </Warning>
+  </Step>
+  <Step title="Add the redirect URI">
+    Still on the registration form, under **Redirect URI**, choose the **Web** platform and paste the URL below, with your own Kapptivate domain in place of `<your-domain>`. Then click **Register**.
+
+    ```text Redirect URI
+    https://<your-domain>/api/integrations/oauth/callback/teams
+    ```
+
+    Example: `https://app.kapptivate.com/api/integrations/oauth/callback/teams`
+
+    Copy it exactly. A trailing slash, `http` instead of `https` or the wrong domain is enough for Microsoft to refuse the redirect with **AADSTS50011**.
+  </Step>
+  <Step title="Add the permissions">
+    Open **API permissions → Add a permission → Microsoft Graph**, choose **Delegated permissions**, and add these four:
+
+    | Permission | What it allows |
+    |---|---|
+    | `ChannelMessage.Send` | Post the alert message in the channel |
+    | `Channel.ReadBasic.All` | List the channels in the channel picker |
+    | `Team.ReadBasic.All` | List the teams in the team picker |
+    | `offline_access` | Keep the connection alive past the first token |
+
+    <Warning>
+    `offline_access` is not optional. Without it Microsoft issues no refresh token, and the integration flips to **Reconnection required** as soon as the first token expires.
+    </Warning>
+  </Step>
+  <Step title="Copy the credentials">
+    You need two values from the registration.
+
+    | Value | Where to find it |
+    |---|---|
+    | **Client ID** | The **Overview** page, field **Application (client) ID** |
+    | **Client secret** | **Certificates & secrets → Client secrets → New client secret**, then the **Value** column |
+
+    <Warning>
+    Copy the secret straight away. The **Value** column is only readable while you are still on that page: leave it and you have to create a new secret. And take the **Value**, not the **Secret ID** next to it, which is not the credential.
+    </Warning>
+  </Step>
+</Steps>
+
+## Connect from Kapptivate
+
+Go to **Administration → Integrations** and open the **Microsoft Teams** card. Paste the **Client ID** and the **Client secret**, then click **Connect**.
+
+A window opens and asks you to consent to the permissions for your organization. Once you approve, you land back in Kapptivate and the Microsoft Teams card shows **Connected**.
+
+Both values are stored encrypted, and never live in a configuration file.
+
+## Choose the default team and channel
+
+A connected integration still needs to know where to post. In the **Integration details** panel, under **Default settings**, pick a **Default team** and a **Default channel**, then click **Save**. An alert that does not name a channel of its own goes here.
+
+The pickers list what the integration can see with the permissions you granted, for the account that consented. If a team is missing from the list, check that this account is a member of it in Teams.
+
+## If the connection fails
+
+The authorization window closes on a generic error and logs nothing, because the failure happens on Microsoft's side before the redirect back to Kapptivate. To read the real reason, open the authorization URL in a normal browser tab: Microsoft then shows its own error page, with a code.
+
+| Code | What it means | Fix |
+|---|---|---|
+| `AADSTS50194` | The application is registered as single-tenant | Change **Supported account types** to multitenant, in **Authentication** |
+| `AADSTS50011` | The redirect URI does not match the one Kapptivate calls | Compare the URI character for character with the one in step 3 |
+
+## Disconnect
+
+In the **Integration details** panel, click **Disconnect**. Kapptivate stops posting to Teams, and the card goes back to **Not connected**. The app registration itself stays in your tenant, so reconnecting later only takes pasting the credentials again.
+
+## What's Next?
+
+<Columns cols={2}>
+  <Card title="Slack" icon="comments" href="/administration/integrations/slack">
+
+    Send the same alerts to a Slack channel
+
+</Card>
+  <Card title="Alerts" icon="triangle-exclamation" href="/alerting/alerts">
+
+    Decide which monitor results raise an alert in the first place
+
+</Card>
+</Columns>
