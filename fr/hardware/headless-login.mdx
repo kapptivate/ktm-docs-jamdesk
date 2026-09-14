@@ -1,50 +1,93 @@
 ---
 title: Se connecter à un robot sans sortie vidéo
-description: Utiliser un adaptateur série-USB pour accéder à un mini robot cellulaire.
-sidebarTitle: Accès au robot sans écran
+description: Ouvrir une console sur le mini robot cellulaire par sa prise DB9, de l'adaptateur branché jusqu'à l'invite de connexion.
+sidebarTitle: Accès par liaison série
 ---
 
-Certains modèles de robots n'ont pas de sortie vidéo. Pour interagir avec eux, vous vous connectez via une liaison série au lieu de brancher un écran. Cela concerne le mini robot cellulaire :
+Sur le mini robot cellulaire, la prise DB9 de la face arrière tient lieu d'écran et de clavier. Branchez-y un adaptateur série-USB, ouvrez un terminal série sur votre ordinateur : vous obtenez la console du robot. C'est son seul accès local, puisqu'il n'a pas de sortie vidéo.
+
+<Note>
+  Ce robot appartient à la génération précédente du matériel Kapptivate, en cours de remplacement. Sa face arrière le distingue : une prise DB9 là où les autres modèles portent une sortie vidéo. Ceux-là se rejoignent avec un écran et un clavier.
+</Note>
 
 <Frame caption="Le mini robot cellulaire">
-  ![Mini robot cellulaire](/images/hardware/headless-login-01.webp)
+  ![Le mini robot cellulaire, un boîtier rouge plat muni de deux antennes](/images/hardware/headless-login-01.webp)
 </Frame>
 
 ## Ce dont vous avez besoin
 
-- Un **adaptateur série-USB** :
+- Le robot, sous tension et à portée de main. La liaison série passe par un câble, donc l'opération se fait sur place.
+- Un adaptateur série-USB : DB9 côté robot, USB-A côté ordinateur.
+- Le pilote de l'adaptateur, installé sur votre ordinateur. Demandez au support le lien de téléchargement correspondant à votre modèle d'adaptateur.
+- Une application de terminal série. Les étapes ci-dessous utilisent **CoolTerm**, gratuit et disponible pour macOS, Windows et Linux.
+- Les identifiants du robot, ceux que le support vous a remis avec lui.
 
-<Frame caption="Adaptateur série-USB">
-  ![Adaptateur série-USB](/images/hardware/headless-login-02.webp)
+<Frame caption="L'adaptateur série-USB">
+  ![Un adaptateur série-USB, avec un connecteur DB9 à une extrémité et une prise USB-A à l'autre](/images/hardware/headless-login-02.webp)
 </Frame>
 
-- Le **driver** de l'adaptateur installé sur votre ordinateur (contactez le support pour obtenir le lien de téléchargement correspondant à votre modèle d'adaptateur).
-- Une application de terminal série, par exemple **CoolTerm** (disponible pour macOS, Windows et Linux).
+## Ouvrir la console
 
-## Connexion
+<Steps>
+  <Step title="Branchez l'adaptateur">
+    Branchez l'extrémité DB9 sur la prise série de la face arrière du robot, et l'extrémité USB sur votre ordinateur.
+  </Step>
+  <Step title="Sélectionnez le port">
+    Ouvrez CoolTerm et affichez la liste des ports. Le branchement en a ajouté un : `/dev/tty.usbserial-*` sur macOS, un numéro `COM` sur Windows, `/dev/ttyUSB0` sur Linux. Sélectionnez-le. Si aucun port ne s'est ajouté, le pilote n'est pas installé, ou l'adaptateur est branché sur un port USB mort.
+  </Step>
+  <Step title="Réglez les paramètres du port">
+    | Paramètre | Valeur |
+    |-----------|--------|
+    | Débit | 115200 bauds |
+    | Bits de données | 8 |
+    | Parité | aucune |
+    | Bits d'arrêt | 1 |
+    | Contrôle de flux | aucun |
+  </Step>
+  <Step title="Ouvrez la connexion">
+    La fenêtre reste noire.
+  </Step>
+  <Step title="Appuyez sur Entrée">
+    L'invite de connexion du robot s'affiche.
+  </Step>
+  <Step title="Connectez-vous">
+    Saisissez les identifiants du robot. Vous arrivez dans un shell.
+  </Step>
+</Steps>
 
-Configurez la connexion série avec :
+<Note>
+  Tant que vous n'avez pas appuyé sur Entrée, la fenêtre noire est l'état normal, pas une panne : une liaison série n'affiche rien tant que rien n'y circule.
+</Note>
 
-| Paramètre | Valeur |
-|-----------|--------|
-| Baudrate | 115200 |
-| Data bits | 8 |
-| Parity | None |
-| Stop bit | 1 |
+## Vérifier que la console répond
 
-Ouvrez la connexion : vous obtenez la console du robot et pouvez vous connecter avec vos identifiants.
+Demandez son nom au robot, c'est la vérification la plus courte :
+
+```bash
+hostname
+```
+
+Le nom s'affiche, la console est bien celle du robot. La suite se passe comme sur n'importe quelle autre, à commencer par [identifier le port RJ45](/fr/hardware/rj45-port) qui porte l'IP statique.
+
+## Quand rien ne s'affiche
+
+| Ce que vous voyez | Ce qu'il faut faire |
+|-------------------|---------------------|
+| Une fenêtre noire, même après Entrée | Vérifiez que le robot est sous tension, puis que le contrôle de flux est sur aucun. |
+| Des caractères illisibles | Le débit est faux. Remettez-le à 115200 bauds. |
+| Aucun port série dans la liste | Le pilote n'est pas installé, ou l'adaptateur est branché sur un port USB mort. Débranchez, rebranchez, puis regardez à nouveau la liste des ports. |
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Quel port RJ45 est configuré ?" icon="ethernet" href="/fr/hardware/rj45-port">
+  <Card title="Identifier le port RJ45" icon="ethernet" href="/fr/hardware/rj45-port">
 
-    Trouver le bon port réseau depuis la ligne de commande
+    Trouver le port qui porte l'IP statique, depuis la console que vous venez d'ouvrir
 
 </Card>
   <Card title="Dépannage réseau" icon="network-wired" href="/fr/hardware/network-troubleshooting">
 
-    Diagnostiquer la connectivité depuis la console
+    Diagnostiquer la connectivité depuis le robot
 
 </Card>
 </Columns>
