@@ -1,9 +1,9 @@
 ---
 title: Configure the robot network
-description: Give a wired robot its address, with a static IP or over DHCP, and see it come Online in the platform.
+description: Give a wired robot its address, prove it reaches Kapptivate, and ask support to deploy it.
 ---
 
-Cabling a robot is not enough for the platform to see it. It needs an address on your network, and you set that address on the robot itself, with a screen and a keyboard plugged into the back. Do it before you screw the robot into its rack: those sockets are much easier to reach on a table.
+Cabling a robot is not enough for the platform to see it. It needs an address on your network, which you set on the robot itself, with a screen, a keyboard, and a mouse plugged into the back. Then you hand over to Kapptivate support, who deploys it. Do all this before you screw the robot into its rack: those sockets are much easier to reach on a table.
 
 <Note>
   This procedure applies to the latest generation of Kapptivate robots, on the models with display output. The mini cellular robot has none: reach it over a serial line instead, see [log in on a robot without display output](/hardware/headless-login). For an older robot, contact support@kapptivate.com.
@@ -17,7 +17,7 @@ If your robot goes straight out to the internet, you have no flows to open. It f
 
 On a filtered network, your IT department opens the flows from the robot toward Kapptivate. The IP requirements document lists them, and support@kapptivate.com sends it to you.
 
-Those flows start from the robot's own address, so the order matters here. Give the robot its IP first, then have the flows opened from that address. Until they are open, the robot shows **Offline**, exactly as it would with a wrong address.
+Those flows start from the robot's own address. Set that address first, and have the flows opened afterwards.
 
 <Note>
   The robot opens every one of these connections itself. Nothing has to reach it from the internet.
@@ -25,9 +25,9 @@ Those flows start from the robot's own address, so the order matters here. Give 
 
 ## Static IP or DHCP
 
-A static IP is the recommended setup, and the procedure below sets one. The address never moves, your flows open from it, and you still have it the day the robot goes quiet.
+A static IP is the recommended setup, and the procedure below sets one. The address never moves, your flows open from it, and support always knows where to reach the robot.
 
-DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at boot and reaches the platform on its own. Only check that the RJ45 cable sits in Ethernet port 1, 2, or 3, because port 4 does not work. Nothing else to plug in, so skip the steps below and go straight to [check that the robot is online](#check-that-the-robot-is-online).
+DHCP works too, and a simple LAN is where it earns its keep: the robot takes a lease at boot, with nothing for you to configure. Two things still hold. The cable has to sit in Ethernet port 1, 2, or 3, since port 4 does not work, and the screen and keyboard stay plugged in, because the tests and the serial number come from the robot itself. From there, go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
 
 ## Before you start
 
@@ -41,7 +41,7 @@ DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at bo
 
 <Steps>
   <Step title="Check which port the cable is in">
-    The RJ45 cable belongs in the Ethernet port labeled **1**. Ports 2 and 3 work too, but you then configure `lan2` or `lan3` further down instead of `lan1`. Port 4 does not work.
+    Check which Ethernet port holds the RJ45 cable. Port **1** is the one to use. Ports 2 and 3 work too, but you then configure `lan2` or `lan3` further down instead of `lan1`, and port 4 does not work at all.
 
     <Frame caption="How the Ethernet ports are numbered">
       ![The numbered Ethernet ports at the back of the robot](/images/hardware/configure-network-11.webp)
@@ -75,7 +75,7 @@ DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at bo
     </Frame>
   </Step>
   <Step title="Check the General tab">
-    In **General**, **Connect automatically with priority** has to be checked, with the value `-999`. Check it if it isn't.
+    Open **General**. **Connect automatically with priority** has to be checked, with the value `-999`, so check it if it isn't.
 
     <Frame caption="General tab">
       ![The General tab of the connection editor](/images/hardware/configure-network-05.webp)
@@ -86,10 +86,10 @@ DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at bo
     </Frame>
   </Step>
   <Step title="Switch to manual addressing">
-    Open **IPV4 Settings** and change the method from **Automatic (DHCP)** to **Manual**.
+    Open **IPv4 Settings** and change the method from **Automatic (DHCP)** to **Manual**.
 
-    <Frame caption="IPV4 Settings tab">
-      ![The IPV4 Settings tab](/images/hardware/configure-network-07.webp)
+    <Frame caption="IPv4 Settings tab">
+      ![The IPv4 Settings tab](/images/hardware/configure-network-07.webp)
     </Frame>
 
     <Frame caption="Switch from DHCP to Manual">
@@ -111,15 +111,31 @@ DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at bo
     </Frame>
   </Step>
   <Step title="Reboot the robot">
-    Reboot the robot from the Linux desktop. Every change you made takes effect on the way back up, and the robot returns on its final address.
+    Reboot the robot, from the desktop menu or with `sudo reboot` in a terminal. Every change you made takes effect on the way back up, and the robot returns on its new address.
   </Step>
 </Steps>
 
-## Check that the robot is online
+## Check that the robot reaches Kapptivate
 
-Open the Kapptivate platform: **Agents** is where the platform lists your robots. Find yours. It shows **Online** once it reaches the platform, and that is your signal to rack it.
+Open a terminal on the Linux desktop and walk the network path: a route to the IP addresses listed in the IP requirements document, a flow test by IP and port, the same test by domain name, then a full HTTPS handshake. [Network troubleshooting](/hardware/network-troubleshooting) carries the commands and the expected output.
 
-If it stays **Offline**, work through [network troubleshooting](/hardware/network-troubleshooting): the checks there start with the cable and the port, then the flows, then DNS resolution.
+A failing test points at your network, not at the robot. Take it back to your IT department before going further, because the robot has no way to reach the platform while the path is blocked.
+
+## Ask support to deploy the robot
+
+A new robot stays unknown to the platform until Kapptivate support deploys it, correct address and open flows notwithstanding. Support handles that last step, and needs the robot's serial number:
+
+```bash
+sudo krobot serial
+```
+
+Send that number to support@kapptivate.com, and add the static IP if you set one. That address doubles as a way in, because support can then hop through another of your robots on the same LAN to reach the new one.
+
+Support then deploys the robot, and it turns **Online** with nothing more from you. That is your signal to rack it. Until then, open the Kapptivate platform under **Agents**: the robot sits there as **Waiting for configuration**, from the moment support creates its entry, before or after you configure the network.
+
+<Note>
+  Changing the address of a robot that is already deployed? Nothing to ask support. It comes back **Online** on its own after the reboot. If it stays **Offline**, work through [network troubleshooting](/hardware/network-troubleshooting): the checks there start with the cable and the port, then the flows, then DNS resolution.
+</Note>
 
 A smartphone robot is not finished at this point. The robot is online, but no phone accepts a test until you prepare it.
 
