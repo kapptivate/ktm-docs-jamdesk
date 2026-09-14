@@ -1,23 +1,23 @@
 ---
 title: Installer un robot
-description: Déballer, installer en rack et câbler un robot Kapptivate, cellulaire, smartphone ou web.
+description: Monter un robot Kapptivate en baie, le brancher et le câbler, jusqu'aux antennes ou au hub USB selon son type.
 ---
 
-Qu'il s'agisse d'un robot cellulaire, smartphone ou web, l'installation physique suit les mêmes étapes : le placer en rack, le brancher, câbler le réseau, puis ajouter les antennes ou le hub USB selon le type de robot.
+À la fin de cette page, le robot est en place, sous tension et relié au réseau. Tout commence pareil : l'alimentation, puis le câble RJ45. Ce qui change ensuite tient au type de robot, antennes, SIM ou hub USB, et chacun a sa section.
 
 <Note>
-  Cette procédure s'applique à la dernière génération de robots Kapptivate. Pour un robot plus ancien, contactez le support.
+  Cette procédure vaut pour la dernière génération de robots Kapptivate. Contactez le support pour un modèle plus ancien.
 </Note>
 
 ## Préparer l'installation
 
-Assurez-vous d'avoir le robot, un câble d'alimentation noir et un câble RJ45 :
+Sortez du carton le robot, le câble d'alimentation noir et le câble RJ45 :
 
 <Frame caption="Le robot avec ses câbles d'alimentation et réseau">
   ![Robot, câble d'alimentation et câble RJ45](/images/hardware/install-robot-01.webp)
 </Frame>
 
-Les antennes et le hub USB sont livrés avec le robot, en quantité adaptée à son type :
+Le carton contient aussi les antennes ou le hub USB, dont le nombre dépend du type de robot :
 
 | Type de robot | Contenu de la livraison |
 |---------------|-------------------------|
@@ -25,15 +25,15 @@ Les antennes et le hub USB sont livrés avec le robot, en quantité adaptée à 
 | Cellulaire 4G | 4 antennes, 1 pour chacun des 4 modems |
 | Smartphone | Un hub USB, un câble USB bleu et une alimentation pour le hub |
 
-Seule exception, l'outil d'éjection des tiroirs SIM d'un robot 4G : celui-là, il faut vous le procurer à part.
+Une pièce fait exception : Kapptivate ne livre pas l'outil d'éjection des tiroirs SIM d'un robot 4G. Prévoyez le vôtre avant de partir.
 
 <Frame caption="De haut en bas : antennes 5G, antennes 4G avec l'outil d'éjection, kit USB smartphone">
-  ![Antennes 5G](/images/hardware/install-robot-02.webp)
+  ![Le lot d'antennes 5G livré](/images/hardware/install-robot-02.webp)
   ![Antennes 4G et éjecteur SIM](/images/hardware/install-robot-03.webp)
   ![Kit hub USB](/images/hardware/install-robot-04.webp)
 </Frame>
 
-Installez le robot dans une baie : l'air y circule mieux et vous y accédez plus facilement. Glissez-le dans un emplacement, puis serrez deux vis de chaque côté. Rien ne vous y oblige, mais gardez en tête que l'air entre par l'avant et ressort par l'arrière.
+Le robot fonctionne posé sur une étagère. La baie reste le meilleur choix : vous atteignez l'arrière sans rien débrancher, et l'air circule. Glissez le robot dans un emplacement libre de la baie. Serrez ensuite deux vis de chaque côté. L'air entre par l'avant et ressort par l'arrière : gardez ces deux faces dégagées.
 
 ## Brancher l'alimentation et le réseau
 
@@ -43,76 +43,76 @@ Branchez le câble d'alimentation noir à l'arrière du robot :
   ![Câble d'alimentation](/images/hardware/install-robot-05.webp)
 </Frame>
 
-Connectez le câble RJ45 au port Ethernet numéroté **1** à l'arrière. Les ports 2 et 3 conviennent aussi, à condition de configurer `lan2` ou `lan3` au lieu de `lan1` lors de la [configuration réseau](/fr/hardware/configure-network). Le port 4, lui, ne fonctionne pas.
+Branchez le câble RJ45 sur le port Ethernet numéroté **1**, lui aussi à l'arrière. Les ports 2 et 3 conviennent aussi, à condition de déclarer `lan2` ou `lan3` au lieu de `lan1` dans la [configuration réseau du robot](/fr/hardware/configure-network). Le port 4 n'est pas câblé : n'y cherchez pas de réglage.
 
-<Frame caption="Utilisez le port Ethernet 1 (2 et 3 fonctionnent aussi, le 4 non)">
+<Frame caption="Les quatre ports Ethernet, numérotés de 1 à 4">
   ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/install-robot-06.webp)
 </Frame>
 
 Pour un robot web, l'installation s'arrête ici : l'alimentation et le réseau suffisent. La suite ne concerne que les robots cellulaires et smartphone.
 
-## Connecter les antennes (robots cellulaires 5G)
+## Antennes et SIM (robots cellulaires 5G)
 
 Un robot 5G utilise 4 antennes par modem :
 
-<Frame caption="Antennes 5G, 4 par modem">
-  ![Antennes 5G](/images/hardware/install-robot-07.webp)
+<Frame caption="Les antennes 5G">
+  ![Les antennes 5G, de près](/images/hardware/install-robot-07.webp)
 </Frame>
 
-L'arrière du robot dispose de 4 connecteurs par modem. Connectez les antennes :
+Chaque modem a 4 connecteurs à l'arrière du robot. Connectez une antenne sur chacun :
 
-<Frame caption="4 connecteurs d'antenne par modem">
+<Frame caption="Les connecteurs d'antenne à l'arrière">
   ![Connecteurs d'antenne](/images/hardware/install-robot-08.webp)
 </Frame>
 
-Pour insérer une carte SIM, poussez-la dans le slot SIM jusqu'à entendre un clic, puis répétez pour les slots restants.
+Poussez ensuite chaque carte SIM dans son slot, jusqu'au clic.
 
-<Frame caption="Poussez la SIM jusqu'au clic">
-  ![Insertion SIM](/images/hardware/install-robot-09.webp)
+<Frame caption="Une carte SIM engagée dans son slot">
+  ![Carte SIM engagée dans son slot](/images/hardware/install-robot-09.webp)
 </Frame>
 
-## Connecter les antennes (robots cellulaires 4G)
+## Antennes et SIM (robots cellulaires 4G)
 
-Un robot 4G utilise 1 antenne par modem, avec 3 câbles par antenne : le câble bleu est le GPS, les deux câbles rouges sont la connectivité 4G.
+Un robot 4G utilise 1 antenne par modem, et chaque antenne porte 3 câbles : un bleu pour le GPS, deux rouges pour la connectivité 4G.
 
 <Frame caption="Antenne 4G avec ses trois câbles">
   ![Câbles antenne 4G](/images/hardware/install-robot-10.webp)
 </Frame>
 
-À l'arrière, chaque modem dispose de 3 connecteurs : la rangée du haut reçoit les câbles bleus, les deux rangées du bas reçoivent les câbles rouges.
+À l'arrière, les 3 connecteurs d'un modem se répartissent sur trois rangées. Le câble bleu va sur la rangée du haut, les deux rouges sur les rangées du dessous.
 
-<Frame caption="Câbles bleus sur la rangée du haut, câbles rouges en dessous">
+<Frame caption="Les trois rangées de connecteurs d'antenne 4G">
   ![Connecteurs antenne 4G](/images/hardware/install-robot-11.webp)
 </Frame>
 
-Pour insérer une carte SIM, appuyez avec l'outil d'éjection sur le bouton en haut à droite du tiroir SIM, placez la SIM dans le tiroir et repoussez-le. Répétez pour tous les tiroirs.
+Sortez ensuite le tiroir SIM : appuyez avec l'outil d'éjection sur le bouton situé en haut à droite du tiroir. Posez la SIM dedans, puis repoussez le tiroir. Recommencez pour les autres tiroirs.
 
-<Frame caption="Éjectez le tiroir avec l'outil, placez la SIM, repoussez">
-  ![Éjection du tiroir SIM](/images/hardware/install-robot-12.webp)
-  ![SIM dans le tiroir](/images/hardware/install-robot-13.webp)
+<Frame caption="Le tiroir SIM sorti, et la SIM posée dedans">
+  ![Tiroir SIM sorti du robot](/images/hardware/install-robot-12.webp)
+  ![Carte SIM posée dans le tiroir](/images/hardware/install-robot-13.webp)
 </Frame>
 
 ## Connecter le hub USB (robots smartphone)
 
-Connectez le câble USB bleu au port **Host** du hub (coin supérieur gauche) :
+Branchez le câble USB bleu sur le port **Host** du hub, dans le coin supérieur gauche :
 
-<Frame caption="Le port host du hub">
-  ![Port host du hub](/images/hardware/install-robot-14.webp)
+<Frame caption="Le port Host du hub">
+  ![Port Host du hub](/images/hardware/install-robot-14.webp)
 </Frame>
 
-Connectez l'autre extrémité au port USB en bas à gauche de l'arrière du robot (tout autre port USB fonctionne aussi) :
+L'autre extrémité va sur un port USB à l'arrière du robot, celui d'en bas à gauche par exemple. Les autres conviennent aussi.
 
 <Frame caption="Port USB du robot">
   ![Port USB du robot](/images/hardware/install-robot-15.webp)
 </Frame>
 
-Branchez l'alimentation du hub et allumez-le en basculant l'interrupteur vers la gauche. Un voyant rouge indique que le hub est allumé :
+Branchez l'alimentation du hub. Basculez son interrupteur vers la gauche : un voyant rouge s'allume.
 
-<Frame caption="Le hub sous tension">
+<Frame caption="Le hub sous tension, voyant rouge allumé">
   ![Hub sous tension](/images/hardware/install-robot-16.webp)
 </Frame>
 
-Vous pouvez maintenant connecter les smartphones aux ports USB disponibles :
+Connectez enfin les smartphones aux ports USB libres :
 
 <Frame caption="Smartphones connectés au hub">
   ![Smartphones sur le hub](/images/hardware/install-robot-17.webp)
@@ -122,29 +122,29 @@ Vous pouvez maintenant connecter les smartphones aux ports USB disponibles :
   Les smartphones ne se chargent que lorsque le robot est sous tension.
 </Tip>
 
-L'installation matérielle est terminée. Le robot a encore besoin de sa [configuration réseau](/fr/hardware/configure-network) pour devenir opérationnel, et un robot smartphone réclame en plus la préparation de chacun de ses téléphones, sous [Android](/fr/hardware/prepare-android) ou sur [iPhone](/fr/hardware/prepare-iphone).
+Le câblage est terminé. Le robot ne rejoint pas la plateforme pour autant : il lui manque son IP statique. [Configurez son réseau](/fr/hardware/configure-network), et il passe **Online**, ce qui confirme l'alimentation et le réseau. Un robot smartphone demande en plus la préparation de chacun de ses téléphones, sous [Android](/fr/hardware/prepare-android) comme sur [iPhone](/fr/hardware/prepare-iphone).
 
 ## Et ensuite ?
 
 <Columns cols={2}>
   <Card title="Configurer le réseau du robot" icon="gear" href="/fr/hardware/configure-network">
 
-    L'IP statique qui fait passer l'agent Online, quel que soit le type de robot
+    L'IP statique qui fait passer le robot **Online**, quel que soit son type
 
 </Card>
   <Card title="Remplacer ou configurer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
 
-    Déclarer les SIM que vous venez d'insérer
+    Déclarer dans la plateforme les SIM que vous venez d'insérer
 
 </Card>
   <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
 
-    Les réglages qui gardent un Samsung éveillé et joignable en USB
+    Empêcher un Samsung de s'endormir et le garder joignable en USB
 
 </Card>
   <Card title="Préparer un iPhone" icon="apple" href="/fr/hardware/prepare-iphone">
 
-    Faire confiance au robot, puis laisser le support terminer l'appairage
+    Appuyer sur **Trust** sur le téléphone, puis la session d'appairage avec le support
 
 </Card>
 </Columns>
