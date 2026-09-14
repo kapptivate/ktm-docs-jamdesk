@@ -1,41 +1,65 @@
 ---
 title: Supported devices and OS versions
-description: Which smartphones and OS versions are fully supported for mobile app tests, and what to know before using your own devices.
+sidebarTitle: Devices and OS versions
+description: The brands, phones, and OS versions that can run your mobile app tests, on a phone plugged into a robot or on a device imported from BrowserStack.
 ---
 
-Which smartphones can run your mobile app tests, which OS versions are supported, and the compatibility points to check before adding your own devices to the platform.
+Two routes lead to a phone that runs your mobile app tests. One you plug into the USB hub of a [robot](/hardware/overview), the other you import from a BrowserStack account. The brands you can pick from and the OS versions they run are not the same on both, so the route comes first.
 
-## Supported smartphone brands
+## The two routes
+
+| Route | Brands | OS versions | Where the phone sits |
+|-------|--------|-------------|----------------------|
+| Plugged into a robot | Samsung for Android, Apple for iOS | iOS 11 to 26, Android 8 to 16 | On the robot's USB hub |
+| Imported from BrowserStack | Whatever your account's catalogue offers | Whatever your account's catalogue offers | BrowserStack's cloud |
+
+One limit ignores that split. `FLAG_SECURE`, at the end of this page, hits Android phones on both routes, because it comes from the app you test rather than from the phone.
+
+## Phones plugged into a robot
 
 Two manufacturers are officially supported:
 
 - **Samsung** (Android)
 - **Apple** (iOS)
 
-Samsung is the only fully supported Android brand: other manufacturers ship customized OS layers that can interfere with mobile automation. You can still use any device you already have, with two caveats:
+Samsung is the only fully supported Android brand. Other manufacturers ship customized OS layers that can interfere with mobile automation, and a test that passes on a Galaxy can fail on a phone whose maker rewrote the settings.
+
+The phone needs at least 4 GB of RAM.
+
+Nothing stops you from plugging in an Android phone from another brand.
 
 <Warning>
-  Investigations on non-Samsung Android devices are deducted from your support package, and full support cannot be guaranteed if issues occur on those devices.
+  A non-Samsung Android phone comes with two limits. Any investigation on that phone is deducted from your support package, and full support cannot be guaranteed if an issue turns out to be specific to it.
 </Warning>
 
-## Minimum hardware
-
-4 GB of RAM minimum.
-
-## Supported OS versions
+### OS versions
 
 | Platform | Versions |
 |----------|----------|
 | iOS | 11 to 26 |
 | Android | 8 to 16 |
 
-Each platform has its own configuration page: [prepare an Android smartphone](/hardware/prepare-android), or [prepare an iPhone](/hardware/prepare-iphone). The iPhone route takes longer, because Apple has to register the device before it accepts automated testing.
+iOS 27 and Android 17 are not covered yet. An OS update can also carry a phone out of the range above, which is why both preparation pages turn automatic updates off.
 
-## Android 12+ and FLAG_SECURE
+### Prepare the phone
 
-Kapptivate cannot automate apps, or specific screens, that enable `FLAG_SECURE`: Android blocks automation tools from interacting with the protected content. If the app you want to test uses it, ask your development team to remove the flag in the build used for testing.
+Each platform has its own page: [prepare an Android smartphone](/hardware/prepare-android), or [prepare an iPhone](/hardware/prepare-iphone). Plan more time for the iPhone. Apple has to register the device before it accepts automated testing, and that registration takes 24 to 72 hours.
 
-## What's Next?
+## Devices imported from BrowserStack
+
+Kapptivate also runs native app tests on the devices of a [BrowserStack account](/equipment/browserstack). You connect the account, pick devices from its catalogue, and they land in your Devices lab next to the physical phones.
+
+None of the constraints above apply on this route. The phone is not yours: no brand restriction, no RAM to check, nothing to prepare. The picker lists every device the account offers with its OS and version, so you import what your users actually carry, other Android brands and tablets included.
+
+One limit replaces them. Only the apps uploaded to your BrowserStack account can be tested, because BrowserStack blocks access to the apps preinstalled on a public cloud device. Upload the build you want to test from BrowserStack's App Management.
+
+## Android 12 and up: FLAG_SECURE
+
+Kapptivate cannot automate an app, or a single screen of that app, that turns on `FLAG_SECURE`. Android blocks automation tools from interacting with the protected content, and no setting on the phone lifts that.
+
+Ask your development team to remove the flag in the build you use for testing.
+
+## What's next?
 
 <Columns cols={2}>
   <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
@@ -48,9 +72,14 @@ Kapptivate cannot automate apps, or specific screens, that enable `FLAG_SECURE`:
     The iOS settings, and the registration Apple requires
 
 </Card>
+  <Card title="BrowserStack" icon="cloud" href="/equipment/browserstack">
+
+    Connect an account and import the cloud devices you need
+
+</Card>
   <Card title="Devices lab" icon="mobile-screen" href="/equipment/devices-lab">
 
-    Browse and manage the devices connected to your workspace
+    See every phone and SIM your workspace can test on
 
 </Card>
 </Columns>
