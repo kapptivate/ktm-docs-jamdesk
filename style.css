@@ -523,13 +523,15 @@ article:has(.prose img[src*="/images/logo-"]) header h1::before {
   background-size: contain;
 }
 
-article:has(.prose img[src$="logo-slack.webp"]) header h1::before {
+/* « contient » et non « se termine par » : en production les images
+   portent un paramètre de cache (logo-slack.webp?v=...), en local non. */
+article:has(.prose img[src*="logo-slack.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-slack.webp");
 }
-article:has(.prose img[src$="logo-jira.webp"]) header h1::before {
+article:has(.prose img[src*="logo-jira.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-jira.webp");
 }
-article:has(.prose img[src$="logo-teams.webp"]) header h1::before {
+article:has(.prose img[src*="logo-teams.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-teams.webp");
 }
 
