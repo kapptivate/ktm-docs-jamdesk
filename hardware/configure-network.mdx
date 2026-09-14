@@ -35,7 +35,7 @@ DHCP works too, and a simple LAN is where it earns its keep: the robot takes a l
 - A USB keyboard, a USB mouse, a screen, and an HDMI cable. None of these ship with the robot.
 - The robot's credentials. Ask support@kapptivate.com if you don't have them.
 - The static IP, mask, gateway, and DNS server addresses, from your IT department.
-- Access to the Kapptivate platform, where you read the robot's status at the end.
+- Access to the Kapptivate platform, where you watch the robot turn **Online**.
 
 ## Set the static IP
 
@@ -131,13 +131,11 @@ sudo krobot serial
 
 Send that number to support@kapptivate.com, and add the static IP if you set one. That address doubles as a way in, because support can then hop through another of your robots on the same LAN to reach the new one.
 
-Support then deploys the robot, and it turns **Online** with nothing more from you. That is your signal to rack it. Until then, open the Kapptivate platform under **Agents**: the robot sits there as **Waiting for configuration**, from the moment support creates its entry, before or after you configure the network.
+Support then deploys the robot, and it turns **Online** with nothing more from you. That is your signal to rack it.
 
 <Note>
   Changing the address of a robot that is already deployed? Nothing to ask support. It comes back **Online** on its own after the reboot. If it stays **Offline**, work through [network troubleshooting](/hardware/network-troubleshooting): the checks there start with the cable and the port, then the flows, then DNS resolution.
 </Note>
-
-A smartphone robot is not finished at this point. The robot is online, but no phone accepts a test until you prepare it.
 
 ## What's next?
 
