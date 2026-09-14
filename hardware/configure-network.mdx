@@ -9,19 +9,25 @@ Cabling a robot is not enough for the platform to see it. It needs an address on
   This procedure applies to the latest generation of Kapptivate robots, on the models with display output. The mini cellular robot has none: reach it over a serial line instead, see [log in on a robot without display output](/hardware/headless-login). For an older robot, contact support@kapptivate.com.
 </Note>
 
-Every robot goes through this page, web, cellular, and smartphone alike. Smartphone robots then need each phone prepared, on a separate page per operating system.
+Every robot goes through this page, web, cellular, and smartphone alike. Smartphone robots then need each phone prepared, on [Android](/hardware/prepare-android) or on [iPhone](/hardware/prepare-iphone).
 
 ## Which flows to open
 
-Some robots reach the internet with nothing in the way. Those need no flows opened at all: yours finds Kapptivate on its first boot, so move on to the next section.
+If your robot goes straight out to the internet, you have no flows to open. It finds Kapptivate on its first boot.
 
-On a filtered network, your IT department has to open flows from the robot toward Kapptivate. Which ones depends on the platform you use to reach the product, so ask support@kapptivate.com for the IP requirements document. Get those flows opened before you go on site. Closed flows and a wrong address produce the same symptom.
+On a filtered network, your IT department opens the flows from the robot toward Kapptivate. The IP requirements document lists them, and support@kapptivate.com sends it to you.
+
+Those flows start from the robot's own address, so the order matters here. Give the robot its IP first, then have the flows opened from that address. Until they are open, the robot shows **Offline**, exactly as it would with a wrong address.
+
+<Note>
+  The robot opens every one of these connections itself. Nothing has to reach it from the internet.
+</Note>
 
 ## Static IP or DHCP
 
-A static IP is the recommended setup, and the procedure below sets one. The address never moves, so you write it down once and still have it the day the robot goes quiet.
+A static IP is the recommended setup, and the procedure below sets one. The address never moves, your flows open from it, and you still have it the day the robot goes quiet.
 
-DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at boot and reaches the platform on its own. Only check that the RJ45 cable sits in Ethernet port 1, 2, or 3, because port 4 does not work. Nothing else to plug in, so skip the steps below and go straight to the verification at the end of this page.
+DHCP works too. On a simple LAN, leave the robot on DHCP: it takes a lease at boot and reaches the platform on its own. Only check that the RJ45 cable sits in Ethernet port 1, 2, or 3, because port 4 does not work. Nothing else to plug in, so skip the steps below and go straight to [check that the robot is online](#check-that-the-robot-is-online).
 
 ## Before you start
 

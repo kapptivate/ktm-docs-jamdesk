@@ -9,19 +9,25 @@ Entre un robot câblé et la plateforme, il manque encore une chose : son adress
   Cette procédure vise la dernière génération de robots Kapptivate, et seulement les modèles pourvus d'une sortie vidéo. Le mini robot cellulaire n'en a pas : il se rejoint par une liaison série, voir [se connecter à un robot sans sortie vidéo](/fr/hardware/headless-login). Pour un robot plus ancien, écrivez à support@kapptivate.com.
 </Note>
 
-Tous les robots passent par cette page, web, cellulaires et smartphone. Ces derniers demandent ensuite la préparation de chaque téléphone, avec une page par système.
+Tous les robots passent par cette page, web, cellulaires et smartphone. Ces derniers demandent ensuite la préparation de chaque téléphone, sous [Android](/fr/hardware/prepare-android) comme sur [iPhone](/fr/hardware/prepare-iphone).
 
 ## Les flux à ouvrir
 
-Certains clients laissent leurs robots sortir directement sur internet. Rien à ouvrir dans ce cas : le robot joint Kapptivate dès son premier démarrage, passez à la section suivante.
+Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : il joint Kapptivate dès son premier démarrage.
 
-Sur un réseau filtré, en revanche, votre service informatique doit ouvrir des flux du robot vers Kapptivate. Lesquels ? Cela dépend de la plateforme par laquelle vous accédez au produit : demandez le document des exigences IP à support@kapptivate.com. Faites ouvrir ces flux avant votre déplacement. Des flux fermés et une adresse fausse donnent exactement le même symptôme.
+Sur un réseau filtré, votre service informatique ouvre les flux du robot vers Kapptivate. Le document des exigences IP les liste : demandez-le à support@kapptivate.com.
+
+Ces flux partent de l'adresse du robot, donc l'ordre compte. Donnez-lui d'abord son IP, puis faites ouvrir les flux depuis cette adresse. Tant qu'ils restent fermés, le robot affiche **Offline**, exactement comme s'il était mal adressé.
+
+<Note>
+  Le robot établit lui-même toutes ces connexions. Aucun flux entrant depuis internet n'est nécessaire.
+</Note>
 
 ## IP statique ou DHCP
 
-L'IP statique est la configuration recommandée, et c'est celle que définit la procédure ci-dessous. L'adresse ne bouge plus : vous la notez une fois, et vous la retrouvez le jour où le robot pose problème.
+L'IP statique est la configuration recommandée, et c'est celle que définit la procédure ci-dessous. L'adresse ne bouge plus : vos flux s'ouvrent depuis elle, et vous la retrouvez le jour où le robot pose problème.
 
-Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend son bail au démarrage et joint la plateforme tout seul. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas. Vous n'avez alors ni écran ni clavier à brancher : allez directement à la vérification, en fin de page.
+Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend son bail au démarrage et joint la plateforme tout seul. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas. Vous n'avez alors ni écran ni clavier à brancher : passez directement à [vérifier que le robot est en ligne](#vérifier-que-le-robot-est-en-ligne).
 
 ## Avant de commencer
 
