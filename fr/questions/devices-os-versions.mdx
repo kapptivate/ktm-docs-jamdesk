@@ -1,39 +1,61 @@
 ---
-title: Appareils et versions d'OS supportés
-description: Quels smartphones et versions d'OS sont entièrement supportés pour les tests d'applications mobiles, et ce qu'il faut savoir avant d'utiliser vos propres appareils.
+title: Devices et versions d'OS pris en charge
+sidebarTitle: Devices et versions d'OS
+description: Ce que la plateforme accepte comme téléphone de test, selon qu'il est branché à un robot ou importé depuis un compte BrowserStack.
 ---
 
-Quels smartphones peuvent exécuter vos tests d'applications mobiles, quelles versions d'OS sont supportées, et les points de compatibilité à vérifier avant d'ajouter vos propres appareils à la plateforme.
+Avant de commander un téléphone de test, ou de brancher celui qui dort dans un tiroir, une question commande tout le reste : ce téléphone ira-t-il sur le hub USB d'un [robot](/fr/hardware/overview), ou viendra-t-il d'un compte BrowserStack ? Les deux chemins n'acceptent ni les mêmes marques ni les mêmes versions d'OS.
 
-## Marques de smartphones supportées
+## Les deux parcours
 
-Deux fabricants sont officiellement supportés :
+| Parcours | Marques | Versions d'OS | Où se trouve le téléphone |
+|----------|---------|---------------|---------------------------|
+| Branché à un robot | Samsung pour Android, Apple pour iOS | iOS 11 à 26, Android 8 à 16 | Sur le hub USB du robot |
+| Importé depuis BrowserStack | Le catalogue de votre compte | Le catalogue de votre compte | Le cloud BrowserStack |
+
+Une limite échappe à ce partage. `FLAG_SECURE`, en fin de page, touche les téléphones Android des deux parcours. Elle vient de l'application testée, pas du téléphone.
+
+## Les téléphones branchés à un robot
+
+Deux fabricants sont officiellement pris en charge :
 
 - **Samsung** (Android)
 - **Apple** (iOS)
 
-Samsung est la seule marque Android entièrement supportée : les autres fabricants intègrent des couches d'OS personnalisées qui peuvent interférer avec l'automatisation mobile. Vous pouvez tout de même utiliser n'importe quel appareil que vous possédez déjà, avec deux réserves :
+Côté Android, Samsung est la seule marque pleinement prise en charge. La raison tient aux surcouches d'OS : chaque constructeur réécrit une partie du système, et l'automatisation mobile ne retrouve pas toujours ailleurs ce qu'elle trouve sur un Galaxy.
+
+Le téléphone demande au moins 4 Go de RAM. Pour le reste, rien n'interdit de brancher un Android d'une autre marque.
 
 <Warning>
-  Les investigations sur des appareils Android non Samsung sont déduites de votre forfait de support, et le support complet ne peut pas être garanti si des problèmes surviennent sur ces appareils.
+  Un Android autre que Samsung s'accompagne de deux limites. Les investigations sur ce téléphone sont décomptées de votre forfait de support, et la prise en charge complète n'est pas garantie si un problème se révèle propre à lui.
 </Warning>
 
-## Configuration matérielle minimale
-
-4 Go de RAM minimum.
-
-## Versions d'OS supportées
+### Les versions d'OS
 
 | Plateforme | Versions |
 |------------|----------|
 | iOS | 11 à 26 |
 | Android | 8 à 16 |
 
-Chaque plateforme a sa page de configuration : [préparer un smartphone Android](/fr/hardware/prepare-android), ou [préparer un iPhone](/fr/hardware/prepare-iphone). Le parcours iPhone est le plus long, Apple devant enregistrer le téléphone avant qu'il accepte les tests automatisés.
+Une mise à jour d'OS suffit à faire sortir un téléphone de cette plage : c'est pour cela que les deux pages de préparation coupent les mises à jour automatiques. iOS 27 et Android 17, eux, ne sont pas encore couverts.
 
-## Android 12+ et FLAG_SECURE
+### Préparer le téléphone
 
-Kapptivate ne peut pas automatiser les applications, ou les écrans spécifiques, qui activent `FLAG_SECURE` : Android empêche les outils d'automatisation d'interagir avec le contenu protégé. Si l'application que vous souhaitez tester l'utilise, demandez à votre équipe de développement de retirer le flag dans le build utilisé pour les tests.
+L'iPhone est le plus long des deux parcours : Apple doit enregistrer le téléphone avant qu'il accepte les tests automatisés, et cet enregistrement demande 24 à 72 heures. Chaque plateforme a sa page : [préparer un smartphone Android](/fr/hardware/prepare-android), ou [préparer un iPhone](/fr/hardware/prepare-iphone).
+
+## Les devices importés depuis BrowserStack
+
+Un [compte BrowserStack](/fr/equipment/browserstack) ouvre la seconde voie. Vous le connectez, vous piochez des devices dans son catalogue, et ils rejoignent votre **Devices lab** (le parc d'appareils), au milieu des téléphones physiques.
+
+Le sélecteur liste tous les devices du compte avec leur OS et leur version. Vous importez ceux que vos utilisateurs ont vraiment en main, autres marques Android et tablettes comprises. Aucune des contraintes ci-dessus ne tient ici, puisque le téléphone ne vous appartient pas : ni marque imposée, ni RAM à vérifier, ni préparation.
+
+Une limite les remplace, et elle porte sur l'application, pas sur le téléphone. Uploadez le build à tester dans l'App Management de votre compte : BrowserStack bloque l'accès aux applications préinstallées sur un device public du cloud, donc seules les vôtres sont testables.
+
+## Android 12 et au-delà : FLAG_SECURE
+
+Une application peut marquer son contenu comme protégé avec `FLAG_SECURE`. Kapptivate ne peut alors automatiser ni cette application, ni le seul écran concerné. Le blocage vient d'Android, et aucun réglage du téléphone ne le lève.
+
+Demandez le retrait du flag à votre équipe de développement, dans le build réservé aux tests.
 
 ## Et ensuite ?
 
@@ -48,9 +70,14 @@ Kapptivate ne peut pas automatiser les applications, ou les écrans spécifiques
     Les réglages iOS, et l'enregistrement qu'Apple exige
 
 </Card>
+  <Card title="BrowserStack" icon="cloud" href="/fr/equipment/browserstack">
+
+    Connecter un compte et importer les devices du cloud dont vous avez besoin
+
+</Card>
   <Card title="Parc d'appareils" icon="mobile-screen" href="/fr/equipment/devices-lab">
 
-    Parcourir et gérer les appareils connectés à votre espace de travail
+    Voir tous les téléphones et toutes les SIM sur lesquels votre workspace peut tester
 
 </Card>
 </Columns>
