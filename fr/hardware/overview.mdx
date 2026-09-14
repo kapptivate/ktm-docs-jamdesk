@@ -1,14 +1,12 @@
 ---
 title: Matériel
-description: Installer, maintenir et dépanner les robots Kapptivate déployés dans votre réseau.
+description: De l'installation d'un robot à la recherche de panne, tout ce qui touche au matériel Kapptivate.
 sidebarTitle: Vue d'ensemble
 ---
 
-Les robots Kapptivate exécutent vos tests depuis votre propre réseau : robots web, robots smartphone et robots cellulaires équipés de vraies cartes SIM. Cette section suit la vie de ce matériel : l'installation, la préparation des téléphones qu'il pilote, la maintenance, et la recherche de panne quand un robot ne répond plus.
+Kapptivate exécute vos tests sur du matériel réel : robots web, robots smartphone et robots cellulaires équipés de vraies cartes SIM. Installation, préparation des téléphones pilotés, maintenance, recherche de panne : cette section couvre chacune de ces étapes.
 
-Deux objets à ne pas confondre. Le robot est le matériel : boîtier, alimentation, antennes, cartes SIM, ports Ethernet. L'agent est le logiciel embarqué, celui que vous pilotez depuis la plateforme. D'où le découpage des pages ci-dessous : un robot se met hors tension, un agent redémarre.
-
-Les pages d'installation décrivent la dernière génération de robots. Pour installer un robot plus ancien, passez par le support. La maintenance et le dépannage, eux, couvrent les deux générations.
+Tous les robots ne vivent pas au même endroit. Certains occupent vos propres baies, d'autres tournent chez Kapptivate, d'autres encore sont des machines virtuelles. Les pages ci-dessous s'adressent au robot que vous hébergez vous-même, sur la dernière génération de matériel. La maintenance et le dépannage valent aussi pour les robots plus anciens.
 
 ## Installation
 
@@ -20,7 +18,7 @@ Les pages d'installation décrivent la dernière génération de robots. Pour in
 </Card>
   <Card title="Configurer le réseau du robot" icon="gear" href="/fr/hardware/configure-network">
 
-    L'IP statique qui fait passer l'agent Online, quel que soit le type de robot
+    L'IP statique sans laquelle le robot n'apparaît jamais **Online**
 
 </Card>
 </Columns>
@@ -45,7 +43,7 @@ Les pages d'installation décrivent la dernière génération de robots. Pour in
 <Columns cols={2}>
   <Card title="Remplacer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
 
-    Ce que devient la carte selon le numéro saisi : reprise d'une ancienne SIM, ou mise en service neuve
+    Ce que devient la carte dépend du numéro saisi : reprise des réglages et des monitors d'une ancienne SIM, ou mise en service neuve
 
 </Card>
   <Card title="Remplacer la batterie" icon="battery-half" href="/fr/hardware/swap-battery">
@@ -70,12 +68,12 @@ Les pages d'installation décrivent la dernière génération de robots. Pour in
 </Card>
   <Card title="Erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
 
-    Un résultat gris signale une erreur technique : remontez jusqu'à l'agent avant de redémarrer quoi que ce soit
+    Un résultat gris signale une erreur technique : remontez jusqu'au robot avant de redémarrer quoi que ce soit
 
 </Card>
   <Card title="Dépannage des cartes SIM" icon="sim-card" href="/fr/hardware/sim-troubleshooting">
 
-    Statut bloqué, USSD sans réponse, SMS jamais reçu : le diagnostic cas par cas
+    Statut bloqué, USSD sans réponse, SMS jamais reçu, appel coupé : le diagnostic cas par cas
 
 </Card>
   <Card title="Identifier le port RJ45" icon="ethernet" href="/fr/hardware/rj45-port">
@@ -90,12 +88,12 @@ Les pages d'installation décrivent la dernière génération de robots. Pour in
 <Columns cols={2}>
   <Card title="Agents" icon="server" href="/fr/equipment/agents">
 
-    Rechercher un agent, ouvrir ses devices et ses monitors, lancer un redémarrage ou une mise à jour
+    La zone Agents liste vos robots : leurs devices, leurs monitors, les redémarrages et la maintenance
 
 </Card>
   <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
 
-    Quand un statut vous surprend, la page qui les liste tous, agent comme device
+    Quand un statut vous surprend, la page qui les liste tous : robot, device, enregistrement SIM, signal et utilisation
 
 </Card>
 </Columns>
