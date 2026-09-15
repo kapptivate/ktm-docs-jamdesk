@@ -18,6 +18,8 @@ Microsoft Copilot Studio peut appeler le serveur MCP de Kapptivate comme outil, 
     ```
     https://mcp.kapptivate.com/mcp
     ```
+
+    Cette adresse dessert app.kapptivate.com. Sur une autre adresse de connexion, [votre endpoint porte le nom de votre environnement](/fr/mcp/connect#votre-endpoint).
   </Step>
   <Step title="Authentification">
     Choisissez **API key**, définissez le type sur **Header** et saisissez le nom de l'en-tête :
@@ -37,7 +39,7 @@ Microsoft Copilot Studio peut appeler le serveur MCP de Kapptivate comme outil, 
 
 ## Si l'en-tête personnalisé n'est pas transmis
 
-L'option clé API dans l'en-tête de l'assistant est le chemin supporté. Certaines configurations Copilot Studio plus anciennes ne transmettent pas les en-têtes préfixés `X-` ajoutés manuellement via un connecteur personnalisé. Si vous rencontrez ce problème, créez un **Custom connector** dans Power Apps à partir d'un fichier OpenAPI qui déclare l'en-tête `X-Kapptivate-API-Key` et l'opération MCP streamable (`x-ms-agentic-protocol: mcp-streamable-1.0`), puis ajoutez ce connecteur comme outil.
+L'option clé API dans l'en-tête de l'assistant est le chemin pris en charge. Certaines configurations Copilot Studio plus anciennes ne transmettent pas les en-têtes préfixés `X-` ajoutés manuellement via un connecteur personnalisé. Si vous rencontrez ce problème, créez un **Custom connector** dans Power Apps à partir d'un fichier OpenAPI qui déclare l'en-tête `X-Kapptivate-API-Key` et l'opération MCP streamable (`x-ms-agentic-protocol: mcp-streamable-1.0`), puis ajoutez ce connecteur comme outil.
 
 ## Gouvernance
 
