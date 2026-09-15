@@ -79,8 +79,8 @@
   },
   "seo": {
     "metatags": {
-      "robots": "noindex, nofollow",
-      "googlebot": "noindex, nofollow"
+      "robots": "index, follow",
+      "googlebot": "index, follow"
     }
   },
   "integrations": {
