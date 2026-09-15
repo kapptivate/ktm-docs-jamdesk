@@ -5,20 +5,28 @@ description: Workspaces, products, tests, executions, monitors, metrics, channel
 
 Nine terms come back everywhere in Kapptivate. This page defines each one and shows how they fit together, so the rest of the documentation reads without friction.
 
-```
-Workspace
-├─ Product A
-│  ├─ Test 1 (Web)
-│  │  ├─ Execution 1 (run on Chrome agent) → success
-│  │  ├─ Execution 2 (run on Firefox agent) → failed
-│  │  └─ Monitor 1 (runs daily on Chrome agent) → up
-│  ├─ Test 2 (Smartphone)
-│  └─ Devices: Chrome browser, iPhone 12, Samsung Galaxy
-├─ Product B
-│  ├─ Test 3 (Cellular)
-│  └─ Devices: SIM card 1, SIM card 2
-└─ Agents: Web Agent, Smartphone Agent, Cellular Agent
-```
+<div className="not-prose" style={{border:'1px solid var(--color-border)',borderRadius:'10px',background:'var(--color-bg-secondary)',padding:'14px 12px',margin:'24px 0'}}>
+  <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-accent)'}}><Icon icon="building" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px',fontWeight:600}}>Workspace</span></div>
+  <div style={{marginLeft:'13px',paddingLeft:'16px',borderLeft:'1px solid var(--color-border)'}}>
+    <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-accent)'}}><Icon icon="cube" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px',fontWeight:500}}>Product A</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>web portal</span></div>
+    <div style={{marginLeft:'13px',paddingLeft:'16px',borderLeft:'1px solid var(--color-border)'}}>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="vial" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Test 1</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>web</span></div>
+      <div style={{marginLeft:'13px',paddingLeft:'16px',borderLeft:'1px solid var(--color-border)'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'4px 6px',color:'var(--color-text-muted)'}}><Icon icon="play" iconType="solid" size={12} /><span style={{color:'var(--color-text-secondary)',fontSize:'13px'}}>Execution 1, on the Chrome agent</span><span style={{color:'#16a34a',fontSize:'13px'}}>success</span></div>
+        <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'4px 6px',color:'var(--color-text-muted)'}}><Icon icon="play" iconType="solid" size={12} /><span style={{color:'var(--color-text-secondary)',fontSize:'13px'}}>Execution 2, on the Firefox agent</span><span style={{color:'#dc2626',fontSize:'13px'}}>failed</span></div>
+      </div>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="vial" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Test 2</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>smartphone</span></div>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="eye" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Monitor 1</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>Test 1, promoted, runs daily</span><span style={{color:'#16a34a',fontSize:'13px'}}>up</span></div>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="globe" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Devices</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>Chrome browser, iPhone 12, Samsung Galaxy</span></div>
+    </div>
+    <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-accent)'}}><Icon icon="cube" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px',fontWeight:500}}>Product B</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>SIM-based service</span></div>
+    <div style={{marginLeft:'13px',paddingLeft:'16px',borderLeft:'1px solid var(--color-border)'}}>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="vial" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Test 3</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>cellular</span></div>
+      <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-text-muted)'}}><Icon icon="sim-card" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px'}}>Devices</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>SIM card 1, SIM card 2</span></div>
+    </div>
+    <div style={{display:'flex',alignItems:'center',gap:'9px',padding:'5px 6px',color:'var(--color-accent)'}}><Icon icon="robot" iconType="solid" size={14} /><span style={{color:'var(--color-text-primary)',fontSize:'14px',fontWeight:500}}>Agents</span><span style={{color:'var(--color-text-muted)',fontSize:'13px'}}>Web, Smartphone, Cellular</span></div>
+  </div>
+</div>
 
 When you run Test 1 on the Chrome agent, an execution is created, the agent controls the browser, and results are recorded. Later, you can promote Test 1 to a monitor, which runs on a schedule and tracks health over time.
 
