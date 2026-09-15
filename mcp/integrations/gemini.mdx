@@ -17,6 +17,10 @@ gemini mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
   --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
 ```
 
+<Note>
+  The URL above serves app.kapptivate.com. Sign in elsewhere and [your endpoint carries the name of your environment](/mcp/connect#your-endpoint). Substitute it everywhere on this page.
+</Note>
+
 Or configure it in `~/.gemini/settings.json` (all projects) or `.gemini/settings.json` (one project):
 
 ```json
@@ -45,6 +49,8 @@ For large deployments, point your Gemini agent tooling (including Vertex AI agen
 ```
 https://mcp.kapptivate.com/mcp
 ```
+
+Check this address against the one for your environment before you roll it out to a fleet of agents. [Your endpoint](/mcp/connect#your-endpoint) gives the rule.
 
 Send the `X-Kapptivate-API-Key` header on every request and store the key in your secret manager. Scope one key per environment so you can rotate or revoke it independently.
 

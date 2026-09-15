@@ -4,26 +4,34 @@ description: Connectez Kapptivate à vos assistants et agents IA via le Model Co
 sidebarTitle: Vue d'ensemble
 ---
 
-Le serveur MCP de Kapptivate offre à vos assistants IA un accès direct et contrôlé à votre plateforme. Configurez un client MCP avec une seule URL, authentifiez-vous avec votre clé API, et le modèle peut découvrir des [tests](/fr/tests/overview), exécuter des [campaigns](/fr/executions/run-campaign), interroger des métriques, gérer des [monitors](/fr/monitoring/overview) et traiter des [incidents](/fr/alerting/incidents) grâce à des outils qui correspondent un à un aux fonctionnalités de Kapptivate.
+Le serveur MCP de Kapptivate offre à vos assistants IA un accès direct et contrôlé à votre plateforme. Configurez un client MCP sur votre endpoint, authentifiez-vous, et le modèle peut découvrir des [tests](/fr/tests/overview), exécuter des [campaigns](/fr/executions/run-campaign), interroger des métriques, gérer des [monitors](/fr/monitoring/overview) et traiter des [incidents](/fr/alerting/incidents) grâce à des outils qui correspondent un à un aux fonctionnalités de Kapptivate.
 
 Utilisez-le pour transformer une intention en action : "exécute la régression du checkout sur staging et résume les échecs", "crée un monitor pour le test de login toutes les cinq minutes", ou "affiche le taux de succès de la semaine dernière pour le produit paiements".
 
 ## Fonctionnement
 
-Le serveur parle le [Model Context Protocol](https://modelcontextprotocol.io), le standard ouvert pour connecter des assistants à des outils. Kapptivate l'héberge sur un seul endpoint :
+Le serveur parle le [Model Context Protocol](https://modelcontextprotocol.io), le standard ouvert pour connecter des assistants à des outils. Kapptivate l'héberge à cette adresse :
 
 ```
 https://mcp.kapptivate.com/mcp
 ```
 
-Votre client authentifie chaque requête avec l'en-tête `X-Kapptivate-API-Key`. La clé porte les mêmes permissions que votre compte Kapptivate, donc un agent ne peut faire que ce que vous pouvez faire.
+Retenez celle-ci si vous vous connectez sur app.kapptivate.com. Ailleurs, votre endpoint porte le nom de votre environnement. Reprenez la première partie de l'adresse de connexion, et placez-la après `/t/` :
+
+```
+https://mcp.kapptivate.com/t/<environment>/mcp
+```
+
+`acme.kapptivate.com` devient ainsi `https://mcp.kapptivate.com/t/acme/mcp`. La page [Connecter votre client IA](/fr/mcp/connect#votre-endpoint) détaille la marche à suivre. Le reste de cette page vaut dans les deux cas.
+
+Votre client authentifie chaque requête avec l'en-tête `X-Kapptivate-API-Key`, ou par une connexion navigateur. La session porte les mêmes permissions que votre compte Kapptivate : l'assistant ne peut faire que ce que vous pouvez faire.
 
 <Warning>
   Votre clé API accorde le même accès que votre compte. Traitez-la comme un mot de passe : ne la commitez jamais dans un dépôt et ne la collez pas dans un chat partagé.
 </Warning>
 
 <Warning>
-  Selon l'outil IA que vous utilisez, lui accorder l'accès pourrait exposer vos données — passez en revue ses permissions avec attention avant de l'autoriser.
+  Selon l'outil IA que vous utilisez, lui accorder l'accès pourrait exposer vos données. Passez en revue ses permissions avec attention avant de l'autoriser.
 </Warning>
 
 ## Ce que vous pouvez faire

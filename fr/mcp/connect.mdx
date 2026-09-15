@@ -4,13 +4,29 @@ description: Configurez Claude, Cursor, Claude Code ou GitHub Copilot avec le se
 sidebarTitle: Clients IA
 ---
 
-Configurez n'importe quel client compatible MCP sur `https://mcp.kapptivate.com/mcp` et authentifiez-vous soit via une connexion navigateur (OAuth), soit avec l'en-tête `X-Kapptivate-API-Key`. Cette page couvre les clients développeur courants (Claude, Cursor, Claude Code et GitHub Copilot). Pour Microsoft 365 Copilot Studio et Google Gemini, consultez leurs pages dédiées dans cette section.
+Configurez n'importe quel client compatible MCP sur votre endpoint, et authentifiez-vous soit via une connexion navigateur (OAuth), soit avec l'en-tête `X-Kapptivate-API-Key`. Cette page couvre les clients développeur courants (Claude Code, Cursor, Claude Desktop et GitHub Copilot). Pour Microsoft 365 Copilot Studio et Google Gemini, consultez leurs pages dédiées dans cette section.
+
+## Votre endpoint
+
+Vous ouvrez votre session Kapptivate sur app.kapptivate.com ? Voici votre endpoint :
+
+```
+https://mcp.kapptivate.com/mcp
+```
+
+Si vous ouvrez votre session Kapptivate sur une autre adresse, votre endpoint porte le nom de votre environnement. Reprenez la première partie de l'adresse de connexion et placez-la après `/t/` :
+
+```
+https://mcp.kapptivate.com/t/<environment>/mcp
+```
+
+Un compte sur `acme.kapptivate.com` se connecte donc à `https://mcp.kapptivate.com/t/acme/mcp`. Tous les exemples de cette page portent l'adresse app.kapptivate.com : remplacez-la par la vôtre avant d'en copier un.
 
 ## Obtenir votre clé API
 
 <Steps>
   <Step title="Ouvrir votre profil">
-    Connectez-vous à [Kapptivate](https://app.kapptivate.com) et ouvrez votre profil.
+    Ouvrez votre session Kapptivate à l'adresse qui est la vôtre, celle qui vient de vous donner votre endpoint, puis ouvrez votre profil.
   </Step>
   <Step title="Copier votre clé API">
     Copiez votre clé API personnelle. Elle porte le même accès que votre compte. Les clés au niveau workspace, scopées par équipe, se gèrent dans [Administration > Clés API](/fr/administration/api-keys).
@@ -117,9 +133,22 @@ Ouvrez Copilot Chat en mode agent, puis démarrez le serveur depuis **MCP: List 
 
 Demandez à votre assistant quelque chose en lecture seule, par exemple : "Liste les operators auxquels j'ai accès." Si des résultats apparaissent, vous êtes connecté.
 
-<Tip>
-  Si un appel échoue avec une erreur d'authentification, vérifiez la valeur de l'en-tête. Le serveur accepte votre clé API dans l'en-tête `X-Kapptivate-API-Key`, ou une session OAuth via `Authorization: Bearer` (obtenue par la connexion navigateur).
-</Tip>
+## Erreurs courantes
+
+L'établissement de la connexion prouve seulement que l'adresse existe. Votre environnement, lui, se résout plus tard, au moment où un outil s'exécute : un client peut donc afficher la connexion comme établie et échouer dès son premier appel. Dans ses messages d'erreur, le serveur appelle un environnement un tenant.
+
+<Warning>
+  Un statut de connexion au vert ne valide pas votre endpoint. Lancez [la vérification en lecture seule ci-dessus](#vérifier-la-connexion).
+</Warning>
+
+| Ce que vous voyez | Ce que cela signifie | Ce qu'il faut faire |
+| --- | --- | --- |
+| 401 | Aucune authentification, ou une authentification émise pour un autre environnement | Envoyez votre clé API dans l'en-tête `X-Kapptivate-API-Key`, ou connectez-vous par le navigateur, qui transporte à la place une session `Authorization: Bearer`. La clé doit appartenir à l'environnement présent dans l'URL. |
+| 404 | Le segment `/t/` manque au chemin | Écrivez `https://mcp.kapptivate.com/t/<environment>/mcp`, jamais `https://mcp.kapptivate.com/<environment>/mcp`. |
+| 400, `invalid tenant path` | Le chemin porte une adresse complète | Ne gardez que la première partie de votre adresse de connexion, sans `.kapptivate.com`. |
+| La connexion s'établit, puis tous les appels d'outil échouent | La clé et le chemin désignent deux environnements différents | Alignez-les, puis reconnectez le client. |
+
+Rien n'y fait ? Écrivez à support@kapptivate.com en indiquant l'endpoint utilisé et le code obtenu.
 
 ## Et ensuite ?
 

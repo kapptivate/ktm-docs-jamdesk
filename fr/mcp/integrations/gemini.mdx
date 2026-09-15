@@ -15,6 +15,10 @@ gemini mcp add --transport http kapptivate https://mcp.kapptivate.com/mcp \
   --header "X-Kapptivate-API-Key: $KAPPTIVATE_API_KEY"
 ```
 
+<Note>
+  L'URL ci-dessus dessert app.kapptivate.com. Sur une autre adresse de connexion, [votre endpoint porte le nom de votre environnement](/fr/mcp/connect#votre-endpoint). Reportez-le partout dans cette page.
+</Note>
+
 Ou configurez-le dans `~/.gemini/settings.json` (tous les projets) ou `.gemini/settings.json` (un seul projet) :
 
 ```json
@@ -30,7 +34,7 @@ Ou configurez-le dans `~/.gemini/settings.json` (tous les projets) ou `.gemini/s
 }
 ```
 
-Utilisez `httpUrl` pour le transport HTTP streamable (le champ `url` est pour SSE, que le serveur n'utilise pas). Les valeurs d'en-tête supportent la substitution `${VAR}`, donc conservez la clé dans une variable d'environnement plutôt que de la commiter.
+Utilisez `httpUrl` pour le transport HTTP streamable (le champ `url` est pour SSE, que le serveur n'utilise pas). Les valeurs d'en-tête prennent en charge la substitution `${VAR}`, donc conservez la clé dans une variable d'environnement plutôt que de la commiter.
 
 <Warning>
   La clé API porte le même accès que votre compte Kapptivate. Traitez-la comme un mot de passe et utilisez un compte de service dédié pour les agents partagés ou automatisés.
@@ -43,6 +47,8 @@ Pour les déploiements à grande échelle, configurez vos outils d'agent Gemini 
 ```
 https://mcp.kapptivate.com/mcp
 ```
+
+Confrontez cette adresse à celle de votre environnement avant de la déployer sur un parc d'agents. La règle est sur [votre endpoint](/fr/mcp/connect#votre-endpoint).
 
 Envoyez l'en-tête `X-Kapptivate-API-Key` à chaque requête et stockez la clé dans votre gestionnaire de secrets. Scopez une clé par environnement pour pouvoir la faire tourner ou la révoquer indépendamment.
 
