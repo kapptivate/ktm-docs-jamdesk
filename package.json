@@ -11,6 +11,6 @@
     "docs:check": "node scripts/generate.mjs --source=all --check"
   },
   "dependencies": {
-    "jamdesk": "^1.1.120"
+    "jamdesk": "^1.1.205"
   }
 }
