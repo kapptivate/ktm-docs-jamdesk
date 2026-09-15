@@ -10,9 +10,9 @@ Plan for it. The Apple registration takes 24 to 72 hours, so a new iPhone is not
 ## Before you start
 
 - The robot is installed, with its USB hub powered on: see [install a robot](/hardware/install-robot).
-- The robot's agent shows **Online** in the platform: see [configure the robot network](/hardware/configure-network).
+- The robot shows **Online** in the platform: see [configure the robot network](/hardware/configure-network).
 - The iPhone runs a [supported iOS version](/questions/devices-os-versions).
-- A Lightning or USB-C cable for the phone. The hub ships with the robot, the phone cables do not.
+- A USB-C to USB-A or Lightning to USB-A cable, preferably a new one. The hub's ports are USB-A, and the phone cables don't ship with the robot. A worn cable is enough to make the phone vanish from the platform, with no other symptom.
 
 <Warning>
   The iPhone needs internet access, over Wi-Fi or the mobile network, at all times. iOS checks the certificates the platform uses online, so without a connection the device never shows up correctly in Kapptivate.
@@ -20,7 +20,7 @@ Plan for it. The Apple registration takes 24 to 72 hours, so a new iPhone is not
 
 ## First boot
 
-Turn the phone on and go through the iOS setup: pick **English** and your country, skip every account, and connect it to Wi-Fi. Every label quoted below is the English one.
+Turn the phone on and go through the iOS setup: pick the language and country you want, skip every account, and connect it to the internet over Wi-Fi or a SIM with data. The labels quoted on this page are the English ones.
 
 <Warning>
   Do not set a passcode, Face ID, or Touch ID. The screen has to stay unlocked for the platform to use the phone.
@@ -31,36 +31,24 @@ Turn the phone on and go through the iOS setup: pick **English** and your countr
 <Steps>
   <Step title="Turn off automatic updates">
     In **Settings > General > Software Update > Automatic Updates**, turn off every **iOS Updates** entry. The platform supports [iOS 11 to 26](/questions/devices-os-versions), and an update can push the phone past the versions it covers.
-
-    <Frame caption="Automatic Updates, off">
-      ![The iOS Updates toggle turned off](/images/hardware/prepare-iphone-01.webp)
-    </Frame>
   </Step>
   <Step title="Stop the screen from locking">
     In **Settings > Display & Brightness > Auto-Lock**, select **Never**.
   </Step>
-  <Step title="Enable the Web Inspector">
-    In **Settings > Safari > Advanced**, turn **Web Inspector** on.
-
-    <Frame caption="Web Inspector, on">
-      ![The Web Inspector toggle turned on](/images/hardware/prepare-iphone-02.webp)
-    </Frame>
-  </Step>
   <Step title="Allow wired accessories (iOS 26 and later)">
-    In **Settings > Privacy & Security > Wired accessories**, select **Always allow**. Earlier versions of iOS don't have this setting, so skip the step there.
+    In **Settings > Privacy & Security > Wired Accessories**, select **Always Allow**. Earlier versions of iOS don't have this setting, so skip the step there.
 
-    <Frame caption="Privacy & Security, then Wired accessories">
-      ![The Privacy and Security screen](/images/hardware/prepare-iphone-03.webp)
-      ![Wired accessories set to Always allow](/images/hardware/prepare-iphone-04.webp)
+    <Frame caption="Wired Accessories, set to Always Allow">
+      ![The Wired Accessories screen with Always Allow selected](/images/hardware/prepare-iphone-01.webp)
     </Frame>
   </Step>
   <Step title="Connect the phone to the robot">
     Plug the phone into a free USB port of the hub. If it was already plugged in, unplug it and plug it back: the popup only fires on connection.
 
-    When the iPhone asks whether to trust the computer, tap **Trust**. Dismiss any other popup with whichever option closes it.
+    When the iPhone shows **Trust This Computer?**, tap **Trust**.
 
     <Frame caption="The trust popup on the iPhone">
-      ![The popup asking whether to trust the computer, with the Trust option](/images/hardware/prepare-iphone-05.webp)
+      ![The popup asking whether to trust the computer, with the Trust option](/images/hardware/prepare-iphone-02.webp)
     </Frame>
   </Step>
 </Steps>
@@ -71,21 +59,25 @@ These three stages are Apple's requirements and they run in this order. All thre
 
 <Steps>
   <Step title="Support reads the device identifier">
-    Contact support to say the iPhone is connected and ready. If you went through the steps above and tapped **Trust**, there is nothing left to do on your side: support reads the device identifier (UDID) directly from the robot.
+    Contact support@kapptivate.com to say the iPhone is connected and ready. If you went through [Set up iOS](#set-up-ios) and tapped **Trust**, there is nothing left to do on your side. Support reads the device identifier (UDID) directly from the robot.
 
     Tell support if the trust popup never appeared. They can make it appear again during the session below.
   </Step>
   <Step title="Apple registers the device">
-    Support registers the UDID with Apple, which is what allows automated testing on that specific iPhone. Count 24 to 72 hours.
+    Support registers the UDID with Apple, which is what allows automated testing on that specific iPhone. Count 24 to 72 hours. You have nothing to watch for: support tells you once Apple has cleared the device, and the pairing follows.
 
-    This stage only concerns an iPhone that has never been used with Kapptivate. A device already registered goes straight to the session.
+    This stage only concerns an iPhone that has never been used with Kapptivate. A device already registered goes straight to the pairing.
   </Step>
   <Step title="Pairing and Developer Mode, with support">
-    Ask support for a 5-minute slot to finish the setup. During the session you confirm the popups on the phone, then check one last setting:
+    Ask support@kapptivate.com for a 5-minute slot to finish the setup. During the session you confirm the popups on the phone, then check one last setting:
 
     1. If the trust popup never appeared, support triggers it. Tap **Trust**.
     2. Support then triggers the Developer Mode activation popup. Confirm it. The iPhone may reboot afterwards.
-    3. Check that **Enable UI Automation** is on in the Developer Mode settings.
+    3. In **Settings > Developer**, turn **Enable UI Automation** on. That menu only shows up at the root of the Settings once Developer Mode is active.
+
+    <Frame caption="Enable UI Automation, on">
+      ![The Developer screen with Enable UI Automation turned on](/images/hardware/prepare-iphone-03.webp)
+    </Frame>
 
     If iOS asks for a restart at any point, restart the phone and leave it connected to the robot.
   </Step>
@@ -93,13 +85,13 @@ These three stages are Apple's requirements and they run in this order. All thre
 
 ## Check that it worked
 
-Open the Kapptivate platform, find the robot's agent under **Agents**, and open it. The iPhone appears in its device list and shows **Available** once it is ready to take tests.
+Open the Kapptivate platform and go to [**Agents**](/equipment/agents), where the platform lists your robots. Open yours: the iPhone appears in its device list and shows **Available** once it is ready to take tests.
 
-A device only becomes available when its own status is **Available** and its agent is **Online**. If the phone shows nothing, check the agent first.
+A device only becomes available when its own status is **Available** and the robot it hangs off is **Online**. If the iPhone isn't in the list, check the robot first.
 
 If the phone is registered, paired, and still absent, the two usual causes are a lost internet connection and a dismissed trust popup. Check the Wi-Fi, then unplug and replug the cable to bring the popup back.
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
