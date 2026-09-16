@@ -40,8 +40,20 @@ An account on `acme.kapptivate.com` connects to `https://mcp.kapptivate.com/t/ac
 </Warning>
 
 <Note>
-  Prefer signing in with your browser? Clients that implement MCP authorization (Claude custom connectors, for example) can skip the API key entirely: add the server URL without any header and the client walks you through a browser sign-in (OAuth). The key-based setup below remains the simplest path for clients configured by file.
+  Prefer signing in with your browser? Clients that implement MCP authorization (Claude custom connectors, for example) can skip the API key entirely: add the server URL without any header and the client walks you through a browser sign-in (OAuth). This works with clients that carry MCP authorization natively, such as Claude custom connectors. It does not work through `mcp-remote`: that proxy requires dynamic client registration, which this authorization server does not offer, so it exits at startup with `Incompatible auth server`. Keep the API key for the Claude Desktop setup below.
 </Note>
+
+## Access scopes
+
+A browser sign-in grants three scopes. An API key carries the full rights of your account.
+
+| Scope | What it allows |
+| --- | --- |
+| `read` | Browse every Kapptivate resource: tests, monitors, dashboards, metrics, robots |
+| `write` | Create, edit and run those resources |
+| `admin` | Privileged actions: shell commands on robots, restart and maintenance, incident closure |
+
+`admin` lets an assistant restart your robots, so read the consent screen before you approve it. To see what a client holds today, or to take it back, open `https://<your-environment>/o/authorized_tokens/`. Revoking there cuts off that client immediately and changes nothing else.
 
 ## Configure your client
 

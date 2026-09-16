@@ -38,8 +38,20 @@ Un compte sur `acme.kapptivate.com` se connecte donc à `https://mcp.kapptivate.
 </Warning>
 
 <Note>
-  Vous préférez une connexion via le navigateur ? Les clients qui implémentent l'autorisation MCP (les connecteurs personnalisés Claude, par exemple) peuvent se passer complètement de clé API : ajoutez l'URL du serveur sans aucun en-tête et le client vous guide dans une connexion navigateur (OAuth). La configuration par clé reste le chemin le plus simple pour les clients configurés par fichier.
+  Vous préférez une connexion via le navigateur ? Les clients qui implémentent l'autorisation MCP (les connecteurs personnalisés Claude, par exemple) peuvent se passer complètement de clé API : ajoutez l'URL du serveur sans aucun en-tête et le client vous guide dans une connexion navigateur (OAuth). Cela vaut pour les clients qui portent nativement l'autorisation MCP, comme les connecteurs personnalisés Claude. En revanche `mcp-remote` n'y arrive pas : ce relais réclame l'enregistrement dynamique de client, que le serveur d'autorisation ne propose pas, et il s'arrête au démarrage sur `Incompatible auth server`. Gardez donc la clé API pour la configuration Claude Desktop ci-dessous.
 </Note>
+
+## Portée des accès
+
+Une connexion navigateur accorde trois scopes. Une clé API, elle, porte tous les droits de votre compte.
+
+| Scope | Ce qu'il autorise |
+| --- | --- |
+| `read` | Consulter toutes les ressources Kapptivate : tests, monitors, dashboards, métriques, robots |
+| `write` | Créer, modifier et exécuter ces ressources |
+| `admin` | Actions privilégiées : commandes shell sur les robots, redémarrage et maintenance, clôture d'incidents |
+
+Le scope `admin` autorise un assistant à redémarrer vos robots. Lisez l'écran de consentement avant de valider. Pour savoir ce qu'un client détient aujourd'hui, ou pour le lui retirer, ouvrez `https://<votre-environnement>/o/authorized_tokens/`. La révocation coupe cet accès immédiatement et ne change rien d'autre.
 
 ## Configurer votre client
 
