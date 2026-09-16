@@ -6,13 +6,29 @@ description: >-
 sidebarTitle: AI clients
 ---
 
-Point any MCP-compatible client at `https://mcp.kapptivate.com/mcp` and authenticate either with a browser sign-in (OAuth) or with the `X-Kapptivate-API-Key` header. This page covers the common developer clients (Claude, Cursor, Claude Code, and GitHub Copilot). For Microsoft 365 Copilot Studio and Google Gemini, see their dedicated pages in this section.
+Point any MCP-compatible client at your endpoint and authenticate either with a browser sign-in (OAuth) or with the `X-Kapptivate-API-Key` header. This page covers the common developer clients (Claude Code, Cursor, Claude Desktop, and GitHub Copilot). For Microsoft 365 Copilot Studio and Google Gemini, see their dedicated pages in this section.
+
+## Your endpoint
+
+Sign in to Kapptivate at app.kapptivate.com, and this is your endpoint:
+
+```
+https://mcp.kapptivate.com/mcp
+```
+
+Sign in somewhere else and your endpoint carries the name of your environment. Take the first part of the address you sign in with, and put it after `/t/`:
+
+```
+https://mcp.kapptivate.com/t/<environment>/mcp
+```
+
+An account on `acme.kapptivate.com` connects to `https://mcp.kapptivate.com/t/acme/mcp`. Every example below carries the app.kapptivate.com address, so substitute yours before you copy one.
 
 ## Get your API key
 
 <Steps>
   <Step title="Open your profile">
-    Sign in to [Kapptivate](https://app.kapptivate.com) and open your profile.
+    Sign in to Kapptivate at the address you use, the same one that gave you your endpoint above, and open your profile.
   </Step>
   <Step title="Copy your API key">
     Copy your personal API key. It carries the same access as your account. Workspace-level keys, scoped to teams, are managed under [Administration > API keys](/administration/api-keys).
@@ -119,9 +135,22 @@ Open Copilot Chat in agent mode, then start the server from **MCP: List Servers*
 
 Ask your assistant for something read-only, for example: "List the operators I can access." If it returns results, you are connected.
 
-<Tip>
-  If a call fails with an authentication error, re-check the header value. The server accepts your API key in the `X-Kapptivate-API-Key` header, or an OAuth session via `Authorization: Bearer` (obtained through the browser sign-in).
-</Tip>
+## Common errors
+
+Connecting only proves the address exists. Your environment is resolved later, when a tool runs, so a client can report the server as connected and still fail on its first call. In its error messages, the server calls an environment a tenant.
+
+<Warning>
+  A green connection status is not proof that your endpoint is right. Run [the read-only check above](#verify-the-connection).
+</Warning>
+
+| What you see | What it means | What to do |
+| --- | --- | --- |
+| 401 | No credentials, or credentials issued for another environment | Send your API key in the `X-Kapptivate-API-Key` header, or sign in through the browser, which carries an `Authorization: Bearer` session instead. Check that the key belongs to the environment in the URL. |
+| 404 | The path is missing its `/t/` segment | Write `https://mcp.kapptivate.com/t/<environment>/mcp`, never `https://mcp.kapptivate.com/<environment>/mcp`. |
+| 400, `invalid tenant path` | The path carries a full address | Keep only the first part of your sign-in address, without `.kapptivate.com`. |
+| Connects, then every tool call fails | The key and the path name two different environments | Line them up, then reconnect the client. |
+
+Still stuck? Write to support@kapptivate.com with the endpoint you used and the code you got back.
 
 ## What's Next?
 

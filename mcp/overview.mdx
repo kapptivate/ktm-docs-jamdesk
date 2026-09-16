@@ -6,26 +6,34 @@ description: >-
 sidebarTitle: Overview
 ---
 
-The Kapptivate MCP server gives AI assistants direct, governed access to your platform. Point an MCP client at one URL, authenticate with your API key, and the model can discover [tests](/tests/overview), run [campaigns](/executions/run-campaign), query metrics, manage [monitors](/monitoring/overview), and triage [incidents](/alerting/incidents) through tools that map one-to-one to Kapptivate.
+The Kapptivate MCP server gives AI assistants direct, governed access to your platform. Point an MCP client at your endpoint, authenticate, and the model can discover [tests](/tests/overview), run [campaigns](/executions/run-campaign), query metrics, manage [monitors](/monitoring/overview), and triage [incidents](/alerting/incidents) through tools that map one-to-one to Kapptivate.
 
 Use it to turn intent into action: "run the checkout regression on staging and summarize the failures", "create a monitor for the login test every five minutes", or "show last week's success rate for the payments product".
 
 ## How it works
 
-The server speaks the [Model Context Protocol](https://modelcontextprotocol.io), the open standard for connecting assistants to tools. Kapptivate hosts it at a single endpoint:
+The server speaks the [Model Context Protocol](https://modelcontextprotocol.io), the open standard for connecting assistants to tools. Kapptivate hosts it at:
 
 ```
 https://mcp.kapptivate.com/mcp
 ```
 
-Your client authenticates every request with the `X-Kapptivate-API-Key` header. The key carries the same permissions as your Kapptivate account, so an agent can only do what you can do.
+Use that one if you sign in at app.kapptivate.com. Sign in elsewhere and your endpoint carries the name of your environment, taken from the first part of the address you sign in with:
+
+```
+https://mcp.kapptivate.com/t/<environment>/mcp
+```
+
+So `acme.kapptivate.com` becomes `https://mcp.kapptivate.com/t/acme/mcp`. [Connect your AI client](/mcp/connect#your-endpoint) walks through it, and everything else on this page reads the same either way.
+
+Your client authenticates every request with the `X-Kapptivate-API-Key` header, or with a browser sign-in. The session carries the same permissions as your Kapptivate account, so the assistant can only do what you can do.
 
 <Warning>
   Your API key grants the same access as your account. Treat it like a password: never commit it to a repository or paste it into a shared chat.
 </Warning>
 
 <Warning>
-  Depending on which AI tool you use, granting it access could expose your data — review its permissions carefully before authorizing it.
+  Depending on which AI tool you use, granting it access could expose your data. Review its permissions carefully before authorizing it.
 </Warning>
 
 ## What you can do
