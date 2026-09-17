@@ -1,23 +1,23 @@
 ---
 title: Configurer le réseau du robot
-description: Adresser un robot câblé, vérifier qu'il atteint Kapptivate, et demander son déploiement au support.
+description: Donner son adresse réseau à un robot câblé, vérifier qu'il joint Kapptivate, puis demander son déploiement au support.
 ---
 
-Entre un robot câblé et la plateforme, il manque encore une chose : son adresse sur votre réseau. Vous la lui donnez sur place, écran, clavier et souris branchés à l'arrière du robot, puis vous passez la main au support Kapptivate, qui déploie le robot. Faites-le avant de visser le robot en baie : ces prises sont bien plus accessibles sur une table.
+Un robot câblé ne se déclare pas tout seul à la plateforme : il lui faut d'abord une adresse sur votre réseau. Vous la lui donnez sur place, avec un écran, un clavier et une souris branchés à l'arrière du robot. Le support Kapptivate prend ensuite le relais et déploie le robot. Faites tout cela avant de visser le robot en baie : ces prises sont bien plus accessibles sur une table.
 
 <Note>
-  Cette procédure vise la dernière génération de robots Kapptivate, et seulement les modèles pourvus d'une sortie vidéo. Le mini robot cellulaire n'en a pas : il se rejoint par une liaison série, voir [se connecter à un robot sans sortie vidéo](/fr/hardware/headless-login). Pour un robot plus ancien, écrivez à support@kapptivate.com.
+  Cette procédure vise la dernière génération de robots Kapptivate. Pour un robot plus ancien, écrivez à support@kapptivate.com.
 </Note>
 
-Tous les robots passent par cette page : web, cellulaire et smartphone. Ces derniers demandent ensuite la préparation de chaque téléphone, sous [Android](/fr/hardware/prepare-android) comme sur [iPhone](/fr/hardware/prepare-iphone).
+Tous les robots passent par cette page : web, cellulaire et smartphone.
 
 ## Les flux à ouvrir
 
-Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : il joint Kapptivate dès son premier démarrage.
+Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : il joint Kapptivate dès son premier démarrage. Il n'apparaît pas pour autant tout seul sur la plateforme : le support doit encore le [déployer](#demander-le-déploiement-au-support).
 
-Sur un réseau filtré, votre service informatique ouvre les flux du robot vers Kapptivate. Le document des exigences IP les liste : demandez-le à support@kapptivate.com.
+Si votre réseau filtre les sorties, il faut au contraire y ouvrir les flux du robot vers Kapptivate. Le support en tient la liste à jour : demandez le document des exigences IP à support@kapptivate.com, puis transmettez-le à votre service informatique.
 
-Ces flux s'ouvrent depuis l'adresse du robot. Attribuez-la donc d'abord, puis faites ouvrir les flux.
+Ces flux partent tous d'une adresse IP fixe. Déroulez donc d'abord [définir une IP statique](#définir-une-ip-statique), puis demandez la liste au support.
 
 <Note>
   Le robot établit lui-même toutes ces connexions. Aucun flux entrant depuis internet n'est nécessaire.
@@ -25,23 +25,26 @@ Ces flux s'ouvrent depuis l'adresse du robot. Attribuez-la donc d'abord, puis fa
 
 ## IP statique ou DHCP
 
-L'IP statique est la configuration recommandée, et c'est celle que définit la procédure ci-dessous. L'adresse ne bouge plus : vos flux s'ouvrent depuis elle, et le support sait toujours où joindre le robot.
+L'IP statique est la configuration recommandée, et c'est elle que met en place [définir une IP statique](#définir-une-ip-statique). L'adresse ne bouge plus : vos flux s'ouvrent depuis elle, et le support sait toujours où joindre le robot.
 
-Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend son bail au démarrage, sans que vous ayez rien à configurer. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas. Vous sautez alors toute la procédure d'adressage, mais gardez écran et clavier : les tests et le numéro de série se lisent depuis le robot. Passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
+Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend son bail au démarrage, sans que vous ayez rien à configurer. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas.
+
+Vous sautez alors la procédure d'adressage, mais pas le reste. Deux choses se font depuis le robot lui-même : vérifier qu'il joint Kapptivate, et relever son numéro de série. Branchez donc l'écran, le clavier et la souris, connectez-vous avec les identifiants du robot (étapes 2 et 3), puis passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
 
 ## Avant de commencer
 
 - Le robot est déballé, sous tension et câblé au réseau, mais pas encore vissé en baie : voir [installer un robot](/fr/hardware/install-robot).
 - Un clavier USB, une souris USB, un écran et un câble HDMI. Rien de tout cela n'est livré avec le robot.
 - Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
+- Le document des exigences IP, qui liste les IP, les domaines et les ports à vérifier. Demandez-le à support@kapptivate.com.
 - L'IP statique, le masque, la passerelle et les adresses des serveurs DNS, fournis par votre service informatique.
 - Un accès à la plateforme Kapptivate, pour y voir le robot passer **Online**.
 
-## Définir l'IP statique
+## Définir une IP statique
 
 <Steps>
   <Step title="Repérer le port du câble">
-    Vérifiez que le câble RJ45 est dans le port Ethernet numéroté **1**. Les ports 2 et 3 conviennent aussi, à condition de configurer plus bas `lan2` ou `lan3` au lieu de `lan1`. Le port 4 ne fonctionne pas.
+    Vérifiez que le câble RJ45 est dans le port Ethernet numéroté **1**. Les ports 2 et 3 conviennent aussi, à condition de sélectionner `lan2` ou `lan3` à l'étape 4, au lieu de `lan1`. Le port 4 ne fonctionne pas.
 
     <Frame caption="Numérotation des ports Ethernet">
       ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/configure-network-11.webp)
@@ -68,7 +71,7 @@ Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend
       ![Le menu réseau ouvert sur l'entrée Edit Connections](/images/hardware/configure-network-03.webp)
     </Frame>
 
-    Ici la connexion s'appelle `lan1`, mais la vôtre peut porter un autre nom, **Wired connection 1** par exemple. Le numéro suit celui du port : retenez la connexion qui correspond au port repéré à l'étape 1, et modifiez-la.
+    Ici, la connexion s'appelle `lan1`, mais la vôtre peut porter un autre nom, **Wired connection 1** par exemple. Le numéro suit celui du port : retenez la connexion qui correspond au port repéré à l'étape 1, et modifiez-la.
 
     <Frame caption="Sélectionner la connexion et la modifier">
       ![La liste des connexions avec lan1 sélectionnée](/images/hardware/configure-network-04.webp)
@@ -86,7 +89,7 @@ Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend
     </Frame>
   </Step>
   <Step title="Passer en adressage manuel">
-    Ouvrez **IPv4 Settings**, puis faites passer la méthode de **Automatic (DHCP)** à **Manual**.
+    Ouvrez **IPv4 Settings**, puis faites passer la méthode d'**Automatic (DHCP)** à **Manual**.
 
     <Frame caption="Onglet IPv4 Settings">
       ![L'onglet IPv4 Settings](/images/hardware/configure-network-07.webp)
@@ -117,24 +120,24 @@ Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend
 
 ## Vérifier que le robot atteint Kapptivate
 
-Ouvrez un terminal sur le bureau Linux. Rejouez le chemin réseau de bout en bout : une route vers les IP du document des exigences IP, un test de flux par IP et par port, puis le même test par nom de domaine. Terminez par un handshake HTTPS complet. Le [dépannage réseau](/fr/hardware/network-troubleshooting) donne les commandes et les sorties attendues.
+Ouvrez un terminal sur le bureau Linux, puis déroulez le [dépannage réseau](/fr/hardware/network-troubleshooting), qui réunit les commandes et les sorties attendues.
 
-Un test qui échoue vient du réseau, pas du robot. Reprenez le point bloquant avec votre service informatique avant d'aller plus loin. Tant que le chemin ne passe pas, le robot ne joint pas la plateforme.
+Si une commande échoue, le robot n'est pas en cause. C'est le chemin réseau qui reste incomplet : reprenez le point bloquant avec votre service informatique, puis relancez la vérification.
 
 ## Demander le déploiement au support
 
-Adressage correct et flux ouverts ne suffisent pas : un robot neuf reste inconnu de la plateforme tant que le support Kapptivate ne l'a pas déployé. Ce déploiement revient au support, à qui il faut le numéro de série du robot :
+Vous y êtes presque. Il ne reste qu'à relever le numéro de série du robot et à le transmettre au support. C'est lui qui déploie le robot et le rend opérationnel sur Kapptivate. Dans un terminal du robot :
 
 ```bash
 sudo krobot serial
 ```
 
-Envoyez ce numéro à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une : elle sert de porte d'entrée quand vous exploitez déjà d'autres robots sur le même LAN, le support passant par l'un d'eux pour rejoindre le nouveau.
+Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une.
 
-Le support déploie ensuite le robot, et il passe **Online** sans autre action de votre part. C'est le feu vert pour le glisser dans sa baie.
+Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot).
 
 <Note>
-  Robot déjà déployé dont vous changez l'adresse : rien à demander au support. Il repasse **Online** de lui-même après le redémarrage. S'il reste **Offline**, déroulez le [dépannage réseau](/fr/hardware/network-troubleshooting), qui part du câble et du port avant de regarder les flux, puis la résolution DNS.
+  Robot déjà déployé dont vous changez l'adresse : rien à demander au support. Il repasse **Online** de lui-même après le redémarrage. S'il reste **Offline**, déroulez le [dépannage réseau](/fr/hardware/network-troubleshooting).
 </Note>
 
 ## Et ensuite ?
