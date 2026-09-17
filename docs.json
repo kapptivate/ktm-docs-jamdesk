@@ -22,6 +22,16 @@
       "permanent": true
     },
     {
+      "source": "/hardware/headless-login",
+      "destination": "/hardware/overview",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/headless-login",
+      "destination": "/fr/hardware/overview",
+      "permanent": true
+    },
+    {
       "source": "/hardware/macmini-network",
       "destination": "/hardware/overview",
       "permanent": true
@@ -1186,7 +1196,6 @@
                   "hardware/network-troubleshooting",
                   "hardware/technical-errors",
                   "hardware/sim-troubleshooting",
-                  "hardware/headless-login",
                   "hardware/rj45-port"
                 ]
               }
@@ -2294,7 +2303,6 @@
                   "fr/hardware/network-troubleshooting",
                   "fr/hardware/technical-errors",
                   "fr/hardware/sim-troubleshooting",
-                  "fr/hardware/headless-login",
                   "fr/hardware/rj45-port"
                 ]
               }
