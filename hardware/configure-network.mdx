@@ -13,11 +13,11 @@ Web, cellular, and smartphone robots all start here.
 
 ## Which flows to open
 
-A robot with a straight route to the internet has no flows to open at all: it finds Kapptivate on its first boot. Expect nothing on the platform yet, though. It appears there once support has [deployed it](#ask-support-to-deploy-the-robot).
+Networks come in two shapes here, and each shape settles both questions at once. Where the robot has a way out to the internet, it runs on DHCP and nothing needs opening: Kapptivate is reachable on the first boot. Behind a corporate filter, the robot takes a fixed IP instead, and the flows toward Kapptivate are opened from that address.
 
-Anywhere else, the robot sits behind a filter and flows have to be opened toward Kapptivate. Support keeps that list current, so ask support@kapptivate.com for the IP requirements document, then hand it to your IT department.
+Support keeps the list of those flows current. Ask support@kapptivate.com for the IP requirements document whenever it suits you, then hand it to your IT department. Only the opening itself waits on the robot's address, so [set the static IP](#set-the-static-ip) before that point.
 
-Ask for that list once the robot is addressed, not before: every flow is opened from a fixed IP address, so [set the static IP](#set-the-static-ip) comes first.
+Either shape leaves one thing undone: the robot never appears on the platform by itself, and support still has to [deploy it](#ask-support-to-deploy-the-robot).
 
 <Note>
   The robot opens every one of these connections itself. Nothing has to reach it from the internet.
@@ -25,11 +25,11 @@ Ask for that list once the robot is addressed, not before: every flow is opened 
 
 ## Static IP or DHCP
 
-Go with a static IP. [Set the static IP](#set-the-static-ip) below does exactly that, and it pays off twice: your flows open from an address that never moves, and support always knows where to reach the robot.
+The network decides this one for you: DHCP where the robot reaches the internet, a fixed IP behind a corporate filter. The fixed address pays off twice, since it never moves: support always knows where to find the robot, and your flows stay open on the right target. [Set the static IP](#set-the-static-ip) is what puts it in place.
 
-DHCP works too, and a simple LAN is where it earns its keep: the robot takes a lease at boot, with nothing for you to configure. The cable still has to sit in Ethernet port 1, 2, or 3, since port 4 does not work.
+Under DHCP, the robot takes its lease at boot and leaves you nothing to configure. The cable still has to sit in Ethernet port 1, 2, or 3, since port 4 does not work.
 
-You skip the addressing, not the rest of the page. Checking that the robot reaches Kapptivate and reading its serial number both happen on the robot, so plug in the screen, keyboard, and mouse and log in with the robot's credentials, as steps 2 and 3 describe. Then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
+You skip the addressing, not the rest of the page. Checking that the robot reaches Kapptivate and reading its serial number both happen on the robot, so work through [connect the peripherals](#connect-the-peripherals) and [power on and log in](#power-on-and-log-in). Then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
 
 ## Before you start
 

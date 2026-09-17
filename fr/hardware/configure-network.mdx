@@ -13,11 +13,11 @@ Tous les robots passent par cette page : web, cellulaire et smartphone.
 
 ## Les flux à ouvrir
 
-Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : il joint Kapptivate dès son premier démarrage. Il n'apparaît pas pour autant tout seul sur la plateforme : le support doit encore le [déployer](#demander-le-déploiement-au-support).
+Tout se joue sur le type de réseau. Sur un réseau ouvert sur internet, le robot prend son adresse en DHCP et vous n'avez aucun flux à ouvrir : il joint Kapptivate dès son premier démarrage. Sur un réseau d'entreprise filtré, il lui faut au contraire une IP fixe, et les flux vers Kapptivate s'ouvrent depuis cette adresse.
 
-Si votre réseau filtre les sorties, il faut au contraire y ouvrir les flux du robot vers Kapptivate. Le support en tient la liste à jour : demandez le document des exigences IP à support@kapptivate.com, puis transmettez-le à votre service informatique.
+Sur un réseau filtré, le support tient la liste de ces flux à jour : demandez le document des exigences IP à support@kapptivate.com, à n'importe quel moment de l'installation, et transmettez-le à votre service informatique. L'ouverture, elle, attend l'adresse du robot : déroulez [définir une IP statique](#définir-une-ip-statique) avant.
 
-Ces flux partent tous d'une adresse IP fixe. Déroulez donc d'abord [définir une IP statique](#définir-une-ip-statique), puis demandez la liste au support.
+Dans les deux cas, le robot n'apparaît pas tout seul sur la plateforme : le support doit encore le [déployer](#demander-le-déploiement-au-support).
 
 <Note>
   Le robot établit lui-même toutes ces connexions. Aucun flux entrant depuis internet n'est nécessaire.
@@ -25,11 +25,11 @@ Ces flux partent tous d'une adresse IP fixe. Déroulez donc d'abord [définir un
 
 ## IP statique ou DHCP
 
-L'IP statique est la configuration recommandée, et c'est elle que met en place [définir une IP statique](#définir-une-ip-statique). L'adresse ne bouge plus : vos flux s'ouvrent depuis elle, et le support sait toujours où joindre le robot.
+Votre réseau tranche donc à votre place : le DHCP là où le robot sort sur internet, une IP fixe derrière un filtrage d'entreprise. L'IP fixe a un mérite de plus : comme l'adresse ne bouge jamais, le support sait toujours où joindre le robot, et vos flux restent ouverts sur la bonne cible. C'est [définir une IP statique](#définir-une-ip-statique) qui la met en place.
 
-Le DHCP fonctionne aussi. Sur un LAN simple, laissez le robot en DHCP : il prend son bail au démarrage, sans que vous ayez rien à configurer. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas.
+En DHCP, le robot prend son bail au démarrage, sans que vous ayez rien à configurer. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas.
 
-Vous sautez alors la procédure d'adressage, mais pas le reste. Deux choses se font depuis le robot lui-même : vérifier qu'il joint Kapptivate, et relever son numéro de série. Branchez donc l'écran, le clavier et la souris, connectez-vous avec les identifiants du robot (étapes 2 et 3), puis passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
+Vous sautez alors la procédure d'adressage, mais pas le reste. Deux choses se font depuis le robot lui-même : vérifier qu'il joint Kapptivate, et relever son numéro de série. Déroulez donc [brancher les périphériques](#brancher-les-périphériques) et [allumer et se connecter](#allumer-et-se-connecter), puis passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
 
 ## Avant de commencer
 
