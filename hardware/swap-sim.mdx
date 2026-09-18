@@ -5,12 +5,12 @@ description: Fit a new SIM, reboot its slot, and let the platform hand it the nu
 
 The number you type at the end of this procedure decides everything. Type one that another SIM in your workspace already holds, and the platform offers to hand that card's settings and monitors over to the new SIM. Type a number nobody has used, and you set the SIM up yourself. Seating the card is the easy half: until the platform has a number, the SIM stays **Unnamed** and runs nothing.
 
-Cellular robots of the current generation, 4G and 5G alike, work the way this page describes; web and smartphone robots have no SIM to swap. Write to support@kapptivate.com for older hardware.
+Every cellular robot works this way, 4G or 5G, whatever generation it belongs to. Web and smartphone robots have no SIM to swap.
 
 ## Before you start
 
 - Physical access to the robot.
-- A SIM ejector tool on a 4G robot. Kapptivate doesn't ship one, so bring your own.
+- A SIM ejector tool on a 4G robot.
 - Access to the **Equipments** area of the platform.
 - The number of the card you're replacing, if the new one takes over its tests.
 
@@ -22,9 +22,9 @@ Cellular robots of the current generation, 4G and 5G alike, work the way this pa
   <Step title="Install the card">
     The robot stays powered on. Slots are hot-swappable.
 
-    Take out the card that's in there, if any, then fit the new one. On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. [Install a robot](/hardware/install-robot) shows both.
+    Take out the card that's in there, if any, then fit the new one. On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. Install a robot has photographs of each, [for 5G](/hardware/install-robot#antennas-and-sims-5g-cellular-robots) and [for 4G](/hardware/install-robot#antennas-and-sims-4g-cellular-robots).
 
-    Note the number printed beside the holder, **SIM1**, **SIM2**, and so on. It matches the **Slot** column in the platform, where every fresh card shows up as **Unnamed**.
+    Note the number printed beside the holder, **SIM1**, **SIM2**, and so on. It matches the **Slot** column in the platform.
 
     <Frame caption="The four SIM holders on the front of a 4G robot">
       ![The front panel of a 4G cellular robot, with its four SIM holders in a row, each printed SIM1, SIM2, SIM3, and SIM4 and followed by two indicator lights](/images/hardware/swap-sim-slot-labels.webp)
@@ -40,12 +40,12 @@ Cellular robots of the current generation, 4G and 5G alike, work the way this pa
     Open the robot, then go to its **Connected devices** tab.
   </Step>
   <Step title="Reboot the slot">
-    A slot holds on to the card it found at boot, so it keeps showing the old one until you reboot it.
+    Your slot still reads **No SIM inserted**, and that's expected. Pulling the old card out removed it from the platform there and then, and nothing brings the new one in but a slot reboot.
 
-    Open the three-dot menu on the slot you changed, then click **Reboot slot**.
+    Open the three-dot menu on that row, then click **Reboot slot**, the one action an empty slot offers.
 
-    <Frame caption="The slot menu on the Connected devices tab">
-      ![The Slots table of a cellular robot, with two unnamed SIMs and the action menu of the first slot open, offering Edit, Activate test-only mode, Reboot slot, and Archive SIM](/images/hardware/swap-sim-02.webp)
+    <Frame caption="The menu of an empty slot, on the Connected devices tab">
+      ![The Slots table of a 4G cellular robot, with a working SIM in slot 1 and three slots reading No SIM inserted, slot 2 having its action menu open on its single entry, Reboot slot](/images/hardware/swap-sim-02.webp)
     </Frame>
   </Step>
   <Step title="Wait for the slot to pick up the card">
@@ -56,7 +56,7 @@ Cellular robots of the current generation, 4G and 5G alike, work the way this pa
     </Frame>
   </Step>
   <Step title="Give the SIM its number">
-    Click the SIM to open its page, then open the **Settings** tab. Fill in the **National MSISDN**. The **International MSISDN** field and its country selector are optional, so fill them in only when your tests expect the number in international format.
+    Click the SIM to open its page, then open the **Settings** tab. Fill in the **National MSISDN**. The **International MSISDN** field is optional, so fill it in only when your tests expect the number in international format. Its country selector follows the dialling code you type.
 
     Leave **Name** empty: the SIM's name comes from the number. Click **Save changes**.
 
@@ -102,7 +102,11 @@ Then head back to **Settings** and fill in the **Default APN**. Click **Save cha
 
 ## Check that the SIM is in service
 
-The robot's **Slots** table tells you when the swap is done. The SIM carries its number instead of **Unnamed**, its status has moved from **Configuration** to **Available**, and the **Network** column has left **Searching** for whatever state the network hands back. [Statuses](/equipment/statuses) lists them all.
+The robot's **Slots** table tells you when the swap is done. The SIM now carries a name built from its number, its status has moved from **Configuration** to **Available**, and the **Network** column has left **Searching** for the technology the card registered on, **LTE** for instance. [Statuses](/equipment/statuses) lists every one of these.
+
+<Frame caption="A slot whose SIM is back at work">
+  ![The Slots table of a 4G cellular robot, slot 1 holding a SIM named after its number, with the status Available, the network LTE, and the usage Healthy, and three empty slots](/images/hardware/swap-sim-08.webp)
+</Frame>
 
 Ten minutes on **Searching** is a fault, not a wait. Work through [SIM cards troubleshooting](/hardware/sim-troubleshooting).
 
