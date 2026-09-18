@@ -453,9 +453,10 @@
                     ]
                   },
                   {
-                    "group": "Email",
+                    "group": "Email & SMS",
                     "expanded": false,
                     "pages": [
+                      "tests/actions/smartphone/getsmscode",
                       "tests/actions/smartphone/getmail",
                       "tests/actions/smartphone/getemailcode",
                       "tests/actions/smartphone/getemaillink"
@@ -1560,9 +1561,10 @@
                     ]
                   },
                   {
-                    "group": "Email",
+                    "group": "Email & SMS",
                     "expanded": false,
                     "pages": [
+                      "fr/tests/actions/smartphone/getsmscode",
                       "fr/tests/actions/smartphone/getmail",
                       "fr/tests/actions/smartphone/getemailcode",
                       "fr/tests/actions/smartphone/getemaillink"
