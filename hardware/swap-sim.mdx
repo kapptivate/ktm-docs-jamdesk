@@ -1,6 +1,6 @@
 ---
 title: Swap a SIM in a cellular robot
-description: Fit a new SIM, reboot its slot, and let the platform hand it the number, the settings and the monitors of the card it replaces.
+description: Insert a new SIM, reboot its slot, and let the platform transfer the number, the settings and the monitors of the card it replaces.
 ---
 
 The number you type at the end of this procedure decides everything. Type one that another SIM in your workspace already holds, and the platform offers to hand that card's settings and monitors over to the new SIM. Type a number nobody has used, and you set the SIM up yourself. Seating the card is the easy half: until the platform has a number, the SIM stays **Unnamed** and runs nothing.
@@ -19,15 +19,15 @@ Every cellular robot works this way, 4G or 5G, whatever generation it belongs to
 </Warning>
 
 <Steps>
-  <Step title="Install the card">
+  <Step title="Insert the card">
     The robot stays powered on. Slots are hot-swappable.
 
-    Take out the card that's in there, if any, then fit the new one. On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. Install a robot has photographs of each, [for 5G](/hardware/install-robot#antennas-and-sims-5g-cellular-robots) and [for 4G](/hardware/install-robot#antennas-and-sims-4g-cellular-robots).
+    Take out the card that's in there, if any, then fit the new one. On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. Install a robot has photographs of each, [for 5G](/hardware/install-robot#inserting-the-sim-cards-5g) and [for 4G](/hardware/install-robot#inserting-the-sim-cards-4g).
 
-    Note the number printed beside the holder, **SIM1**, **SIM2**, and so on. It matches the **Slot** column in the platform.
+    Note the number printed beside the slot, **SIM1**, **SIM2**, and so on. It matches the **Slot** column in the platform.
 
-    <Frame caption="The four SIM holders on the front of a 4G robot">
-      ![The front panel of a 4G cellular robot, with its four SIM holders in a row, each printed SIM1, SIM2, SIM3, and SIM4 and followed by two indicator lights](/images/hardware/swap-sim-slot-labels.webp)
+    <Frame caption="The four SIM slots on the front of a 4G robot">
+      ![The front panel of a 4G cellular robot, with its four SIM slots in a row, each printed SIM1, SIM2, SIM3, and SIM4 and followed by two indicator lights](/images/hardware/swap-sim-slot-labels.webp)
     </Frame>
   </Step>
   <Step title="Find the robot in Agents">
@@ -49,14 +49,14 @@ Every cellular robot works this way, 4G or 5G, whatever generation it belongs to
     </Frame>
   </Step>
   <Step title="Wait for the slot to pick up the card">
-    The slot detects the card and lists it as **Unnamed**, with the status **Configuration**. Expect anything from 30 seconds to a few minutes, because the card registers on the network first.
+    The slot detects the card and lists it as **Unnamed**, with the status **Configuration**. Don't wait for it to register on the network before you give it its number; registration can take a few more minutes.
 
     <Frame caption="A card waiting to be configured">
       ![The Slots table of a cellular robot showing two unnamed SIMs with the status Configuration and the network Searching, and one slot with no SIM inserted](/images/hardware/swap-sim-03.webp)
     </Frame>
   </Step>
   <Step title="Give the SIM its number">
-    Click the SIM to open its page, then open the **Settings** tab. Fill in the **National MSISDN**. The **International MSISDN** field is optional, so fill it in only when your tests expect the number in international format. Its country selector follows the dialling code you type.
+    Click the SIM to open its page, then open the **Settings** tab. Fill in the **National MSISDN**. The **International MSISDN** field is optional.
 
     Leave **Name** empty: the SIM's name comes from the number. Click **Save changes**.
 
