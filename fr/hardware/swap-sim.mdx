@@ -20,9 +20,11 @@ Cette page vaut pour les robots cellulaires 4G et 5G de la dernière génératio
 
 <Steps>
   <Step title="Installer la carte">
-    Retirez la carte en place, s'il y en a une, puis installez la nouvelle.
+    Le robot reste sous tension : le remplacement se fait à chaud.
 
-    Sur un robot 5G, poussez la SIM dans son slot jusqu'au clic. Sur un robot 4G, sortez d'abord le tiroir : appuyez avec l'outil d'éjection sur le bouton situé en haut à droite, posez la SIM dedans, puis repoussez le tiroir. [Installer un robot](/fr/hardware/install-robot) détaille les deux gestes.
+    Retirez la carte en place, s'il y en a une, puis installez la nouvelle. Sur un robot 5G, poussez la SIM dans son slot jusqu'au clic. Sur un robot 4G, sortez d'abord le tiroir : appuyez avec l'outil d'éjection sur le bouton situé en haut à droite, posez la SIM dedans, puis repoussez le tiroir. [Installer un robot](/fr/hardware/install-robot) détaille les deux gestes.
+
+    Relevez le numéro sérigraphié à côté de l'emplacement, **SIM1**, **SIM2**, et ainsi de suite. Vous le retrouvez dans la colonne **Slot** de la plateforme, où toutes les cartes neuves s'affichent **Unnamed**.
   </Step>
   <Step title="Retrouver le robot dans Agents">
     Sous **Equipments**, ouvrez [**Agents**](/fr/equipment/agents) : c'est là que la plateforme liste vos robots. Ouvrez l'onglet **SIM**, puis retrouvez le robot par son hostname ou réduisez la liste avec les filtres **Status** et **Zone**.
@@ -43,7 +45,7 @@ Cette page vaut pour les robots cellulaires 4G et 5G de la dernière génératio
     </Frame>
   </Step>
   <Step title="Attendre que le slot détecte la carte">
-    Le slot détecte la carte et l'affiche en **Unnamed**, au statut **Configuration**.
+    Le slot détecte la carte et l'affiche en **Unnamed**, au statut **Configuration**. Comptez de 30 secondes à quelques minutes : la carte s'enregistre d'abord sur le réseau.
 
     <Frame caption="Une carte en attente de configuration">
       ![La table Slots d'un robot cellulaire montrant deux SIM sans nom au statut Configuration et au réseau Searching, et un slot sans SIM](/images/hardware/swap-sim-03.webp)
@@ -80,7 +82,9 @@ Cliquez sur **Cancel** pour laisser les deux SIM en l'état.
 
 Un numéro qui n'a jamais servi arrive sans aucun réglage. Deux choses lui manquent pour exécuter des tests : les produits autorisés à l'utiliser, et un point d'accès.
 
-Ouvrez l'onglet **General** de la SIM, puis sa section **Products**. Activez **This SIM can be used by all the products**, ou laissez l'interrupteur éteint et cliquez sur **Add product** pour constituer une liste restreinte.
+Ouvrez l'onglet **General** de la SIM, puis sa section **Products**. Activez **This SIM can be used by all the products** pour que tous vos produits puissent s'en servir.
+
+Pour une liste restreinte, laissez l'interrupteur éteint et cliquez sur **Add product**. Cochez les produits voulus dans la fenêtre, puis cliquez sur **Add** : rien n'est enregistré tant que vous ne l'avez pas fait.
 
 <Frame caption="Les produits autorisés à utiliser la SIM">
   ![La section Products d'une SIM, avec l'interrupteur This SIM can be used by all the products, une liste de produits vide, et un bouton Add product](/images/hardware/swap-sim-06.webp)

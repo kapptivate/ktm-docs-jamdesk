@@ -20,9 +20,11 @@ Cellular robots of the current generation, 4G and 5G alike, work the way this pa
 
 <Steps>
   <Step title="Install the card">
-    Take out the card that's in there, if any, then fit the new one.
+    The robot stays powered on. Slots are hot-swappable.
 
-    On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. [Install a robot](/hardware/install-robot) shows both.
+    Take out the card that's in there, if any, then fit the new one. On a 5G robot, push the SIM into its slot until it clicks. On a 4G robot, eject the tray first: press the button at its top right corner with the ejector tool, drop the SIM in, then slide the tray back. [Install a robot](/hardware/install-robot) shows both.
+
+    Note the number printed beside the holder, **SIM1**, **SIM2**, and so on. It matches the **Slot** column in the platform, where every fresh card shows up as **Unnamed**.
   </Step>
   <Step title="Find the robot in Agents">
     Under **Equipments**, open [**Agents**](/equipment/agents), where the platform lists your robots. Open the **SIM** tab, then find the robot by hostname or narrow the list with the **Status** and **Zone** filters.
@@ -43,7 +45,7 @@ Cellular robots of the current generation, 4G and 5G alike, work the way this pa
     </Frame>
   </Step>
   <Step title="Wait for the slot to pick up the card">
-    The slot detects the card and lists it as **Unnamed**, with the status **Configuration**.
+    The slot detects the card and lists it as **Unnamed**, with the status **Configuration**. Expect anything from 30 seconds to a few minutes, because the card registers on the network first.
 
     <Frame caption="A card waiting to be configured">
       ![The Slots table of a cellular robot showing two unnamed SIMs with the status Configuration and the network Searching, and one slot with no SIM inserted](/images/hardware/swap-sim-03.webp)
@@ -80,7 +82,9 @@ Click **Swap values** and the whole set moves at once: **International MSISDN**,
 
 A brand new number arrives bare. Two things get it ready for a test run: the products allowed to use it, and an access point to go out through. Both live on the SIM's own page.
 
-Open the SIM's **General** tab and go to **Products**. Turn on **This SIM can be used by all the products**, or leave the toggle off and click **Add product** to build a shorter list.
+Open the SIM's **General** tab and go to **Products**. Turn on **This SIM can be used by all the products** and any product can use it.
+
+For a shorter list, leave the toggle off and click **Add product**. Tick what you need in the dialog, then click **Add**, which is what saves the selection.
 
 <Frame caption="The products allowed to use the SIM">
   ![The Products section of a SIM, with the toggle This SIM can be used by all the products, an empty product list, and an Add product button](/images/hardware/swap-sim-06.webp)
