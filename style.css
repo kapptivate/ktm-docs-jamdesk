@@ -514,13 +514,18 @@ article:has(.prose img[src*="/images/logo-"]) .prose > p:has(> img[src*="/images
 article:has(.prose img[src*="/images/logo-"]) header h1::before {
   content: "";
   display: inline-block;
-  width: 1.15em;
-  height: 1.15em;
-  margin-right: 0.4em;
-  vertical-align: -0.22em;
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: 0.45em;
+  vertical-align: -0.42em;
+  /* Même traitement que l'image dans le corps de la page : coins arrondis
+     et filet fin. Le logo est posé dedans avec une marge, sinon il touche
+     le filet et la tuile paraît sale. */
+  border: 1px solid var(--color-border);
+  border-radius: 0.3em;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 66%;
 }
 
 /* « contient » et non « se termine par » : en production les images
@@ -572,4 +577,31 @@ article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:fir
 .dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
 .dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
   color: #c3bcff !important;
+}
+
+/* ===== Fenced blocks without a language =====
+   Un bloc ``` sans langage ne passe pas par Shiki : il sort en <pre> nu, sans
+   fond ni cadre, et hérite de la taille du texte courant (16px au lieu des
+   13,44px des autres blocs). Il ne se lit plus comme un bloc de code.
+   Corrigé ici et pas page par page : 28 blocs sont dans ce cas, répartis sur
+   16 fichiers, et un nouveau réapparaît dès qu'une page est écrite sans
+   préciser le langage. Le CSS les rattrape tous sans toucher au contenu. */
+.prose pre:not(.shiki) {
+  background-color: var(--code-panel-bg);
+  border: 1px solid var(--code-panel-border);
+  border-radius: var(--radius-sm, 0.5rem);
+  color: var(--code-panel-text);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 13.44px;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+.prose pre:not(.shiki) code {
+  font-family: var(--font-mono, "JetBrains Mono"), monospace;
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
 }
