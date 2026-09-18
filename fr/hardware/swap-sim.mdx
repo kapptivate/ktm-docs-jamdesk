@@ -1,9 +1,9 @@
 ---
 title: Remplacer une SIM dans un robot cellulaire
-description: Poser une carte SIM dans un robot 4G ou 5G, lui donner son numéro, et lui faire reprendre les tests de la carte qu'elle remplace.
+description: Insérer une carte SIM dans un robot 4G ou 5G, lui attribuer un numéro, et lui transférer les tests de la carte qu'elle remplace.
 ---
 
-Poser la carte ne suffit pas. Tant que la plateforme n'a pas son numéro, la SIM reste **Unnamed** et n'exécute aucun test. Ce numéro décide aussi de la suite : selon qu'il est déjà pris ou qu'il n'a jamais servi, la plateforme transfère les réglages et les monitors de l'ancienne carte, ou vous laisse configurer la nouvelle vous-même.
+Insérer la carte ne suffit pas. Tant que la plateforme n'a pas son numéro, la SIM reste **Unnamed** et n'exécute aucun test. Ce numéro décide aussi de la suite. Reprenez celui d'une ancienne SIM et tout bascule en un clic : ses réglages et ses monitors passent sur la nouvelle carte. Attribuez-en un neuf et vous configurez la SIM vous-même.
 
 Cette page vaut pour tous les robots cellulaires, 4G comme 5G, quelle que soit leur génération. Les robots web et smartphone n'ont pas de SIM.
 
@@ -19,15 +19,15 @@ Cette page vaut pour tous les robots cellulaires, 4G comme 5G, quelle que soit l
 </Warning>
 
 <Steps>
-  <Step title="Installer la carte">
+  <Step title="Insérer la carte">
     Le robot reste sous tension : le remplacement se fait à chaud.
 
-    Retirez la carte en place, s'il y en a une, puis installez la nouvelle. Sur un robot 5G, poussez la SIM dans son slot jusqu'au clic. Sur un robot 4G, sortez d'abord le tiroir : appuyez avec l'outil d'éjection sur le bouton situé en haut à droite, posez la SIM dedans, puis repoussez le tiroir. Le geste est en photos dans Installer un robot, [pour le 5G](/fr/hardware/install-robot#antennes-et-sim-robots-cellulaires-5g) comme [pour le 4G](/fr/hardware/install-robot#antennes-et-sim-robots-cellulaires-4g).
+    Retirez la carte en place, s'il y en a une, puis installez la nouvelle. Sur un robot 5G, poussez la SIM dans son slot jusqu'au clic. Sur un robot 4G, sortez d'abord le tiroir : appuyez avec l'outil d'éjection sur le bouton situé en haut à droite, posez la SIM dedans, puis repoussez le tiroir. Le geste est en photos dans Installer un robot, [pour le 5G](/fr/hardware/install-robot#insertion-des-cartes-sim-robot-5g) comme [pour le 4G](/fr/hardware/install-robot#insertion-des-cartes-sim-robot-4g).
 
-    Relevez le numéro sérigraphié à côté de l'emplacement, **SIM1**, **SIM2**, et ainsi de suite. Vous le retrouvez dans la colonne **Slot** de la plateforme.
+    Relevez le numéro sérigraphié à côté du slot, **SIM1**, **SIM2**, et ainsi de suite. Vous le retrouvez dans la colonne **Slot** de la plateforme.
 
-    <Frame caption="Les quatre emplacements SIM d'un robot 4G, vus de face">
-      ![La face avant d'un robot cellulaire 4G, avec ses quatre emplacements SIM alignés et sérigraphiés SIM1, SIM2, SIM3 et SIM4, chacun suivi de deux voyants](/images/hardware/swap-sim-slot-labels.webp)
+    <Frame caption="Les quatre slots SIM d'un robot 4G, vus de face">
+      ![La face avant d'un robot cellulaire 4G, avec ses quatre slots SIM alignés et sérigraphiés SIM1, SIM2, SIM3 et SIM4, chacun suivi de deux voyants](/images/hardware/swap-sim-slot-labels.webp)
     </Frame>
   </Step>
   <Step title="Retrouver le robot dans Agents">
@@ -40,7 +40,7 @@ Cette page vaut pour tous les robots cellulaires, 4G comme 5G, quelle que soit l
     Ouvrez le robot, puis allez dans son onglet **Connected devices**.
   </Step>
   <Step title="Redémarrer le slot">
-    La ligne de votre emplacement affiche **No SIM inserted**, et c'est normal. La carte que vous avez retirée a disparu de la plateforme au moment où vous l'avez sortie, et la nouvelle ne remonte qu'au redémarrage du slot.
+    La ligne de votre slot affiche **No SIM inserted**, et c'est normal. La carte que vous avez retirée a disparu de la plateforme au moment où vous l'avez sortie, et la nouvelle ne remonte qu'au redémarrage du slot.
 
     Ouvrez le menu à trois points de cette ligne, puis cliquez sur **Reboot slot**. C'est la seule action qu'un slot vide propose.
 
@@ -49,14 +49,14 @@ Cette page vaut pour tous les robots cellulaires, 4G comme 5G, quelle que soit l
     </Frame>
   </Step>
   <Step title="Attendre que le slot détecte la carte">
-    Le slot détecte la carte et l'affiche en **Unnamed**, au statut **Configuration**. Comptez de 30 secondes à quelques minutes : la carte s'enregistre d'abord sur le réseau.
+    Le slot détecte la carte et l'affiche en **Unnamed**, au statut **Configuration**. N'attendez pas qu'elle soit enregistrée sur le réseau pour lui attribuer son numéro : l'enregistrement demande parfois quelques minutes de plus.
 
     <Frame caption="Une carte en attente de configuration">
       ![La table Slots d'un robot cellulaire montrant deux SIM sans nom au statut Configuration et au réseau Searching, et un slot sans SIM](/images/hardware/swap-sim-03.webp)
     </Frame>
   </Step>
-  <Step title="Donner son numéro à la SIM">
-    Cliquez sur la SIM pour ouvrir sa page, puis ouvrez l'onglet **Settings**. Renseignez le **National MSISDN**. Le champ **International MSISDN** reste facultatif : ne le renseignez que si vos tests attendent le numéro au format international. Le sélecteur de pays suit tout seul l'indicatif que vous saisissez.
+  <Step title="Attribuer son numéro à la SIM">
+    Cliquez sur la SIM pour ouvrir sa page, puis ouvrez l'onglet **Settings**. Renseignez le **National MSISDN**. Le champ **International MSISDN** est facultatif.
 
     Laissez le champ **Name** vide : le nom de la SIM se génère à partir du numéro. Cliquez sur **Save changes**.
 
