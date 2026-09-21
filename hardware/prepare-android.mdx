@@ -1,14 +1,14 @@
 ---
 title: Prepare an Android smartphone
-description: Set up a Samsung phone so a robot can keep it awake, reach it over USB, and run mobile app tests on it.
+description: Bring an Android phone into service on a smartphone robot, from Auto Blocker to the battery settings.
 ---
 
-A new Samsung ships set against exactly what a robot needs. It sleeps, it suspends apps on its own, and it updates itself mid-run. Work through the page in order: Auto Blocker comes first, during the setup wizard, and while it's on no robot can reach the phone over USB.
+A phone straight out of the box isn't ready to run tests. This page walks through the Samsung settings that let a robot keep it awake, reach it over the USB cable, and run mobile app tests on it. Start with Auto Blocker, during the setup wizard: while it's on, no robot can reach the phone.
 
-The paths below come from One UI 7, on Android 15. An earlier One UI files two or three of the battery settings somewhere else.
+The paths below come from One UI 7, on Android 15. On an earlier version, some settings sit elsewhere.
 
 <Note>
-  [Samsung is the only fully supported Android brand](/questions/devices-os-versions). Other makers rewrite part of the system, so a test that passes on a Galaxy can fail on a phone whose maker moved the settings around. Nothing outside Samsung is guaranteed.
+  In theory, any Android phone works on a robot, but [Samsung is the only fully supported brand](/questions/devices-os-versions). On another make, the menu paths won't match the ones below, though the settings to look for stay the same.
 </Note>
 
 ## Before you start
@@ -16,24 +16,24 @@ The paths below come from One UI 7, on Android 15. An earlier One UI files two o
 - The robot is installed, with its USB hub powered on: see [install a robot](/hardware/install-robot).
 - The robot shows **Online** in the platform: see [configure the robot network](/hardware/configure-network).
 - The phone runs a [supported Android version](/questions/devices-os-versions) and has at least 4 GB of RAM.
-- A USB-C to USB-A cable, preferably a new one. The hub's ports are USB-A, and the phone cables don't ship with the robot. A worn cable is enough to make the phone vanish from the platform, with no other symptom.
+- A USB-C to USB-A cable, preferably a new one. The hub's ports are USB-A, and the phone cables don't ship with the robot. A faulty cable is enough to make the link unstable.
 
 ## First boot
 
-Turn the phone on and run the Android setup. Pick the language and country you want, and skip both accounts, Google and Samsung: tests need neither.
+Turn the phone on and go through the Android setup: pick the language and country you want, and handle the accounts however you like. Two screens in that setup need attention.
 
 <Warning>
-  Don't set a screen lock: no password, no PIN, no pattern. The screen has to stay unlocked for the platform to use the phone.
+  When the setup offers a screen lock, decline it. No password, no PIN, no pattern. The screen has to stay unlocked for the platform to use the phone.
 </Warning>
 
 ## Turn off Auto Blocker
 
-Auto Blocker is Samsung's security bundle, and one of the four things it blocks is commands sent over the USB cable. That is exactly how a robot drives a phone, so the two can't coexist.
+Auto Blocker blocks commands sent over the USB cable, which is how a robot drives a phone. Kapptivate and Auto Blocker can't work together.
 
 It comes pre-ticked on the **Samsung services** screen of the setup wizard. Untick **Auto Blocker**, then tap **Agree**.
 
-<Frame caption="The Samsung services screen, with Auto Blocker still ticked">
-  ![The Samsung services setup screen, Auto Blocker ticked, listing Blocks commands by USB cable](/images/hardware/prepare-android-01.webp)
+<Frame caption="The Samsung services screen, with Auto Blocker unticked">
+  ![The Samsung services setup screen, the Auto Blocker box unticked](/images/hardware/prepare-android-01.webp)
 </Frame>
 
 <Note>
@@ -42,14 +42,12 @@ It comes pre-ticked on the **Samsung services** screen of the setup wizard. Unti
 
 ## Set up the phone
 
-Eight settings, in this order. The battery ones are spread over three screens, all reached from **Settings > Battery**.
-
 <Steps>
   <Step title="Make Chrome the default browser">
-    In **Settings > Apps > Choose default apps > Browser app**, check that **Chrome** is selected. Kapptivate's web tests run on Chrome, so the robot needs to find it there. Android 15 usually selects it out of the box; if Chrome isn't in the list, install it from the Play Store, then come back.
+    In **Settings > Apps > Choose default apps > Browser app**, check that **Chrome** is selected. Kapptivate's web tests run on Chrome. Android 15 selects it by default most of the time; if Chrome isn't in the list, install it from the Play Store, then come back.
   </Step>
   <Step title="Unlock the developer options">
-    Open **Settings > About phone > Software information** and tap **Build number** until Android confirms that developer mode is on. **Developer options** then appears at the bottom of the Settings list.
+    Open **Settings > About phone > Software information** and tap **Build number** several times, until Android confirms that developer mode is on. **Developer options** then appears at the bottom of the Settings list.
   </Step>
   <Step title="Set the developer options">
     In **Settings > Developer options**, set these six:
@@ -63,27 +61,24 @@ Eight settings, in this order. The battery ones are spread over three screens, a
     | Verify apps over USB | Off |
     | Verify bytecode of debuggable apps | Off |
 
-    **USB debugging** is the one that makes the phone drivable over the cable at all. **Disable adb authorization timeout** keeps that authorization from expiring after seven days without a reconnection, so the phone survives a quiet week between campaigns.
-
-    **Auto update system** only stops updates from being applied at restart. Downloading them is a separate setting, turned off in step 8.
+    **USB debugging** is the one that makes the phone drivable over the cable at all.
 
     <Note>
-      **Revoke USB debugging authorizations** sits in the same list, but it's an action, not a setting. Leave it alone. It clears every computer the phone already trusts, the robot included.
+      On a phone that has been used before, tap **Revoke USB debugging authorizations** in the same list, before you plug it into the robot. Authorizations left over from another robot can get in the way. A phone straight out of the box has none, so skip this.
     </Note>
   </Step>
   <Step title="Stop Android from sleeping the apps">
-    Under **Settings > Battery > Background usage limits**, turn **Put unused apps to sleep** off. Samsung suspends apps it decides you no longer use, and a phone on a robot has to stay reachable between campaigns.
-  </Step>
-  <Step title="Turn off the adaptive battery">
-    Stay on **Background usage limits**, open the menu at the top right, choose **Adaptive battery**, and turn it off. Nothing on the screen hints that it's in there.
+    The next three settings all start from **Settings > Battery**, on three different screens.
+
+    Open **Background usage limits** and turn **Put unused apps to sleep** off. On the same screen, open the menu at the top right, choose **Adaptive battery**, and turn it off too.
   </Step>
   <Step title="Turn off fast charging">
-    Back on **Settings > Battery**, scroll down to **Charging settings** and turn **Fast charging** off. Fast charging adds heat that a phone sitting on a hub has no use for.
+    Back on **Settings > Battery**, scroll down to **Charging settings** and turn **Fast charging** off. Fast charging wears the battery down faster.
   </Step>
   <Step title="Cap the charge">
     Still under **Settings > Battery**, open **Battery protection**. Turn it on, select **Maximum**, and set the slider to **80%**.
 
-    A phone on the hub charges permanently, and [that is what makes smartphone batteries swell](/hardware/swap-battery#smartphone-batteries-swelling). **Maximum** stops charging at 80% instead of holding the cell at full.
+    **Maximum** stops charging at 80% instead of holding the phone at 100% permanently. That is what keeps [smartphone batteries from swelling](/hardware/swap-battery#smartphone-batteries-swelling) over time.
 
     <Frame caption="Battery protection, on and set to Maximum at 80%">
       ![The Battery protection screen, switched on, with Maximum selected and the slider on 80%](/images/hardware/prepare-android-02.webp)
@@ -91,10 +86,6 @@ Eight settings, in this order. The battery ones are spread over three screens, a
   </Step>
   <Step title="Turn off automatic updates">
     Under **Settings > Software update**, open **Auto download** and select **Never**. The platform supports [Android 8 to 16](/questions/devices-os-versions), and an update can push the phone past the versions it covers.
-
-    <Note>
-      The same screen warns that critical updates can still download on mobile data. **Never** narrows that risk, it doesn't remove it.
-    </Note>
   </Step>
 </Steps>
 
@@ -102,7 +93,7 @@ Eight settings, in this order. The battery ones are spread over three screens, a
 
 Plug the phone into a free USB port of the hub. If it was already plugged in, unplug it and plug it back: the popup only fires on connection.
 
-On the phone, tick **Always allow from this computer**, then tap **Allow**. Without the tick, the authorization expires the next time the robot reconnects.
+On the phone, tick **Always allow from this computer**, then tap **Allow**.
 
 <Frame caption="The USB debugging popup, with Always allow from this computer ticked">
   ![The USB debugging authorization popup, the Always allow from this computer box ticked](/images/hardware/prepare-android-03.webp)
@@ -114,7 +105,9 @@ Open the Kapptivate platform and go to [**Agents**](/equipment/agents), where th
 
 A device only becomes available when its own status is **Available** and the robot carrying it is **Online**. If the phone shows nothing, look at the robot first.
 
-If the phone never appears at all, unplug and replug the cable and watch for the authorization popup. A popup dismissed too fast is the usual cause, and it only comes back on reconnection. If the popup returns and the phone still doesn't show up, check Auto Blocker under **Settings > Security and privacy**. If that switch is off too, write to support@kapptivate.com with the robot name.
+If the phone never appears at all, unplug and replug the cable and watch whether the authorization popup shows up. If you aren't sure you confirmed it, or if it never appeared, unplug the phone, tap **Revoke USB debugging authorizations** under **Settings > Developer options**, and plug it back: the popup then comes up for certain.
+
+If the popup was confirmed and the phone still doesn't show up, check Auto Blocker under **Settings > Security and privacy**. If that switch is off too, write to support@kapptivate.com with the robot name.
 
 ## What's next?
 

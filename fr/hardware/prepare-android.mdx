@@ -1,14 +1,14 @@
 ---
 title: Préparer un smartphone Android
-description: Les réglages Samsung qui laissent un robot piloter un téléphone Android, du bloqueur automatique au plafond de charge.
+description: Mettre en service un Android sur un robot smartphone, du bloqueur automatique aux réglages de la batterie.
 ---
 
-Un téléphone est prêt le jour où il apparaît dans la liste des devices de son robot, en **Available**. D'ici là, il travaille contre vous : il s'endort, il met ses applications en veille, il se met à jour au milieu d'une campagne. Une protection Samsung fait pire encore, en refusant les commandes qui arrivent par le câble USB. Commencez par elle, pendant l'assistant de démarrage : tant qu'elle est active, aucun robot n'atteint le téléphone.
+Un téléphone sorti du carton n'est pas prêt à exécuter des tests. Cette page déroule les réglages Samsung qui laissent un robot le garder éveillé, le joindre par le câble USB et y exécuter des tests d'application mobile. Commencez par le bloqueur automatique, pendant l'assistant de démarrage : tant qu'il est actif, aucun robot n'atteint le téléphone.
 
-Les chemins ci-dessous valent pour One UI 7, sous Android 15 ; sur une version antérieure, deux ou trois réglages de batterie se trouvent ailleurs.
+Les chemins ci-dessous valent pour One UI 7, sous Android 15. Sur une version antérieure, certains réglages peuvent être différents.
 
 <Note>
-  Chaque constructeur Android réécrit une partie du système, et l'automatisation mobile n'y retrouve pas toujours ce qu'elle trouve sur un Galaxy. [Samsung est donc la seule marque pleinement prise en charge](/fr/questions/devices-os-versions) : en dehors, rien n'est garanti.
+  En théorie, n'importe quel Android se pilote depuis un robot, mais [Samsung est la seule marque pleinement prise en charge](/fr/questions/devices-os-versions). Sur une autre marque, les chemins de menu ci-dessous ne correspondront pas, même si les réglages à chercher restent les mêmes.
 </Note>
 
 ## Avant de commencer
@@ -16,26 +16,26 @@ Les chemins ci-dessous valent pour One UI 7, sous Android 15 ; sur une version a
 - Le robot est installé et son hub USB est sous tension : voir [installer un robot](/fr/hardware/install-robot).
 - Le robot affiche **Online** dans la plateforme : voir [configurer le réseau du robot](/fr/hardware/configure-network).
 - Le téléphone tourne sous une [version d'Android prise en charge](/fr/questions/devices-os-versions) et dispose d'au moins 4 Go de RAM.
-- Un câble USB-C vers USB-A, de préférence neuf. Les ports du hub sont en USB-A, et les câbles des téléphones ne sont pas livrés avec le robot. Un câble fatigué suffit à faire disparaître le téléphone de la plateforme, sans autre symptôme.
+- Un câble USB-C vers USB-A, de préférence neuf. Les ports du hub sont en USB-A, et les câbles des téléphones ne sont pas livrés avec le robot. Un câble défectueux suffit à rendre la liaison instable.
 
 ## Premier démarrage
 
-Allumez le téléphone et déroulez l'assistant Android. La langue et le pays sont libres. Ne connectez en revanche aucun compte, ni Google ni Samsung : les tests n'en ont pas besoin.
+Allumez le téléphone et déroulez l'assistant Android : choisissez la langue et le pays qui vous conviennent, et traitez les comptes comme vous le souhaitez. Deux écrans de cet assistant demandent votre attention.
 
 Les libellés cités sur cette page sont ceux d'un téléphone en français. Les captures, elles, montrent un téléphone en anglais.
 
 <Warning>
-  L'écran doit rester déverrouillé pour que la plateforme puisse se servir du téléphone. Ne définissez donc aucun verrouillage : ni mot de passe, ni code PIN, ni schéma.
+  Quand l'assistant propose un verrouillage d'écran, refusez-le. Ni mot de passe, ni code PIN, ni schéma. L'écran doit rester déverrouillé pour que la plateforme puisse se servir du téléphone.
 </Warning>
 
 ## Couper le bloqueur automatique
 
-Le **Bloqueur automatique** rassemble quatre protections Samsung. L'une d'elles bloque les commandes envoyées par le câble USB, et c'est précisément par là qu'un robot pilote un téléphone. Les deux ne peuvent pas cohabiter.
+Le bloqueur automatique bloque les commandes envoyées par le câble USB, c'est-à-dire la façon dont un robot pilote un téléphone. Kapptivate et le bloqueur automatique ne fonctionnent pas ensemble.
 
 Il est coché d'office sur l'écran **Services Samsung** de l'assistant de démarrage. Décochez-le, puis appuyez sur **Accepter**.
 
-<Frame caption="L'écran Samsung services, Auto Blocker encore coché">
-  ![L'écran Samsung services de l'assistant, Auto Blocker coché, avec la mention Blocks commands by USB cable](/images/hardware/prepare-android-01.webp)
+<Frame caption="L'écran Samsung services, Auto Blocker décoché">
+  ![L'écran Samsung services de l'assistant, la case Auto Blocker décochée](/images/hardware/prepare-android-01.webp)
 </Frame>
 
 <Note>
@@ -44,14 +44,12 @@ Il est coché d'office sur l'écran **Services Samsung** de l'assistant de déma
 
 ## Régler le téléphone
 
-Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois écrans, tous atteints depuis **Paramètres > Batterie**.
-
 <Steps>
   <Step title="Mettre Chrome en navigateur par défaut">
-    Dans **Paramètres > Applications > Choix des applications par défaut > Appli de navigateur**, vérifiez que **Chrome** est sélectionné. Les tests web de Kapptivate s'appuient sur Chrome, et le robot a besoin de l'y trouver. Android 15 le sélectionne d'origine la plupart du temps ; s'il ne figure pas dans la liste, installez-le depuis le Play Store, puis revenez ici.
+    Dans **Paramètres > Applications > Choix des applications par défaut > Appli de navigateur**, vérifiez que **Chrome** est sélectionné. Les tests web de Kapptivate s'appuient sur Chrome. Android 15 le sélectionne par défaut la plupart du temps ; s'il ne figure pas dans la liste, installez-le depuis le Play Store, puis revenez ici.
   </Step>
   <Step title="Débloquer les options de développement">
-    Ouvrez **Paramètres > À propos du téléphone > Informations sur le logiciel** et appuyez sur **Numéro de version** jusqu'à ce qu'Android confirme l'activation du mode développeur. L'entrée **Options de développement** apparaît alors en bas de la liste des paramètres.
+    Ouvrez **Paramètres > À propos du téléphone > Informations sur le logiciel** et appuyez plusieurs fois sur **Numéro de version**, jusqu'à ce qu'Android confirme l'activation du mode développeur. L'entrée **Options de développement** apparaît alors en bas de la liste des paramètres.
   </Step>
   <Step title="Régler les options de développement">
     Dans **Paramètres > Options de développement**, réglez ces six options :
@@ -65,27 +63,24 @@ Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois �
     | Vérifier les applis via USB | Désactivé |
     | Vérif. bytecode applis débogables | Désactivé |
 
-    **Débogage USB** est celui qui rend le téléphone pilotable par le câble. **Désactiv. expiration autorisation adb** empêche cette autorisation d'expirer au bout de sept jours sans reconnexion : le téléphone survit à une semaine calme entre deux campagnes.
-
-    **Mise à jour auto. système** empêche seulement l'installation des mises à jour au redémarrage. Leur téléchargement se coupe ailleurs, à l'étape 8.
+    **Débogage USB** est celui qui rend le téléphone pilotable par le câble.
 
     <Note>
-      **Révoquer les autorisations de débogage USB** figure dans la même liste, mais c'est une action, pas un réglage. N'y touchez pas : elle efface tous les ordinateurs déjà autorisés par le téléphone, robot compris.
+      Sur un téléphone qui a déjà servi, appuyez sur **Révoquer les autorisations de débogage USB**, dans la même liste, avant de le brancher au robot. D'anciennes autorisations, héritées d'un autre robot, peuvent gêner la connexion. Un téléphone neuf n'en a aucune : passez cette manipulation.
     </Note>
   </Step>
   <Step title="Empêcher Android d'endormir les applications">
-    Sous **Paramètres > Batterie > Limites utilisation arrière-plan**, désactivez **Mise en veille applis inutilisées**. Samsung endort les applications qu'il juge inutilisées, or un téléphone monté sur un robot doit rester joignable entre deux campagnes.
-  </Step>
-  <Step title="Couper la batterie adaptative">
-    Restez sur **Limites utilisation arrière-plan**, ouvrez le menu en haut à droite, choisissez **Batterie adaptative** et désactivez-la. Rien n'indique qu'elle se trouve là.
+    Les trois réglages suivants partent tous de **Paramètres > Batterie**, sur trois écrans différents.
+
+    Ouvrez **Limites utilisation arrière-plan** et désactivez **Mise en veille applis inutilisées**. Sur le même écran, ouvrez le menu en haut à droite, choisissez **Batterie adaptative** et désactivez-la également.
   </Step>
   <Step title="Couper le chargement rapide">
-    De retour dans **Paramètres > Batterie**, descendez jusqu'à **Paramètres de charge** et désactivez **Chargement rapide**. La charge rapide dégage une chaleur dont un téléphone posé sur un hub n'a aucun usage.
+    De retour dans **Paramètres > Batterie**, descendez jusqu'à **Paramètres de charge** et désactivez **Chargement rapide**. La charge rapide dégrade plus vite la batterie du téléphone.
   </Step>
   <Step title="Plafonner la charge">
     Toujours dans **Paramètres > Batterie**, ouvrez **Protection de la batterie**. Activez-la, sélectionnez **Maximale**, puis placez le curseur sur **80 %**.
 
-    **Maximale** arrête la charge à 80 % au lieu de maintenir la cellule pleine. C'est ce qui compte ici : sur le hub, un téléphone charge en permanence, et [la charge permanente fait gonfler les batteries de smartphones](/fr/hardware/swap-battery#gonflement-des-batteries-de-smartphones).
+    **Maximale** arrête la charge à 80 % au lieu de maintenir le téléphone à 100 % en permanence. C'est ce qui évite [le gonflement des batteries de smartphones](/fr/hardware/swap-battery#gonflement-des-batteries-de-smartphones) sur le long terme.
 
     <Frame caption="Battery protection, activé et réglé sur Maximum à 80 %">
       ![L'écran Battery protection, activé, avec Maximum sélectionné et le curseur sur 80 %](/images/hardware/prepare-android-02.webp)
@@ -93,10 +88,6 @@ Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois �
   </Step>
   <Step title="Couper les mises à jour automatiques">
     Sous **Paramètres > Mise à jour logicielle**, ouvrez **Téléchargement automatique** et sélectionnez **Jamais**. La plateforme couvre [Android 8 à 16](/fr/questions/devices-os-versions), et une mise à jour peut pousser le téléphone au-delà des versions prises en charge.
-
-    <Note>
-      Ce même écran prévient que les mises à jour critiques peuvent passer malgré tout, par les données mobiles. **Jamais** réduit le risque, il ne l'annule pas.
-    </Note>
   </Step>
 </Steps>
 
@@ -104,7 +95,7 @@ Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois �
 
 Branchez le téléphone sur un port USB libre du hub. S'il était déjà branché, débranchez-le et rebranchez-le : la popup ne se déclenche qu'à la connexion.
 
-Sur le téléphone, cochez **Toujours autoriser sur cet ordinateur**, puis appuyez sur **Autoriser**. Sans cette case cochée, l'autorisation expire à la prochaine reconnexion du robot.
+Sur le téléphone, cochez **Toujours autoriser sur cet ordinateur**, puis appuyez sur **Autoriser**.
 
 <Frame caption="La popup d'autorisation USB, case Always allow from this computer cochée">
   ![La popup d'autorisation de débogage USB, la case Always allow from this computer cochée](/images/hardware/prepare-android-03.webp)
@@ -116,7 +107,9 @@ Ouvrez la plateforme Kapptivate, puis allez dans [**Agents**](/fr/equipment/agen
 
 Un device ne devient disponible que si son propre statut est **Available** et si le robot qui le porte est **Online**. Si le téléphone n'affiche rien, regardez d'abord le robot.
 
-Et s'il n'apparaît pas du tout, débranchez puis rebranchez le câble en guettant la popup d'autorisation. Une popup fermée trop vite est la cause habituelle, et elle ne revient qu'à la reconnexion. Si elle revient et que le téléphone manque toujours, vérifiez le bloqueur automatique dans **Paramètres > Sécurité et confidentialité**. S'il est déjà désactivé, écrivez à support@kapptivate.com en donnant le nom du robot.
+Et s'il n'apparaît pas du tout, débranchez puis rebranchez le câble en vérifiant si une popup d'autorisation apparaît. Si vous n'êtes pas sûr de l'avoir validée, ou si elle ne s'est pas affichée, débranchez le téléphone, appuyez sur **Révoquer les autorisations de débogage USB** dans **Paramètres > Options de développement**, puis rebranchez : la popup revient à coup sûr.
+
+Si la popup a bien été validée et que le téléphone ne remonte toujours pas, vérifiez le bloqueur automatique dans **Paramètres > Sécurité et confidentialité**. S'il est déjà désactivé, écrivez à support@kapptivate.com en donnant le nom du robot.
 
 ## Et ensuite ?
 
