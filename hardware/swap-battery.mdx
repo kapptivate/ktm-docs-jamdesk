@@ -1,108 +1,165 @@
 ---
-title: Swap the battery of a robot
-description: >-
-  Learn how to replace your robot's motherboard battery for both new and old
-  hardware generations, plus tips on smartphone battery swelling.
+title: Replace a robot's motherboard battery
+sidebarTitle: Motherboard battery
+description: Fit a new motherboard battery in a Kapptivate robot, on the older white chassis and on the latest hardware.
 ---
 
-Every robot ships with a motherboard battery. When it runs out, the robot can malfunction (clock drift, BIOS resets); replacing it takes a few minutes. The procedure depends on your hardware generation.
+A motherboard battery is a wear part: it drains on its own, whatever the robot does. Once it's flat, the clock drifts and the BIOS forgets its settings at every boot. The swap itself takes ten minutes, with the robot off and out of the rack. Older hardware then needs a BIOS update on top.
 
-## New robot hardware
+<Note>
+  Kapptivate maintains the robots it hosts. This page is for the ones that sit in your own racks.
+</Note>
 
-New hardware is gray or green:
+## Before you start
 
-<Frame caption="New generation hardware">
-  ![New hardware](/images/hardware/swap-battery-01.webp)
+- The replacement battery. Write to support@kapptivate.com: the model depends on your generation of hardware, and support sends the one that fits.
+- On an older robot, the BIOS update guide. Ask for it in the same message as the battery. That update also calls for a screen and a keyboard at the back of the robot, plus a USB stick prepared on a Windows PC.
+- A screwdriver, for the two lid screws and for the rack screws.
+- A thin tool to lift the adhesive that holds the battery down. A small flat screwdriver does the job.
+- A window where the robot can go down. It runs no tests while it's powered off.
+
+## Find out which generation you have
+
+Two chassis colors, two places to look for the battery. Check which one you have before you unscrew anything.
+
+White is the older hardware:
+
+<Frame caption="A robot from an older generation">
+  ![The front panel of a white Kapptivate robot, with eight numbered SIM slots and its antenna connectors](/images/hardware/swap-battery-06.webp)
 </Frame>
 
+Gray or green is the latest generation:
+
+<Frame caption="A robot from the latest generation">
+  ![A green Kapptivate robot seen from the front, its power and network cables resting on top](/images/hardware/swap-battery-01.webp)
+</Frame>
+
+Not sure from the color? Send the serial number to support@kapptivate.com and ask which generation the robot belongs to.
+
+Every robot starts the same way, off and out of the rack. The page then splits between [older robots](#replace-the-battery-on-an-older-robot), whose batteries are the ones reaching the end of their life, and [the latest hardware](#replace-the-battery-on-the-latest-hardware). Both routes end at [racking the robot again](#rack-the-robot-and-switch-it-on).
+
+## Power the robot down and take it out of the rack
+
 <Steps>
-  <Step title="Open the robot">
-    Remove the 2 screws and take off the top aluminum plate.
-
-    <Frame caption="The 2 screws to remove">
-      ![Screws to remove](/images/hardware/swap-battery-02.webp)
-    </Frame>
+  <Step title="Power the robot down">
+    Press the power button on the front panel and let the robot shut down. The fans stop.
   </Step>
-  <Step title="Locate the battery">
-    The battery sits on the motherboard, next to the power supply.
-
-    <Frame caption="The battery next to the power supply">
-      ![Battery location](/images/hardware/swap-battery-03.webp)
-    </Frame>
+  <Step title="Unplug the cables">
+    Pull the power cable, then the RJ45 cable. On a cellular robot, photograph the antennas before you unscrew them: each one goes back on its own connector. On a smartphone robot, unplug the USB hub.
   </Step>
-  <Step title="Replace it">
-    Detach the adhesive securing the battery with a thin tool, pull gently on the red and black cable to remove it, and stick the new battery in the same spot.
-
-    <Frame caption="Detach the adhesive, then swap the battery">
-      ![Detach the adhesive](/images/hardware/swap-battery-04.webp)
-      ![Insert the new battery](/images/hardware/swap-battery-05.webp)
-    </Frame>
-  </Step>
-  <Step title="Close and update the BIOS">
-    Screw the top plate back in place. Then update the BIOS before using the robot again; contact support for the BIOS update guide for your model.
+  <Step title="Take the robot out of the rack">
+    The lid comes off the top, and a racked robot keeps its motherboard out of reach. Undo the two screws on each side of the front panel, slide the robot out of its slot, and set it down flat.
   </Step>
 </Steps>
 
-## Old robot hardware
-
-Older hardware looks like this:
-
-<Frame caption="Old generation hardware">
-  ![Old hardware](/images/hardware/swap-battery-06.webp)
-</Frame>
+## Replace the battery on an older robot
 
 <Steps>
-  <Step title="Open the robot">
-    Remove the 2 screws and slide the top aluminum plate towards the back.
+  <Step title="Open the lid">
+    Remove the two screws on top, then slide the aluminum plate towards the back.
 
-    <Frame caption="The 2 screws to remove">
-      ![Screws to remove](/images/hardware/swap-battery-07.webp)
+    <Frame caption="The two lid screws, circled in red">
+      ![The top of a white robot, its two lid screws circled in red](/images/hardware/swap-battery-07.webp)
     </Frame>
   </Step>
   <Step title="Locate the battery">
-    The battery is in the lower left corner of the motherboard.
+    It sits flat in the lower left corner of the motherboard, under adhesive, on one red and one black lead.
 
-    <Frame caption="Battery in the lower left corner">
-      ![Battery location](/images/hardware/swap-battery-08.webp)
+    <Frame caption="The battery in the lower left corner of the motherboard">
+      ![The round battery taped to the motherboard, its red and black leads running to a white connector](/images/hardware/swap-battery-08.webp)
     </Frame>
   </Step>
-  <Step title="Replace it">
-    Detach the adhesive with a thin tool, pull gently on the red and black cable, and stick the new battery in the same spot.
+  <Step title="Clear the way if your fingers don't reach">
+    This generation is a tight fit. Undo the four screws at the corners of the motherboard. Lift the board with everything still plugged in, far enough to work on the battery.
 
-    <Frame caption="Detach the adhesive, then swap the battery">
-      ![Detach the adhesive](/images/hardware/swap-battery-09.webp)
-      ![Insert the new battery](/images/hardware/swap-battery-10.webp)
-    </Frame>
-
-    If access is difficult, unscrew the four screws at the corners of the motherboard and lift it, without disconnecting anything, to reach the battery. Reattach those screws before closing.
-
-    <Frame caption="Lift the motherboard for easier access">
-      ![Motherboard screws](/images/hardware/swap-battery-11.webp)
-      ![Lifted motherboard](/images/hardware/swap-battery-12.webp)
+    <Frame caption="The four motherboard screws, circled in red, then the board lifted">
+      ![The inside of a white robot, the four corner screws of the motherboard circled in red](/images/hardware/swap-battery-11.webp)
+      ![The motherboard lifted a few centimeters, its cables still connected](/images/hardware/swap-battery-12.webp)
     </Frame>
   </Step>
-  <Step title="Close and update the BIOS">
-    Screw the top plate back. Update the BIOS before using the robot again; contact support for the guide.
+  <Step title="Swap the battery">
+    Lift the adhesive with a thin tool without tearing it: the new battery goes back under the same piece. Unplug the battery by its connector, never by the leads. Plug the new one in and stick it back in place. Put the four motherboard screws back if you lifted the board.
+
+    <Frame caption="The adhesive lifted, then the new battery in place">
+      ![A thin tool slid under the battery adhesive](/images/hardware/swap-battery-09.webp)
+      ![The new battery stuck down in the same spot](/images/hardware/swap-battery-10.webp)
+    </Frame>
+  </Step>
+  <Step title="Close the lid">
+    Put the aluminum plate back and tighten its two screws.
+  </Step>
+  <Step title="Update the BIOS">
+    Do this with the robot still flat on the table. Its screen and keyboard plug in at the back, which a rack slot makes awkward to reach. Connect them along with the power cable, switch the robot on, and work through the guide support sent you. Power the robot back down once the configuration is saved.
   </Step>
 </Steps>
+
+## Replace the battery on the latest hardware
+
+<Steps>
+  <Step title="Open the lid">
+    Remove the two screws on top, then lift the aluminum plate off.
+
+    <Frame caption="The two lid screws, circled in red">
+      ![The top of a gray robot, its two lid screws circled in red](/images/hardware/swap-battery-02.webp)
+    </Frame>
+  </Step>
+  <Step title="Locate the battery">
+    It rests on the motherboard, against the power supply. Look for a flat pack held down by adhesive, wired to the board with one red and one black lead.
+
+    <Frame caption="Inside the robot, the battery next to the power supply">
+      ![The open robot showing the motherboard, its fan, the modems, and the power supply on the right](/images/hardware/swap-battery-03.webp)
+    </Frame>
+  </Step>
+  <Step title="Swap the battery">
+    Lift the adhesive with a thin tool and keep it in one piece, because it holds the new battery down. Unplug the battery by its connector rather than by the leads. Plug the new one into the same connector and stick it back in the same spot.
+
+    <Frame caption="The adhesive lifted, then the new battery plugged in">
+      ![A flat screwdriver slid under the adhesive holding the battery, and the battery once freed](/images/hardware/swap-battery-04.webp)
+      ![The new yellow battery plugged into the motherboard](/images/hardware/swap-battery-05.webp)
+    </Frame>
+  </Step>
+  <Step title="Close the lid">
+    Put the aluminum plate back and tighten its two screws. Nothing to do in the BIOS of this generation once the battery is in.
+  </Step>
+</Steps>
+
+## Rack the robot and switch it on
+
+Slide the robot into its slot and tighten two screws on each side. Plug the cables back the way they were: antennas or USB hub, then the RJ45 cable in the Ethernet port it left. Power comes last, then press the button on the front panel.
+
+## Check that the robot is back
+
+The platform has the answer. Your robot is listed under [**Agents**](/equipment/agents), and it comes back as **Online** once it has booted. Its devices and its SIMs follow, back to **Available**.
+
+A robot still offline has usually not finished starting: wait a minute and look again. After that, suspect the RJ45 cable, which belongs in the Ethernet port it left. [Network troubleshooting](/hardware/network-troubleshooting) covers the rest.
+
+One more symptom to watch: a clock that drifts again, or a BIOS that forgets its settings at the next boot, points at the new battery. Its connector is loose or unplugged. Open the lid and go through that step again.
 
 ## Smartphone batteries swelling
 
-Smartphone batteries swell over time when constantly charging, which is the case on a smartphone robot. A stand reduces heat and delays the phenomenon, but the real fix is choosing phones that support **pass-through charging**: power feeds the phone directly without cycling the battery.
+The phones on a smartphone robot never leave the charger. Their batteries sit at 100%, a few degrees above room temperature, month after month. That is what makes them swell.
 
-Models known to support it: Galaxy S22 and S23 series, Galaxy Z Fold 2 through 5, Galaxy Z Flip 5, Galaxy A73 5G, and Galaxy A33 5G (the most affordable).
+Two settings and one accessory push that day further out:
 
-## What's Next?
+- Cap the charge at 80% on every [Android phone](/hardware/prepare-android). This is the setting that matters most.
+- Turn fast charging off, in the same settings. Less current, less heat.
+- Stand every phone up on a holder, [Android](/hardware/prepare-android) and [iPhone](/hardware/prepare-iphone) alike, so air moves behind the case instead of sitting against a flat surface.
+
+<Warning>
+  Take a phone out of service the moment its battery swells. You see it from the outside: a back panel that lifts, a screen coming away from its frame, a phone that rocks instead of lying flat. It doesn't go back on charge, and nothing goes through it. Tell support@kapptivate.com, then set its replacement up like any other phone.
+</Warning>
+
+## What's next?
 
 <Columns cols={2}>
-  <Card title="Technical errors troubleshooting" icon="wrench" href="/hardware/technical-errors">
+  <Card title="Technical errors" icon="wrench" href="/hardware/technical-errors">
 
-    Symptoms that often trace back to a dead battery
+    Symptoms that often trace back to a flat battery
 
 </Card>
   <Card title="Equipment statuses" icon="signal" href="/equipment/statuses">
 
-    Check the robot's health after the swap
+    What the robot should show once it's back in the rack
 
 </Card>
 </Columns>
