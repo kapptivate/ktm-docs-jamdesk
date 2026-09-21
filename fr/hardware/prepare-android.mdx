@@ -8,7 +8,7 @@ Un téléphone est prêt le jour où il apparaît dans la liste des devices de s
 Les chemins ci-dessous valent pour One UI 7, sous Android 15 ; sur une version antérieure, deux ou trois réglages de batterie se trouvent ailleurs.
 
 <Note>
-  Chaque constructeur Android réécrit une partie du système, et l'automatisation mobile n'y retrouve pas toujours ce qu'elle trouve sur un Galaxy. [Samsung est donc la seule marque pleinement prise en charge](/fr/questions/devices-os-versions), et Kapptivate décompte de votre package de support toute investigation menée sur un autre téléphone.
+  Chaque constructeur Android réécrit une partie du système, et l'automatisation mobile n'y retrouve pas toujours ce qu'elle trouve sur un Galaxy. [Samsung est donc la seule marque pleinement prise en charge](/fr/questions/devices-os-versions) : en dehors, rien n'est garanti.
 </Note>
 
 ## Avant de commencer
@@ -32,9 +32,9 @@ Les libellés cités sur cette page sont ceux d'un téléphone en français. Les
 
 Le **Bloqueur automatique** rassemble quatre protections Samsung. L'une d'elles bloque les commandes envoyées par le câble USB, et c'est précisément par là qu'un robot pilote un téléphone. Les deux ne peuvent pas cohabiter.
 
-Il est coché d'office sur l'écran **Samsung services** de l'assistant de démarrage. Décochez-le, puis appuyez sur **Agree** (accepter).
+Il est coché d'office sur l'écran **Services Samsung** de l'assistant de démarrage. Décochez-le, puis appuyez sur **Accepter**.
 
-<Frame caption="L'écran Samsung services, le bloqueur automatique encore coché">
+<Frame caption="L'écran Samsung services, Auto Blocker encore coché">
   ![L'écran Samsung services de l'assistant, Auto Blocker coché, avec la mention Blocks commands by USB cable](/images/hardware/prepare-android-01.webp)
 </Frame>
 
@@ -48,7 +48,7 @@ Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois �
 
 <Steps>
   <Step title="Mettre Chrome en navigateur par défaut">
-    Dans **Paramètres > Applications > Choix des applications par défaut > Appli de navigateur**, vérifiez que **Chrome** est sélectionné. Android 15 le sélectionne d'origine la plupart du temps. S'il ne figure pas dans la liste, installez-le depuis le Play Store, puis revenez ici.
+    Dans **Paramètres > Applications > Choix des applications par défaut > Appli de navigateur**, vérifiez que **Chrome** est sélectionné. Les tests web de Kapptivate s'appuient sur Chrome, et le robot a besoin de l'y trouver. Android 15 le sélectionne d'origine la plupart du temps ; s'il ne figure pas dans la liste, installez-le depuis le Play Store, puis revenez ici.
   </Step>
   <Step title="Débloquer les options de développement">
     Ouvrez **Paramètres > À propos du téléphone > Informations sur le logiciel** et appuyez sur **Numéro de version** jusqu'à ce qu'Android confirme l'activation du mode développeur. L'entrée **Options de développement** apparaît alors en bas de la liste des paramètres.
@@ -104,9 +104,9 @@ Huit réglages, dans cet ordre. Ceux de la batterie se répartissent sur trois �
 
 Branchez le téléphone sur un port USB libre du hub. S'il était déjà branché, débranchez-le et rebranchez-le : la popup ne se déclenche qu'à la connexion.
 
-Sur le téléphone, cochez **Always allow from this computer** (toujours autoriser sur cet ordinateur), puis appuyez sur **Allow** (autoriser). Sans cette case cochée, l'autorisation expire à la prochaine reconnexion du robot.
+Sur le téléphone, cochez **Toujours autoriser sur cet ordinateur**, puis appuyez sur **Autoriser**. Sans cette case cochée, l'autorisation expire à la prochaine reconnexion du robot.
 
-<Frame caption="La popup de débogage USB, case Always allow from this computer cochée">
+<Frame caption="La popup d'autorisation USB, case Always allow from this computer cochée">
   ![La popup d'autorisation de débogage USB, la case Always allow from this computer cochée](/images/hardware/prepare-android-03.webp)
 </Frame>
 

@@ -8,7 +8,7 @@ A new Samsung ships set against exactly what a robot needs. It sleeps, it suspen
 The paths below come from One UI 7, on Android 15. An earlier One UI files two or three of the battery settings somewhere else.
 
 <Note>
-  [Samsung is the only fully supported Android brand](/questions/devices-os-versions). Other makers ship customized OS layers that can interfere with mobile automation, and Kapptivate bills any investigation on those phones against your support package.
+  [Samsung is the only fully supported Android brand](/questions/devices-os-versions). Other makers rewrite part of the system, so a test that passes on a Galaxy can fail on a phone whose maker moved the settings around. Nothing outside Samsung is guaranteed.
 </Note>
 
 ## Before you start
@@ -46,7 +46,7 @@ Eight settings, in this order. The battery ones are spread over three screens, a
 
 <Steps>
   <Step title="Make Chrome the default browser">
-    In **Settings > Apps > Choose default apps > Browser app**, check that **Chrome** is selected. Android 15 usually selects it out of the box. If Chrome isn't in the list, install it from the Play Store, then come back.
+    In **Settings > Apps > Choose default apps > Browser app**, check that **Chrome** is selected. Kapptivate's web tests run on Chrome, so the robot needs to find it there. Android 15 usually selects it out of the box; if Chrome isn't in the list, install it from the Play Store, then come back.
   </Step>
   <Step title="Unlock the developer options">
     Open **Settings > About phone > Software information** and tap **Build number** until Android confirms that developer mode is on. **Developer options** then appears at the bottom of the Settings list.
