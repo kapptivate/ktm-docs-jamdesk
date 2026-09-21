@@ -1,96 +1,193 @@
 ---
-title: Dépannage réseau du robot
-description: Diagnostiquer un robot injoignable, du câble aux flux vers Kapptivate.
+title: Robot Offline
+description: Faire remonter un robot passé Offline, du bouton d'alimentation jusqu'aux flux que votre service informatique doit ouvrir.
+sidebarTitle: Robot Offline
 ---
 
-Lorsqu'un robot est injoignable, la cause est presque toujours l'une de ces trois choses : le câble est dans le mauvais port, les flux vers Kapptivate ne sont pas ouverts, ou la résolution DNS échoue. Effectuez les vérifications dans l'ordre.
+Un robot qui ne remonte plus a presque toujours perdu le courant, ou garde un lien figé vers Kapptivate. Le redémarrage physique répare le second cas et révèle le premier : commencez par là. Les commandes de vérification viennent après, seulement si le robot reste **Offline**.
 
-## Vérifier les prérequis
+<Note>
+  Cette page vise la dernière génération de robots Kapptivate. Pour un robot plus ancien, écrivez à support@kapptivate.com.
+</Note>
 
-- Le câble RJ45 est branché dans le port Ethernet configuré avec l'IP statique ([comment vérifier](/fr/hardware/rj45-port)).
-- Les flux requis vers Kapptivate sont ouverts. Consultez le document des exigences IP ; demandez-le à support@kapptivate.com si vous ne l'avez pas.
+## Par où commencer
 
-## Connecter un écran et un clavier
+| Ce que vous constatez | Ce que ça désigne | Où aller |
+|---|---|---|
+| Un seul robot du site est **Offline** | le robot, son alimentation ou son câble | [Redémarrer le robot](#redémarrer-le-robot) |
+| Tous les robots du site sont tombés à la même minute | le site : courant, lien opérateur, règle de pare-feu modifiée | [Prévenir votre service informatique](#avant-de-vous-déplacer) |
+| Le robot repasse **Online** après un redémarrage, puis retombe | une règle temporaire, ou des sessions coupées pour inactivité | [Un robot qui remonte puis retombe](#un-robot-qui-remonte-puis-retombe) |
+| Sur place, l'écran reste noir et la façade ne clignote plus | le matériel | [Un robot qui ne donne plus signe de vie](#un-robot-qui-ne-donne-plus-signe-de-vie) |
 
-Connectez un écran et un clavier au robot.
+## Avant de vous déplacer
 
-Si l'écran reste noir même en appuyant sur des touches, vérifiez que la source d'entrée de l'écran correspond au branchement que vous avez utilisé. Si c'est le cas et que l'écran reste noir, redémarrez le robot plusieurs fois et vérifiez qu'il s'allume. Toujours pas de réponse ? Contactez support@kapptivate.com, avec une vidéo des LED avant s'il s'agit d'un robot cellulaire : il s'agit très probablement d'un problème matériel.
+Ouvrez [la liste de vos robots](/fr/equipment/agents) et relevez deux choses : depuis quand ce robot est **Offline**, et combien d'autres robots du même site le sont aussi. Une chute isolée accuse le robot. Une chute groupée accuse le site, et prévenir votre service informatique vous fera gagner le déplacement.
 
-## Tester le chemin réseau
+<Frame caption="Un robot au statut Offline dans la liste des robots">
+  ![La liste des robots web, avec une carte portant le statut Offline](/images/hardware/network-troubleshooting-01.webp)
+</Frame>
 
-Connectez-vous avec vos identifiants et ouvrez un terminal. Exécutez chaque vérification pour toutes les IP, domaines et ports du document d'exigences.
+Le redémarrage proposé par la plateforme reste sans effet sur un robot **Offline** : il emprunte le lien qui est justement coupé.
 
-### Route vers la plateforme
+## Ce qu'il vous faut sur place
+
+- Un écran, un clavier, une souris et un câble HDMI. Rien de tout cela n'est livré avec le robot.
+- Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
+- Le document des exigences IP, qui liste les flux à tester. Demandez-le à support@kapptivate.com.
+- L'adresse pour laquelle ces flux ont été ouverts. C'est votre service informatique qui la détient.
+
+## Redémarrer le robot
+
+Éteignez le robot avec le bouton en façade, attendez dix secondes, rallumez-le. Laissez-lui trois minutes, puis relisez son statut sur la plateforme.
+
+S'il reste **Offline**, recommencez une fois. Un robot qui rallume trop vite après une coupure repart parfois avant que le port du switch ou le bail DHCP ne soient prêts. Il reste alors sans réseau jusqu'au démarrage suivant, et c'est ce second redémarrage qui l'en sort.
+
+Ne redémarrez pas une troisième fois. Passez à l'alimentation et aux câbles.
+
+## Vérifier l'alimentation et les câbles
+
+Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez les branchements un par un.
+
+- Les voyants de façade clignotent. Un robot vivant les fait clignoter en permanence, et une façade éteinte après une pression sur le bouton dit qu'il ne reçoit pas de courant.
+- Le câble d'alimentation tient des deux côtés, côté robot et côté prise. Si le robot passe par un onduleur, vérifiez que l'onduleur lui-même est sous tension. Sur les sites où le courant saute, c'est de loin la première cause.
+- Le câble RJ45 est dans le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
+
+Si vous avez repris un branchement, rallumez le robot et relisez son statut. La façade clignote et la plateforme affiche toujours **Offline** ? Passez à son adresse.
+
+## Un robot qui ne donne plus signe de vie
+
+Écran noir malgré le clavier, et plus aucun voyant qui clignote en façade : ces deux signes ensemble désignent une panne matérielle, pas un problème de réseau. Écartez d'abord la fausse piste, en vérifiant que la source d'entrée de l'écran correspond bien à la prise que vous avez utilisée.
+
+Si elle correspond, que l'écran reste noir et que la façade reste éteinte après deux redémarrages, arrêtez-vous là. Aucune commande ne s'exécutera, et le reste de cette page ne vous servira pas. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Pour un robot cellulaire, joignez une vidéo de la façade : le rythme des voyants désigne la pièce en cause.
+
+## Vérifier l'adresse du robot
+
+Connectez-vous avec les identifiants du robot, ouvrez un terminal, puis listez les interfaces.
 
 ```bash
-traceroute IP
+ip -br a
 ```
 
-<Frame caption="Le robot atteint l'IP cible">
-  ![Traceroute réussi](/images/hardware/network-troubleshooting-01.webp)
-</Frame>
+L'interface qui porte le câble affiche `UP` et une adresse. Comparez-la à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Un robot repris en DHCP après une coupure en change sans prévenir, et les règles continuent alors de viser l'ancienne. Rien n'a bougé dans la configuration, et le robot n'est plus joignable. Rendez-lui [une IP statique](/fr/hardware/configure-network#définir-une-ip-statique) pour le remettre là où les règles l'attendent.
 
-<Frame caption="La route n'atteint jamais la cible : quelque chose bloque le trafic">
-  ![Traceroute échoué](/images/hardware/network-troubleshooting-02.webp)
-</Frame>
-
-Si la route échoue, envoyez une capture d'écran à votre service informatique : quelque chose sur votre réseau bloque le chemin vers Kapptivate.
-
-### Flux par IP et port
+Joignez ensuite la passerelle du réseau.
 
 ```bash
-curl -v telnet://IP:port
+ip route
+ping -c 4 GATEWAY
 ```
 
-<Frame caption="Connexion réussie">
-  ![Telnet réussi](/images/hardware/network-troubleshooting-03.webp)
-</Frame>
+`ip route` affiche la passerelle sur la ligne `default via` : c'est cette adresse qui remplace `GATEWAY`. Une passerelle qui répond place le robot sur le réseau et déplace le blocage plus loin. Une passerelle muette accuse le câble, le port du switch ou le VLAN : reprenez les branchements ci-dessus, puis faites vérifier le port du switch par votre service informatique. Certains réseaux filtrent aussi le ping en interne. Si le vôtre est dans ce cas, laissez ce test de côté : les flux trancheront à sa place.
 
-<Frame caption="Connexion refusée : le flux n'est pas ouvert">
-  ![Telnet refusé](/images/hardware/network-troubleshooting-04.webp)
-</Frame>
+## Vérifier les flux
 
-Une connexion refusée signifie que les flux requis ne sont pas ouverts : votre service informatique doit les ouvrir.
+Le document des exigences IP liste les destinations que le robot doit joindre. Elles ne font pas le même travail :
 
-### Flux par nom de domaine
+- l'une porte le pilotage du robot et l'envoi de ses tests ;
+- une autre porte la remontée de ses résultats ;
+- une dernière porte l'accès dont le support a besoin pour intervenir.
+
+Elles sont indépendantes. Un robot peut recevoir ses tests sans en remonter un seul résultat, ou rester joignable pour vous et hors de portée du support. Testez-les toutes, pas seulement celle qui vous paraît en cause.
+
+Toutes ces connexions partent du robot. Aucun flux entrant depuis internet n'est nécessaire.
+
+<Tip>
+  Les règles sont ouvertes pour l'adresse du robot. Le même test depuis un portable du même réseau peut réussir alors que le robot échoue : lancez ces commandes sur le robot lui-même.
+</Tip>
+
+Prenez le document ligne par ligne, en remplaçant `ADDRESS` et `PORT` par les valeurs qu'il donne.
 
 ```bash
-curl -v telnet://domain.kapptivate.com:port
+nc -zv -w 5 ADDRESS PORT
 ```
 
-<Frame caption="Connexion réussie">
-  ![Telnet domaine réussi](/images/hardware/network-troubleshooting-05.webp)
-</Frame>
+Trois réponses sont possibles, et elles ne se règlent pas de la même façon.
 
-<Frame caption="Connexion refusée : problème DNS ou de flux">
-  ![Telnet domaine refusé](/images/hardware/network-troubleshooting-06.webp)
-</Frame>
+Le flux est ouvert, passez à la ligne suivante :
 
-Si l'IP fonctionne mais le domaine échoue, le DNS est le suspect : soit les serveurs DNS ne sont pas configurés sur le robot (voir le champ DNS servers dans [la configuration réseau](/fr/hardware/configure-network)), soit les flux pour ces domaines ne sont pas ouverts.
+```
+Connection to 203.0.113.10 443 port [tcp/https] succeeded!
+```
 
-### Handshake HTTPS complet
+Une machine a répondu et a refusé la connexion. Notez la ligne pour votre service informatique : soit une règle la rejette, soit le port a changé.
+
+```
+nc: connect to 203.0.113.10 port 443 (tcp) failed: Connection refused
+```
+
+Rien ne répond, et `-w 5` abandonne au bout de cinq secondes. Un paquet jeté en silence est la signature d'une règle absente, et c'est le cas le plus fréquent derrière un pare-feu d'entreprise.
+
+```
+nc: connect to 203.0.113.10 port 443 (tcp) timed out: Operation now in progress
+```
+
+Rejouez ensuite chaque ligne avec le nom de domaine à la place de l'adresse. Une adresse qui passe pendant que son nom échoue ainsi accuse la résolution de noms, pas le pare-feu. Renseignez le champ **DNS servers** de l'étape d'adressage, dans [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
+
+```
+nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
+```
+
+Reste un échec qui ressemble à un succès. Sur une destination en HTTPS, regardez qui a signé le certificat.
 
 ```bash
-curl -v https://domain.kapptivate.com
+curl -v https://DOMAIN
 ```
 
-<Frame caption="Un handshake TLS complet">
-  ![HTTPS réussi](/images/hardware/network-troubleshooting-07.webp)
-</Frame>
+Une autorité publique signe une connexion qui va bien de bout en bout :
 
-Si la sortie s'arrête en cours de handshake (par exemple juste après `TLS handshake, Client hello`), quelque chose sur votre réseau interne intercepte ou bloque la connexion : escaladez vers votre service informatique avec la sortie.
+```
+*  issuer: C=US; O=Let's Encrypt; CN=R11
+```
+
+Le nom de votre propre entreprise à cette ligne signale autre chose : un proxy déchiffre le trafic au passage, et le robot refuse de lui parler. Demandez à votre service informatique d'exempter les destinations du document de l'inspection TLS.
+
+```
+*  issuer: C=FR; O=Your Company; CN=Your Company Root CA
+```
+
+## Un robot qui remonte puis retombe
+
+Un robot qui repasse **Online** à chaque redémarrage puis retombe quelques heures plus tard n'a pas un problème de robot. Il garde en permanence des connexions ouvertes vers Kapptivate, et elles restent silencieuses entre deux tests. Un pare-feu qui ferme les sessions inactives les coupe là. Le robot disparaît alors jusqu'au redémarrage suivant.
+
+Notez les heures de chute avant d'appeler : c'est le rythme qui nomme le coupable. Une chute toujours à la même heure désigne une fenêtre de maintenance, ou une bascule de règle. Une chute après un délai constant désigne le délai d'inactivité. Les deux mènent à la même demande : exempter les destinations du document de ce délai, et rendre les règles permanentes plutôt qu'ouvertes le temps d'un essai.
+
+## Ce qu'il faut envoyer, et à qui
+
+Le robot passe toutes les vérifications et reste **Offline** ? Le problème dépasse cette page. Rassemblez ceci avant d'écrire.
+
+À votre service informatique :
+
+- les lignes du document qui échouent ;
+- la sortie complète de `nc` pour chacune ;
+- l'adresse du robot, qui est l'adresse source des connexions ;
+- l'heure à laquelle vous avez lancé le test.
+
+La différence entre refusé et sans réponse lui désigne la règle en cause.
+
+À support@kapptivate.com :
+
+- le numéro de série du robot ;
+- son adresse ;
+- les lignes qui passent et celles qui échouent ;
+- la durée pendant laquelle le robot tient après un redémarrage.
+
+Le numéro de série se relève depuis un terminal du robot :
+
+```bash
+sudo krobot serial
+```
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Dépannage des erreurs techniques" icon="wrench" href="/fr/hardware/technical-errors">
+  <Card title="Configurer le réseau du robot" icon="network-wired" href="/fr/hardware/configure-network">
 
-    Quand le robot est joignable mais les monitorings passent au gris
+    Rendre au robot une adresse fixe après un changement de réseau
 
 </Card>
-  <Card title="Statuts des équipements" icon="signal" href="/fr/equipment/statuses">
+  <Card title="Statuts" icon="signal" href="/fr/equipment/statuses">
 
-    Confirmer que le robot est de nouveau en ligne
+    Ce que chaque statut annonce, avant de partir sur site
 
 </Card>
 </Columns>
