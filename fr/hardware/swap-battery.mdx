@@ -1,10 +1,10 @@
 ---
 title: Remplacer la pile de carte mère d'un robot
 sidebarTitle: Pile de carte mère
-description: Changer la pile de la carte mère d'un robot Kapptivate, sur la dernière génération de matériel comme sur les plus anciennes.
+description: Changer la pile de la carte mère d'un robot Kapptivate, sur l'ancien matériel comme sur la dernière génération.
 ---
 
-L'horloge du robot dérive, ou le BIOS repart sur ses valeurs d'usine à chaque démarrage : sa pile de carte mère est vide. C'est une pièce d'usure, qui se décharge avec le temps quoi que fasse le robot. Le remplacement lui-même prend une dizaine de minutes, robot éteint et sorti de la baie. Prévoyez plus large : les réglages du BIOS sont à refaire derrière.
+L'horloge du robot dérive, ou le BIOS repart sur ses valeurs d'usine à chaque démarrage : sa pile de carte mère est vide. C'est une pièce d'usure, qui se décharge avec le temps quoi que fasse le robot. Le remplacement lui-même prend une dizaine de minutes, robot éteint et sorti de la baie. Sur l'ancien matériel, ajoutez la mise à jour du BIOS qui suit.
 
 <Note>
   Cette page vaut pour un robot que vous hébergez vous-même. Un robot hébergé chez Kapptivate est entretenu par ses équipes.
@@ -13,7 +13,7 @@ L'horloge du robot dérive, ou le BIOS repart sur ses valeurs d'usine à chaque 
 ## Avant de commencer
 
 - La pile de rechange. Écrivez à support@kapptivate.com : le support identifie votre robot et vous expédie le modèle qui lui correspond.
-- Le guide de mise à jour du BIOS de votre modèle. Demandez-le au support en même temps que la pile : le robot reste arrêté tant que le BIOS n'est pas repassé.
+- Sur un robot plus ancien, le guide de mise à jour du BIOS. Demandez-le au support en même temps que la pile. Il vous faudra aussi un écran et un clavier à brancher à l'arrière du robot, et une clé USB préparée depuis un PC Windows.
 - Un tournevis, pour les deux vis du capot et pour les vis qui tiennent le robot dans la baie.
 - Un outil fin pour décoller l'adhésif de la pile. Un petit tournevis plat fait l'affaire.
 - Un créneau pendant lequel le robot peut s'arrêter. Éteint, il n'exécute aucun test.
@@ -22,21 +22,21 @@ L'horloge du robot dérive, ou le BIOS repart sur ses valeurs d'usine à chaque 
 
 La pile ne se loge pas au même endroit selon les générations, et la couleur du châssis suffit à les distinguer.
 
-Le matériel de dernière génération est gris ou vert :
-
-<Frame caption="Un robot de dernière génération">
-  ![Un robot Kapptivate vert, de face, avec ses câbles d'alimentation et réseau posés dessus](/images/hardware/swap-battery-01.webp)
-</Frame>
-
 Le matériel plus ancien est blanc :
 
 <Frame caption="Un robot d'une génération plus ancienne">
   ![La face avant d'un robot Kapptivate blanc, avec ses huit slots SIM numérotés et ses connecteurs d'antenne](/images/hardware/swap-battery-06.webp)
 </Frame>
 
+Le matériel de dernière génération est gris ou vert :
+
+<Frame caption="Un robot de dernière génération">
+  ![Un robot Kapptivate vert, de face, avec ses câbles d'alimentation et réseau posés dessus](/images/hardware/swap-battery-01.webp)
+</Frame>
+
 Si la couleur ne tranche pas, envoyez le numéro de série du robot à support@kapptivate.com, qui vous dira de quelle génération il est.
 
-Les trois premières étapes sont les mêmes pour tous. Vous bifurquez ensuite vers [la dernière génération](#changer-la-pile-sur-la-dernière-génération) ou vers [les robots plus anciens](#changer-la-pile-sur-un-robot-plus-ancien), puis les deux chemins se rejoignent pour [refermer](#refermer-et-remettre-le-robot-en-service).
+Tout le monde commence par éteindre le robot et le sortir de la baie. Vous bifurquez ensuite vers [les robots plus anciens](#changer-la-pile-sur-un-robot-plus-ancien), dont les piles arrivent en fin de vie, ou vers [la dernière génération](#changer-la-pile-sur-la-dernière-génération). Les deux chemins se rejoignent pour [remonter le robot](#remonter-le-robot-et-le-rallumer).
 
 ## Éteindre le robot et le sortir de la baie
 
@@ -49,6 +49,47 @@ Les trois premières étapes sont les mêmes pour tous. Vous bifurquez ensuite v
   </Step>
   <Step title="Sortir le robot de la baie">
     Le capot s'ouvre par le dessus, et la carte mère reste hors d'atteinte tant que le robot est vissé. Dévissez les deux vis de chaque côté de la façade, faites glisser le robot hors de son emplacement et posez-le à plat.
+  </Step>
+</Steps>
+
+## Changer la pile sur un robot plus ancien
+
+<Steps>
+  <Step title="Ouvrir le capot">
+    Retirez les deux vis du dessus, puis faites glisser la plaque en aluminium vers l'arrière.
+
+    <Frame caption="Les deux vis du capot, entourées en rouge">
+      ![Le dessus d'un robot blanc, ses deux vis de capot entourées en rouge](/images/hardware/swap-battery-07.webp)
+    </Frame>
+  </Step>
+  <Step title="Repérer la pile">
+    Elle occupe le coin inférieur gauche de la carte mère, à plat, sous un adhésif, reliée par un fil rouge et un fil noir.
+
+    <Frame caption="La pile, dans le coin inférieur gauche de la carte mère">
+      ![La pile ronde collée sur la carte mère, reliée par un fil rouge et un fil noir à un connecteur blanc](/images/hardware/swap-battery-08.webp)
+    </Frame>
+  </Step>
+  <Step title="Dégager l'accès si vos doigts ne passent pas">
+    L'espace est serré sur cette génération. Dévissez les quatre vis aux coins de la carte mère, puis soulevez-la sans rien débrancher, le temps d'atteindre la pile.
+
+    <Frame caption="Les quatre vis de la carte mère, entourées en rouge, puis la carte soulevée">
+      ![L'intérieur d'un robot blanc, les quatre vis des coins de la carte mère entourées en rouge](/images/hardware/swap-battery-11.webp)
+      ![La carte mère soulevée de quelques centimètres, ses câbles toujours branchés](/images/hardware/swap-battery-12.webp)
+    </Frame>
+  </Step>
+  <Step title="Remplacer la pile">
+    Décollez l'adhésif avec un outil fin, sans le déchirer : c'est lui qui tiendra la pile neuve. Débranchez la pile par son connecteur, jamais par les fils. Branchez la neuve sur le même connecteur, puis recollez-la au même endroit. Revissez les quatre vis de la carte mère si vous l'avez soulevée.
+
+    <Frame caption="L'adhésif décollé, puis la pile neuve en place">
+      ![Un outil fin glissé sous l'adhésif de la pile](/images/hardware/swap-battery-09.webp)
+      ![La pile neuve collée au même emplacement](/images/hardware/swap-battery-10.webp)
+    </Frame>
+  </Step>
+  <Step title="Refermer le capot">
+    Reposez la plaque en aluminium et revissez ses deux vis.
+  </Step>
+  <Step title="Mettre à jour le BIOS">
+    Cette mise à jour se fait robot posé à plat : l'écran et le clavier se branchent à l'arrière, hors d'atteinte une fois le robot vissé en baie. Branchez-les avec le câble d'alimentation, allumez le robot, puis déroulez le guide que le support vous a transmis. Éteignez le robot une fois la configuration enregistrée.
   </Step>
 </Steps>
 
@@ -77,56 +118,14 @@ Les trois premières étapes sont les mêmes pour tous. Vous bifurquez ensuite v
       ![La pile neuve, jaune, branchée sur la carte mère](/images/hardware/swap-battery-05.webp)
     </Frame>
   </Step>
-</Steps>
-
-## Changer la pile sur un robot plus ancien
-
-<Steps>
-  <Step title="Ouvrir le capot">
-    Retirez les deux vis du dessus, puis faites glisser la plaque en aluminium vers l'arrière.
-
-    <Frame caption="Les deux vis du capot, entourées en rouge">
-      ![Le dessus d'un robot blanc, ses deux vis de capot entourées en rouge](/images/hardware/swap-battery-07.webp)
-    </Frame>
-  </Step>
-  <Step title="Repérer la pile">
-    Elle occupe le coin inférieur gauche de la carte mère, à plat, sous un adhésif, avec le même fil rouge et noir.
-
-    <Frame caption="La pile, dans le coin inférieur gauche de la carte mère">
-      ![La pile ronde collée sur la carte mère, reliée par un fil rouge et un fil noir à un connecteur blanc](/images/hardware/swap-battery-08.webp)
-    </Frame>
-  </Step>
-  <Step title="Dégager l'accès si vos doigts ne passent pas">
-    L'espace est serré sur cette génération. Dévissez les quatre vis aux coins de la carte mère, puis soulevez-la sans rien débrancher, le temps d'atteindre la pile.
-
-    <Frame caption="Les quatre vis de la carte mère, entourées en rouge, puis la carte soulevée">
-      ![L'intérieur d'un robot blanc, les quatre vis des coins de la carte mère entourées en rouge](/images/hardware/swap-battery-11.webp)
-      ![La carte mère soulevée de quelques centimètres, ses câbles toujours branchés](/images/hardware/swap-battery-12.webp)
-    </Frame>
-  </Step>
-  <Step title="Remplacer la pile">
-    Décollez l'adhésif avec un outil fin, sans le déchirer : c'est lui qui tiendra la pile neuve. Débranchez la pile par son connecteur, jamais par les fils. Branchez la neuve sur le même connecteur, puis recollez-la au même endroit. Revissez les quatre vis de la carte mère si vous l'avez soulevée.
-
-    <Frame caption="L'adhésif décollé, puis la pile neuve en place">
-      ![Un outil fin glissé sous l'adhésif de la pile](/images/hardware/swap-battery-09.webp)
-      ![La pile neuve collée au même emplacement](/images/hardware/swap-battery-10.webp)
-    </Frame>
-  </Step>
-</Steps>
-
-## Refermer et remettre le robot en service
-
-<Steps>
   <Step title="Refermer le capot">
-    Reposez la plaque en aluminium et revissez ses deux vis.
-  </Step>
-  <Step title="Remonter le robot en baie">
-    Glissez le robot dans son emplacement, puis serrez les deux vis de chaque côté. Rebranchez les câbles comme ils étaient : antennes ou hub USB, puis le RJ45 sur son port Ethernet d'origine. Terminez par l'alimentation.
-  </Step>
-  <Step title="Rallumer et mettre à jour le BIOS">
-    Appuyez sur le bouton d'alimentation. Le BIOS a perdu ses réglages en même temps que sa pile : passez la mise à jour avec le guide que le support vous a transmis, avant de rendre le robot aux tests.
+    Reposez la plaque en aluminium et revissez ses deux vis. Le BIOS de cette génération n'a rien à reprendre après le remplacement.
   </Step>
 </Steps>
+
+## Remonter le robot et le rallumer
+
+Glissez le robot dans son emplacement, puis serrez les deux vis de chaque côté. Rebranchez les câbles comme ils étaient : antennes ou hub USB, puis le RJ45 sur son port Ethernet d'origine. Terminez par l'alimentation, puis appuyez sur le bouton en façade.
 
 ## Vérifier que le robot a repris le service
 

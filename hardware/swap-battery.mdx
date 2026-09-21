@@ -1,10 +1,10 @@
 ---
 title: Replace a robot's motherboard battery
 sidebarTitle: Motherboard battery
-description: Fit a new motherboard battery in a Kapptivate robot, on the latest hardware and on the older white chassis.
+description: Fit a new motherboard battery in a Kapptivate robot, on the older white chassis and on the latest hardware.
 ---
 
-A motherboard battery is a wear part: it drains on its own, whatever the robot does. Once it's flat, the clock drifts and the BIOS forgets its settings at every boot. The swap itself takes ten minutes, with the robot off and out of the rack. Book more than that, because the BIOS settings go back in by hand afterwards.
+A motherboard battery is a wear part: it drains on its own, whatever the robot does. Once it's flat, the clock drifts and the BIOS forgets its settings at every boot. The swap itself takes ten minutes, with the robot off and out of the rack. Older hardware then needs a BIOS update on top.
 
 <Note>
   Kapptivate maintains the robots it hosts. This page is for the ones that sit in your own racks.
@@ -13,7 +13,7 @@ A motherboard battery is a wear part: it drains on its own, whatever the robot d
 ## Before you start
 
 - The replacement battery. Write to support@kapptivate.com: the model depends on your generation of hardware, and support sends the one that fits.
-- The BIOS update guide for your model. Ask for it in the same message as the battery, because the robot stays down until the BIOS has been through it.
+- On an older robot, the BIOS update guide. Ask for it in the same message as the battery. That update also calls for a screen and a keyboard at the back of the robot, plus a USB stick prepared on a Windows PC.
 - A screwdriver, for the two lid screws and for the rack screws.
 - A thin tool to lift the adhesive that holds the battery down. A small flat screwdriver does the job.
 - A window where the robot can go down. It runs no tests while it's powered off.
@@ -22,21 +22,21 @@ A motherboard battery is a wear part: it drains on its own, whatever the robot d
 
 Two chassis colors, two places to look for the battery. Check which one you have before you unscrew anything.
 
-Gray or green means the latest generation:
-
-<Frame caption="A robot from the latest generation">
-  ![A green Kapptivate robot seen from the front, its power and network cables resting on top](/images/hardware/swap-battery-01.webp)
-</Frame>
-
-White means an older one:
+White is the older hardware:
 
 <Frame caption="A robot from an older generation">
   ![The front panel of a white Kapptivate robot, with eight numbered SIM slots and its antenna connectors](/images/hardware/swap-battery-06.webp)
 </Frame>
 
+Gray or green is the latest generation:
+
+<Frame caption="A robot from the latest generation">
+  ![A green Kapptivate robot seen from the front, its power and network cables resting on top](/images/hardware/swap-battery-01.webp)
+</Frame>
+
 Not sure from the color? Send the serial number to support@kapptivate.com and ask which generation the robot belongs to.
 
-Whichever you have, start with the same three steps. From there, take [the latest hardware](#replace-the-battery-on-the-latest-hardware) or [older robots](#replace-the-battery-on-an-older-robot). Both routes end at [closing the robot back up](#close-the-robot-and-put-it-back-to-work).
+Every robot starts the same way, off and out of the rack. The page then splits between [older robots](#replace-the-battery-on-an-older-robot), whose batteries are the ones reaching the end of their life, and [the latest hardware](#replace-the-battery-on-the-latest-hardware). Both routes end at [racking the robot again](#rack-the-robot-and-switch-it-on).
 
 ## Power the robot down and take it out of the rack
 
@@ -49,6 +49,47 @@ Whichever you have, start with the same three steps. From there, take [the lates
   </Step>
   <Step title="Take the robot out of the rack">
     The lid comes off the top, and a racked robot keeps its motherboard out of reach. Undo the two screws on each side of the front panel, slide the robot out of its slot, and set it down flat.
+  </Step>
+</Steps>
+
+## Replace the battery on an older robot
+
+<Steps>
+  <Step title="Open the lid">
+    Remove the two screws on top, then slide the aluminum plate towards the back.
+
+    <Frame caption="The two lid screws, circled in red">
+      ![The top of a white robot, its two lid screws circled in red](/images/hardware/swap-battery-07.webp)
+    </Frame>
+  </Step>
+  <Step title="Locate the battery">
+    It sits flat in the lower left corner of the motherboard, under adhesive, on one red and one black lead.
+
+    <Frame caption="The battery in the lower left corner of the motherboard">
+      ![The round battery taped to the motherboard, its red and black leads running to a white connector](/images/hardware/swap-battery-08.webp)
+    </Frame>
+  </Step>
+  <Step title="Clear the way if your fingers don't reach">
+    This generation is a tight fit. Undo the four screws at the corners of the motherboard. Lift the board with everything still plugged in, far enough to work on the battery.
+
+    <Frame caption="The four motherboard screws, circled in red, then the board lifted">
+      ![The inside of a white robot, the four corner screws of the motherboard circled in red](/images/hardware/swap-battery-11.webp)
+      ![The motherboard lifted a few centimeters, its cables still connected](/images/hardware/swap-battery-12.webp)
+    </Frame>
+  </Step>
+  <Step title="Swap the battery">
+    Lift the adhesive with a thin tool without tearing it: the new battery goes back under the same piece. Unplug the battery by its connector, never by the leads. Plug the new one in and stick it back in place. Put the four motherboard screws back if you lifted the board.
+
+    <Frame caption="The adhesive lifted, then the new battery in place">
+      ![A thin tool slid under the battery adhesive](/images/hardware/swap-battery-09.webp)
+      ![The new battery stuck down in the same spot](/images/hardware/swap-battery-10.webp)
+    </Frame>
+  </Step>
+  <Step title="Close the lid">
+    Put the aluminum plate back and tighten its two screws.
+  </Step>
+  <Step title="Update the BIOS">
+    Do this with the robot still flat on the table. Its screen and keyboard plug in at the back, which a rack slot makes awkward to reach. Connect them along with the power cable, switch the robot on, and work through the guide support sent you. Power the robot back down once the configuration is saved.
   </Step>
 </Steps>
 
@@ -77,56 +118,14 @@ Whichever you have, start with the same three steps. From there, take [the lates
       ![The new yellow battery plugged into the motherboard](/images/hardware/swap-battery-05.webp)
     </Frame>
   </Step>
-</Steps>
-
-## Replace the battery on an older robot
-
-<Steps>
-  <Step title="Open the lid">
-    Remove the two screws on top, then slide the aluminum plate towards the back.
-
-    <Frame caption="The two lid screws, circled in red">
-      ![The top of a white robot, its two lid screws circled in red](/images/hardware/swap-battery-07.webp)
-    </Frame>
-  </Step>
-  <Step title="Locate the battery">
-    It sits flat in the lower left corner of the motherboard, under adhesive, on the same red and black leads.
-
-    <Frame caption="The battery in the lower left corner of the motherboard">
-      ![The round battery taped to the motherboard, its red and black leads running to a white connector](/images/hardware/swap-battery-08.webp)
-    </Frame>
-  </Step>
-  <Step title="Clear the way if your fingers don't reach">
-    This generation is a tight fit. Undo the four screws at the corners of the motherboard. Lift the board with everything still plugged in, far enough to work on the battery.
-
-    <Frame caption="The four motherboard screws, circled in red, then the board lifted">
-      ![The inside of a white robot, the four corner screws of the motherboard circled in red](/images/hardware/swap-battery-11.webp)
-      ![The motherboard lifted a few centimeters, its cables still connected](/images/hardware/swap-battery-12.webp)
-    </Frame>
-  </Step>
-  <Step title="Swap the battery">
-    Lift the adhesive with a thin tool without tearing it: the new battery goes back under the same piece. Unplug the battery by its connector, never by the leads. Plug the new one in and stick it back in place. Put the four motherboard screws back if you lifted the board.
-
-    <Frame caption="The adhesive lifted, then the new battery in place">
-      ![A thin tool slid under the battery adhesive](/images/hardware/swap-battery-09.webp)
-      ![The new battery stuck down in the same spot](/images/hardware/swap-battery-10.webp)
-    </Frame>
-  </Step>
-</Steps>
-
-## Close the robot and put it back to work
-
-<Steps>
   <Step title="Close the lid">
-    Put the aluminum plate back and tighten its two screws.
-  </Step>
-  <Step title="Rack the robot again">
-    Slide the robot into its slot and tighten two screws on each side. Plug the cables back the way they were: antennas or USB hub, then the RJ45 cable in the Ethernet port it left. Power comes last.
-  </Step>
-  <Step title="Power up and update the BIOS">
-    Press the power button. The BIOS lost its settings along with its battery, so run the update with the guide support sent you before the robot takes tests again.
+    Put the aluminum plate back and tighten its two screws. Nothing to do in the BIOS of this generation once the battery is in.
   </Step>
 </Steps>
+
+## Rack the robot and switch it on
+
+Slide the robot into its slot and tighten two screws on each side. Plug the cables back the way they were: antennas or USB hub, then the RJ45 cable in the Ethernet port it left. Power comes last, then press the button on the front panel.
 
 ## Check that the robot is back
 
