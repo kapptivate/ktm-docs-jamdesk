@@ -2,6 +2,16 @@
   "$schema": "https://jamdesk.com/docs.json",
   "redirects": [
     {
+      "source": "/hardware/technical-errors",
+      "destination": "/hardware/network-troubleshooting",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/technical-errors",
+      "destination": "/fr/hardware/network-troubleshooting",
+      "permanent": true
+    },
+    {
       "source": "/hardware/install-hardware",
       "destination": "/hardware/install-robot",
       "permanent": true
@@ -1195,7 +1205,6 @@
                 "expanded": true,
                 "pages": [
                   "hardware/network-troubleshooting",
-                  "hardware/technical-errors",
                   "hardware/sim-troubleshooting",
                   "hardware/rj45-port"
                 ]
@@ -2303,7 +2312,6 @@
                 "expanded": true,
                 "pages": [
                   "fr/hardware/network-troubleshooting",
-                  "fr/hardware/technical-errors",
                   "fr/hardware/sim-troubleshooting",
                   "fr/hardware/rj45-port"
                 ]
