@@ -20,7 +20,7 @@ The paths below come from One UI 7, on Android 15. On an earlier version, some s
 
 ## First boot
 
-Turn the phone on and go through the Android setup: pick the language and country you want, and handle the accounts however you like. Two screens in that setup need attention.
+Turn the phone on and go through the Android setup: pick the language and country you want, and handle the Google and Samsung accounts however you like. Two screens in that setup need attention.
 
 <Warning>
   When the setup offers a screen lock, decline it. No password, no PIN, no pattern. The screen has to stay unlocked for the platform to use the phone.
@@ -28,7 +28,7 @@ Turn the phone on and go through the Android setup: pick the language and countr
 
 ## Turn off Auto Blocker
 
-Auto Blocker blocks commands sent over the USB cable, which is how a robot drives a phone. Kapptivate and Auto Blocker can't work together.
+Auto Blocker blocks commands sent over the USB cable, which makes it incompatible with Kapptivate.
 
 It comes pre-ticked on the **Samsung services** screen of the setup wizard. Untick **Auto Blocker**, then tap **Agree**.
 
@@ -64,7 +64,7 @@ It comes pre-ticked on the **Samsung services** screen of the setup wizard. Unti
     **USB debugging** is the one that makes the phone drivable over the cable at all.
 
     <Note>
-      On a phone that has been used before, tap **Revoke USB debugging authorizations** in the same list, before you plug it into the robot. Authorizations left over from another robot can get in the way. A phone straight out of the box has none, so skip this.
+      On a phone that has been used before, tap **Revoke USB debugging authorizations** in the same list, before you plug it into the robot. Old authorizations can get in the way of the connection. On a new phone, there is nothing to revoke.
     </Note>
   </Step>
   <Step title="Stop Android from sleeping the apps">
