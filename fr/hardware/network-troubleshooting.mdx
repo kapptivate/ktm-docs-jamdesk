@@ -30,9 +30,9 @@ Partez de ce que vous venez de lire sur la plateforme.
 
 | Ce que vous constatez | Ce que vous vérifiez | Où aller |
 |---|---|---|
-| Un seul robot du site est **Offline** | le robot, son alimentation, son câble réseau | [Redémarrer le robot](#red-marrer-le-robot) |
-| Tous les robots du site sont tombés à la même heure | le site : courant, réseau, pare-feu | [Vérifier les flux](#v-rifier-les-flux), après le passage de votre service informatique |
-| Sur place, l'écran reste noir ou les voyants se figent | le matériel | [Un robot qui ne démarre plus](#un-robot-qui-ne-d-marre-plus) |
+| Un seul robot du site est **Offline** | le robot, son alimentation, son câble réseau | [Redémarrer le robot](#redémarrer-le-robot) |
+| Tous les robots du site sont tombés à la même heure | le site : courant, réseau, pare-feu | [Vérifier les flux](#vérifier-les-flux), après le passage de votre service informatique |
+| Sur place, l'écran reste noir ou les voyants se figent | le matériel | [Un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus) |
 
 ## Redémarrer le robot
 
@@ -47,10 +47,10 @@ Ne redémarrez pas une troisième fois : au-delà, le problème n'est plus logic
 Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez les branchements un par un.
 
 - Regardez la façade. Si elle reste éteinte alors que le robot est allumé, le courant n'arrive pas : reprenez la prise, le bloc d'alimentation et le cordon.
-- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-d-marre-plus). Les robots web et smartphone n'ont pas ce signal.
-- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#d-finir-une-ip-statique).
+- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus). Les robots web et smartphone n'ont pas ce signal.
+- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
 
-Si vous avez repris un branchement, rallumez le robot et relisez son statut. Si la façade est allumée et que la plateforme affiche toujours **Offline**, le robot tourne et personne ne l'entend. Passez à [vérifier l'adresse IP locale du robot](#v-rifier-l-adresse-ip-locale-du-robot).
+Si vous avez repris un branchement, rallumez le robot et relisez son statut. Si la façade est allumée et que la plateforme affiche toujours **Offline**, le robot tourne et personne ne l'entend. Passez à [vérifier l'adresse IP locale du robot](#vérifier-ladresse-ip-locale-du-robot).
 
 ## Un robot qui ne démarre plus
 
@@ -71,7 +71,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles diffèrent, rendez au robot [son IP statique](/fr/hardware/configure-network#d-finir-une-ip-statique) pour le remettre là où les règles l'attendent.
+`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles diffèrent, rendez au robot [son IP statique](/fr/hardware/configure-network#définir-une-ip-statique) pour le remettre là où les règles l'attendent.
 
 L'autre réponse possible est plus courte, et elle clôt la question du réseau.
 
@@ -156,7 +156,7 @@ nc -zv -w 5 robots.example.com 443
 nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
-L'adresse IP passe et son nom échoue. Le pare-feu est hors de cause : c'est la résolution de noms. Renseignez le champ **DNS servers** à l'étape Saisir les adresses de [définir une IP statique](/fr/hardware/configure-network#d-finir-une-ip-statique).
+L'adresse IP passe et son nom échoue. Le pare-feu est hors de cause : c'est la résolution de noms. Renseignez le champ **DNS servers** à l'étape Saisir les adresses de [définir une IP statique](/fr/hardware/configure-network#définir-une-ip-statique).
 
 ### Écarter un proxy qui déchiffre le trafic
 
