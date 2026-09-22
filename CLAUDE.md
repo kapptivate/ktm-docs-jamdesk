@@ -19,6 +19,31 @@ Jamdesk docs project. Pages are MDX (Markdown + React components). Config is in 
 - **Don't leave a server running for hours.** The leak accumulates over long-lived sessions. Start it for review, then stop it.
 - Prefer asking the user to run `! npx jamdesk dev` themselves over launching a long-lived background process.
 
+### What actually freezes the Mac (measured 2026-09-15)
+
+macOS resource reports (`/Library/Logs/DiagnosticReports/node_*.diag`) for the crashes of 9, 11 and 14 September all show the same single `node` process:
+
+- **45001 wakeups in 4 seconds** (12703/s) against a system limit of 150/s. The file watcher spins on its own writes.
+- **2147 MB of file backed memory dirtied in 550 s** (3.9 MB/s) against a 24.86 KB/s limit, all of it Turbopack cache churn.
+- **Vnodes available falling from 75% to 30%.** That kernel resource running out is what turns a slow machine into a hard freeze, leaving only the power button (`forceReset-base+socd` markers confirm it).
+
+Page weight is not the cause. The heaviest image in the repo is 1.1 MB and all of `images/` is 15 MB.
+
+The dev workspace lives **outside the repo**, in `~/.jamdesk/workspaces/<project>-<hash>/`, and its `.next` cache reached 716 MB. It sits in the home folder, so Spotlight indexes it while Turbopack rewrites it. A `.metadata_never_index` marker now sits at `~/.jamdesk/` to keep the indexer out of that loop.
+
+Maintenance, in order of usefulness:
+
+- `npx jamdesk dev --clean` wipes the workspace cache before starting.
+- After a crash a stale `.jamdesk-dev.lock` holding a dead PID stays behind in the workspace. Check it with `ps -p <pid>` and delete it.
+- Abandoned workspaces pile up. One left from July held 573 MB of dead cache. Audit with `du -sh ~/.jamdesk/workspaces/*`.
+
+**Upgrading jamdesk fixes it.** Tested 1.1.205 against this content on 2026-09-15: the dev server starts fast and trips no system limit at all, where 1.1.126 blew through the wakeups limit within 4 seconds of every session. The fix is not in the CLI, whose process handling is byte-for-byte the same (no `killpg`, same `SIGTERM`/`SIGKILL`/cleanup paths, so stacked servers are still worth avoiding). It comes from the vendored Next.js going 16.2.6 to 16.3.4, which settles the Turbopack watcher.
+
+Two caveats that cost time when testing this:
+
+- 1.1.205 pulls `commander@15`, which wants Node >= 22.12. This machine runs Node 20, so `npm install` warns `EBADENGINE`. It works anyway.
+- `~/.jamdesk` is shared by every project, not per repo, and `jamdesk validate` rewrites its dependency tree to match whichever CLI version ran last. Two versions pointed at the same home directory reinstall over each other on every command, so testing an upgrade in a "throwaway" clone still mutates the real environment.
+
 ## Page Template
 
 Every page follows this structure:
