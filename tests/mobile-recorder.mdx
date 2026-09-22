@@ -55,17 +55,23 @@ The right column lists, under **Find the element by**, the ways to reach the ele
 
 The most robust one is marked **RECOMMENDED** and is the one already filled in at the bottom of the modal. The **Attributes** panel underneath lists everything the capture knows about the element, if you want to build your own.
 
+![The Find an element modal on a calculator screen: the 9 key is selected, resource-id is recommended with 1 match while class name reaches 24 elements](/images/find-an-element-selectors.webp)
+
 ### A shared selector is a question of scope
 
 An element whose siblings carry the same attributes is normal: a list of cards, a row of tabs. Rather than refusing the selector, the modal asks which one you meant, with **Use the 14th of the 22 elements that share it, the one you picked**. The matches are numbered on the capture so you can check you are on the right one, and changing the rank moves the selection, so you never inspect one card while the step acts on another.
 
 The selector at the bottom of the modal then reads `found by class name - 14th of 22`.
 
+![An ImageView shared by 22 elements: the matches are numbered on the capture and a dropdown picks the 14th](/images/find-an-element-shared-selector.webp)
+
 ### Tap by coordinates
 
 Some screens have nothing to select, typically a web page displayed inside the app: the tree stops at the frame and none of the fields inside it can be reached by a selector.
 
 Switch the capture to **Coords**. A crosshair follows the pointer and reads the x and y, click to place the point, and **X position** and **Y position** stay editable. The panel spells out what a point costs you: `65% from the left, 14% from the top of this 1080 x 2340 screen. On a screen of another size the tap lands somewhere else.` If an element does sit under the point, the modal still offers its selector, because a selector survives a change of layout and a point does not.
+
+![Coords mode: a crosshair on the capture reads 700, 339, next to the X and Y fields and the note about screen resolution](/images/find-an-element-coords.webp)
 
 ### Add the step
 

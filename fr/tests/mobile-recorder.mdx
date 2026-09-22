@@ -53,17 +53,23 @@ La colonne de droite liste, sous **Find the element by**, les façons d'atteindr
 
 Le plus robuste porte le badge **RECOMMENDED** et c'est celui qui est déjà rempli en pied de modale. Le panneau **Attributes** en dessous liste tout ce que la capture sait de l'élément, si vous voulez construire le vôtre.
 
+![La modale Find an element sur une calculatrice : la touche 9 est sélectionnée, resource-id est recommandé avec 1 match tandis que class name en atteint 24](/images/find-an-element-selectors.webp)
+
 ### Un selector partagé est une question de portée
 
 Un élément dont les frères portent les mêmes attributs, c'est normal : une liste de cartes, une rangée d'onglets. Plutôt que de refuser le selector, la modale vous demande lequel vous visiez, avec **Use the 14th of the 22 elements that share it, the one you picked**. Les matchs sont numérotés sur la capture pour que vous vérifiiez que c'est le bon, et changer de rang déplace la sélection : vous n'inspectez jamais une carte pendant que le step en tape une autre.
 
 Le selector en pied de modale affiche alors `found by class name - 14th of 22`.
 
+![Un ImageView partagé par 22 éléments : les matchs sont numérotés sur la capture et une liste déroulante choisit le 14e](/images/find-an-element-shared-selector.webp)
+
 ### Taper par coordonnées
 
 Certains écrans n'offrent rien à sélectionner, typiquement une page web affichée dans l'application : l'arbre s'arrête au cadre et aucun des champs à l'intérieur n'est atteignable par un selector.
 
 Basculez la capture sur **Coords**. Un viseur suit le pointeur et affiche les x et y, un clic pose le point, et **X position** et **Y position** restent modifiables. Le panneau écrit noir sur blanc ce que coûte un point : `65% from the left, 14% from the top of this 1080 x 2340 screen. On a screen of another size the tap lands somewhere else.` Si un élément se trouve tout de même sous le point, la modale propose son selector, parce qu'un selector survit à un changement de mise en page, un point non.
+
+![Le mode Coords : un viseur sur la capture affiche 700, 339, à côté des champs X et Y et de la note sur la résolution de l'écran](/images/find-an-element-coords.webp)
 
 ### Ajouter le step
 
