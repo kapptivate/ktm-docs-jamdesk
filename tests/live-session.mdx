@@ -42,12 +42,14 @@ Selecting a smartphone streams its screen live. Click and swipe directly on the 
 The right panel adds device tooling:
 
 - **Information**: battery, CPU, RAM, storage, hosting agent, model, OS and version, resolution, and how many users are on the phone.
-- **Control Panel**: device-level actions such as restarting the phone, installing an APK, taking a screenshot, recording the screen, rotating it, or grabbing the UI hierarchy with **Get XML**.
+- **Control Panel**: device-level actions such as restarting the phone, installing an APK, taking a screenshot, recording the screen, rotating it, or inspecting the current screen with **Get XML**.
 - **Quick Access**: software equivalents of the hardware buttons, Back, Home, Recent apps, Lock, Volume, and Power.
 
-### Inspect the UI with the XML viewer
+### Inspect the UI
 
-**Get XML** opens a viewer with the current screen's element hierarchy. Hover a node to highlight the matching element on a screenshot preview, and use **Copy** to take the XML into your selector work.
+**Get XML** opens the **Find an element** modal on the screen as it is right now: a capture on the left, the element tree in the middle, and the selected element on the right. Point at the capture and the smallest element under the pointer lights up, the tree follows, and the panel ranks the ways to reach that element with the number of matches each one has on this screen.
+
+It is the same modal as the one in the [mobile app recorder](/tests/mobile-recorder#find-an-element), so the mechanics are described once there: how the selectors are ranked, what a shared selector means, and how to read a point in **Coords** mode. In a live session there is no test being edited, so the selector is yours to copy into the step you are building elsewhere.
 
 ## Web sessions
 

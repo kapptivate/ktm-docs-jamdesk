@@ -29,7 +29,7 @@ Un bandeau traverse le haut du recorder et porte l'état de la session : le chro
 
 Deux outils sont posés au-dessus du device, parce qu'ils agissent sur l'écran lui-même :
 
-- **Assertion mode** transforme votre prochain tap en vérification plutôt qu'en action : vous désignez ce qui doit être à l'écran et le recorder écrit un step **Verify element**.
+- **Assertion mode** transforme votre prochain tap en vérification plutôt qu'en action : vous désignez ce qui doit être à l'écran et le recorder écrit un step **Verify element**. C'est le raccourci de la vérification que vous construiriez sinon via **Find an element**, sans ouvrir la modale.
 - **Find an element** ouvre une modale où vous désignez un élément sur une capture de l'écran et le transformez en step. C'est la porte d'entrée pour un élément qu'on n'atteint pas au doigt, pour une vérification, ou quand vous voulez voir le selector avant le geste. Voir [Find an element](#find-an-element) plus bas.
 
 **Fill input** ne demande aucune commande : tapez un champ sur le device et le recorder crée le step, avec un bandeau qui rappelle que vous pouvez saisir la valeur directement au clavier.
@@ -89,7 +89,7 @@ Chaque step enregistré affiche le sélecteur qu'il cible (par exemple `id=...` 
 Le menu trois points d'un step propose des options supplémentaires, dont **Add assertion** : un step **Verify element** qui vérifie que l'écran est correct, par exemple qu'une valeur est `displayed`. Les assertions deviennent des steps dans le canvas aux côtés de vos taps, ce qui permet à un enregistrement de vérifier le comportement au fur et à mesure.
 
 <Tip>
-Pour les éléments fragiles, activez les sélecteurs IA par step dans le builder afin que le test s'auto-corrige lorsque l'interface de l'application change. Consultez [Sélecteurs IA](/fr/tests/builder#ai-selectors).
+Pour les éléments fragiles, activez les sélecteurs IA par step dans le builder afin que le test s'auto-corrige lorsque l'interface de l'application change. Consultez [Sélecteurs IA](/fr/tests/builder#sélecteurs-ia).
 </Tip>
 
 ## Legacy : recorder en contrôle à distance
