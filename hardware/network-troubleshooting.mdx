@@ -9,7 +9,7 @@ Most robots that stop reporting to Kapptivate have lost power, or lost the netwo
 
 Open the robot's page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 4 months ago)**. Read it on the robot that failed, then on the other robots of the same site.
 
-If its neighbours are still reporting, the fault is in that one robot. If they all went quiet within the same hour, something at the site changed. Your IT team will know what, and you save the drive.
+One robot down on its own is investigated at the robot. Several robots down at the same moment are investigated at the site that hosts them. In that second case, call your IT team.
 
 <Frame caption="An Offline robot on the platform">
   ![The page of robot demo-web-1, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
@@ -46,21 +46,21 @@ Don't go for a third. Past two, the trouble is no longer software. Move on to po
 
 The sockets you need are on the back panel. Plug in the screen, the keyboard, and the mouse there, then take the connections one at a time.
 
-- Look at the front panel. A dark panel on a robot that is switched on means no power reaches it. Work back through the socket, the power brick, and the cord.
-- On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots). Web and smartphone robots don't carry that signal.
+- Look at the front panel. A panel that stays dark means no power reaches the robot, so check the socket, the power brick, and the cord.
+- On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots).
 - Check that the RJ45 cable sits in Ethernet port 1, 2, or 3, never port 4, which does not work. [Configure the robot network](/hardware/configure-network#set-the-static-ip) shows the numbering.
 
-Power the robot back up once you have changed something, then read its status again. Front panel lit, platform still **Offline**? The robot runs and nobody hears it, so go to [check the robot's local IP address](#check-the-robots-local-ip-address).
+Power the robot back up if you changed a connection, then read its status again. Once everything checks out, plugged in and powered, go to [check the robot's local IP address](#check-the-robots-local-ip-address).
 
 ## A robot that no longer boots
 
-The front panel is lit, the screen stays black: the robot no longer boots. Frozen LEDs on a cellular robot say the same thing. Rule out the false alarm first, by checking the screen's input source against the socket you actually used.
+The front panel is lit, the screen stays black: the robot no longer boots. On a cellular robot, you also see the LEDs stop blinking. Rule out the false alarm first, by checking the screen's input source against the socket you actually used.
 
-Source right, nothing changed after two reboots? Stop here. No command runs on a robot that won't boot, so nothing below this line applies. Send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, film the front panel and attach the video. The LED sequence shows how far the boot got.
+Source right, nothing changed after two reboots? Stop here. No command runs on a robot that won't boot, so nothing below this line applies. Send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, film the front panel and attach the video.
 
 ## Check the robot's local IP address
 
-Log in with the robot credentials, then open a terminal from the Linux desktop. One command gives both the robot's local address and its gateway. Nothing leaves the robot: it only reads its own routing table.
+Log in with the robot credentials, then open a terminal from the Linux desktop. One command gives both the robot's local address and its gateway.
 
 ```bash
 ip route get 1.1.1.1
@@ -71,7 +71,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-Two values matter on that line. `src` is the robot's own address, `192.168.10.42` above. `via` is the gateway it goes through to leave the network, `192.168.10.1`. The `src` value has to match the address your IT team wrote into the firewall rules. When it doesn't, give the robot [its static IP](/hardware/configure-network#set-the-static-ip) again, and the rules find it where they expect it.
+Two values matter on that line. `src` is the robot's own address, `192.168.10.42` above. `via` is the gateway it goes through to leave the network, `192.168.10.1`. The `src` value has to match the address your IT team wrote into the firewall rules. When the two differ, reconfigure [the robot's static IP](/hardware/configure-network#set-the-static-ip) so it matches what your network expects.
 
 The other possible answer is shorter, and it ends the question here.
 
@@ -79,7 +79,7 @@ The other possible answer is shorter, and it ends the question here.
 RTNETLINK answers: Network is unreachable
 ```
 
-No route means no link at all. Go back to the RJ45 cable and the switch port before anyone mentions firewalls.
+No route means no link at all. Check the RJ45 cable and the switch port.
 
 Ping that gateway next. Use the address printed after `via`.
 
@@ -97,14 +97,14 @@ ping -c 4 192.168.10.1
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
 ```
 
-Replies mean the robot sits on its network. Move on to the flows. The other outcome looks like this.
+Replies mean the robot sits on its network, so [move on to the flows](#check-the-flows). The other outcome looks like this.
 
 ```
 --- 192.168.10.1 ping statistics ---
 4 packets transmitted, 0 received, 100% packet loss, time 3007ms
 ```
 
-Go back to the RJ45 cable, which can be faulty or in the wrong socket. Then have your IT team confirm it lands on a live switch port.
+Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your IT team confirm it lands on a live switch port.
 
 ## Check the flows
 
@@ -152,55 +152,47 @@ Work down the list a second time, swapping each IP address for its domain name.
 nc -zv -w 5 robots.example.com 443
 ```
 
+The name resolves and the flow goes through:
+
+```
+Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
+```
+
+The other answer is this one:
+
 ```
 nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
-An address that passes while its name fails clears the firewall. DNS is at fault, and the fix is one field. Fill **DNS servers** in the Enter the addresses step of [set the static IP](/hardware/configure-network#set-the-static-ip).
+The IP address passes but its name fails. The robot most likely has no DNS server configured, which leaves it unable to resolve the domain name. Report it to your IT team. You can set one or more DNS servers on the robot by following [configure the robot network](/hardware/configure-network#set-the-static-ip).
 
-### Rule out a proxy decrypting the traffic
+### Check the certificate
 
-One failure still reads like a success. `nc` gets through, and the robot still reaches nobody, because something in between is decrypting the traffic. Ask an HTTPS destination for its status code.
+One last check. Take the HTTPS destinations of the document, the ones on port 443, and ask for the status code.
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' https://robots.example.com
 ```
 
+You should get `200`:
+
 ```
 200
 ```
 
-The connection runs end to end. Nothing to do on that destination.
+Any other answer, and this one in particular, means a device on your network is stepping in and presenting its own certificate.
 
 ```
 curl: (60) SSL certificate problem: unable to get local issuer certificate
 ```
 
-An intermediate device is presenting its own certificate, and the robot refuses to trust it. The `issuer` line names that device. `-k` is there to read the certificate, not to trust it: without the flag, `curl` stops before printing it.
-
-```bash
-curl -kv https://robots.example.com 2>&1 | grep issuer
-```
-
-A public authority signs a healthy connection:
-
-```
-*  issuer: C=US; O=Let's Encrypt; CN=YR1
-```
-
-Your own company's name on that line points at the proxy:
-
-```
-*  issuer: C=FR; O=Your Company; CN=Your Company Root CA
-```
-
-Ask your IT team to exempt the destinations in the document from TLS inspection.
+Report to your IT team that HTTPS traffic to the destinations in the document is being intercepted.
 
 ## Who to contact
 
-Whatever failed above belongs to your own network: a line of the document, a silent gateway, a certificate from the wrong authority. Send your IT team the full command output. Add the robot's local IP address and the time you ran the test. Once the rule is open, run the command again from the robot, and the status follows within minutes.
+One of the checks in this procedure failed, so the blockage sits on your own network. Send your IT team the full output of every command that failed, the robot's local IP address, and the time you ran them.
 
-Every check passes and the platform still says **Offline**? That one is ours. Write to support@kapptivate.com with the robot's name as the platform shows it. Its local IP address helps too, if you noted it.
+Every check in this procedure passed and the robot is still **Offline**? That one is ours. Write to support@kapptivate.com with the robot's name as the platform shows it, and its local IP address if you noted it: both speed up the investigation.
 
 ## What's next?
 
