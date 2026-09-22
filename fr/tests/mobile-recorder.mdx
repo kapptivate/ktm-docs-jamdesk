@@ -3,7 +3,7 @@ title: Recorder d'application mobile
 description: Enregistrez un test smartphone en pilotant un device réel aux côtés d'une liste de steps en direct.
 ---
 
-![Le recorder smartphone côte à côte : le canvas de steps avec des steps Tap et Verify element à gauche, le device en direct à droite](/images/mobile-recorder-new.webp)
+![Le recorder smartphone en cours de session : le bandeau d'enregistrement avec son chrono, Pause et Stop record, le canvas de steps à gauche, et le device surmonté d'Assertion mode et Find an element](/images/mobile-recorder-new.webp)
 
 L'enregistrement transforme une session manuelle sur un device réel en test. Vous pilotez le smartphone depuis votre navigateur, et chaque tap, input et scroll devient un step modifiable, sans script requis. Le recorder fonctionne côte à côte avec le builder : le device est diffusé à droite tandis que vos steps se construisent à gauche.
 
@@ -25,11 +25,14 @@ Partez du tableau de bord **Tests** pour que l'enregistrement aboutisse dans un 
 
 ## Pendant l'enregistrement
 
-Trois commandes accompagnent le stream :
+Un bandeau traverse le haut du recorder et porte l'état de la session : le chrono, **Pause** et **Stop record**. La pause gèle l'enregistrement sans fermer la session : vous pouvez naviguer librement dans l'application (fermer une popup, revenir au bon écran) sans que ce détour devienne des steps. Le device reste pilotable pendant la pause, il n'enregistre simplement plus. **Resume** reprend l'enregistrement.
 
-- **Pause** gèle l'enregistrement sans fermer la session : vous pouvez naviguer librement dans l'application (fermer une popup, revenir au bon écran) sans que ce détour devienne des steps. **Resume** reprend l'enregistrement.
-- **Fill input** ne demande aucune action dédiée : tapez un champ sur le device et le recorder crée le step, avec un bandeau qui rappelle que vous pouvez saisir la valeur directement au clavier.
-- **Inspect XML tree** ouvre la modale **Find an element**, où vous désignez un élément sur une capture de l'écran et le transformez en step. C'est la porte d'entrée pour un élément qu'on n'atteint pas au doigt, pour une vérification, ou quand vous voulez voir le selector avant le geste. Voir [Find an element](#find-an-element) plus bas.
+Deux outils sont posés au-dessus du device, parce qu'ils agissent sur l'écran lui-même :
+
+- **Assertion mode** transforme votre prochain tap en vérification plutôt qu'en action : vous désignez ce qui doit être à l'écran et le recorder écrit un step **Verify element**.
+- **Find an element** ouvre une modale où vous désignez un élément sur une capture de l'écran et le transformez en step. C'est la porte d'entrée pour un élément qu'on n'atteint pas au doigt, pour une vérification, ou quand vous voulez voir le selector avant le geste. Voir [Find an element](#find-an-element) plus bas.
+
+**Fill input** ne demande aucune commande : tapez un champ sur le device et le recorder crée le step, avec un bandeau qui rappelle que vous pouvez saisir la valeur directement au clavier.
 
 ## Find an element
 

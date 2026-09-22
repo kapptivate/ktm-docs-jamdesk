@@ -5,7 +5,7 @@ description: >-
   to build a mobile test without writing any code.
 ---
 
-![The side-by-side smartphone recorder: the step canvas with Tap and Verify element steps on the left, the live device on the right](/images/mobile-recorder-new.webp)
+![The smartphone recorder mid-session: the recording banner with its timer, Pause and Stop record, the step canvas on the left, and the device with Assertion mode and Find an element above it](/images/mobile-recorder-new.webp)
 
 Recording turns a manual session on a real device into a test. You drive the smartphone from your browser, and every tap, input, and scroll becomes a step you can edit, no scripting required. The recorder works side by side with the builder: the device streams on the right while your steps build up on the left.
 
@@ -27,11 +27,14 @@ Start from the **Tests** dashboard so the recording lands in a new test.
 
 ## While you record
 
-Three controls sit next to the stream:
+A banner runs across the top of the recorder and carries the state of the session: the timer, **Pause**, and **Stop record**. Pausing freezes the recording without closing the session, so you can navigate the app freely (dismiss a popup, get back to the right screen) without turning your detour into steps. The device stays drivable while paused, it simply stops recording. **Resume** picks the recording back up.
 
-- **Pause** freezes the recording without closing the session, so you can navigate the app freely (dismiss a popup, get back to the right screen) without turning your detour into steps. **Resume** picks the recording back up.
-- **Fill input** needs no dedicated action: tap a field on the device and the recorder creates the step, with a banner reminding you that you can type the value straight from your keyboard.
-- **Inspect XML tree** opens the **Find an element** modal, where you pick an element on a capture of the screen and turn it into a step. It is the way in for an element you cannot reach by tapping, for a check, or when you want to see the selector before the gesture. See [Find an element](#find-an-element) below.
+Two tools sit above the device, because they act on the screen itself:
+
+- **Assertion mode** turns your next tap into a check rather than an action: you point at what should be on the screen and the recorder writes a **Verify element** step.
+- **Find an element** opens a modal where you pick an element on a capture of the screen and turn it into a step. It is the way in for an element you cannot reach by tapping, for a check, or when you want to see the selector before the gesture. See [Find an element](#find-an-element) below.
+
+**Fill input** needs no control at all: tap a field on the device and the recorder creates the step, with a banner reminding you that you can type the value straight from your keyboard.
 
 ## Find an element
 
