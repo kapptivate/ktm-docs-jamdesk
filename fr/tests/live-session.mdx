@@ -1,22 +1,22 @@
 ---
 title: Live session
-description: Pilotez un vrai appareil SIM, smartphone ou agent web de manière interactive, puis transformez vos actions en test.
+description: Pilotez un vrai device SIM, smartphone ou agent web de manière interactive, puis transformez vos actions en test.
 sidebarTitle: Live session
 ---
 
-![Le sélecteur d'appareil de la live session avec les onglets Remote control et History, les catégories SIMs, Smartphones et Web, et les cartes d'appareils disponibles](/images/live-session-picker.webp)
+![Le sélecteur de device de la live session avec les onglets Remote control et History, les catégories SIMs, Smartphones et Web, et les cartes de devices disponibles](/images/live-session-picker.webp)
 
-Une live session vous donne le contrôle interactif d'un vrai appareil (une SIM, un smartphone ou un agent web) depuis votre navigateur. Utilisez-la pour explorer une application, déboguer un parcours en échec, ou exécuter des actions manuelles et les capturer dans un test.
+Une live session vous donne le contrôle interactif d'un vrai device (une SIM, un smartphone ou un agent web) depuis votre navigateur. Utilisez-la pour explorer une application, déboguer un parcours en échec, ou exécuter des actions manuelles et les capturer dans un test.
 
-La page comporte deux onglets : **Remote control**, où vous pilotez un appareil, et **History**, où chaque action manuelle est journalisée et peut devenir un test.
+La page comporte deux onglets : **Remote control**, où vous pilotez un device, et **History**, où chaque action manuelle est journalisée et peut devenir un test.
 
-## Choisir un appareil
+## Choisir un device
 
-Dans **Remote control**, basculez entre les catégories **SIMs**, **Smartphones** et **Web**. Le panneau de gauche liste les appareils disponibles pour la catégorie sélectionnée, regroupés par emplacement :
+Dans **Remote control**, basculez entre les catégories **SIMs**, **Smartphones** et **Web**. Le panneau de gauche liste les devices disponibles pour la catégorie sélectionnée, regroupés par emplacement :
 
-- Chaque carte affiche le nom de l'appareil, son statut de connexion et ses tags : l'agent hébergeur, la version de l'OS et les slots SIM pour les smartphones, l'opérateur et la technologie réseau pour les SIM.
+- Chaque carte affiche le nom de le device, son statut de connexion et ses tags : l'agent hébergeur, la version de l'OS et les slots SIM pour les smartphones, l'opérateur et la technologie réseau pour les SIM.
 - Utilisez la barre de recherche pour filtrer par nom.
-- Sélectionnez un appareil pour ouvrir sa session. En attendant, la zone principale affiche **Pick a device to launch session**.
+- Sélectionnez un device pour ouvrir sa session. En attendant, la zone principale affiche **Pick a device to launch session**.
 
 ## Sessions SIM
 
@@ -35,17 +35,19 @@ Les résultats apparaissent dans le fil en dessous du formulaire à mesure que c
 
 ## Sessions Smartphone
 
-Sélectionner un smartphone diffuse son écran en direct. Cliquez et faites glisser directement sur le flux ; vos gestes sont envoyés à l'appareil physique en temps réel.
+Sélectionner un smartphone diffuse son écran en direct. Cliquez et faites glisser directement sur le flux ; vos gestes sont envoyés à le device physique en temps réel.
 
-Le panneau de droite ajoute des outils pour l'appareil :
+Le panneau de droite ajoute des outils pour le device :
 
 - **Information** : batterie, CPU, RAM, stockage, agent hébergeur, modèle, OS et version, résolution, et combien d'utilisateurs sont sur le téléphone.
-- **Control Panel** : actions au niveau de l'appareil comme redémarrer le téléphone, installer un APK, prendre une capture d'écran, enregistrer l'écran, le pivoter, ou récupérer la hiérarchie d'interface avec **Get XML**.
+- **Control Panel** : actions au niveau du device comme redémarrer le téléphone, installer un APK, prendre une capture d'écran, enregistrer l'écran, le pivoter, ou inspecter l'écran courant avec **Get XML**.
 - **Quick Access** : équivalents logiciels des boutons physiques : Back, Home, Recent apps, Lock, Volume et Power.
 
-### Inspecter l'interface avec le visualiseur XML
+### Inspecter l'interface
 
-**Get XML** ouvre un visualiseur avec la hiérarchie d'éléments de l'écran actuel. Survolez un noeud pour mettre en surbrillance l'élément correspondant sur une prévisualisation de capture d'écran, et utilisez **Copy** pour copier le XML dans votre travail de sélecteur.
+**Get XML** ouvre la modale **Find an element** sur l'écran tel qu'il est à cet instant : une capture à gauche, l'arbre des éléments au milieu, et l'élément sélectionné à droite. Survolez la capture et le plus petit élément sous le pointeur s'allume, l'arbre suit, et le panneau classe les façons d'atteindre cet élément avec le nombre de matchs de chacune sur cet écran.
+
+C'est la même modale que celle du [recorder d'application mobile](/fr/tests/mobile-recorder#find-an-element), la mécanique n'est donc décrite qu'une fois là-bas : le classement des selectors, ce que veut dire un selector partagé, et la lecture d'un point en mode **Coords**. Dans une live session aucun test n'est en cours d'édition : le selector est à copier vers le step que vous construisez ailleurs.
 
 ## Sessions Web
 
@@ -58,7 +60,7 @@ Un **API Call** prend l'URL du endpoint avec les onglets **Headers** et **Body**
 Deux contrôles se trouvent en haut des sessions SIM et web :
 
 - **Record Macro** : capturez la séquence d'actions manuelles que vous exécutez, pour qu'une configuration ou vérification répétée n'ait pas à être reconstruite action par action.
-- **Spectate** : observez les autres actions manuelles en cours sur l'appareil sélectionné, utile quand plusieurs personnes travaillent sur le même équipement.
+- **Spectate** : observez les autres actions manuelles en cours sur le device sélectionné, utile quand plusieurs personnes travaillent sur le même équipement.
 
 ## History
 
@@ -71,11 +73,11 @@ Cliquez sur **Add** sur les entrées que vous souhaitez conserver : elles arrive
 
 ## Conseils pour les live sessions
 
-**Commencez simplement** : quelques commandes vous aident à comprendre l'appareil avant d'automatiser des tests complets.
+**Commencez simplement** : quelques commandes vous aident à comprendre le device avant d'automatiser des tests complets.
 
 **Capturez les parcours complexes** : pour les parcours utilisateur complexes, les exécuter en direct et convertir l'historique est plus rapide que de créer les steps manuellement.
 
-**Déboguez les échecs** : rejouez les actions d'un test en échec dans une live session pour voir exactement où il échoue et ce que l'appareil retourne réellement.
+**Déboguez les échecs** : rejouez les actions d'un test en échec dans une live session pour voir exactement où il échoue et ce que le device retourne réellement.
 
 ## Et ensuite ?
 
@@ -85,7 +87,7 @@ Cliquez sur **Add** sur les entrées que vous souhaitez conserver : elles arrive
     Affinez le test créé à partir d'une session, avec des checks et des variables
 
 </Card>
-  <Card title="Parc d'appareils" icon="mobile-screen" href="/fr/equipment/devices-lab">
+  <Card title="Parc de devices" icon="mobile-screen" href="/fr/equipment/devices-lab">
 
     Parcourez et gérez les SIM et smartphones derrière vos sessions
 

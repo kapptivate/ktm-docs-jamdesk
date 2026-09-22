@@ -5,7 +5,7 @@ description: >-
   to build a mobile test without writing any code.
 ---
 
-![The side-by-side smartphone recorder: the step canvas with Tap and Verify element steps on the left, the live device on the right](/images/mobile-recorder-new.webp)
+![The smartphone recorder mid-session: the recording banner with its timer, Pause and Stop record, the step canvas on the left, and the device with Assertion mode and Find an element above it](/images/mobile-recorder-new.webp)
 
 Recording turns a manual session on a real device into a test. You drive the smartphone from your browser, and every tap, input, and scroll becomes a step you can edit, no scripting required. The recorder works side by side with the builder: the device streams on the right while your steps build up on the left.
 
@@ -27,11 +27,62 @@ Start from the **Tests** dashboard so the recording lands in a new test.
 
 ## While you record
 
-Three controls sit next to the stream:
+A banner runs across the top of the recorder and carries the state of the session: the timer, **Pause**, and **Stop record**. Pausing freezes the recording without closing the session, so you can navigate the app freely (dismiss a popup, get back to the right screen) without turning your detour into steps. The device stays drivable while paused, it simply stops recording. **Resume** picks the recording back up.
 
-- **Pause** freezes the recording without closing the session, so you can navigate the app freely (dismiss a popup, get back to the right screen) without turning your detour into steps. **Resume** picks the recording back up.
-- **Fill input** needs no dedicated action: tap a field on the device and the recorder creates the step, with a banner reminding you that you can type the value straight from your keyboard.
-- **Inspect the XML tree** opens the screen's hierarchy when a tap is not enough. Pick an element in the tree or directly on the screenshot, read its XPath, choose the action to build (**Wait for element**, **Tap on element**, or **Fill input**), add a value if the action takes one, and **Add step** drops it into the test. It is the way in for an element you cannot reach by tapping, or when you want the selector before the gesture.
+Two tools sit above the device, because they act on the screen itself:
+
+- **Assertion mode** turns your next tap into a check rather than an action: you point at what should be on the screen and the recorder writes a **Verify element** step. It is the shortcut for the check you would otherwise build through **Find an element**, without opening the modal.
+- **Find an element** opens a modal where you pick an element on a capture of the screen and turn it into a step. It is the way in for an element you cannot reach by tapping, for a check, or when you want to see the selector before the gesture. See [Find an element](#find-an-element) below.
+
+**Fill input** needs no control at all: tap a field on the device and the recorder creates the step, with a banner reminding you that you can type the value straight from your keyboard.
+
+## Find an element
+
+The modal opens on the screen as it was captured, with the capture time in the header and a **Refresh** button to take a fresh one. It has three columns: the screen on the left, the element tree in the middle, and the element you selected on the right.
+
+### Point at what you want
+
+Move over the capture and the smallest element under the pointer lights up. Click to select it. The tree follows: the parents unfold and the row scrolls into view, so you always see where the element sits in the hierarchy. The eye button outlines everything selectable on the screen at once, which is handy when you do not know what the app exposes.
+
+The **Search by label, text or id** field filters the tree, so an element you can name is faster to reach than one you have to scroll to.
+
+### Read the selectors
+
+The right column lists, under **Find the element by**, the ways to reach the element, from the most robust to the most fragile. Each one shows how many elements it matches, counted on this very screen:
+
+| Badge | What it means |
+| --- | --- |
+| **1 match** | The selector reaches your element and only it. Nothing to arbitrate. |
+| **22 matches** | Several elements share it. See the section below. |
+| **1 match, by position** | It reaches one element, but because of where it sits in the tree. It breaks if the screen is reordered. |
+
+The most robust one is marked **RECOMMENDED** and is the one already filled in at the bottom of the modal. The **Attributes** panel underneath lists everything the capture knows about the element, if you want to build your own.
+
+![The Find an element modal on a calculator screen: the 9 key is selected, resource-id is recommended with 1 match while class name reaches 24 elements](/images/find-an-element-selectors.webp)
+
+### A shared selector is a question of scope
+
+An element whose siblings carry the same attributes is normal: a list of cards, a row of tabs. Rather than refusing the selector, the modal asks which one you meant, with **Use the 14th of the 22 elements that share it, the one you picked**. The matches are numbered on the capture so you can check you are on the right one, and changing the rank moves the selection, so you never inspect one card while the step acts on another.
+
+The selector at the bottom of the modal then reads `found by class name - 14th of 22`.
+
+![An ImageView shared by 22 elements: the matches are numbered on the capture and a dropdown picks the 14th](/images/find-an-element-shared-selector.webp)
+
+### Tap by coordinates
+
+Some screens have nothing to select, typically a web page displayed inside the app: the tree stops at the frame and none of the fields inside it can be reached by a selector.
+
+Switch the capture to **Coords**. A crosshair follows the pointer and reads the x and y, click to place the point, and **X position** and **Y position** stay editable. The panel spells out what a point costs you: `65% from the left, 14% from the top of this 1080 x 2340 screen. On a screen of another size the tap lands somewhere else.` If an element does sit under the point, the modal still offers its selector, because a selector survives a change of layout and a point does not.
+
+![Coords mode: a crosshair on the capture reads 700, 339, next to the X and Y fields and the note about screen resolution](/images/find-an-element-coords.webp)
+
+### Add the step
+
+Pick the action at the bottom of the modal: **Tap**, **Long press**, **Fill input**, **Verify element**, or **Extract value**. Add a value when the action takes one, then **Add step**. In **Coords** mode only **Tap** and **Long press** remain, since there is no element to check or to read a value from.
+
+![The action picker at the bottom of the modal, open on Tap, Long press, Fill input, Verify element and Extract value, next to the Add step button](/images/find-an-element-actions.webp)
+
+The modal fills the locator of the step it was opened from, in the right mode, so you never copy a selector by hand.
 
 ## Tune selectors and add assertions
 
