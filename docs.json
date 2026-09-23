@@ -103,6 +103,9 @@
       "googlebot": "index, follow"
     }
   },
+  "metadata": {
+    "timestamp": true
+  },
   "integrations": {
     "ga4": {
       "measurementId": "G-61CX3HXZ0P"
