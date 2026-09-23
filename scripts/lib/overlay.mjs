@@ -3,9 +3,15 @@
 //
 // Shape:
 // {
-//   "tools":   { "<name>":    { summary?, description?, examples?: [{title?, lang?, code}], notes?: [string], related?: [{title, href}] } },
-//   "commands":{ "<id>":      { summary?, description?, examples?: [string], notes?: [string], related?: [{title, href}] } }
+//   "tools":   { "<name>":    { summary?, metaDescription?, description?, examples?: [{title?, lang?, code}], notes?: [string], related?: [{title, href}] } },
+//   "commands":{ "<id>":      { summary?, metaDescription?, description?, examples?: [string], notes?: [string], related?: [{title, href}] } },
+//   "overview": { description? }   // the section's landing page (cli/commands/overview, mcp/tools/overview)
 // }
+//
+// `summary` is the page's lead paragraph. `metaDescription` is the frontmatter description
+// only: it is what Google shows as the snippet and what llms.txt lists, and it is usually
+// longer and more explicit than the lead. Without it the description falls back to `summary`,
+// then to the upstream one-liner.
 import { readJSONOptional } from './util.mjs';
 
 export async function loadOverlay(file) {

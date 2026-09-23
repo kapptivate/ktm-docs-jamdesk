@@ -1,3 +1,19 @@
 {
-  "tools": {}
+  "tools": {
+    "get_smartphone_apps": {
+      "metaDescription": "List installable apps on a smartphone device for V2 or classic test authoring. Copy `package` to `starting.app`, the app to `meta`."
+    },
+    "build_campaign": {
+      "metaDescription": "Build a runnable campaign from exactly one source, test_ids or test_campaign_id. An ephemeral batch of tests, discarded after the run and never saved."
+    },
+    "run_campaign": {
+      "metaDescription": "Execute a campaign and wait for results. Blocks until completion and returns per-test results."
+    },
+    "get_monitor": {
+      "metaDescription": "Get the full configuration of a monitor: owners, input_variables, scheduling, variable_group, and status."
+    }
+  },
+  "overview": {
+    "description": "Explore all 105 Kapptivate MCP tools across 17 categories, covering discovery, testing, monitoring, alerting, and dashboards."
+  }
 }

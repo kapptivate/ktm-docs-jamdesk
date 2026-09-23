@@ -12,8 +12,8 @@ function flagTable(flags) {
   const rows = flags.map((f) => [
     `\`${escapeCell(flagName(f))}\``,
     flagType(f.type),
-    f.default !== null && f.default !== undefined && f.default !== '' ? `\`${escapeCell(f.default)}\`` : '—',
-    escapeCell(f.description) || '—',
+    f.default !== null && f.default !== undefined && f.default !== '' ? `\`${escapeCell(f.default)}\`` : '',
+    escapeCell(f.description),
   ]);
   return table(['Flag', 'Type', 'Default', 'Description'], rows);
 }
@@ -104,7 +104,7 @@ export function renderCommandPage(item, ctx) {
   const o = item.overlay || {};
   const last = item.path[item.path.length - 1];
   const sections = [
-    frontmatter({ title: item.name, description: item.summary || item.name, sidebarTitle: last }),
+    frontmatter({ title: item.name, description: o.metaDescription || o.summary || item.summary || item.name, sidebarTitle: last }),
     BANNER,
     escapeProse(o.summary || item.summary || item.name),
   ];
@@ -175,7 +175,9 @@ export function renderCommandsOverview(catalog) {
   const sections = [
     frontmatter({
       title: 'CLI command reference',
-      description: `Every ktm command, grouped by resource (${tops.length} top-level commands).`,
+      description:
+        catalog.overview?.description ||
+        `Every ktm command, grouped by resource (${tops.length} top-level commands).`,
       sidebarTitle: 'Overview',
     }),
     BANNER,

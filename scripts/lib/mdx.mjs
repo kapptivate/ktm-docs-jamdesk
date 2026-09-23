@@ -3,7 +3,7 @@ import { escapeCell } from './util.mjs';
 
 /** Banner placed at the top of every generated page so humans know not to edit it. */
 export const BANNER =
-  '{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}';
+  '{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}';
 
 /** Build YAML frontmatter. Values are emitted as double-quoted scalars (JSON strings are valid YAML). */
 export function frontmatter({ title, description, sidebarTitle }) {
@@ -34,7 +34,7 @@ export function paramTable(rows, { requiredColumn = true } = {}) {
     }
     const cells = [`\`${escapeCell(r.name)}\``, escapeCell(r.type)];
     if (requiredColumn) cells.push(r.required ? 'Yes' : 'No');
-    cells.push(desc.join(' ').trim() || '—');
+    cells.push(desc.join(' ').trim());
     return cells;
   });
   return table(headers, body);
@@ -78,9 +78,9 @@ export function columns(cards, cols = 2) {
   return [`<Columns cols={${cols}}>`, cards.join('\n'), '</Columns>'].join('\n');
 }
 
-/** The standard closing "What's Next?" section. `cards` is an array of card() strings. */
+/** The standard closing "What's next?" section. `cards` is an array of card() strings. */
 export function whatsNext(cards, cols = 2) {
-  return [`## What's Next?`, '', columns(cards, cols)].join('\n');
+  return [`## What's next?`, '', columns(cards, cols)].join('\n');
 }
 
 /** A "Related" section linking to sibling pages. `links` = [{title, href}]. Returns null if empty. */

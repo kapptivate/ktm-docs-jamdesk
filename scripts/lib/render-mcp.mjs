@@ -63,7 +63,7 @@ export function renderToolPage(item, ctx = {}) {
   const sections = [
     frontmatter({
       title: item.name,
-      description: item.summary || `Kapptivate MCP tool ${item.name}.`,
+      description: o.metaDescription || o.summary || item.summary || `Kapptivate MCP tool ${item.name}.`,
       sidebarTitle: item.name,
     }),
     BANNER,
@@ -164,7 +164,9 @@ export function renderToolsOverview(catalog) {
   const sections = [
     frontmatter({
       title: 'MCP tools reference',
-      description: `All ${catalog.items.length} Kapptivate MCP tools, grouped by category.`,
+      description:
+        catalog.overview?.description ||
+        `All ${catalog.items.length} Kapptivate MCP tools, grouped by category.`,
       sidebarTitle: 'Overview',
     }),
     BANNER,
