@@ -4,7 +4,7 @@ description: "Edit an existing monitor"
 sidebarTitle: "edit"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Edit an existing monitor
 
@@ -43,12 +43,12 @@ ktm monitors edit 42 --from-file patch.json
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--active` | string | — | New active status (true/false) |
-| `--from-file` | string | — | JSON file with fields to update |
-| `--name` | string | — | New monitor name |
-| `--scheduling` | string | — | New scheduling JSON |
-| `--set-var` | string[] | — | Override variable value (repeatable, format: NAME=VALUE). Re-builds owners + input_variables from the test definition. |
-| `--variant` | string[] | — | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Unpinned groups retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. |
+| `--active` | string |  | New active status (true/false) |
+| `--from-file` | string |  | JSON file with fields to update |
+| `--name` | string |  | New monitor name |
+| `--scheduling` | string |  | New scheduling JSON |
+| `--set-var` | string[] |  | Override variable value (repeatable, format: NAME=VALUE). Re-builds owners + input_variables from the test definition. |
+| `--variant` | string[] |  | Re-pin a variant for one variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Unpinned groups retain their existing bucket; for legacy monitors mid-migration, unpinned groups default per-variable. |
 
 ## Details
 
@@ -84,7 +84,7 @@ To change the underlying test, delete the monitor and create a new one.
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

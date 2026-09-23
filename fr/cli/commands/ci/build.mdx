@@ -4,7 +4,7 @@ description: "Générer un template JSON de campagne à partir d'ID de tests ou 
 sidebarTitle: "build"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Générer un template JSON de campagne à partir d'ID de tests ou d'une campagne de tests enregistrée (local uniquement, pas d'exécution)
 
@@ -51,11 +51,11 @@ ktm ci build --product acme~web --test-ids 16480 --variant "API:Staging" | \
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--name` | string | — | Nom de la campagne (optionnel, vide par défaut) |
-| `--product` | string | — | Slug du produit (format : operator~product). Requis avec --test-ids (résout les buckets de variables V3) ; non nécessaire avec --test-campaign (déduit automatiquement). |
-| `--test-campaign` | int | — | ID de campagne de tests enregistrée (mutuellement exclusif avec --test-ids ; produit déduit automatiquement) |
-| `--test-ids` | string | — | ID de tests séparés par des virgules (depuis 'tests list') ; mutuellement exclusif avec --test-campaign |
-| `--variant` | string[] | — | Fixer un variant par groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les variables des groupes non fixés utilisent le variant par défaut du groupe. |
+| `--name` | string |  | Nom de la campagne (optionnel, vide par défaut) |
+| `--product` | string |  | Slug du produit (format : operator~product). Requis avec --test-ids (résout les buckets de variables V3) ; non nécessaire avec --test-campaign (déduit automatiquement). |
+| `--test-campaign` | int |  | ID de campagne de tests enregistrée (mutuellement exclusif avec --test-ids ; produit déduit automatiquement) |
+| `--test-ids` | string |  | ID de tests séparés par des virgules (depuis 'tests list') ; mutuellement exclusif avec --test-campaign |
+| `--variant` | string[] |  | Fixer un variant par groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les variables des groupes non fixés utilisent le variant par défaut du groupe. |
 
 ## Détails
 

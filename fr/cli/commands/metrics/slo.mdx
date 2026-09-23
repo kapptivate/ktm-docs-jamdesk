@@ -4,7 +4,7 @@ description: "Calculer les métriques SLI/SLO selon la méthodologie burn-rate d
 sidebarTitle: "slo"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Calculer les métriques SLI/SLO selon la méthodologie burn-rate de Google SRE
 
@@ -29,10 +29,10 @@ ktm metrics slo --operator acme   --query "SELECT sum(success) AS ok, sum(reques
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
 | `--good-field` | string | `good` | Nom du field pour les événements réussis |
-| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
-| `--precision` | string | — | Précision temporelle de la requête (s, ms, u, ns) |
-| `--query` | string | — | Requête InfluxQL retournant les fields good/total |
-| `--slo-target` | float | — | Cible SLO en pourcentage (ex. 99.9) |
+| `--operator` | string |  | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--precision` | string |  | Précision temporelle de la requête (s, ms, u, ns) |
+| `--query` | string |  | Requête InfluxQL retournant les fields good/total |
+| `--slo-target` | float |  | Cible SLO en pourcentage (ex. 99.9) |
 | `--total-field` | string | `total` | Nom du field pour le total des événements |
 | `--window` | string | `30d` | Fenêtre SLO (ex. 30d, 168h) |
 

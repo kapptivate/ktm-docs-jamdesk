@@ -4,7 +4,7 @@ description: "Initialiser un espace de travail de création de tests prêt pour 
 sidebarTitle: "init"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Initialiser un espace de travail de création de tests prêt pour les agents (skills, configuration MCP, structure du catalogue)
 
@@ -46,17 +46,17 @@ ktm init -n
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--automation-url` | string | — | URL du point d'accès MCP kapptivate-automation ; remplace le placeholder dans .mcp.json |
+| `--automation-url` | string |  | URL du point d'accès MCP kapptivate-automation ; remplace le placeholder dans .mcp.json |
 | `--dir` | string | `.` | Répertoire où installer l'espace de travail (créé s'il n'existe pas) |
-| `-n, --dry-run` | boolean | — | Afficher ce qui serait créé ou mis à jour, sans rien écrire |
-| `--force` | boolean | — | Écraser les fichiers d'espace de travail et les skills embarqués. Les fichiers fusionnés et gérés restent intacts : .claude/settings.local.json, les configs des agents de code connectés, .ktm.json et .ktm.local.json |
-| `--local-key` | boolean | — | Stocker la clé API dans un .ktm.local.json (0600) ignoré par git dans l'espace de travail, au lieu du trousseau de clés OS |
-| `--no-input` | boolean | — | Ne jamais poser de question ; ne prendre les valeurs que des flags (sûr en CI) |
-| `--operator` | string | — | Slug de l'opérateur ciblé par cet espace de travail (enregistré dans .ktm.json). Saute la question de l'assistant sur l'opérateur ; avec --no-input, écrit tel quel |
-| `--reconfigure` | boolean | — | Relancer l'assistant sur un espace de travail configuré, en conservant son identité enregistrée (env, opérateur, produit) : fait seulement tourner/revérifier la clé API et redécouvre le robot d'automatisation. catalog/ et pages/ ne sont pas touchés. Utilisez --reset pour changer d'opérateur, de produit ou d'hôte |
-| `--refresh-skills` | boolean | — | Supprimer et réécrire les dossiers .agents/skills/ et leurs liens .claude/skills/ depuis la version embarquée dans ce binaire (les autres fichiers gardent la sémantique « ignorer si présent ») |
-| `--reset` | boolean | — | Redéfinir le périmètre d'un espace de travail configuré : redemande opérateur/produit/hôte et réécrit .ktm.json. DESTRUCTIF : vide catalog/ sans condition (régénérable) et, après confirmation, pages/ (vos sélecteurs vérifiés à la main) ; avec --no-input, pages/ est vidé sans demander. --reset l'emporte sur --reconfigure |
-| `--wire` | string[] | — | Agents de code auxquels connecter le MCP kapptivate-automation (claude, cursor, vscode, codex, gemini). Écrit des fichiers de configuration au niveau du projet ; utile avec --no-input |
+| `-n, --dry-run` | boolean |  | Afficher ce qui serait créé ou mis à jour, sans rien écrire |
+| `--force` | boolean |  | Écraser les fichiers d'espace de travail et les skills embarqués. Les fichiers fusionnés et gérés restent intacts : .claude/settings.local.json, les configs des agents de code connectés, .ktm.json et .ktm.local.json |
+| `--local-key` | boolean |  | Stocker la clé API dans un .ktm.local.json (0600) ignoré par git dans l'espace de travail, au lieu du trousseau de clés OS |
+| `--no-input` | boolean |  | Ne jamais poser de question ; ne prendre les valeurs que des flags (sûr en CI) |
+| `--operator` | string |  | Slug de l'opérateur ciblé par cet espace de travail (enregistré dans .ktm.json). Saute la question de l'assistant sur l'opérateur ; avec --no-input, écrit tel quel |
+| `--reconfigure` | boolean |  | Relancer l'assistant sur un espace de travail configuré, en conservant son identité enregistrée (env, opérateur, produit) : fait seulement tourner/revérifier la clé API et redécouvre le robot d'automatisation. catalog/ et pages/ ne sont pas touchés. Utilisez --reset pour changer d'opérateur, de produit ou d'hôte |
+| `--refresh-skills` | boolean |  | Supprimer et réécrire les dossiers .agents/skills/ et leurs liens .claude/skills/ depuis la version embarquée dans ce binaire (les autres fichiers gardent la sémantique « ignorer si présent ») |
+| `--reset` | boolean |  | Redéfinir le périmètre d'un espace de travail configuré : redemande opérateur/produit/hôte et réécrit .ktm.json. DESTRUCTIF : vide catalog/ sans condition (régénérable) et, après confirmation, pages/ (vos sélecteurs vérifiés à la main) ; avec --no-input, pages/ est vidé sans demander. --reset l'emporte sur --reconfigure |
+| `--wire` | string[] |  | Agents de code auxquels connecter le MCP kapptivate-automation (claude, cursor, vscode, codex, gemini). Écrit des fichiers de configuration au niveau du projet ; utile avec --no-input |
 
 ## Détails
 

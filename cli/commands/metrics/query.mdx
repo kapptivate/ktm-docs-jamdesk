@@ -4,7 +4,7 @@ description: "Execute a raw InfluxQL query against the operator's metrics databa
 sidebarTitle: "query"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Execute a raw InfluxQL query against the operator's metrics database
 
@@ -34,11 +34,11 @@ ktm metrics query --operator acme --query "SELECT * FROM \"event\" WHERE time >=
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--executive` | boolean | — | One-line-per-series executive summary (implies --summary) |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query string |
-| `--summary` | boolean | — | Run statistical analysis and display formatted summary |
+| `--executive` | boolean |  | One-line-per-series executive summary (implies --summary) |
+| `--operator` | string |  | Operator slug (= InfluxDB database name) |
+| `--precision` | string |  | Query time precision (s, ms, u, ns) |
+| `--query` | string |  | InfluxQL query string |
+| `--summary` | boolean |  | Run statistical analysis and display formatted summary |
 
 ## Details
 
@@ -113,7 +113,7 @@ For reports, use --executive. For raw analysis, use --summary.
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

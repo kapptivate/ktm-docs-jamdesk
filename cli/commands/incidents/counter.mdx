@@ -1,12 +1,10 @@
 ---
-title: ktm incidents counter
-description: >-
-  Use the ktm incidents counter command to quickly retrieve critical, warning,
-  and closed incident counts for any operator.
-sidebarTitle: counter
+title: "ktm incidents counter"
+description: "Use the ktm incidents counter command to quickly retrieve critical, warning, and closed incident counts for any operator."
+sidebarTitle: "counter"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Get incident counts: critical, warning, closed
 
@@ -33,13 +31,13 @@ ktm incidents counter --operator my-operator --created-after 2026-03-12T00:00:00
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--alert-id` | string | — | Comma-separated alert definition IDs |
-| `--closed-after` | string | — | Filter incidents closed after this ISO datetime |
-| `--closed-before` | string | — | Filter incidents closed before this ISO datetime |
-| `--created-after` | string | — | Filter incidents created after this ISO datetime |
-| `--created-before` | string | — | Filter incidents created before this ISO datetime |
-| `--operator` | string | — | Operator slug (required) |
-| `--status` | string | — | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
+| `--alert-id` | string |  | Comma-separated alert definition IDs |
+| `--closed-after` | string |  | Filter incidents closed after this ISO datetime |
+| `--closed-before` | string |  | Filter incidents closed before this ISO datetime |
+| `--created-after` | string |  | Filter incidents created after this ISO datetime |
+| `--created-before` | string |  | Filter incidents created before this ISO datetime |
+| `--operator` | string |  | Operator slug (required) |
+| `--status` | string |  | Filter by status: OPEN, CLOSED, MANUALLY_CLOSED, CHANGED, DEACTIVATED |
 
 ## Details
 
@@ -57,7 +55,7 @@ Accepts the same filters as 'incidents list' to scope the counts.
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

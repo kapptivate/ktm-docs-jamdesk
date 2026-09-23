@@ -1,12 +1,10 @@
 ---
-title: ktm login
-description: >-
-  Authenticate with the ktm CLI using OAuth 2.1 + PKCE to securely log in to
-  Kapptivate and store your access token.
-sidebarTitle: login
+title: "ktm login"
+description: "Authenticate with the ktm CLI using OAuth 2.1 + PKCE to securely log in to Kapptivate and store your access token."
+sidebarTitle: "login"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Authenticate against Kapptivate via OAuth 2.1 + PKCE
 
@@ -42,9 +40,9 @@ ktm login --no-browser
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--creds-file` | string | — | Path to the fallback credentials file (default: $KAPPTIVATE_CREDENTIALS_FILE, else ~/.config/kapptivate/credentials.json). Set the env var instead of the flag if other ktm commands must read the same custom path. |
-| `--no-browser` | boolean | — | Print the authorization URL instead of opening a browser (for headless / SSH sessions) |
-| `--no-keychain` | boolean | — | Skip OS keychain; store token in a file at ~/.config/kapptivate/credentials.json (0600) |
+| `--creds-file` | string |  | Path to the fallback credentials file (default: $KAPPTIVATE_CREDENTIALS_FILE, else ~/.config/kapptivate/credentials.json). Set the env var instead of the flag if other ktm commands must read the same custom path. |
+| `--no-browser` | boolean |  | Print the authorization URL instead of opening a browser (for headless / SSH sessions) |
+| `--no-keychain` | boolean |  | Skip OS keychain; store token in a file at ~/.config/kapptivate/credentials.json (0600) |
 | `--timeout` | duration | `2m0s` | How long to wait for the browser callback before failing |
 
 ## Details
@@ -71,7 +69,7 @@ on this machine (e.g. local SSH port forwarding).
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

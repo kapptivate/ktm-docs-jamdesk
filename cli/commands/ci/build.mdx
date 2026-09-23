@@ -1,12 +1,10 @@
 ---
-title: ktm ci build
-description: >-
-  Generate a local-only campaign JSON template with ktm ci build using test IDs
-  or a saved Tests campaign, then pipe it into ci run.
-sidebarTitle: build
+title: "ktm ci build"
+description: "Generate a local-only campaign JSON template with ktm ci build using test IDs or a saved Tests campaign, then pipe it into ci run."
+sidebarTitle: "build"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Generate a campaign JSON template from test IDs or a saved Tests campaign (local-only, no execution)
 
@@ -53,11 +51,11 @@ ktm ci build --product acme~web --test-ids 16480 --variant "API:Staging" | \
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--name` | string | — | Campaign name (optional, defaults to empty) |
-| `--product` | string | — | Product slug (format: operator~product). Required with --test-ids (resolves V3 variable buckets); not needed with --test-campaign (auto-derived). |
-| `--test-campaign` | int | — | Saved Tests campaign id (mutually exclusive with --test-ids; product auto-derived) |
-| `--test-ids` | string | — | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
-| `--variant` | string[] | — | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
+| `--name` | string |  | Campaign name (optional, defaults to empty) |
+| `--product` | string |  | Product slug (format: operator~product). Required with --test-ids (resolves V3 variable buckets); not needed with --test-campaign (auto-derived). |
+| `--test-campaign` | int |  | Saved Tests campaign id (mutually exclusive with --test-ids; product auto-derived) |
+| `--test-ids` | string |  | Comma-separated test IDs (from 'tests list'); mutually exclusive with --test-campaign |
+| `--variant` | string[] |  | Pin a variant per variable group. Repeatable. Forms: '5' (numeric variant ID) or 'API:Staging' (group:variant by name). Variables in unpinned groups use that group's default variant. |
 
 ## Details
 
@@ -98,7 +96,7 @@ Campaign JSON schema:
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

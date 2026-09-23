@@ -4,7 +4,7 @@ description: "Exécuter des tests Kapptivate depuis des fichiers de configuratio
 sidebarTitle: "run"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Exécuter des tests Kapptivate depuis des fichiers de configuration JSON ou un JSON de campagne, attendre les résultats et rapporter
 
@@ -44,16 +44,16 @@ ktm ci build --test-campaign 42 --variant "API:Staging" | \
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--ignore-errors` | boolean | — | Ignorer les échecs pour tous les types d'actions (définit options.ignore_failed pour tous les codes d'actions) ; l'exécution se termine quand même mais le statut par test peut être modifié |
-| `--junit-file` | string | — | Écrire un rapport JUnit XML dans ce fichier (pour l'upload d'artefacts CI) |
+| `--ignore-errors` | boolean |  | Ignorer les échecs pour tous les types d'actions (définit options.ignore_failed pour tous les codes d'actions) ; l'exécution se termine quand même mais le statut par test peut être modifié |
+| `--junit-file` | string |  | Écrire un rapport JUnit XML dans ce fichier (pour l'upload d'artefacts CI) |
 | `--max-poll-duration` | duration | `30m0s` | Durée maximale d'attente pour chaque résultat de test avant timeout |
-| `--output-file` | string | — | Écrire le résumé JSON d'exécution dans ce fichier |
-| `--parallel` | boolean | — | Exécuter les tests en parallèle (définit options.parallel_test_execution=-1 ; superadmin + tests ethernet uniquement) |
-| `--set-var` | string[] | — | Remplacer une valeur de variable : NAME=VALUE. Répétable. Appliqué en mode --stdin (campagne) avant exécution ; le bucket est préservé. Les noms inconnus sont ignorés silencieusement. |
-| `--stdin` | boolean | — | Lire un seul JSON de campagne depuis stdin (mutuellement exclusif avec --test-config-path/--test-config-dir) |
-| `--test-config-dir` | string | — | Répertoire de fichiers de configuration JSON de tests (tous les fichiers *.json sont chargés) |
-| `--test-config-path` | string[] | — | Chemin vers un fichier de configuration JSON de test (répétable, supporte les patterns glob) |
-| `--validate` | boolean | — | Valider la structure du fichier de configuration et quitter (pas besoin de clé API ou réseau) |
+| `--output-file` | string |  | Écrire le résumé JSON d'exécution dans ce fichier |
+| `--parallel` | boolean |  | Exécuter les tests en parallèle (définit options.parallel_test_execution=-1 ; superadmin + tests ethernet uniquement) |
+| `--set-var` | string[] |  | Remplacer une valeur de variable : NAME=VALUE. Répétable. Appliqué en mode --stdin (campagne) avant exécution ; le bucket est préservé. Les noms inconnus sont ignorés silencieusement. |
+| `--stdin` | boolean |  | Lire un seul JSON de campagne depuis stdin (mutuellement exclusif avec --test-config-path/--test-config-dir) |
+| `--test-config-dir` | string |  | Répertoire de fichiers de configuration JSON de tests (tous les fichiers *.json sont chargés) |
+| `--test-config-path` | string[] |  | Chemin vers un fichier de configuration JSON de test (répétable, supporte les patterns glob) |
+| `--validate` | boolean |  | Valider la structure du fichier de configuration et quitter (pas besoin de clé API ou réseau) |
 
 ## Détails
 

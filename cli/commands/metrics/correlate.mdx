@@ -1,12 +1,10 @@
 ---
-title: ktm metrics correlate
-description: >-
-  Run ktm metrics correlate to detect correlation, distribution shift, and lag
-  across InfluxQL queries with configurable analysis modes.
-sidebarTitle: correlate
+title: "ktm metrics correlate"
+description: "Run ktm metrics correlate to detect correlation, distribution shift, and lag across InfluxQL queries with configurable analysis modes."
+sidebarTitle: "correlate"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Detect cross-metric relationships: correlation, distribution shift, lag
 
@@ -39,9 +37,9 @@ ktm metrics correlate --operator acme --mode shift \
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
 | `--mode` | string | `quick` | Analysis mode: quick (correlation only), full (correlation + shift + lag), shift (distribution shift only) |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--queries` | string | — | JSON array of InfluxQL query strings |
-| `--query` | string[] | — | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
+| `--operator` | string |  | Operator slug (= InfluxDB database name) |
+| `--queries` | string |  | JSON array of InfluxQL query strings |
+| `--query` | string[] |  | InfluxQL query (repeatable — use multiple --query flags instead of --queries JSON) |
 
 ## Details
 
@@ -79,7 +77,7 @@ Measurements may also contain orphaned data from deleted monitors. Check freshne
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

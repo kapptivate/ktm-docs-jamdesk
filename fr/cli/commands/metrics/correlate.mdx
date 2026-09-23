@@ -4,7 +4,7 @@ description: "Détecter les relations entre métriques : corrélation, changemen
 sidebarTitle: "correlate"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Détecter les relations entre métriques : corrélation, changement de distribution, décalage
 
@@ -32,9 +32,9 @@ ktm metrics correlate --operator acme --mode shift   --queries '["SELECT mean(du
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
 | `--mode` | string | `quick` | Mode d'analyse : quick (corrélation uniquement), full (corrélation + shift + lag), shift (changement de distribution uniquement) |
-| `--operator` | string | — | Slug de l'opérateur (= nom de base de données InfluxDB) |
-| `--queries` | string | — | Tableau JSON de chaînes de requêtes InfluxQL |
-| `--query` | string[] | — | Requête InfluxQL (répétable, utilisez plusieurs flags --query au lieu du JSON --queries) |
+| `--operator` | string |  | Slug de l'opérateur (= nom de base de données InfluxDB) |
+| `--queries` | string |  | Tableau JSON de chaînes de requêtes InfluxQL |
+| `--query` | string[] |  | Requête InfluxQL (répétable, utilisez plusieurs flags --query au lieu du JSON --queries) |
 
 ## Détails
 

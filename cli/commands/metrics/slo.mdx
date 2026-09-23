@@ -4,7 +4,7 @@ description: "Compute SLI/SLO metrics using Google SRE burn-rate methodology"
 sidebarTitle: "slo"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Compute SLI/SLO metrics using Google SRE burn-rate methodology
 
@@ -33,10 +33,10 @@ ktm metrics slo --operator acme \
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
 | `--good-field` | string | `good` | Field name for good events |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query returning good/total fields |
-| `--slo-target` | float | — | SLO target percentage (e.g. 99.9) |
+| `--operator` | string |  | Operator slug (= InfluxDB database name) |
+| `--precision` | string |  | Query time precision (s, ms, u, ns) |
+| `--query` | string |  | InfluxQL query returning good/total fields |
+| `--slo-target` | float |  | SLO target percentage (e.g. 99.9) |
 | `--total-field` | string | `total` | Field name for total events |
 | `--window` | string | `30d` | SLO window (e.g. 30d, 168h) |
 
@@ -68,7 +68,7 @@ Severity thresholds (Google SRE):
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">
