@@ -9,7 +9,7 @@ La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'ali
 
 Ouvrez la fiche du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 4 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots du même site.
 
-Un robot seul à tomber désigne ce robot. Plusieurs robots tombés à la même heure désignent le site. Prévenez votre service informatique : le déplacement est inutile.
+Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer au niveau du robot. Si le problème concerne plusieurs robots, tombés au même moment, l'investigation est à effectuer au niveau du site qui héberge les robots. Dans ce cas, prévenez votre service informatique.
 
 <Frame caption="La fiche d'un robot Offline sur la plateforme">
   ![La fiche du robot demo-web-1, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
@@ -46,21 +46,21 @@ Ne redémarrez pas une troisième fois : au-delà, le problème n'est plus logic
 
 Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez les branchements un par un.
 
-- Regardez la façade. Si elle reste éteinte alors que le robot est allumé, le courant n'arrive pas : reprenez la prise, le bloc d'alimentation et le cordon.
-- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus). Les robots web et smartphone n'ont pas ce signal.
+- Regardez la façade. Si elle reste éteinte, le courant n'arrive pas : vérifiez la prise, le bloc d'alimentation et le cordon.
+- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus).
 - Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
 
-Si vous avez repris un branchement, rallumez le robot et relisez son statut. Si la façade est allumée et que la plateforme affiche toujours **Offline**, le robot tourne et personne ne l'entend. Passez à [vérifier l'adresse IP locale du robot](#vérifier-ladresse-ip-locale-du-robot).
+Si vous avez modifié un branchement, rallumez le robot et relisez son statut. Si vous avez tout vérifié, et que tout semble correctement branché et allumé, passez à [vérifier l'adresse IP locale du robot](#vérifier-ladresse-ip-locale-du-robot).
 
 ## Un robot qui ne démarre plus
 
-La façade est allumée, l'écran reste noir : le robot ne démarre plus. Sur un robot cellulaire, des voyants figés disent la même chose. Vérifiez d'abord la source d'entrée de l'écran, qui doit correspondre au câble branché.
+La façade est allumée, l'écran reste noir : le robot ne démarre plus. Sur un robot cellulaire, vous constatez aussi que les voyants ne clignotent plus. Vérifiez d'abord la source d'entrée de l'écran, qui doit correspondre au câble branché.
 
-Si la source est la bonne et que rien ne change après deux redémarrages, arrêtez-vous là. Aucune commande ne s'exécute, et le reste de cette page ne vous sert à rien. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, filmez la façade et joignez la vidéo. La séquence des voyants dit où le démarrage s'arrête.
+Si la source est la bonne et que rien ne change après deux redémarrages, arrêtez-vous là. Aucune commande ne s'exécute, et le reste de cette page ne vous sert à rien. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, filmez la façade et joignez la vidéo.
 
 ## Vérifier l'adresse IP locale du robot
 
-Connectez-vous avec les identifiants du robot, puis ouvrez un terminal depuis le bureau Linux. Une seule commande donne l'adresse IP locale et la passerelle. Elle ne sort pas du robot : elle lit sa table de routage.
+Connectez-vous avec les identifiants du robot, puis ouvrez un terminal depuis le bureau Linux. Une seule commande donne l'adresse IP locale et la passerelle.
 
 ```bash
 ip route get 1.1.1.1
@@ -71,7 +71,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles diffèrent, rendez au robot [son IP statique](/fr/hardware/configure-network#définir-une-ip-statique) pour le remettre là où les règles l'attendent.
+`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer [l'IP statique du robot](/fr/hardware/configure-network#définir-une-ip-statique) pour qu'elle corresponde à ce qui est configuré sur votre réseau.
 
 L'autre réponse possible est plus courte, et elle clôt la question du réseau.
 
@@ -79,7 +79,7 @@ L'autre réponse possible est plus courte, et elle clôt la question du réseau.
 RTNETLINK answers: Network is unreachable
 ```
 
-Le robot n'a aucune route, donc aucun lien. Reprenez le câble RJ45 et le port de switch avant de parler de pare-feu.
+Le robot n'a aucune route, donc aucun lien. Vérifiez le câble RJ45 et le port du switch.
 
 Joignez ensuite la passerelle, en reprenant l'adresse affichée après `via`.
 
@@ -97,14 +97,14 @@ ping -c 4 192.168.10.1
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
 ```
 
-La passerelle répond : le robot est bien sur son réseau, passez aux flux. L'autre réponse est celle-ci.
+La passerelle répond : le robot est bien sur son réseau, [passez aux flux](#vérifier-les-flux). L'autre réponse est celle-ci.
 
 ```
 --- 192.168.10.1 ping statistics ---
 4 packets transmitted, 0 received, 100% packet loss, time 3007ms
 ```
 
-Reprenez alors le câble RJ45 : il est peut-être défaillant, ou branché au mauvais endroit. Faites ensuite vérifier par votre service informatique qu'il aboutit sur un port de switch actif.
+Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au mauvais endroit. Faites ensuite vérifier par votre service informatique qu'il aboutit sur un port de switch actif.
 
 ## Vérifier les flux
 
@@ -152,55 +152,47 @@ Reprenez ensuite chaque ligne avec le nom de domaine à la place de l'adresse IP
 nc -zv -w 5 robots.example.com 443
 ```
 
+Le nom se résout et le flux passe :
+
+```
+Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
+```
+
+L'autre réponse est celle-ci :
+
 ```
 nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
-L'adresse IP passe et son nom échoue. Le pare-feu est hors de cause : c'est la résolution de noms. Renseignez le champ **DNS servers** à l'étape Saisir les adresses de [définir une IP statique](/fr/hardware/configure-network#définir-une-ip-statique).
+L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
 
-### Écarter un proxy qui déchiffre le trafic
+### Vérifier le certificat
 
-Un dernier échec ressemble à un succès : `nc` passe, et pourtant rien ne remonte. Sur une destination en HTTPS, demandez le code de retour.
+Dernière vérification. Reprenez les destinations du document qui sont en HTTPS, donc celles sur le port 443, et demandez le code de retour.
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' https://robots.example.com
 ```
 
+Vous devez obtenir `200` :
+
 ```
 200
 ```
 
-La connexion va de bout en bout. Il n'y a rien à faire sur cette destination.
+Toute autre réponse, et celle-ci en particulier, signale qu'un équipement de votre réseau s'intercale et présente son propre certificat.
 
 ```
 curl: (60) SSL certificate problem: unable to get local issuer certificate
 ```
 
-Un équipement s'est intercalé et présente son propre certificat, que le robot refuse. Pour le nommer, relevez la ligne `issuer`. L'option `-k` sert seulement à lire ce certificat, pas à lui faire confiance : sans elle, `curl` coupe avant de l'afficher.
-
-```bash
-curl -kv https://robots.example.com 2>&1 | grep issuer
-```
-
-Une autorité publique signe une connexion saine :
-
-```
-*  issuer: C=US; O=Let's Encrypt; CN=YR1
-```
-
-Le nom de votre propre entreprise à cette ligne désigne le proxy :
-
-```
-*  issuer: C=FR; O=Your Company; CN=Your Company Root CA
-```
-
-Demandez alors à votre service informatique d'exempter les destinations du document de l'inspection TLS.
+Remontez alors à votre service informatique que le trafic HTTPS vers les destinations du document est intercepté.
 
 ## Qui contacter
 
-Une ligne du document échoue, une passerelle reste muette, un certificat n'est pas le bon : le blocage est sur votre réseau. Transmettez la sortie complète de la commande à votre service informatique, avec l'adresse IP locale du robot et l'heure du test. Une fois la règle ouverte, rejouez la commande depuis le robot : le statut suit en quelques minutes.
+Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
 
-Tout passe et le robot reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée.
+Toutes les étapes de vérification de cette procédure ont fonctionné et le robot reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
 
 ## Et ensuite ?
 
