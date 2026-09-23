@@ -100,7 +100,8 @@
   "seo": {
     "metatags": {
       "robots": "index, follow",
-      "googlebot": "index, follow"
+      "googlebot": "index, follow",
+      "google-site-verification": "gToWXGlQh13lTgwYdJnZyf0z3XLRlEe4l-zcptxo2kw"
     }
   },
   "integrations": {
