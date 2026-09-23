@@ -59,7 +59,7 @@ Every page follows this structure:
 
     Content. Use components where they help, not for decoration.
 
-    ## What's Next?
+    ## What's next?
 
     <Columns cols={2}>
       <Card title="Related Page" icon="arrow-right" href="/path">
@@ -69,7 +69,7 @@ Every page follows this structure:
 </Card>
 </Columns>
 
-The opening paragraph comes right after frontmatter, with no heading before it. "What's Next?" is always the last section. Card descriptions explain why, not what ("Set up search for your docs", not "Search configuration page").
+The opening paragraph comes right after frontmatter, with no heading before it. "What's next?" is always the last section. Card descriptions explain why, not what ("Set up search for your docs", not "Search configuration page").
 
 ## Writing Style
 
@@ -118,7 +118,7 @@ Icons are Font Awesome Light names: "rocket", "code", "terminal", "book-open", "
 
 1. Create the `.mdx` file
 2. Add the page path (no `.mdx` extension) to `docs.json` in the right navigation group
-3. Link to it from related pages via "What's Next?" cards
+3. Link to it from related pages via "What's next?" cards
 
 **If you skip step 2, the page won't show up in the sidebar.** Read `docs.json` before creating pages so you understand the navigation structure.
 
@@ -127,7 +127,7 @@ Icons are Font Awesome Light names: "rocket", "code", "terminal", "book-open", "
 Check your work:
 - [ ] Frontmatter has both `title` and `description`
 - [ ] Opening paragraph exists (no heading before it)
-- [ ] Page ends with "What's Next?" cards
+- [ ] Page ends with "What's next?" cards
 - [ ] New pages are added to `docs.json` navigation
 - [ ] Code examples are complete and copy-pasteable
 - [ ] No invented components; only the ones listed above
