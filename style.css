@@ -605,3 +605,13 @@ article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:fir
   font-size: inherit;
   color: inherit;
 }
+
+/* ===== "Last updated on" line — smaller than the body text =====
+   Jamdesk renders it as <p class="mt-8 text-sm text-[--color-text-muted]">
+   with a <time> inside (vendored/components/navigation/LastUpdated.tsx).
+   The <time> element appears nowhere else in a page, so it is the anchor. */
+.prose p:has(> time[datetime]),
+p:has(> time[datetime]) {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
