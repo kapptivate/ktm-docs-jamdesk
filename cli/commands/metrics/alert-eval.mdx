@@ -1,12 +1,10 @@
 ---
-title: ktm metrics alert-eval
-description: >-
-  Run ktm metrics alert-eval to check InfluxDB metrics against threshold,
-  anomaly, and seven other alert rule types without Kapacitor.
-sidebarTitle: alert-eval
+title: "ktm metrics alert-eval"
+description: "Run ktm metrics alert-eval to check InfluxDB metrics against threshold, anomaly, and seven other alert rule types without Kapacitor."
+sidebarTitle: "alert-eval"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Evaluate metrics against alert rules
 
@@ -34,11 +32,11 @@ ktm metrics alert-eval --operator acme \
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--operator` | string | — | Operator slug (= InfluxDB database name) |
-| `--precision` | string | — | Query time precision (s, ms, u, ns) |
-| `--query` | string | — | InfluxQL query string |
-| `--rules` | string | — | Inline JSON alert rule array |
-| `--rules-file` | string | — | Path to JSON file with alert rule array |
+| `--operator` | string |  | Operator slug (= InfluxDB database name) |
+| `--precision` | string |  | Query time precision (s, ms, u, ns) |
+| `--query` | string |  | InfluxQL query string |
+| `--rules` | string |  | Inline JSON alert rule array |
+| `--rules-file` | string |  | Path to JSON file with alert rule array |
 
 ## Details
 
@@ -72,7 +70,7 @@ Typical SRE workflow: metrics query (explore data) → metrics alert-eval (check
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

@@ -1,12 +1,10 @@
 ---
-title: ktm init
-description: >-
-  Scaffold a ready-to-use Kapptivate test-authoring workspace with skills, MCP
-  config, and catalog layout using the ktm init command.
-sidebarTitle: init
+title: "ktm init"
+description: "Scaffold a ready-to-use Kapptivate test-authoring workspace with skills, MCP config, and catalog layout using the ktm init command."
+sidebarTitle: "init"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Scaffold an agent-ready test-authoring workspace (skills, MCP config, catalog layout)
 
@@ -48,17 +46,17 @@ ktm init -n
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--automation-url` | string | — | URL of the kapptivate-automation MCP endpoint; replaces the placeholder in .mcp.json |
+| `--automation-url` | string |  | URL of the kapptivate-automation MCP endpoint; replaces the placeholder in .mcp.json |
 | `--dir` | string | `.` | Directory to set the workspace up in (created if missing) |
-| `-n, --dry-run` | boolean | — | Print what would be created/updated without writing |
-| `--force` | boolean | — | Overwrite the embedded workspace files and skills. Merged and managed files are left as-is: .claude/settings.local.json, connected coding-agent configs, .ktm.json, and .ktm.local.json |
-| `--local-key` | boolean | — | Store the API key in a git-ignored .ktm.local.json (0600) in the workspace instead of the OS keychain |
-| `--no-input` | boolean | — | Never prompt; take values only from flags (CI-safe) |
-| `--operator` | string | — | Operator slug this workspace targets (recorded in .ktm.json). Skips the wizard's operator question; with --no-input, written as-is |
-| `--reconfigure` | boolean | — | Re-run the wizard on a configured workspace, keeping its recorded identity (env, operator, product): only rotates/re-verifies the API key and re-discovers the automation robot. catalog/ and pages/ are left untouched. Use --reset to change the operator, product, or host |
-| `--refresh-skills` | boolean | — | Delete and rewrite the .agents/skills/ folders and their .claude/skills/ links from this binary's embedded version (other files keep skip-if-exists semantics) |
-| `--reset` | boolean | — | Re-scope a configured workspace: re-ask operator/product/host and rewrite .ktm.json. DESTRUCTIVE — clears catalog/ unconditionally (regenerable) and, after confirmation, pages/ (your hand-verified selectors); with --no-input pages/ is cleared without asking. --reset overrides --reconfigure |
-| `--wire` | string[] | — | Coding agents to connect the kapptivate-automation MCP to (claude, cursor, vscode, codex, gemini). Writes project-scoped config files; useful with --no-input |
+| `-n, --dry-run` | boolean |  | Print what would be created/updated without writing |
+| `--force` | boolean |  | Overwrite the embedded workspace files and skills. Merged and managed files are left as-is: .claude/settings.local.json, connected coding-agent configs, .ktm.json, and .ktm.local.json |
+| `--local-key` | boolean |  | Store the API key in a git-ignored .ktm.local.json (0600) in the workspace instead of the OS keychain |
+| `--no-input` | boolean |  | Never prompt; take values only from flags (CI-safe) |
+| `--operator` | string |  | Operator slug this workspace targets (recorded in .ktm.json). Skips the wizard's operator question; with --no-input, written as-is |
+| `--reconfigure` | boolean |  | Re-run the wizard on a configured workspace, keeping its recorded identity (env, operator, product): only rotates/re-verifies the API key and re-discovers the automation robot. catalog/ and pages/ are left untouched. Use --reset to change the operator, product, or host |
+| `--refresh-skills` | boolean |  | Delete and rewrite the .agents/skills/ folders and their .claude/skills/ links from this binary's embedded version (other files keep skip-if-exists semantics) |
+| `--reset` | boolean |  | Re-scope a configured workspace: re-ask operator/product/host and rewrite .ktm.json. DESTRUCTIVE — clears catalog/ unconditionally (regenerable) and, after confirmation, pages/ (your hand-verified selectors); with --no-input pages/ is cleared without asking. --reset overrides --reconfigure |
+| `--wire` | string[] |  | Coding agents to connect the kapptivate-automation MCP to (claude, cursor, vscode, codex, gemini). Writes project-scoped config files; useful with --no-input |
 
 ## Details
 
@@ -112,7 +110,7 @@ Works offline and requires no authentication.
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

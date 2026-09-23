@@ -1,12 +1,10 @@
 ---
-title: ktm executions list
-description: >-
-  List, filter, and search test executions for a product using the ktm CLI, with
-  options for status, date range, and creator.
-sidebarTitle: list
+title: "ktm executions list"
+description: "List, filter, and search test executions for a product using the ktm CLI, with options for status, date range, and creator."
+sidebarTitle: "list"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 List recent test executions for a product
 
@@ -39,16 +37,16 @@ ktm executions list --product my-operator~my-product -o table
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--creator` | string | — | Filter by creator username |
-| `--from-date` | string | — | Only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z) |
-| `--operator` | string | — | Operator slug (from 'operators list') |
-| `--ordering` | string | — | Sort field: created or -created (default: -created) |
-| `--page` | string | — | Page number to fetch (default: 1) |
-| `--page-size` | string | — | Number of executions per page (default: 20, max: 4000) |
-| `--product` | string | — | Product slug (format: operator~product, from 'products list') |
-| `--search` | string | — | Free-text search across execution name and tags |
-| `--status` | string | — | Filter by execution status: success, failed, ongoing, pending, canceled, timed out, maintenance |
-| `--to-date` | string | — | Only include executions before this date (ISO 8601) |
+| `--creator` | string |  | Filter by creator username |
+| `--from-date` | string |  | Only include executions after this date (ISO 8601, e.g. 2025-01-01T00:00:00Z) |
+| `--operator` | string |  | Operator slug (from 'operators list') |
+| `--ordering` | string |  | Sort field: created or -created (default: -created) |
+| `--page` | string |  | Page number to fetch (default: 1) |
+| `--page-size` | string |  | Number of executions per page (default: 20, max: 4000) |
+| `--product` | string |  | Product slug (format: operator~product, from 'products list') |
+| `--search` | string |  | Free-text search across execution name and tags |
+| `--status` | string |  | Filter by execution status: success, failed, ongoing, pending, canceled, timed out, maintenance |
+| `--to-date` | string |  | Only include executions before this date (ISO 8601) |
 
 ## Details
 
@@ -72,7 +70,7 @@ or locate a specific execution by name or time range.
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

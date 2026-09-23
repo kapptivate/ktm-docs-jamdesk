@@ -104,6 +104,9 @@
       "google-site-verification": "gToWXGlQh13lTgwYdJnZyf0z3XLRlEe4l-zcptxo2kw"
     }
   },
+  "metadata": {
+    "timestamp": true
+  },
   "integrations": {
     "ga4": {
       "measurementId": "G-61CX3HXZ0P"

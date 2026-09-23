@@ -4,7 +4,7 @@ description: "List tests, optionally filtered by operator and product"
 sidebarTitle: "list"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 List tests, optionally filtered by operator and product
 
@@ -37,15 +37,15 @@ ktm tests list --operator my-operator --page 2 --page-size 50
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--archived` | string | — | Include archived tests: true, false (default: false = non-archived only) |
-| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
-| `--name` | string | — | Filter by test name (substring match, case-insensitive) |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-| `--ordering` | string | — | Sort by field: name, created, modified (prefix with - for descending) |
-| `--page` | string | — | Page number to fetch (default: 1) |
-| `--page-size` | string | — | Number of results per page (default: 20; pass a larger value to fetch more) |
-| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
-| `--tags` | string[] | — | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
+| `--archived` | string |  | Include archived tests: true, false (default: false = non-archived only) |
+| `--fields` | string |  | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--name` | string |  | Filter by test name (substring match, case-insensitive) |
+| `--operator` | string |  | Operator slug (from 'operators list') to scope results |
+| `--ordering` | string |  | Sort by field: name, created, modified (prefix with - for descending) |
+| `--page` | string |  | Page number to fetch (default: 1) |
+| `--page-size` | string |  | Number of results per page (default: 20; pass a larger value to fetch more) |
+| `--product` | string |  | Product slug (from 'products list', format: operator~product) to scope results |
+| `--tags` | string[] |  | Comma-separated list of tags to filter by (e.g., --tags smoke,regression) |
 
 ## Details
 
@@ -70,7 +70,7 @@ Table columns:      ID, NAME, PRODUCT, STATUS, KIND, ARCHIVED
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

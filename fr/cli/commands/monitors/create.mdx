@@ -4,7 +4,7 @@ description: "Créer un nouveau monitor pour un test existant"
 sidebarTitle: "create"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Créer un nouveau monitor pour un test existant
 
@@ -46,16 +46,16 @@ ktm monitors create ... --confirm   --scheduling '{"type":"simple/v2","definitio
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--confirm` | boolean | — | Soumettre le payload auto-construit après avoir examiné l'aperçu |
-| `--force` | boolean | — | Ignorer l'aperçu, construire et soumettre en une étape (uniquement pour l'automatisation CI/CD) |
-| `--from-file` | string | — | Fichier JSON avec owners, input_variables, scheduling, options (soumet directement ; --variant ignoré) |
-| `--name` | string | — | Nom du monitor (par défaut le nom du test) |
-| `--product` | string | — | Slug du produit (requis, format : operator~product) |
-| `--scheduling` | string | — | Objet JSON de planification. Types : simple/v2 (intervalle), advanced/v2 (fenêtre temporelle avec "at" ou "between"). Défaut : simple/v2 toutes les 5 min. Voir les exemples dans --help. |
-| `--set-var` | string[] | — | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE) |
+| `--confirm` | boolean |  | Soumettre le payload auto-construit après avoir examiné l'aperçu |
+| `--force` | boolean |  | Ignorer l'aperçu, construire et soumettre en une étape (uniquement pour l'automatisation CI/CD) |
+| `--from-file` | string |  | Fichier JSON avec owners, input_variables, scheduling, options (soumet directement ; --variant ignoré) |
+| `--name` | string |  | Nom du monitor (par défaut le nom du test) |
+| `--product` | string |  | Slug du produit (requis, format : operator~product) |
+| `--scheduling` | string |  | Objet JSON de planification. Types : simple/v2 (intervalle), advanced/v2 (fenêtre temporelle avec "at" ou "between"). Défaut : simple/v2 toutes les 5 min. Voir les exemples dans --help. |
+| `--set-var` | string[] |  | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE) |
 | `--start` | boolean | `true; --start=false crée en pause) (défaut true` | Démarrer le monitor immédiatement après sa création |
-| `--test-id` | int | — | ID du test à monitorer (requis) |
-| `--variant` | string[] | — | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. Les globales émettent toujours un bucket global. |
+| `--test-id` | int |  | ID du test à monitorer (requis) |
+| `--variant` | string[] |  | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. Les globales émettent toujours un bucket global. |
 
 ## Détails
 

@@ -4,7 +4,7 @@ description: "Lister les monitors, avec filtrage optionnel par operator et produ
 sidebarTitle: "list"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Lister les monitors, avec filtrage optionnel par operator et produit
 
@@ -34,13 +34,13 @@ ktm monitors list --operator my-operator --product my-operator~my-product -o jso
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--active` | string | — | Filtrer par statut actif : true, false, ou séparés par des virgules (ex. true,false) |
-| `--archived` | string | — | Filtrer par statut archivé (true/false). Utilisé uniquement avec --device-type et --device-id. |
-| `--device-id` | string | — | Identifiant de l'appareil (SIM : national_msisdn, web-agent : hostname, smartphone : UUID). Nécessite --device-type. |
-| `--device-type` | string | — | Type d'appareil : sim, web-agent, ou smartphone. Nécessite --device-id et --operator. |
-| `--fields` | string | — | Restreindre la réponse JSON à ces champs (liste blanche séparée par des virgules) |
-| `--operator` | string | — | Slug de l'operator (depuis 'operators list') pour limiter les résultats |
-| `--product` | string | — | Slug du produit (depuis 'products list', format : operator~product) pour limiter les résultats |
+| `--active` | string |  | Filtrer par statut actif : true, false, ou séparés par des virgules (ex. true,false) |
+| `--archived` | string |  | Filtrer par statut archivé (true/false). Utilisé uniquement avec --device-type et --device-id. |
+| `--device-id` | string |  | Identifiant de l'appareil (SIM : national_msisdn, web-agent : hostname, smartphone : UUID). Nécessite --device-type. |
+| `--device-type` | string |  | Type d'appareil : sim, web-agent, ou smartphone. Nécessite --device-id et --operator. |
+| `--fields` | string |  | Restreindre la réponse JSON à ces champs (liste blanche séparée par des virgules) |
+| `--operator` | string |  | Slug de l'operator (depuis 'operators list') pour limiter les résultats |
+| `--product` | string |  | Slug du produit (depuis 'products list', format : operator~product) pour limiter les résultats |
 
 ## Détails
 

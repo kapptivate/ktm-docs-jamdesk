@@ -3,12 +3,14 @@
     "ci_build": {
       "notes": [
         "Builds a campaign template locally and prints JSON — it does **not** execute anything. Fill in the values, then pipe it to [`ktm ci run`](/cli/commands/ci/run) with `--stdin`."
-      ]
+      ],
+      "metaDescription": "Generate a local-only campaign JSON template with ktm ci build using test IDs or a saved Tests campaign, then pipe it into ci run."
     },
     "ci_run": {
       "notes": [
         "Executes a campaign produced by [`ktm ci build`](/cli/commands/ci/build) (from a file or `--stdin`). Use `--junit-file` / `--output-file` for CI reporting; the exit code is non-zero when any test fails."
-      ]
+      ],
+      "metaDescription": "Run and poll Kapptivate tests from JSON configs or campaign JSON via the ktm ci run command, then report JUnit or JSON results."
     },
     "tests_get": {
       "notes": [
@@ -68,12 +70,221 @@
     "alerts": {
       "notes": [
         "Alert definitions are the persistent rules that trigger incidents. The incidents they raise are managed under [`ktm incidents`](/cli/commands/incidents)."
-      ]
+      ],
+      "metaDescription": "Manage ktm alerts from the CLI to view and list persistent alert definitions that automatically trigger incidents on the platform."
     },
     "incidents": {
       "notes": [
         "Incidents are triggered alert occurrences (OPEN / CLOSED). The rules that create them live under [`ktm alerts`](/cli/commands/alerts)."
-      ]
+      ],
+      "metaDescription": "Manage KTM incidents from the CLI to list, view, close, and count triggered alerts across OPEN, CLOSED, and MANUALLY_CLOSED states."
+    },
+    "adb": {
+      "metaDescription": "Connect Android Studio or the ADB CLI to remote phones via a secure tunnel, then enable, monitor, and disable device access per agent."
+    },
+    "adb_connect": {
+      "metaDescription": "Run `ktm adb connect` to open a local ADB tunnel to a remote phone, exposing it to Android Studio and your local ADB server."
+    },
+    "adb_disable": {
+      "metaDescription": "Learn how to use the ktm adb disable command to turn off an agent's ADB bridge and terminate all active device connections."
+    },
+    "adb_enable": {
+      "metaDescription": "Enable the ADB bridge on an agent with ktm adb enable so its phones accept ktm adb connect, without restarting the agent."
+    },
+    "adb_status": {
+      "metaDescription": "Check each Android phone's agent, ADB bridge status, and current connection holder using the ktm adb status command."
+    },
+    "agents": {
+      "metaDescription": "Manage ktm agents with the CLI to monitor infrastructure health, control capacity, list slots, and toggle runtime adapter features."
+    },
+    "agents_adapters": {
+      "metaDescription": "List, enable, disable and configure an agent's runtime-controllable adapters, including ADB bridge settings, using the ktm agents adapters command."
+    },
+    "agents_get": {
+      "metaDescription": "Use the ktm agents get command to view detailed health, capacity, and slot information for a single agent by hostname or UUID."
+    },
+    "agents_list": {
+      "metaDescription": "Learn how to use the ktm agents list command to list agents for an operator, with filtering options by type and zone."
+    },
+    "agents_maintenance": {
+      "metaDescription": "Use the ktm agents maintenance command to enable or disable maintenance mode and pause or resume test execution on an agent."
+    },
+    "agents_reboot": {
+      "metaDescription": "Use the ktm agents reboot command to restart a cellular, ethernet, or smartphone agent or a specific SIM slot."
+    },
+    "alerts_get": {
+      "metaDescription": "Retrieve a specific alert definition's configuration and notification settings by ID using the ktm alerts get CLI command."
+    },
+    "alerts_list": {
+      "metaDescription": "Use the ktm alerts list command to view configured alert definitions for an operator, filtering by type, name, or archived status."
+    },
+    "artifacts": {
+      "metaDescription": "Learn how to use the ktm artifacts command to fetch screenshots, recordings, and other test artifacts from the CLI."
+    },
+    "artifacts_get": {
+      "metaDescription": "Use ktm artifacts get to download screenshots, logs, or traces by URL or relative path directly from the command line."
+    },
+    "ci": {
+      "metaDescription": "Run CI/CD tests with ktm ci by executing JSON config files, polling for results, and reporting outcomes automatically."
+    },
+    "collections": {
+      "metaDescription": "Manage the ktm collections command to organize tests and dashboards into a hierarchical tree using create, move, rename, and search subcommands."
+    },
+    "collections_can-edit": {
+      "metaDescription": "Check edit permissions for a collection using the ktm collections can-edit command, which returns a simple can_edit boolean via the CLI."
+    },
+    "collections_create": {
+      "metaDescription": "Learn how to use the ktm collections create command to add a new sub-collection under a specified parent collection UID."
+    },
+    "collections_delete": {
+      "metaDescription": "Learn how to use ktm collections delete to soft-delete a collection into the organization's trash, requiring the --yes confirmation flag."
+    },
+    "collections_get": {
+      "metaDescription": "Use the ktm collections get command to fetch a collection's metadata and breadcrumb path by UID for a specified operator."
+    },
+    "collections_items": {
+      "metaDescription": "Learn how to use the ktm collections items command to list paginated tests and dashboards inside a specified collection."
+    },
+    "collections_list": {
+      "metaDescription": "Use the ktm collections list command to view direct child collections of a specified parent UID within an operator scope."
+    },
+    "collections_move-items": {
+      "metaDescription": "Learn how to use the ktm collections move-items command to atomically relocate tests or dashboards into a target collection via the CLI."
+    },
+    "collections_move": {
+      "metaDescription": "Learn how to use the ktm collections move command to reparent a collection under a new parent UID via the CLI."
+    },
+    "collections_search": {
+      "metaDescription": "Search collections and items within a collection sub-tree using the ktm CLI, with support for filtering by query, tags, and owner ID."
+    },
+    "dashboards": {
+      "metaDescription": "Manage ktm dashboards from the CLI, including creating, listing, updating, and configuring widgets for operator-level analytics."
+    },
+    "dashboards_add-widget": {
+      "metaDescription": "Add a widget to a dashboard from a JSON file or stdin, using auto-positioning or explicit grid coordinates and size."
+    },
+    "dashboards_build": {
+      "metaDescription": "Use ktm dashboards build to atomically create dashboards with all widgets validated upfront and auto-positioned, previewing layouts via dry-run."
+    },
+    "dashboards_create": {
+      "metaDescription": "Use the ktm dashboards create command to quickly generate a new empty dashboard under an operator with a required name."
+    },
+    "dashboards_edit-widget": {
+      "metaDescription": "Use ktm dashboards edit-widget to replace a widget's data from a JSON file or stdin while keeping its type unchanged."
+    },
+    "dashboards_get": {
+      "metaDescription": "Retrieve a dashboard's full definition by UID using the ktm CLI, including widget layouts, filters, and metadata."
+    },
+    "dashboards_list-widget-types": {
+      "metaDescription": "Learn how to use the ktm dashboards list-widget-types command to view available widget types, their constraints, and grid sizes."
+    },
+    "dashboards_remove-widget": {
+      "metaDescription": "Learn how to use the ktm dashboards remove-widget command to delete a specific widget from a dashboard by its ID via the CLI."
+    },
+    "dashboards_update": {
+      "metaDescription": "Update dashboard metadata like name, bucket, and favorite status using the ktm dashboards update command with simple flags."
+    },
+    "dashboards_validate-widget": {
+      "metaDescription": "Validate a dashboard widget JSON file with the ktm CLI, checking structure, query fields, and type-specific constraints before deployment."
+    },
+    "dashboards_widget-template": {
+      "metaDescription": "Generate a JSON template for ktm dashboards widget-template widgets like line, counter, and customDisplay charts easily."
+    },
+    "executions": {
+      "metaDescription": "Explore the ktm executions command to view campaign run results, including detailed per-test pass/fail data for your product."
+    },
+    "executions_get": {
+      "metaDescription": "Retrieve detailed results for a specific test execution by ID, including status, pass/fail counts, and full JSON output via the ktm CLI."
+    },
+    "executions_list": {
+      "metaDescription": "List, filter, and search test executions for a product using the ktm CLI, with options for status, date range, and creator."
+    },
+    "incidents_close": {
+      "metaDescription": "Learn how to use the ktm incidents close command to manually close an active incident by ID for a specified operator via the CLI."
+    },
+    "incidents_counter": {
+      "metaDescription": "Use the ktm incidents counter command to quickly retrieve critical, warning, and closed incident counts for any operator."
+    },
+    "incidents_get": {
+      "metaDescription": "Use the ktm incidents get command to retrieve a single incident's tags, status, level, duration, and alert source by ID."
+    },
+    "incidents_list": {
+      "metaDescription": "Use the ktm incidents list command to filter, paginate, and review triggered alert incidents by status, alert ID, or date range."
+    },
+    "init": {
+      "metaDescription": "Scaffold a ready-to-use Kapptivate test-authoring workspace with skills, MCP config, and catalog layout using the ktm init command."
+    },
+    "login": {
+      "metaDescription": "Authenticate with the ktm CLI using OAuth 2.1 + PKCE to securely log in to Kapptivate and store your access token."
+    },
+    "logout": {
+      "metaDescription": "Use the ktm logout command to clear stored OAuth tokens from your keychain and revoke them server-side when possible."
+    },
+    "metrics": {
+      "metaDescription": "Use the ktm metrics command to query monitor KPIs, passive collector data, and device utilization stored in InfluxDB."
+    },
+    "metrics_alert-eval": {
+      "metaDescription": "Run ktm metrics alert-eval to check InfluxDB metrics against threshold, anomaly, and seven other alert rule types without Kapacitor."
+    },
+    "metrics_correlate": {
+      "metaDescription": "Run ktm metrics correlate to detect correlation, distribution shift, and lag across InfluxQL queries with configurable analysis modes."
+    },
+    "metrics_peak-usage": {
+      "metaDescription": "Retrieve P95 peak resource usage across custom time aggregation windows using the ktm metrics peak-usage CLI command with flags."
+    },
+    "monitoring-results": {
+      "metaDescription": "Use the ktm monitoring-results command to view and list run outcomes from your scheduled monitors directly via the CLI."
+    },
+    "monitors": {
+      "metaDescription": "Manage ktm monitors via CLI to create, edit, list, toggle, and force-run scheduled test executions with status tracking."
+    },
+    "operators": {
+      "metaDescription": "Manage ktm operators with the CLI to list top-level entities that own products, tests, and users in your organization."
+    },
+    "products": {
+      "metaDescription": "Manage ktm products with the CLI, including listing applications or services under an operator that contain tests and monitors."
+    },
+    "resources": {
+      "metaDescription": "Explore the ktm resources command to list and get details on SIMs, web agents, and smartphones for test execution."
+    },
+    "reusables": {
+      "metaDescription": "Manage reusable test fragments with the ktm CLI, including getting definitions, listing usage, and viewing embedded tests."
+    },
+    "shell": {
+      "metaDescription": "Run interactive live shell commands on SIM cards and web agents, sending USSD, SMS, calls, or HTTP requests in real time."
+    },
+    "status": {
+      "metaDescription": "Run \"ktm status\" to verify CLI connectivity, authentication state, host configuration, version, and API latency before running commands."
+    },
+    "test-campaigns": {
+      "metaDescription": "Manage ktm test-campaigns from the CLI to create, list, update, delete, and fetch saved test packs before running them."
+    },
+    "tests": {
+      "metaDescription": "Manage automated test scenarios with the ktm CLI: create, edit, validate, archive, restore, and inspect tests from your terminal."
+    },
+    "update": {
+      "metaDescription": "Learn how to use ktm update to check for, download, and install the latest ktm CLI release, or pin a specific version."
+    },
+    "use": {
+      "metaDescription": "Use ktm use to view or switch the workspace's default product stored in .ktm.json, streamlining commands that rely on --product."
+    },
+    "users": {
+      "metaDescription": "Manage human users and service accounts with the ktm users command, including activation, deactivation, and listing options."
+    },
+    "variables": {
+      "metaDescription": "Manage ktm variables, groups, and variants with dedicated subcommands for creating, listing, updating, and deleting configuration values."
+    },
+    "variables_groups": {
+      "metaDescription": "Variable groups: environment configurations holding a set of variants"
+    },
+    "variables_variants": {
+      "metaDescription": "Variants: environment slices inside a variable group (dev, staging, prod, …)"
+    },
+    "whoami": {
+      "metaDescription": "Check which identity the ktm CLI authenticates as using ktm whoami, revealing API key or stored OAuth token details."
     }
+  },
+  "overview": {
+    "description": "Explore the ktm CLI's 149 commands across 28 groups, covering global flags, resources, monitors, incidents, and more."
   }
 }

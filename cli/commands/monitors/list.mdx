@@ -4,7 +4,7 @@ description: "List monitors, optionally filtered by operator and product"
 sidebarTitle: "list"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 List monitors, optionally filtered by operator and product
 
@@ -34,13 +34,13 @@ ktm monitors list --operator my-operator --product my-operator~my-product -o jso
 
 | Flag | Type | Default | Description |
 | --- | --- | --- | --- |
-| `--active` | string | — | Filter by active status: true, false, or comma-separated (e.g. true,false) |
-| `--archived` | string | — | Filter by archived status (true/false). Only used with --device-type and --device-id. |
-| `--device-id` | string | — | Device identifier (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Requires --device-type. |
-| `--device-type` | string | — | Device type: sim, web-agent, or smartphone. Requires --device-id and --operator. |
-| `--fields` | string | — | Restrict JSON response to these fields (comma-separated whitelist) |
-| `--operator` | string | — | Operator slug (from 'operators list') to scope results |
-| `--product` | string | — | Product slug (from 'products list', format: operator~product) to scope results |
+| `--active` | string |  | Filter by active status: true, false, or comma-separated (e.g. true,false) |
+| `--archived` | string |  | Filter by archived status (true/false). Only used with --device-type and --device-id. |
+| `--device-id` | string |  | Device identifier (SIM: national_msisdn, web-agent: hostname, smartphone: UUID). Requires --device-type. |
+| `--device-type` | string |  | Device type: sim, web-agent, or smartphone. Requires --device-id and --operator. |
+| `--fields` | string |  | Restrict JSON response to these fields (comma-separated whitelist) |
+| `--operator` | string |  | Operator slug (from 'operators list') to scope results |
+| `--product` | string |  | Product slug (from 'products list', format: operator~product) to scope results |
 
 ## Details
 
@@ -74,7 +74,7 @@ of recent execution results (id, status, created).
   Global flags (`--output`, `--debug`, `--host`, …) apply to every command. See the [command reference overview](/cli/commands/overview).
 </Note>
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="All commands" icon="terminal" href="/cli/commands/overview">

@@ -4,7 +4,7 @@ description: "Créer un nouveau test à partir d'un fichier JSON"
 sidebarTitle: "create"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Créer un nouveau test à partir d'un fichier JSON
 
@@ -43,13 +43,13 @@ ktm tests create --from-file test.json --product acme~web --skip-validation
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--auto-correct-kinds` | boolean | — | Réécrire les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Sans ce flag, les décalages de kind sont des erreurs bloquantes. |
-| `--from-file` | string | — | Chemin vers le fichier JSON contenant la définition du test (requis) |
+| `--auto-correct-kinds` | boolean |  | Réécrire les kinds d'input_variable déclarés pour correspondre aux types de variables de la plateforme. Sans ce flag, les décalages de kind sont des erreurs bloquantes. |
+| `--from-file` | string |  | Chemin vers le fichier JSON contenant la définition du test (requis) |
 | `--kind` | int | `1` | Kind du test : 1=test, 2=composant reusable |
-| `--name` | string | — | Remplacer le nom du test depuis le fichier JSON |
-| `--product` | string | — | Slug du produit (requis, format : operator~product) |
-| `--skip-validation` | boolean | — | Contourne le validateur côté client (la plateforme valide toujours). À utiliser lorsque le validateur du CLI est en retard sur le moteur (types de step/action futurs). La résolution de bucket V3 s'exécute quand même : l'API exige des buckets à la création. |
-| `--variant` | string[] | — | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. |
+| `--name` | string |  | Remplacer le nom du test depuis le fichier JSON |
+| `--product` | string |  | Slug du produit (requis, format : operator~product) |
+| `--skip-validation` | boolean |  | Contourne le validateur côté client (la plateforme valide toujours). À utiliser lorsque le validateur du CLI est en retard sur le moteur (types de step/action futurs). La résolution de bucket V3 s'exécute quand même : l'API exige des buckets à la création. |
+| `--variant` | string[] |  | Fixer un variant pour un groupe de variables. Répétable. Formes : '5' (identifiant numérique du variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés utilisent leur variant par défaut. |
 
 ## Détails
 

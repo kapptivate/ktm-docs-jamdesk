@@ -4,7 +4,7 @@ description: "Modifier un monitor existant"
 sidebarTitle: "edit"
 ---
 
-{/* GENERATED FILE — do not edit by hand. Regenerate with: node scripts/generate.mjs */}
+{/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
 Modifier un monitor existant
 
@@ -43,12 +43,12 @@ ktm monitors edit 42 --from-file patch.json
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--active` | string | — | Nouveau statut actif (true/false) |
-| `--from-file` | string | — | Fichier JSON avec les champs à mettre à jour |
-| `--name` | string | — | Nouveau nom du monitor |
-| `--scheduling` | string | — | Nouveau JSON de planification |
-| `--set-var` | string[] | — | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE). Reconstruit owners + input_variables depuis la définition du test. |
-| `--variant` | string[] | — | Re-fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant ; pour les monitors legacy en cours de migration, les groupes non fixés utilisent le défaut par variable. |
+| `--active` | string |  | Nouveau statut actif (true/false) |
+| `--from-file` | string |  | Fichier JSON avec les champs à mettre à jour |
+| `--name` | string |  | Nouveau nom du monitor |
+| `--scheduling` | string |  | Nouveau JSON de planification |
+| `--set-var` | string[] |  | Remplacer la valeur d'une variable (répétable, format : NAME=VALUE). Reconstruit owners + input_variables depuis la définition du test. |
+| `--variant` | string[] |  | Re-fixer un variant pour un groupe de variables. Répétable. Formes : '5' (ID numérique de variant) ou 'API:Staging' (group:variant par nom). Les groupes non fixés conservent leur bucket existant ; pour les monitors legacy en cours de migration, les groupes non fixés utilisent le défaut par variable. |
 
 ## Détails
 

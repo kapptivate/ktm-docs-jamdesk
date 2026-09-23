@@ -3,9 +3,9 @@ title: API Call
 description: Send an HTTP request in the middle of a web test, and assert on the response.
 ---
 
-![The test editor with an API Call step selected: the step row carries the method and the URL, and the right panel shows the General, Variables, Checks, and Advanced settings tabs with the response placeholder](/images/api-call-step.webp)
-
 A test that only drives a browser cannot see what is underneath it. The **API Call** step sends an HTTP request from the same run: seed a record before the UI walks over it, read back what a form just wrote, or check the API a page depends on before blaming the page. It sits in the scenario like any other step, and every field accepts [variables](/tests/variables).
+
+![The test editor with an API Call step selected: the step row carries the method and the URL, and the right panel shows the General, Variables, Checks, and Advanced settings tabs with the response placeholder](/images/api-call-step.webp)
 
 <Warning>
 The step needs an up-to-date robot. On an older one it fails. Check your robot versions on the [Agents](/equipment/agents) page and update them before adding API Call steps. The step is available in **Web (New experience)** tests, with smartphone tests to follow.
@@ -78,7 +78,7 @@ In the run results, an API Call step opens on four tabs:
 - **Settings**: DNS override, certificates, cookies, and redirects as they ran.
 - **Variables**: the variables this step used.
 
-## What's Next?
+## What's next?
 
 <Columns cols={2}>
   <Card title="API scenarios" icon="cloud" href="/tests/actions/api/overview">

@@ -87,7 +87,7 @@ async function buildMcp(args) {
   }
   catalog.items = sanitizeItems(catalog.items);
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.mcp));
-  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'tools') };
+  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'tools'), overview: overlay.overview || {} };
 
   const files = new Map();
   files.set(CATALOG.mcp, catalogJSON(catalog));
@@ -120,7 +120,7 @@ async function buildCli(args) {
   }
   catalog.items = sanitizeItems(catalog.items);
   const overlay = await loadOverlay(path.join(ROOT, OVERLAY.cli));
-  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'commands') };
+  const renderCatalog = { ...catalog, items: attachOverlay(catalog.items, overlay, 'commands'), overview: overlay.overview || {} };
 
   const files = new Map();
   files.set(CATALOG.cli, catalogJSON(catalog));
