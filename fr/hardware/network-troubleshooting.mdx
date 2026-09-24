@@ -3,19 +3,19 @@ title: Dépanner un robot Offline
 description: Faire remonter un robot passé Offline, du redémarrage physique jusqu'aux flux réseau que votre service informatique doit ouvrir.
 ---
 
-La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe reste de le redémarrer physiquement. S'il reste **Offline** après ce redémarrage, vérifiez sa configuration réseau. Cette page déroule les deux dans l'ordre.
+La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe reste de le redémarrer physiquement. S'il reste **Offline** après ce redémarrage, vérifiez sa configuration réseau.
 
 ## Avant de vous déplacer
 
-Ouvrez la fiche du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 4 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots du même site.
+Ouvrez la page détails du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 4 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots **Offline** s'il y en a.
 
-Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer au niveau du robot. Si le problème concerne plusieurs robots, tombés au même moment, l'investigation est à effectuer au niveau du site qui héberge les robots. Dans ce cas, prévenez votre service informatique.
+Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer au niveau du robot. Si le problème concerne plusieurs robots, tombés au même moment et situés au même endroit, alors l'investigation est à effectuer au niveau du site qui héberge les robots. Dans ce cas, prévenez votre service informatique.
 
-<Frame caption="La fiche d'un robot Offline sur la plateforme">
-  ![La fiche du robot demo-web-1, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
+<Frame caption="La page détails d'un robot Offline sur la plateforme">
+  ![La page détails du robot demo-web-1, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
 </Frame>
 
-Le bouton **Redémarrer l'agent** ne sert à rien sur un robot **Offline** : la commande emprunte le lien qui est justement coupé. Seul un redémarrage physique le fait remonter.
+Le bouton **Redémarrer l'agent** n'a aucun effet sur un robot **Offline** : la commande emprunte le lien qui est justement coupé. Seul un redémarrage physique peut le faire remonter.
 
 ## Ce qu'il vous faut sur place
 
@@ -28,9 +28,9 @@ Le bouton **Redémarrer l'agent** ne sert à rien sur un robot **Offline** : la 
 
 Partez de ce que vous venez de lire sur la plateforme.
 
-| Ce que vous constatez | Ce que vous vérifiez | Où aller |
+| Ce que vous constatez | Ce qu'il faut vérifier | Où aller |
 |---|---|---|
-| Un seul robot du site est **Offline** | le robot, son alimentation, son câble réseau | [Redémarrer le robot](#redémarrer-le-robot) |
+| Un seul robot est **Offline** | le robot, son alimentation, son câble réseau | [Redémarrer le robot](#redémarrer-le-robot) |
 | Tous les robots du site sont tombés à la même heure | le site : courant, réseau, pare-feu | [Vérifier les flux](#vérifier-les-flux), après le passage de votre service informatique |
 | Sur place, l'écran reste noir ou les voyants se figent | le matériel | [Un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus) |
 
@@ -50,13 +50,13 @@ Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez
 - Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus).
 - Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
 
-Si vous avez modifié un branchement, rallumez le robot et relisez son statut. Si vous avez tout vérifié, et que tout semble correctement branché et allumé, passez à [vérifier l'adresse IP locale du robot](#vérifier-ladresse-ip-locale-du-robot).
+Si vous avez modifié un branchement, redémarrez le robot à l'aide du bouton en façade et relisez son statut. Si vous avez tout vérifié, et que tout semble correctement branché et allumé, passez à [vérifier l'adresse IP locale du robot](#vérifier-ladresse-ip-locale-du-robot).
 
 ## Un robot qui ne démarre plus
 
-La façade est allumée, l'écran reste noir : le robot ne démarre plus. Sur un robot cellulaire, vous constatez aussi que les voyants ne clignotent plus. Vérifiez d'abord la source d'entrée de l'écran, qui doit correspondre au câble branché.
+La façade est allumée, l'écran reste noir : le robot ne démarre plus. Sur un robot cellulaire, vous constatez aussi que les voyants ne clignotent plus.
 
-Si la source est la bonne et que rien ne change après deux redémarrages, arrêtez-vous là. Aucune commande ne s'exécute, et le reste de cette page ne vous sert à rien. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, filmez la façade et joignez la vidéo.
+Si rien ne change après deux redémarrages, arrêtez-vous là. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, joignez aussi à votre message une vidéo de la façade avant du robot. Cela aidera le support dans ses investigations.
 
 ## Vérifier l'adresse IP locale du robot
 
@@ -110,43 +110,13 @@ Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au m
 
 Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : la page s'arrête pour vous à la passerelle. Ce qui suit ne vaut que sur un réseau d'entreprise filtré.
 
-Le document des exigences IP liste alors les destinations que le robot doit joindre, avec leur port. Elles sont indépendantes : le pilotage, la remontée des résultats et l'accès du support passent chacun par la sienne. Un robot peut donc recevoir ses tests sans en remonter un seul résultat. Testez toutes les lignes, pas seulement celle qui vous paraît en cause.
+Vérifiez que tous les flux du document des exigences IP sont bien ouverts, pas seulement celui qui vous paraît en cause. Le document donne la commande de chaque flux et la lecture de ses réponses : lancez-les depuis le robot lui-même.
 
-Toutes ces connexions partent du robot. Aucun flux entrant depuis internet n'est nécessaire.
-
-<Tip>
-  Les règles sont ouvertes pour l'adresse IP du robot. Le même test depuis une autre machine peut réussir alors que le robot échoue : lancez ces commandes sur le robot lui-même.
-</Tip>
-
-Prenez le document ligne par ligne, en remplaçant `ADDRESS` et `PORT` par les valeurs qu'il donne.
-
-```bash
-nc -zv -w 5 ADDRESS PORT
-```
-
-Trois réponses sont possibles.
-
-```
-Connection to 203.0.113.10 443 port [tcp/https] succeeded!
-```
-
-Le flux est ouvert. Passez à la ligne suivante.
-
-```
-nc: connect to 203.0.113.10 port 443 (tcp) failed: Connection refused
-```
-
-Une machine a répondu et a refusé la connexion. Soit une règle de pare-feu rejette explicitement ce trafic, soit plus rien n'écoute sur ce port. Notez la ligne pour votre service informatique.
-
-```
-nc: connect to 203.0.113.10 port 443 (tcp) timed out: Operation now in progress
-```
-
-Rien n'a répondu, et `-w 5` abandonne au bout de cinq secondes. Quand rien ne répond, c'est en général qu'aucune règle n'autorise ce flux. Derrière un pare-feu d'entreprise, c'est le cas le plus fréquent.
+Notez pour votre service informatique chaque ligne qui ne répond pas `succeeded!`.
 
 ### Rejouer le test par le nom de domaine
 
-Reprenez ensuite chaque ligne avec le nom de domaine à la place de l'adresse IP.
+Reprenez ensuite les flux du document qui ont un nom de domaine, avec ce nom à la place de l'adresse IP.
 
 ```bash
 nc -zv -w 5 robots.example.com 443
