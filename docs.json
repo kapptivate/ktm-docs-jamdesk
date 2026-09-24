@@ -1209,6 +1209,7 @@
                 "expanded": true,
                 "pages": [
                   "hardware/network-troubleshooting",
+                  "hardware/check-robot-network",
                   "hardware/sim-troubleshooting",
                   "hardware/rj45-port"
                 ]
@@ -2316,6 +2317,7 @@
                 "expanded": true,
                 "pages": [
                   "fr/hardware/network-troubleshooting",
+                  "fr/hardware/check-robot-network",
                   "fr/hardware/sim-troubleshooting",
                   "fr/hardware/rj45-port"
                 ]
