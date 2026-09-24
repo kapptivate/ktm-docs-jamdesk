@@ -7,15 +7,15 @@ Most robots that stop reporting to Kapptivate have lost power, or lost the netwo
 
 ## Before you go on site
 
-Open the robot's page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 4 months ago)**. Read it on the robot that failed, then on the other robots of the same site.
+Open the robot's details page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 4 months ago)**. Read it on the robot that failed, then on any other robot that reads **Offline**.
 
-One robot down on its own is investigated at the robot. Several robots down at the same moment are investigated at the site that hosts them. In that second case, call your IT team.
+One robot down on its own is investigated at the robot. Several robots down at the same moment, in the same place, are investigated at the site that hosts them. In that second case, call your IT team.
 
 <Frame caption="An Offline robot on the platform">
-  ![The page of robot demo-web-1, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
+  ![The details page of robot demo-web-1, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
 </Frame>
 
-**Reboot agent** won't help you here. The command has to reach the robot over the link that is down, so an **Offline** robot never receives it. Press the button on the machine instead.
+**Reboot agent** has no effect on an **Offline** robot. The command has to reach the robot over the link that is down, so the robot never receives it. Only a physical reboot can bring it back.
 
 ## What you need on site
 
@@ -28,9 +28,9 @@ One robot down on its own is investigated at the robot. Several robots down at t
 
 Start from what the platform just told you.
 
-| What you see | What you check | Where to go |
+| What you see | What to check | Where to go |
 |---|---|---|
-| One robot on the site is **Offline** | the robot, its power supply, its network cable | [Reboot the robot](#reboot-the-robot) |
+| Only one robot is **Offline** | the robot, its power supply, its network cable | [Reboot the robot](#reboot-the-robot) |
 | Every robot on the site dropped at the same hour | the site: power, network, firewall | [Check the flows](#check-the-flows), once your IT team has looked |
 | On site, the screen stays black or the LEDs freeze | hardware | [A robot that no longer boots](#a-robot-that-no-longer-boots) |
 
@@ -50,13 +50,13 @@ The sockets you need are on the back panel. Plug in the screen, the keyboard, an
 - On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots).
 - Check that the RJ45 cable sits in Ethernet port 1, 2, or 3, never port 4, which does not work. [Configure the robot network](/hardware/configure-network#set-the-static-ip) shows the numbering.
 
-Power the robot back up if you changed a connection, then read its status again. Once everything checks out, plugged in and powered, go to [check the robot's local IP address](#check-the-robots-local-ip-address).
+If you changed a connection, restart the robot with its front button, then read its status again. Once everything checks out, plugged in and powered, go to [check the robot's local IP address](#check-the-robots-local-ip-address).
 
 ## A robot that no longer boots
 
-The front panel is lit, the screen stays black: the robot no longer boots. On a cellular robot, you also see the LEDs stop blinking. Rule out the false alarm first, by checking the screen's input source against the socket you actually used.
+The front panel is lit, the screen stays black: the robot no longer boots. On a cellular robot, you also see the LEDs stop blinking.
 
-Source right, nothing changed after two reboots? Stop here. No command runs on a robot that won't boot, so nothing below this line applies. Send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, film the front panel and attach the video.
+Nothing changed after two reboots? Stop here. Send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, also attach a video of the robot's front panel to your message. It helps support with the investigation.
 
 ## Check the robot's local IP address
 
@@ -110,43 +110,13 @@ Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your
 
 Does your robot go straight out to the internet? Then there is nothing to open, and the page ends for you at the gateway. What follows is for a filtered corporate network.
 
-There, the IP requirements document lists the destinations the robot has to reach, with their port. They are independent: control, results, and support access each take their own. So a robot can happily receive its tests and send back nothing at all. Test every line, not the one you suspect.
+Check that every flow in the IP requirements document is open, not just the one you suspect. The document gives the command for each flow and how to read its answers. Run them on the robot itself.
 
-Every connection here is outbound. You never have to let anything in from the internet.
-
-<Tip>
-  The rules were opened for one address, the robot's. Run these commands anywhere else on the same network and they can all pass while the robot still fails.
-</Tip>
-
-Work down the document, one line at a time, replacing `ADDRESS` and `PORT` with the values it gives.
-
-```bash
-nc -zv -w 5 ADDRESS PORT
-```
-
-Three answers come back.
-
-```
-Connection to 203.0.113.10 443 port [tcp/https] succeeded!
-```
-
-The flow is open. Move to the next line.
-
-```
-nc: connect to 203.0.113.10 port 443 (tcp) failed: Connection refused
-```
-
-Something on the other end answered, then shut the door. A rule rejects the traffic outright, or the service behind that port is gone. Either way, the line goes to your IT team.
-
-```
-nc: connect to 203.0.113.10 port 443 (tcp) timed out: Operation now in progress
-```
-
-Nothing answered, and `-w 5` gives up after five seconds. Silence means the packet was dropped, not refused. Behind a corporate firewall, that is a rule nobody ever wrote.
+Any line that doesn't answer `succeeded!` goes on the list for your IT team.
 
 ### Run the test again by domain name
 
-Work down the list a second time, swapping each IP address for its domain name.
+Then take the flows in the document that have a domain name, and run them again with the name in place of the IP address.
 
 ```bash
 nc -zv -w 5 robots.example.com 443
