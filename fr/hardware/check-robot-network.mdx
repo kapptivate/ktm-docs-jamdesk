@@ -9,7 +9,7 @@ Si vous n'avez pas encore redémarré le robot, commencez par [dépanner un robo
 
 ## Ce qu'il vous faut sur place
 
-- Un écran, un clavier, une souris et un câble vidéo, branchés au robot comme dans [vérifier l'alimentation et les câbles](/fr/hardware/network-troubleshooting#vérifier-lalimentation-et-les-câbles).
+- Un écran, un clavier, une souris et un câble vidéo, branchés au robot comme dans [dépanner un robot Offline](/fr/hardware/network-troubleshooting).
 - Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
 - Le document des exigences IP, qui liste les flux nécessaires au fonctionnement du robot. Demandez-le à support@kapptivate.com.
 - L'adresse IP locale, sur votre LAN, pour laquelle ces flux ont été ouverts. C'est votre service informatique qui la détient.
@@ -27,7 +27,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer [l'IP statique du robot](/fr/hardware/configure-network#définir-une-ip-statique) pour qu'elle corresponde à ce qui est configuré sur votre réseau.
+`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [configurer le réseau du robot](/fr/hardware/configure-network).
 
 L'autre réponse possible est plus courte, et elle clôt la question du réseau.
 
@@ -90,7 +90,7 @@ L'autre réponse est celle-ci :
 nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
-L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant [configurer le réseau du robot](/fr/hardware/configure-network#définir-une-ip-statique).
+L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant l'étape [saisir les adresses](/fr/hardware/configure-network#saisir-les-adresses) de la configuration réseau.
 
 ### Vérifier le certificat
 
