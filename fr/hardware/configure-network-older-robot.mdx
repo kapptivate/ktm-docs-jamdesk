@@ -1,0 +1,200 @@
+---
+title: Changer l'IP d'un ancien robot
+description: Donner à un ancien robot une nouvelle adresse IP locale, une passerelle et des serveurs DNS, en une seule commande tapée sur sa console.
+---
+
+Le robot doit prendre une nouvelle adresse IP : votre service informatique la lui attribue, ou le robot change de réseau. Pendant ce changement, le robot n'exécute aucun test, jusqu'à ce qu'il repasse **Online**. Sur un ancien robot, l'adresse IP, la passerelle et les serveurs DNS sont écrits dans un seul fichier. Une commande tapée sur la console suffit à le réécrire.
+
+Cette page concerne les robots qui n'affichent aucun bureau après la connexion, seulement une ligne de commande. Si vous voyez un bureau Linux, votre robot est de dernière génération : suivez plutôt [configurer le réseau du robot](/fr/hardware/configure-network).
+
+<Note>
+  Cette procédure vaut pour les anciens robots Kapptivate sous Ubuntu. Pour un autre modèle, écrivez à support@kapptivate.com.
+</Note>
+
+## Avant de commencer
+
+- Un écran, un clavier et un câble vidéo, HDMI ou VGA selon le modèle de robot. La souris est inutile : tout se fait en ligne de commande.
+- Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
+- La nouvelle adresse IP, son masque, la passerelle et les adresses des serveurs DNS, fournis par votre service informatique.
+- Sur un réseau d'entreprise filtré, les flux ouverts pour la nouvelle adresse. Ils sont listés dans le document des exigences IP : demandez-le à support@kapptivate.com et transmettez-le à votre service informatique. Sans ces flux, le robot reste **Offline** sur sa nouvelle adresse.
+- Un accès à la plateforme Kapptivate, pour y voir le robot repasser **Online**.
+
+## Se connecter à la console
+
+Branchez l'écran et le clavier à l'arrière du robot. La première ligne affiche Ubuntu et sa version. En dessous, le robot attend un nom d'utilisateur :
+
+```
+Ubuntu 22.04.5 LTS demo-4g-1 tty1
+
+demo-4g-1 login:
+```
+
+<Note>
+  Le robot attend un clavier AZERTY français, ou QWERTY américain sur certains robots. Avant toute saisie, tapez `a` à l'invite de connexion. Si un `q` s'affiche, les deux dispositions ne correspondent pas : branchez un clavier de l'autre disposition. Sinon, effacez la lettre et continuez.
+</Note>
+
+Saisissez le nom d'utilisateur, puis le mot de passe de vos identifiants. Le mot de passe ne s'affiche pas pendant la saisie, c'est normal.
+
+## Repérer le port et le fichier
+
+Avant d'écrire quoi que ce soit, relevez deux valeurs : le port où le câble est branché, et le nom du fichier réseau. Commencez par le port.
+
+```bash
+ip -br link | grep ^en
+```
+
+```
+enp1s0           UP             00:00:5e:00:53:01 <BROADCAST,MULTICAST,UP,LOWER_UP>
+enp2s0           DOWN           00:00:5e:00:53:02 <NO-CARRIER,BROADCAST,MULTICAST,UP>
+```
+
+Il y a une ligne par port Ethernet. Regardez la deuxième colonne. Le câble est branché sur le port qui y affiche `UP`, ici `enp1s0`. Si tous les ports affichent `DOWN` dans cette colonne, branchez le câble sur un autre port à l'arrière du robot et relancez la commande.
+
+Listez ensuite les fichiers réseau.
+
+```bash
+ls /etc/netplan
+```
+
+```
+01-netcfg.yaml
+```
+
+Le nom du fichier dépend du robot : `01-netcfg.yaml`, `00-installer-config.yaml` ou `50-cloud-init.yaml`. Les noms qui ne se terminent pas par `.yaml`, comme `.save` ou `.bak`, sont d'anciennes copies, et le robot les ignore. Si deux noms se terminent par `.yaml`, le robot lit les deux fichiers, et en réécrire un seul ne suffit pas. Dans ce cas, arrêtez-vous et écrivez à support@kapptivate.com.
+
+Copiez maintenant le fichier, en remplaçant `FILE` par le nom affiché par `ls` :
+
+```bash
+sudo cp /etc/netplan/FILE /root/
+```
+
+Si `sudo` demande un mot de passe, saisissez celui de votre connexion. La copie est rangée dans `/root`, hors de `/etc/netplan`, donc le robot ne la lit pas. C'est elle que vous remettez en place pour [revenir à la configuration précédente](#revenir-à-la-configuration-précédente).
+
+## Écrire la nouvelle adresse
+
+Toute la configuration tient sur une ligne, sans indentation. Voici la commande, avec en capitales les valeurs à remplacer :
+
+```bash
+echo "network: {version: 2, ethernets: {PORT: {addresses: [ADDRESS/PREFIX], gateway4: GATEWAY, nameservers: {addresses: [DNS1, DNS2]}}}}" | sudo tee /etc/netplan/FILE
+```
+
+- `PORT` : le port qui affichait `UP`, par exemple `enp1s0`.
+- `ADDRESS/PREFIX` : la nouvelle adresse IP, une barre oblique, puis le masque sous sa forme courte, par exemple `192.168.10.42/24`. Le tableau ci-dessous donne la forme courte du masque fourni par votre service informatique.
+- `GATEWAY` : l'adresse de la passerelle.
+- `DNS1, DNS2` : les serveurs DNS, séparés par une virgule et une espace. S'il n'y en a qu'un, écrivez-le seul.
+- `FILE` : le nom de fichier affiché par `ls`.
+
+| Masque | Forme courte |
+|---|---|
+| 255.255.0.0 | /16 |
+| 255.255.252.0 | /22 |
+| 255.255.254.0 | /23 |
+| 255.255.255.0 | /24 |
+| 255.255.255.128 | /25 |
+| 255.255.255.192 | /26 |
+| 255.255.255.224 | /27 |
+| 255.255.255.240 | /28 |
+
+Si votre masque n'est pas dans le tableau, demandez sa forme courte à votre service informatique.
+
+Par exemple, pour un robot en `192.168.10.42` sur un réseau `255.255.255.0` :
+
+```bash
+echo "network: {version: 2, ethernets: {enp1s0: {addresses: [192.168.10.42/24], gateway4: 192.168.10.1, nameservers: {addresses: [192.168.10.53, 192.168.10.54]}}}}" | sudo tee /etc/netplan/01-netcfg.yaml
+```
+
+La commande réaffiche la ligne, qui est désormais le contenu du fichier. Seul le port câblé reçoit une adresse : si vous déplacez le câble sur un autre port plus tard, reprenez cette page.
+
+## Vérifier le fichier et l'appliquer
+
+Vérifiez d'abord le fichier.
+
+```bash
+sudo netplan generate
+```
+
+Sous Ubuntu 18.04 et 20.04, un fichier valide n'affiche rien. À partir d'Ubuntu 22.04, il affiche cet avertissement, qui ne bloque rien :
+
+```
+** (generate:2408447): WARNING **: 10:06:30.273: `gateway4` has been deprecated, use default routes instead.
+See the 'Default routes' section of the documentation for more details.
+```
+
+Sous Ubuntu 24.04, un second avertissement peut suivre, `Permissions for /etc/netplan/01-netcfg.yaml are too open`. Il ne bloque rien non plus.
+
+Si la ligne contient une faute de frappe, la commande affiche une erreur. L'erreur commence par le nom du fichier, suivi du numéro de ligne et du numéro de colonne où se trouve la faute. Voici les trois erreurs les plus probables.
+
+```
+/etc/netplan/01-netcfg.yaml:1:55: Error in network definition: address '192.168.10.42' is missing /prefixlength
+```
+
+Le masque manque après l'adresse. Ajoutez `/24`, ou la forme courte donnée par le tableau.
+
+```
+/etc/netplan/01-netcfg.yaml:2:1: Invalid YAML: did not find expected ',' or '}':
+```
+
+Une accolade manque. La ligne doit se terminer par quatre `}` avant le guillemet final.
+
+```
+/etc/netplan/01-netcfg.yaml:1:75: Error in network definition: unknown key 'gateway4:192.168.10.1'
+```
+
+Une espace manque après un deux-points. Dans la ligne, chaque `:` et chaque `,` est suivi d'une espace.
+
+Pour corriger, appuyez deux fois sur la flèche du haut : la commande `echo` réapparaît. Corrigez-la, appuyez sur Entrée pour réécrire le fichier, puis relancez `sudo netplan generate`. Sous Ubuntu 18.04, les messages sont formulés un peu différemment, mais ils signalent les mêmes erreurs.
+
+Quand la vérification ne signale plus d'erreur, appliquez le fichier.
+
+```bash
+sudo netplan apply
+```
+
+La commande n'affiche rien, ou les mêmes avertissements que la vérification. Relevez ensuite l'adresse que le robot utilise réellement.
+
+```bash
+ip route get 1.1.1.1
+```
+
+```
+1.1.1.1 via 192.168.10.1 dev enp1s0 src 192.168.10.42 uid 1000
+    cache
+```
+
+`src` doit afficher la nouvelle adresse, et `via` la passerelle. Les autres réponses possibles de cette commande sont décrites dans [vérifier la connexion réseau du robot](/fr/hardware/check-robot-network).
+
+## Redémarrer et relire le statut
+
+Redémarrez le robot.
+
+```bash
+sudo reboot
+```
+
+Le robot redémarre sur sa nouvelle adresse. Il est déjà déployé : vous n'avez rien à demander au support. Laissez à la plateforme environ trois minutes, puis relisez le statut du robot dans [la liste de vos robots](/fr/equipment/agents). Il doit repasser **Online**.
+
+S'il reste **Offline**, déroulez [vérifier la connexion réseau du robot](/fr/hardware/check-robot-network) : l'adresse, la passerelle, puis les flux.
+
+## Revenir à la configuration précédente
+
+Remettez la copie en place, puis appliquez-la, en remplaçant `FILE` par le nom du fichier copié :
+
+```bash
+sudo cp /root/FILE /etc/netplan/
+sudo netplan apply
+```
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Vérifier la connexion réseau du robot" icon="terminal" href="/fr/hardware/check-robot-network">
+
+    Si le robot a sa nouvelle adresse et reste Offline
+
+</Card>
+  <Card title="Dépanner un robot Offline" icon="network-wired" href="/fr/hardware/network-troubleshooting">
+
+    Si le robot a disparu de la plateforme sans qu'aucune adresse ait changé
+
+</Card>
+</Columns>
