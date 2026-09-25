@@ -50,6 +50,16 @@
       "source": "/fr/hardware/macmini-network",
       "destination": "/fr/hardware/overview",
       "permanent": true
+    },
+    {
+      "source": "/hardware/rj45-port",
+      "destination": "/hardware/configure-network-older-robot",
+      "permanent": true
+    },
+    {
+      "source": "/fr/hardware/rj45-port",
+      "destination": "/fr/hardware/configure-network-older-robot",
+      "permanent": true
     }
   ],
   "name": "Kapptivate",
@@ -1200,7 +1210,8 @@
                 "expanded": true,
                 "pages": [
                   "hardware/swap-sim",
-                  "hardware/swap-battery"
+                  "hardware/swap-battery",
+                  "hardware/configure-network-older-robot"
                 ]
               },
               {
@@ -1210,8 +1221,7 @@
                 "pages": [
                   "hardware/network-troubleshooting",
                   "hardware/check-robot-network",
-                  "hardware/sim-troubleshooting",
-                  "hardware/rj45-port"
+                  "hardware/sim-troubleshooting"
                 ]
               }
             ]
@@ -2308,7 +2318,8 @@
                 "expanded": true,
                 "pages": [
                   "fr/hardware/swap-sim",
-                  "fr/hardware/swap-battery"
+                  "fr/hardware/swap-battery",
+                  "fr/hardware/configure-network-older-robot"
                 ]
               },
               {
@@ -2318,8 +2329,7 @@
                 "pages": [
                   "fr/hardware/network-troubleshooting",
                   "fr/hardware/check-robot-network",
-                  "fr/hardware/sim-troubleshooting",
-                  "fr/hardware/rj45-port"
+                  "fr/hardware/sim-troubleshooting"
                 ]
               }
             ]

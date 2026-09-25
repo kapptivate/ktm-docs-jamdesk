@@ -1,0 +1,200 @@
+---
+title: Change the IP of an older robot
+description: Give an older robot a new local IP address, gateway, and DNS servers from its console, with one command and no desktop.
+---
+
+Your IT team is giving the robot a new address, or the robot is moving to another network. On an older robot, the address lives in a single file, and one command rewrites it from the console. Plan for the downtime: the robot runs no test from the moment you change its address until it reads **Online** again.
+
+This page is for a robot that shows no desktop once you log in, only a line of text waiting for a command. See a Linux desktop instead? Your robot is from the latest generation, and [configure the robot network](/hardware/configure-network) is the page you need.
+
+<Note>
+  This procedure covers older Kapptivate robots running Ubuntu. For any other model, write to support@kapptivate.com.
+</Note>
+
+## Before you start
+
+- A screen, a keyboard, and a video cable, HDMI or VGA depending on the robot model. You won't need a mouse: everything happens on the command line.
+- The robot's credentials. Ask support@kapptivate.com if you don't have them.
+- The new IP address, its mask, the gateway, and the DNS server addresses, from your IT team.
+- On a filtered corporate network, the flows opened for that new address. The IP requirements document lists them: ask support@kapptivate.com for it and pass it to your IT team. Without those flows, the robot stays **Offline** on its new address.
+- Access to the Kapptivate platform, to watch the robot go back **Online**.
+
+## Log in on the console
+
+Plug the screen and the keyboard into the back of the robot. The first line on screen names Ubuntu and its version, and the robot waits for a user name below it:
+
+```
+Ubuntu 22.04.5 LTS demo-4g-1 tty1
+
+demo-4g-1 login:
+```
+
+<Note>
+  The robot expects a French AZERTY keyboard, or a US QWERTY on some robots. Type `a` at the login prompt before anything else. If a `q` shows up, the layouts don't match: plug in a keyboard with the other layout. Otherwise, erase the letter and carry on.
+</Note>
+
+Type the user name, then the password from your credentials. Nothing shows while you type the password, and that's expected.
+
+## Find the port and the file
+
+You need two values before you write anything: the port that carries the cable, and the name of the network file. Start with the port.
+
+```bash
+ip -br link | grep ^en
+```
+
+```
+enp1s0           UP             00:00:5e:00:53:01 <BROADCAST,MULTICAST,UP,LOWER_UP>
+enp2s0           DOWN           00:00:5e:00:53:02 <NO-CARRIER,BROADCAST,MULTICAST,UP>
+```
+
+Each line is an Ethernet port. Read the second column: the port that shows `UP` there holds the cable, `enp1s0` here. If every line shows `DOWN` in that column, move the cable to another port at the back of the robot and run the command again.
+
+Then list the network files.
+
+```bash
+ls /etc/netplan
+```
+
+```
+01-netcfg.yaml
+```
+
+Depending on the robot, the file is called `01-netcfg.yaml`, `00-installer-config.yaml`, or `50-cloud-init.yaml`. Names that don't end in `.yaml`, such as `.save` or `.bak`, are old copies the robot ignores. Two names ending in `.yaml`? Stop here and write to support@kapptivate.com. The robot reads both files, so rewriting one of them isn't enough.
+
+Copy the file before you replace it. In the command below, replace `FILE` with the name `ls` just gave you:
+
+```bash
+sudo cp /etc/netplan/FILE /root/
+```
+
+If `sudo` asks for a password, type the one you logged in with. The copy sits outside `/etc/netplan`, so the robot never reads it, and it's what you restore to [go back to the old address](#go-back-to-the-old-address).
+
+## Write the new address
+
+The whole configuration fits on one line, with nothing to indent. Here is the command, with the values to replace in capitals:
+
+```bash
+echo "network: {version: 2, ethernets: {PORT: {addresses: [ADDRESS/PREFIX], gateway4: GATEWAY, nameservers: {addresses: [DNS1, DNS2]}}}}" | sudo tee /etc/netplan/FILE
+```
+
+- `PORT` is the port that showed `UP`, such as `enp1s0`.
+- `ADDRESS/PREFIX` is the new IP address, a slash, then the mask in its short form, such as `192.168.10.42/24`. The table below converts the mask your IT team gave you.
+- `GATEWAY` is the gateway address.
+- `DNS1, DNS2` are the DNS servers, separated by a comma and a space. With a single server, write only that one.
+- `FILE` is the file name that `ls` returned.
+
+| Mask | Short form |
+|---|---|
+| 255.255.0.0 | /16 |
+| 255.255.252.0 | /22 |
+| 255.255.254.0 | /23 |
+| 255.255.255.0 | /24 |
+| 255.255.255.128 | /25 |
+| 255.255.255.192 | /26 |
+| 255.255.255.224 | /27 |
+| 255.255.255.240 | /28 |
+
+For any other mask, ask your IT team for the short form.
+
+Filled in for a robot at `192.168.10.42` on a `255.255.255.0` network, the command reads:
+
+```bash
+echo "network: {version: 2, ethernets: {enp1s0: {addresses: [192.168.10.42/24], gateway4: 192.168.10.1, nameservers: {addresses: [192.168.10.53, 192.168.10.54]}}}}" | sudo tee /etc/netplan/01-netcfg.yaml
+```
+
+The robot prints the line back: it's the new content of the file. Only the cabled port gets an address. If you move the cable to another port later, come back to this page.
+
+## Check the file and apply it
+
+Check the file first.
+
+```bash
+sudo netplan generate
+```
+
+On Ubuntu 18.04 and 20.04, a valid file prints nothing. From Ubuntu 22.04 onward, it prints this warning, which blocks nothing:
+
+```
+** (generate:2408447): WARNING **: 10:06:30.273: `gateway4` has been deprecated, use default routes instead.
+See the 'Default routes' section of the documentation for more details.
+```
+
+On Ubuntu 24.04, a second warning can follow, `Permissions for /etc/netplan/01-netcfg.yaml are too open`. It doesn't block anything either.
+
+An error, on the other hand, names the file, then the line and the column where the typo sits. Each of these three comes from a typo.
+
+```
+/etc/netplan/01-netcfg.yaml:1:55: Error in network definition: address '192.168.10.42' is missing /prefixlength
+```
+
+The mask is missing after the address. Add `/24`, or the short form from the table.
+
+```
+/etc/netplan/01-netcfg.yaml:2:1: Invalid YAML: did not find expected ',' or '}':
+```
+
+A brace is missing. The line has to end with four `}` before the closing quote.
+
+```
+/etc/netplan/01-netcfg.yaml:1:75: Error in network definition: unknown key 'gateway4:192.168.10.1'
+```
+
+A space is missing after a colon. Every `:` and every `,` in the line is followed by a space.
+
+To fix the line, press the up arrow twice to bring back the `echo` command. Correct it, press Enter to rewrite the file, then run `sudo netplan generate` again. On Ubuntu 18.04, the same errors are worded a little differently, and they mean the same thing.
+
+Once the check comes back clean, apply the file.
+
+```bash
+sudo netplan apply
+```
+
+It prints nothing, or the same warnings as the check. Then read the address the robot actually uses.
+
+```bash
+ip route get 1.1.1.1
+```
+
+```
+1.1.1.1 via 192.168.10.1 dev enp1s0 src 192.168.10.42 uid 1000
+    cache
+```
+
+`src` has to show the new address, and `via` the gateway. [Checking the robot's local IP address](/hardware/check-robot-network#check-the-robots-local-ip-address) covers the other answers this command can give.
+
+## Reboot and read the status
+
+Reboot the robot.
+
+```bash
+sudo reboot
+```
+
+The robot comes back up on its new address. Since it's already deployed, you have nothing to ask support. The platform needs about three minutes to notice it's back, then the robot reads **Online** in [your list of robots](/equipment/agents).
+
+Still **Offline** after that? Work through [checking the robot's network connection](/hardware/check-robot-network), which tests the address, the gateway, then the flows.
+
+## Go back to the old address
+
+Put the copy back in place, then apply it. Replace `FILE` with the name you copied earlier:
+
+```bash
+sudo cp /root/FILE /etc/netplan/
+sudo netplan apply
+```
+
+## What's next?
+
+<Columns cols={2}>
+  <Card title="Check the robot's network connection" icon="terminal" href="/hardware/check-robot-network">
+
+    When the robot has its new address and still reads Offline
+
+</Card>
+  <Card title="Troubleshoot an Offline robot" icon="network-wired" href="/hardware/network-troubleshooting">
+
+    When the robot dropped off the platform before any change
+
+</Card>
+</Columns>
