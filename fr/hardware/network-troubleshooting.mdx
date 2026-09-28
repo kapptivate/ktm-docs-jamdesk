@@ -1,18 +1,18 @@
 ---
 title: Dépanner un robot Offline
-description: Faire remonter un robot passé Offline : ce qu'il faut relever sur la plateforme avant de vous déplacer, puis les actions à mener : un redémarrage physique et une vérification des branchements.
+description: Faire remonter un robot passé Offline : ce qu'il faut relever sur la plateforme avant de vous déplacer, puis, sur place, un redémarrage physique et une vérification des branchements.
 ---
 
-La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe reste de le redémarrer physiquement. S'il reste **Offline** après ce redémarrage, [vérifiez sa connexion réseau](/fr/hardware/check-robot-network).
+La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe reste de le redémarrer physiquement.
 
 ## Avant de vous déplacer
 
-Ouvrez la page détails du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 4 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots **Offline** s'il y en a.
+Ouvrez la page de détails du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 4 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots **Offline** s'il y en a.
 
 Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer au niveau du robot. Si le problème concerne plusieurs robots, tombés au même moment et situés au même endroit, alors l'investigation est à effectuer au niveau du site qui héberge les robots. Dans ce cas, prévenez votre service informatique.
 
-<Frame caption="La page détails d'un robot Offline sur la plateforme">
-  ![La page détails du robot demo-web-1, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
+<Frame caption="La page de détails d'un robot Offline sur la plateforme">
+  ![La page de détails du robot demo-web-1, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
 </Frame>
 
 Le bouton **Redémarrer l'agent** n'a aucun effet sur un robot **Offline** : la commande emprunte le lien qui est justement coupé. Seul un redémarrage physique peut le faire remonter.
@@ -42,15 +42,15 @@ Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez
 
 - Regardez la façade. Si elle reste éteinte, le courant n'arrive pas : vérifiez la prise, le bloc d'alimentation et le cordon.
 - Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus).
-- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas, et la numérotation est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network), à l'étape « Repérer le port du câble ».
+- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. Le port 4 ne fonctionne pas. La numérotation des ports est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network), à l'étape « Repérer le port du câble ».
 
-Si vous avez modifié un branchement, redémarrez le robot à l'aide du bouton en façade et relisez son statut. Si vous avez tout vérifié, et que tout semble correctement branché et allumé, passez à [vérifier la connexion réseau du robot](/fr/hardware/check-robot-network).
+Si vous avez modifié un branchement, redémarrez le robot à l'aide du bouton en façade et relisez son statut.
 
 ## Un robot qui ne démarre plus
 
 La façade est allumée, l'écran reste noir : le robot ne démarre plus. Sur un robot cellulaire, vous constatez aussi que les voyants ne clignotent plus.
 
-Si rien ne change après deux redémarrages, arrêtez-vous là. Remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, joignez aussi à votre message une vidéo de la façade avant du robot. Cela aidera le support dans ses investigations.
+Ne le redémarrez pas davantage : remontez le cas à support@kapptivate.com, en nommant le robot tel qu'il apparaît sur la plateforme. Sur un robot cellulaire, joignez aussi à votre message une vidéo de la façade avant du robot. Cela aidera le support dans ses investigations.
 
 ## Si le robot reste Offline
 
