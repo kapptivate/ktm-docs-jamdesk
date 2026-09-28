@@ -3,16 +3,18 @@ title: Vérifier la connexion réseau du robot
 description: Depuis un terminal sur le robot, vérifier son adresse IP locale, sa passerelle et les flux que votre service informatique doit ouvrir.
 ---
 
-Si le robot reste **Offline** après deux redémarrages physiques, alors que son alimentation et ses câbles sont en ordre, le problème vient probablement du réseau. Les vérifications de cette page se font dans un terminal sur le robot. Elles indiquent si le blocage vient du robot ou de votre réseau.
+Deux situations mènent à cette page. Vous venez de configurer le réseau d'un robot neuf, et vous voulez vérifier qu'il atteint Kapptivate avant de demander son déploiement. Ou bien un robot en service est passé **Offline**, et il le reste après deux redémarrages physiques alors que son alimentation et ses câbles sont en ordre : le problème vient alors probablement du réseau.
 
-Si vous n'avez pas encore redémarré le robot, commencez par [dépanner un robot Offline](/fr/hardware/network-troubleshooting).
+Dans les deux cas, les vérifications se font dans un terminal sur le robot. Elles indiquent si le blocage vient du robot ou de votre réseau.
+
+Si le robot est **Offline** et que vous ne l'avez pas encore redémarré, commencez par [dépanner un robot Offline](/fr/hardware/network-troubleshooting).
 
 ## Ce qu'il vous faut sur place
 
-- Un écran, un clavier, une souris et un câble vidéo, branchés au robot comme dans [dépanner un robot Offline](/fr/hardware/network-troubleshooting).
+- Un écran, un clavier, une souris et un câble vidéo, HDMI ou VGA selon le modèle de robot, branchés à l'arrière du robot.
 - Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
-- Le document des exigences IP, qui liste les flux nécessaires au fonctionnement du robot. Demandez-le à support@kapptivate.com.
-- L'adresse IP locale, sur votre LAN, pour laquelle ces flux ont été ouverts. C'est votre service informatique qui la détient.
+- Sur un réseau d'entreprise filtré, le document des exigences IP, qui liste les flux nécessaires au fonctionnement du robot. Demandez-le à support@kapptivate.com.
+- Sur un réseau d'entreprise filtré toujours, l'adresse IP locale, sur votre LAN, pour laquelle ces flux ont été ouverts. C'est votre service informatique qui la détient.
 
 ## Vérifier l'adresse IP locale du robot
 
@@ -29,7 +31,7 @@ ip route get 1.1.1.1
 
 `src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [configurer le réseau du robot](/fr/hardware/configure-network).
 
-L'autre réponse possible est plus courte, et elle clôt la question du réseau.
+L'autre réponse possible est celle-ci.
 
 ```
 RTNETLINK answers: Network is unreachable
@@ -44,6 +46,7 @@ ping -c 4 192.168.10.1
 ```
 
 ```
+PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
 64 bytes from 192.168.10.1: icmp_seq=1 ttl=254 time=1.12 ms
 64 bytes from 192.168.10.1: icmp_seq=2 ttl=254 time=1.18 ms
 64 bytes from 192.168.10.1: icmp_seq=3 ttl=254 time=1.09 ms
@@ -51,11 +54,14 @@ ping -c 4 192.168.10.1
 
 --- 192.168.10.1 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 1.090/1.135/1.180/0.034 ms
 ```
 
 La passerelle répond : le robot est bien sur son réseau, [passez aux flux](#vérifier-les-flux). L'autre réponse est celle-ci.
 
 ```
+PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
+
 --- 192.168.10.1 ping statistics ---
 4 packets transmitted, 0 received, 100% packet loss, time 3007ms
 ```
@@ -66,7 +72,7 @@ Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au m
 
 Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : la page s'arrête pour vous à la passerelle. Ce qui suit ne vaut que sur un réseau d'entreprise filtré.
 
-Vérifiez que tous les flux du document des exigences IP sont bien ouverts. Le document indique quels sont les flux à ouvrir, et quelle est la procédure pour vérifier que ces flux sont bien ouverts. Pour rappel, il faut lancer les commandes depuis le robot. Si vous n'avez pas ce document, demandez-le à support@kapptivate.com.
+Vérifiez que tous les flux du document des exigences IP sont bien ouverts. Le document donne une commande `nc` pour chaque flux, et la lecture de ses réponses. Lancez ces commandes depuis le robot, pas depuis votre ordinateur.
 
 Notez pour votre service informatique chaque ligne qui ne répond pas `succeeded!`.
 
@@ -94,31 +100,39 @@ L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveu
 
 ### Vérifier le certificat
 
-Dernière vérification. Reprenez les destinations du document qui sont en HTTPS, donc celles sur le port 443, et demandez le code de retour.
+Dernière vérification. Reprenez les destinations du document qui ont un nom de domaine et le port 443, et demandez leur code de retour.
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' https://robots.example.com
 ```
 
-Vous devez obtenir `200` :
+La commande affiche un code à trois chiffres, par exemple `200` ou `404` :
 
 ```
 200
 ```
 
-Toute autre réponse, et celle-ci en particulier, signale qu'un équipement de votre réseau s'intercale et présente son propre certificat.
+Quel que soit ce code, la connexion chiffrée a abouti et le certificat est reconnu. L'autre réponse est une erreur `curl: (60)`, suivie de `000` :
 
 ```
 curl: (60) SSL certificate problem: unable to get local issuer certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000
 ```
 
-Remontez alors à votre service informatique que le trafic HTTPS vers les destinations du document est intercepté.
+Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers les destinations du document est intercepté.
 
 ## Qui contacter
 
-Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
+Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test. Une fois la correction faite, relancez les vérifications de cette page.
 
-Toutes les étapes de vérification de cette procédure ont fonctionné et le robot reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
+Toutes les étapes de vérification ont fonctionné sur un robot neuf ? Demandez son déploiement au support, comme décrit dans [configurer le réseau du robot](/fr/hardware/configure-network), à la section « Demander le déploiement au support ».
+
+Toutes les étapes de vérification ont fonctionné, et un robot en service reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
 
 ## Et ensuite ?
 
