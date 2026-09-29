@@ -1,60 +1,144 @@
 ---
-title: SIM cards troubleshooting
-description: >-
-  Diagnose SIM card issues like searching or unregistered status, USSD errors,
-  missed SMS, or unreachable robots with this troubleshooting guide.
+title: Troubleshoot a SIM card
+sidebarTitle: Troubleshoot a SIM
+description: Find out whether a failing SIM comes down to the card, its slot, or the network, and what each error message in a SIM test result means.
 ---
 
-A SIM that misbehaves shows up either through its status (searching, unregistered) or through recurring errors in test results. Here is the diagnosis for each case.
+A SIM that stops running tests points to one of three suspects: the card, the slot that holds it, or the network behind it. Replacing the card only fixes the first. This page tells them apart, starting from what the platform shows. It covers the SIMs of cellular robots.
 
-<AccordionGroup>
-<Accordion title="The SIM status stays on searching">
-1. Reboot the slot, or the robot.
-2. If the status stays **searching** after 10 minutes, insert the SIM in a phone and check whether it connects to the network.
-3. If it connects in a phone, the modem's IMEI has likely been banned by the operator: investigate that side.
-4. If it does not connect in a phone either, the SIM itself has a problem or the network coverage is very poor.
-</Accordion>
-<Accordion title="The SIM status stays on unregistered">
-The SIM has probably been deactivated by the operator because it always stayed connected to the same antenna. Reboot the modem; if it stays unregistered, test the SIM in a phone and replace it if it does not connect.
-</Accordion>
-<Accordion title="A USSD test fails with Network Timeout (+CUSD 5)">
-The cellular network did not answer a USSD session opening request. Possible causes: bad network coverage, an outdated USSD licence, or an overloaded USSD server.
+## Before you go on site
 
-To confirm the request left the modem, open the pcap artifacts (radioframes) attached to the test result and look for:
+Open the SIM in the [**Devices lab**](/equipment/devices-lab) and note the robot and slot hosting it, its number, its **Status**, and its **Network** value.
 
-- `UplinkDirectTransfer ... invoke processUnstructuredSS-Request`: the request was sent.
-- `DownlinkDirectTransfer ... invoke unstructuredSS-Request`: the network replied.
+Then look at the other SIMs of the same robot and of the same site. If only one SIM fails, look at the card and its slot. If every SIM of an operator fails at the same minute on several robots, look at that operator's network: the card is not the cause.
 
-If the request is sent but never answered, contact your USSD provider.
-</Accordion>
-<Accordion title="A USSD test fails with CME 100">
-Reboot the modem, then contact support if it persists.
-</Accordion>
-<Accordion title="A USSD test fails with Connection problem or invalid MMI code (CME 258)">
-The SIM refuses USSD actions. Reboot; if that does not help, escalate to the operator's network team.
-</Accordion>
-<Accordion title="No SMS is received">
-Check the SIM's history in the platform: the SMS may simply have arrived after the timeout.
-</Accordion>
-<Accordion title="A call is emitted then suddenly stops">
-Either the SIM has no airtime, or it is not allowed to call this number (short numbers, or unavailable while roaming).
-</Accordion>
-<Accordion title="A test fails with robot unreachable">
-Either the robot is not connected ([a robot that stays Offline](/hardware/network-troubleshooting)), or, if the agent shows available in administration, the robot's clock is out of sync: ask support to check.
-</Accordion>
-</AccordionGroup>
+## What you need on site
+
+- An unlocked phone, to test the card outside the robot.
+- A working SIM from the same robot, to swap slots.
+- For a 4G robot, a SIM ejector tool.
+
+## Where to start
+
+Whatever the case, reboot the slot first, with **Reboot slot** at the top of the SIM's page or in the menu of its row.
+
+| What you see | What to check | Where to go |
+|---|---|---|
+| **Network** stays on **Denied** or **Not registered (denied)** | the subscription behind the card | [The card is read, the network refuses it](#the-card-is-read-the-network-refuses-it) |
+| The slot reads **No SIM inserted** with a card in it | the card and the slot contact | [The card is no longer detected](#the-card-is-no-longer-detected) |
+| **Network** reads **Searching** or **Not registered** for more than ten minutes | activation, radio, access technology | [A SIM stuck on Searching](#a-sim-stuck-on-searching) |
+| The SIM reads **Unnamed**, with the status **Configuration** | its number in the platform | [Swap a SIM](/hardware/swap-sim#set-up-a-new-number) |
+| The SIM looks fine, but a test fails with a message | the message itself | [Error messages in test results](#error-messages-in-test-results) |
+
+## The card is read, the network refuses it
+
+The robot reads the card and the signal is good, yet the network refuses to register it. The card is fine. A new card seems to fix it only because it carries a new IMSI, and so a new subscription.
+
+The likely cause is a block on the IMSI for unusual usage, by an anti-fraud rule or a usage cap: monitors use a robot's SIMs around the clock. Ask your HLR team to check the IMSI's status before you replace anything.
+
+## The card is no longer detected
+
+The slot reads **No SIM inserted**, and yet the card is in. A reboot alone won't bring it back: either the card has reached the end of its life, or the slot contact is worn.
+
+Take the card out, put it back in, then reboot the slot. If it stays invisible, [tell the card from the slot](#tell-the-card-from-the-slot).
+
+## A SIM stuck on Searching
+
+Ten minutes on **Searching** is a fault, not a wait. Check three things, in this order.
+
+- **The line is active.** A new card nobody activated in the HLR stays on **Searching**, and so does a suspended line.
+- **The radio reaches the robot.** If the SIM fails in every slot, compare the signal with a robot of the same model on another site. If it's much weaker here, check that the antennas are screwed on, then move the robot.
+- **The test doesn't force a missing technology.** Forcing 3G or 2G on a cell that no longer serves it leaves the SIM searching. Set **Access technology** to **Default**, unless the test checks 3G or 2G on purpose.
+
+## Tell the card from the slot
+
+**Swap slots.** Move the failing card into the slot of a working SIM from the same robot, and that SIM into the failing slot. Reboot both slots. If the fault follows the card, the card or its subscription is to blame. If it stays with the slot, the slot is.
+
+**Test the card in a phone.** If it doesn't register, receive SMS, or complete the USSD code there either, the robot is not involved.
+
+A fault that stays with the slot has one more lead: a banned IMEI, which stops any card from registering in that slot. Get the slot's IMEI from support@kapptivate.com, and have your core network team check it in the EIR.
+
+## Replace the card or have the robot repaired
+
+- **The fault follows the card, and the HLR finds nothing wrong**: replace the card, following [Swap a SIM](/hardware/swap-sim).
+- **The fault stays with the slot, and the IMEI isn't banned**: the slot is faulty.
+- **A slot has already worn out two cards**: don't insert a third, the slot is faulty.
+
+For a faulty slot, write to support@kapptivate.com with the robot's name as the platform shows it and the slot number.
+
+## Error messages in test results
+
+The messages below are the ones the robot emits, word for word. Any other text is the network's own answer: a menu, a balance, or a gateway error such as `USSDC: ESME fault.` or `Service not available`. The SIM works and the network answered, so hand the text to the team that runs the service this code calls.
+
+### USSD
+
+| Message | What to do |
+|---|---|
+| `Connection problem or invalid MMI code (+CME ERROR: 100)` | The network rejected the request. Several SIMs failing from the same minute point to the USSD platform: replay the code on another SIM of the site in a [live session](/tests/live-session) to confirm. One SIM alone: reboot its slot, then test the card in a phone. |
+| `Connection problem or invalid MMI code (+CME ERROR: 258)` | The SIM refuses USSD requests. Reboot the slot, then have your network team check the line's profile. |
+| `No network service (+CME ERROR: 30)` | Check the **Network** column. If the SIM is registered, the cause is on the network side. |
+| `Call barred (+CME ERROR: 257)` | Lift the USSD barring on the line. |
+| `Network Timeout (+CUSD 5)`, `no ussd response received from network`, or `Ussd session closed by operator (+CUSD:2)` | The network didn't answer, or closed the session early: poor coverage, an expired USSD licence, or an overloaded USSD server. Give the team that runs your USSD platform the code, the time, and the SIM's number. |
+| `Wrong USSD code format` | Correct the **Command** field of the test. |
+
+### SMS
+
+| Message | What to do |
+|---|---|
+| `SMS not received.` | Test the card in a phone. If it receives nothing there either, check the line and the SMSC. If every SMS test of a robot fails at once, write to support@kapptivate.com: a robot clock more than 30 seconds off fails them all. The robot's other tests keep working as long as the drift stays under two minutes. |
+| `Received SMS was not the expected one.` | Compare the SMS with the test's **Expected Message**. The service may have changed its wording, or answered with an error such as an empty balance. |
+| `failed to send sms` | Check the line's credit, then its SMSC. |
+
+### Calls
+
+| Message | What to do |
+|---|---|
+| `cannot place call to <NUMBER>` | Check that the calling SIM is registered and has credit. |
+| `call was correctly emitted but was suddenly stopped` | The SIM has no airtime, or isn't allowed to call this number (short numbers, or roaming). |
+| `timeout call not pick up` | Check that the called SIM is registered. |
+| `timeout no call received` | Read the result of the calling side, and check the number it dials. |
+
+### Data
+
+| Message | What to do |
+|---|---|
+| `No internet after PDP activation` | The data bundle is used up or has expired: top up the line. |
+| `Failed to activate PDP context (timeout while waiting cellular network attachment)` | The SIM isn't attached to the network. Go back to [where to start](#where-to-start). |
+| `Failed to activate PDP context (no 'APN' specified)` | Turn **Use default APN credentials** back on in the test, or fill in **APN Name**. |
+| `Failed to activate PDP context (Unspecified reason)` | Check the APN and the line's data subscription. |
+
+### Network technology
+
+The robot switches technology before it runs the action, so these messages come first.
+
+| Message | What to do |
+|---|---|
+| `failed to change network technology: sim not registered` or `failed to change network technology: timeout while waiting network registration` | The SIM isn't registered on the requested technology. Set **Access technology** to **Default**, unless the test checks a technology on purpose. If it persists on **Default**, go back to [where to start](#where-to-start). |
+| `failed to change network technology: ERROR` | Reboot the slot. If it persists, write to support@kapptivate.com. |
+
+### Robot and test
+
+| Message | What to do |
+|---|---|
+| `Robot unreachable` | The robot is **Offline**: follow [Troubleshoot an Offline robot](/hardware/network-troubleshooting). |
+| `SIM timeout` | The slot didn't answer within the timeout, four minutes by default. Reboot the slot. If it comes back, write to support@kapptivate.com. |
+| `Owner <NUMBER> not recognized` | No SIM in your workspace carries this number right now. Edit the test or the monitor to select a SIM that is available. After a swap, you can also assign this number to the new SIM, following [Swap a SIM](/hardware/swap-sim#reuse-the-number-of-the-card-you-replaced). |
+
+## Who to contact
+
+A fault that follows the card or comes from the network goes to your own teams: the HLR for a refused IMSI or an inactive line, the core network for a banned IMEI, the USSD platform for an unanswered request. Everything else goes to support@kapptivate.com, with the robot's name as the platform shows it, the slot number, the exact message, and the time of the failure.
 
 ## What's next?
 
 <Columns cols={2}>
   <Card title="Swap a SIM" icon="sim-card" href="/hardware/swap-sim">
 
-    Replace a SIM that turned out faulty
+    When the card turned out to be faulty
 
 </Card>
-  <Card title="USSD Command" icon="hashtag" href="/tests/actions/cellular/ussd">
+  <Card title="Statuses" icon="signal" href="/equipment/statuses">
 
-    The session states a USSD test can assert on
+    Every status a SIM and its robot can show
 
 </Card>
 </Columns>
