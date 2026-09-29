@@ -7,12 +7,12 @@ Most robots that stop reporting to Kapptivate have lost power, or lost the netwo
 
 ## Before you go on site
 
-Open the robot's details page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 4 months ago)**. Read it on the robot that failed, then on any other robot that reads **Offline**.
+Open the robot's details page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 2 months ago)**. Read it on the robot that failed, then on any other robot that reads **Offline**.
 
 One robot down on its own is investigated at the robot. Several robots down at the same moment, in the same place, are investigated at the site that hosts them. In that second case, call your IT team.
 
 <Frame caption="An Offline robot on the platform">
-  ![The details page of robot demo-web-1, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
+  ![The details page of a robot with its name blurred, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
 </Frame>
 
 **Reboot agent** has no effect on an **Offline** robot. The command has to reach the robot over the link that is down, so the robot never receives it. Only a physical reboot can bring it back.
@@ -42,7 +42,7 @@ The sockets you need are on the back panel. Plug in the screen, the keyboard, an
 
 - Look at the front panel. A panel that stays dark means no power reaches the robot, so check the socket, the power brick, and the cord.
 - On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots).
-- Check that the RJ45 cable sits in Ethernet port 1, 2, or 3 (port 4 does not work). [Configure the robot network](/hardware/configure-network#set-the-static-ip) shows the numbering.
+- Check that the RJ45 cable sits in Ethernet port 1, 2, or 3 (port 4 does not work). [Configure the robot network](/hardware/configure-network#check-which-port-the-cable-is-in) shows the numbering.
 
 If you changed a connection, restart the robot with its front button, then read its status again.
 
@@ -50,7 +50,7 @@ If you changed a connection, restart the robot with its front button, then read 
 
 If the front panel is lit but the screen stays black, the robot most likely no longer boots. On a cellular robot, the front LEDs stop blinking too.
 
-Don't reboot it again. Send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, also attach a video of the robot's front panel to your message. It helps support with the investigation.
+If that's what you see, send the case to support@kapptivate.com, naming the robot as the platform names it. On a cellular robot, also attach a video of the robot's front panel to your message. It helps support with the investigation.
 
 ## If the robot stays Offline
 
