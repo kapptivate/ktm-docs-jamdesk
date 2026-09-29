@@ -13,11 +13,11 @@ Web, cellular, and smartphone robots all start here.
 
 ## Static IP or DHCP
 
-The network decides this one for you: DHCP where the robot reaches the internet, a fixed IP behind a corporate filter. The fixed address pays off twice, since it never moves: support always knows where to find the robot, and your flows stay open on the right target. [Set the static IP](#set-the-static-ip) is what puts it in place.
+The network decides this one for you: DHCP where the robot reaches the internet, a fixed IP behind a corporate filter. [Set the static IP](#set-the-static-ip) is what puts it in place.
 
-Under DHCP, the robot takes its lease at boot and leaves you nothing to configure. The cable still has to sit in Ethernet port 1, 2, or 3, since port 4 does not work.
+Under DHCP, the robot takes its lease at boot and leaves you nothing to configure.
 
-You skip the addressing, not the check. Follow steps 2 and 3 of [set the static IP](#set-the-static-ip) to connect the peripherals and log in, then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
+You skip the addressing, not the check. Follow steps 1 to 3 of [set the static IP](#set-the-static-ip) to check the port, connect the peripherals, and log in, then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
 
 ## Before you start
 
@@ -32,7 +32,7 @@ You skip the addressing, not the check. Follow steps 2 and 3 of [set the static 
 
 <Steps>
   <Step title="Check which port the cable is in">
-    Check which Ethernet port holds the RJ45 cable. Port **1** is the one to use. Ports 2 and 3 work too, but you then pick `lan2` or `lan3` in step 4 instead of `lan1`, and port 4 does not work at all.
+    Check which Ethernet port holds the RJ45 cable. Port **1** is the one to use. Ports 2 and 3 work too, but you then pick `lan2` or `lan3` in step 4 instead of `lan1`. Port 4 isn't wired.
 
     <Frame caption="How the Ethernet ports are numbered">
       ![The numbered Ethernet ports at the back of the robot](/images/hardware/configure-network-11.webp)
@@ -95,7 +95,7 @@ You skip the addressing, not the check. Follow steps 2 and 3 of [set the static 
     </Frame>
   </Step>
   <Step title="Save">
-    Click **Save**. The connection comes back up with its new address.
+    Click **Save**.
 
     <Frame caption="Save the connection">
       ![The Save button of the connection editor](/images/hardware/configure-network-10.webp)
@@ -108,7 +108,7 @@ You skip the addressing, not the check. Follow steps 2 and 3 of [set the static 
 
 ## Check that the robot reaches Kapptivate
 
-Open a terminal on the Linux desktop, then work through [checking the robot's network connection](/hardware/check-robot-network), which carries the commands to run and the output to expect. It ends with the deployment request to support.
+Open a terminal on the Linux desktop, then work through [checking the robot's network connection](/hardware/check-robot-network), which carries the commands to run and the output to expect. It ends with [the deployment request](/hardware/check-robot-network#request-the-deployment-of-a-new-robot) to support.
 
 <Note>
   Changing the address of a robot that is already deployed? Nothing to ask support. It comes back **Online** on its own after the reboot. If it stays **Offline**, work through [troubleshooting a robot that stays Offline](/hardware/network-troubleshooting).
@@ -117,6 +117,16 @@ Open a terminal on the Linux desktop, then work through [checking the robot's ne
 ## What's next?
 
 <Columns cols={2}>
+  <Card title="Check the robot's network connection" icon="terminal" href="/hardware/check-robot-network">
+
+    Prove the robot reaches Kapptivate, then ask support to deploy it
+
+</Card>
+  <Card title="Swap a SIM in a cellular robot" icon="sim-card" href="/hardware/swap-sim">
+
+    Declare the SIMs of a cellular robot, once it reads Online
+
+</Card>
   <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
 
     The Samsung settings that keep a phone awake and reachable over USB
@@ -125,16 +135,6 @@ Open a terminal on the Linux desktop, then work through [checking the robot's ne
   <Card title="Prepare an iPhone" icon="apple" href="/hardware/prepare-iphone">
 
     Trust the robot, then let support finish the pairing
-
-</Card>
-  <Card title="Troubleshoot an Offline robot" icon="network-wired" href="/hardware/network-troubleshooting">
-
-    When the robot stays Offline once you have saved
-
-</Card>
-  <Card title="Swap or configure a SIM" icon="sim-card" href="/hardware/swap-sim">
-
-    Declare the SIMs of a cellular robot
 
 </Card>
 </Columns>

@@ -1,15 +1,13 @@
 ---
 title: Dépanner un robot Offline
-description: Faire remonter un robot passé Offline : ce qu'il faut relever sur la plateforme avant de vous déplacer, puis, sur place, un redémarrage physique et une vérification des branchements.
+description: Faire remonter un robot passé Offline : ce qu'il faut relever sur la plateforme avant de vous déplacer, puis, sur place, une vérification de la façade et du câble et un redémarrage physique.
 ---
 
-La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe reste de le redémarrer physiquement.
+La plupart du temps, un robot qui ne remonte plus dans Kapptivate n'a plus d'alimentation électrique, ou n'est plus connecté au réseau. Le premier réflexe : vérifier sa façade et son câble, puis le redémarrer physiquement.
 
 ## Avant de vous déplacer
 
 Ouvrez la page de détails du robot depuis [la liste de vos robots](/fr/equipment/agents). Le bandeau du haut affiche sa dernière connexion : **Cet agent est inaccessible. (Dernière connexion il y a 2 mois)**. Relevez cette date sur le robot en panne, puis sur les autres robots **Offline** s'il y en a.
-
-Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer au niveau du robot. Si le problème concerne plusieurs robots, tombés au même moment et situés au même endroit, alors l'investigation est à effectuer au niveau du site qui héberge les robots. Dans ce cas, prévenez votre service informatique.
 
 <Frame caption="La page de détails d'un robot Offline sur la plateforme">
   ![La page de détails d'un robot au nom flouté, au statut Offline, avec son bandeau de dernière connexion et le bouton de redémarrage](/images/hardware/network-troubleshooting-01.webp)
@@ -17,16 +15,20 @@ Si le problème ne concerne qu'un seul robot, l'investigation est à effectuer a
 
 Le bouton **Redémarrer l'agent** n'a aucun effet sur un robot **Offline** : la commande emprunte le lien qui est justement coupé. Seul un redémarrage physique peut le faire remonter.
 
-## Ce qu'il vous faut sur place
-
-- Un écran, un clavier, une souris et un câble vidéo, HDMI ou VGA selon le modèle de robot.
-
-## Par où commencer
-
 | Ce que vous constatez | Ce qu'il faut vérifier | Où aller |
 |---|---|---|
-| Un seul robot est **Offline** | le robot, son alimentation, son câble réseau | [Redémarrer le robot](#redémarrer-le-robot) |
-| Tous les robots du site sont tombés à la même heure | le site : courant, réseau, pare-feu | [Vérifier la connexion réseau du robot](/fr/hardware/check-robot-network), après le passage de votre service informatique |
+| Un seul robot est **Offline** | le robot, son alimentation, son câble réseau | [Vérifier la façade et le câble](#vérifier-la-façade-et-le-câble) |
+| Tous les robots du site sont tombés à la même heure | le site : courant, réseau, pare-feu. Prévenez d'abord votre service informatique. | [Vérifier la connexion réseau du robot](/fr/hardware/check-robot-network), après le passage de votre service informatique |
+
+Sur place, il vous faut un écran, un clavier, une souris et un câble vidéo, HDMI ou VGA selon le modèle de robot.
+
+## Vérifier la façade et le câble
+
+Branchez l'écran, le clavier et la souris à l'arrière du robot. Regardez ensuite le robot, avant de toucher à quoi que ce soit.
+
+- Si la façade reste éteinte, le courant n'arrive pas : vérifiez la prise, le bloc d'alimentation et le cordon.
+- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus).
+- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3. La numérotation des ports est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#trouver-le-port-ethernet), à l'étape « Trouver le port Ethernet ».
 
 ## Redémarrer le robot
 
@@ -34,17 +36,7 @@ Le bouton **Redémarrer l'agent** n'a aucun effet sur un robot **Offline** : la 
 
 S'il reste **Offline**, redémarrez-le une seconde fois.
 
-Ne redémarrez pas une troisième fois : au-delà, le problème n'est plus logiciel. Passez à l'alimentation et aux câbles.
-
-## Vérifier l'alimentation et les câbles
-
-Branchez l'écran, le clavier et la souris à l'arrière du robot, puis reprenez les branchements un par un.
-
-- Regardez la façade. Si elle reste éteinte, le courant n'arrive pas : vérifiez la prise, le bloc d'alimentation et le cordon.
-- Sur un robot cellulaire, les voyants de façade clignotent en permanence. Des voyants figés ou éteints sur une façade allumée renvoient à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus).
-- Vérifiez que le câble RJ45 est branché sur le port Ethernet 1, 2 ou 3 (le port 4 ne fonctionne pas). La numérotation des ports est illustrée dans [configurer le réseau du robot](/fr/hardware/configure-network#trouver-le-port-ethernet), à l'étape « Trouver le port Ethernet ».
-
-Si vous avez modifié un branchement, redémarrez le robot à l'aide du bouton en façade et relisez son statut.
+Ne redémarrez pas une troisième fois : au-delà, le problème n'est plus logiciel. Si l'écran reste noir, passez à [un robot qui ne démarre plus](#un-robot-qui-ne-démarre-plus). Sinon, passez à [si le robot reste Offline](#si-le-robot-reste-offline).
 
 ## Un robot qui ne démarre plus
 

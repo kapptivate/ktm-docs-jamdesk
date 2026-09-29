@@ -1,6 +1,6 @@
 ---
 title: Vérifier la connexion réseau du robot
-description: Depuis un terminal sur le robot, vérifier son adresse IP locale, sa passerelle et les flux que votre service informatique doit ouvrir.
+description: Depuis un terminal sur le robot, vérifier son adresse IP locale, sa passerelle et les flux que votre service informatique doit ouvrir, puis demander le déploiement d'un nouveau robot.
 ---
 
 Deux situations mènent à cette page. Vous venez de configurer le réseau d'un nouveau robot, et vous voulez vérifier qu'il atteint Kapptivate avant de demander son déploiement.
@@ -31,7 +31,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [définir une IP statique](/fr/hardware/configure-network#trouver-le-port-ethernet).
+`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Sur un réseau filtré, comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [définir une IP statique](/fr/hardware/configure-network#trouver-le-port-ethernet).
 
 L'autre réponse possible est celle-ci.
 
@@ -102,7 +102,7 @@ L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveu
 
 ### Vérifier le certificat
 
-Dernière vérification. Vérifiez le code de retour de votre plateforme Kapptivate, à l'adresse que vous ouvrez dans votre navigateur.
+Dernière vérification : le code de retour de votre plateforme Kapptivate, à l'adresse que vous ouvrez dans votre navigateur.
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' https://exemple.kapptivate.com
@@ -128,9 +128,7 @@ how to fix it, please visit the web page mentioned above.
 
 Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers Kapptivate est intercepté.
 
-## Qui contacter
-
-Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
+## Demander le déploiement d'un nouveau robot
 
 Toutes les étapes de vérification ont fonctionné sur un nouveau robot ? Il ne reste qu'à demander son déploiement au support, qui le rend opérationnel sur Kapptivate. Relevez le numéro de série du robot dans un terminal :
 
@@ -138,7 +136,11 @@ Toutes les étapes de vérification ont fonctionné sur un nouveau robot ? Il ne
 sudo krobot serial
 ```
 
-Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une. Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot).
+Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une. Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot#monter-le-robot-en-baie).
+
+## Qui contacter
+
+Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
 
 Toutes les étapes de vérification ont fonctionné, et un robot en service reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
 
