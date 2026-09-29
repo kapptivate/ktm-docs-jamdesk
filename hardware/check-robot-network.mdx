@@ -3,7 +3,9 @@ title: Check the robot's network connection
 description: From a terminal on the robot, check its local IP address, its gateway, and the flows your IT team has to open.
 ---
 
-You land here at one of two moments. Either you've just configured a new robot's network and want proof it reaches Kapptivate before you ask for its deployment. Or a robot in service reads **Offline** after two physical reboots, with power and cables in order, which points to the network.
+You land here at one of two moments. Either you've just configured a new robot's network and want proof it reaches Kapptivate before you ask for its deployment.
+
+Or a robot in service reads **Offline** after two physical reboots, with power and cables in order.
 
 Both cases use the same checks, run in a terminal on the robot. They tell you whether the blockage is on the robot or on your network.
 
@@ -72,38 +74,38 @@ Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your
 
 Does your robot go straight out to the internet? Then there is nothing to open, and the page ends for you at the gateway. What follows is for a filtered corporate network.
 
-Check that every flow in the IP requirements document is open. The document gives one `nc` command per flow, and how to read its answers. Run them on the robot, not on your computer.
+Check that every flow in the IP requirements document is open. The document lists the flows to open, and tells you how to test whether each one is open. Run those tests on the robot, not on your computer.
 
 Any line that doesn't answer `succeeded!` goes on the list for your IT team.
 
 ### Run the test again by domain name
 
-Then take the flows in the document that have a domain name, and run them again with the name in place of the IP address.
+Next, check the flows in the document that have a domain name, and run them again with the name in place of the IP address.
 
 ```bash
-nc -zv -w 5 robots.example.com 443
+nc -zv -w 5 example.kapptivate.com 443
 ```
 
 The name resolves and the flow goes through:
 
 ```
-Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
+Connection to example.kapptivate.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
 The other answer is this one:
 
 ```
-nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
+nc: getaddrinfo for host "example.kapptivate.com" port 443: Name or service not known
 ```
 
 The IP address passes but its name fails. The robot most likely has no DNS server configured, which leaves it unable to resolve the domain name. Report it to your IT team. You can set one or more DNS servers on the robot in the [enter the addresses](/hardware/configure-network#enter-the-addresses) step of the network configuration.
 
 ### Check the certificate
 
-One last check. Take the destinations in the document that have a domain name and port 443, and ask each one for its status code.
+One last check. Check the status code of your Kapptivate platform, at the address you open in your browser.
 
 ```bash
-curl -sS -o /dev/null -w '%{http_code}\n' https://robots.example.com
+curl -sS -o /dev/null -w '%{http_code}\n' https://example.kapptivate.com
 ```
 
 You get a three-digit code back, `200` or `404` for example:
@@ -124,13 +126,19 @@ how to fix it, please visit the web page mentioned above.
 000
 ```
 
-A device on your network sits between the robot and Kapptivate and presents its own certificate. Report to your IT team that HTTPS traffic to the destinations in the document is being intercepted.
+A device on your network sits between the robot and Kapptivate and presents its own certificate. Report to your IT team that HTTPS traffic to Kapptivate is being intercepted.
 
 ## Who to contact
 
-One of the checks in this procedure failed, so the blockage sits on your own network. Send your IT team the full output of every command that failed, the robot's local IP address, and the time you ran them. Once they've fixed it, run the checks on this page again.
+One of the checks in this procedure failed, so the blockage sits on your own network. Send your IT team the full output of every command that failed, the robot's local IP address, and the time you ran them.
 
-Every check passed on a new robot? [Ask support to deploy it](/hardware/configure-network#ask-support-to-deploy-the-robot).
+Every check passed on a new robot? All that's left is asking support to deploy it, which puts it to work on Kapptivate. Read the robot's serial number in a terminal:
+
+```bash
+sudo krobot serial
+```
+
+Send the output of that command to support@kapptivate.com, and add the static IP if you set one. Support does the rest. The robot turns **Online** in [your list of robots](/equipment/agents) with nothing more from you, and that is when you [rack it](/hardware/install-robot).
 
 Every check passed and a robot in service is still **Offline**? That one is ours. Write to support@kapptivate.com with the robot's name as the platform shows it, and its local IP address if you noted it: both speed up the investigation.
 

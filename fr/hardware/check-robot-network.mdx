@@ -3,7 +3,9 @@ title: Vérifier la connexion réseau du robot
 description: Depuis un terminal sur le robot, vérifier son adresse IP locale, sa passerelle et les flux que votre service informatique doit ouvrir.
 ---
 
-Deux situations mènent à cette page. Vous venez de configurer le réseau d'un robot neuf, et vous voulez vérifier qu'il atteint Kapptivate avant de demander son déploiement. Ou bien un robot en service est passé **Offline**, et il le reste après deux redémarrages physiques alors que son alimentation et ses câbles sont en ordre : le problème vient alors probablement du réseau.
+Deux situations mènent à cette page. Vous venez de configurer le réseau d'un nouveau robot, et vous voulez vérifier qu'il atteint Kapptivate avant de demander son déploiement.
+
+Ou bien un robot en service est passé **Offline**, et il le reste après deux redémarrages physiques alors que son alimentation et ses câbles sont en ordre.
 
 Dans les deux cas, les vérifications se font dans un terminal sur le robot. Elles indiquent si le blocage vient du robot ou de votre réseau.
 
@@ -29,7 +31,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [configurer le réseau du robot](/fr/hardware/configure-network).
+`src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [définir une IP statique](/fr/hardware/configure-network#trouver-le-port-ethernet).
 
 L'autre réponse possible est celle-ci.
 
@@ -72,38 +74,38 @@ Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au m
 
 Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : la page s'arrête pour vous à la passerelle. Ce qui suit ne vaut que sur un réseau d'entreprise filtré.
 
-Vérifiez que tous les flux du document des exigences IP sont bien ouverts. Le document donne une commande `nc` pour chaque flux, et la lecture de ses réponses. Lancez ces commandes depuis le robot, pas depuis votre ordinateur.
+Vérifiez que tous les flux du document des exigences IP sont bien ouverts. Le document liste les flux à ouvrir, et indique comment tester s'ils sont bien ouverts ou non. Lancez ces tests depuis le robot, pas depuis votre ordinateur.
 
 Notez pour votre service informatique chaque ligne qui ne répond pas `succeeded!`.
 
 ### Rejouer le test par le nom de domaine
 
-Reprenez ensuite les flux du document qui ont un nom de domaine, avec ce nom à la place de l'adresse IP.
+Vérifiez ensuite les flux du document qui ont un nom de domaine, avec ce nom à la place de l'adresse IP.
 
 ```bash
-nc -zv -w 5 robots.example.com 443
+nc -zv -w 5 exemple.kapptivate.com 443
 ```
 
 Le nom se résout et le flux passe :
 
 ```
-Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
+Connection to exemple.kapptivate.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
 L'autre réponse est celle-ci :
 
 ```
-nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
+nc: getaddrinfo for host "exemple.kapptivate.com" port 443: Name or service not known
 ```
 
 L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant l'étape [saisir les adresses](/fr/hardware/configure-network#saisir-les-adresses) de la configuration réseau.
 
 ### Vérifier le certificat
 
-Dernière vérification. Reprenez les destinations du document qui ont un nom de domaine et le port 443, et demandez leur code de retour.
+Dernière vérification. Vérifiez le code de retour de votre plateforme Kapptivate, à l'adresse que vous ouvrez dans votre navigateur.
 
 ```bash
-curl -sS -o /dev/null -w '%{http_code}\n' https://robots.example.com
+curl -sS -o /dev/null -w '%{http_code}\n' https://exemple.kapptivate.com
 ```
 
 La commande affiche un code à trois chiffres, par exemple `200` ou `404` :
@@ -124,13 +126,19 @@ how to fix it, please visit the web page mentioned above.
 000
 ```
 
-Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers les destinations du document est intercepté.
+Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers Kapptivate est intercepté.
 
 ## Qui contacter
 
-Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test. Une fois la correction faite, relancez les vérifications de cette page.
+Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
 
-Toutes les étapes de vérification ont fonctionné sur un robot neuf ? Demandez son déploiement au support, comme décrit dans [configurer le réseau du robot](/fr/hardware/configure-network), à la section « Demander le déploiement au support ».
+Toutes les étapes de vérification ont fonctionné sur un nouveau robot ? Il ne reste qu'à demander son déploiement au support, qui le rend opérationnel sur Kapptivate. Relevez le numéro de série du robot dans un terminal :
+
+```bash
+sudo krobot serial
+```
+
+Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une. Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot).
 
 Toutes les étapes de vérification ont fonctionné, et un robot en service reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
 

@@ -17,7 +17,7 @@ Networks come in two shapes here, and each shape settles both questions at once.
 
 Support keeps the list of those flows current. Ask support@kapptivate.com for the IP requirements document whenever it suits you, then hand it to your IT department. Only the opening itself waits on the robot's address, so [set the static IP](#set-the-static-ip) before that point.
 
-Either shape leaves one thing undone: the robot never appears on the platform by itself, and support still has to [deploy it](#ask-support-to-deploy-the-robot).
+Either shape leaves one thing undone: the robot never appears on the platform by itself, and support still has to deploy it. You ask for that at the end of [checking the robot's network connection](/hardware/check-robot-network#who-to-contact).
 
 <Note>
   The robot opens every one of these connections itself. Nothing has to reach it from the internet.
@@ -120,21 +120,7 @@ You skip the addressing, not the rest of the page. Checking that the robot reach
 
 ## Check that the robot reaches Kapptivate
 
-Open a terminal on the Linux desktop, then work through [checking the flows](/hardware/check-robot-network#check-the-flows), which carries the commands to run and the output to expect.
-
-A check that fails points at the network path rather than at the robot. Take that one point back to your IT department, then run the checks again.
-
-## Ask support to deploy the robot
-
-You're nearly there. One number still stands between the robot and the platform: its serial. Read it from the robot and send it to support, who deploys the robot and puts it to work on Kapptivate. In a terminal on the robot:
-
-```bash
-sudo krobot serial
-```
-
-Send the output of that command to support@kapptivate.com, and add the static IP if you set one.
-
-Support does the rest. The robot turns **Online** in [your list of robots](/equipment/agents) with nothing more from you, and that is when you [rack it](/hardware/install-robot).
+Open a terminal on the Linux desktop, then work through [checking the robot's network connection](/hardware/check-robot-network), which carries the commands to run and the output to expect. It ends with the deployment request to support.
 
 <Note>
   Changing the address of a robot that is already deployed? Nothing to ask support. It comes back **Online** on its own after the reboot. If it stays **Offline**, work through [troubleshooting a robot that stays Offline](/hardware/network-troubleshooting).
