@@ -17,7 +17,7 @@ Tout se joue sur le type de réseau. Sur un réseau ouvert sur internet, le robo
 
 Sur un réseau filtré, le support tient la liste de ces flux à jour : demandez le document des exigences IP à support@kapptivate.com, à n'importe quel moment de l'installation, et transmettez-le à votre service informatique. L'ouverture, elle, attend l'adresse du robot : déroulez [définir une IP statique](#définir-une-ip-statique) avant.
 
-Dans les deux cas, le robot n'apparaît pas tout seul sur la plateforme : le support doit encore le [déployer](#demander-le-déploiement-au-support).
+Dans les deux cas, le robot n'apparaît pas tout seul sur la plateforme : le support doit encore le déployer. La demande se fait à la fin de la [vérification de la connexion réseau du robot](/fr/hardware/check-robot-network#qui-contacter).
 
 <Note>
   Le robot établit lui-même toutes ces connexions. Aucun flux entrant depuis internet n'est nécessaire.
@@ -43,7 +43,7 @@ Vous sautez alors la procédure d'adressage, mais pas le reste. Deux choses se f
 ## Définir une IP statique
 
 <Steps>
-  <Step title="Repérer le port du câble">
+  <Step title="Trouver le port Ethernet">
     Vérifiez que le câble RJ45 est dans le port Ethernet numéroté **1**. Les ports 2 et 3 conviennent aussi, à condition de sélectionner `lan2` ou `lan3` à l'étape 4, au lieu de `lan1`. Le port 4 ne fonctionne pas.
 
     <Frame caption="Numérotation des ports Ethernet">
@@ -120,21 +120,7 @@ Vous sautez alors la procédure d'adressage, mais pas le reste. Deux choses se f
 
 ## Vérifier que le robot atteint Kapptivate
 
-Ouvrez un terminal sur le bureau Linux, puis déroulez la [vérification de la connexion réseau du robot](/fr/hardware/check-robot-network), qui réunit les commandes et les sorties attendues.
-
-Si une commande échoue, le robot n'est pas en cause. C'est le chemin réseau qui reste incomplet : reprenez le point bloquant avec votre service informatique, puis relancez la vérification.
-
-## Demander le déploiement au support
-
-Vous y êtes presque. Il ne reste qu'à relever le numéro de série du robot et à le transmettre au support. C'est lui qui déploie le robot et le rend opérationnel sur Kapptivate. Dans un terminal du robot :
-
-```bash
-sudo krobot serial
-```
-
-Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une.
-
-Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot).
+Ouvrez un terminal sur le bureau Linux, puis déroulez la [vérification de la connexion réseau du robot](/fr/hardware/check-robot-network), qui réunit les commandes et les sorties attendues. Elle se termine par la demande de déploiement au support.
 
 <Note>
   Robot déjà déployé dont vous changez l'adresse : rien à demander au support. Il repasse **Online** de lui-même après le redémarrage. S'il reste **Offline**, déroulez le [dépannage d'un robot Offline](/fr/hardware/network-troubleshooting).
