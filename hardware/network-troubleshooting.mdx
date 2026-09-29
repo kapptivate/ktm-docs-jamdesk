@@ -1,15 +1,13 @@
 ---
 title: Troubleshoot an Offline robot
-description: Bring a robot back from Offline, from what to read on the platform before you go, then what to do on site: a physical reboot and a check of the connections.
+description: Bring a robot back from Offline, from what to read on the platform before you go, then what to do on site: a look at the front panel and the cable, and a physical reboot.
 ---
 
-Most robots that stop reporting to Kapptivate have lost power, or lost the network. One physical reboot often settles it on the spot. Start there.
+Most robots that stop reporting to Kapptivate have lost power, or lost the network. A look at the front panel and one physical reboot often settle it on the spot.
 
 ## Before you go on site
 
 Open the robot's details page from [your robot list](/equipment/agents). The bar at the top carries its last contact: **This agent is unreachable. (Last seen 2 months ago)**. Read it on the robot that failed, then on any other robot that reads **Offline**.
-
-One robot down on its own is investigated at the robot. Several robots down at the same moment, in the same place, are investigated at the site that hosts them. In that second case, call your IT team.
 
 <Frame caption="An Offline robot on the platform">
   ![The details page of a robot with its name blurred, showing the Offline status, the last seen banner, and the reboot button](/images/hardware/network-troubleshooting-01.webp)
@@ -17,16 +15,20 @@ One robot down on its own is investigated at the robot. Several robots down at t
 
 **Reboot agent** has no effect on an **Offline** robot. The command has to reach the robot over the link that is down, so the robot never receives it. Only a physical reboot can bring it back.
 
-## What you need on site
-
-- A screen, a keyboard, a mouse, and a video cable, HDMI or VGA depending on the robot model.
-
-## Where to start
-
 | What you see | What to check | Where to go |
 |---|---|---|
-| Only one robot is **Offline** | the robot, its power supply, its network cable | [Reboot the robot](#reboot-the-robot) |
-| Every robot on the site dropped at the same hour | the site: power, network, firewall | [Check the flows](/hardware/check-robot-network#check-the-flows), once your IT team has looked |
+| Only one robot is **Offline** | the robot, its power supply, its network cable | [Check the front panel and the cable](#check-the-front-panel-and-the-cable) |
+| Every robot on the site dropped at the same hour | the site: power, network, firewall. Call your IT team first. | [Check the flows](/hardware/check-robot-network#check-the-flows), once your IT team has looked |
+
+On site, you need a screen, a keyboard, a mouse, and a video cable, HDMI or VGA depending on the robot model.
+
+## Check the front panel and the cable
+
+The sockets you need are on the back panel. Plug in the screen, the keyboard, and the mouse there, then look at the robot before you touch anything.
+
+- A front panel that stays dark means no power reaches the robot. Check the socket, the power brick, and the cord.
+- On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots).
+- The RJ45 cable sits in Ethernet port 1, 2, or 3. [Configure the robot network](/hardware/configure-network#check-which-port-the-cable-is-in) shows the numbering.
 
 ## Reboot the robot
 
@@ -34,17 +36,7 @@ Press the front button to power the robot down. Count ten seconds before you pre
 
 Still **Offline**? Reboot it a second time.
 
-Don't go for a third. Past two, the trouble is no longer software. Move on to power and cables.
-
-## Check power and cables
-
-The sockets you need are on the back panel. Plug in the screen, the keyboard, and the mouse there, then take the connections one at a time.
-
-- Look at the front panel. A panel that stays dark means no power reaches the robot, so check the socket, the power brick, and the cord.
-- On a cellular robot, the front LEDs blink around the clock. Frozen or dark LEDs on a lit panel send you to [a robot that no longer boots](#a-robot-that-no-longer-boots).
-- Check that the RJ45 cable sits in Ethernet port 1, 2, or 3 (port 4 does not work). [Configure the robot network](/hardware/configure-network#check-which-port-the-cable-is-in) shows the numbering.
-
-If you changed a connection, restart the robot with its front button, then read its status again.
+Don't go for a third. Past two, the trouble is no longer software: a black screen sends you to [a robot that no longer boots](#a-robot-that-no-longer-boots), anything else to [a robot that stays Offline](#if-the-robot-stays-offline).
 
 ## A robot that no longer boots
 

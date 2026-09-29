@@ -1,9 +1,9 @@
 ---
 title: Check the robot's network connection
-description: From a terminal on the robot, check its local IP address, its gateway, and the flows your IT team has to open.
+description: From a terminal on the robot, check its local IP address, its gateway, and the flows your IT team has to open, then ask support to deploy a new robot.
 ---
 
-You land here at one of two moments. Either you've just configured a new robot's network and want proof it reaches Kapptivate before you ask for its deployment.
+You land here at one of two moments. You've just configured a new robot's network and want proof it reaches Kapptivate before you ask for its deployment.
 
 Or a robot in service reads **Offline** after two physical reboots, with power and cables in order.
 
@@ -31,7 +31,7 @@ ip route get 1.1.1.1
     cache
 ```
 
-Two values matter on that line. `src` is the robot's own address, `192.168.10.42` above. `via` is the gateway it goes through to leave the network, `192.168.10.1`. The `src` value has to match the address your IT team wrote into the firewall rules. When the two differ, reconfigure [the robot's static IP](/hardware/configure-network#set-the-static-ip) so it matches what your network expects.
+Two values matter on that line. `src` is the robot's own address, `192.168.10.42` above. `via` is the gateway it goes through to leave the network, `192.168.10.1`. On a filtered network, the `src` value has to match the address your IT team wrote into the firewall rules. When the two differ, reconfigure [the robot's static IP](/hardware/configure-network#set-the-static-ip) so it matches what your network expects.
 
 The other possible answer is this one.
 
@@ -102,7 +102,7 @@ The IP address passes but its name fails. The robot most likely has no DNS serve
 
 ### Check the certificate
 
-One last check. Check the status code of your Kapptivate platform, at the address you open in your browser.
+One last check: the status code of your Kapptivate platform, at the address you open in your browser.
 
 ```bash
 curl -sS -o /dev/null -w '%{http_code}\n' https://example.kapptivate.com
@@ -128,9 +128,7 @@ how to fix it, please visit the web page mentioned above.
 
 A device on your network sits between the robot and Kapptivate and presents its own certificate. Report to your IT team that HTTPS traffic to Kapptivate is being intercepted.
 
-## Who to contact
-
-One of the checks in this procedure failed, so the blockage sits on your own network. Send your IT team the full output of every command that failed, the robot's local IP address, and the time you ran them.
+## Request the deployment of a new robot
 
 Every check passed on a new robot? All that's left is asking support to deploy it, which puts it to work on Kapptivate. Read the robot's serial number in a terminal:
 
@@ -138,7 +136,11 @@ Every check passed on a new robot? All that's left is asking support to deploy i
 sudo krobot serial
 ```
 
-Send the output of that command to support@kapptivate.com, and add the static IP if you set one. Support does the rest. The robot turns **Online** in [your list of robots](/equipment/agents) with nothing more from you, and that is when you [rack it](/hardware/install-robot).
+Send the output of that command to support@kapptivate.com, and add the static IP if you set one. Support does the rest. The robot turns **Online** in [your list of robots](/equipment/agents) with nothing more from you, and that is when you [rack it](/hardware/install-robot#rack-the-robot).
+
+## Who to contact
+
+One of the checks in this procedure failed, so the blockage sits on your own network. Send your IT team the full output of every command that failed, the robot's local IP address, and the time you ran them.
 
 Every check passed and a robot in service is still **Offline**? That one is ours. Write to support@kapptivate.com with the robot's name as the platform shows it, and its local IP address if you noted it: both speed up the investigation.
 

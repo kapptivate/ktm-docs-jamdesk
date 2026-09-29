@@ -13,11 +13,11 @@ Tous les robots passent par cette page : web, cellulaire et smartphone.
 
 ## IP statique ou DHCP
 
-Votre réseau tranche à votre place : le DHCP là où le robot sort sur internet, une IP fixe derrière un filtrage d'entreprise. L'IP fixe a un mérite de plus : comme l'adresse ne bouge jamais, le support sait toujours où joindre le robot, et vos flux restent ouverts sur la bonne cible. C'est [définir une IP statique](#définir-une-ip-statique) qui la met en place.
+Votre réseau tranche à votre place : le DHCP là où le robot sort sur internet, une IP fixe derrière un filtrage d'entreprise. C'est [définir une IP statique](#définir-une-ip-statique) qui la met en place.
 
-En DHCP, le robot prend son bail au démarrage, sans que vous ayez rien à configurer. Vérifiez seulement que le câble RJ45 est branché dans le port Ethernet 1, 2 ou 3, car le port 4 ne fonctionne pas.
+En DHCP, le robot prend son bail au démarrage, sans que vous ayez rien à configurer.
 
-Vous n'avez pas d'IP statique à définir, mais la vérification reste à faire. Suivez les étapes 2 et 3 de [définir une IP statique](#définir-une-ip-statique) pour brancher les périphériques et vous connecter, puis passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
+Vous n'avez pas d'IP statique à définir, mais la vérification reste à faire. Suivez les étapes 1 à 3 de [définir une IP statique](#définir-une-ip-statique) pour vérifier le port, brancher les périphériques et vous connecter, puis passez à [vérifier que le robot atteint Kapptivate](#vérifier-que-le-robot-atteint-kapptivate).
 
 ## Avant de commencer
 
@@ -32,7 +32,7 @@ Vous n'avez pas d'IP statique à définir, mais la vérification reste à faire.
 
 <Steps>
   <Step title="Trouver le port Ethernet">
-    Vérifiez que le câble RJ45 est dans le port Ethernet numéroté **1**. Les ports 2 et 3 conviennent aussi, à condition de sélectionner `lan2` ou `lan3` à l'étape 4, au lieu de `lan1`. Le port 4 ne fonctionne pas.
+    Vérifiez que le câble RJ45 est dans le port Ethernet numéroté **1**. Les ports 2 et 3 conviennent aussi, à condition de sélectionner `lan2` ou `lan3` à l'étape 4, au lieu de `lan1`. Le port 4 n'est pas câblé.
 
     <Frame caption="Numérotation des ports Ethernet">
       ![Les ports Ethernet numérotés à l'arrière du robot](/images/hardware/configure-network-11.webp)
@@ -95,7 +95,7 @@ Vous n'avez pas d'IP statique à définir, mais la vérification reste à faire.
     </Frame>
   </Step>
   <Step title="Enregistrer">
-    Cliquez sur **Save**. La connexion remonte avec sa nouvelle adresse.
+    Cliquez sur **Save**.
 
     <Frame caption="Enregistrer la connexion">
       ![Le bouton Save de l'éditeur de connexion](/images/hardware/configure-network-10.webp)
@@ -117,6 +117,16 @@ Ouvrez un terminal sur le bureau Linux, puis déroulez la [vérification de la c
 ## Et ensuite ?
 
 <Columns cols={2}>
+  <Card title="Vérifier la connexion réseau du robot" icon="terminal" href="/fr/hardware/check-robot-network">
+
+    Vérifier que le robot atteint Kapptivate, puis demander son déploiement au support
+
+</Card>
+  <Card title="Remplacer une SIM dans un robot cellulaire" icon="sim-card" href="/fr/hardware/swap-sim">
+
+    Déclarer les SIM d'un robot cellulaire, une fois qu'il est Online
+
+</Card>
   <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
 
     Les réglages Samsung qui gardent un téléphone éveillé et joignable en USB
@@ -125,16 +135,6 @@ Ouvrez un terminal sur le bureau Linux, puis déroulez la [vérification de la c
   <Card title="Préparer un iPhone" icon="apple" href="/fr/hardware/prepare-iphone">
 
     Faire confiance au robot, puis laisser le support terminer l'appairage
-
-</Card>
-  <Card title="Dépanner un robot Offline" icon="network-wired" href="/fr/hardware/network-troubleshooting">
-
-    Quand le robot reste Offline une fois la configuration faite
-
-</Card>
-  <Card title="Remplacer ou configurer une SIM" icon="sim-card" href="/fr/hardware/swap-sim">
-
-    Déclarer les SIM d'un robot cellulaire
 
 </Card>
 </Columns>

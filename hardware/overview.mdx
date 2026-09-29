@@ -4,7 +4,7 @@ description: Install, maintain, and troubleshoot the Kapptivate robots that run 
 sidebarTitle: "Overview"
 ---
 
-Kapptivate runs your tests on real hardware. Some robots drive a browser, some drive phones over USB, and some carry live SIM cards. These pages take one from the day you rack it to the morning it stops answering, the phones it drives included.
+Kapptivate runs your tests on real hardware. Some robots drive a browser, some drive phones over USB, and some carry live SIM cards. These pages follow a robot from installation to troubleshooting, the phones it drives included.
 
 A robot doesn't always sit in your building. Yours may run in your own racks, at Kapptivate, or as a virtual machine with no box to touch. What follows assumes you host it yourself, on the latest generation of hardware, though maintenance and troubleshooting hold for older robots too.
 
@@ -18,7 +18,7 @@ A robot doesn't always sit in your building. Yours may run in your own racks, at
 </Card>
   <Card title="Configure the robot network" icon="gear" href="/hardware/configure-network">
 
-    Every robot needs a static IP before the platform shows it **Online**
+    Before support can deploy the robot: an address on your network, and proof it reaches Kapptivate
 
 </Card>
 </Columns>
@@ -41,14 +41,9 @@ A robot doesn't always sit in your building. Yours may run in your own racks, at
 ## Maintenance
 
 <Columns cols={2}>
-  <Card title="Swap a SIM" icon="sim-card" href="/hardware/swap-sim">
+  <Card title="Swap a SIM in a cellular robot" icon="sim-card" href="/hardware/swap-sim">
 
     The number you type decides: a swap that carries the old card's settings and monitors over, or a fresh SIM
-
-</Card>
-  <Card title="Replace the motherboard battery" icon="battery-half" href="/hardware/swap-battery">
-
-    When the clock drifts or the BIOS resets
 
 </Card>
   <Card title="Change the IP of an older robot" icon="terminal" href="/hardware/configure-network-older-robot">
