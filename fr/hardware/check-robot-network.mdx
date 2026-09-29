@@ -83,19 +83,19 @@ Notez pour votre service informatique chaque ligne qui ne répond pas `succeeded
 Vérifiez ensuite les flux du document qui ont un nom de domaine, avec ce nom à la place de l'adresse IP.
 
 ```bash
-nc -zv -w 5 exemple.kapptivate.com 443
+nc -zv -w 5 robots.example.com 443
 ```
 
 Le nom se résout et le flux passe :
 
 ```
-Connection to exemple.kapptivate.com (203.0.113.10) 443 port [tcp/https] succeeded!
+Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
 L'autre réponse est celle-ci :
 
 ```
-nc: getaddrinfo for host "exemple.kapptivate.com" port 443: Name or service not known
+nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
 L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant l'étape [saisir les adresses](/fr/hardware/configure-network#saisir-les-adresses) de la configuration réseau.

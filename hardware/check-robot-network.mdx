@@ -83,19 +83,19 @@ Any line that doesn't answer `succeeded!` goes on the list for your IT team.
 Next, check the flows in the document that have a domain name, and run them again with the name in place of the IP address.
 
 ```bash
-nc -zv -w 5 example.kapptivate.com 443
+nc -zv -w 5 robots.example.com 443
 ```
 
 The name resolves and the flow goes through:
 
 ```
-Connection to example.kapptivate.com (203.0.113.10) 443 port [tcp/https] succeeded!
+Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
 The other answer is this one:
 
 ```
-nc: getaddrinfo for host "example.kapptivate.com" port 443: Name or service not known
+nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
 ```
 
 The IP address passes but its name fails. The robot most likely has no DNS server configured, which leaves it unable to resolve the domain name. Report it to your IT team. You can set one or more DNS servers on the robot in the [enter the addresses](/hardware/configure-network#enter-the-addresses) step of the network configuration.

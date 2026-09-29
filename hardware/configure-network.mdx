@@ -1,27 +1,15 @@
 ---
 title: Configure the robot network
-description: "Everything a wired robot needs before support can deploy it: an address on your network, open flows, and a working path to Kapptivate."
+description: "Everything a wired robot needs before support can deploy it: an address on your network and a working path to Kapptivate."
 ---
 
 A robot that is only cabled stays invisible, because the platform has no address for it yet. You set that address on the robot itself, screen, keyboard, and mouse plugged into the back, and Kapptivate support takes it from there. Work on a table rather than in the rack: the sockets at the back are much easier to reach.
 
 <Note>
-  This procedure applies to the latest generation of Kapptivate robots. On an older robot, [change the IP of an older robot](/hardware/configure-network-older-robot) covers the address change. For anything else, write to support@kapptivate.com.
+  This procedure applies to the latest generation of Kapptivate robots. On an older robot, [change the IP of an older robot](/hardware/configure-network-older-robot) covers the address change.
 </Note>
 
 Web, cellular, and smartphone robots all start here.
-
-## Which flows to open
-
-Networks come in two shapes here, and each shape settles both questions at once. Where the robot has a way out to the internet, it runs on DHCP and nothing needs opening: Kapptivate is reachable on the first boot. Behind a corporate filter, the robot takes a fixed IP instead, and the flows toward Kapptivate are opened from that address.
-
-Support keeps the list of those flows current. Ask support@kapptivate.com for the IP requirements document whenever it suits you, then hand it to your IT department. Only the opening itself waits on the robot's address, so [set the static IP](#set-the-static-ip) before that point.
-
-Either shape leaves one thing undone: the robot never appears on the platform by itself, and support still has to deploy it. You ask for that at the end of [checking the robot's network connection](/hardware/check-robot-network#who-to-contact).
-
-<Note>
-  The robot opens every one of these connections itself. Nothing has to reach it from the internet.
-</Note>
 
 ## Static IP or DHCP
 
@@ -29,14 +17,14 @@ The network decides this one for you: DHCP where the robot reaches the internet,
 
 Under DHCP, the robot takes its lease at boot and leaves you nothing to configure. The cable still has to sit in Ethernet port 1, 2, or 3, since port 4 does not work.
 
-You skip the addressing, not the rest of the page. Checking that the robot reaches Kapptivate and reading its serial number both happen on the robot, so work through [connect the peripherals](#connect-the-peripherals) and [power on and log in](#power-on-and-log-in). Then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
+You skip the addressing, not the check. Follow steps 2 and 3 of [set the static IP](#set-the-static-ip) to connect the peripherals and log in, then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
 
 ## Before you start
 
 - The robot is unpacked, powered, and cabled to the network, but not yet screwed into the rack: see [install a robot](/hardware/install-robot).
 - A USB keyboard, a USB mouse, a screen, and an HDMI cable. None of these ship with the robot.
 - The robot's credentials. Ask support@kapptivate.com if you don't have them.
-- The IP requirements document, which lists the IP addresses, domains, and ports to check. Ask support@kapptivate.com for it.
+- On a filtered corporate network, the flows opened from the robot's static IP. The IP requirements document lists them: ask support@kapptivate.com for it and pass it to your IT team.
 - The static IP, mask, gateway, and DNS server addresses, from your IT department.
 - Access to the Kapptivate platform, where you watch the robot turn **Online**.
 
