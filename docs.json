@@ -1168,8 +1168,15 @@
                 "icon": "circle-question",
                 "expanded": true,
                 "pages": [
-                  "questions/overview-page-removed",
                   "questions/devices-os-versions"
+                ]
+              },
+              {
+                "group": "Questions",
+                "hidden": true,
+                "searchable": true,
+                "pages": [
+                  "questions/overview-page-removed"
                 ]
               }
             ]
@@ -1210,7 +1217,6 @@
                 "expanded": true,
                 "pages": [
                   "hardware/swap-sim",
-                  "hardware/swap-battery",
                   "hardware/configure-network-older-robot"
                 ]
               },
@@ -1222,6 +1228,14 @@
                   "hardware/network-troubleshooting",
                   "hardware/check-robot-network",
                   "hardware/sim-troubleshooting"
+                ]
+              },
+              {
+                "group": "Maintenance",
+                "hidden": true,
+                "searchable": true,
+                "pages": [
+                  "hardware/swap-battery"
                 ]
               }
             ]
@@ -2276,8 +2290,15 @@
                 "icon": "circle-question",
                 "expanded": true,
                 "pages": [
-                  "fr/questions/overview-page-removed",
                   "fr/questions/devices-os-versions"
+                ]
+              },
+              {
+                "group": "Questions",
+                "hidden": true,
+                "searchable": true,
+                "pages": [
+                  "fr/questions/overview-page-removed"
                 ]
               }
             ]
@@ -2318,7 +2339,6 @@
                 "expanded": true,
                 "pages": [
                   "fr/hardware/swap-sim",
-                  "fr/hardware/swap-battery",
                   "fr/hardware/configure-network-older-robot"
                 ]
               },
@@ -2330,6 +2350,14 @@
                   "fr/hardware/network-troubleshooting",
                   "fr/hardware/check-robot-network",
                   "fr/hardware/sim-troubleshooting"
+                ]
+              },
+              {
+                "group": "Maintenance",
+                "hidden": true,
+                "searchable": true,
+                "pages": [
+                  "fr/hardware/swap-battery"
                 ]
               }
             ]
