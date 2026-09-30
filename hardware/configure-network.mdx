@@ -3,7 +3,7 @@ title: Configure the robot network
 description: "Everything a wired robot needs before support can deploy it: an address on your network and a working path to Kapptivate."
 ---
 
-A robot that is only cabled stays invisible, because the platform has no address for it yet. You set that address on the robot itself, screen, keyboard, and mouse plugged into the back, and Kapptivate support takes it from there. Work on a table rather than in the rack: the sockets at the back are much easier to reach.
+A robot that is only cabled stays invisible, because the platform has no address for it yet. You set that address on the robot itself, screen, keyboard, and mouse plugged into the back, and Kapptivate support takes it from there.
 
 <Note>
   This procedure applies to the latest generation of Kapptivate robots. On an older robot, [change the IP of an older robot](/hardware/configure-network-older-robot) covers the address change.
@@ -13,11 +13,7 @@ Web, cellular, and smartphone robots all start here.
 
 ## Static IP or DHCP
 
-The network decides this one for you: DHCP where the robot reaches the internet, a fixed IP behind a corporate filter. [Set the static IP](#set-the-static-ip) is what puts it in place.
-
-Under DHCP, the robot takes its lease at boot and leaves you nothing to configure.
-
-You skip the addressing, not the check. Follow steps 1 to 3 of [set the static IP](#set-the-static-ip) to check the port, connect the peripherals, and log in, then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate).
+If your robot reaches the internet directly, it takes its address over DHCP at boot. Follow only steps 1 to 3 of [set the static IP](#set-the-static-ip), then go to [check that the robot reaches Kapptivate](#check-that-the-robot-reaches-kapptivate). Behind a corporate filter, it needs a static IP: follow the whole procedure.
 
 ## Before you start
 

@@ -20,7 +20,7 @@ An **Offline** robot you haven't rebooted yet? Start with [troubleshooting an Of
 
 ## Check the robot's local IP address
 
-Log in with the robot credentials, then open a terminal from the Linux desktop. One command gives both the robot's local address and its gateway.
+Log in with the robot credentials, then open a terminal from the Linux desktop. An older robot has no desktop: type the commands straight at its console. One command gives both the robot's local address and its gateway.
 
 ```bash
 ip route get 1.1.1.1
@@ -74,7 +74,7 @@ Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your
 
 Does your robot go straight out to the internet? Then there is nothing to open, and the page ends for you at the gateway. What follows is for a filtered corporate network.
 
-Check that every flow in the IP requirements document is open. The document lists the flows to open, and tells you how to test whether each one is open. Run those tests on the robot, not on your computer.
+The IP requirements document lists the flows to open, and the command that tests each one. Run those tests on the robot, not on your computer.
 
 Any line that doesn't answer `succeeded!` goes on the list for your IT team.
 
