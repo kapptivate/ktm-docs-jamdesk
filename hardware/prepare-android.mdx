@@ -3,7 +3,7 @@ title: Prepare an Android smartphone
 description: Bring an Android phone into service on a smartphone robot, from Auto Blocker to the battery settings.
 ---
 
-A phone straight out of the box isn't ready to run tests. This page walks through the Samsung settings that let a robot keep it awake, reach it over the USB cable, and run mobile app tests on it. Start with Auto Blocker, during the setup wizard: while it's on, no robot can reach the phone.
+A phone straight out of the box isn't ready to run tests. This page walks through the Samsung settings that let a robot keep it awake, reach it over the USB cable, and run mobile app tests on it.
 
 The paths below come from One UI 7, on Android 15. On an earlier version, some settings sit elsewhere.
 
@@ -107,7 +107,7 @@ Open the Kapptivate platform and go to [**Agents**](/equipment/agents), where th
 
 A device only becomes available when its own status is **Available** and the robot carrying it is **Online**. If the phone shows nothing, look at the robot first.
 
-If the phone never appears at all, unplug and replug the cable and watch whether the authorization popup shows up. If you aren't sure you confirmed it, or if it never appeared, unplug the phone, tap **Revoke USB debugging authorizations** under **Settings > Developer options**, and plug it back: the popup then comes up for certain.
+If the phone never appears at all, the authorization popup wasn't confirmed. Unplug the phone, tap **Revoke USB debugging authorizations** under **Settings > Developer options**, and plug it back: the popup then comes up for certain.
 
 If the popup was confirmed and the phone still doesn't show up, check Auto Blocker under **Settings > Security and privacy**. If that switch is off too, write to support@kapptivate.com with the robot name.
 

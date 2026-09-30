@@ -20,7 +20,7 @@ Si le robot est **Offline** et que vous ne l'avez pas encore redémarré, commen
 
 ## Vérifier l'adresse IP locale du robot
 
-Connectez-vous avec les identifiants du robot, puis ouvrez un terminal depuis le bureau Linux. Une seule commande donne l'adresse IP locale et la passerelle.
+Connectez-vous avec les identifiants du robot, puis ouvrez un terminal depuis le bureau Linux. Sur un ancien robot, sans bureau, tapez les commandes directement sur sa console. Une seule commande donne l'adresse IP locale et la passerelle.
 
 ```bash
 ip route get 1.1.1.1
@@ -74,7 +74,7 @@ Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au m
 
 Si votre robot sort directement sur internet, vous n'avez aucun flux à ouvrir : la page s'arrête pour vous à la passerelle. Ce qui suit ne vaut que sur un réseau d'entreprise filtré.
 
-Vérifiez que tous les flux du document des exigences IP sont bien ouverts. Le document liste les flux à ouvrir, et indique comment tester s'ils sont bien ouverts ou non. Lancez ces tests depuis le robot, pas depuis votre ordinateur.
+Le document des exigences IP liste les flux à ouvrir, et la commande qui teste chacun. Lancez ces tests depuis le robot, pas depuis votre ordinateur.
 
 Notez pour votre service informatique chaque ligne qui ne répond pas `succeeded!`.
 
