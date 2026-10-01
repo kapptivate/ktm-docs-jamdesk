@@ -1227,7 +1227,8 @@
                 "pages": [
                   "hardware/network-troubleshooting",
                   "hardware/check-robot-network",
-                  "hardware/sim-troubleshooting"
+                  "hardware/sim-troubleshooting",
+                  "hardware/sim-test-errors"
                 ]
               },
               {
@@ -2349,7 +2350,8 @@
                 "pages": [
                   "fr/hardware/network-troubleshooting",
                   "fr/hardware/check-robot-network",
-                  "fr/hardware/sim-troubleshooting"
+                  "fr/hardware/sim-troubleshooting",
+                  "fr/hardware/sim-test-errors"
                 ]
               },
               {
