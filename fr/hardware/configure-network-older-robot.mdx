@@ -3,20 +3,34 @@ title: Configurer le réseau d'un ancien robot
 description: Donner une nouvelle adresse IP, une passerelle et un serveur DNS à un robot sans bureau, en écrivant son fichier réseau depuis sa console.
 ---
 
-Un ancien robot n'a pas d'interface graphique : son adresse IP se change en ligne de commande, directement sur sa console. Entre le moment où vous changez l'adresse et celui où le robot repasse **Online**, il n'exécute aucun test.
+Un ancien robot n'a pas d'interface graphique : son adresse IP se change en ligne de commande, directement sur sa console.
 
-Cette page concerne les robots qui affichent une ligne de commande dès la connexion. Si vous voyez un bureau Linux, suivez plutôt [configurer le réseau d'un robot](/fr/hardware/configure-network).
+Cette page concerne les robots sans bureau Linux. Branchés sur un écran, ils affichent une ligne de commande dès la connexion. Si vous voyez un bureau, suivez plutôt [configurer le réseau d'un robot](/fr/hardware/configure-network).
+
+En SSH, tous les robots affichent une ligne de commande. Pour savoir si le vôtre a un bureau, lancez :
+
+```bash
+systemctl is-active NetworkManager
+```
+
+Si la commande répond `inactive`, le robot n'a pas de bureau : suivez cette page. Si elle répond `active`, suivez [configurer le réseau d'un robot](/fr/hardware/configure-network).
 
 ## Avant de commencer
 
-- Un écran et un clavier. Selon le modèle, l'écran se branche en HDMI ou en VGA.
+- Un accès SSH au robot, ou à défaut un écran et un clavier. Selon le modèle, l'écran se branche en HDMI ou en VGA.
 - Les identifiants du robot. Demandez-les à support@kapptivate.com si vous ne les avez pas.
 - La nouvelle adresse IP, son masque, la passerelle et le serveur DNS, fournis par votre service informatique.
 - Sur un réseau d'entreprise filtré, les flux ouverts pour la nouvelle adresse. Ils sont listés dans le document des exigences IP : demandez-le à support@kapptivate.com. Sans ces flux, le robot reste **Offline** sur sa nouvelle adresse.
 
 ## Se connecter
 
-Branchez l'écran et le clavier à l'arrière du robot, puis saisissez le nom d'utilisateur et le mot de passe. Le mot de passe ne s'affiche pas pendant la saisie, c'est normal.
+En SSH, connectez-vous avec les identifiants du robot, en remplaçant `UTILISATEUR` par le nom d'utilisateur et `ADRESSE` par l'adresse IP actuelle du robot :
+
+```bash
+ssh UTILISATEUR@ADRESSE
+```
+
+Sans accès SSH, branchez l'écran et le clavier à l'arrière du robot, puis saisissez le nom d'utilisateur et le mot de passe. Le mot de passe ne s'affiche pas pendant la saisie, c'est normal.
 
 <Note>
   Le robot attend un clavier AZERTY, ou QWERTY sur certains robots. Tapez `a` à l'invite de connexion : si un `q` s'affiche, ce que vous tapez et ce que le robot reçoit ne correspondent pas, et ce décalage vaut pour toute la page. Pour vérifier que vous tapez correctement le mot de passe, saisissez-le d'abord à la place du nom d'utilisateur : il s'affiche en clair. Effacez-le ensuite avant de vous connecter.
@@ -37,7 +51,7 @@ enp2s0           UP             00:00:5e:00:53:02 <BROADCAST,MULTICAST,UP,LOWER_
 
 Le câble réseau RJ45 est branché sur le port qui affiche `UP` dans la deuxième colonne, ici `enp2s0`. Notez ce nom.
 
-Si aucun port n'affiche `UP`, branchez le câble RJ45 sur un autre port et relancez la commande. Si plusieurs ports affichent `UP`, le robot est relié à plusieurs réseaux : arrêtez-vous et écrivez à support@kapptivate.com.
+Si aucun port n'affiche `UP`, branchez le câble RJ45 sur un autre port et relancez la commande.
 
 ## Écrire la nouvelle adresse
 
@@ -75,7 +89,7 @@ Ouvrez enfin le nouveau fichier :
 sudo nano /etc/netplan/01-netcfg.yaml
 ```
 
-Tapez la configuration ci-dessous, avec exactement le même nombre d'espaces en début de ligne, puis enregistrez. Elle correspond à un robot en `192.168.10.42` sur un réseau `255.255.255.0` :
+Tapez la configuration, puis enregistrez. Voici un exemple :
 
 ```
 network:
@@ -89,12 +103,26 @@ network:
           - 192.168.10.53
 ```
 
+Chaque ligne commence par un nombre précis d'espaces :
+
+| Ligne | Espaces en début de ligne |
+|---|---|
+| `network:` | 0 |
+| `ethernets:` | 2 |
+| `enp2s0:` | 4 |
+| `addresses:` | 6 |
+| `- 192.168.10.42/24` | 8 |
+| `gateway4: 192.168.10.1` | 6 |
+| `nameservers:` | 6 |
+| `addresses:` | 8 |
+| `- 192.168.10.53` | 10 |
+
 Remplacez les valeurs de l'exemple par les vôtres :
 
 - `enp2s0` : le port qui affichait `UP`.
 - `192.168.10.42/24` : la nouvelle adresse IP, une barre oblique, puis le masque sous sa forme courte, donnée par le tableau ci-dessous.
 - `192.168.10.1` : l'adresse de la passerelle.
-- `192.168.10.53` : l'adresse du serveur DNS. S'il y en a deux, ajoutez une ligne `- ` pour le second, alignée sur la première.
+- `192.168.10.53` : l'adresse du serveur DNS. S'il y en a deux, ajoutez une ligne `- ` pour le second, précédée de 10 espaces comme la première.
 
 | Masque | Forme courte |
 |---|---|
@@ -111,7 +139,7 @@ Si votre masque n'est pas dans le tableau, demandez sa forme courte à votre ser
 
 ## Vérifier et redémarrer
 
-Vérifiez le fichier :
+Validez les modifications :
 
 ```bash
 sudo netplan generate
@@ -159,8 +187,6 @@ Si elle affiche une erreur, corrigez le fichier avant de redémarrer : avec un f
   ```
 
   Le masque manque après l'adresse. Ajoutez `/24`, ou la forme courte donnée par le tableau.
-
-  Sous Ubuntu 18.04, les messages sont formulés autrement, et les lignes sont comptées à partir de 0 : ajoutez 1 au numéro affiché.
 </Accordion>
 
 Quand la vérification ne signale plus d'erreur, redémarrez le robot :
@@ -168,6 +194,8 @@ Quand la vérification ne signale plus d'erreur, redémarrez le robot :
 ```bash
 sudo reboot
 ```
+
+En SSH, la connexion se coupe au redémarrage. Si le robot démarre sans réseau, seuls un écran et un clavier permettent de [revenir à la configuration précédente](#revenir-à-la-configuration-précédente).
 
 Laissez à la plateforme environ trois minutes, puis relisez le statut du robot dans [la liste de vos robots](/fr/equipment/agents). Il doit repasser **Online**. S'il reste **Offline**, suivez [vérifier la connexion réseau d'un robot](/fr/hardware/check-robot-network).
 
