@@ -33,13 +33,13 @@ ip route get 1.1.1.1
 
 Two values matter on that line. `src` is the robot's own address, `192.168.10.42` above. `via` is the gateway it goes through to leave the network, `192.168.10.1`. On a filtered network, the `src` value has to match the address your IT team wrote into the firewall rules. When the two differ, reconfigure [the robot's static IP](/hardware/configure-network#set-the-static-ip) so it matches what your network expects.
 
-The other possible answer is this one.
+<Accordion title="If the network is unreachable">
+  ```
+  RTNETLINK answers: Network is unreachable
+  ```
 
-```
-RTNETLINK answers: Network is unreachable
-```
-
-No route means no link at all. Check the RJ45 cable and the switch port.
+  No route means no link at all. Check the RJ45 cable and the switch port.
+</Accordion>
 
 Ping that gateway next. Use the address printed after `via`.
 
@@ -59,16 +59,18 @@ PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.090/1.135/1.180/0.034 ms
 ```
 
-Replies mean the robot sits on its network, so [move on to the flows](#check-the-flows). The other outcome looks like this.
+Replies mean the robot sits on its network, so [move on to the flows](#check-the-flows).
 
-```
-PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
+<Accordion title="If the gateway doesn't reply">
+  ```
+  PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
 
---- 192.168.10.1 ping statistics ---
-4 packets transmitted, 0 received, 100% packet loss, time 3007ms
-```
+  --- 192.168.10.1 ping statistics ---
+  4 packets transmitted, 0 received, 100% packet loss, time 3007ms
+  ```
 
-Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your IT team confirm it lands on a live switch port.
+  Check the RJ45 cable, which can be faulty or in the wrong socket. Then have your IT team confirm it lands on a live switch port.
+</Accordion>
 
 ## Check the flows
 
@@ -92,13 +94,13 @@ The name resolves and the flow goes through:
 Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
-The other answer is this one:
+<Accordion title="If the name doesn't resolve">
+  ```
+  nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
+  ```
 
-```
-nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
-```
-
-The IP address passes but its name fails. The robot most likely has no DNS server configured, which leaves it unable to resolve the domain name. Report it to your IT team. You can set one or more DNS servers on the robot in the [enter the addresses](/hardware/configure-network#enter-the-addresses) step of the network configuration.
+  The IP address passes but its name fails. The robot most likely has no DNS server configured, which leaves it unable to resolve the domain name. Report it to your IT team. You can set one or more DNS servers on the robot in the [enter the addresses](/hardware/configure-network#enter-the-addresses) step of the network configuration.
+</Accordion>
 
 ### Check the certificate
 
@@ -114,19 +116,23 @@ You get a three-digit code back, `200` or `404` for example:
 200
 ```
 
-Any code will do. It proves the encrypted connection went through and the certificate checked out. The failure looks different: a `curl: (60)` error, then `000`.
+Any code will do. It proves the encrypted connection went through and the certificate checked out.
 
-```
-curl: (60) SSL certificate problem: unable to get local issuer certificate
-More details here: https://curl.se/docs/sslcerts.html
+<Accordion title="If the certificate is rejected">
+  The command returns a `curl: (60)` error, then `000`.
 
-curl failed to verify the legitimacy of the server and therefore could not
-establish a secure connection to it. To learn more about this situation and
-how to fix it, please visit the web page mentioned above.
-000
-```
+  ```
+  curl: (60) SSL certificate problem: unable to get local issuer certificate
+  More details here: https://curl.se/docs/sslcerts.html
 
-A device on your network sits between the robot and Kapptivate and presents its own certificate. Report to your IT team that HTTPS traffic to Kapptivate is being intercepted.
+  curl failed to verify the legitimacy of the server and therefore could not
+  establish a secure connection to it. To learn more about this situation and
+  how to fix it, please visit the web page mentioned above.
+  000
+  ```
+
+  A device on your network sits between the robot and Kapptivate and presents its own certificate. Report to your IT team that HTTPS traffic to Kapptivate is being intercepted.
+</Accordion>
 
 ## Request the deployment of a new robot
 
