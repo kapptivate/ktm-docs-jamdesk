@@ -1,11 +1,11 @@
 ---
-title: Changer l'IP d'un ancien robot
+title: Configurer le réseau d'un ancien robot
 description: Donner une nouvelle adresse IP, une passerelle et un serveur DNS à un robot sans bureau, en écrivant son fichier réseau depuis sa console.
 ---
 
 Un ancien robot n'a pas d'interface graphique : son adresse IP se change en ligne de commande, directement sur sa console. Entre le moment où vous changez l'adresse et celui où le robot repasse **Online**, il n'exécute aucun test.
 
-Cette page concerne les robots qui affichent une ligne de commande dès la connexion. Si vous voyez un bureau Linux, suivez plutôt [configurer le réseau du robot](/fr/hardware/configure-network).
+Cette page concerne les robots qui affichent une ligne de commande dès la connexion. Si vous voyez un bureau Linux, suivez plutôt [configurer le réseau d'un robot](/fr/hardware/configure-network).
 
 ## Avant de commencer
 
@@ -169,7 +169,7 @@ Quand la vérification ne signale plus d'erreur, redémarrez le robot :
 sudo reboot
 ```
 
-Laissez à la plateforme environ trois minutes, puis relisez le statut du robot dans [la liste de vos robots](/fr/equipment/agents). Il doit repasser **Online**. S'il reste **Offline**, suivez [vérifier la connexion réseau du robot](/fr/hardware/check-robot-network).
+Laissez à la plateforme environ trois minutes, puis relisez le statut du robot dans [la liste de vos robots](/fr/equipment/agents). Il doit repasser **Online**. S'il reste **Offline**, suivez [vérifier la connexion réseau d'un robot](/fr/hardware/check-robot-network).
 
 ## Revenir à la configuration précédente
 
@@ -184,7 +184,7 @@ sudo reboot
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Vérifier la connexion réseau du robot" icon="terminal" href="/fr/hardware/check-robot-network">
+  <Card title="Vérifier la connexion réseau d'un robot" icon="terminal" href="/fr/hardware/check-robot-network">
 
     Si le robot a sa nouvelle adresse et reste Offline
 
