@@ -3,63 +3,161 @@ title: Fix a SIM test error
 description: What each error message in a SIM test result means, from USSD and SMS to calls, data, and network technology, and what to do about it.
 ---
 
-A SIM can look healthy and still fail a test. The message in the result tells you where the failure comes from, and the tables on this page say what to do about each one. If the SIM itself looks wrong in the platform, start with [Troubleshoot a SIM](/hardware/sim-troubleshooting) instead.
+A SIM can look healthy and still fail a test. The message in the result tells you where the failure comes from, and each message on this page has its own section saying what to do. If the SIM itself looks wrong in the platform, start with [Troubleshoot a SIM](/hardware/sim-troubleshooting) instead.
 
-The messages below are the ones the robot emits, word for word. Any other text is the network's own answer: a menu, a balance, or a gateway error such as `USSDC: ESME fault.` or `Service not available`. The SIM works and the network answered, so hand the text to the team that runs the service this code calls.
+The messages below are the ones the platform shows in the test result, word for word. Any other text is the network's own answer: a menu, a balance, or a gateway error such as `USSDC: ESME fault.` or `Service not available`. The SIM works and the network answered, so this page can't tell you why. Hand the text to the team that runs the service this code calls: the investigation happens on their side.
+
+Several fixes start with a slot reboot. Use **Reboot slot** at the top of the SIM's page, as shown in [where to start](/hardware/sim-troubleshooting#where-to-start).
 
 ## USSD
 
-| Message | What to do |
-|---|---|
-| `Connection problem or invalid MMI code (+CME ERROR: 100)` | The network rejected the request. Several SIMs failing from the same minute point to the USSD platform: replay the code on another SIM of the site in a [live session](/tests/live-session) to confirm. One SIM alone: reboot its slot, then test the card in a phone. |
-| `Connection problem or invalid MMI code (+CME ERROR: 258)` | The SIM refuses USSD requests. Reboot the slot, then have your network team check the line's profile. |
-| `No network service (+CME ERROR: 30)` | Check the **Network** column. If the SIM is registered, the cause is on the network side. |
-| `Call barred (+CME ERROR: 257)` | Lift the USSD barring on the line. |
-| `Network Timeout (+CUSD 5)`, `no ussd response received from network`, or `Ussd session closed by operator (+CUSD:2)` | The network didn't answer, or closed the session early: poor coverage, an expired USSD licence, or an overloaded USSD server. Give the team that runs your USSD platform the code, the time, and the SIM's number. |
-| `Wrong USSD code format` | Correct the **Command** field of the test. |
+### `Connection problem or invalid MMI code (+CME ERROR: 100)`
+
+The network rejected the request.
+
+Several SIMs failing from the same minute point to the USSD platform. Replay the code on another SIM of the site in a [live session](/tests/live-session) to confirm.
+
+One SIM alone: reboot its slot, then test the card in a phone.
+
+### `Connection problem or invalid MMI code (+CME ERROR: 258)`
+
+The SIM refuses USSD requests. Reboot the slot, then have your network team check the line's profile.
+
+### `No network service (+CME ERROR: 30)`
+
+Check the SIM's **Network** column. If the SIM is registered, the cause is on the network side.
+
+### `Call barred (+CME ERROR: 257)`
+
+USSD is barred on the line. Lift the barring.
+
+### `Network Timeout (+CUSD 5)`, `no ussd response received from network`, `Ussd session closed by operator (+CUSD:2)`
+
+The network didn't answer, or closed the session early: poor coverage, an expired USSD licence, or an overloaded USSD server. Give the team that runs your USSD platform the code, the time, and the SIM's number.
+
+### `Wrong USSD code format`
+
+Correct the **Command** field of the test.
 
 ## SMS
 
-| Message | What to do |
-|---|---|
-| `SMS not received.` | Test the card in a phone. If it receives nothing there either, check the line and the SMSC. If every SMS test of a robot fails at once, write to support@kapptivate.com: a robot clock more than 30 seconds off fails them all. The robot's other tests keep working as long as the drift stays under two minutes. |
-| `Received SMS was not the expected one.` | Compare the SMS with the test's **Expected Message**. The service may have changed its wording, or answered with an error such as an empty balance. |
-| `failed to send sms` | Check the line's credit, then its SMSC. |
+### `SMS not received.`
+
+Test the card in a phone. If it receives nothing there either, check the line and the SMSC.
+
+Every SMS test of one robot failing at once usually means the robot's clock has drifted. Write to support@kapptivate.com with the robot's name as the platform shows it.
+
+### `Received SMS was not the expected one.`
+
+Compare the SMS with the test's **Expected Message**. The service may have changed its wording, or answered with an error such as an empty balance.
+
+### `failed to send sms`
+
+Check the line's credit, then its SMSC.
 
 ## Calls
 
-| Message | What to do |
-|---|---|
-| `cannot place call to <NUMBER>` | Check that the calling SIM is registered and has credit. |
-| `call was correctly emitted but was suddenly stopped` | The SIM has no airtime, or isn't allowed to call this number (short numbers, or roaming). |
-| `timeout call not pick up` | Check that the called SIM is registered. |
-| `timeout no call received` | Read the result of the calling side, and check the number it dials. |
+Whatever the call error, listen to the calling side's recording first: in the result, open the **Artifacts** section of the **Place Call** step and download the `record-place-…` file. Don't wait: artifacts are kept for 24 hours. The recording often settles the question on its own: a line that's always busy, an announcement that the credit has run out, an odd tone.
+
+### `cannot place call to <NUMBER>`
+
+The calling SIM couldn't place the call. Check that it's registered and has credit.
+
+You'll also get this message when the test forces the call over VoLTE and VoLTE isn't provisioned on the line.
+
+### `call quit unexpectedly`
+
+The called number answered, then hung up a few seconds later, before the call was due to end. You'll mostly see this on short numbers and IVRs. The call's recording may hold an announcement that explains the drop.
+
+Several monitors calling the same service failing within the same minutes point to that service. Give the team that runs it the number called and the times of the failures.
+
+### `call was correctly emitted but was suddenly stopped`
+
+The SIM has no airtime, or isn't allowed to call this number (short numbers, or roaming).
+
+### `timeout call not pick up`
+
+Check that the called SIM is registered.
+
+### `call not ended correctly`
+
+The call came through but nobody hung it up when it was due to end, so it lasted minutes instead of seconds. Check the calling side's step. If it failed with `SIM timeout`, see [`SIM timeout`](#sim-timeout). Otherwise, write to support@kapptivate.com with the link to the execution.
+
+### `timeout no call received`
+
+Read the result of the calling side, and check the number it dials.
 
 ## Data
 
-| Message | What to do |
-|---|---|
-| `No internet after PDP activation` | The data bundle is used up or has expired: top up the line. |
-| `Failed to activate PDP context (timeout while waiting cellular network attachment)` | The SIM isn't attached to the network. Go back to [where to start](/hardware/sim-troubleshooting#where-to-start). |
-| `Failed to activate PDP context (no 'APN' specified)` | Turn **Use default APN credentials** back on in the test, or fill in **APN Name**. |
-| `Failed to activate PDP context (Unspecified reason)` | Check the APN and the line's data subscription. |
+### `No internet after PDP activation`
+
+The data bundle is used up or has expired: top up the line.
+
+### `Failed to activate PDP context (timeout while waiting cellular network attachment)`
+
+The SIM isn't attached to the network. Go back to [where to start](/hardware/sim-troubleshooting#where-to-start).
+
+### `Failed to activate PDP context (no 'APN' specified)`
+
+The test has no APN to use. Either:
+
+- Fill in **APN Name** in the test.
+- Or turn **Use default APN credentials** back on in the test, and make sure the SIM has a default APN. A SIM has none until someone enters it: in the SIM's **Settings** tab, fill in the **Default APN** section, then click **Save changes**.
+
+### `Failed to activate PDP context (Unspecified reason)`
+
+Check the APN and the line's data subscription.
 
 ## Network technology
 
 The robot switches technology before it runs the action, so these messages come first.
 
-| Message | What to do |
-|---|---|
-| `failed to change network technology: sim not registered` or `failed to change network technology: timeout while waiting network registration` | The SIM isn't registered on the requested technology. Set **Access technology** to **Default**, unless the test checks a technology on purpose. If it persists on **Default**, go back to [where to start](/hardware/sim-troubleshooting#where-to-start). |
-| `failed to change network technology: ERROR` | Reboot the slot. If it persists, write to support@kapptivate.com. |
+### `failed to change network technology: sim not registered`
+
+The SIM has no network at all, on any technology. Go back to [where to start](/hardware/sim-troubleshooting#where-to-start).
+
+### `failed to change network technology: timeout while waiting network registration`
+
+The SIM has a network, just not on the technology the test asks for.
+
+Set **Access technology** to **Default** on every step of every test this SIM runs. The SIM's **Monitors** tab lists the monitors that use it. If a test checks 3G or 2G on purpose, report the missing technology to your network team instead. Then reboot the slot.
+
+Fixing only the failing test isn't always enough. A SIM that keeps alternating between 3G and 4G tests switches technology all the time, and it can end up failing all of its tests, the 3G ones included.
+
+Still failing with **Default** everywhere? Write to support@kapptivate.com. The technology can also be forced on the slot itself, in the robot's configuration, and only support can change that. It isn't by default.
+
+### `failed to change network technology: ERROR`
+
+Reboot the slot. If it persists, write to support@kapptivate.com.
 
 ## Robot and test
 
-| Message | What to do |
-|---|---|
-| `Robot unreachable` | The robot is **Offline**: follow [Troubleshoot an Offline robot](/hardware/network-troubleshooting). |
-| `SIM timeout` | The slot didn't answer within the timeout, four minutes by default. Reboot the slot. If it comes back, write to support@kapptivate.com. |
-| `Owner <NUMBER> not recognized` | No SIM in your workspace carries this number right now. Edit the test or the monitor to select a SIM that is available. After a swap, you can also assign this number to the new SIM, following [Swap a SIM](/hardware/swap-sim#reuse-the-number-of-the-card-you-replaced). |
+### `Robot unreachable`
+
+The robot is **Offline**: follow [Troubleshoot an Offline robot](/hardware/network-troubleshooting).
+
+### `SIM timeout`
+
+The slot didn't answer within the timeout, four minutes by default. Reboot the slot. If it comes back, write to support@kapptivate.com.
+
+### `Owner <NUMBER> not recognized`
+
+No SIM in your workspace carries this number right now. The message can also show an empty number (`Owner  not recognized`) or a name in braces (`Owner {SIM} not recognized`): the fix is the same.
+
+Select an available device where the number is set:
+
+- For a test, edit the test.
+- For a monitor, open it, click **Edit monitor**, and pick the device again in the **Device** section, whether it's a SIM, a web robot, or a smartphone. **Edit related test** won't do it: the monitor's device doesn't follow the test's.
+
+### `<metric> assertion failed`
+
+An assertion set up in the test failed it on purpose: a measured value missed its threshold, as in `audio_mos assertion failed`. The step's **Assertion** section shows the measured value next to the expected condition: `audio_mos (2.559999942779541) is not superior or equal to 2.6`.
+
+The SIM and the robot did their job, so investigate the quality of the service being measured. If the threshold no longer matches what you want to watch, adjust the assertion in the test.
+
+## Any other message
+
+A message that isn't on this page and doesn't read like a network answer comes from the platform or the robot. Write to support@kapptivate.com with the link to the failed execution and the exact message.
 
 ## What's next?
 
