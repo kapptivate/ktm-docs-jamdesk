@@ -1,9 +1,9 @@
 ---
 title: Change the IP of an older robot
-description: Give a robot with no desktop a new IP address, gateway, and DNS server, with a few commands typed on its console.
+description: Give a robot with no desktop a new IP address, gateway, and DNS server by writing its network file from the console.
 ---
 
-Older robots have no desktop, so you change their IP address from the console, with a few commands. Plan for the downtime: the robot runs no test from the moment you change its address until it reads **Online** again.
+Older robots have no desktop, so you change their IP address from the console, in a short text file. Plan for the downtime: the robot runs no test from the moment you change its address until it reads **Online** again.
 
 This page is for robots that drop you straight at a command line once you log in. See a Linux desktop instead? Follow [configure the robot network](/hardware/configure-network#set-the-static-ip).
 
@@ -19,7 +19,7 @@ This page is for robots that drop you straight at a command line once you log in
 Plug the screen and the keyboard into the back of the robot, then type the user name and the password. Nothing shows while you type the password, and that's expected.
 
 <Note>
-  The robot expects an AZERTY keyboard, or a QWERTY one on some robots. Type `a` at the login prompt. If a `q` shows up, plug in a keyboard with the other layout.
+  The robot expects an AZERTY keyboard, or a QWERTY one on some robots. Type `a` at the login prompt. If a `q` shows up, the robot doesn't receive the keys you press, and that offset holds for the whole page. To check you're typing the password right, type it in the user name field first, where it shows in clear. Then erase it and log in.
 </Note>
 
 Whenever `sudo` asks for a password on this page, type the one you logged in with.
@@ -35,11 +35,13 @@ enp1s0           DOWN           00:00:5e:00:53:01 <BROADCAST,MULTICAST>
 enp2s0           UP             00:00:5e:00:53:02 <BROADCAST,MULTICAST,UP,LOWER_UP>
 ```
 
-The cable sits in the port that shows `UP` in the second column, `enp2s0` here. Write that name down.
+The RJ45 network cable sits in the port that shows `UP` in the second column, `enp2s0` here. Write that name down.
 
-No port shows `UP`? Move the cable to another port and run the command again. Several ports show `UP`? The robot is on more than one network, so stop here and write to support@kapptivate.com.
+No port shows `UP`? Move the RJ45 cable to another port and run the command again. Several ports show `UP`? The robot is on more than one network, so stop here and write to support@kapptivate.com.
 
 ## Write the new address
+
+You write one or two files with the `nano` editor. Indent lines with the space bar, never with Tab. To save and quit, press Ctrl+O, then Enter, then Ctrl+X.
 
 List the robot's network files first.
 
@@ -47,10 +49,17 @@ List the robot's network files first.
 ls /etc/netplan
 ```
 
-If `50-cloud-init.yaml` is in the list, run this command. Skip it and the robot puts its old configuration back at every boot.
+If `50-cloud-init.yaml` is in the list, the robot puts its old configuration back at every boot. Open this file to stop it:
 
 ```bash
-echo "network: {config: disabled}" | sudo tee /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+```
+
+Type these two lines, with two spaces before the second one, then save.
+
+```
+network:
+  config: disabled
 ```
 
 Then move the old configuration aside. It waits in `/etc/netplan-backup` in case you need to [go back to the old address](#go-back-to-the-old-address).
@@ -60,16 +69,32 @@ sudo mkdir -p /etc/netplan-backup
 sudo mv /etc/netplan/*.yaml /etc/netplan-backup/
 ```
 
-Now write the new configuration. Replace the values in capitals:
+Now open the new file.
 
 ```bash
-echo "network: {version: 2, ethernets: {PORT: {addresses: [ADDRESS/PREFIX], routes: [{to: 0.0.0.0/0, via: GATEWAY}], nameservers: {addresses: [DNS]}}}}" | sudo tee /etc/netplan/01-netcfg.yaml
+sudo nano /etc/netplan/01-netcfg.yaml
 ```
 
-- `PORT` is the port that showed `UP`, such as `enp2s0`.
-- `ADDRESS/PREFIX` is the new IP address, a slash, then the short form of the mask from the table below, such as `192.168.10.42/24`.
-- `GATEWAY` is the gateway address.
-- `DNS` is the DNS server address. With two servers, separate them with a comma and a space.
+Type the configuration below, then save. Every line starts with the same number of spaces as here. This one is for a robot at `192.168.10.42` on a `255.255.255.0` network:
+
+```
+network:
+  ethernets:
+    enp2s0:
+      addresses:
+        - 192.168.10.42/24
+      gateway4: 192.168.10.1
+      nameservers:
+        addresses:
+          - 192.168.10.53
+```
+
+Swap the sample values for yours:
+
+- `enp2s0` is the port that showed `UP`.
+- `192.168.10.42/24` is the new IP address, a slash, then the short form of the mask from the table below.
+- `192.168.10.1` is the gateway address.
+- `192.168.10.53` is the DNS server address. With two servers, add a second `- ` line for the other one, lined up with the first.
 
 | Mask | Short form |
 |---|---|
@@ -84,14 +109,6 @@ echo "network: {version: 2, ethernets: {PORT: {addresses: [ADDRESS/PREFIX], rout
 
 For any other mask, ask your IT team for the short form.
 
-Filled in for a robot at `192.168.10.42` on a `255.255.255.0` network, the command reads:
-
-```bash
-echo "network: {version: 2, ethernets: {enp2s0: {addresses: [192.168.10.42/24], routes: [{to: 0.0.0.0/0, via: 192.168.10.1}], nameservers: {addresses: [192.168.10.53]}}}}" | sudo tee /etc/netplan/01-netcfg.yaml
-```
-
-The robot prints the line back. That's the new content of the file.
-
 ## Check the file and reboot
 
 Check the file.
@@ -100,36 +117,50 @@ Check the file.
 sudo netplan generate
 ```
 
-A valid file prints nothing, or this warning, which blocks nothing:
+A valid file prints nothing, or `WARNING` lines, which block nothing:
 
 ```
 ** (generate:1225): WARNING **: 15:24:04.849: Permissions for /etc/netplan/01-netcfg.yaml are too open. Netplan configuration should NOT be accessible by others.
+** (generate:1225): WARNING **: 15:24:04.850: `gateway4` has been deprecated, use default routes instead.
+See the 'Default routes' section of the documentation for more details.
 ```
 
-An error means a typo in the line. Fix it before you reboot: with an invalid file, the robot boots with no network.
+An error means a typo in the file. Fix it before you reboot: with an invalid file, the robot boots with no network.
 
 <Accordion title="Fix an error">
-  The error names the file, then the line and the column where the typo sits. These three are the likely ones.
+  The error names the file, then the line and the column where the typo sits. Reopen the file with `sudo nano -l /etc/netplan/01-netcfg.yaml`, where `-l` shows line numbers. Fix the line, save, then run `sudo netplan generate` again. These are the likely errors.
 
   ```
-  /etc/netplan/01-netcfg.yaml:1:55: Error in network definition: address '192.168.10.42' is missing /prefixlength
+  /etc/netplan/01-netcfg.yaml:4:1: Invalid YAML: tabs are not allowed for indent:
+  ```
+
+  A line starts with a tab. Delete it and use spaces instead.
+
+  ```
+  /etc/netplan/01-netcfg.yaml:6:6: Invalid YAML: inconsistent indentation:
+  ```
+
+  A line starts with the wrong number of spaces. Compare it with the sample.
+
+  ```
+  /etc/netplan/01-netcfg.yaml:7:7: Invalid YAML: could not find expected ':':
+  ```
+
+  A space is missing after a colon, on the line above the one named. A `:` followed by a value always takes a space after it.
+
+  ```
+  /etc/netplan/01-netcfg.yaml:9:11: Error in network definition: expected sequence
+  ```
+
+  A space is missing after a dash. Every `-` takes a space after it.
+
+  ```
+  /etc/netplan/01-netcfg.yaml:5:9: Error in network definition: address '192.168.10.42' is missing /prefixlength
   ```
 
   The mask is missing after the address. Add `/24`, or the short form from the table.
 
-  ```
-  /etc/netplan/01-netcfg.yaml:2:1: Invalid YAML: did not find expected ',' or '}':
-  ```
-
-  A brace is missing. The line has to end with `]}}}}` before the closing quote.
-
-  ```
-  /etc/netplan/01-netcfg.yaml:1:100: Error in network definition: unknown key 'via:192.168.10.1'
-  ```
-
-  A space is missing after a colon. Every `:` and every `,` in the line is followed by a space. On Ubuntu 18.04, this error reads `Invalid YAML: found unexpected ':'` instead.
-
-  To fix the line, press the up arrow twice to bring back the `echo` command. Correct it, press Enter to rewrite the file, then run `sudo netplan generate` again.
+  On Ubuntu 18.04, the messages are worded differently and count lines from 0, so add 1 to the line number shown.
 </Accordion>
 
 Once the check comes back clean, reboot the robot.
