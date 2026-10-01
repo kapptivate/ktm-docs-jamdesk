@@ -17,7 +17,7 @@ Open the robot in **Agents**, then its **Connected devices** tab. For each slot,
 Then compare with the other SIMs of the same robot and of the same site.
 
 - **One SIM fails on its own**: look at the card and its slot.
-- **Every SIM of one operator fails on the same site**, even if they didn't go down at the same time: that operator's network on this site is the likely cause, so the investigation belongs on the network side. Nationwide outages are rare. Most of the time the outage stays local to one site.
+- **Every SIM of one operator fails on the same site**, even if they didn't go down at the same time: that operator's network on this site is the likely cause, so the investigation belongs on the network side.
 - **Only the SIMs testing one technology fail**: that technology is likely down on the site. Say a site has one SIM running only 4G tests and one running only 3G tests. If the 4G SIM works and the 3G SIM won't register, 3G is probably down there.
 
 ## Where to start
@@ -53,8 +53,8 @@ Take the card out, put it back in, then reboot the slot. If it stays invisible, 
 Ten minutes on **Not registered** or **Searching** is a fault, not a wait. Check three things, in this order.
 
 - **The line is active.** A new card nobody activated in the HLR won't register, and neither will a suspended line.
-- **The radio reaches the robot.** If the SIM fails in two slots, compare the signal with a robot of the same model on another site. No such robot? Use a phone, held where the robot stands. If the signal is much weaker here, check that the antennas are screwed on. Move the robot if no network gets through even then.
-- **The test doesn't force a missing technology.** Forcing 3G or 2G on a cell that no longer serves it usually leaves the SIM on **Not registered**, sometimes on **Searching**. Set **Access technology** to **Default** on every step of every test this SIM runs, unless a test checks 3G or 2G on purpose.
+- **The radio reaches the robot.** If you've tried the SIM in two different slots and it still won't register, check whether another SIM registers on the same site, in this robot or in another one. Failing that, try a phone held where the robot stands. If other SIMs or your phone pick up the network, check that the robot's antennas are screwed on. If nothing picks it up, move the robot.
+- **The test doesn't force a missing technology.** Forcing 3G or 2G on a cell that no longer serves it usually leaves the SIM on **Not registered**, sometimes on **Searching**. Set **Access technology** to **Default** on every step of every test this SIM runs. The SIM's **Monitors** tab lists the monitors that use it. If a test checks 3G or 2G on purpose, report the missing technology to your network team instead.
 
 <Frame caption="The Access technology field of a test step">
   ![The first step of a test, a USSD Command, with the SIM field, the Access technology field set to Default, and the Command field.](/images/hardware/sim-troubleshooting-access-technology.webp)
@@ -64,21 +64,22 @@ Ten minutes on **Not registered** or **Searching** is a fault, not a wait. Check
 
 Everything above runs remotely. [Telling the card from the slot](#tell-the-card-from-the-slot) is the only check that takes a site visit.
 
+What to bring:
+
 - An unlocked phone, to test the card outside the robot.
-- A working SIM from the same robot, to swap the SIMs.
 - For a 4G robot, a SIM ejector tool.
 
 ## Tell the card from the slot
 
-**Swap the SIMs.** Move the failing card into the slot of a working SIM from the same robot, and that SIM into the failing slot. Reboot both slots with **Reboot slot** in the platform. If the fault follows the card, the card or its subscription is to blame: replace the card, following [Swap a SIM](/hardware/swap-sim). If it stays with the slot, the slot is.
+**Swap the SIMs.** Move the failing card into the slot of a working SIM from the same robot, and that SIM into the failing slot. Reboot both slots with **Reboot slot** in the platform. If the fault follows the card, the card or its subscription is to blame. If it stays with the slot, the slot is.
 
-**Test the card in a phone.** If it doesn't register, receive SMS, or complete the USSD code there either, the robot is not involved. Replace the card, following [Swap a SIM](/hardware/swap-sim).
+**Test the card in a phone.** If it doesn't register, receive SMS, or complete the USSD code there either, the card is to blame here too.
 
-A fault that stays with the slot goes to support@kapptivate.com, with the robot's name as the platform shows it and the slot number. Support checks the robot. An IMEI banned by the operator can also cause it.
+A faulty card gets replaced: follow [Swap a SIM](/hardware/swap-sim). A fault that stays with the slot is for support to check. Write to support@kapptivate.com with what [Who to contact](#who-to-contact) lists. An IMEI banned by the operator can also cause it.
 
 ## Who to contact
 
-A fault that follows the card or comes from the network goes to your own teams: the HLR for a refused IMSI or an inactive line, your network team for an outage on a site. Everything else goes to support@kapptivate.com, with the robot's name as the platform shows it, the slot number, the exact message, and the time of the failure.
+A fault that follows the card or comes from the network goes to your own teams: the HLR for a refused IMSI or an inactive line, your network team for an outage on a site. Everything else goes to support@kapptivate.com, with the link to the failed execution in the platform first, then the robot's name as the platform shows it, the slot number, the exact message, and the time of the failure.
 
 ## What's next?
 

@@ -19,7 +19,7 @@ Ouvrez le robot dans **Agents**, puis son onglet **Connected devices**. Pour cha
 Regardez ensuite les autres SIM du même robot et du même site.
 
 - **Une seule SIM est en échec** : l'investigation porte sur la carte et sur son slot.
-- **Toutes les SIM d'un même opérateur sont en échec sur un même site**, même si elles ne sont pas tombées au même moment : le problème vient très probablement du réseau de cet opérateur sur ce site, et l'investigation est à mener côté réseau. Un opérateur en panne à l'échelle d'un pays est rare, la panne se limite le plus souvent à un site.
+- **Toutes les SIM d'un même opérateur sont en échec sur un même site**, même si elles ne sont pas tombées au même moment : le problème vient très probablement du réseau de cet opérateur sur ce site, et l'investigation est à mener côté réseau.
 - **Seules les SIM qui testent une technologie sont en échec** : le problème vient très probablement de cette technologie sur le site. Par exemple, si sur un même site une SIM qui ne joue que des tests 4G fonctionne, et qu'une SIM qui ne joue que des tests 3G ne s'enregistre pas, la 3G est probablement en panne sur ce site.
 
 ## Par où commencer
@@ -55,8 +55,8 @@ Retirez la carte, réinsérez-la, puis redémarrez le slot. Si elle n'apparaît 
 Une SIM qui reste sur **Not registered** ou sur **Searching** au bout de dix minutes ne se débloque pas toute seule. Vérifiez trois points, dans cet ordre.
 
 - **La ligne est active.** Une carte neuve qui n'a pas été activée dans le HLR ne s'enregistre pas, tout comme une ligne suspendue.
-- **La radio atteint le robot.** Si la SIM échoue dans deux slots, comparez le signal avec celui d'un robot du même modèle installé sur un autre site, ou à défaut avec un téléphone placé au même endroit que le robot. Si le signal est nettement plus faible ici, vérifiez que les antennes sont bien vissées, et déplacez le robot si aucun réseau ne passe malgré tout.
-- **Le test n'impose pas une technologie absente.** Un test qui force la 3G ou la 2G sur une cellule qui ne la diffuse plus laisse le plus souvent la SIM sur **Not registered**, parfois sur **Searching**. Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, sauf si le test vérifie volontairement la 3G ou la 2G.
+- **La radio atteint le robot.** Si vous avez testé la SIM dans deux slots différents et qu'elle ne s'enregistre toujours pas, regardez si une autre SIM arrive à s'enregistrer sur le même site, dans le même robot ou dans un autre robot. À défaut, testez avec un téléphone placé au même endroit que le robot. Si d'autres SIM ou votre téléphone captent le réseau, vérifiez que les antennes du robot sont bien vissées. Si rien ne capte, déplacez le robot.
+- **Le test n'impose pas une technologie absente.** Un test qui force la 3G ou la 2G sur une cellule qui ne la diffuse plus laisse le plus souvent la SIM sur **Not registered**, parfois sur **Searching**. Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, sauf si le test vérifie volontairement la 3G ou la 2G : dans ce cas, remontez l'absence de cette technologie à votre équipe réseau. Les monitors qui utilisent la SIM sont listés dans l'onglet **Monitors** de sa page.
 
 <Frame caption="Le champ Access technology d'une étape de test">
   ![La première étape d'un test, de type USSD Command, avec le champ SIM, le champ Access technology réglé sur Default et le champ Command.](/images/hardware/sim-troubleshooting-access-technology.webp)
@@ -66,21 +66,22 @@ Une SIM qui reste sur **Not registered** ou sur **Searching** au bout de dix min
 
 Les sections qui précèdent se traitent à distance. Seule la suivante, [distinguer la carte du slot](#distinguer-la-carte-du-slot), demande de vous déplacer.
 
+Ce que vous devez prendre :
+
 - Un téléphone désimlocké, pour tester la carte hors du robot.
-- Une SIM qui fonctionne sur le même robot, pour permuter les SIM.
 - Pour un robot 4G, l'outil d'éjection des tiroirs SIM.
 
 ## Distinguer la carte du slot
 
-**Permutez les SIM.** Insérez la carte en défaut dans le slot d'une SIM qui fonctionne sur le même robot, et cette SIM dans le slot en défaut. Redémarrez les deux slots avec le bouton **Reboot slot** de l'interface. Si le défaut suit la carte, c'est la carte ou son abonnement qui est en cause : remplacez la carte en suivant [Remplacer une SIM](/fr/hardware/swap-sim). Si le défaut reste sur le slot, c'est le slot qui est en cause.
+**Permutez les SIM.** Insérez la carte en défaut dans le slot d'une SIM qui fonctionne sur le même robot, et cette SIM dans le slot en défaut. Redémarrez les deux slots avec le bouton **Reboot slot** de l'interface. Si le défaut suit la carte, c'est la carte ou son abonnement qui est en cause. Si le défaut reste sur le slot, c'est le slot qui est en cause.
 
-**Testez la carte dans un téléphone.** Si la carte ne s'enregistre pas non plus dans un téléphone, ne reçoit pas de SMS ou si le code USSD n'aboutit pas, le robot n'est pas en cause : remplacez la carte en suivant [Remplacer une SIM](/fr/hardware/swap-sim).
+**Testez la carte dans un téléphone.** Si la carte ne s'enregistre pas non plus dans un téléphone, ne reçoit pas de SMS ou si le code USSD n'aboutit pas, c'est aussi la carte qui est en cause.
 
-Quand le défaut reste sur le slot, écrivez à support@kapptivate.com en indiquant le nom du robot tel qu'il apparaît sur la plateforme et le numéro du slot : le support vérifie le robot. Le défaut peut aussi venir d'un IMEI banni par l'opérateur.
+Quand la carte est en cause, remplacez-la en suivant [Remplacer une SIM](/fr/hardware/swap-sim). Quand le défaut reste sur le slot, c'est le support qui vérifie le robot : écrivez à support@kapptivate.com avec les informations listées dans [Qui contacter](#qui-contacter). Le défaut peut aussi venir d'un IMEI banni par l'opérateur.
 
 ## Qui contacter
 
-Quand le défaut suit la carte ou vient du réseau, ce sont vos propres équipes qui prennent la main : le HLR pour un IMSI refusé ou une ligne inactive, votre équipe réseau pour une panne sur un site. Pour tout le reste, écrivez à support@kapptivate.com en indiquant le nom du robot tel qu'il apparaît sur la plateforme, le numéro du slot, le message exact et l'heure de l'échec.
+Quand le défaut suit la carte ou vient du réseau, ce sont vos propres équipes qui prennent la main : le HLR pour un IMSI refusé ou une ligne inactive, votre équipe réseau pour une panne sur un site. Pour tout le reste, écrivez à support@kapptivate.com en indiquant surtout le lien de l'exécution en échec sur la plateforme, puis le nom du robot tel qu'il apparaît sur la plateforme, le numéro du slot, le message exact et l'heure de l'échec.
 
 ## Et ensuite ?
 
