@@ -67,9 +67,9 @@ You'll also get this message when the test forces the call over VoLTE and VoLTE 
 
 ### `call quit unexpectedly`
 
-The called number answered, then hung up a few seconds later, before the call was due to end. You'll mostly see this on short numbers and IVRs. The call's recording may hold an announcement that explains the drop.
+The called service answered, then dropped the call in under a second without playing anything. You'll see this on short numbers and IVRs. The step then ends before the duration in its title, for example after 2.9 seconds on `Place Call to 8027 for 3s`, and the `record-place-…` recording is silent.
 
-Several monitors calling the same service failing within the same minutes point to that service. Give the team that runs it the number called and the times of the failures.
+Check the failure times against the service's opening hours: a service that is closed or down at night answers and hangs up like this. Less often, the network drops the call after a few seconds. Either way, give the team that runs the service the number called and the times of the failures.
 
 ### `call was correctly emitted but was suddenly stopped`
 
@@ -81,7 +81,13 @@ Check that the called SIM is registered.
 
 ### `call not ended correctly`
 
-The call came through but nobody hung it up when it was due to end, so it lasted minutes instead of seconds. Check the calling side's step. If it failed with `SIM timeout`, see [`SIM timeout`](#sim-timeout). Otherwise, write to support@kapptivate.com with the link to the execution.
+This message shows on the **Wait Call** step, on the receiving side. The call came through, but the caller never hung up. Instead of the planned duration, such as 10 seconds for `Place Call to <NUMBER> for 10s`, **Wait Call** runs for 4 minutes, and then the receiving robot hangs up on its own.
+
+So the problem is the calling SIM. The **Place Call** step of the same result usually shows `SIM timeout` or `timeout, an error occurred during call`. Reboot the calling SIM's slot. If the error comes back, or if **Place Call** succeeded, write to support@kapptivate.com with the link to the execution.
+
+### `timeout, an error occurred during call`
+
+This message shows on the **Place Call** step, on the calling side: the calling SIM stopped answering during the call. It comes with `call not ended correctly` on **Wait Call**, and the fix is the same: see [`call not ended correctly`](#call-not-ended-correctly).
 
 ### `timeout no call received`
 
@@ -149,11 +155,17 @@ Select an available device where the number is set:
 - For a test, edit the test.
 - For a monitor, open it, click **Edit monitor**, and pick the device again in the **Device** section, whether it's a SIM, a web robot, or a smartphone. **Edit related test** won't do it: the monitor's device doesn't follow the test's.
 
-### `<metric> assertion failed`
+### A failed assertion
 
-An assertion set up in the test failed it on purpose: a measured value missed its threshold, as in `audio_mos assertion failed`. The step's **Assertion** section shows the measured value next to the expected condition: `audio_mos (2.559999942779541) is not superior or equal to 2.6`.
+An assertion is a condition you added to the test so that it fails when a measurement isn't good enough. When the condition isn't met, the test fails even though the SIM and the robot did their job.
 
-The SIM and the robot did their job, so investigate the quality of the service being measured. If the threshold no longer matches what you want to watch, adjust the assertion in the test.
+The step's **Assertion** section lists every condition of the test. The one that failed it shows the measured value next to the expected condition, for example:
+
+- `audio_mos (2.559999942779541) is not superior or equal to 2.6`
+- `duration (4.8152558800000005) is not strictly inferior to 3`
+- `body doesn't contain MCO=OGC`
+
+Investigate the quality of the service being measured. If the threshold no longer matches what you want to watch, adjust the assertion in the test.
 
 ## Any other message
 

@@ -67,9 +67,9 @@ Le même message apparaît quand le test force l'appel en VoLTE alors que la VoL
 
 ### `call quit unexpectedly`
 
-Le numéro appelé a décroché, puis a raccroché quelques secondes plus tard, avant la fin prévue de l'appel. Ce message apparaît surtout sur les numéros courts et les serveurs vocaux. L'enregistrement de l'appel peut contenir une annonce qui explique la coupure.
+Le service appelé a décroché, puis a coupé l'appel en moins d'une seconde, sans rien diffuser. Ce message apparaît sur les numéros courts et les serveurs vocaux. L'étape dure alors moins longtemps que la durée prévue dans son titre, par exemple 2,9 secondes pour `Place Call to 8027 for 3s`, et l'enregistrement `record-place-…` est silencieux.
 
-Si plusieurs monitors qui appellent le même service échouent dans les mêmes minutes, c'est ce service qui est en cause. Transmettez le numéro appelé et les heures des échecs à l'équipe qui le gère.
+Comparez les heures des échecs avec les horaires d'ouverture du service : un service fermé ou indisponible la nuit décroche et raccroche de cette façon. Plus rarement, c'est le réseau qui coupe l'appel au bout de quelques secondes. Dans les deux cas, transmettez le numéro appelé et les heures des échecs à l'équipe qui gère le service.
 
 ### `call was correctly emitted but was suddenly stopped`
 
@@ -81,7 +81,13 @@ Vérifiez que la SIM appelée est enregistrée.
 
 ### `call not ended correctly`
 
-L'appel a bien été reçu, mais il n'a pas été raccroché à la fin prévue : il a duré plusieurs minutes au lieu de quelques secondes. Regardez l'étape de l'appelant. Si elle a échoué avec `SIM timeout`, suivez [`SIM timeout`](#sim-timeout). Sinon, écrivez à support@kapptivate.com avec le lien de l'exécution.
+Ce message apparaît sur l'étape **Wait Call**, du côté appelé. L'appel a bien été reçu, mais l'appelant ne l'a jamais raccroché : au lieu de la durée prévue, par exemple 10 secondes pour `Place Call to <NUMBER> for 10s`, l'étape **Wait Call** dure 4 minutes, puis le robot appelé raccroche lui-même.
+
+Le problème vient donc de la SIM appelante. Regardez l'étape **Place Call** du même résultat : le plus souvent, elle affiche `SIM timeout` ou `timeout, an error occurred during call`. Redémarrez le slot de la SIM appelante. Si l'erreur revient, ou si l'étape **Place Call** a réussi, écrivez à support@kapptivate.com avec le lien de l'exécution.
+
+### `timeout, an error occurred during call`
+
+Ce message apparaît sur l'étape **Place Call**, du côté appelant : la SIM appelante a cessé de répondre pendant l'appel. Il accompagne `call not ended correctly` sur l'étape **Wait Call**, et se traite de la même façon : voir [`call not ended correctly`](#call-not-ended-correctly).
 
 ### `timeout no call received`
 
@@ -149,11 +155,17 @@ Sélectionnez un device disponible là où le numéro est configuré :
 - Pour un test, modifiez le test.
 - Pour un monitor, ouvrez le monitor, cliquez sur **Edit monitor**, puis choisissez à nouveau le device dans la section **Device**, que ce soit une SIM, un robot web ou un smartphone. Passer par **Edit related test** ne suffit pas : le device du monitor ne suit pas celui du test.
 
-### `<metric> assertion failed`
+### Une assertion échoue
 
-Le test échoue parce qu'une assertion configurée dans le test l'a fait échouer : une valeur mesurée n'a pas atteint le seuil fixé, par exemple `audio_mos assertion failed`. La section **Assertion** de l'étape affiche la valeur mesurée et la condition attendue : `audio_mos (2.559999942779541) is not superior or equal to 2.6`.
+Une assertion est une condition que vous avez ajoutée au test pour le faire échouer quand une mesure ne vous convient pas. Quand elle n'est pas remplie, le test échoue alors que la SIM et le robot ont fonctionné.
 
-La SIM et le robot ont fonctionné : c'est la qualité du service mesuré qu'il faut investiguer. Si le seuil ne correspond plus à ce que vous voulez surveiller, ajustez l'assertion dans le test.
+La section **Assertion** de l'étape liste chaque condition du test. Celle qui a fait échouer le test affiche la valeur mesurée et la condition attendue, par exemple :
+
+- `audio_mos (2.559999942779541) is not superior or equal to 2.6`
+- `duration (4.8152558800000005) is not strictly inferior to 3`
+- `body doesn't contain MCO=OGC`
+
+C'est la qualité du service mesuré qu'il faut investiguer. Si le seuil ne correspond plus à ce que vous voulez surveiller, ajustez l'assertion dans le test.
 
 ## Tout autre message
 
