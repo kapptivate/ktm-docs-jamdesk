@@ -33,13 +33,13 @@ ip route get 1.1.1.1
 
 `src` donne l'adresse IP locale du robot, ici `192.168.10.42`, et `via` donne la passerelle de son réseau, ici `192.168.10.1`. Sur un réseau filtré, comparez l'adresse `src` à celle que votre service informatique a déclarée dans ses règles de pare-feu : les deux doivent coïncider. Si elles sont différentes, vous pouvez reconfigurer l'IP statique du robot pour qu'elle corresponde à ce qui est configuré sur votre réseau : voir [définir une IP statique](/fr/hardware/configure-network#trouver-le-port-ethernet).
 
-L'autre réponse possible est celle-ci.
+<Accordion title="Si le réseau est injoignable">
+  ```
+  RTNETLINK answers: Network is unreachable
+  ```
 
-```
-RTNETLINK answers: Network is unreachable
-```
-
-Le robot n'a aucune route, donc aucun lien. Vérifiez le câble RJ45 et le port du switch.
+  Le robot n'a aucune route, donc aucun lien. Vérifiez le câble RJ45 et le port du switch.
+</Accordion>
 
 Joignez ensuite la passerelle, en reprenant l'adresse affichée après `via`.
 
@@ -59,16 +59,18 @@ PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.090/1.135/1.180/0.034 ms
 ```
 
-La passerelle répond : le robot est bien sur son réseau, [passez aux flux](#vérifier-les-flux). L'autre réponse est celle-ci.
+La passerelle répond : le robot est bien sur son réseau, [passez aux flux](#vérifier-les-flux).
 
-```
-PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
+<Accordion title="Si la passerelle ne répond pas">
+  ```
+  PING 192.168.10.1 (192.168.10.1) 56(84) bytes of data.
 
---- 192.168.10.1 ping statistics ---
-4 packets transmitted, 0 received, 100% packet loss, time 3007ms
-```
+  --- 192.168.10.1 ping statistics ---
+  4 packets transmitted, 0 received, 100% packet loss, time 3007ms
+  ```
 
-Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au mauvais endroit. Faites ensuite vérifier par votre service informatique qu'il aboutit sur un port de switch actif.
+  Vérifiez alors le câble RJ45 : il est peut-être défaillant, ou branché au mauvais endroit. Faites ensuite vérifier par votre service informatique qu'il aboutit sur un port de switch actif.
+</Accordion>
 
 ## Vérifier les flux
 
@@ -92,13 +94,13 @@ Le nom se résout et le flux passe :
 Connection to robots.example.com (203.0.113.10) 443 port [tcp/https] succeeded!
 ```
 
-L'autre réponse est celle-ci :
+<Accordion title="Si le nom ne se résout pas">
+  ```
+  nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
+  ```
 
-```
-nc: getaddrinfo for host "robots.example.com" port 443: Name or service not known
-```
-
-L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant l'étape [saisir les adresses](/fr/hardware/configure-network#saisir-les-adresses) de la configuration réseau.
+  L'adresse IP passe mais son nom échoue. Le robot n'a certainement pas de serveur DNS configuré, ce qui l'empêche de résoudre le nom de domaine. Remontez l'information à votre service informatique. Vous pouvez configurer un ou plusieurs serveurs DNS sur le robot en suivant l'étape [saisir les adresses](/fr/hardware/configure-network#saisir-les-adresses) de la configuration réseau.
+</Accordion>
 
 ### Vérifier le certificat
 
@@ -114,19 +116,23 @@ La commande affiche un code à trois chiffres, par exemple `200` ou `404` :
 200
 ```
 
-Quel que soit ce code, la connexion chiffrée a abouti et le certificat est reconnu. L'autre réponse est une erreur `curl: (60)`, suivie de `000` :
+Quel que soit ce code, la connexion chiffrée a abouti et le certificat est reconnu.
 
-```
-curl: (60) SSL certificate problem: unable to get local issuer certificate
-More details here: https://curl.se/docs/sslcerts.html
+<Accordion title="Si le certificat est refusé">
+  La commande renvoie une erreur `curl: (60)`, suivie de `000` :
 
-curl failed to verify the legitimacy of the server and therefore could not
-establish a secure connection to it. To learn more about this situation and
-how to fix it, please visit the web page mentioned above.
-000
-```
+  ```
+  curl: (60) SSL certificate problem: unable to get local issuer certificate
+  More details here: https://curl.se/docs/sslcerts.html
 
-Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers Kapptivate est intercepté.
+  curl failed to verify the legitimacy of the server and therefore could not
+  establish a secure connection to it. To learn more about this situation and
+  how to fix it, please visit the web page mentioned above.
+  000
+  ```
+
+  Un équipement de votre réseau s'intercale entre le robot et Kapptivate, et présente son propre certificat. Remontez à votre service informatique que le trafic HTTPS vers Kapptivate est intercepté.
+</Accordion>
 
 ## Demander le déploiement d'un nouveau robot
 
