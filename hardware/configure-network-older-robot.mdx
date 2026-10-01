@@ -3,20 +3,34 @@ title: Configure an older robot's network
 description: Give a robot with no desktop a new IP address, gateway, and DNS server by writing its network file from the console.
 ---
 
-Older robots have no desktop, so you change their IP address from the console, in a short text file. Plan for the downtime: the robot runs no test from the moment you change its address until it reads **Online** again.
+Older robots have no desktop, so you change their IP address from the console, in a short text file.
 
-This page is for robots that drop you straight at a command line once you log in. See a Linux desktop instead? Follow [configure a robot's network](/hardware/configure-network#set-the-static-ip).
+This page is for robots with no Linux desktop. On a screen, they drop you straight at a command line once you log in. See a desktop instead? Follow [configure a robot's network](/hardware/configure-network#set-the-static-ip).
+
+Over SSH, every robot gives you a command line. To tell whether yours has a desktop, run:
+
+```bash
+systemctl is-active NetworkManager
+```
+
+`inactive` means no desktop, so this page is the right one. `active` means a desktop: follow [configure a robot's network](/hardware/configure-network#set-the-static-ip) instead.
 
 ## Before you start
 
-- A screen and a keyboard. The screen plugs in over HDMI or VGA, depending on the model.
+- SSH access to the robot, or a screen and a keyboard if SSH doesn't work. The screen plugs in over HDMI or VGA, depending on the model.
 - The robot's credentials. Ask support@kapptivate.com if you don't have them.
 - The new IP address, its mask, the gateway, and the DNS server, from your IT team.
 - On a filtered corporate network, the flows opened for the new address. The IP requirements document lists them: ask support@kapptivate.com for it. Without those flows, the robot stays **Offline** on its new address.
 
 ## Log in
 
-Plug the screen and the keyboard into the back of the robot, then type the user name and the password. Nothing shows while you type the password, and that's expected.
+Over SSH, log in with the robot's credentials. Replace `USER` with the user name and `ADDRESS` with the robot's current IP address:
+
+```bash
+ssh USER@ADDRESS
+```
+
+No SSH access? Plug the screen and the keyboard into the back of the robot, then type the user name and the password. Nothing shows while you type the password, and that's expected.
 
 <Note>
   The robot expects an AZERTY keyboard, or a QWERTY one on some robots. Type `a` at the login prompt. If a `q` shows up, the robot doesn't receive the keys you press, and that offset holds for the whole page. To check you're typing the password right, type it in the user name field first, where it shows in clear. Then erase it and log in.
@@ -37,7 +51,7 @@ enp2s0           UP             00:00:5e:00:53:02 <BROADCAST,MULTICAST,UP,LOWER_
 
 The RJ45 network cable sits in the port that shows `UP` in the second column, `enp2s0` here. Write that name down.
 
-No port shows `UP`? Move the RJ45 cable to another port and run the command again. Several ports show `UP`? The robot is on more than one network, so stop here and write to support@kapptivate.com.
+No port shows `UP`? Move the RJ45 cable to another port and run the command again.
 
 ## Write the new address
 
@@ -75,7 +89,7 @@ Now open the new file.
 sudo nano /etc/netplan/01-netcfg.yaml
 ```
 
-Type the configuration below, then save. Every line starts with the same number of spaces as here. This one is for a robot at `192.168.10.42` on a `255.255.255.0` network:
+Type the configuration, then save. Here's an example:
 
 ```
 network:
@@ -89,12 +103,26 @@ network:
           - 192.168.10.53
 ```
 
+Each line starts with an exact number of spaces:
+
+| Line | Leading spaces |
+|---|---|
+| `network:` | 0 |
+| `ethernets:` | 2 |
+| `enp2s0:` | 4 |
+| `addresses:` | 6 |
+| `- 192.168.10.42/24` | 8 |
+| `gateway4: 192.168.10.1` | 6 |
+| `nameservers:` | 6 |
+| `addresses:` | 8 |
+| `- 192.168.10.53` | 10 |
+
 Swap the sample values for yours:
 
 - `enp2s0` is the port that showed `UP`.
 - `192.168.10.42/24` is the new IP address, a slash, then the short form of the mask from the table below.
 - `192.168.10.1` is the gateway address.
-- `192.168.10.53` is the DNS server address. With two servers, add a second `- ` line for the other one, lined up with the first.
+- `192.168.10.53` is the DNS server address. With two servers, add a second `- ` line for the other one, with the same 10 spaces in front.
 
 | Mask | Short form |
 |---|---|
@@ -111,7 +139,7 @@ For any other mask, ask your IT team for the short form.
 
 ## Check the file and reboot
 
-Check the file.
+Validate the changes.
 
 ```bash
 sudo netplan generate
@@ -159,8 +187,6 @@ An error means a typo in the file. Fix it before you reboot: with an invalid fil
   ```
 
   The mask is missing after the address. Add `/24`, or the short form from the table.
-
-  On Ubuntu 18.04, the messages are worded differently and count lines from 0, so add 1 to the line number shown.
 </Accordion>
 
 Once the check comes back clean, reboot the robot.
@@ -168,6 +194,8 @@ Once the check comes back clean, reboot the robot.
 ```bash
 sudo reboot
 ```
+
+Over SSH, the session drops when the robot reboots. If it comes back with no network, only a screen and a keyboard can get you to [go back to the old address](#go-back-to-the-old-address).
 
 The platform needs about three minutes to notice the robot is back. Then it reads **Online** in [your list of robots](/equipment/agents). Still **Offline**? Work through [checking the robot's network connection](/hardware/check-robot-network).
 
