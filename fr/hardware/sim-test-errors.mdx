@@ -13,11 +13,10 @@ Commencez par [redémarrer le slot](/fr/hardware/sim-troubleshooting#commencer-p
 
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
-| `Connection problem or invalid MMI code (+CME ERROR: 100)` | Le réseau a rejeté la requête. | Si le souci est présent sur plusieurs SIM en même temps, la plateforme USSD est en cause : rejouez le shortcode sur une autre SIM du site via une [live session](/fr/tests/live-session) pour le confirmer.<br /><br />Si une seule SIM est touchée, redémarrez son slot, puis testez la carte dans un téléphone si le problème persiste. |
-| `Connection problem or invalid MMI code (+CME ERROR: 258)` | La SIM refuse les requêtes USSD. | Redémarrez le slot, puis faites vérifier le profil de la ligne par votre équipe réseau. |
+| `Connection problem or invalid MMI code (+CME ERROR: 100)`<br /><br />`Connection problem or invalid MMI code (+CME ERROR: 258)` | Le réseau a rejeté la requête. Le robot a déjà réessayé trois fois avant d'afficher ce message.<br /><br />Un code que le réseau ne connaît pas donne aussi ce message. | Si le souci est présent sur plusieurs SIM en même temps, la plateforme USSD est en cause : rejouez le shortcode sur une autre SIM du site via une [live session](/fr/tests/live-session) pour le confirmer.<br /><br />Si une seule SIM est touchée, redémarrez son slot. Si le problème persiste, composez le même code depuis un téléphone avec cette carte : s'il échoue aussi, vérifiez le code, puis faites vérifier le profil de la ligne par votre équipe réseau. |
 | `No network service (+CME ERROR: 30)` | Aucun service réseau n'était disponible pour la SIM au moment de la requête. | Regardez la colonne **Network** de la SIM.<br /><br />Si la SIM est enregistrée, la cause est côté réseau. Si elle ne l'est pas, suivez [Dépanner une SIM](/fr/hardware/sim-troubleshooting). |
-| `Call barred (+CME ERROR: 257)` | L'USSD est interdit sur la ligne. | Levez cette interdiction. |
-| `Network Timeout (+CUSD 5)`<br /><br />`no ussd response received from network`<br /><br />`Ussd session closed by operator (+CUSD:2)` | Le réseau n'a pas répondu, ou a fermé la session avant la fin : mauvaise couverture, licence USSD expirée ou serveur USSD surchargé. | Transmettez à l'équipe qui gère votre plateforme USSD le code, l'heure et le numéro de la SIM. |
+| `Call barred (+CME ERROR: 257)` | Le réseau indique que l'USSD est interdit sur la ligne. | Faites vérifier les restrictions de la ligne par votre équipe réseau. |
+| `Network Timeout (+CUSD 5)`<br /><br />`no ussd response received from network`<br /><br />`Ussd session closed by operator (+CUSD:2)` | Le réseau a signalé un délai dépassé, n'a rien répondu en 2 minutes, ou a fermé la session avant la fin. | Transmettez à l'équipe qui gère votre plateforme USSD le code, l'heure et le numéro de la SIM. |
 | `Wrong USSD code format` | Le code saisi dans le test n'a pas le format d'un code USSD. | Corrigez le champ **Command** du test. |
 
 ## SMS
@@ -25,7 +24,7 @@ Commencez par [redémarrer le slot](/fr/hardware/sim-troubleshooting#commencer-p
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
 | `SMS not received.` | Le SMS attendu n'est pas arrivé sur la SIM dans le délai prévu. | Le monitor attend le SMS pendant la durée réglée dans **SMS timeout**, dans la section **Options** du monitor. Si ce délai vous paraît trop court, vous pouvez le rallonger.<br /><br />Testez la carte dans un téléphone. Si elle ne reçoit rien non plus, vérifiez la ligne et le SMSC.<br /><br />Si tous les tests SMS d'un même robot échouent, l'horloge du robot est probablement décalée : écrivez à support@kapptivate.com avec le nom du robot tel qu'il apparaît sur la plateforme. |
-| `failed to send sms` | La SIM n'a pas pu envoyer le SMS. | Vérifiez le crédit de la ligne, puis son SMSC. |
+| `failed to send sms` | La SIM n'a pas pu envoyer le SMS. | Vérifiez que la SIM est enregistrée dans la colonne **Network**, puis le crédit de la ligne et son SMSC. |
 
 ## Appels
 
@@ -38,18 +37,18 @@ Pour tout échec d'appel, écoutez d'abord l'enregistrement du côté appelant :
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
 | `cannot place call to <NUMBER>` | La SIM appelante n'a pas pu passer l'appel. | Vérifiez qu'elle est enregistrée et qu'elle a du crédit.<br /><br />Si le test force l'appel en VoLTE, vérifiez aussi que la VoLTE est provisionnée sur la ligne. |
-| `call quit unexpectedly` | Le service appelé a décroché, puis coupé l'appel en moins d'une seconde : l'étape finit avant sa durée prévue et l'enregistrement est silencieux. | Comparez les heures des échecs aux horaires d'ouverture du service.<br /><br />Transmettez le numéro appelé et ces heures à l'équipe qui gère le service. |
-| `call was correctly emitted but was suddenly stopped` | Soit la SIM n'a plus de crédit, soit elle n'est pas autorisée à appeler ce numéro (numéros courts, ou itinérance). | Vérifiez le crédit de la ligne et les numéros qu'elle a le droit d'appeler. |
-| `timeout call not pick up` | L'appel n'a pas été décroché du côté appelé. | Vérifiez que la SIM appelée est enregistrée. |
+| `call quit unexpectedly` | L'appel a été décroché, puis coupé avant la durée prévue par l'étape. Avec un numéro court, la coupure arrive souvent moins d'une seconde après le décroché. | Comparez les heures des échecs aux horaires d'ouverture du service.<br /><br />Transmettez le numéro appelé et ces heures à l'équipe qui gère le service. |
+| `call was correctly emitted but was suddenly stopped` | L'appel s'est arrêté avant d'être décroché : ligne appelée occupée ou injoignable, appel refusé, ou SIM appelante sans crédit ou sans droit d'appeler ce numéro (numéros courts, ou itinérance). | L'enregistrement donne souvent la raison.<br /><br />Vérifiez le crédit de la ligne et les numéros qu'elle a le droit d'appeler.<br /><br />Si plusieurs SIM échouent en même temps, la cause est côté réseau. |
+| `timeout call not pick up` | Ça a sonné du côté appelé, mais personne n'a décroché dans le délai de l'étape. | Si le numéro appelé est une SIM de la plateforme, ouvrez son résultat : son étape **Wait Call** doit être en cours au moment de l'appel.<br /><br />Sinon, vérifiez que le service appelé décroche à cette heure-là. |
 | `call not ended correctly` | Côté appelé, sur l'étape **Wait Call** : l'appelant n'a jamais raccroché, et l'étape a attendu 4 minutes. | Redémarrez le slot de la SIM appelante.<br /><br />Si l'erreur revient, ou si son étape **Place Call** a réussi, écrivez à support@kapptivate.com avec le lien de l'exécution. |
-| `timeout, an error occurred during call` | Côté appelant, sur l'étape **Place Call** : la SIM appelante a cessé de répondre pendant l'appel. Ce message accompagne `call not ended correctly`. | Faites comme pour `call not ended correctly` : redémarrez le slot de la SIM appelante. |
+| `timeout, an error occurred during call` | Côté appelant, sur l'étape **Place Call** : l'appel n'était toujours pas terminé au bout de 4 minutes. Ce message accompagne `call not ended correctly`. | Faites comme pour `call not ended correctly` : redémarrez le slot de la SIM appelante. |
 | `timeout no call received` | La SIM appelée n'a reçu aucun appel. | Lisez le résultat du côté appelant, et vérifiez le numéro qu'il compose. |
 
 ## Data
 
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
-| `No internet after PDP activation` | Le forfait data est épuisé ou a expiré. | Rechargez la ligne. |
+| `No internet after PDP activation` | La connexion data s'est ouverte, mais la SIM n'a pas pu joindre internet. | Vérifiez le forfait data de la ligne, puis l'APN.<br /><br />Si plusieurs SIM échouent en même temps, la cause est côté réseau. |
 | `Failed to activate PDP context (timeout while waiting cellular network attachment)` | La SIM n'est pas attachée au réseau. | Reprenez le [dépannage de la SIM](/fr/hardware/sim-troubleshooting). |
 | `Failed to activate PDP context (no 'APN' specified)` | Le test n'a aucun APN à utiliser. | Renseignez **APN Name** dans le test.<br /><br />Ou bien réactivez **Use default APN credentials**, après avoir rempli la section **Default APN** dans l'onglet **Settings** de la SIM et cliqué sur **Save changes** : une SIM n'a aucun APN par défaut tant que personne ne l'a saisi. |
 | `Failed to activate PDP context (Unspecified reason)` | La connexion data a échoué, sans raison précisée par le réseau. | Vérifiez l'APN et l'abonnement data de la ligne. |
@@ -69,7 +68,7 @@ Le robot change de technologie avant d'exécuter l'action.
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
 | `Robot unreachable` | Le robot est **Offline**, ou la SIM n'est plus détectée dans aucun robot. | Si le robot est **Offline**, suivez [Dépanner un robot Offline](/fr/hardware/network-troubleshooting).<br /><br />Si le robot est **Online**, c'est la SIM qui n'est plus détectée : suivez [Dépanner une SIM](/fr/hardware/sim-troubleshooting). |
-| `SIM timeout` | Le slot n'a pas répondu dans le délai, de quatre minutes par défaut. | Redémarrez le slot.<br /><br />Si l'erreur revient, écrivez à support@kapptivate.com. |
+| `SIM timeout` | Le slot n'a pas répondu dans le délai, de cinq minutes par défaut. | Redémarrez le slot.<br /><br />Si l'erreur revient, écrivez à support@kapptivate.com. |
 | `Owner <NUMBER> not recognized` | Aucune SIM autorisée pour votre produit ne porte ce numéro. Le numéro peut aussi s'afficher vide ou entre accolades (`Owner {SIM} not recognized`). | Sélectionnez un device disponible dans le test, ou pour un monitor dans **Edit monitor**, section **Device**.<br /><br />**Edit related test** ne change pas le device du monitor. |
 
 ## La réponse n'est pas celle attendue
