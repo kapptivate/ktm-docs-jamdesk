@@ -615,3 +615,34 @@ p:has(> time[datetime]) {
   font-size: 0.75rem;
   line-height: 1.4;
 }
+
+/* ===== Tables with line breaks inside cells =====
+   A Markdown table cell is one line of source, so a long explanation
+   becomes a block of text. Pages that split such a cell with <br /><br />
+   (sim-test-errors) get room to breathe: text starts on the top line
+   next to its message, a looser line height, and fixed column widths
+   so every table on the page lines up. Tables without <br> are left alone. */
+.prose table:has(td br) td {
+  vertical-align: top;
+  line-height: 1.6;
+  padding: 0.875rem 1rem;
+}
+
+.prose table:has(td br) td:first-child {
+  width: 30%;
+}
+
+.prose table:has(td br) td:nth-child(2) {
+  width: 30%;
+}
+
+/* A message that wraps keeps its chip padding on every line, so its
+   second line no longer starts 6px left of the first. */
+.prose table:has(td br) td code {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.prose table:has(td br) th {
+  text-align: center;
+}

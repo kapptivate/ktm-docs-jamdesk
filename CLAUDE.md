@@ -131,7 +131,7 @@ Check your work:
 - [ ] New pages are added to `docs.json` navigation
 - [ ] Code examples are complete and copy-pasteable
 - [ ] No invented components; only the ones listed above
-- [ ] No raw HTML tags; use MDX components
+- [ ] No raw HTML tags; use MDX components. One exception: `<br /><br />` inside a Markdown table cell, to split a long explanation into blocks (a cell can't hold a line break otherwise). `style.css` gives such tables top-aligned, airier cells; see `hardware/sim-test-errors.mdx`
 - [ ] Images use `.webp` format
 
 ## Common Mistakes
