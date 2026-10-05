@@ -5,11 +5,11 @@ description: Depuis un terminal sur le robot, vérifier son adresse IP locale, s
 
 Deux situations mènent à cette page. Vous venez de configurer le réseau d'un nouveau robot, et vous voulez vérifier qu'il atteint Kapptivate avant de demander son déploiement.
 
-Ou bien un robot en service est passé **Offline**, et il le reste après deux redémarrages physiques alors que son alimentation et ses câbles sont en ordre.
+Ou bien un robot en service est passé **Hors ligne**, et il le reste après deux redémarrages physiques alors que son alimentation et ses câbles sont en ordre.
 
 Dans les deux cas, les vérifications se font dans un terminal sur le robot. Elles indiquent si le blocage vient du robot ou de votre réseau.
 
-Si le robot est **Offline** et que vous ne l'avez pas encore redémarré, commencez par [dépanner un robot Offline](/fr/hardware/network-troubleshooting).
+Si le robot est **Hors ligne** et que vous ne l'avez pas encore redémarré, commencez par [dépanner un robot hors ligne](/fr/hardware/network-troubleshooting).
 
 ## Ce qu'il vous faut sur place
 
@@ -142,18 +142,18 @@ Toutes les étapes de vérification ont fonctionné sur un nouveau robot ? Il ne
 sudo krobot serial
 ```
 
-Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une. Le support déploie ensuite le robot, et il passe **Online** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot#monter-le-robot-en-baie).
+Envoyez la sortie de cette commande à support@kapptivate.com. Joignez-y l'IP statique si vous en avez défini une. Le support déploie ensuite le robot, et il passe **En ligne** dans [la liste de vos robots](/fr/equipment/agents), sans autre action de votre part. C'est le feu vert pour le [visser en baie](/fr/hardware/install-robot#monter-le-robot-en-baie).
 
 ## Qui contacter
 
 Une des étapes de vérification de cette procédure a échoué : le blocage est sur votre réseau. Transmettez la sortie complète des commandes concernées à votre service informatique, avec l'adresse IP locale du robot et l'heure du test.
 
-Toutes les étapes de vérification ont fonctionné, et un robot en service reste **Offline** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
+Toutes les étapes de vérification ont fonctionné, et un robot en service reste **Hors ligne** ? Écrivez à support@kapptivate.com. Donnez le nom du robot tel qu'il apparaît sur la plateforme, et son adresse IP locale si vous l'avez relevée : cela facilitera les investigations.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Dépanner un robot Offline" icon="power-off" href="/fr/hardware/network-troubleshooting">
+  <Card title="Dépanner un robot hors ligne" icon="power-off" href="/fr/hardware/network-troubleshooting">
 
     Revenir au redémarrage et aux branchements, si vous ne les avez pas faits
 

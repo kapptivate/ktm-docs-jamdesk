@@ -8,7 +8,7 @@ sidebarTitle: Variables in tests
 
 Static test data goes stale: a hardcoded email collides on the second sign-up, a fixed name can't prove the confirmation page shows what you typed. Inside a test, variables keep every step fed with live data, values produced by earlier steps, generated on the fly, or pulled from your product configuration.
 
-![The variable picker open on a step field, with the Previous steps, Random, and Variables tabs](/images/variables-picker.webp)
+![The variable picker open on a step field, with the In the test, Random, and Variables tabs](/images/variables-picker.webp)
 
 ## Three kinds of variable
 
@@ -24,11 +24,11 @@ The color is the quickest way to read a field: orange stays inside the test, blu
 
 Click the `{}` icon next to any step field to open the variable picker. Selecting an entry inserts it as a pill in the field, where it can mix with literal text. The picker has three tabs:
 
-- **Previous steps**: values produced earlier in the test, plus **Create in-test variable** at the bottom.
+- **In the test**: values produced earlier in the test, plus **Create in-test variable** at the bottom.
 - **Random**: generated fake data for this run.
 - **Variables**: your product's configured variables and groups, plus a shortcut to create a global variable without leaving the test.
 
-## Previous steps
+## In the test
 
 Every step that produces a value exports it as a variable, listed with the step that created it (for example `SmsCode`, Step 1). Typical producers: [Email & SMS steps](/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), text-reading actions, and your own **Set variable** steps.
 
@@ -36,11 +36,11 @@ Pick one to chain steps together: navigate to the `MailLink` extracted two steps
 
 ### Set variable
 
-The **Set variable** step stores a value of your own mid-test: give it a value and a name, and it appears in the Previous steps tab for every later step. See the [Set variable reference](/tests/actions/web/setvariable) for the JSON format and template functions.
+The **Set variable** step stores a value of your own mid-test: give it a value and a name, and it appears in the **In the test** tab for every later step. See the [Set variable reference](/tests/actions/web/setvariable) for the JSON format and template functions.
 
 ### Create an in-test variable
 
-A value you need in several steps does not have to come from a **Set variable** step. Open the picker on the field, choose **Create in-test variable** at the bottom of the Previous steps tab, and give it a name. The variable lands in the field as a tag, and its value is yours to fill in the Environment tab or in the step's Variables tab.
+A value you need in several steps does not have to come from a **Set variable** step. Open the picker on the field, choose **Create in-test variable** at the bottom of the **In the test** tab, and give it a name. The variable lands in the field as a tag, and its value is yours to fill in the Environment tab or in the step's Variables tab.
 
 Its value can be as rich as any other field: literal text, a global variable, a built-in random, or another test variable.
 
