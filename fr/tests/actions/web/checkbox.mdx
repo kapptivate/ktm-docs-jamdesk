@@ -1,13 +1,13 @@
 ---
 title: Cocher une case
-description: Step obsolète qui coche ou décoche une case à cocher. Utilisez Click à la place.
+description: Step obsolète qui coche ou décoche une case. Utilisez Click dans un test web à la place.
 ---
 
 <Danger>
   **Obsolète.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Click](/fr/tests/actions/web/click) sur la case à cocher. Un clic bascule l'état au lieu de le définir, vérifiez donc le résultat avec [Vérifier un élément](/fr/tests/actions/web/verifyelement) si nécessaire.
 </Danger>
 
-Définissez l'état d'une case à cocher. Le step ne clique que lorsque l'état actuel diffère de celui demandé, il peut donc être répété en toute sécurité.
+Cochez ou décochez une case. Le step ne clique que si la case n'est pas déjà dans cet état : le lancer deux fois n'annule donc pas le premier passage.
 
 ## Paramètres
 

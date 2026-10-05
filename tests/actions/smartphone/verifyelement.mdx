@@ -4,7 +4,7 @@ sidebarTitle: "Verify element"
 description: "Check that an element of the app is, or is not, displayed, clickable, enabled, or present, and fail the smartphone test when it is not."
 ---
 
-Verify the state of an element in the app: the confirmation screen is displayed, the Continue button is enabled, the loading spinner is gone. The step waits until the condition is met and fails if it never is within the waiting time. This is the main verification step for smartphone tests, and a robust alternative to fixed delays.
+Use it to confirm what the user should see: the confirmation screen is displayed, the Continue button is enabled, the loading spinner is gone. The step waits until the condition is met and fails if it never is within the waiting time. This is the main verification step for smartphone tests, and a robust alternative to fixed delays.
 
 ## Parameters
 
@@ -12,7 +12,7 @@ Verify the state of an element in the app: the confirmation screen is displayed,
 | ----------- | ---------- | ------------- |
 | Target element | Yes, unless a manual selector is set | Natural-language description of the element to verify. |
 | Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
-| Condition | Yes | `is` or `is not`. "is not" sets `reverse: true` on the chosen state. |
+| Condition | Yes | `is` or `is not`. `is not` checks the opposite of the chosen state. |
 | State | Yes | The state to check. Default: `displayed`. `exist` is labeled "present" in the builder: the element is in the UI tree, visible or not. |
 | Max. waiting time | No | How long to wait for the condition before failing, in seconds. |
 | Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |

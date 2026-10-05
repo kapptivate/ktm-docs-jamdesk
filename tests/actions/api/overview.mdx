@@ -4,7 +4,7 @@ description: Test REST and HTTP services with API steps inside your web and mobi
 sidebarTitle: API
 ---
 
-API testing in Kapptivate covers REST and HTTP services: methods, headers, JSON bodies, response assertions, variable extraction, and detailed per-request timing. API actions live as steps inside web or mobile tests, added from the [test builder](/tests/builder) like any other step; the action and metrics are identical in both, only the surrounding test type differs.
+Add an API step when a test needs to call a service directly instead of going through the screen. You add it from the [test builder](/tests/builder) like any other step. It behaves the same in a web test and in a mobile test, with the same checks on the response and the same timing metrics: only the surrounding test changes.
 
 ## API actions
 
@@ -15,12 +15,12 @@ HTTP API actions are available inside existing tests:
 
 Both share the same request configuration and response assertion model, with a few channel-specific differences in routing.
 
-In a **Web (New experience)** test, this is the [API Call step](/tests/actions/web/apicall): same request, plus response conditions written in the step's Checks tab and a response viewer in the builder and in the results. `ETH_HTTP_API` is what you still address in classic tests and through the [CLI](/cli/guides/create-tests) and MCP.
+In a **Web (New experience)** test, this is the [API Call step](/tests/actions/web/apicall): same request, plus response conditions written in the step's Checks tab and a response viewer in the builder and in the results. Classic tests, the [CLI](/cli/guides/create-tests), and the MCP still refer to it by its identifier, `ETH_HTTP_API`.
 
 ## Request configuration
 
 - **HTTP methods**: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
-- **URL** with templated variables.
+- **URL**, which can include variables.
 - **Custom headers** with autocompletion for standard ones.
 - **Body**: JSON or raw payload.
 - **Routing**: DNS override, proxy, SSL bypass, cookie preservation, redirect handling.
@@ -33,4 +33,4 @@ In a **Web (New experience)** test, this is the [API Call step](/tests/actions/w
 
 ## Per-request metrics
 
-Each HTTP request emits a detailed timing breakdown: DNS lookup, TCP connection, TLS handshake, content generation, transfer, and total. This lets you spot performance regressions, not just functional failures.
+Each HTTP request records how long each phase took: DNS lookup, TCP connection, TLS handshake, content generation, transfer, and total. Use it to spot a service getting slower, not just one that fails.

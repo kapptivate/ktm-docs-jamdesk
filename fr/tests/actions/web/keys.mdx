@@ -4,7 +4,7 @@ sidebarTitle: Saisie clavier
 description: "Envoyez des touches et des raccourcis à la page : Entrée pour soumettre, Échap pour fermer une modale, Tab pour le focus, ou Ctrl+A."
 ---
 
-Envoyez une ou plusieurs touches clavier à la page : Entrée pour soumettre un formulaire, Échap pour fermer une modale, Tab pour déplacer le focus, ou des raccourcis comme Ctrl+A. Dans le builder, vous enregistrez les touches dans une petite modale clavier : appuyez sur les touches que vous souhaitez envoyer, et elles sont stockées dans l'ordre.
+Le step appuie sur les touches comme un utilisateur devant son clavier. Dans le builder, vous les enregistrez dans une petite modale clavier : appuyez sur les touches à envoyer, et elles sont stockées dans l'ordre.
 
 ## Paramètres
 
@@ -13,7 +13,7 @@ Envoyez une ou plusieurs touches clavier à la page : Entrée pour soumettre un 
 | Touches | Oui | Les touches à envoyer, enregistrées dans la modale clavier et envoyées dans l'ordre. |
 | Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
 
-Ce step ne cible pas d'élément : les touches sont envoyées à l'élément qui a actuellement le focus. Utilisez [Click](/fr/tests/actions/web/click) ou [Fill input](/fr/tests/actions/web/input) au préalable pour définir le focus.
+Ce step ne cible pas d'élément : les touches vont à l'élément actif de la page (celui qui a le focus). Utilisez d'abord [Click](/fr/tests/actions/web/click) ou [Fill input](/fr/tests/actions/web/input) pour rendre le bon élément actif.
 
 ## Résultats et métriques
 

@@ -1,10 +1,10 @@
 ---
 title: "Measure TCP latency over the SIM connection"
 sidebarTitle: "TCP Ping"
-description: Measure connection latency at the TCP layer over the cellular connection.
+description: "Measure latency over the SIM's data connection by timing how long it takes to open a connection to a host."
 ---
 
-Measure latency by opening TCP connections to a host instead of sending ICMP packets. Use it when firewalls filter ICMP, or to measure the latency your applications actually experience at the transport layer.
+Unlike [Ping](/tests/actions/cellular/ping), which sends ICMP packets, TCP Ping opens real TCP connections (the kind web and app traffic uses) to a host. Use it when firewalls filter ICMP, or to measure the latency your applications actually experience.
 
 ## Parameters
 

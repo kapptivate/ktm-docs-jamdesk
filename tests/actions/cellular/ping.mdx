@@ -1,10 +1,10 @@
 ---
 title: "Ping a host over the SIM connection"
 sidebarTitle: "Ping"
-description: Measure ICMP latency, jitter, and packet loss over the cellular connection.
+description: "Ping a host over the SIM's data connection and measure round-trip time, jitter and packet loss."
 ---
 
-Ping a host over the SIM's data connection and measure round-trip time, jitter, and packet loss. The reference action for tracking cellular network latency over time.
+The reference action for tracking cellular network latency over time. A ping sends small network packets (ICMP) to a host and times the reply: round-trip time is the delay, jitter is how much that delay varies, and packet loss is the share of packets that never come back. When a firewall filters ICMP, use [TCP Ping](/tests/actions/cellular/tcp-ping) instead.
 
 ## Parameters
 

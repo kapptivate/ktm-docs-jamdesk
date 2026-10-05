@@ -4,7 +4,7 @@ sidebarTitle: "Vérifier l'élément"
 description: Vérifier qu'un élément est (ou n'est pas) affiché, cliquable, activé ou présent.
 ---
 
-Vérifiez l'état d'un élément dans l'application : l'écran de confirmation est affiché, le bouton Continuer est activé, le spinner de chargement a disparu. Le step attend que la condition soit remplie et échoue si elle ne l'est jamais dans le temps imparti. C'est le step de vérification principal pour les tests smartphone, et une alternative robuste aux délais fixes.
+Utilisez-le pour confirmer ce que l'utilisateur doit voir : l'écran de confirmation est affiché, le bouton Continuer est activé, le spinner de chargement a disparu. Le step attend que la condition soit remplie et échoue si elle ne l'est jamais dans le temps imparti. C'est le step de vérification principal pour les tests smartphone, et une alternative robuste aux délais fixes.
 
 ## Paramètres
 
@@ -12,7 +12,7 @@ Vérifiez l'état d'un élément dans l'application : l'écran de confirmation e
 | ----------- | -------- | ------------- |
 | Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément à vérifier. |
 | Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Condition | Oui | `is` ou `is not`. "is not" définit `reverse: true` sur l'état choisi. |
+| Condition | Oui | `is` ou `is not`. `is not` vérifie le contraire de l'état choisi. |
 | État | Oui | L'état à vérifier. Par défaut : `displayed`. `exist` est libellé "present" dans le builder : l'élément est dans l'arbre UI, visible ou non. |
 | Temps d'attente max. | Non | Combien de temps attendre la condition avant l'échec, en secondes. |
 | Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |

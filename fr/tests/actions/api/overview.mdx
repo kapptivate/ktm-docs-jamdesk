@@ -4,7 +4,7 @@ description: Tester les services REST et HTTP avec des steps API dans vos tests 
 sidebarTitle: API
 ---
 
-Les tests API dans Kapptivate couvrent les services REST et HTTP : méthodes, headers, corps JSON, assertions sur les réponses, extraction de variables et timing détaillé par requête. Les actions API sont des steps à l'intérieur des tests web ou mobile, ajoutés depuis le [test builder](/fr/tests/builder) comme tout autre step ; l'action et les métriques sont identiques dans les deux cas, seul le type de test environnant diffère.
+Ajoutez un step API quand un test doit appeler un service directement, sans passer par l'écran. Vous l'ajoutez depuis le [test builder](/fr/tests/builder) comme tout autre step. Il se comporte de la même façon dans un test web et dans un test mobile, avec les mêmes conditions sur la réponse et les mêmes métriques de temps : seul le test qui l'entoure change.
 
 ## Actions API
 
@@ -15,12 +15,12 @@ Les actions API HTTP sont disponibles dans les tests existants :
 
 Les deux partagent la même configuration de requête et le même modèle d'assertion sur les réponses, avec quelques différences de routage spécifiques au canal.
 
-Dans un test **Web (New experience)**, il s'agit du [step API Call](/fr/tests/actions/web/apicall) : la même requête, plus des conditions sur la réponse dans l'onglet Checks du step et une visualisation de la réponse dans le builder comme dans les résultats. `ETH_HTTP_API` reste ce que vous adressez dans les tests classiques et via le [CLI](/fr/cli/guides/create-tests) et le MCP.
+Dans un test **Web (New experience)**, il s'agit du [step API Call](/fr/tests/actions/web/apicall) : la même requête, plus des conditions sur la réponse dans l'onglet Checks du step et une visualisation de la réponse dans le builder comme dans les résultats. Les tests classiques, le [CLI](/fr/cli/guides/create-tests) et le MCP le désignent toujours par son identifiant, `ETH_HTTP_API`.
 
 ## Configuration de la requête
 
 - **Méthodes HTTP** : `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
-- **URL** avec variables templatisées.
+- **URL**, qui peut contenir des variables.
 - **Headers personnalisés** avec autocomplétion pour les headers standards.
 - **Corps** : payload JSON ou brut.
 - **Routage** : remplacement DNS, proxy, contournement SSL, conservation des cookies, gestion des redirections.
@@ -33,4 +33,4 @@ Dans un test **Web (New experience)**, il s'agit du [step API Call](/fr/tests/ac
 
 ## Métriques par requête
 
-Chaque requête HTTP émet un détail de timing complet : résolution DNS, connexion TCP, handshake TLS, génération du contenu, transfert et total. Cela vous permet de repérer les régressions de performance, pas seulement les échecs fonctionnels.
+Chaque requête HTTP enregistre la durée de chaque phase : résolution DNS, connexion TCP, handshake TLS, génération du contenu, transfert et total. Servez-vous-en pour repérer un service qui ralentit, pas seulement un service qui échoue.

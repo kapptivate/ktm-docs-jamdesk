@@ -13,7 +13,7 @@ Verify the state of an element: the confirmation banner is displayed, the Submit
 | Target element | Yes, unless a manual selector is set | Natural-language description of the element to verify. |
 | Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
 | Condition | Yes | `is` or `is not`. "is not" sets `reverse: true` on the chosen state. |
-| State | Yes | The state to check. Default: `displayed`. `exist` is labeled "present" in the builder: the element is in the UI tree, visible or not. |
+| State | Yes | The state to check. Default: `displayed`. `exist` is labeled "present" in the builder: the element is part of the page, visible or not. |
 | Max. waiting time | No | How long to wait for the condition before failing, in seconds. |
 | Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
@@ -22,7 +22,7 @@ The four states:
 - **displayed**: the element is visible on the screen.
 - **clickable**: the element is visible and can receive a click or tap.
 - **enabled**: the element is active (not disabled).
-- **present**: the element exists in the UI tree, even if hidden.
+- **present**: the element is part of the page, even if hidden.
 
 ## Results and metrics
 

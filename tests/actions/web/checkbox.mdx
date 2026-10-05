@@ -1,13 +1,13 @@
 ---
 title: Set checkbox
-description: "Set a checkbox to a target state, clicking only when the current state differs. Legacy step, prefer Click on modern checkboxes."
+description: "Legacy step that checks or unchecks a checkbox. Use Click in a web test instead."
 ---
 
 <Danger>
   **Deprecated.** This step no longer appears in the step palette. Existing tests that use it keep running. For new tests, use [Click](/tests/actions/web/click) on the checkbox. A click toggles the state instead of setting it, so verify the result with [Verify element](/tests/actions/web/verifyelement) when it matters.
 </Danger>
 
-Set a checkbox to a target state. The step only clicks when the current state differs from the requested one, so it is safe to repeat.
+Set a checkbox to checked or unchecked. The step only clicks when the box is not already in that state, so running it twice does not undo the first run.
 
 ## Parameters
 
