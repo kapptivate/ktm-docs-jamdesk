@@ -13,7 +13,7 @@ Vérifiez l'état d'un élément : la bannière de confirmation est affichée, l
 | Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément à vérifier. |
 | Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
 | Condition | Oui | `is` ou `is not`. "is not" définit `reverse: true` sur l'état choisi. |
-| État | Oui | L'état à vérifier. Par défaut : `displayed`. `exist` est libellé "present" dans le builder : l'élément est dans l'arbre UI, visible ou non. |
+| État | Oui | L'état à vérifier. Par défaut : `displayed`. `exist` est libellé "present" dans le builder : l'élément fait partie de la page, visible ou non. |
 | Temps d'attente max. | Non | Durée d'attente avant l'échec, en secondes. |
 | Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
 
@@ -22,7 +22,7 @@ Les quatre états :
 - **displayed** : l'élément est visible à l'écran.
 - **clickable** : l'élément est visible et peut recevoir un clic ou un appui.
 - **enabled** : l'élément est actif (non désactivé).
-- **present** : l'élément existe dans l'arbre UI, même s'il est masqué.
+- **present** : l'élément fait partie de la page, même s'il est masqué.
 
 ## Résultats et métriques
 

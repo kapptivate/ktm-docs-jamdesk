@@ -4,13 +4,13 @@ sidebarTitle: "Wait Call"
 description: Wait for an incoming call on a real SIM, answer it, and score the audio quality.
 ---
 
-Wait for an incoming call on the SIM and answer it. Paired with [Place Call](/tests/actions/cellular/place-call) on another SIM, it verifies the full voice path; with recording and MOS enabled, it scores the audio quality the listener actually heard.
+Paired with [Place Call](/tests/actions/cellular/place-call) on another SIM, it verifies the full voice path. With recording and audio MOS (Mean Opinion Score, the standard audio quality score) turned on, it scores the audio quality the listener actually heard.
 
 ## Parameters
 
 | Parameter | Required | Description |
 | ----------- | ---------- | ------------- |
-| Access technology | No | Network technology, including VoLTE profiles. Default: automatic. |
+| Access technology | No | Network technology, including VoLTE (voice over 4G) profiles. Default: automatic. |
 | Wait time | No | How long to wait for the call. Default: 30. |
 | Record call | No | Record the received audio. Default: off. |
 | Compute Audio MOS | No | Score the recorded audio against the reference file played by the caller. Requires recording. |

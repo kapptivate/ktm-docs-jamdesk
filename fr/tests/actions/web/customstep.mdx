@@ -1,10 +1,10 @@
 ---
 title: "Exécuter son propre JavaScript dans un test web"
 sidebarTitle: "Script"
-description: Exécutez votre propre JavaScript lorsqu'aucun step intégré ne convient.
+description: "Exécutez votre propre JavaScript dans un test web quand aucun step intégré ne convient : un flux non couvert, un calcul, une métrique envoyée vers Analytics."
 ---
 
-Exécutez votre propre JavaScript dans le test : gérez un flux qu'aucun step intégré ne couvre, calculez une valeur, ou envoyez une métrique personnalisée vers Analytics. Le script s'exécute dans la session navigateur du test avec l'API WebdriverIO complète à disposition.
+Écrivez quelques lignes de code quand les steps intégrés ne savent pas faire ce dont vous avez besoin. Vous éditez le script dans une modale dédiée, et il s'exécute dans la session navigateur du test, sur la page où les steps précédents se sont arrêtés.
 
 ## Paramètres
 
@@ -14,7 +14,7 @@ Exécutez votre propre JavaScript dans le test : gérez un flux qu'aucun step in
 | Script | Oui | Code JavaScript, édité dans une modale dédiée. |
 | Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si le script lève une erreur. Par défaut : désactivé. |
 
-Dans le script, vous pouvez utiliser l'objet WebdriverIO `browser` pour piloter la session, ainsi que les helpers `test`, par exemple :
+Dans le script, pilotez le navigateur avec l'objet `browser`. Le script dispose de l'API WebdriverIO complète (la librairie d'automatisation du navigateur sur laquelle il s'appuie) : cherchez la syntaxe dans la documentation de WebdriverIO. Les helpers `test` couvrent le reste, par exemple l'envoi d'une métrique vers Analytics :
 
 ```javascript
 // Push a custom metric to Analytics

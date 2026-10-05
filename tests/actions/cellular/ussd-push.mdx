@@ -1,10 +1,10 @@
 ---
 title: "Wait for a USSD push on a SIM"
 sidebarTitle: "Wait USSD Push"
-description: "Wait for a network-initiated USSD push: a balance alert, a subscription notice, a promotion. The step sends nothing, it watches the SIM."
+description: "Wait for a USSD message sent by the network, such as a balance alert or a promotion, and verify its content when it arrives."
 ---
 
-Wait for a network-initiated USSD push: a balance alert, a subscription notification, a promotional message. The action sends nothing; it watches the SIM and verifies the message when it arrives.
+USSD (Unstructured Supplementary Service Data) is the service behind operator short codes like `#100#`, where the network answers with a text screen. A push is a USSD message the network sends on its own, without any code being dialed. The action sends nothing: it watches the SIM. When an earlier action triggers the push, start watching from that action so the message isn't missed.
 
 ## Parameters
 

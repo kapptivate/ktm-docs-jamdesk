@@ -4,7 +4,7 @@ sidebarTitle: "Press keys"
 description: "Send keyboard keys and shortcuts to the page: Enter to submit, Escape to close a modal, Tab to move focus, or combinations like Ctrl+A."
 ---
 
-Send one or more keyboard keys to the page: Enter to submit a form, Escape to close a modal, Tab to move focus, or shortcuts like Ctrl+A. In the builder you record the keys in a small keyboard modal: press the keys you want to send, and they are stored in order.
+The step presses keys the way a user would at the keyboard. In the builder, you record them in a small keyboard modal: press the keys you want to send, and they are stored in order.
 
 ## Parameters
 
@@ -13,7 +13,7 @@ Send one or more keyboard keys to the page: Enter to submit a form, Escape to cl
 | Keys | Yes | The keys to press, recorded in the keyboard modal and sent in order. |
 | Ignore error on this step | No | The run continues with the next step if this one fails. Default: off. |
 
-This step does not target an element: the keys go to whatever currently has focus. Use [Click](/tests/actions/web/click) or [Fill input](/tests/actions/web/input) first to set the focus.
+This step does not target an element: the keys go to the element that is active on the page (the one that has focus). Use [Click](/tests/actions/web/click) or [Fill input](/tests/actions/web/input) first to make the right element active.
 
 ## Results and metrics
 

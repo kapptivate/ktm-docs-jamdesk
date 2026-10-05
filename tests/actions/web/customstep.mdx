@@ -4,7 +4,7 @@ sidebarTitle: "Custom step"
 description: "Run your own JavaScript in a web test when no built-in step fits: an uncovered flow, a computed value, a custom metric sent to Analytics."
 ---
 
-Run your own JavaScript inside the test: handle a flow no built-in step covers, compute a value, or push a custom metric to Analytics. The script runs in the test's browser session with the full WebdriverIO API available.
+Write a few lines of code when the built-in steps can't do what you need. You edit the script in a dedicated modal, and it runs in the test's own browser session, on the page where the previous steps left off.
 
 ## Parameters
 
@@ -14,7 +14,7 @@ Run your own JavaScript inside the test: handle a flow no built-in step covers, 
 | Script | Yes | JavaScript code, edited in a dedicated modal. |
 | Ignore error on this step | No | The run continues with the next step if the script throws. Default: off. |
 
-Inside the script you can use the WebdriverIO `browser` object to drive the session, and the `test` helpers, for example:
+Inside the script, drive the browser with the `browser` object. The script has the full WebdriverIO API (the browser automation library behind it), so look up the syntax in the WebdriverIO documentation. The `test` helpers cover the rest, for example sending a metric to Analytics:
 
 ```javascript
 // Push a custom metric to Analytics

@@ -4,13 +4,13 @@ sidebarTitle: "Wait Call"
 description: Attendez un appel entrant sur une vraie SIM, décrochez et évaluez la qualité audio.
 ---
 
-Attendez un appel entrant sur la SIM et décrochez. Associé à [Place Call](/fr/tests/actions/cellular/place-call) sur une autre SIM, il vérifie le chemin vocal complet ; avec l'enregistrement et le MOS activés, il évalue la qualité audio réellement entendue par le destinataire.
+Associé à [Place Call](/fr/tests/actions/cellular/place-call) sur une autre SIM, il vérifie le chemin vocal complet. Avec l'enregistrement et le MOS audio (Mean Opinion Score, le score standard de qualité audio) activés, il évalue la qualité audio réellement entendue par le destinataire.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Technologie d'accès | Non | Technologie réseau, y compris les profils VoLTE. Par défaut : automatique. |
+| Technologie d'accès | Non | Technologie réseau, y compris les profils VoLTE (la voix sur 4G). Par défaut : automatique. |
 | Temps d'attente | Non | Temps d'attente pour l'appel. Par défaut : 30. |
 | Enregistrer l'appel | Non | Enregistrer l'audio reçu. Par défaut : désactivé. |
 | Calculer le MOS audio | Non | Évaluer l'audio enregistré par rapport au fichier de référence joué par l'appelant. Nécessite l'enregistrement. |

@@ -1,10 +1,10 @@
 ---
 title: "Run your own JavaScript in a smartphone test"
 sidebarTitle: "Custom step"
-description: "Run your own JavaScript in a smartphone test when no built-in step fits: an uncovered flow, a computed value, a custom metric sent to Analytics."
+description: "Run your own JavaScript in a smartphone test when no built-in step does what you need."
 ---
 
-Run your own JavaScript inside the test: handle a flow no built-in step covers, compute a value, or push a custom metric to Analytics. The script runs in the test's device session with the full WebdriverIO API available.
+Use it to handle a flow no built-in step covers, compute a value, or send a custom metric to Analytics. The script runs on the test's device, in the same session as the other steps.
 
 ## Parameters
 
@@ -14,7 +14,7 @@ Run your own JavaScript inside the test: handle a flow no built-in step covers, 
 | Script | Yes | JavaScript code, edited in a dedicated modal. |
 | Ignore error on this step | No | The run continues with the next step if the script throws. Default: off. |
 
-Inside the script you can use the WebdriverIO `browser` object to drive the session, and the `test` helpers, for example:
+To drive the app from the script, use the `browser` object: it gives you the full WebdriverIO API (a JavaScript library for automating devices and browsers). The `test` helpers cover the rest, for example:
 
 ```javascript
 // Push a custom metric to Analytics

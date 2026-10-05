@@ -1,10 +1,10 @@
 ---
 title: "Exécuter son propre JavaScript dans un test smartphone"
 sidebarTitle: "Script"
-description: Exécuter votre propre JavaScript quand aucun step intégré ne convient.
+description: Exécutez votre propre JavaScript dans un test smartphone quand aucun step intégré ne fait ce dont vous avez besoin.
 ---
 
-Exécutez votre propre JavaScript dans le test : gérer un flux qu'aucun step intégré ne couvre, calculer une valeur, ou envoyer une métrique personnalisée vers les Analytiques. Le script s'exécute dans la session de l'appareil du test avec l'API WebdriverIO complète disponible.
+Utilisez-le pour gérer un parcours qu'aucun step intégré ne couvre, calculer une valeur, ou envoyer une métrique personnalisée vers les Analytiques. Le script s'exécute sur le device du test, dans la même session que les autres steps.
 
 ## Paramètres
 
@@ -14,7 +14,7 @@ Exécutez votre propre JavaScript dans le test : gérer un flux qu'aucun step in
 | Script | Oui | Code JavaScript, édité dans une fenêtre modale dédiée. |
 | Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si le script lève une erreur. Par défaut : désactivé. |
 
-Dans le script, vous pouvez utiliser l'objet WebdriverIO `browser` pour piloter la session, et les helpers `test`, par exemple :
+Pour piloter l'application depuis le script, utilisez l'objet `browser` : il donne accès à toute l'API WebdriverIO (une librairie JavaScript d'automatisation des devices et des navigateurs). Les helpers `test` couvrent le reste, par exemple :
 
 ```javascript
 // Push a custom metric to Analytics
