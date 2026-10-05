@@ -112,6 +112,11 @@
       "robots": "index, follow",
       "googlebot": "index, follow",
       "google-site-verification": "gToWXGlQh13lTgwYdJnZyf0z3XLRlEe4l-zcptxo2kw"
+    },
+    "socialCard": {
+      "theme": "dark",
+      "brandColor": true,
+      "siteName": false
     }
   },
   "metadata": {

@@ -10,7 +10,7 @@
     "docs:generate:cli": "node scripts/generate.mjs --source=cli",
     "docs:check": "node scripts/generate.mjs --source=all --check"
   },
-  "dependencies": {
-    "jamdesk": "^1.1.212"
+  "devDependencies": {
+    "jamdesk": "^1.1.219"
   }
 }
