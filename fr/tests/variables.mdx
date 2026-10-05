@@ -12,7 +12,7 @@ Les données de test statiques deviennent rapidement obsolètes : un email codé
 
 Quel que soit le champ, une valeur peut mélanger du texte littéral et trois natures de variable, chacune avec sa couleur dans l'éditeur :
 
-- **Les variables de test**, en orange : elles vivent dans ce test. Une étape qui produit une valeur en crée une (`SmsCode`, `Extracted`), une étape **Définir une variable locale** en déclare une, et vous pouvez en créer une vous-même depuis le sélecteur.
+- **Les variables de test**, en orange : elles vivent dans ce test. Une étape qui produit une valeur en crée une (`CodeSMS`, `Extrait`), une étape **Définir une variable locale** en déclare une, et vous pouvez en créer une vous-même depuis le sélecteur.
 - **Les variables globales et les groupes de variables**, en bleu : définis une fois pour le produit dans les [Configurations](/fr/tests/configurations), réutilisés par tous les tests.
 - **Les aléatoires intégrés**, en gris : générés à chaque exécution, stockés nulle part.
 
@@ -28,9 +28,9 @@ Cliquez sur l'icône `{}` à côté de n'importe quel champ d'étape pour ouvrir
 
 ## Previous steps
 
-Chaque étape qui produit une valeur l'exporte comme variable, listée avec l'étape qui l'a créée (par exemple `SmsCode`, Étape 1). Producteurs typiques : les [étapes Email & SMS](/fr/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), les actions de lecture de texte, et vos propres étapes **Définir une variable locale**.
+Chaque étape qui produit une valeur l'exporte comme variable, listée avec l'étape qui l'a créée (par exemple `CodeSMS`, Étape 1). Producteurs typiques : les [étapes Email & SMS](/fr/tests/email-sms) (`CodeSMS`, `CodeMail`, `LienMail`), les actions de lecture de texte, et vos propres étapes **Définir une variable locale**.
 
-Choisissez-en une pour enchaîner les étapes : naviguez vers le `MailLink` extrait deux étapes plus tôt, ou saisissez `SmsCode` dans le champ 2FA.
+Choisissez-en une pour enchaîner les étapes : naviguez vers le `LienMail` extrait deux étapes plus tôt, ou saisissez `CodeSMS` dans le champ 2FA.
 
 ### Définir une variable locale
 
