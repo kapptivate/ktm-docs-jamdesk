@@ -4,7 +4,7 @@ description: "Créez un moniteur depuis l'espace Tests ou depuis la liste des mo
 sidebarTitle: Créer un moniteur
 ---
 
-Créez un moniteur depuis l'espace Tests ou directement depuis la liste des moniteurs. Un moniteur associe un test à une planification, une attribution d'appareil et des [règles d'alerte](/fr/alerting/alerts) pour qu'il s'exécute en continu en production.
+Créez un moniteur depuis l'espace Tests ou directement depuis la liste des moniteurs. Un moniteur associe un test à une planification, une attribution de device et des [règles d'alerte](/fr/alerting/alerts) pour qu'il s'exécute en continu en production.
 
 ## Créer un nouveau moniteur
 
@@ -14,7 +14,7 @@ Ouvrez **Monitors** et cliquez sur le bouton **Créer**, ou ouvrez un test, sél
 </Step>
 
 <Step>
-Sélectionnez le test que vous souhaitez surveiller. Une fois sélectionné, le formulaire se charge avec les variables et les exigences d'appareil du test.
+Sélectionnez le test que vous souhaitez surveiller. Une fois sélectionné, le formulaire se charge avec les variables et les exigences de device du test.
 </Step>
 
 <Step>
@@ -24,16 +24,16 @@ Sélectionnez le test que vous souhaitez surveiller. Une fois sélectionné, le 
 
 <Step>
 **Variables** (si le test en possède)
-- Renseignez chaque variable : les [variables](/fr/tests/variables) propres au test, les variables globales, les groupes de variables et les paramètres d'appareil de type owner.
+- Renseignez chaque variable : les [variables](/fr/tests/variables) propres au test, les variables globales, les groupes de variables et les paramètres de device de type owner.
 - Une valeur peut référencer une variable globale ou un aléatoire intégré, donc chaque exécution planifiée peut utiliser des données neuves.
-- Les variables de type owner nécessitent de sélectionner un appareil pour chacune d'entre elles.
+- Les variables de type owner nécessitent de sélectionner un device pour chacune d'entre elles.
 - Toutes les variables doivent avoir une valeur avant de pouvoir sauvegarder.
 </Step>
 
 <Step>
 **Device**
-- Sélectionnez le ou les appareils sur lesquels le test s'exécutera : SIM, Smartphone ou Web agent.
-- N'apparaît que si le test nécessite des appareils.
+- Sélectionnez le ou les devices sur lesquels le test s'exécutera : SIM, Smartphone ou Web agent.
+- N'apparaît que si le test nécessite des devices.
 </Step>
 
 <Step>
@@ -56,7 +56,7 @@ Cliquez sur **Créer le monitor** pour sauvegarder le moniteur. Il commencera à
 
 ## Modifier un moniteur
 
-Ouvrez un moniteur et cliquez sur **Configure**. Vous pouvez modifier le nom, la planification, les appareils et les options du moniteur. Si le moniteur est en pause, une boîte de dialogue vous demande si vous souhaitez le réactiver lors de la sauvegarde.
+Ouvrez un moniteur et cliquez sur **Configure**. Vous pouvez modifier le nom, la planification, les devices et les options du moniteur. Si le moniteur est en pause, une boîte de dialogue vous demande si vous souhaitez le réactiver lors de la sauvegarde.
 
 <Info>
 Vous ne pouvez pas changer le test après la création du moniteur. Pour utiliser un test différent, dupliquez le moniteur et créez-en un nouveau à partir d'un autre test.
@@ -66,17 +66,17 @@ Vous ne pouvez pas changer le test après la création du moniteur. Pour utilise
 
 La duplication copie tous les paramètres d'un moniteur existant. Ouvrez le menu du moniteur et cliquez sur **Dupliquer**, ou ouvrez la page de détails du moniteur et cliquez sur le menu à trois points.
 
-Vous pouvez renommer le moniteur et réattribuer les appareils avant de sauvegarder. Le nouveau moniteur est créé comme une copie avec la même planification et les mêmes variables.
+Vous pouvez renommer le moniteur et réattribuer les devices avant de sauvegarder. Le nouveau moniteur est créé comme une copie avec la même planification et les mêmes variables.
 
 ## Créer des moniteurs en lot à partir de tests
 
 Sélectionnez un ou plusieurs tests (ils doivent tous être du même type), ouvrez le menu contextuel et cliquez sur **Créer des monitors**. Une modale apparaît :
 
-1. Sélectionnez un seul appareil que tous les moniteurs utiliseront.
+1. Sélectionnez un seul device que tous les moniteurs utiliseront.
 2. Configurez la planification.
 3. Cliquez sur **Create X Monitors**, où X est le nombre de tests sélectionnés.
 
-Le système crée un moniteur par test avec l'appareil et la planification partagés. Chaque moniteur utilise les variables et la configuration par défaut du test.
+Le système crée un moniteur par test avec le device et la planification partagés. Chaque moniteur utilise les variables et la configuration par défaut du test.
 
 ## Validation du formulaire
 
@@ -84,7 +84,7 @@ Avant de pouvoir sauvegarder, le formulaire vérifie :
 
 - Le nom du moniteur n'est pas vide.
 - Toutes les variables obligatoires ont des valeurs.
-- Toutes les variables de type owner ont un appareil attribué.
+- Toutes les variables de type owner ont un device attribué.
 - Pour la planification simple : la fréquence est définie.
 - Pour la planification avancée : au moins un jour de la semaine est sélectionné, et la date de début n'est pas postérieure à la date de fin.
 - Pour les tests web : un preset de navigateur est sélectionné.

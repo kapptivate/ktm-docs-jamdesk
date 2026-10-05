@@ -4,14 +4,14 @@ sidebarTitle: "Toucher"
 description: Appuyez sur un bouton, un élément de liste, un onglet ou tout autre élément de l'application dans un test smartphone.
 ---
 
-Localisez l'élément avec un sélecteur XPath, ou avec une description en langage naturel que l'IA utilise pour le trouver. Quand aucun élément ne peut être ciblé, passez l'étape en mode **Coordonnées** et appuyez sur une position X/Y exacte.
+Localisez l'élément avec un sélecteur XPath ou CSS, ou avec une description en langage naturel que l'IA utilise pour le trouver. Quand aucun élément ne peut être ciblé, passez l'étape en mode **Coordonnées** et appuyez sur une position X/Y exacte.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Élément ciblé | Oui en mode Sélecteur, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
-| Sélecteur manuel | Non | Sélecteur XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
 | Approche | Non | `0` = Sélecteur (par défaut), `1` = Coordonnées. Basculez dans le panneau de détails de l'étape. |
 | Position X, Position Y | Oui en mode Coordonnées | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
 | Utilisation de l'IA | Non | `smart` (par défaut), `always` ou `inherit`. |

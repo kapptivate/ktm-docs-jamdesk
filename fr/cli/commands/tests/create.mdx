@@ -61,11 +61,11 @@ et métadonnées. Utilisez "tests template" pour générer une structure de dép
 Le flag --product résout le slug du produit en identifiant de produit et UID de collection
 racine. Le collection_uid est toujours résolu automatiquement depuis le produit, aucun remplacement n'est permis.
 
-Correspondance des owners (quel identifiant d'appareil va dans le champ "owner") :
+Correspondance des owners (quel identifiant de device va dans le champ "owner") :
   Actions ETHERNET  : hostname du web agent  (depuis 'resources list --type web-agent')
   Actions SIM       : national_msisdn     (depuis 'resources list --type sim')
   Actions SMARTPHONE : UUID               (depuis 'resources list --type smartphone')
-  Actions OWNERLESS : "" (chaîne vide, aucun appareil nécessaire)
+  Actions OWNERLESS : "" (chaîne vide, aucun device nécessaire)
 
 Chaque action non-OWNERLESS nécessite un owner ET une entrée correspondante dans variables.owners.
 

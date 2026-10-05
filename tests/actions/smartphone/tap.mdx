@@ -4,14 +4,14 @@ sidebarTitle: "Tap"
 description: Tap a button, a list item, a tab, or any other element of the app in a smartphone test.
 ---
 
-Locate the element with an XPath selector or with a plain-language description the AI uses to find it. When no element can be targeted, switch the step to **Coordinates** mode and tap an exact X/Y position.
+Locate the element with an XPath or CSS selector, or with a plain-language description the AI uses to find it. When no element can be targeted, switch the step to **Coordinates** mode and tap an exact X/Y position.
 
 ## Parameters
 
 | Parameter | Required | Description |
 | ----------- | ---------- | ------------- |
 | Target element | Yes in Selector mode, unless a manual selector is set | Natural-language description of the element. The AI uses it to find the element. |
-| Manual selector | No | XPath selector in the app's UI tree, used when AI is disabled or as the saved selector. |
+| Manual selector | No | XPath or CSS selector, used when AI is disabled or as the saved selector. |
 | Approach | No | `0` = Selector (default), `1` = Coordinates. Toggle in the step's details panel. |
 | X Position, Y Position | Yes in Coordinates mode | Screen position to tap, in pixels from the top-left corner. |
 | AI usage | No | `smart` (default), `always`, or `inherit`. |

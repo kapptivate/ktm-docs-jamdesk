@@ -4,7 +4,7 @@ description: Créez un workspace d'écriture de tests Kapptivate avec ktm init e
 sidebarTitle: Cursor
 ---
 
-Écrire un test Kapptivate à la main suppose de connaître la grammaire JSON, le catalogue d'actions et les sélecteurs qui fonctionnent réellement sur votre application. `ktm init` crée un workspace qui confie tout cela à votre agent de code : les skills d'écriture, un catalogue de vos tests et variables, et une connexion vivante à un robot capable de piloter de vrais navigateurs et appareils.
+Écrire un test Kapptivate à la main suppose de connaître la grammaire JSON, le catalogue d'actions et les sélecteurs qui fonctionnent réellement sur votre application. `ktm init` crée un workspace qui confie tout cela à votre agent de code : les skills d'écriture, un catalogue de vos tests et variables, et une connexion vivante à un robot capable de piloter de vrais navigateurs et devices.
 
 Cette page décrit la configuration pour Cursor. Le même workspace fonctionne dans Claude Code, Codex et Copilot sans modification.
 
@@ -36,8 +36,8 @@ L'assistant pose cinq questions. Appuyez sur Entrée pour accepter la valeur par
   <Step title="Opérateur et produit">
     Un produit est l'application ou le site que vous testez. Si votre clé n'atteint qu'un seul opérateur, l'assistant le choisit pour vous. Changez plus tard avec `ktm use <produit>`.
   </Step>
-  <Step title="Automatisation des appareils">
-    L'assistant cherche un robot capable de piloter navigateurs et appareils pour votre opérateur, puis le configure. Rien à coller.
+  <Step title="Automatisation des devices">
+    L'assistant cherche un robot capable de piloter navigateurs et devices pour votre opérateur, puis le configure. Rien à coller.
   </Step>
   <Step title="Agents de code">
     Rien n'est coché par défaut. Cochez Cursor. L'assistant écrit `.cursor/mcp.json` pour vous.

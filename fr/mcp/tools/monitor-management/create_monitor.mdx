@@ -22,7 +22,7 @@ Créer un nouveau monitor pour un test existant.
 | `name` | string | Non | Nom du monitor (par défaut : nom du test si omis) |
 | `options` | string | Non | Options JSON : \{timeout_sms, ignore_errors, auto_retry_failed_test\}. Valeurs par défaut : timeout_sms=30, ignore_errors=false, auto_retry_failed_test=0. |
 | `overrides` | string | Non | Objet JSON associant nom de variable → nouvelle valeur string. Appliqué au modèle d'aperçu. Exemple : \{"SIM_A": "0699999999", "TODO_INDEX": "42"\} |
-| `owners` | string | Non | Objet JSON : identifiant d'appareil → \{kind, hostname/national_msisdn/uuid\}. Requis pour la soumission. |
+| `owners` | string | Non | Objet JSON : identifiant de device → \{kind, hostname/national_msisdn/uuid\}. Requis pour la soumission. |
 | `product` | string | Oui | Slug du produit (format : operator~product) |
 | `scheduling` | string | Non | Objet JSON de planification. Si omis, par défaut simple/v2 toutes les 5 minutes. Exemple : \{"type":"simple/v2","definition":\{"frequency":\{"every":5,"unit":"minutes"\}\}\} |
 | `test_id` | number | Oui | Identifiant du test à surveiller |

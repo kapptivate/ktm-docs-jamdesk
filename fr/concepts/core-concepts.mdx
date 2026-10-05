@@ -1,6 +1,6 @@
 ---
 title: Concepts fondamentaux
-description: Workspaces, produits, tests, exécutions, moniteurs, métriques, canaux, agents et appareils, et comment ils s'articulent.
+description: Workspaces, produits, tests, exécutions, moniteurs, métriques, canaux, agents et devices, et comment ils s'articulent.
 ---
 
 Neuf termes reviennent partout dans Kapptivate. Cette page définit chacun d'entre eux et montre comment ils s'articulent, pour que le reste de la documentation se lise sans friction.
@@ -32,7 +32,7 @@ Lorsque vous lancez le Test 1 sur l'agent Chrome, une exécution est créée, l'
 
 ## Workspace
 
-Un **Workspace** est l'unité opérationnelle de votre organisation. Il contient tous vos produits, appareils, tests, agents, utilisateurs et résultats. Considérez-le comme un conteneur pour un client ou une grande unité métier.
+Un **Workspace** est l'unité opérationnelle de votre organisation. Il contient tous vos produits, devices, tests, agents, utilisateurs et résultats. Considérez-le comme un conteneur pour un client ou une grande unité métier.
 
 Lorsque vous vous connectez à Kapptivate, vous choisissez un Workspace. Tout votre travail dans ce Workspace est isolé des autres. Un Workspace peut être actif (en cours d'utilisation) ou archivé (inactif), et vous pouvez être membre de plusieurs.
 
@@ -42,9 +42,9 @@ Vous n'avez pas besoin de vous déconnecter pour passer d'un Workspace à l'autr
 
 Un **Produit** est une application ou un service spécifique testé au sein d'un Workspace. Un même Workspace peut contenir plusieurs produits de types différents : un portail web, une application mobile Android ou iOS, un service basé sur carte SIM, etc.
 
-Les tests, moniteurs, configurations et appareils sont tous rattachés à un Produit. Lorsque vous changez de produit dans la barre latérale, les tests et appareils affichés changent en conséquence. Vous pouvez définir un produit par défaut pour chaque Workspace : la plateforme l'ouvre automatiquement lorsque vous entrez.
+Les tests, moniteurs, configurations et devices sont tous rattachés à un Produit. Lorsque vous changez de produit dans la barre latérale, les tests et devices affichés changent en conséquence. Vous pouvez définir un produit par défaut pour chaque Workspace : la plateforme l'ouvre automatiquement lorsque vous entrez.
 
-L'accès est géré par espace produit. Les [rôles](/fr/administration/roles) accordent à certaines personnes l'accès à certains produits, et les [appareils](/fr/equipment/devices-lab) peuvent être restreints de la même manière.
+L'accès est géré par espace produit. Les [rôles](/fr/administration/roles) accordent à certaines personnes l'accès à certains produits, et les [devices](/fr/equipment/devices-lab) peuvent être restreints de la même manière.
 
 ## Test
 
@@ -66,7 +66,7 @@ Les tests peuvent référencer des [composants reusable](/fr/tests/reusable-comp
 
 ## Exécution
 
-Une **Exécution** correspond à un lancement unique d'un ou plusieurs tests sur des appareils spécifiques.
+Une **Exécution** correspond à un lancement unique d'un ou plusieurs tests sur des devices spécifiques.
 
 Lorsque vous mettez un test en file d'attente, la plateforme crée une exécution. Cette exécution produit des résultats détaillés : captures d'écran, logs des étapes, temps de réponse et statut final. Les exécutions ont des statuts tels que success, failed, warning, ongoing, canceled ou timed out.
 
@@ -90,35 +90,35 @@ Chaque étape produit une durée, et chaque groupe d'étapes aussi. Les données
 
 ## Canal
 
-Un **Canal** est une grande catégorie d'endpoints que vous testez : Web, Smartphone ou Cellulaire. Chaque canal possède ses propres types d'appareils et agents. En complément, les **APIs** peuvent également être testées via des étapes API dans les tests de n'importe quel canal.
+Un **Canal** est une grande catégorie d'endpoints que vous testez : Web, Smartphone ou Cellulaire. Chaque canal possède ses propres types de devices et agents. En complément, les **APIs** peuvent également être testées via des étapes API dans les tests de n'importe quel canal.
 
 - **Web** : testez les navigateurs desktop et mobile.
 - **Smartphone** : testez les applications natives iOS et Android.
 - **Cellulaire** : testez les flux SMS, USSD ou dépendants du réseau cellulaire.
 - **API** : testez les endpoints HTTP avec des étapes API dans un test Web ou Smartphone.
 
-Un test simple s'exécute sur un seul canal, éventuellement combiné avec l'API (par exemple Web seul, Web + API, Smartphone + API ou USSD (SIM) + API). Pour les parcours plus complexes, l'orchestration avancée permet à un seul test de couvrir plusieurs appareils : commencer un scénario sur le Web et le terminer sur un Smartphone, par exemple.
+Un test simple s'exécute sur un seul canal, éventuellement combiné avec l'API (par exemple Web seul, Web + API, Smartphone + API ou USSD (SIM) + API). Pour les parcours plus complexes, l'orchestration avancée permet à un seul test de couvrir plusieurs devices : commencer un scénario sur le Web et le terminer sur un Smartphone, par exemple.
 
 ## Agent
 
-Un **Agent** est le composant matériel ou logiciel qui pilote les appareils sur lesquels vos tests s'exécutent. Il en existe plusieurs types :
+Un **Agent** est le composant matériel ou logiciel qui pilote les devices sur lesquels vos tests s'exécutent. Il en existe plusieurs types :
 
 - **Web Agent** : physique ou virtualisé. Pilote les navigateurs web (Chrome, Firefox, Safari, etc.).
-- **Smartphone Agent** : physique. Pilote de vrais appareils Android ou iOS.
+- **Smartphone Agent** : physique. Pilote de vrais devices Android ou iOS.
 - **Cellular Agent** : toujours physique. Pilote les cartes SIM pour tester les SMS et l'USSD, lancer des tests réseau, passer et recevoir des appels, naviguer sur le réseau data, et plus encore.
 - **Passive Agent** : collecte des métriques et des données de santé sans exécuter de tests actifs.
 
 Vous pouvez créer des agents et les enregistrer dans la plateforme via votre administrateur. Lorsque vous lancez un test, vous choisissez sur quel(s) agent(s) l'exécuter.
 
-## Appareil
+## Device
 
-Un **Appareil** (Device) est l'endpoint testé, l'élément que l'agent pilote. Les appareils incluent :
+Un **device** est l'endpoint testé, l'élément que l'agent pilote. Les devices incluent :
 
 - **Navigateurs web** : Chrome, Firefox, Safari fonctionnant sur un Web Agent.
 - **Smartphones** : téléphones iOS/Android physiques ou virtuels connectés à un Smartphone Agent.
 - **Cartes SIM** : lignes cellulaires enregistrées auprès d'un Cellular Agent pour les tests SMS et réseau.
 
-Vous pouvez voir les appareils disponibles (et leur statut actuel : en ligne, hors ligne, occupé) dans la section Équipement de la barre latérale. Consultez la page [Statuts](/fr/equipment/statuses) pour la référence complète des statuts.
+Vous pouvez voir les devices disponibles (et leur statut actuel : en ligne, hors ligne, occupé) dans la section Équipement de la barre latérale. Consultez la page [Statuts](/fr/equipment/statuses) pour la référence complète des statuts.
 
 ## Et ensuite ?
 
@@ -135,7 +135,7 @@ Vous pouvez voir les appareils disponibles (et leur statut actuel : en ligne, ho
 </Card>
   <Card title="Canal Smartphone" icon="mobile" href="/fr/agents-devices/smartphone">
 
-    Tests d'applications natives sur de vrais appareils Android et iOS
+    Tests d'applications natives sur de vrais devices Android et iOS
 
 </Card>
   <Card title="Canal SIM" icon="sim-card" href="/fr/agents-devices/sim">

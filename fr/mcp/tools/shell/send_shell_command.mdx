@@ -1,12 +1,12 @@
 ---
 title: "send_shell_command"
-description: "Envoyer une commande shell à un appareil (carte SIM ou web agent) pour exécution immédiate."
+description: "Envoyer une commande shell à un device (carte SIM ou web agent) pour exécution immédiate."
 sidebarTitle: "send_shell_command"
 ---
 
 {/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Envoyer une commande shell à un appareil (carte SIM ou web agent) pour exécution immédiate.
+Envoyer une commande shell à un device (carte SIM ou web agent) pour exécution immédiate.
 
 <Info>
   **Écriture de données · Appelle des systèmes externes.**
@@ -17,8 +17,8 @@ Envoyer une commande shell à un appareil (carte SIM ou web agent) pour exécuti
 | Champ | Type | Requis | Description |
 | --- | --- | --- | --- |
 | `command` | string | Oui | Payload de commande en chaîne JSON. Les champs dépendent du type d'action, utilisez list_shell_action_types pour référence. |
-| `owner` | string | Oui | Identifiant de l'appareil : MSISDN pour SIM (par ex. 0789800356), hostname pour Ethernet (par ex. my-web-agent) |
-| `product_id` | number | Oui | Identifiant du produit propriétaire de l'appareil |
+| `owner` | string | Oui | Identifiant du device : MSISDN pour SIM (par ex. 0789800356), hostname pour Ethernet (par ex. my-web-agent) |
+| `product_id` | number | Oui | Identifiant du produit propriétaire du device |
 | `type` | string | Oui | Type d'action (par ex. USSD, ETH_HTTP_API, DATA_PING). Utilisez list_shell_action_types pour voir les options. |
 
 ## Exemple d'arguments

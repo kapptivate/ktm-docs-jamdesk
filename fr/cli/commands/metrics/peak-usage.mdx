@@ -28,7 +28,7 @@ ktm metrics peak-usage --operator acme --resources 0612345678 --aggregations 1h,
 | `--aggregations` | string | `1h` | Fenêtres d'agrégation séparées par des virgules (ex. '1h,24h') |
 | `--end` | string |  | Heure de fin au format ISO 8601 (ex. '2024-01-02T00:00:00Z') |
 | `--operator` | string |  | Slug de l'opérateur (= nom de base de données InfluxDB) |
-| `--resources` | string |  | ID d'appareils séparés par des virgules |
+| `--resources` | string |  | ID de devices séparés par des virgules |
 | `--start` | string |  | Heure de début au format ISO 8601 (ex. '2024-01-01T00:00:00Z') |
 
 ## Détails
@@ -37,9 +37,9 @@ Obtenir l'utilisation maximale P95 des ressources par fenêtres d'agrégation te
 
 Retourne le pourcentage d'utilisation maximale P95 par ressource pour les fenêtres d'agrégation temporelle.
 Un seul appel répond aux questions de capacité comme « quelle est l'utilisation maximale horaire/journalière
-pour ces appareils ? »
+pour ces devices ? »
 
-Interroge le measurement "resource_usage" dans InfluxDB. Les ID d'appareils correspondent
+Interroge le measurement "resource_usage" dans InfluxDB. Les ID de devices correspondent
 aux ressources découvertes via 'ktm resources list' (SIM : national_msisdn,
 web-agent : hostname, smartphone : UUID).
 

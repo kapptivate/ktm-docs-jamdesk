@@ -16,7 +16,7 @@ sidebarTitle: Créer des tests
     `ktm tests template <TYPE...> > test.json` écrit une action par type, avec des valeurs de substitution `<...>`.
   </Step>
   <Step title="Remplir les champs">
-    Définissez la requête/URL, les assertions et l'`owner` de chaque action (un identifiant d'appareil).
+    Définissez la requête/URL, les assertions et l'`owner` de chaque action (un identifiant de device).
   </Step>
   <Step title="Valider">
     `ktm tests validate --from-file test.json` vérifie la définition sans la créer.
@@ -27,7 +27,7 @@ sidebarTitle: Créer des tests
 </Steps>
 
 <Tip>
-  L'`owner` d'une action prend un identifiant d'appareil depuis `ktm resources list` : agents web par nom d'hôte (`--type web-agent`), SIM par MSISDN (`--type sim`), smartphones par UUID (`--type smartphone`). Les actions sans propriétaire (`JAVASCRIPT`, `SLEEP`) utilisent `""`.
+  L'`owner` d'une action prend un identifiant de device depuis `ktm resources list` : agents web par nom d'hôte (`--type web-agent`), SIM par MSISDN (`--type sim`), smartphones par UUID (`--type smartphone`). Les actions sans propriétaire (`JAVASCRIPT`, `SLEEP`) utilisent `""`.
 </Tip>
 
 ## Par canal

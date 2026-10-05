@@ -1,12 +1,12 @@
 ---
 title: "get_resource_usage"
-description: "Obtenir l'utilisation des ressources d'un appareil dans le temps, ventilée par une fenêtre d'agrégation configurable."
+description: "Obtenir l'utilisation des ressources d'un device dans le temps, ventilée par une fenêtre d'agrégation configurable."
 sidebarTitle: "get_resource_usage"
 ---
 
 {/* GENERATED FILE: do not edit by hand. Regenerate with: node scripts/generate.mjs */}
 
-Obtenir l'utilisation des ressources d'un appareil dans le temps, ventilée par une fenêtre d'agrégation configurable.
+Obtenir l'utilisation des ressources d'un device dans le temps, ventilée par une fenêtre d'agrégation configurable.
 
 <Note>
   **Lecture seule · Appelle des systèmes externes.** Appel sûr : cet outil ne modifie pas les données.
@@ -21,7 +21,7 @@ Obtenir l'utilisation des ressources d'un appareil dans le temps, ventilée par 
 | `detail` | boolean | Non | Renvoyer le JSON sans valeurs nulles au lieu du résumé (par défaut : false) |
 | `end` | string | Oui | Heure de fin au format ISO 8601 (par ex. '2024-01-02T00:00:00Z') |
 | `operator` | string | Oui | Slug de l'opérateur (= nom de la base InfluxDB) |
-| `resources` | string | Oui | Identifiants d'appareils séparés par des virgules (SIM : national_msisdn, web-agent : hostname, smartphone : UUID) |
+| `resources` | string | Oui | Identifiants de devices séparés par des virgules (SIM : national_msisdn, web-agent : hostname, smartphone : UUID) |
 | `start` | string | Oui | Heure de début au format ISO 8601 (par ex. '2024-01-01T00:00:00Z') |
 
 ## Exemple d'arguments

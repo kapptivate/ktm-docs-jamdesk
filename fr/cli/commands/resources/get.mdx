@@ -37,13 +37,13 @@ ktm resources get EXAMPLE1234 --include-apps -o table
 
 | Flag | Type | Défaut | Description |
 | --- | --- | --- | --- |
-| `--include-apps` | boolean |  | Récupérer les applications installées sur l'appareil (pour la création de tests smartphone V2 : copier package vers starting.app, objet app vers meta) |
+| `--include-apps` | boolean |  | Récupérer les applications installées sur le device (pour la création de tests smartphone V2 : copier package vers starting.app, objet app vers meta) |
 
 ## Détails
 
-Récupérer les détails d'un appareil smartphone par son numéro de série ou UUID.
+Récupérer les détails d'un device smartphone par son numéro de série ou UUID.
 
-Utilisez --include-apps pour récupérer également la liste des applications installées sur l'appareil.
+Utilisez --include-apps pour récupérer également la liste des applications installées sur le device.
 La liste des applications installées correspond directement aux champs starting.app et meta du test V2 :
   - copier package   vers starting.app
   - copier l'objet app \{kind, name, label, package, version\} vers meta

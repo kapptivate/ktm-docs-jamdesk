@@ -4,7 +4,7 @@ description: Consultez la disponibilité, le temps d'exécution et les échecs q
 sidebarTitle: Détails du moniteur
 ---
 
-La page de détails d'un moniteur affiche sa configuration (planification, appareils, agents, localisations) aux côtés d'analyses qui suivent la disponibilité, les performances et les échecs. Utilisez ces informations pour comprendre le comportement de votre moniteur en production.
+La page de détails d'un moniteur affiche sa configuration (planification, devices, agents, localisations) aux côtés d'analyses qui suivent la disponibilité, les performances et les échecs. Utilisez ces informations pour comprendre le comportement de votre moniteur en production.
 
 ## Ouvrir la page de détails d'un moniteur
 
@@ -17,8 +17,8 @@ Quatre cartes en haut de page affichent la configuration du moniteur :
 | Carte | Contenu |
 |-------|---------|
 | **Devices** | SIM, Smartphone ou Web agent exécutant le test ; preset de navigateur (le cas échéant) |
-| **Agents** | Noms d'hôte et types des appareils |
-| **Locations** | Zone géographique ou région pour chaque appareil |
+| **Agents** | Noms d'hôte et types des devices |
+| **Locations** | Zone géographique ou région pour chaque device |
 | **Scheduling** | Fréquence (par exemple "Every 5 minutes") ou "custom" pour les planifications avancées ; survolez pour voir tous les détails |
 
 ## Analyses de disponibilité
@@ -63,15 +63,15 @@ Cliquez sur une barre ou un point dans les graphiques d'analyse pour ouvrir une 
 - **Étapes** : chaque étape du test, son statut (réussie/échouée/ignorée) et sa durée.
 - **Captures d'écran** : captures d'écran prises pendant l'exécution (le cas échéant).
 - **Video** : enregistrement de l'exécution du test (si activé).
-- **Metadata** : heure de début/fin d'exécution, appareil utilisé, navigateur/OS, ID du test et raison de l'erreur (en cas d'échec).
+- **Metadata** : heure de début/fin d'exécution, device utilisé, navigateur/OS, ID du test et raison de l'erreur (en cas d'échec).
 
 Depuis la page de résultat, vous pouvez modifier le test associé ou revenir à la page de détails du moniteur.
 
-## Bandeau d'indisponibilité d'appareil
+## Bandeau d'indisponibilité de device
 
-Si un appareil (SIM, Smartphone ou Web agent) est indisponible ou mal configuré, un bandeau apparaît au-dessus des analyses avec les étapes de dépannage :
+Si un device (SIM, Smartphone ou Web agent) est indisponible ou mal configuré, un bandeau apparaît au-dessus des analyses avec les étapes de dépannage :
 
-- Vérifiez le statut de votre appareil dans l'espace **Devices**.
+- Vérifiez le statut de votre device dans l'espace **Devices**.
 - Vérifiez la connectivité réseau.
 - Pour les Web agents : déroulez le [dépannage d'un robot Offline](/fr/hardware/network-troubleshooting).
-- Cliquez sur **Send help request** pour contacter le support avec les détails de l'appareil.
+- Cliquez sur **Send help request** pour contacter le support avec les détails du device.
