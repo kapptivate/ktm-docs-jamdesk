@@ -14,9 +14,9 @@ Ajoutez-les depuis **Ajouter une étape... > Email & SMS** dans le builder. Chaq
 
 | Étape | Entrée | Variable par défaut | Ce que l'IA extrait |
 |------|--------|---------------------|---------------------|
-| **[Code par SMS](/fr/tests/actions/web/getsmscode)** | Numéro de téléphone pour recevoir le code | `SmsCode` | Le code de vérification dans le SMS |
-| **[Code par email](/fr/tests/actions/web/getemailcode)** | Email pour recevoir le code | `MailCode` | L'OTP ou le code de vérification dans l'email |
-| **[Lien par email](/fr/tests/actions/web/getemaillink)** | Email pour recevoir le lien | `MailLink` | Le lien correspondant à votre intention |
+| **[Code par SMS](/fr/tests/actions/web/getsmscode)** | Numéro de téléphone pour recevoir le code | `CodeSMS` | Le code de vérification dans le SMS |
+| **[Code par email](/fr/tests/actions/web/getemailcode)** | Email pour recevoir le code | `CodeMail` | L'OTP ou le code de vérification dans l'email |
+| **[Lien par email](/fr/tests/actions/web/getemaillink)** | Email pour recevoir le lien | `LienMail` | Le lien correspondant à votre intention |
 
 Chaque nom d'étape renvoie à sa page de référence, avec les paramètres et le format JSON. Pour récupérer un message entier au lieu d'une seule valeur, utilisez [Récupérer un mail](/fr/tests/actions/web/getmail). Les mêmes étapes existent pour les [tests smartphone](/fr/tests/actions/smartphone/getmail).
 
@@ -34,7 +34,7 @@ Un email contient souvent plusieurs liens (le lien d'action, mais aussi les pied
 
 ## Utiliser les valeurs extraites
 
-Les variables extraites se comportent comme n'importe quelle variable de test. Cliquez sur l'icône `{}` dans le champ d'une étape suivante et sélectionnez-les depuis l'onglet **Previous steps** : naviguez vers `MailLink`, saisissez `SmsCode` dans le champ 2FA, ajoutez une assertion sur `MailCode`.
+Les variables extraites se comportent comme n'importe quelle variable de test. Cliquez sur l'icône `{}` dans le champ d'une étape suivante et sélectionnez-les depuis l'onglet **Previous steps** : naviguez vers `LienMail`, saisissez `CodeSMS` dans le champ 2FA, ajoutez une assertion sur `CodeMail`.
 
 Consultez [Variables dans les tests](/fr/tests/variables) pour tout ce que le sélecteur de variables peut faire.
 
