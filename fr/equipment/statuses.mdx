@@ -14,8 +14,8 @@ Tous les agents rapportent les mêmes états opérationnels :
 
 | Statut | Signification |
 |--------|---------------|
-| **Online** | L'agent est joignable et prêt à exécuter des tests |
-| **Offline** | L'agent est injoignable ou arrêté |
+| **En ligne** | L'agent est joignable et prêt à exécuter des tests |
+| **Hors ligne** | L'agent est injoignable ou arrêté |
 | **Rebooting** | L'agent est en cours de redémarrage |
 | **Maintenance** | L'agent est en mode maintenance (manuel ou planifié) |
 | **Waiting for Config** | L'agent est initialisé mais manque de configuration requise (agents Web uniquement) |
@@ -27,12 +27,12 @@ Les smartphones et les cartes SIM partagent le même ensemble de statuts :
 
 | Statut | Signification |
 |--------|---------------|
-| **Available** | Le device est prêt et peut accepter des tests |
+| **Disponible** | Le device est prêt et peut accepter des tests |
 | **Configuration** | Le device est en cours de configuration ou de mise à jour |
-| **Unavailable** | Le device est hors ligne, ne répond pas ou est injoignable |
-| **Disconnected** | Le device a perdu la connexion avec son agent |
+| **Indisponible** | Le device est hors ligne, ne répond pas ou est injoignable |
+| **Déconnecté** | Le device a perdu la connexion avec son agent |
 | **Degraded** | Le device est partiellement fonctionnel (par exemple utilisation élevée des ressources, connexion intermittente) |
-| **Archived** | Le device a été retiré et n'est plus utilisé |
+| **Archivé** | Le device a été retiré et n'est plus utilisé |
 | **Test-only** | Le device est réservé aux exécutions de tests hors production |
 
 ## Statuts d'enregistrement SIM
@@ -72,14 +72,14 @@ Kapptivate suit l'utilisation des ressources de chaque device sur 24 heures pour
 | **Healthy** | 0–60% | Fonctionne normalement avec de la capacité disponible |
 | **Stressed** | 60–85% | Proche de la capacité maximale ; envisagez l'équilibrage de charge |
 | **Overused** | >85% | À capacité maximale ou au-delà ; les tests peuvent être mis en file d'attente ou expirer |
-| **Unavailable** | - | Le device est hors ligne et ne peut pas exécuter de tests |
+| **Indisponible** | - | Le device est hors ligne et ne peut pas exécuter de tests |
 
 ## Règles de disponibilité des devices
 
 Un device est disponible pour les tests lorsque :
 
-1. Son statut est **Available**
-2. Son agent est **Online**
+1. Son statut est **Disponible**
+2. Son agent est **En ligne**
 3. Pour les SIM : la SIM est enregistrée sur un réseau (REGISTERED ou REGISTERED ROAMING)
 
 Vérifications supplémentaires optionnelles :
