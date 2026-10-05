@@ -1,33 +1,33 @@
 ---
-title: "Fill input dans un test smartphone"
-sidebarTitle: "Saisie de texte"
+title: "Remplir un champ dans un test smartphone"
+sidebarTitle: "Remplir le champ"
 description: "Saisissez du texte dans un champ de l'application pendant un test smartphone : texte fixe, variables ou données générées à chaque exécution."
 ---
 
-Une même valeur peut mélanger les trois : le même step se connecte alors avec un compte enregistré, ou s'inscrit avec un email aléatoire différent à chaque exécution.
+Une même valeur peut mélanger les trois : la même étape se connecte alors avec un compte enregistré, ou s'inscrit avec un email aléatoire différent à chaque exécution.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel du champ. L'IA l'utilise pour trouver l'élément. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel du champ. L'IA l'utilise pour trouver l'élément. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
 | Valeur | Oui | Texte à saisir. Supporte les variables et les fonctions comme le texte aléatoire. |
 | Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart` ou `always`. |
-| Activer l'IA | Non | Lorsque désactivé, seul le selector manuel est utilisé. Par défaut : activé. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Activer l'IA | Non | Lorsque désactivé, seul le sélecteur manuel est utilisé. Par défaut : activé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
-- **Capture d'écran** : prise après l'exécution du step.
-- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+- **Capture d'écran** : prise après l'exécution de l'étape.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le sélecteur corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Hide keyboard" icon="keyboard" href="/fr/tests/actions/smartphone/hidekeyboard">
+  <Card title="Masquer le clavier" icon="keyboard" href="/fr/tests/actions/smartphone/hidekeyboard">
 
     Masquer le clavier après la saisie
 

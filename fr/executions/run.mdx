@@ -10,13 +10,13 @@ Toutes les exécutions n'attendent pas une planification : pendant la création 
 
 ## Ajouter les tests à la file d'attente
 
-Dans la liste des tests, cliquez sur **Add to queue** sur la ligne d'un test. Continuez à ajouter des tests pour les accumuler : une barre flottante en bas de l'écran suit la file d'attente (**Run queue** avec un compteur), avec **Clear** pour la vider et **Open** pour la consulter.
+Dans la liste des tests, cliquez sur **Ajouter à la file** sur la ligne d'un test. Continuez à ajouter des tests pour les accumuler : une barre flottante en bas de l'écran suit la file d'attente (**File d'exécution** avec un compteur), avec **Vider la file** pour la vider et **Ouvrir** pour la consulter.
 
-Pour ajouter plusieurs tests d'un coup, sélectionnez-les avec les cases à cocher : une barre de sélection apparaît en bas avec une action **Add to queue** pour tout ce que vous avez sélectionné.
+Pour ajouter plusieurs tests d'un coup, sélectionnez-les avec les cases à cocher : une barre de sélection apparaît en bas avec une action **Ajouter à la file** pour tout ce que vous avez sélectionné.
 
 ## Vérifier la file d'attente
 
-Cliquez sur **Open** dans la barre flottante pour ouvrir le panneau **Run queue**. Chaque test en file d'attente affiche son nombre de steps et ses variables. Développez un test pour ajuster ses paramètres pour cette exécution uniquement, sans modifier le test lui-même : l'appareil sur lequel il s'exécute, ses [variables](/fr/tests/variables) (celles du test comme celles du produit, et une surcharge accepte des références et des aléatoires, pas seulement du texte), et les paramètres spécifiques au canal. Un test web, par exemple, expose son URL de départ et son [browser preset](/fr/tests/browser-presets).
+Cliquez sur **Ouvrir** dans la barre flottante pour ouvrir le panneau **File d'exécution**. Chaque test en file d'attente affiche son nombre d'étapes et ses variables. Développez un test pour ajuster ses paramètres pour cette exécution uniquement, sans modifier le test lui-même : l'appareil sur lequel il s'exécute, ses [variables](/fr/tests/variables) (celles du test comme celles du produit, et une surcharge accepte des références et des aléatoires, pas seulement du texte), et les paramètres spécifiques au canal. Un test web, par exemple, expose son URL de départ et son [browser preset](/fr/tests/browser-presets).
 
 Deux boutons sur chaque carte de test vous permettent de le **dupliquer** (pour lancer le même test plusieurs fois) ou de le **retirer** de la file d'attente.
 
@@ -26,23 +26,23 @@ Pour lancer de nombreux tests avec différentes valeurs de variables, [importez 
 
 ## Options avancées
 
-La section **Advanced options** en bas du panneau contrôle le comportement du batch :
+La section **Options avancées** en bas du panneau contrôle le comportement du batch :
 
 - **[Mode d'exécution](/fr/executions/execution-modes)** : la quantité de données collectées pendant l'exécution, de Rapide à Détaillé (Standard par défaut).
-- **Run later** : planifier l'exécution au lieu de la lancer immédiatement.
-- **Parallel test execution** : lancer les tests en file d'attente en parallèle.
-- **Wait between each test** : insérer une pause entre les tests.
+- **Exécuter plus tard** : planifier l'exécution au lieu de la lancer immédiatement.
+- **Exécution parallèle des tests** : lancer les tests en file d'attente en parallèle.
+- **Attendre entre chaque test** : insérer une pause entre les tests.
 
-**More options** développe le reste :
+**Plus d'options** développe le reste :
 
-- **Send results by email / by SMS / by call** : recevez une notification quand l'exécution se termine.
-- **Ignore errors** : continuer quand un step échoue.
-- **Use capabilities** : transmettre des capacités d'exécution supplémentaires.
+- **Envoyer les résultats par email / par SMS / par appel** : recevez une notification quand l'exécution se termine.
+- **Ignorer les erreurs** : continuer quand une étape échoue.
+- **Utiliser des capabilities** : transmettre des capacités d'exécution supplémentaires.
 
 ## Lancement
 
-Cliquez sur **Run** dans l'en-tête du panneau pour lancer tout ce qui se trouve dans la file d'attente. L'exécution apparaît dans la [liste des exécutions](/fr/executions/overview), où vous pouvez la suivre et [consulter ses résultats](/fr/executions/results).
+Cliquez sur **Lancer** dans l'en-tête du panneau pour lancer tout ce qui se trouve dans la file d'attente. L'exécution apparaît dans la [liste des exécutions](/fr/executions/overview), où vous pouvez la suivre et [consulter ses résultats](/fr/executions/results).
 
 ## Lancer depuis le builder
 
-Pendant la création, vous n'avez pas besoin de quitter l'éditeur pour tester : cliquez sur **Run** en haut à droite du builder. Une fenêtre modale s'ouvre avec un flux vidéo en direct du test en cours d'exécution, que vous pouvez agrandir en plein écran pour suivre l'exécution en temps réel.
+Pendant la création, vous n'avez pas besoin de quitter l'éditeur pour tester : cliquez sur **Exécuter** en haut à droite du builder. Une fenêtre modale s'ouvre avec un flux vidéo en direct du test en cours d'exécution, que vous pouvez agrandir en plein écran pour suivre l'exécution en temps réel.

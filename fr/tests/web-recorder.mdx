@@ -1,50 +1,50 @@
 ---
 title: Web recorder
-description: Enregistrez un parcours web avec l'extension Chrome Kompagnon et transformez-le en steps de test.
+description: Enregistrez un parcours web avec l'extension Chrome Kompagnon et transformez-le en étapes de test.
 ---
 
-L'enregistrement est le moyen le plus rapide de créer un test web : parcourez votre scénario dans un vrai navigateur, et chaque click, input et navigation devient un step dans le builder. Le recorder fonctionne via **Kompagnon**, une extension Chrome qui pilote l'enregistrement et ajoute des vérifications sans quitter la page.
+L'enregistrement est le moyen le plus rapide de créer un test web : parcourez votre scénario dans un vrai navigateur, et chaque clic, saisie et navigation devient une étape dans le builder. Le recorder fonctionne via **Kompagnon**, une extension Chrome qui pilote l'enregistrement et ajoute des vérifications sans quitter la page.
 
-![Le side panel Kompagnon enregistrant en direct à côté de la page testée, avec un step de click capturé](/images/web-recorder-kompagnon.webp)
+![Le side panel Kompagnon enregistrant en direct à côté de la page testée, avec une étape Clic capturée](/images/web-recorder-kompagnon.webp)
 
 ## Installer Kompagnon
 
-Vous installez l'extension une seule fois, depuis le builder. Créez ou ouvrez un test **Web (New experience)**, puis cliquez sur **Use recorder**. Si Kompagnon n'est pas encore installé, une modale **Install the Kompagnon extension** décrit ses fonctionnalités et propose **Add to Chrome**, qui ouvre le Chrome Web Store. Installez-le et revenez au builder.
+Vous installez l'extension une seule fois, depuis le builder. Créez ou ouvrez un test **Web (Nouvelle expérience)**, puis cliquez sur **Utiliser l'enregistreur**. Si Kompagnon n'est pas encore installé, une modale **Installer l'extension Kompagnon** décrit ses fonctionnalités et propose **Ajouter à Chrome**, qui ouvre le Chrome Web Store. Installez-le et revenez au builder.
 
 ## Enregistrer un test
 
-Une fois Kompagnon installé, **Use recorder** ouvre votre URL de départ dans un nouvel onglet avec le recorder attaché.
+Une fois Kompagnon installé, **Utiliser l'enregistreur** ouvre votre URL de départ dans un nouvel onglet avec le recorder attaché.
 
 <Steps>
   <Step title="Parcourez votre scénario">
-    Naviguez sur la page normalement. Les clicks, inputs et navigations sont capturés comme des steps en temps réel. Un widget déplaçable se superpose à la page et affiche le statut de l'enregistrement, le nombre d'actions capturées, ainsi que les boutons **Pause**, **Stop** et **Open sidepanel**.
+    Naviguez sur la page normalement. Les clics, saisies et navigations sont capturés comme des étapes en temps réel. Un widget déplaçable se superpose à la page et affiche le statut de l'enregistrement, le nombre d'actions capturées, ainsi que les boutons **Pause**, **Stop** et **Open sidepanel**.
   </Step>
   <Step title="Ouvrez le side panel">
     Cliquez sur **Open sidepanel** pour ancrer Kompagnon dans le side panel natif de Chrome. Il affiche l'état actuel (**RECORDING LIVE** ou **ASSERTION MODE**), la liste en direct des actions capturées avec leurs sélecteurs, et les mêmes contrôles de pause, stop et assertion.
   </Step>
   <Step title="Arrêtez et vérifiez">
-    Cliquez sur **Stop**. Les steps enregistrés apparaissent dans le canvas du builder, regroupés et prêts à être modifiés, réordonnés ou enrichis avec des [variables](/fr/tests/variables) et des [checks](/fr/tests/builder#checks).
+    Cliquez sur **Stop**. Les étapes enregistrées apparaissent dans le canvas du builder, regroupées et prêtes à être modifiées, réordonnées ou enrichies avec des [variables](/fr/tests/variables) et des [checks](/fr/tests/builder#checks).
   </Step>
 </Steps>
 
 ## Ajouter des vérifications pendant l'enregistrement
 
-Vous pouvez ajouter des assertions sur la page sans quitter le recorder. Cliquez sur l'**icône œil** pour passer en assertion mode, puis cliquez sur l'élément à vérifier. Une modale **Verify element** s'ouvre pour configurer le check :
+Vous pouvez ajouter des assertions sur la page sans quitter le recorder. Cliquez sur l'**icône œil** pour passer en assertion mode, puis cliquez sur l'élément à vérifier. Une modale **Vérifier l'élément** s'ouvre pour configurer le check :
 
 ![La modale Verify element avec Displayed, Clickable, et les options Enabled et Present dépliées](/images/web-recorder-verify-element.webp)
 
-- **Displayed** : l'élément est visible.
-- **Clickable** : l'élément est cliquable.
+- **Affiché** : l'élément est visible.
+- **Cliquable** : l'élément est cliquable.
 
-**More options** révèle deux conditions supplémentaires :
+**Plus d'options** révèle deux conditions supplémentaires :
 
-- **Enabled** : l'élément est actif.
-- **Present** : l'élément existe dans le DOM.
+- **Activé** : l'élément est actif.
+- **Présent** : l'élément existe dans le DOM.
 
-Choisissez une condition et la vérification est enregistrée comme un step [Verify element](/fr/tests/actions/web/verifyelement) aux côtés de vos interactions.
+Choisissez une condition et la vérification est enregistrée comme une étape [Vérifier l'élément](/fr/tests/actions/web/verifyelement) aux côtés de vos interactions.
 
 <Note>
-Les steps enregistrés sont des steps classiques du builder. L'onglet **General** de chaque step web inclut une **Reference screenshot** de la page capturée lors de la dernière exécution du step, pour que vous puissiez voir exactement ce qu'il cible. Avant la première exécution, il affiche "No reference screenshot available for this step".
+Les étapes enregistrées sont des étapes classiques du builder. L'onglet **Général** de chaque étape web inclut une **Capture d'écran de référence** de la page capturée lors de la dernière exécution de l'étape, pour que vous puissiez voir exactement ce qu'elle cible. Avant la première exécution, il affiche "Aucun screenshot de référence disponible pour cette étape".
 </Note>
 
 ## Legacy : recorder avec export de script
@@ -70,10 +70,10 @@ L'export est une [script action](/fr/tests/actions/legacy/script-actions) : du J
 <Columns cols={2}>
   <Card title="Test builder" icon="vial" href="/fr/tests/builder">
 
-    Modifiez, regroupez et vérifiez les steps que vous avez enregistrés
+    Modifiez, regroupez et vérifiez les étapes que vous avez enregistrées
 
 </Card>
-  <Card title="Verify element" icon="circle-check" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="circle-check" href="/fr/tests/actions/web/verifyelement">
 
     Toutes les conditions disponibles pour vos assertions sur un élément web
 

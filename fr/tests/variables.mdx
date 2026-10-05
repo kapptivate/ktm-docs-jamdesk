@@ -4,15 +4,15 @@ description: Définissez, générez et réutilisez des valeurs dynamiques dans u
 sidebarTitle: Variables dans les tests
 ---
 
-Les données de test statiques deviennent rapidement obsolètes : un email codé en dur provoque une collision lors de la deuxième inscription, un nom fixe ne peut pas prouver que la page de confirmation affiche ce que vous avez saisi. Dans un test, les variables alimentent chaque step avec des données dynamiques : des valeurs produites par des steps précédents, générées à la volée, ou récupérées depuis la configuration de votre produit.
+Les données de test statiques deviennent rapidement obsolètes : un email codé en dur provoque une collision lors de la deuxième inscription, un nom fixe ne peut pas prouver que la page de confirmation affiche ce que vous avez saisi. Dans un test, les variables alimentent chaque étape avec des données dynamiques : des valeurs produites par des étapes précédentes, générées à la volée, ou récupérées depuis la configuration de votre produit.
 
-![Le sélecteur de variables ouvert sur un champ de step, avec les onglets Previous steps, Random et Variables](/images/variables-picker.webp)
+![Le sélecteur de variables ouvert sur un champ d'étape, avec les onglets Previous steps, Random et Variables](/images/variables-picker.webp)
 
 ## Trois natures de variable
 
 Quel que soit le champ, une valeur peut mélanger du texte littéral et trois natures de variable, chacune avec sa couleur dans l'éditeur :
 
-- **Les variables de test**, en orange : elles vivent dans ce test. Un step qui produit une valeur en crée une (`SmsCode`, `Extracted`), un step **Set variable** en déclare une, et vous pouvez en créer une vous-même depuis le sélecteur.
+- **Les variables de test**, en orange : elles vivent dans ce test. Une étape qui produit une valeur en crée une (`SmsCode`, `Extracted`), une étape **Définir une variable locale** en déclare une, et vous pouvez en créer une vous-même depuis le sélecteur.
 - **Les variables globales et les groupes de variables**, en bleu : définis une fois pour le produit dans les [Configurations](/fr/tests/configurations), réutilisés par tous les tests.
 - **Les aléatoires intégrés**, en gris : générés à chaque exécution, stockés nulle part.
 
@@ -20,33 +20,33 @@ La couleur est le moyen le plus rapide de lire un champ : l'orange reste dans le
 
 ## Le sélecteur de variables
 
-Cliquez sur l'icône `{}` à côté de n'importe quel champ de step pour ouvrir le sélecteur de variables. Sélectionner une entrée l'insère sous forme de pastille dans le champ, où elle peut se combiner avec du texte littéral. Le sélecteur comporte trois onglets :
+Cliquez sur l'icône `{}` à côté de n'importe quel champ d'étape pour ouvrir le sélecteur de variables. Sélectionner une entrée l'insère sous forme de pastille dans le champ, où elle peut se combiner avec du texte littéral. Le sélecteur comporte trois onglets :
 
-- **Previous steps** : valeurs produites précédemment dans le test, avec **Create in-test variable** en bas de l'onglet.
+- **Previous steps** : valeurs produites précédemment dans le test, avec **Créer une variable in-test** en bas de l'onglet.
 - **Random** : données fictives générées pour cette exécution.
 - **Variables** : les variables et groupes de variables configurés dans votre produit, avec un raccourci pour créer une variable globale sans quitter le test.
 
 ## Previous steps
 
-Chaque step qui produit une valeur l'exporte comme variable, listée avec le step qui l'a créée (par exemple `SmsCode`, Step 1). Producteurs typiques : les [steps Email & SMS](/fr/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), les actions de lecture de texte, et vos propres steps **Set variable**.
+Chaque étape qui produit une valeur l'exporte comme variable, listée avec l'étape qui l'a créée (par exemple `SmsCode`, Étape 1). Producteurs typiques : les [étapes Email & SMS](/fr/tests/email-sms) (`SmsCode`, `MailCode`, `MailLink`), les actions de lecture de texte, et vos propres étapes **Définir une variable locale**.
 
-Choisissez-en une pour enchaîner les steps : naviguez vers le `MailLink` extrait deux steps plus tôt, ou saisissez `SmsCode` dans le champ 2FA.
+Choisissez-en une pour enchaîner les étapes : naviguez vers le `MailLink` extrait deux étapes plus tôt, ou saisissez `SmsCode` dans le champ 2FA.
 
-### Set variable
+### Définir une variable locale
 
-Le step **Set variable** stocke une valeur de votre choix en cours de test : donnez-lui une valeur et un nom, et il apparaît dans l'onglet Previous steps pour tous les steps suivants. Consultez la [référence Set variable](/fr/tests/actions/web/setvariable) pour le format JSON et les fonctions de template.
+L'étape **Définir une variable locale** stocke une valeur de votre choix en cours de test : donnez-lui une valeur et un nom, et elle apparaît dans l'onglet Previous steps pour toutes les étapes suivantes. Consultez la [référence Définir une variable locale](/fr/tests/actions/web/setvariable) pour le format JSON et les fonctions de template.
 
 ### Créer une variable in-test
 
-Une valeur dont vous avez besoin dans plusieurs steps n'est pas obligée de venir d'un step **Set variable**. Ouvrez le sélecteur sur le champ, choisissez **Create in-test variable** en bas de l'onglet Previous steps, et donnez-lui un nom. La variable arrive dans le champ sous forme de pastille, et c'est à vous de renseigner sa valeur dans l'onglet Environment ou dans l'onglet Variables du step.
+Une valeur dont vous avez besoin dans plusieurs étapes n'est pas obligée de venir d'une étape **Définir une variable locale**. Ouvrez le sélecteur sur le champ, choisissez **Créer une variable in-test** en bas de l'onglet Previous steps, et donnez-lui un nom. La variable arrive dans le champ sous forme de pastille, et c'est à vous de renseigner sa valeur dans l'onglet Environnement ou dans l'onglet Variables de l'étape.
 
 Sa valeur peut être aussi riche que n'importe quel autre champ : du texte littéral, une variable globale, un aléatoire intégré, ou une autre variable de test.
 
 ## Données aléatoires
 
-L'onglet **Random** génère des données fictives à chaque exécution, pour que chaque lancement utilise des valeurs nouvelles. Préréglages : **First name**, **Last name**, **City** et **Street address**.
+L'onglet **Random** génère des données fictives à chaque exécution, pour que chaque lancement utilise des valeurs nouvelles. Préréglages : **Prénom**, **Nom**, **Ville** et **Adresse**.
 
-**Custom** ouvre un générateur de format quand les préréglages ne conviennent pas :
+**Personnalisée** ouvre un générateur de format quand les préréglages ne conviennent pas :
 
 - **Text** : choisissez les jeux de caractères et la longueur.
 - **Number** : générez une valeur numérique.
@@ -56,20 +56,20 @@ L'onglet **Random** génère des données fictives à chaque exécution, pour qu
 
 L'onglet **Variables** expose ce qui est défini dans les [Configurations](/fr/tests/configurations) de votre produit : des variables simples et des groupes de variables que vous pouvez développer pour sélectionner une entrée spécifique (comme un `PASSWORD` dans votre groupe par défaut). Définissez une fois, réutilisez dans tous vos tests.
 
-## Modifier et relire dans l'onglet Environment
+## Modifier et relire dans l'onglet Environnement
 
-L'onglet **Environment** du builder rassemble les variables utilisées par votre test, en trois tableaux :
+L'onglet **Environnement** du builder rassemble les variables utilisées par votre test, en trois tableaux :
 
-- **Test variables** : tout ce qui est déclaré dans le test (codes extraits, steps Set variable, variables in-test). La colonne **Value** est modifiable, et une modification reste synchronisée avec le step Set variable qui déclare la variable : plus besoin de retrouver le step pour changer une valeur.
-- **Global variables** : les variables configurées référencées par le test, avec les valeurs secrètes masquées.
+- **Test variables** : tout ce qui est déclaré dans le test (codes extraits, étapes Définir une variable locale, variables in-test). La colonne **Value** est modifiable, et une modification reste synchronisée avec l'étape Définir une variable locale qui déclare la variable : plus besoin de retrouver l'étape pour changer une valeur.
+- **Variables globales** : les variables configurées référencées par le test, avec les valeurs secrètes masquées.
 - **Variable groups** : les groupes référencés par le test, et la variante utilisée.
 
-Les mêmes trois tableaux se retrouvent dans l'onglet **Variables** d'un step, réduits à ce que ce step utilise.
+Les mêmes trois tableaux se retrouvent dans l'onglet **Variables** d'une étape, réduits à ce que cette étape utilise.
 
-Modifier une valeur ici change le test, pas seulement la prochaine exécution : le bouton **Run** devient donc **Save and run**.
+Modifier une valeur ici change le test, pas seulement la prochaine exécution : le bouton **Exécuter** devient donc **Enregistrer et exécuter**.
 
 <Note>
-Les variables assignées par le script d'un [custom step](/fr/tests/actions/web/customstep) (`test.variables.set`) n'apparaissent pas dans ces tableaux. Leur valeur n'existe que pendant l'exécution, et le script écraserait de toute façon ce que vous auriez saisi ici.
+Les variables assignées par une étape [Script](/fr/tests/actions/web/customstep) (`test.variables.set`) n'apparaissent pas dans ces tableaux. Leur valeur n'existe que pendant l'exécution, et le script écraserait de toute façon ce que vous auriez saisi ici.
 </Note>
 
 ## Surcharger des valeurs pour une exécution
@@ -96,12 +96,12 @@ La page de résultat d'une exécution comporte un onglet **Variables** qui liste
 </Card>
   <Card title="Test Email & SMS" icon="envelope" href="/fr/tests/email-sms">
 
-    Les steps qui alimentent vos variables en codes et liens
+    Les étapes qui alimentent vos variables en codes et liens
 
 </Card>
   <Card title="Test builder" icon="vial" href="/fr/tests/builder">
 
-    Là où les steps, checks et variables se rejoignent
+    Là où les étapes, checks et variables se rejoignent
 
 </Card>
   <Card title="Exécuter un test" icon="play" href="/fr/executions/run">

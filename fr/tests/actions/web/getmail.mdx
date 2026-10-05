@@ -1,21 +1,21 @@
 ---
-title: "Get mail dans un test web"
+title: "Récupérer un mail dans un test web"
 sidebarTitle: "Récupérer un mail"
-description: "Vérifiez que votre application envoie bien un e-mail. Le step attend qu'il arrive dans une boîte mail de test et échoue si rien n'arrive à temps."
+description: "Vérifiez que votre application envoie bien un e-mail. L'étape attend qu'il arrive dans une boîte mail de test et échoue si rien n'arrive à temps."
 ---
 
-Utilisez-le sur les parcours qui se terminent par un e-mail : un message de bienvenue, une confirmation de commande, une facture. L'e-mail est joint au résultat du step, pour que vous puissiez le lire en revoyant l'exécution. Pour réutiliser ce qu'il contient, utilisez plutôt [Get email code](/fr/tests/actions/web/getemailcode) ou [Get email link](/fr/tests/actions/web/getemaillink).
+Utilisez-la sur les parcours qui se terminent par un e-mail : un message de bienvenue, une confirmation de commande, une facture. L'e-mail est joint au résultat de l'étape, pour que vous puissiez le lire en revoyant l'exécution. Pour réutiliser ce qu'il contient, utilisez plutôt [Code par email](/fr/tests/actions/web/getemailcode) ou [Lien par email](/fr/tests/actions/web/getemaillink).
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Boîte mail | Oui | L'adresse de la boîte mail de test qui doit recevoir l'e-mail. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun e-mail n'arrive. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si aucun e-mail n'arrive. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Contenu de l'e-mail** : l'e-mail reçu est joint au résultat du step, vous pouvez donc le lire lors de la revue de l'exécution.
+- **Contenu de l'e-mail** : l'e-mail reçu est joint au résultat de l'étape, vous pouvez donc le lire lors de la revue de l'exécution.
 - **Temps d'exécution** : début, fin et durée (en secondes). La durée indique le temps de livraison.
 - **Statut** : échec si aucun e-mail n'arrive dans la boîte mail.
 
@@ -24,12 +24,12 @@ Consultez [Email & SMS dans les tests](/fr/tests/email-sms) pour savoir comment 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Get email code" icon="envelope" href="/fr/tests/actions/web/getemailcode">
+  <Card title="Code par email" icon="envelope" href="/fr/tests/actions/web/getemailcode">
 
     Extraire un code de vérification de l'e-mail à la place
 
 </Card>
-  <Card title="Get email link" icon="link" href="/fr/tests/actions/web/getemaillink">
+  <Card title="Lien par email" icon="link" href="/fr/tests/actions/web/getemaillink">
 
     Extraire un lien de l'e-mail et continuer le flux
 

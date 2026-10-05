@@ -1,13 +1,13 @@
 ---
 title: Actions script sur smartphone
-description: Helpers spécifiques aux smartphones pour les actions script, mode avion, événements d'appareil, appels et audio.
+description: Helpers spécifiques aux smartphones pour les actions script, mode avion, événements du device, appels et audio.
 ---
 
 <Danger>
   **Déprécié.** Les actions script sont un héritage. Les actions existantes continuent de fonctionner, mais pour les nouveaux tests préférez le [constructeur visuel](/fr/tests/builder). Migrez dès que possible.
 </Danger>
 
-Les actions script smartphone (application Android, application iOS et web mobile) étendent WebdriverIO avec des helpers pour les fonctionnalités propres à un vrai téléphone : basculer le mode avion, réagir aux événements d'appareil comme un SMS ou un appel entrant, passer et recevoir des appels, et lire ou enregistrer de l'audio. `browser` et `driver` sont des alias ; les deux fonctionnent avec chaque helper.
+Les actions script smartphone (application Android, application iOS et web mobile) étendent WebdriverIO avec des helpers pour les fonctionnalités propres à un vrai téléphone : basculer le mode avion, réagir aux événements du device comme un SMS ou un appel entrant, passer et recevoir des appels, et lire ou enregistrer de l'audio. `browser` et `driver` sont des alias ; les deux fonctionnent avec chaque helper.
 
 Pour la structure du script, les paramètres et les helpers partagés, commencez par [Actions script](/fr/tests/actions/legacy/script-actions).
 
@@ -28,7 +28,7 @@ browser.disableAirplaneMode();
 | `airplaneSwitchXPATH` | chaîne | XPath complet du commutateur pour la stratégie XPATH. |
 | `forceNativeAttempt` | booléen | Essayer l'approche non-UI en premier même sur Android >= 7. Par défaut : `false`. |
 
-## Événements d'appareil
+## Événements du device
 
 Deux helpers fonctionnent ensemble : `addEventListener` réagit aux événements au fur et à mesure, et `waitForEvent` bloque jusqu'à ce qu'un événement se produise. Pour capturer des événements avec un listener, l'étape doit aussi en attendre un.
 

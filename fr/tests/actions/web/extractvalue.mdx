@@ -4,32 +4,32 @@ sidebarTitle: "Extraire une valeur"
 description: "Capturez une donnée de la page dans une variable : un numéro de commande à rechercher, un prix à comparer, un identifiant à saisir ailleurs."
 ---
 
-Utilisez-le quand un step suivant a besoin d'une valeur qui n'existe sur la page qu'au moment de l'exécution. Le step lit le texte de l'élément (ou sa valeur, pour un champ de formulaire) et le stocke dans une variable. Insérez ensuite cette variable dans n'importe quel step suivant, par exemple un [Fill input](/fr/tests/actions/web/input) qui la saisit dans un autre formulaire.
+Utilisez-la quand une étape suivante a besoin d'une valeur qui n'existe sur la page qu'au moment de l'exécution. L'étape lit le texte de l'élément (ou sa valeur, pour un champ de formulaire) et le stocke dans une variable. Insérez ensuite cette variable dans n'importe quelle étape suivante, par exemple une étape [Saisie de texte](/fr/tests/actions/web/input) qui la saisit dans un autre formulaire.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément à lire. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément à lire. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
 | Variable | Oui | Nom de la variable qui reçoit la valeur extraite. Par défaut : `Extracted`. |
-| Utilisation IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Variable** : le contenu textuel de l'élément (ou sa valeur, pour les champs de formulaire) est stocké dans la variable et disponible pour chaque step ultérieur. Insérez-la partout où un champ supporte les variables.
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Variable** : le contenu textuel de l'élément (ou sa valeur, pour les champs de formulaire) est stocké dans la variable et disponible pour chaque étape ultérieure. Insérez-la partout où un champ supporte les variables.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
-- **Capture d'écran** : prise après l'exécution du step.
-- **Utilisation IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+- **Capture d'écran** : prise après l'exécution de l'étape.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le sélecteur corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
 
-Consultez [Variables](/fr/tests/variables) pour savoir comment les valeurs extraites peuvent être réutilisées entre les steps.
+Consultez [Variables](/fr/tests/variables) pour savoir comment les valeurs extraites peuvent être réutilisées entre les étapes.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Remplir un champ" icon="keyboard" href="/fr/tests/actions/web/input">
+  <Card title="Saisie de texte" icon="keyboard" href="/fr/tests/actions/web/input">
 
     Saisissez la valeur extraite ailleurs
 

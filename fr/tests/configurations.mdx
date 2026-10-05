@@ -13,7 +13,7 @@ Les variables appartiennent à un espace produit. La page Configurations les lis
 Une variable simple appartient à un espace produit et contient une seule valeur utilisée partout où elle est référencée. Choisissez un type de variable lors de la création.
 
 <Tabs>
-  <Tab title="Single value">
+  <Tab title="Valeur unique">
     Une valeur fixe (texte, nombre, clé) qui ne change pas. Utilisez-la pour des éléments comme un identifiant client ou une clé publique.
   </Tab>
   <Tab title="Secret">
@@ -21,7 +21,7 @@ Une variable simple appartient à un espace produit et contient une seule valeur
 
     Une fois enregistrée, la valeur n'est **plus jamais affichée**. Pour la modifier, le champ apparaît vide et vous devez saisir à nouveau la valeur complète pour écraser l'ancienne.
   </Tab>
-  <Tab title="Choice">
+  <Tab title="Choix">
     Une liste prédéfinie de valeurs (Choice 1, Choice 2, Choice 3...). L'utilisateur de la variable choisit l'une des options.
   </Tab>
 </Tabs>
@@ -30,19 +30,19 @@ Une variable simple appartient à un espace produit et contient une seule valeur
 
 <Steps>
   <Step title="Ouvrir le formulaire de création">
-    Cliquez sur **Create variable**.
+    Cliquez sur **Créer une variable**.
   </Step>
   <Step title="La nommer">
     Saisissez un nom sans espaces ni caractères spéciaux.
   </Step>
   <Step title="Choisir un type">
-    Sélectionnez **Single value**, **Secret** ou **Choice**.
+    Sélectionnez **Valeur unique**, **Secret** ou **Choix**.
   </Step>
   <Step title="La décrire">
     Ajoutez une description. Optionnel, mais recommandé pour que vos coéquipiers sachent à quoi sert la variable.
   </Step>
   <Step title="Définir la valeur">
-    Saisissez la valeur, ou la liste de valeurs pour une variable Choice, puis cliquez sur **Create**.
+    Saisissez la valeur, ou la liste de valeurs pour une variable Choix, puis cliquez sur **Créer**.
   </Step>
 </Steps>
 
@@ -56,7 +56,7 @@ C'est idéal pour des profils utilisateur distincts, des environnements séparé
 
 <Steps>
   <Step title="Ouvrir le formulaire de groupe">
-    Cliquez sur **Create variable group**.
+    Cliquez sur **Créer un groupe de variables**.
   </Step>
   <Step title="Nommer le groupe">
     Par exemple, `User Profiles`.
@@ -76,25 +76,25 @@ Changer de variante depuis le menu déroulant du groupe met à jour toutes ses v
 
 ## Utiliser les variables dans les tests
 
-Une fois vos variables configurées, injectez-les directement dans vos steps de test.
+Une fois vos variables configurées, injectez-les directement dans vos étapes de test.
 
-**Injecter une variable dans un step :**
+**Injecter une variable dans une étape :**
 
 <Steps>
   <Step title="Ouvrir le sélecteur de variables">
-    Lors de la création ou de la modification d'un step (une action **Click**, une saisie de texte, etc.), cliquez sur l'icône `{}` à côté du champ cible.
+    Lors de la création ou de la modification d'une étape (une action **Clic**, une saisie de texte, etc.), cliquez sur l'icône `{}` à côté du champ cible.
   </Step>
   <Step title="Aller dans l'onglet Variables">
-    Le sélecteur propose aussi des valeurs provenant de steps précédents et des générateurs aléatoires ; vos variables configurées se trouvent dans l'onglet **Variables**. Consultez [Variables dans les tests](/fr/tests/variables) pour le sélecteur complet.
+    Le sélecteur propose aussi des valeurs provenant d'étapes précédentes et des générateurs aléatoires ; vos variables configurées se trouvent dans l'onglet **Variables**. Consultez [Variables dans les tests](/fr/tests/variables) pour le sélecteur complet.
   </Step>
   <Step title="Choisir la variable">
-    Parcourez l'arborescence (par exemple `User Profiles` > `email`) et sélectionnez la variable pour l'insérer dans le step.
+    Parcourez l'arborescence (par exemple `User Profiles` > `email`) et sélectionnez la variable pour l'insérer dans l'étape.
   </Step>
 </Steps>
 
 ### Changer de variante lors de la configuration du test
 
-Dans le panneau latéral de l'éditeur de test, l'onglet **Environment** liste vos groupes de variables. Utilisez le menu déroulant pour changer la variante utilisée par le test. Passez d'*Alexandre* à *Marc* et le test s'exécute avec les données de Marc.
+Dans le panneau latéral de l'éditeur de test, l'onglet **Environnement** liste vos groupes de variables. Utilisez le menu déroulant pour changer la variante utilisée par le test. Passez d'*Alexandre* à *Marc* et le test s'exécute avec les données de Marc.
 
 ### Changer de variante au moment de l'exécution
 

@@ -13,28 +13,28 @@ Chaque fois qu'un test s'exécute, il produit une exécution. La liste des exéc
 Les exécutions sont regroupées par jour, les plus récentes en premier, et la liste se rafraîchit pour afficher les statuts mis à jour. Chaque ligne affiche :
 
 - **Name** : le nom de l'exécution avec son icône de statut, la date d'exécution, la durée et la pastille de l'appareil.
-- **About** : un badge avec le nombre de tests échoués sur le total.
-- **Ran by** : qui ou quoi a déclenché l'exécution.
-- **Details** : des pastilles nommant les tests de l'exécution, avec "View more" quand il y en a beaucoup.
-- **Run** : un bouton pour relancer l'exécution.
+- **À propos** : un badge avec le nombre de tests échoués sur le total.
+- **Exécuté par** : qui ou quoi a déclenché l'exécution.
+- **Détails** : des pastilles nommant les tests de l'exécution, avec "Voir plus" quand il y en a beaucoup.
+- **Exécuter** : un bouton pour relancer l'exécution.
 
 ## Filtrer les exécutions
 
 - **Search** : recherchez des exécutions par nom.
-- **Status** : filtrez par success, failed, warning, running et d'autres statuts le cas échéant.
+- **Statut** : filtrez par success, failed, warning, running et d'autres statuts le cas échéant.
 - **Creator** : affichez uniquement les exécutions lancées par un utilisateur spécifique.
 - **Date range** : choisissez un préréglage dans le menu déroulant (Past 1h, 2h, 6h, 12h, 24h, Today, Yesterday, Last 7 days, Last 30 days) ou définissez une plage personnalisée.
 - **Multi-select** : activez le mode cases à cocher pour les actions groupées ; appuyez sur Echap pour effacer la sélection.
 
 ## Actions sur les lignes
 
-Utilisez le bouton **Run** pour relancer une exécution telle quelle. Le menu à trois points de la ligne propose :
+Utilisez le bouton **Exécuter** pour relancer une exécution telle quelle. Le menu à trois points de la ligne propose :
 
-- **Add tag(s)** : étiquetez l'exécution pour l'organiser.
-- **Rerun only failed tests** : relancez uniquement les tests qui ont échoué.
-- **Rename execution** : modifiez son nom d'affichage.
-- **Cancel execution** : arrêtez une exécution encore en cours. L'action apparaît pendant l'exécution, sur les runs composés de tests new experience, qu'il s'agisse d'un test ou d'un lot entier. L'exécution s'arrête immédiatement, la progression de ce run est perdue, et son statut passe à **canceled**.
-- **Delete** : supprimez l'exécution.
+- **Ajouter un tag** : étiquetez l'exécution pour l'organiser.
+- **Relancer uniquement les tests échoués** : relancez uniquement les tests qui ont échoué.
+- **Renommer l'exécution** : modifiez son nom d'affichage.
+- **Annuler l'exécution** : arrêtez une exécution encore en cours. L'action apparaît pendant l'exécution, sur les runs composés de tests new experience, qu'il s'agisse d'un test ou d'un lot entier. L'exécution s'arrête immédiatement, la progression de ce run est perdue, et son statut passe à **canceled**.
+- **Supprimer** : supprimez l'exécution.
 
 Cliquez sur la ligne elle-même pour ouvrir la [vue des résultats](/fr/executions/results) complète.
 
@@ -56,14 +56,14 @@ Les exécutions planifiées affichent un tag avec la date et l'heure prévues au
 
 ## Monitoring en direct
 
-Quand un test est en cours d'exécution, vous pouvez le regarder en direct : ouvrez l'exécution pour voir un aperçu en direct de l'écran de l'appareil avec les steps qui se mettent à jour en temps réel, ou lancez directement [depuis le builder](/fr/executions/run#lancer-depuis-le-builder) pour regarder dans une fenêtre modale sans quitter l'éditeur.
+Quand un test est en cours d'exécution, vous pouvez le regarder en direct : ouvrez l'exécution pour voir un aperçu en direct de l'écran de l'appareil avec les étapes qui se mettent à jour en temps réel, ou lancez directement [depuis le builder](/fr/executions/run#lancer-depuis-le-builder) pour regarder dans une fenêtre modale sans quitter l'éditeur.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
   <Card title="Consulter les résultats" icon="magnifying-glass-chart" href="/fr/executions/results">
 
-    Consultez une exécution : steps, captures d'écran, vidéo et métadonnées
+    Consultez une exécution : étapes, captures d'écran, vidéo et métadonnées
 
 </Card>
   <Card title="Lancer un test" icon="play" href="/fr/executions/run">

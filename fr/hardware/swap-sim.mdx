@@ -3,7 +3,7 @@ title: Remplacer une SIM dans un robot cellulaire
 description: Insérer une carte SIM dans un robot 4G ou 5G, lui attribuer un numéro, et lui transférer les tests de la carte qu'elle remplace.
 ---
 
-Insérer la carte ne suffit pas. Tant que la plateforme n'a pas son numéro, la SIM reste **Unnamed** et n'exécute aucun test. Ce numéro décide aussi de la suite. Reprenez celui d'une ancienne SIM et tout bascule en un clic : ses réglages et ses monitors passent sur la nouvelle carte. Attribuez-en un neuf et vous configurez la SIM vous-même.
+Insérer la carte ne suffit pas. Tant que la plateforme n'a pas son numéro, la SIM reste **Sans nom** et n'exécute aucun test. Ce numéro décide aussi de la suite. Reprenez celui d'une ancienne SIM et tout bascule en un clic : ses réglages et ses monitors passent sur la nouvelle carte. Attribuez-en un neuf et vous configurez la SIM vous-même.
 
 Cette page vaut pour tous les robots cellulaires, 4G comme 5G, quelle que soit leur génération. Les robots web et smartphone n'ont pas de SIM.
 
@@ -13,7 +13,7 @@ Une SIM insérée robot éteint est détectée au démarrage. Si vos SIM sont d�
 
 - Un accès physique au robot.
 - Sur un robot 4G, l'outil d'éjection des tiroirs SIM.
-- Un accès à la zone **Equipments** de la plateforme.
+- Un accès à la zone **Equipements** de la plateforme.
 - Le numéro de la carte remplacée, si la nouvelle doit reprendre ses tests.
 
 <Warning>
@@ -33,27 +33,27 @@ Une SIM insérée robot éteint est détectée au démarrage. Si vos SIM sont d�
     </Frame>
   </Step>
   <Step title="Retrouver le robot dans Agents">
-    Sous **Equipments**, ouvrez [**Agents**](/fr/equipment/agents) : c'est là que la plateforme liste vos robots. Ouvrez l'onglet **SIM**, puis retrouvez le robot par son hostname ou réduisez la liste avec les filtres **Status** et **Zone**.
+    Sous **Equipements**, ouvrez [**Agents**](/fr/equipment/agents) : c'est là que la plateforme liste vos robots. Ouvrez l'onglet **SIM**, puis retrouvez le robot par son hostname ou réduisez la liste avec les filtres **Statut** et **Zone**.
 
     <Frame caption="L'onglet SIM de la zone Agents">
       ![La zone Agents sur l'onglet SIM, avec les onglets Web, Smartphone, SIM et Passive, un champ de recherche, les filtres Status et Zone, et deux robots affichant statut, zone, type, slots et version](/images/hardware/swap-sim-01.webp)
     </Frame>
 
-    Ouvrez le robot, puis allez dans son onglet **Connected devices**.
+    Ouvrez le robot, puis allez dans son onglet **Devices connectés**.
   </Step>
   <Step title="Redémarrer le slot">
     Cette étape ne concerne qu'un robot resté allumé pendant le remplacement. Si vous l'avez éteint, il a détecté la nouvelle carte au démarrage : passez à l'étape suivante.
 
-    La ligne de votre slot affiche **No SIM inserted**, et c'est normal. La carte que vous avez retirée a disparu de la plateforme au moment où vous l'avez sortie, et la nouvelle ne remonte qu'au redémarrage du slot.
+    La ligne de votre slot affiche **Pas de SIM insérée**, et c'est normal. La carte que vous avez retirée a disparu de la plateforme au moment où vous l'avez sortie, et la nouvelle ne remonte qu'au redémarrage du slot.
 
-    Ouvrez le menu à trois points de cette ligne, puis cliquez sur **Reboot slot**. C'est la seule action qu'un slot vide propose.
+    Ouvrez le menu à trois points de cette ligne, puis cliquez sur **Redémarrer le slot**. C'est la seule action qu'un slot vide propose.
 
     <Frame caption="Le menu d'un slot vide, dans l'onglet Connected devices">
       ![La table Slots d'un robot cellulaire 4G, avec une SIM en service dans le slot 1 et trois slots affichant No SIM inserted, dont le slot 2 a son menu d'actions ouvert sur la seule entrée Reboot slot](/images/hardware/swap-sim-02.webp)
     </Frame>
   </Step>
   <Step title="Attendre que le slot détecte la carte">
-    Le slot détecte la carte et l'affiche en **Unnamed**, au statut **Configuration**. N'attendez pas qu'elle soit enregistrée sur le réseau pour lui attribuer son numéro : l'enregistrement demande parfois quelques minutes de plus.
+    Le slot détecte la carte et l'affiche en **Sans nom**, au statut **Configuration**. N'attendez pas qu'elle soit enregistrée sur le réseau pour lui attribuer son numéro : l'enregistrement demande parfois quelques minutes de plus.
 
     <Frame caption="Une carte en attente de configuration">
       ![La table Slots d'un robot cellulaire montrant deux SIM sans nom au statut Configuration et au réseau Searching, et un slot sans SIM](/images/hardware/swap-sim-03.webp)
@@ -70,7 +70,7 @@ Une SIM insérée robot éteint est détectée au démarrage. Si vos SIM sont d�
   </Step>
 </Steps>
 
-C'est ce clic qui décide de la suite. La fenêtre **Swap SIM values?** s'ouvre quand le numéro est déjà pris : poursuivez alors avec [reprendre le numéro de la carte remplacée](#reprendre-le-numéro-de-la-carte-remplacée). Sans cette fenêtre, allez à [mettre en service un numéro neuf](#mettre-en-service-un-numéro-neuf).
+C'est ce clic qui décide de la suite. La fenêtre **Échanger les valeurs de SIM ?** s'ouvre quand le numéro est déjà pris : poursuivez alors avec [reprendre le numéro de la carte remplacée](#reprendre-le-numéro-de-la-carte-remplacée). Sans cette fenêtre, allez à [mettre en service un numéro neuf](#mettre-en-service-un-numéro-neuf).
 
 ## Reprendre le numéro de la carte remplacée
 
@@ -78,23 +78,23 @@ C'est ce clic qui décide de la suite. La fenêtre **Swap SIM values?** s'ouvre 
   ![La fenêtre Swap SIM values, qui avertit qu'une autre SIM utilise déjà ce MSISDN et liste les informations qu'elle reprendrait : International MSISDN, Products, Phone prefix, et adresse et identifiants APN, avec les boutons Cancel et Swap values](/images/hardware/swap-sim-05.webp)
 </Frame>
 
-Cliquez sur **Swap values**. L'**International MSISDN**, les **Products**, le **Phone prefix** et l'APN passent sur la nouvelle carte, et les monitors qui tournaient sur l'ancienne reprennent sur la nouvelle. Il n'y a rien d'autre à configurer.
+Cliquez sur **Échanger les valeurs**. Le **MSISDN international**, les **Produits**, le **Préfixe téléphonique** et l'APN passent sur la nouvelle carte, et les monitors qui tournaient sur l'ancienne reprennent sur la nouvelle. Il n'y a rien d'autre à configurer.
 
-Cliquez sur **Cancel** pour laisser les deux SIM en l'état.
+Cliquez sur **Annuler** pour laisser les deux SIM en l'état.
 
 ## Mettre en service un numéro neuf
 
 Un numéro qui n'a jamais servi arrive sans aucun réglage. Deux choses lui manquent pour exécuter des tests : les produits autorisés à l'utiliser, et un point d'accès.
 
-Ouvrez l'onglet **General** de la SIM, puis sa section **Products**. Activez **This SIM can be used by all the products** pour que tous vos produits puissent s'en servir.
+Ouvrez l'onglet **General** de la SIM, puis sa section **Products**. Activez **Cette SIM peut être utilisée par tous les produits** pour que tous vos produits puissent s'en servir.
 
-Pour une liste restreinte, laissez l'interrupteur éteint et cliquez sur **Add product**. Cochez les produits voulus dans la fenêtre, puis cliquez sur **Add** : rien n'est enregistré tant que vous ne l'avez pas fait.
+Pour une liste restreinte, laissez l'interrupteur éteint et cliquez sur **Ajouter un produit**. Cochez les produits voulus dans la fenêtre, puis cliquez sur **Add** : rien n'est enregistré tant que vous ne l'avez pas fait.
 
 <Frame caption="Les produits autorisés à utiliser la SIM">
   ![La section Products d'une SIM, avec l'interrupteur This SIM can be used by all the products, une liste de produits vide, et un bouton Add product](/images/hardware/swap-sim-06.webp)
 </Frame>
 
-Revenez ensuite dans **Settings** et renseignez le **Default APN** : les tests data sortent par là. Cliquez sur **Save changes**.
+Revenez ensuite dans **Settings** et renseignez l'**APN par défaut** : les tests data sortent par là. Cliquez sur **Save changes**.
 
 <Frame caption="L'APN par défaut de la SIM">
   ![La section Default APN avec les champs APN name, APN login et APN password, et un bouton Save changes](/images/hardware/swap-sim-07.webp)

@@ -1,46 +1,46 @@
 ---
-title: "API Call dans un test web"
-sidebarTitle: "API Call"
+title: "Appel API dans un test web"
+sidebarTitle: "Appel API"
 description: Envoyer une requête HTTP au milieu d'un test web, et poser des conditions sur la réponse.
 ---
 
-Un test qui ne fait que piloter un navigateur ne voit pas ce qui se passe en dessous. Le step **API Call** envoie une requête HTTP depuis la même exécution : préparer une donnée avant que l'UI ne passe dessus, relire ce qu'un formulaire vient d'écrire, ou vérifier l'API dont dépend une page avant d'accuser la page. Il se place dans le scénario comme n'importe quel autre step, et tous ses champs acceptent les [variables](/fr/tests/variables).
+Un test qui ne fait que piloter un navigateur ne voit pas ce qui se passe en dessous. L'étape **Appel API** envoie une requête HTTP depuis la même exécution : préparer une donnée avant que l'UI ne passe dessus, relire ce qu'un formulaire vient d'écrire, ou vérifier l'API dont dépend une page avant d'accuser la page. Elle se place dans le scénario comme n'importe quelle autre étape, et tous ses champs acceptent les [variables](/fr/tests/variables).
 
-![L'éditeur de test avec un step API Call sélectionné : la ligne du step porte la méthode et l'URL, et le panneau de droite affiche les onglets General, Variables, Checks et Advanced settings avec l'emplacement de la réponse](/images/api-call-step.webp)
+![L'éditeur de test avec une étape Appel API sélectionnée : la ligne de l'étape porte la méthode et l'URL, et le panneau de droite affiche les onglets General, Variables, Checks et Advanced settings avec l'emplacement de la réponse](/images/api-call-step.webp)
 
 <Warning>
-Le step exige un robot à jour. Sur un robot plus ancien, il échoue. Vérifiez les versions de vos robots depuis la page [Agents](/fr/equipment/agents) et mettez-les à jour avant d'ajouter des steps API Call. Le step est disponible dans les tests **Web (New experience)**, les tests smartphone suivront.
+L'étape exige un robot à jour. Sur un robot plus ancien, elle échoue. Vérifiez les versions de vos robots depuis la page [Agents](/fr/equipment/agents) et mettez-les à jour avant d'ajouter des étapes Appel API. L'étape est disponible dans les tests **Web (Nouvelle expérience)**, les tests smartphone suivront.
 </Warning>
 
 ## Requête
 
-Ajoutez le step depuis **Add step...**, puis choisissez la méthode et saisissez l'URL directement sur la ligne du step.
+Ajoutez l'étape depuis **Ajouter une étape...**, puis choisissez la méthode et saisissez l'URL directement sur la ligne de l'étape.
 
 | Paramètre | Obligatoire | Description |
 | ----------- | ---------- | ------------- |
 | Method | Oui | `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, `HEAD` ou `OPTIONS`. |
-| URL | Oui | Le endpoint à appeler, par ex. `https://api.example.com/orders`. Accepte les variables : un token ou un ID issu d'un step précédent s'y insère directement. |
+| URL | Oui | Le endpoint à appeler, par ex. `https://api.example.com/orders`. Accepte les variables : un token ou un ID issu d'une étape précédente s'y insère directement. |
 | Query Parameters | Non | Des lignes clé / valeur, les deux acceptant des variables. Elles constituent la query string de l'URL : modifier l'un des deux côtés garde l'autre à jour. |
-| Headers | Non | Des lignes clé / valeur, les deux acceptant des variables. **Add header** ajoute une ligne. |
+| Headers | Non | Des lignes clé / valeur, les deux acceptant des variables. **Ajouter un header** ajoute une ligne. |
 | Body | Non | Disponible sur `POST`, `PUT`, `PATCH` et `DELETE`. Choisissez **JSON**, **XML**, **HTML** ou **Text** pour la coloration syntaxique ; le corps est envoyé tel que vous l'avez saisi. |
 
 Passer à une méthode qui ne porte pas de corps vide le corps au lieu de l'envoyer : un `GET` avec un payload est refusé par le client HTTP.
 
 ## Réglages
 
-**API Call Settings**, dans le panneau du step :
+**Paramètres de l'appel API**, dans le panneau de l'étape :
 
-- **Override DNS** : résoudre le host via vos propres serveurs DNS. Ajoutez-en autant que nécessaire (`8.8.8.8` et compagnie), et chaque entrée accepte les variables, donc un résolveur par environnement peut venir d'une [variable configurée](/fr/tests/configurations).
-- **Accept insecure certificates** : continuer malgré un certificat auto-signé ou expiré. Même option et même libellé que dans les steps navigateur.
-- **Preserve cookies** : conserver les cookies de l'exécution pour cette requête.
-- **Redirection** : **Automatically follow redirects**, activé ou non.
+- **Surcharger le DNS** : résoudre le host via vos propres serveurs DNS. Ajoutez-en autant que nécessaire (`8.8.8.8` et compagnie), et chaque entrée accepte les variables, donc un résolveur par environnement peut venir d'une [variable configurée](/fr/tests/configurations).
+- **Accepter les certificats non sécurisés** : continuer malgré un certificat auto-signé ou expiré. Même option et même libellé que dans les étapes navigateur.
+- **Conserver les cookies** : conserver les cookies de l'exécution pour cette requête.
+- **Redirection** : **Suivre automatiquement les redirections**, activé ou non.
 
 ## Poser des conditions sur la réponse
 
-L'onglet **Checks** du step sépare les conditions en deux :
+L'onglet **Vérifications** de l'étape sépare les conditions en deux :
 
-- **Success conditions**, qui se lisent "Passes if" : le step passe quand elles sont toutes remplies.
-- **Warnings**, qui se lisent "Warns if" : le step passe quand même, mais l'exécution est signalée en warning.
+- **Conditions de succès**, qui se lisent "Réussit si" : l'étape passe quand elles sont toutes remplies.
+- **Avertissements**, qui se lisent "Avertit si" : l'étape passe quand même, mais l'exécution est signalée en warning.
 
 Une condition se déplace d'un groupe à l'autre : transformer un warning en échec franc tient en un clic.
 
@@ -48,36 +48,36 @@ Ce sur quoi vous pouvez porter une condition :
 
 | Champ | Usage typique |
 |-------|---------------|
-| Status code | `is exactly 201` |
-| Status text | `is exactly Created` |
-| Response header | Nommez le header, puis testez sa valeur |
-| Response body | Le corps brut, ou un chemin **JSON path** / **XML path** comme `data.id` |
-| Response time | La requête entière sous un seuil |
-| DNS lookup time, TCP/TLS connection time, Time to first byte, Content transfer time | Identifier quelle phase est lente, pas seulement qu'elle l'est |
+| Code de statut | `is exactly 201` |
+| Texte de statut | `is exactly Created` |
+| En-tête de réponse | Nommez le header, puis testez sa valeur |
+| Corps de réponse | Le corps brut, ou un **Chemin JSON** / **Chemin XML** comme `data.id` |
+| Temps de réponse | La requête entière sous un seuil |
+| Temps de résolution DNS, Temps de connexion TCP/TLS, Temps jusqu'au premier octet, Temps de transfert | Identifier quelle phase est lente, pas seulement qu'elle l'est |
 
 Les opérateurs dépendent du champ :
 
-- **Texte** (status text, la valeur d'un header, le corps) : **is exactly**, **contains**, **starts with**, **ends with**.
-- **Le corps** ajoute **matches JSON**, **matches regex**, **is valid JSON** et **is valid XML**.
-- **Un header** ajoute **is present** et **is not present**, pour tester la présence du header plutôt que sa valeur.
-- **Les nombres** (status code et tous les temps) se comparent avec `=`, `<`, `≤`, `>` et `≥`. Les durées sont accompagnées d'un sélecteur ms, secondes ou minutes.
+- **Texte** (texte de statut, la valeur d'un header, le corps) : **est exactement**, **contient**, **commence par**, **finit par**.
+- **Le corps** ajoute **correspond au JSON**, **correspond à la regex**, **est un JSON valide** et **est un XML valide**.
+- **Un header** ajoute **est présent** et **est absent**, pour tester la présence du header plutôt que sa valeur.
+- **Les nombres** (code de statut et tous les temps) se comparent avec `=`, `<`, `≤`, `>` et `≥`. Les durées sont accompagnées d'un sélecteur ms, secondes ou minutes.
 
-Dans le groupe Warnings, une condition se lit comme le déclencheur et non comme l'attendu : « Warns if > 10s » est la même condition qu'une condition de succès écrite `≤ 10s`.
+Dans le groupe Avertissements, une condition se lit comme le déclencheur et non comme l'attendu : « Avertit si > 10s » est la même condition qu'une condition de succès écrite `≤ 10s`.
 
 <Tip>
-Exécutez le test une fois avant d'écrire vos conditions. **Pick a field...** liste alors les attributs de la dernière réponse, et **Open in full view** ouvre une liste avec recherche où vous pouvez cocher plusieurs attributs et les ajouter tous en une fois.
+Exécutez le test une fois avant d'écrire vos conditions. **Choisir un champ…** liste alors les attributs de la dernière réponse, et **Ouvrir en grand** ouvre une liste avec recherche où vous pouvez cocher plusieurs attributs et les ajouter tous en une fois.
 </Tip>
 
 ## Voir ce qui est revenu
 
-Dans le builder, le panneau du step conserve un bloc **Response** rempli avec les données de la dernière exécution réussie, en trois onglets : **Body** (Pretty ou Raw, avec Copy), **Headers** avec leur nombre, et **Performance**.
+Dans le builder, le panneau de l'étape conserve un bloc **Réponse** rempli avec les données de la dernière exécution réussie, en trois onglets : **Corps** (Pretty ou Raw, avec Copier), **En-têtes** avec leur nombre, et **Performance**.
 
-Dans les résultats d'exécution, un step API Call s'ouvre sur quatre onglets :
+Dans les résultats d'exécution, une étape Appel API s'ouvre sur quatre onglets :
 
-- **Response** : le corps, les headers et le détail des temps, DNS Lookup, TCP Connection, Request Sent, Content Generation et Content Transfer.
-- **Request** : ce qui a réellement été envoyé, headers compris.
-- **Settings** : override DNS, certificats, cookies et redirections tels qu'ils ont tourné.
-- **Variables** : les variables utilisées par ce step.
+- **Réponse** : le corps, les headers et le détail des temps, Résolution DNS, Connexion TCP, Envoi de la requête, Génération du contenu et Transfert du contenu.
+- **Requête** : ce qui a réellement été envoyé, headers compris.
+- **Réglages** : surcharge du DNS, certificats, cookies et redirections tels qu'ils ont tourné.
+- **Variables** : les variables utilisées par cette étape.
 
 ## Et ensuite ?
 
@@ -92,14 +92,14 @@ Dans les résultats d'exécution, un step API Call s'ouvre sur quatre onglets :
     Alimenter une requête en tokens, IDs et données générées
 
 </Card>
-  <Card title="Extract value" icon="arrow-right-from-bracket" href="/fr/tests/actions/web/extractvalue">
+  <Card title="Extraire une valeur" icon="arrow-right-from-bracket" href="/fr/tests/actions/web/extractvalue">
 
     Lire une valeur dans la page plutôt que dans une API
 
 </Card>
   <Card title="Actions web" icon="list" href="/fr/tests/actions/web/overview">
 
-    Tous les steps disponibles dans un test web
+    Toutes les étapes disponibles dans un test web
 
 </Card>
 </Columns>

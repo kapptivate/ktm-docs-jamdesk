@@ -4,27 +4,27 @@ sidebarTitle: Accéder à l'URL
 description: Chargez une URL dans l'onglet courant, avec des vérifications optionnelles sur la page chargée.
 ---
 
-Chargez une page par son URL : allez directement sur une page précise en cours de scénario, ou ouvrez un lien extrait d'un e-mail. Chaque test web commence aussi par un step verrouillé "Navigate to starting page" : c'est ce même step, pointé sur l'URL de départ du test.
+Chargez une page par son URL : allez directement sur une page précise en cours de scénario, ou ouvrez un lien extrait d'un e-mail. Chaque test web commence aussi par une étape verrouillée "Accéder à la page de départ" : c'est cette même étape, pointée sur l'URL de départ du test.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | URL | Oui | L'adresse à charger, par exemple `https://www.example.com`. Supporte les [variables](/fr/tests/variables), vous pouvez donc naviguer vers un lien extrait. |
-| Vérifications | Non | Vérifications du step évaluées après le chargement de la page : URL, temps de chargement et durée du step. Chaque vérification peut faire échouer le step ou seulement émettre un avertissement. |
+| Vérifications | Non | Vérifications de l'étape évaluées après le chargement de la page : URL, temps de chargement et durée de l'étape. Chaque vérification peut faire échouer l'étape ou seulement émettre un avertissement. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Temps de chargement** : mesuré pour le chargement de la page et comparé à vos vérifications.
-- **Résultats des vérifications** : chaque vérification configurée indique ses valeurs attendues et réelles. Une vérification en `error` qui échoue fait échouer le step ; une vérification en `warning` qui échoue le marque comme avertissement.
+- **Résultats des vérifications** : chaque vérification configurée indique ses valeurs attendues et réelles. Une vérification en `error` qui échoue fait échouer l'étape ; une vérification en `warning` qui échoue la marque comme avertissement.
 - **Statut** : succès, avertissement ou échec.
 - **Capture d'écran** : prise une fois la page chargée.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Récupérer un lien e-mail" icon="link" href="/fr/tests/actions/web/getemaillink">
+  <Card title="Lien par email" icon="link" href="/fr/tests/actions/web/getemaillink">
 
     Extrayez le lien vers lequel naviguer depuis un e-mail
 

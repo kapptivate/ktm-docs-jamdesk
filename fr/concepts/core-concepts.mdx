@@ -50,17 +50,17 @@ L'accès est géré par espace produit. Les [rôles](/fr/administration/roles) a
 
 Un **Test** est une séquence automatisée réutilisable qui valide une fonctionnalité ou un parcours spécifique. Vous le définissez une fois, puis vous l'exécutez autant de fois que nécessaire.
 
-Un test est organisé en **step groups**, et chaque step group contient des **steps** :
+Un test est organisé en **groupes d'étapes**, et chaque groupe d'étapes contient des **étapes** :
 
-- Un **step group** est une unité fonctionnelle : *Se connecter*, *Acheter un article*, *Effectuer une recherche*. Il regroupe tout ce qui est nécessaire pour accomplir une action de niveau supérieur.
-- Un **step** est une action unitaire au sein d'un groupe : click sur un élément, saisie de texte, navigation, attente ou vérification d'état.
+- Un **groupe d'étapes** est une unité fonctionnelle : *Se connecter*, *Acheter un article*, *Effectuer une recherche*. Il regroupe tout ce qui est nécessaire pour accomplir une action de niveau supérieur.
+- Une **étape** est une action unitaire au sein d'un groupe : clic sur un élément, saisie de texte, navigation, attente ou vérification d'état.
 
-Cette structure à deux niveaux rend les tests lisibles : vous voyez le parcours d'un coup d'oeil grâce aux step groups, puis vous explorez un groupe pour voir les steps individuels. Chaque test démarre à partir d'un point d'entrée (une URL vers laquelle naviguer ou une application à lancer) avant d'exécuter ses step groups.
+Cette structure à deux niveaux rend les tests lisibles : vous voyez le parcours d'un coup d'oeil grâce aux groupes d'étapes, puis vous explorez un groupe pour voir les étapes individuelles. Chaque test démarre à partir d'un point d'entrée (une URL vers laquelle naviguer ou une application à lancer) avant d'exécuter ses groupes d'étapes.
 
 Un test utilise également :
 
 - **Variables** : des paramètres d'entrée qui permettent d'exécuter le même test avec des données différentes.
-- **Checks** : des instructions de validation qui vérifient la réponse de l'application (contenu de la page, temps de chargement, etc.).
+- **Vérifications** : des instructions de validation qui vérifient la réponse de l'application (contenu de la page, temps de chargement, etc.).
 
 Les tests peuvent référencer des [composants reusable](/fr/tests/reusable-components) (d'autres tests utilisés comme briques de base) pour réduire la duplication. Une fois qu'un test est écrit et approuvé, il peut être lancé à la demande, selon un calendrier ou dans le cadre du CI/CD.
 
@@ -68,7 +68,7 @@ Les tests peuvent référencer des [composants reusable](/fr/tests/reusable-comp
 
 Une **Exécution** correspond à un lancement unique d'un ou plusieurs tests sur des appareils spécifiques.
 
-Lorsque vous mettez un test en file d'attente, la plateforme crée une exécution. Cette exécution produit des résultats détaillés : captures d'écran, logs de steps, temps de réponse et statut final. Les exécutions ont des statuts tels que success, failed, warning, ongoing, canceled ou timed out.
+Lorsque vous mettez un test en file d'attente, la plateforme crée une exécution. Cette exécution produit des résultats détaillés : captures d'écran, logs des étapes, temps de réponse et statut final. Les exécutions ont des statuts tels que success, failed, warning, ongoing, canceled ou timed out.
 
 Vous pouvez lancer un test plusieurs fois et obtenir plusieurs exécutions. Chaque exécution est indépendante et conserve ses résultats indéfiniment, ce qui vous permet de revenir analyser des échecs des semaines plus tard.
 
@@ -86,16 +86,16 @@ Une **Métrique** est une mesure capturée lors de l'exécution d'un test ou d'u
 
 Certaines métriques sont intégrées, par exemple le temps d'ouverture de session USSD ou le temps de chargement d'une application mobile. Vous pouvez également définir des [métriques personnalisées](/fr/tests/actions/shared/createmetric) pour tout ce que vous souhaitez mesurer.
 
-Chaque step produit une durée, et chaque step group aussi. Les données de temps sont donc disponibles à chaque niveau d'un test sans configuration supplémentaire.
+Chaque étape produit une durée, et chaque groupe d'étapes aussi. Les données de temps sont donc disponibles à chaque niveau d'un test sans configuration supplémentaire.
 
 ## Canal
 
-Un **Canal** est une grande catégorie d'endpoints que vous testez : Web, Smartphone ou Cellulaire. Chaque canal possède ses propres types d'appareils et agents. En complément, les **APIs** peuvent également être testées via des steps API dans les tests de n'importe quel canal.
+Un **Canal** est une grande catégorie d'endpoints que vous testez : Web, Smartphone ou Cellulaire. Chaque canal possède ses propres types d'appareils et agents. En complément, les **APIs** peuvent également être testées via des étapes API dans les tests de n'importe quel canal.
 
 - **Web** : testez les navigateurs desktop et mobile.
 - **Smartphone** : testez les applications natives iOS et Android.
 - **Cellulaire** : testez les flux SMS, USSD ou dépendants du réseau cellulaire.
-- **API** : testez les endpoints HTTP avec des steps API dans un test Web ou Smartphone.
+- **API** : testez les endpoints HTTP avec des étapes API dans un test Web ou Smartphone.
 
 Un test simple s'exécute sur un seul canal, éventuellement combiné avec l'API (par exemple Web seul, Web + API, Smartphone + API ou USSD (SIM) + API). Pour les parcours plus complexes, l'orchestration avancée permet à un seul test de couvrir plusieurs appareils : commencer un scénario sur le Web et le terminer sur un Smartphone, par exemple.
 

@@ -1,10 +1,10 @@
 ---
-title: "Get email code dans un test smartphone"
+title: "Code par email dans un test smartphone"
 sidebarTitle: "Code par email"
 description: Testez un parcours de vérification par email sur un device de bout en bout : récupérez le code reçu par email et réutilisez-le dans l'application.
 ---
 
-Le step surveille une boîte de test, attend l'arrivée de l'email et demande à l'IA d'y trouver le code. Il stocke le code dans une variable, prêt à être saisi dans le champ de confirmation de l'application avec un step [Fill input](/fr/tests/actions/smartphone/input).
+L'étape surveille une boîte de test, attend l'arrivée de l'email et demande à l'IA d'y trouver le code. Elle stocke le code dans une variable, prêt à être saisi dans le champ de confirmation de l'application avec une étape [Remplir le champ](/fr/tests/actions/smartphone/input).
 
 ## Paramètres
 
@@ -12,11 +12,11 @@ Le step surveille une boîte de test, attend l'arrivée de l'email et demande à
 | ----------- | -------- | ------------- |
 | Email de réception du code | Oui | L'adresse de la boîte de test qui doit recevoir l'email contenant le code. |
 | Variable | Oui | Nom de la variable qui reçoit le code. Par défaut : `MailCode`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun code n'est trouvé. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si aucun code n'est trouvé. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Variable** : le code extrait est stocké dans la variable, prêt à être saisi dans un champ de confirmation par un step Fill input ultérieur.
+- **Variable** : le code extrait est stocké dans la variable, prêt à être saisi dans un champ de confirmation par une étape Remplir le champ ultérieure.
 - **Timing** : début, fin et durée (en secondes). La durée inclut l'attente de réception de l'email.
 - **Statut** : échec si aucun email n'arrive ou si l'IA ne trouve pas de code dedans.
 - **Utilisation de l'IA** : le coût IA de l'extraction est ajouté à l'exécution.
@@ -26,12 +26,12 @@ Consultez [Email et SMS dans les tests](/fr/tests/email-sms) pour comprendre le 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Fill input" icon="keyboard" href="/fr/tests/actions/smartphone/input">
+  <Card title="Remplir le champ" icon="keyboard" href="/fr/tests/actions/smartphone/input">
 
     Saisir le code extrait dans le champ de confirmation
 
 </Card>
-  <Card title="Get email link" icon="link" href="/fr/tests/actions/smartphone/getemaillink">
+  <Card title="Lien par email" icon="link" href="/fr/tests/actions/smartphone/getemaillink">
 
     Extraire un lien de confirmation au lieu d'un code
 

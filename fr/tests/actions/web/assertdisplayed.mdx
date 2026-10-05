@@ -1,11 +1,11 @@
 ---
-title: "Assert displayed dans un test web"
-sidebarTitle: "Assert displayed"
-description: Step obsolète qui vérifie qu'un élément est visible. Utilisez Vérifier un élément à la place.
+title: "Vérifier la présence d'un élément dans un test web"
+sidebarTitle: "Vérifier la présence d'un élément"
+description: Étape obsolète qui vérifie qu'un élément est visible. Utilisez Vérifier l'élément à la place.
 ---
 
 <Danger>
-  **Obsolète.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Vérifier un élément](/fr/tests/actions/web/verifyelement) avec l'état **displayed**.
+  **Obsolète.** Cette étape n'apparaît plus dans la palette d'étapes. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Vérifier l'élément](/fr/tests/actions/web/verifyelement) avec l'état **affiché**.
 </Danger>
 
 Vérifiez qu'un élément est visible sur la page, en échouant s'il n'apparaît pas dans le délai imparti.
@@ -14,24 +14,24 @@ Vérifiez qu'un élément est visible sur la page, en échouant s'il n'apparaît
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément qui doit être visible. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément qui doit être visible. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
 | Délai d'attente | Non | Durée d'attente avant l'échec. Par défaut : `30s`. |
-| Utilisation IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step. En cas d'échec, la durée reflète le délai d'attente complet.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape. En cas d'échec, la durée reflète le délai d'attente complet.
 - **Statut** : succès si l'élément est devenu visible dans le délai imparti, échec dans le cas contraire.
 - **Capture d'écran** : prise pour l'état vérifié.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
-    Le step actuel pour les vérifications d'éléments
+    L'étape actuelle pour les vérifications d'éléments
 
 </Card>
   <Card title="Vérifier avec l'IA" icon="sparkles" href="/fr/tests/actions/web/aivisualassert">

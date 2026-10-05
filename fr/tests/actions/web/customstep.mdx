@@ -1,18 +1,18 @@
 ---
 title: "Exécuter son propre JavaScript dans un test web"
 sidebarTitle: "Script"
-description: "Exécutez votre propre JavaScript dans un test web quand aucun step intégré ne convient : un flux non couvert, un calcul, une métrique envoyée vers Analytics."
+description: "Exécutez votre propre JavaScript dans un test web quand aucune étape intégrée ne convient : un flux non couvert, un calcul, une métrique envoyée vers Analytics."
 ---
 
-Écrivez quelques lignes de code quand les steps intégrés ne savent pas faire ce dont vous avez besoin. Vous éditez le script dans une modale dédiée, et il s'exécute dans la session navigateur du test, sur la page où les steps précédents se sont arrêtés.
+Écrivez quelques lignes de code quand les étapes intégrées ne savent pas faire ce dont vous avez besoin. Vous éditez le script dans une modale dédiée, et il s'exécute dans la session navigateur du test, sur la page où les étapes précédentes se sont arrêtées.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Titre du step | Non | Le nom affiché pour ce step dans le builder et dans les résultats. |
+| Nom de l'étape | Non | Le nom affiché pour cette étape dans le builder et dans les résultats. |
 | Script | Oui | Code JavaScript, édité dans une modale dédiée. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si le script lève une erreur. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si le script lève une erreur. Par défaut : désactivé. |
 
 Dans le script, pilotez le navigateur avec l'objet `browser`. Le script dispose de l'API WebdriverIO complète (la librairie d'automatisation du navigateur sur laquelle il s'appuie) : cherchez la syntaxe dans la documentation de WebdriverIO. Les helpers `test` couvrent le reste, par exemple l'envoi d'une métrique vers Analytics :
 
@@ -23,15 +23,15 @@ test.metrics.create("checkout", { basket_total: 39.98 }, { currency: "EUR" });
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : échec si le script lève une erreur, succès dans le cas contraire.
-- **Sortie** : tout ce que le script journalise est disponible dans la sortie du step pour le débogage.
+- **Sortie** : tout ce que le script journalise est disponible dans la sortie de l'étape pour le débogage.
 - **Métriques personnalisées** : les métriques créées avec `test.metrics.create(measurement, fields, tags)` remontent vers Analytics comme n'importe quelle métrique intégrée.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Définir une variable" icon="brackets-curly" href="/fr/tests/actions/web/setvariable">
+  <Card title="Définir une variable locale" icon="brackets-curly" href="/fr/tests/actions/web/setvariable">
 
     Stockez une valeur sans écrire de code
 

@@ -39,7 +39,7 @@ variable_group_id;363
     Accédez au produit auquel vos tests appartiennent.
   </Step>
   <Step title="Ouvrez le groupe de variables">
-    Allez dans **Configurations -> Variables groups** et sélectionnez le groupe que le batch doit utiliser.
+    Allez dans **Configurations -> Groupes de variables** et sélectionnez le groupe que le batch doit utiliser.
   </Step>
   <Step title="Lisez l'ID dans l'URL">
     Le nombre à la fin de l'URL est votre `variable_group_id` :
@@ -58,7 +58,7 @@ La section `__OPTIONS__` contrôle comment kapptivate exécute le batch. Chaque 
 
 | Option | Exemple de valeur | Ce qu'elle fait |
 | --- | --- | --- |
-| `ignore_errors` | `True` | Continuer le batch quand un step échoue. |
+| `ignore_errors` | `True` | Continuer le batch quand une étape échoue. |
 | `send_result_by_mail` | `True` | Envoyer les résultats par email à la fin du batch. |
 | `send_result_by_sms` | `False` | Envoyer les résultats par SMS. |
 | `send_result_by_call` | `False` | Envoyer les résultats par appel. |
@@ -130,18 +130,18 @@ L'import CSV se trouve dans la **file d'attente**, à côté des exécutions man
     Depuis la page **Tests** ou **Executions**, ouvrez la file d'attente via le bouton d'action en bas à droite.
   </Step>
   <Step title="Lancez un import CSV">
-    Dans l'en-tête de la file d'attente, cliquez sur **Upload a CSV file to run batch tests**. La boîte de dialogue **Upload CSV to run a tests suite** s'ouvre.
+    Dans l'en-tête de la file d'attente, cliquez sur **Importer un fichier .CSV pour exécuter une campagne de tests**. La boîte de dialogue **Importer un fichier .CSV** s'ouvre.
   </Step>
   <Step title="Sélectionnez votre fichier">
     Cliquez ou glissez votre fichier dans la zone d'import. Seuls les fichiers `.CSV` sont acceptés.
   </Step>
   <Step title="Lancez les tests">
-    Cliquez sur **Run tests**. kapptivate vous redirige vers l'exécution du batch, où vous la suivez comme une [exécution multi-test](/fr/executions/results#exécutions-multi-test).
+    Cliquez sur **Exécuter les tests**. kapptivate vous redirige vers l'exécution du batch, où vous la suivez comme une [exécution multi-test](/fr/executions/results#exécutions-multi-test).
   </Step>
 </Steps>
 
 <Tip>
-La boîte de dialogue d'import contient un lien **How to create a valid CSV test file**, qui pointe vers cette page. Conservez les en-têtes de section et le séparateur point-virgule exactement comme indiqué ci-dessus, sinon le fichier est rejeté.
+La boîte de dialogue d'import contient un lien **Comment créer un fichier .CSV valide**, qui pointe vers cette page. Conservez les en-têtes de section et le séparateur point-virgule exactement comme indiqué ci-dessus, sinon le fichier est rejeté.
 </Tip>
 
 ## Générer le fichier avec un agent IA

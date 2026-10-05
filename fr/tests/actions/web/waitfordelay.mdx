@@ -4,10 +4,10 @@ sidebarTitle: "Attendre un délai"
 description: Mettez un test web en pause pendant une durée fixe, de quelques millisecondes à plusieurs minutes.
 ---
 
-Utilisez-le quand rien sur la page n'indique que le système est prêt : un traitement backend encore en cours, une limite de débit à respecter, une animation que vous ne pouvez pas intercepter.
+Utilisez-la quand rien sur la page n'indique que le système est prêt : un traitement backend encore en cours, une limite de débit à respecter, une animation que vous ne pouvez pas intercepter.
 
 <Tip>
-  Si vous attendez qu'un élément apparaisse sur la page, utilisez plutôt [Vérifier un élément](/fr/tests/actions/web/verifyelement). Il continue dès que la condition est remplie au lieu de consommer systématiquement tout le délai.
+  Si vous attendez qu'un élément apparaisse sur la page, utilisez plutôt [Vérifier l'élément](/fr/tests/actions/web/verifyelement). Il continue dès que la condition est remplie au lieu de consommer systématiquement tout le délai.
 </Tip>
 
 ## Paramètres
@@ -18,20 +18,20 @@ Utilisez-le quand rien sur la page n'indique que le système est prêt : un trai
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step. La durée correspond à la pause configurée.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape. La durée correspond à la pause configurée.
 - **Statut** : succès, sauf si l'exécution est interrompue pendant la pause.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
     Attendez une condition réelle plutôt qu'un temps fixe
 
 </Card>
   <Card title="Builder de test" icon="hammer" href="/fr/tests/builder">
 
-    L'endroit où les steps sont ajoutés et configurés
+    L'endroit où les étapes sont ajoutées et configurées
 
 </Card>
 </Columns>

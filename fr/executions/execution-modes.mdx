@@ -10,20 +10,20 @@ Chaque exécution capture des preuves : captures d'écran, vidéo, logs et méta
 
 ## Les trois modes
 
-- **Fast** : collecte minimale, ni capture d'écran ni vidéo et des logs réduits. L'exécution se termine le plus vite possible. Idéal pour le monitoring en production, où vous vérifiez souvent un parcours et voulez seulement savoir s'il passe.
+- **Rapide** : collecte minimale, ni capture d'écran ni vidéo et des logs réduits. L'exécution se termine le plus vite possible. Idéal pour le monitoring en production, où vous vérifiez souvent un parcours et voulez seulement savoir s'il passe.
 - **Standard** (par défaut) : collecte équilibrée. Capture les médias nécessaires pour comprendre un échec sans beaucoup ralentir l'exécution. Le bon choix dans la plupart des cas.
-- **Detailed** : une capture d'écran avant et après chaque step, avec des logs détaillés et toutes les métadonnées. Idéal pour déboguer un test instable ou en échec, puisque vous voyez exactement à quoi ressemblait l'écran à chaque step. Ce mode ralentit nettement l'exécution : réservez-le à l'investigation, pas aux exécutions de routine.
+- **Détaillé** : une capture d'écran avant et après chaque étape, avec des logs détaillés et toutes les métadonnées. Idéal pour déboguer un test instable ou en échec, puisque vous voyez exactement à quoi ressemblait l'écran à chaque étape. Ce mode ralentit nettement l'exécution : réservez-le à l'investigation, pas aux exécutions de routine.
 
 ## Où le régler
 
-**Pour une exécution ponctuelle**, choisissez le mode dans le panneau **Run queue**, sous **Advanced options**, avant de lancer. Il s'applique à tous les tests du batch. Voir [Exécuter un test](/fr/executions/run).
+**Pour une exécution ponctuelle**, choisissez le mode dans le panneau **File d'exécution**, sous **Options avancées**, avant de lancer. Il s'applique à tous les tests du batch. Voir [Exécuter un test](/fr/executions/run).
 
-**Comme valeur par défaut d'un test**, réglez-le dans le builder sous **Test settings > Advanced > Execution mode**. Le test s'exécute alors dans ce mode partout où il est lancé, sauf si une exécution le surcharge.
+**Comme valeur par défaut d'un test**, réglez-le dans le builder sous **Paramètres du test > Avancé > Mode d'exécution**. Le test s'exécute alors dans ce mode partout où il est lancé, sauf si une exécution le surcharge.
 
 ![The test builder Test settings tab with the Advanced section expanded on the Execution mode dropdown](/images/execution-mode-test-settings.webp)
 
 <Tip>
-Les monitors s'exécutent selon une planification, souvent plusieurs fois par jour. Gardez les tests monitorés en **Fast** ou **Standard** pour que ces exécutions fréquentes restent économiques, et passez en **Detailed** seulement le temps d'investiguer un échec.
+Les monitors s'exécutent selon une planification, souvent plusieurs fois par jour. Gardez les tests monitorés en **Rapide** ou **Standard** pour que ces exécutions fréquentes restent économiques, et passez en **Détaillé** seulement le temps d'investiguer un échec.
 </Tip>
 
 ## Et ensuite ?

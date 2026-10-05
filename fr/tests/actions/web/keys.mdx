@@ -4,32 +4,32 @@ sidebarTitle: Saisie clavier
 description: "Envoyez des touches et des raccourcis à la page : Entrée pour soumettre, Échap pour fermer une modale, Tab pour le focus, ou Ctrl+A."
 ---
 
-Le step appuie sur les touches comme un utilisateur devant son clavier. Dans le builder, vous les enregistrez dans une petite modale clavier : appuyez sur les touches à envoyer, et elles sont stockées dans l'ordre.
+L'étape appuie sur les touches comme un utilisateur devant son clavier. Dans le builder, vous les enregistrez dans une petite modale clavier : appuyez sur les touches à envoyer, et elles sont stockées dans l'ordre.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Touches | Oui | Les touches à envoyer, enregistrées dans la modale clavier et envoyées dans l'ordre. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
-Ce step ne cible pas d'élément : les touches vont à l'élément actif de la page (celui qui a le focus). Utilisez d'abord [Click](/fr/tests/actions/web/click) ou [Fill input](/fr/tests/actions/web/input) pour rendre le bon élément actif.
+Cette étape ne cible pas d'élément : les touches vont à l'élément actif de la page (celui qui a le focus). Utilisez d'abord [Clic](/fr/tests/actions/web/click) ou [Saisie de texte](/fr/tests/actions/web/input) pour rendre le bon élément actif.
 
 ## Résultats et métriques
 
-- **Temps d'exécution** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps d'exécution** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
 - **Capture d'écran** : prise après l'envoi des touches.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Fill input" icon="keyboard" href="/fr/tests/actions/web/input">
+  <Card title="Saisie de texte" icon="keyboard" href="/fr/tests/actions/web/input">
 
     Saisir du texte dans un champ avant d'appuyer sur Entrée
 
 </Card>
-  <Card title="Verify element" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
     Vérifier ce que l'appui sur la touche a changé sur la page
 

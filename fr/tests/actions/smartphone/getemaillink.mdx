@@ -1,10 +1,10 @@
 ---
-title: "Get email link dans un test smartphone"
+title: "Lien par email dans un test smartphone"
 sidebarTitle: "Lien par email"
 description: "Attendez un email pendant un test smartphone et stockez dans une variable le lien que vous décrivez. L'IA choisit le bon lien."
 ---
 
-Utilisez-le quand le parcours passe par un email : confirmation de compte, réinitialisation de mot de passe, connexion par lien magique. Le step attend l'email, demande à l'IA le lien qui correspond à votre intention, et le stocke dans une variable pour les steps suivants.
+Utilisez-la quand le parcours passe par un email : confirmation de compte, réinitialisation de mot de passe, connexion par lien magique. L'étape attend l'email, demande à l'IA le lien qui correspond à votre intention, et le stocke dans une variable pour les étapes suivantes.
 
 ## Paramètres
 
@@ -13,13 +13,13 @@ Utilisez-le quand le parcours passe par un email : confirmation de compte, réin
 | Email de réception du lien | Oui | L'adresse de la boîte de test qui doit recevoir l'email contenant le lien. |
 | Variable | Oui | Nom de la variable qui reçoit le lien. Par défaut : `MailLink`. |
 | Intention | Non | Quel lien l'IA doit extraire. Par défaut : `The first link in the text`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun lien n'est trouvé. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si aucun lien n'est trouvé. Par défaut : désactivé. |
 
 Utilisez l'intention pour désambiguïser les emails contenant plusieurs liens : "The password reset link", "The link in the Confirm my account button".
 
 ## Résultats et métriques
 
-- **Variable** : le lien extrait est stocké dans la variable. Ouvrez-le avec un step de navigation pour continuer le flux.
+- **Variable** : le lien extrait est stocké dans la variable. Ouvrez-le avec une étape de navigation pour continuer le flux.
 - **Timing** : début, fin et durée (en secondes). La durée inclut l'attente de réception de l'email.
 - **Statut** : échec si aucun email n'arrive ou si l'IA ne trouve pas de lien correspondant à l'intention.
 - **Utilisation de l'IA** : le coût IA de l'extraction est ajouté à l'exécution.
@@ -29,9 +29,9 @@ Consultez [Email et SMS dans les tests](/fr/tests/email-sms) pour comprendre le 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Fill input" icon="keyboard" href="/fr/tests/actions/smartphone/input">
+  <Card title="Remplir le champ" icon="keyboard" href="/fr/tests/actions/smartphone/input">
 
-    Utiliser le lien extrait dans un step ultérieur
+    Utiliser le lien extrait dans une étape ultérieure
 
 </Card>
   <Card title="Email et SMS dans les tests" icon="envelope" href="/fr/tests/email-sms">
