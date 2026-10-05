@@ -111,7 +111,14 @@
     "metatags": {
       "robots": "index, follow",
       "googlebot": "index, follow",
-      "google-site-verification": "gToWXGlQh13lTgwYdJnZyf0z3XLRlEe4l-zcptxo2kw"
+      "google-site-verification": "gToWXGlQh13lTgwYdJnZyf0z3XLRlEe4l-zcptxo2kw",
+      "og:image": "/images/og-background.png"
+    },
+    "socialCard": {
+      "theme": "dark",
+      "brandColor": true,
+      "accentBar": false,
+      "siteName": false
     }
   },
   "metadata": {
