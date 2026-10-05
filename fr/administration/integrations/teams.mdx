@@ -6,7 +6,7 @@ description: Connectez Microsoft Teams à Kapptivate pour recevoir les alertes d
 
 ![Microsoft Teams](/images/logo-teams.webp)
 
-Connecter Microsoft Teams permet à Kapptivate de publier les alertes d'incident et les digests de monitoring directement dans un canal Teams, plutôt que dans une boîte mail que personne n'ouvre. La connexion se fait une seule fois, depuis **Administration → Integrations**, et elle s'appuie sur une application que vous déclarez dans Microsoft Entra ID (anciennement Azure Active Directory).
+Connecter Microsoft Teams permet à Kapptivate de publier les alertes d'incident et les digests de monitoring directement dans un canal Teams, plutôt que dans une boîte mail que personne n'ouvre. La connexion se fait une seule fois, depuis **Administration → Intégrations**, et elle s'appuie sur une application que vous déclarez dans Microsoft Entra ID (anciennement Azure Active Directory).
 
 Il vous faut deux choses : le droit de déclarer une application dans votre tenant Microsoft, et un accès administrateur à votre workspace Kapptivate.
 
@@ -51,7 +51,7 @@ Deux réglages décident si la connexion fonctionne, tout simplement : le type d
     | `offline_access` | Maintenir la connexion au-delà du premier jeton |
 
     <Warning>
-    `offline_access` n'est pas optionnelle. Sans elle, Microsoft n'émet pas de refresh token, et l'intégration bascule en **Reconnection required** dès l'expiration du premier jeton.
+    `offline_access` n'est pas optionnelle. Sans elle, Microsoft n'émet pas de refresh token, et l'intégration bascule en **Reconnexion requise** dès l'expiration du premier jeton.
     </Warning>
   </Step>
   <Step title="Copiez les identifiants">
@@ -70,15 +70,15 @@ Deux réglages décident si la connexion fonctionne, tout simplement : le type d
 
 ## Connectez depuis Kapptivate
 
-Allez dans **Administration → Integrations** et ouvrez la carte **Microsoft Teams**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connect**.
+Allez dans **Administration → Intégrations** et ouvrez la carte **Microsoft Teams**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connecter**.
 
-Une fenêtre s'ouvre et vous demande de consentir aux permissions pour votre organisation. Une fois que vous validez, vous revenez dans Kapptivate et la carte Microsoft Teams affiche **Connected**.
+Une fenêtre s'ouvre et vous demande de consentir aux permissions pour votre organisation. Une fois que vous validez, vous revenez dans Kapptivate et la carte Microsoft Teams affiche **Connecté**.
 
 Les deux valeurs sont stockées chiffrées, et ne se retrouvent jamais dans un fichier de configuration.
 
 ## Choisissez l'équipe et le canal par défaut
 
-Une intégration connectée doit encore savoir où publier. Dans le panneau **Integration details**, sous **Default settings**, choisissez une **Default team** et un **Default channel**, puis cliquez sur **Save**. Une alerte qui ne précise pas de canal atterrit ici.
+Une intégration connectée doit encore savoir où publier. Dans le panneau **Détails de l'intégration**, sous **Réglages par défaut**, choisissez une **Default team** et un **Canal par défaut**, puis cliquez sur **Enregistrer**. Une alerte qui ne précise pas de canal atterrit ici.
 
 Les sélecteurs listent ce que l'intégration peut voir avec les permissions accordées, pour le compte qui a donné son consentement. Si une équipe manque dans la liste, vérifiez que ce compte en est bien membre dans Teams.
 
@@ -93,7 +93,7 @@ La fenêtre d'autorisation se referme sur une erreur générique et ne journalis
 
 ## Déconnectez
 
-Dans le panneau **Integration details**, cliquez sur **Disconnect**. Kapptivate arrête de publier dans Teams, et la carte repasse en **Not connected**. L'inscription d'application, elle, reste dans votre tenant : une reconnexion plus tard ne demande que de recoller les identifiants.
+Dans le panneau **Détails de l'intégration**, cliquez sur **Déconnecter**. Kapptivate arrête de publier dans Teams, et la carte repasse en **Non connecté**. L'inscription d'application, elle, reste dans votre tenant : une reconnexion plus tard ne demande que de recoller les identifiants.
 
 ## Autres intégrations
 

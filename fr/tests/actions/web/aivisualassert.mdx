@@ -4,21 +4,21 @@ sidebarTitle: "Vérifier avec l'IA"
 description: Décrivez en langage naturel ce qui doit être vrai sur la page courante, et laissez l'IA en juger.
 ---
 
-Vérifiez ce qu'un selector ne peut pas exprimer : "le graphique montre une tendance à la hausse", "le total du panier correspond à la somme des articles", "aucune bannière d'erreur n'est visible". L'IA observe l'écran courant et juge si votre assertion est vraie.
+Vérifiez ce qu'un sélecteur ne peut pas exprimer : "le graphique montre une tendance à la hausse", "le total du panier correspond à la somme des articles", "aucune bannière d'erreur n'est visible". L'IA observe l'écran courant et juge si votre assertion est vraie.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Assertion | Oui | Ce qui doit être vrai, en langage naturel. Par exemple : "Le panier affiche 2 articles et un total de 39,98 €". Supporte les variables. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès lorsque l'IA juge l'assertion vraie sur l'écran courant, échec dans le cas contraire, avec l'explication de l'IA dans le résultat.
 - **Capture d'écran** : prise pour l'état vérifié, afin que vous puissiez examiner ce que l'IA a évalué.
-- **Utilisation IA** : le coût IA de l'évaluation est ajouté à l'exécution.
+- **Utilisation de l'IA** : le coût IA de l'évaluation est ajouté à l'exécution.
 
 Pour rédiger des assertions fiables, consultez [Vérifier avec l'IA](/fr/ai/verify-with-ai).
 
@@ -30,9 +30,9 @@ Pour rédiger des assertions fiables, consultez [Vérifier avec l'IA](/fr/ai/ver
     Bonnes pratiques pour rédiger des assertions que l'IA évalue de manière fiable
 
 </Card>
-  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
-    Vérifications déterministes d'éléments, quand un selector suffit
+    Vérifications déterministes d'éléments, quand un sélecteur suffit
 
 </Card>
 </Columns>

@@ -30,7 +30,7 @@ ktm shell [flags]
     Lister les commandes shell en attente et en cours
   </Card>
   <Card title="send" icon="angle-right" href="/fr/cli/commands/shell/send">
-    Envoyer une commande shell à un appareil
+    Envoyer une commande shell à un device
   </Card>
   <Card title="types" icon="angle-right" href="/fr/cli/commands/shell/types">
     Lister les types d'action shell disponibles
@@ -39,14 +39,14 @@ ktm shell [flags]
 
 ## Détails
 
-Envoyez des commandes directement aux appareils et consultez les résultats en temps réel.
+Envoyez des commandes directement aux devices et consultez les résultats en temps réel.
 Contrairement aux tests, les commandes shell n'ont pas d'assertions : elles envoient une commande et retournent le résultat brut.
 
-Types d'appareils pris en charge :
+Types de devices pris en charge :
   SIM (owner_kind=S) :      USSD, SMS, appels, opérations de données via réseau cellulaire
   Ethernet (owner_kind=E) : HTTP API, ping, DNS, transferts via web agents
 
-Les smartphones ne sont pas pris en charge : pilotez-les plutôt via des tests ou l'automatisation d'appareils en direct.
+Les smartphones ne sont pas pris en charge : pilotez-les plutôt via des tests ou l'automatisation de devices en direct.
 
 Les sessions USSD sont avec état : composer un shortcode ouvre une session, et envoyer des numéros
 d'option de menu (1, 2, 3) permet de naviguer plus profondément dans l'arborescence du menu. Les sessions expirent après
@@ -56,7 +56,7 @@ Certains flux déclenchent des événements asynchrones (ex. attente SMS après 
 Utilisez 'shell list --from-date &lt;timestamp&gt;' pour interroger les nouveaux shells depuis le début de votre session.
 
 Note : les cartes SIM et les web agents sont des ressources partagées. Les monitors actifs exécutent des tests sur les mêmes
-appareils selon un calendrier. Si un shell retourne Blocked ou Timeout de manière inattendue, il peut s'agir d'une
+devices selon un calendrier. Si un shell retourne Blocked ou Timeout de manière inattendue, il peut s'agir d'une
 contention de ressources : attendez 15-30s et réessayez. Utilisez 'monitors toggle' pour mettre en pause les monitors si nécessaire.
 
 ## Voir aussi

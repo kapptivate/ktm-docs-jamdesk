@@ -1,21 +1,21 @@
 ---
 title: Scénarios API
-description: Tester les services REST et HTTP avec des steps API dans vos tests web et mobile.
+description: Tester les services REST et HTTP avec des étapes API dans vos tests web et mobile.
 sidebarTitle: API
 ---
 
-Ajoutez un step API quand un test doit appeler un service directement, sans passer par l'écran. Vous l'ajoutez depuis le [test builder](/fr/tests/builder) comme tout autre step. Il se comporte de la même façon dans un test web et dans un test mobile, avec les mêmes conditions sur la réponse et les mêmes métriques de temps : seul le test qui l'entoure change.
+Ajoutez une étape API quand un test doit appeler un service directement, sans passer par l'écran. Vous l'ajoutez depuis le [test builder](/fr/tests/builder) comme toute autre étape. Elle se comporte de la même façon dans un test web et dans un test mobile, avec les mêmes conditions sur la réponse et les mêmes métriques de temps : seul le test qui l'entoure change.
 
 ## Actions API
 
 Les actions API HTTP sont disponibles dans les tests existants :
 
-- **Dans un test web** : ajoutez des requêtes HTTP aux côtés des steps navigateur. Identifiant d'action : `ETH_HTTP_API`.
-- **Dans un test mobile** : ajoutez des requêtes HTTP aux côtés des steps smartphone. Identifiant d'action : `DATA_API_HTTP`.
+- **Dans un test web** : ajoutez des requêtes HTTP aux côtés des étapes navigateur. Identifiant d'action : `ETH_HTTP_API`.
+- **Dans un test mobile** : ajoutez des requêtes HTTP aux côtés des étapes smartphone. Identifiant d'action : `DATA_API_HTTP`.
 
 Les deux partagent la même configuration de requête et le même modèle d'assertion sur les réponses, avec quelques différences de routage spécifiques au canal.
 
-Dans un test **Web (New experience)**, il s'agit du [step API Call](/fr/tests/actions/web/apicall) : la même requête, plus des conditions sur la réponse dans l'onglet Checks du step et une visualisation de la réponse dans le builder comme dans les résultats. Les tests classiques, le [CLI](/fr/cli/guides/create-tests) et le MCP le désignent toujours par son identifiant, `ETH_HTTP_API`.
+Dans un test **Web (Nouvelle expérience)**, il s'agit de l'[étape Appel API](/fr/tests/actions/web/apicall) : la même requête, plus des conditions sur la réponse dans l'onglet Vérifications de l'étape et une visualisation de la réponse dans le builder comme dans les résultats. Les tests classiques, le [CLI](/fr/cli/guides/create-tests) et le MCP la désignent toujours par son identifiant, `ETH_HTTP_API`.
 
 ## Configuration de la requête
 
@@ -29,7 +29,7 @@ Dans un test **Web (New experience)**, il s'agit du [step API Call](/fr/tests/ac
 
 - Vérification du **code de statut**.
 - Assertions sur le **corps** et les **headers**.
-- **Extraction de variables** depuis la réponse pour utilisation dans les steps suivants.
+- **Extraction de variables** depuis la réponse pour utilisation dans les étapes suivantes.
 
 ## Métriques par requête
 

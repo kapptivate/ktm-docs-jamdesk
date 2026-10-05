@@ -10,9 +10,9 @@ Un moniteur est un test automatisé promu depuis l'espace Tests vers la supervis
 
 ## La liste des moniteurs
 
-La liste des moniteurs affiche chaque moniteur de votre produit. Chaque ligne présente l'**ID**, le **Statut**, les **5 dernières exécutions**, la **Fréquence** et l'**Appareil** du moniteur. Survolez un chip d'appareil pour voir sa machine hôte et la version du navigateur. Recherchez par nom ou ID de moniteur, ou filtrez par test.
+La liste des moniteurs affiche chaque moniteur de votre produit. Chaque ligne présente l'**ID**, le **Statut**, les **5 dernières exécutions**, la **Fréquence** et l'**Appareil** du moniteur. Survolez un chip de device pour voir sa machine hôte et la version du navigateur. Recherchez par nom ou ID de moniteur, ou filtrez par test.
 
-Depuis la liste, vous pouvez exécuter un moniteur immédiatement, le mettre en pause ou le reprendre, modifier sa configuration ou le dupliquer. Utilisez la sélection multiple pour mettre en pause, reprendre, modifier la planification, changer d'appareil ou supprimer plusieurs moniteurs à la fois.
+Depuis la liste, vous pouvez exécuter un moniteur immédiatement, le mettre en pause ou le reprendre, modifier sa configuration ou le dupliquer. Utilisez la sélection multiple pour mettre en pause, reprendre, modifier la planification, changer de device ou supprimer plusieurs moniteurs à la fois.
 
 ## Cartes de synthèse
 
@@ -20,11 +20,11 @@ Les cartes compteurs en haut de la liste des moniteurs fournissent un aperçu in
 
 | Carte | Ce qu'elle affiche |
 |-------|-------------------|
-| **Daily active monitors** | Nombre total de moniteurs actifs (non mis en pause) |
+| **Monitors actifs quotidiens** | Nombre total de moniteurs actifs (non mis en pause) |
 | **Up** | Moniteurs dont la dernière exécution a réussi |
-| **Device issue** | Moniteurs avec des appareils indisponibles ou mal configurés |
+| **Problème de device** | Moniteurs avec des devices indisponibles ou mal configurés |
 | **Down** | Moniteurs dont la dernière exécution a échoué |
-| **Paused** | Moniteurs actuellement en pause et non exécutés |
+| **En pause** | Moniteurs actuellement en pause et non exécutés |
 
 ## Statuts des moniteurs
 
@@ -41,7 +41,7 @@ Chaque moniteur affiche un statut unique qui reflète son état de santé et d'a
 
 ## 5 dernières exécutions
 
-La colonne **Last 5 runs** affiche les exécutions les plus récentes sous forme de carrés colorés, vert pour les succès et rouge pour les échecs. Cliquez sur un carré pour ouvrir la modale "Monitoring results" : elle affiche le résultat de l'exécution, ses onglets **Steps** (avec les durées) et **Video**, ainsi que **Open details** pour accéder au résultat complet et **Edit related test** pour corriger le scénario.
+La colonne **5 dernières exécutions** affiche les exécutions les plus récentes sous forme de carrés colorés, vert pour les succès et rouge pour les échecs. Cliquez sur un carré pour ouvrir la modale "Résultats de test" : elle affiche le résultat de l'exécution, ses onglets **Étapes** (avec les durées) et **Video**, ainsi que **Voir les détails complets** pour accéder au résultat complet et **Éditer le test associé** pour corriger le scénario.
 
 ## Actions par ligne
 
@@ -49,15 +49,15 @@ Chaque ligne de moniteur dispose d'un menu à trois points avec les actions suiv
 
 | Action | Ce qu'elle fait |
 |--------|----------------|
-| **View analytics** | Ouvrir la page de détails du moniteur pour consulter les analyses et l'historique d'exécution |
-| **Edit monitor** | Ouvrir le formulaire pour modifier le nom, les appareils, la planification et les options du moniteur |
-| **Duplicate** | Cloner le moniteur ; vous pouvez le renommer et réattribuer les appareils avant de sauvegarder |
-| **Edit related test** | Naviguer vers le test sur lequel ce moniteur est basé |
-| **Edit frequency** | Modifier la planification du moniteur sans ouvrir le formulaire complet |
-| **Edit device** | Changer l'appareil attribué (disponible uniquement pour les moniteurs avec un seul appareil) |
-| **Pause / Unpause** | Désactiver ou réactiver temporairement le moniteur |
-| **Force run** | Exécuter le moniteur immédiatement, quel que soit son calendrier |
-| **Activate test-only mode** | Suspendre le calendrier automatisé tout en permettant les déclenchements manuels depuis l'interface ou le CI/CD |
+| **Voir les détails** | Ouvrir la page de détails du moniteur pour consulter les analyses et l'historique d'exécution |
+| **Modifier** | Ouvrir le formulaire pour modifier le nom, les devices, la planification et les options du moniteur |
+| **Dupliquer** | Cloner le moniteur ; vous pouvez le renommer et réattribuer les devices avant de sauvegarder |
+| **Modifier le test associé** | Naviguer vers le test sur lequel ce moniteur est basé |
+| **Modifier la fréquence** | Modifier la planification du moniteur sans ouvrir le formulaire complet |
+| **Modifier le device** | Changer le device attribué (disponible uniquement pour les moniteurs avec un seul device) |
+| **Pause / Reprendre** | Désactiver ou réactiver temporairement le moniteur |
+| **Forcer l'exécution** | Exécuter le moniteur immédiatement, quel que soit son calendrier |
+| **Activer le mode test uniquement** | Suspendre le calendrier automatisé tout en permettant les déclenchements manuels depuis l'interface ou le CI/CD |
 
 Pour supprimer des moniteurs, utilisez la sélection multiple et le bandeau d'actions groupées.
 
@@ -65,11 +65,11 @@ Pour supprimer des moniteurs, utilisez la sélection multiple et le bandeau d'ac
 
 Activez le mode sélection multiple et cochez les moniteurs que vous souhaitez traiter. Un bandeau apparaît en bas avec les actions suivantes :
 
-- **Edit Frequency** : mettre à jour la planification de tous les moniteurs sélectionnés en une seule fois
-- **Edit Device** : changer l'appareil attribué (uniquement si tous les moniteurs sélectionnés utilisent exactement un appareil chacun, du même type)
+- **Modifier la fréquence** : mettre à jour la planification de tous les moniteurs sélectionnés en une seule fois
+- **Modifier le device** : changer le device attribué (uniquement si tous les moniteurs sélectionnés utilisent exactement un device chacun, du même type)
 - **Pause** : mettre en pause tous les moniteurs sélectionnés
-- **Unpause** : reprendre tous les moniteurs sélectionnés
-- **Delete** : supprimer tous les moniteurs sélectionnés
+- **Reprendre** : reprendre tous les moniteurs sélectionnés
+- **Supprimer** : supprimer tous les moniteurs sélectionnés
 
 ## Et ensuite ?
 

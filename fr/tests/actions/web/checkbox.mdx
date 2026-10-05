@@ -1,39 +1,39 @@
 ---
 title: Cocher une case
-description: Step obsolète qui coche ou décoche une case. Utilisez Click dans un test web à la place.
+description: Étape obsolète qui coche ou décoche une case. Utilisez Clic dans un test web à la place.
 ---
 
 <Danger>
-  **Obsolète.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Click](/fr/tests/actions/web/click) sur la case à cocher. Un clic bascule l'état au lieu de le définir, vérifiez donc le résultat avec [Vérifier un élément](/fr/tests/actions/web/verifyelement) si nécessaire.
+  **Obsolète.** Cette étape n'apparaît plus dans la palette d'étapes. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Clic](/fr/tests/actions/web/click) sur la case à cocher. Un clic bascule l'état au lieu de le définir, vérifiez donc le résultat avec [Vérifier l'élément](/fr/tests/actions/web/verifyelement) si nécessaire.
 </Danger>
 
-Cochez ou décochez une case. Le step ne clique que si la case n'est pas déjà dans cet état : le lancer deux fois n'annule donc pas le premier passage.
+Cochez ou décochez une case. L'étape ne clique que si la case n'est pas déjà dans cet état : le lancer deux fois n'annule donc pas le premier passage.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de la case à cocher. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Définir comme cochée | Non | L'état cible. Par défaut : désactivé (non cochée). |
-| Utilisation IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel de la case à cocher. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
+| Cocher la case | Non | L'état cible. Par défaut : désactivé (non cochée). |
+| Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
-- **Capture d'écran** : prise après l'exécution du step.
+- **Capture d'écran** : prise après l'exécution de l'étape.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Click" icon="arrow-pointer" href="/fr/tests/actions/web/click">
+  <Card title="Clic" icon="arrow-pointer" href="/fr/tests/actions/web/click">
 
     La méthode actuelle pour basculer les cases à cocher
 
 </Card>
-  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
     Confirmez que la case à cocher est dans le bon état
 

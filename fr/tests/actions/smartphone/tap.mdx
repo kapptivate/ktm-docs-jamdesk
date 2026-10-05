@@ -4,36 +4,36 @@ sidebarTitle: "Toucher"
 description: Appuyez sur un bouton, un élément de liste, un onglet ou tout autre élément de l'application dans un test smartphone.
 ---
 
-Localisez l'élément avec un selector XPath, ou avec une description en langage naturel que l'IA utilise pour le trouver. Quand aucun élément ne peut être ciblé, passez le step en mode **Coordinates** et appuyez sur une position X/Y exacte.
+Localisez l'élément avec un sélecteur XPath ou CSS, ou avec une description en langage naturel que l'IA utilise pour le trouver. Quand aucun élément ne peut être ciblé, passez l'étape en mode **Coordonnées** et appuyez sur une position X/Y exacte.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui en mode Selector, sauf si un selector manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
-| Selector manuel | Non | Selector XPath dans l'arbre UI de l'application, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Approche | Non | `0` = Selector (par défaut), `1` = Coordinates. Basculez dans le panneau de détails du step. |
-| Position X, Position Y | Oui en mode Coordinates | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
+| Élément ciblé | Oui en mode Sélecteur, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément. L'IA l'utilise pour trouver l'élément. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
+| Approche | Non | `0` = Sélecteur (par défaut), `1` = Coordonnées. Basculez dans le panneau de détails de l'étape. |
+| Position X, Position Y | Oui en mode Coordonnées | Position à l'écran pour le tap, en pixels depuis le coin supérieur gauche. |
 | Utilisation de l'IA | Non | `smart` (par défaut), `always` ou `inherit`. |
 | Activer l'IA | Non | Par défaut : désactivé. Activez-le pour localiser l'élément à partir de la description. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
 - **Capture d'écran** : prise après le tap, montrant l'écran résultant.
-- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le sélecteur corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Long press" icon="hand-pointer" href="/fr/tests/actions/smartphone/longpress">
+  <Card title="Appui long" icon="hand-pointer" href="/fr/tests/actions/smartphone/longpress">
 
     Maintenir l'appui pour ouvrir les actions contextuelles
 
 </Card>
-  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
 
     Vérifier le résultat du tap avant de continuer
 

@@ -4,11 +4,11 @@ description: Consultez la disponibilité, le temps d'exécution et les échecs q
 sidebarTitle: Détails du moniteur
 ---
 
-La page de détails d'un moniteur affiche sa configuration (planification, appareils, agents, localisations) aux côtés d'analyses qui suivent la disponibilité, les performances et les échecs. Utilisez ces informations pour comprendre le comportement de votre moniteur en production.
+La page de détails d'un moniteur affiche sa configuration (planification, devices, agents, localisations) aux côtés d'analyses qui suivent la disponibilité, les performances et les échecs. Utilisez ces informations pour comprendre le comportement de votre moniteur en production.
 
 ## Ouvrir la page de détails d'un moniteur
 
-Depuis la liste des moniteurs, cliquez sur le menu à trois points d'un moniteur et sélectionnez **View analytics**, ou cliquez directement sur la ligne du moniteur si elle ouvre la vue détaillée.
+Depuis la liste des moniteurs, cliquez sur le menu à trois points d'un moniteur et sélectionnez **Voir les détails**, ou cliquez directement sur la ligne du moniteur si elle ouvre la vue détaillée.
 
 ## Cartes d'information
 
@@ -17,27 +17,27 @@ Quatre cartes en haut de page affichent la configuration du moniteur :
 | Carte | Contenu |
 |-------|---------|
 | **Devices** | SIM, Smartphone ou Web agent exécutant le test ; preset de navigateur (le cas échéant) |
-| **Agents** | Noms d'hôte et types des appareils |
-| **Locations** | Zone géographique ou région pour chaque appareil |
+| **Agents** | Noms d'hôte et types des devices |
+| **Locations** | Zone géographique ou région pour chaque device |
 | **Scheduling** | Fréquence (par exemple "Every 5 minutes") ou "custom" pour les planifications avancées ; survolez pour voir tous les détails |
 
 ## Analyses de disponibilité
 
-**Weekly global availability** affiche le pourcentage d'exécutions réussies sur les 7 derniers jours sous forme de diagramme à barres empilées.
+**Disponibilité hebdomadaire** affiche le pourcentage d'exécutions réussies sur les 7 derniers jours sous forme de diagramme à barres empilées.
 
-- **Passing Percent** : pourcentage d'exécutions ayant réussi.
-- **Total Executions** : nombre total d'exécutions du moniteur.
-- **Failed Executions** : nombre d'exécutions échouées.
+- **Disponibilité** : pourcentage d'exécutions ayant réussi.
+- **Nombre d'exécutions** : nombre total d'exécutions du moniteur.
+- **Nombre d'échecs** : nombre d'exécutions échouées.
 
 Cliquez sur une barre du graphique pour explorer les résultats de cette journée et voir ce qui n'a pas fonctionné.
 
 ## Analyses du temps d'exécution
 
-**Weekly execution time average** affiche la durée d'exécution du test chaque jour.
+**Temps d'exécution moyen hebdomadaire** affiche la durée d'exécution du test chaque jour.
 
-- **Average** : durée moyenne sur l'ensemble des exécutions.
-- **Minimum** : exécution la plus rapide de la semaine.
-- **Maximum** : exécution la plus lente de la semaine.
+- **Temps d'exécution moyen** : durée moyenne sur l'ensemble des exécutions.
+- **Temps d'exécution minimum** : exécution la plus rapide de la semaine.
+- **Temps d'exécution maximum** : exécution la plus lente de la semaine.
 
 Les barres sont colorées selon l'écart par rapport à la moyenne :
 - **Vert** : exécutions dans les 30 % de la moyenne.
@@ -48,30 +48,30 @@ Cliquez sur une barre pour voir les résultats de cette journée.
 
 ## Échecs quotidiens
 
-La carte **Daily failures** à droite affiche les échecs et avertissements des 4 derniers jours.
+La carte **Échecs quotidiens** à droite affiche les échecs et avertissements des 4 derniers jours.
 
 - Sélectionnez une date en cliquant sur une cellule de jour.
 - La carte liste chaque échec avec sa raison d'erreur et son nombre d'occurrences.
-- Pas d'échecs à une date ? La carte affiche "No failures" pour ce jour.
+- Pas d'échecs à une date ? La carte affiche "Aucun échec ce jour-ci".
 
-Survolez un message d'échec pour voir le texte complet. Utilisez cette information pour identifier des schémas récurrents (par exemple "tous les échecs surviennent à 2h du matin") et décider s'il faut ajuster la planification ou corriger un step du test.
+Survolez un message d'échec pour voir le texte complet. Utilisez cette information pour identifier des schémas récurrents (par exemple "tous les échecs surviennent à 2h du matin") et décider s'il faut ajuster la planification ou corriger une étape du test.
 
 ## Voir le résultat d'une exécution
 
 Cliquez sur une barre ou un point dans les graphiques d'analyse pour ouvrir une vue détaillée de cette exécution. La page de résultat affiche :
 
-- **Steps** : chaque step du test, son statut (réussi/échoué/ignoré) et sa durée.
-- **Screenshots** : captures d'écran prises pendant l'exécution (le cas échéant).
+- **Étapes** : chaque étape du test, son statut (réussie/échouée/ignorée) et sa durée.
+- **Captures d'écran** : captures d'écran prises pendant l'exécution (le cas échéant).
 - **Video** : enregistrement de l'exécution du test (si activé).
-- **Metadata** : heure de début/fin d'exécution, appareil utilisé, navigateur/OS, ID du test et raison de l'erreur (en cas d'échec).
+- **Metadata** : heure de début/fin d'exécution, device utilisé, navigateur/OS, ID du test et raison de l'erreur (en cas d'échec).
 
 Depuis la page de résultat, vous pouvez modifier le test associé ou revenir à la page de détails du moniteur.
 
-## Bandeau d'indisponibilité d'appareil
+## Bandeau d'indisponibilité de device
 
-Si un appareil (SIM, Smartphone ou Web agent) est indisponible ou mal configuré, un bandeau apparaît au-dessus des analyses avec les étapes de dépannage :
+Si un device (SIM, Smartphone ou Web agent) est indisponible ou mal configuré, un bandeau apparaît au-dessus des analyses avec les étapes de dépannage :
 
-- Vérifiez le statut de votre appareil dans l'espace **Devices**.
+- Vérifiez le statut de votre device dans l'espace **Devices**.
 - Vérifiez la connectivité réseau.
 - Pour les Web agents : déroulez le [dépannage d'un robot Offline](/fr/hardware/network-troubleshooting).
-- Cliquez sur **Send help request** pour contacter le support avec les détails de l'appareil.
+- Cliquez sur **Send help request** pour contacter le support avec les détails du device.

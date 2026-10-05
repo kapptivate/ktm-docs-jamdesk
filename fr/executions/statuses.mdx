@@ -1,6 +1,6 @@
 ---
 title: Success, warning, failed
-description: Ce que veut dire un warning, d'où il vient, et comment il remonte d'un step jusqu'à un monitor.
+description: Ce que veut dire un warning, d'où il vient, et comment il remonte d'une étape jusqu'à un monitor.
 sidebarTitle: Statuts
 ---
 
@@ -8,36 +8,36 @@ Un test répondait par oui ou par non : il est passé, ou il a cassé. Les check
 
 ## D'où vient un warning
 
-Rien ne déclenche un warning tout seul. Un warning existe parce que vous avez écrit une condition pour lui, dans l'onglet **Checks** d'un step, qui contient deux groupes :
+Rien ne déclenche un warning tout seul. Un warning existe parce que vous avez écrit une condition pour lui, dans l'onglet **Vérifications** d'une étape, qui contient deux groupes :
 
-- **Success conditions**, qui se lisent "Passes if". Le step échoue dès que l'une d'elles n'est pas remplie.
-- **Warnings**, qui se lisent "Warns if". Le step passe quand même, et l'exécution est signalée.
+- **Conditions de succès**, qui se lisent "Réussit si". L'étape échoue dès que l'une d'elles n'est pas remplie.
+- **Avertissements**, qui se lisent "Avertit si". L'étape passe quand même, et l'exécution est signalée.
 
-Déplacez une condition d'un groupe à l'autre par glisser-déposer, ou via son menu (**Move to warnings**, **Move to success conditions**), pour changer ce que coûte un problème donné. Chaque groupe a sa propre logique **and** / **or**, et les conditions peuvent être imbriquées en sous-groupes quand une règle a besoin des deux.
+Déplacez une condition d'un groupe à l'autre par glisser-déposer, ou via son menu (**Déplacer vers les avertissements**, **Déplacer vers les conditions de succès**), pour changer ce que coûte un problème donné. Chaque groupe a sa propre logique **et** / **ou**, et les conditions peuvent être imbriquées en sous-groupes quand une règle a besoin des deux.
 
 <Note>
 Les tests existants n'ont aucun check : ils ne peuvent donc rapporter que success ou failed. Un test commence à rapporter des warnings à partir du moment où vous lui ajoutez des conditions.
 </Note>
 
-Ce sur quoi vous pouvez écrire une condition dépend du step :
+Ce sur quoi vous pouvez écrire une condition dépend de l'étape :
 
-| Step | Champs disponibles |
+| Étape | Champs disponibles |
 |------|--------------------|
-| Navigate to starting page | URL, Loading time |
-| Tout autre step navigateur | URL, Step duration |
-| [API Call](/fr/tests/actions/web/apicall) | Status code, status text, response header, response body et les temps de réponse |
-| Get mail | Sender, recipient, CC, subject, content, attachments, attachment name |
-| Check PDF | Extracted text, page count, file size, file name |
+| Accéder à la page de départ | URL, Temps de chargement |
+| Toute autre étape navigateur | URL, Durée de l'étape |
+| [Appel API](/fr/tests/actions/web/apicall) | Code de statut, texte de statut, en-tête de réponse, corps de réponse et les temps de réponse |
+| Récupérer un mail | Expéditeur, destinataire, CC, sujet, contenu, pièces jointes, nom de pièce jointe |
+| Vérifier un PDF | Texte extrait, nombre de pages, taille du fichier, nom du fichier |
 
 ## Les mêmes trois mots à chaque niveau
 
 | Niveau | Success | Warning | Failed |
 |--------|---------|---------|--------|
-| Step | Toutes les success conditions remplies | Une condition du groupe Warnings s'est déclenchée | Une success condition n'est pas remplie |
+| Étape | Toutes les conditions de succès remplies | Une condition du groupe Avertissements s'est déclenchée | Une condition de succès n'est pas remplie |
 | Exécution | Tous les tests ont réussi | Tous les tests ont réussi, au moins un avec un warning | Au moins un test a échoué |
 | Monitor | **Success** | **Degraded**, en jaune | **Failed** |
 
-Un monitor a trois autres états qui ne disent rien de votre application : **Device issue** (l'agent ou l'appareil a lâché, l'exécution ne prouve donc rien), **Paused**, **Running** et **Scheduled**.
+Un monitor a trois autres états qui ne disent rien de votre application : **Problème de device** (l'agent ou le device a lâché, l'exécution ne prouve donc rien), **En pause**, **En cours** et **Planifié**.
 
 ## Ce qu'un warning change vraiment
 
@@ -47,7 +47,7 @@ Un monitor a trois autres états qui ne disent rien de votre application : **Dev
 
 **Le monitor passe Degraded**, en jaune, dans la liste des monitors et sur le [statut en temps réel](/fr/monitoring/realtime-status).
 
-**L'intervalle passe au jaune** sur [Status Details](/fr/monitoring/status-details), où un warning prime sur un succès : un intervalle qui contient les deux se lit en warning.
+**L'intervalle passe au jaune** sur [Détails du statut](/fr/monitoring/status-details), où un warning prime sur un succès : un intervalle qui contient les deux se lit en warning.
 
 **L'uptime compte les warnings comme de l'indisponibilité.** Le pourcentage d'uptime, ce sont les exécutions réussies sur l'ensemble des exécutions : un monitor qui ne fait que warner perd quand même de l'uptime. Un warning sert à être prévenu, pas à garder le chiffre au vert.
 
@@ -60,7 +60,7 @@ La sévérité **Warning** d'une [alerte](/fr/alerting/alerts) est autre chose. 
 <Columns cols={2}>
   <Card title="Actions web" icon="list" href="/fr/tests/actions/web/overview">
 
-    Les steps qui peuvent porter des checks, et ce que chacun enregistre
+    Les étapes qui peuvent porter des checks, et ce que chacun enregistre
 
 </Card>
   <Card title="Liste des exécutions" icon="list-check" href="/fr/executions/overview">
@@ -68,7 +68,7 @@ La sévérité **Warning** d'une [alerte](/fr/alerting/alerts) est autre chose. 
     Filtrer les exécutions par statut et ouvrir celle qui vous intéresse
 
 </Card>
-  <Card title="Status Details" icon="chart-simple" href="/fr/monitoring/status-details">
+  <Card title="Détails du statut" icon="chart-simple" href="/fr/monitoring/status-details">
 
     Là où un intervalle jaune apparaît, moniteur par moniteur
 

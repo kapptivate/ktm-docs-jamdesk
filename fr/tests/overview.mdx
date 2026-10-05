@@ -10,24 +10,24 @@ Les tests sont des scénarios automatisés qui vérifient vos canaux Web, Smartp
 
 ## Collections
 
-Les tests sont regroupés dans des collections, des dossiers organisés hiérarchiquement sous une collection racine. Naviguez entre les collections grâce au fil d'Ariane en haut de la page, et cliquez sur **Create collection** pour en ajouter une.
+Les tests sont regroupés dans des collections, des dossiers organisés hiérarchiquement sous une collection racine. Naviguez entre les collections grâce au fil d'Ariane en haut de la page, et cliquez sur **Créer une collection** pour en ajouter une.
 
-Chaque carte de collection dispose d'un menu à trois points avec **Rename**, **Duplicate**, **Move collection** et **Delete**. Les tests dans une collection vide affichent une invitation à créer votre premier test. Lorsque vous supprimez un test, il est déplacé dans une collection corbeille où vous pouvez le restaurer ou le supprimer définitivement.
+Chaque carte de collection dispose d'un menu à trois points avec **Renommer**, **Dupliquer**, **Move collection** et **Supprimer**. Les tests dans une collection vide affichent une invitation à créer votre premier test. Lorsque vous supprimez un test, il est déplacé dans une collection corbeille où vous pouvez le restaurer ou le supprimer définitivement.
 
 ## Rechercher des tests
 
-Utilisez la barre de recherche pour trouver des tests par nom. Les résultats se mettent à jour au fil de la saisie. Filtrez les tests par statut (Draft, In Progress, Approved ou Deprecated), par tags ou par créateur. Tous les filtres sont conservés dans l'URL, ce qui vous permet de sauvegarder et de partager des vues filtrées. Le **sélecteur de produit** dans la barre latérale limite l'affichage à un espace produit, pour ne voir que les collections et tests de ce produit.
+Utilisez la barre de recherche pour trouver des tests par nom. Les résultats se mettent à jour au fil de la saisie. Filtrez les tests par statut (Brouillon, En cours, Approuvé ou Obsolète), par tags ou par créateur. Tous les filtres sont conservés dans l'URL, ce qui vous permet de sauvegarder et de partager des vues filtrées. Le **sélecteur de produit** dans la barre latérale limite l'affichage à un espace produit, pour ne voir que les collections et tests de ce produit.
 
 ## Tableau des tests
 
-La liste des tests affiche des colonnes pour le nom, le statut, la dernière mise à jour et le créateur, avec un bouton **Run** à la fin de chaque ligne. La colonne nom affiche :
+La liste des tests affiche des colonnes pour le nom, le statut, la dernière mise à jour et le créateur, avec un bouton **Exécuter** à la fin de chaque ligne. La colonne nom affiche :
 
 - Une icône étoile pour mettre un test en favori ; les favoris sont épinglés en haut de la liste
 - Une icône de verrou si un autre utilisateur est en train de modifier le test
 - Des icônes de validité (cercle rouge si le test lui-même est invalide ; triangle rouge s'il dépend d'un test invalide)
 - Des tags avec code couleur
 
-Le badge **Status** est aussi un menu déroulant : cliquez dessus pour changer le statut du test en Draft, In progress, Approved ou Deprecated directement, sans ouvrir l'éditeur.
+Le badge **Statut** est aussi un menu déroulant : cliquez dessus pour changer le statut du test en Brouillon, En cours, Approuvé ou Obsolète directement, sans ouvrir l'éditeur.
 
 Cliquez sur le nom d'un test pour le modifier. Les noms grisés ou désactivés indiquent que vous ne pouvez pas modifier ce test (généralement parce qu'un autre utilisateur l'a verrouillé).
 
@@ -35,38 +35,38 @@ Cliquez sur le nom d'un test pour le modifier. Les noms grisés ou désactivés 
 
 Chaque ligne de test dispose d'un menu à trois points couvrant les opérations courantes :
 
-- **Edit** : ouvrir le test dans le builder.
-- **Add to / Remove from favorites** et **Add tag(s)** : la fenêtre des tags permet d'attribuer des tags existants avec code couleur ou d'en créer de nouveaux.
-- **Lock** : protéger le test contre les modifications.
-- **Duplicate** et **Create copy in other product**.
+- **Modifier** : ouvrir le test dans le builder.
+- **Add to / Remove from favorites** et **Ajouter un tag** : la fenêtre des tags permet d'attribuer des tags existants avec code couleur ou d'en créer de nouveaux.
+- **Verrouiller** : protéger le test contre les modifications.
+- **Dupliquer** et **Copier vers un autre produit**.
 - **Move test** : choisir une collection de destination dans une arborescence de dossiers avec recherche.
-- **Run now** et **Create monitor**.
-- **Replace existing test** : voir ci-dessous.
-- **Delete** : envoyer le test à la corbeille. La suppression est bloquée tant qu'un monitor utilise le test ; le menu explique pourquoi.
-- **View connections** : voir de quoi dépend le test et ce qui l'utilise.
+- **Exécuter** et **Créer un monitor**.
+- **Remplacer un test existant** : voir ci-dessous.
+- **Supprimer** : envoyer le test à la corbeille. La suppression est bloquée tant qu'un monitor utilise le test ; le menu explique pourquoi.
+- **Voir les connexions** : voir de quoi dépend le test et ce qui l'utilise.
 
 ## Remplacer un test
 
-Lorsqu'une copie remaniée est prête à prendre le relais de l'original (un parcours reconstruit, une v2), vous n'avez pas besoin de recâbler les monitors ou les campagnes. Ouvrez le menu du nouveau test, choisissez **Replace existing test**, et sélectionnez le test à remplacer. La case **Delete source test** (cochée par défaut) supprime la copie désormais redondante après le remplacement.
+Lorsqu'une copie remaniée est prête à prendre le relais de l'original (un parcours reconstruit, une v2), vous n'avez pas besoin de recâbler les monitors ou les campagnes. Ouvrez le menu du nouveau test, choisissez **Remplacer un test existant**, et sélectionnez le test à remplacer. La case **Supprimer le test source** (cochée par défaut) supprime la copie désormais redondante après le remplacement.
 
 ## Actions groupées
 
 Sélectionnez un ou plusieurs tests en cochant la case à côté de chaque nom. Un bandeau bleu apparaît en haut avec les actions suivantes :
 
-- **Change Status** : définir tous les tests sélectionnés en Draft, In Progress, Approved ou Deprecated. Désactivé si un test est verrouillé.
-- **Duplicate** : créer des copies des tests sélectionnés dans la même collection.
-- **Copy to Product** : exporter les tests vers un autre produit. Désactivé si un test est un reusable component.
+- **Change Status** : définir tous les tests sélectionnés en Brouillon, En cours, Approuvé ou Obsolète. Désactivé si un test est verrouillé.
+- **Dupliquer** : créer des copies des tests sélectionnés dans la même collection.
+- **Copy to Product** : exporter les tests vers un autre produit. Désactivé si un test est un composant réutilisable.
 - **Move** : déplacer les tests sélectionnés vers une autre collection. Désactivé si un test est verrouillé.
 - **Favorite / Unfavorite** : basculer le statut favori sur tous les tests sélectionnés.
-- **Create Monitors** : convertir les tests sélectionnés en tâches de monitoring. Un seul test redirige directement ; plusieurs tests ouvrent une fenêtre pour choisir lesquels surveiller.
-- **Delete** : envoyer les tests sélectionnés à la corbeille. Désactivé si verrouillé.
-- **Add to Run Queue** : mettre les tests sélectionnés en file d'attente pour une exécution immédiate. Désactivé si un test est invalide.
+- **Créer des monitors** : convertir les tests sélectionnés en tâches de monitoring. Un seul test redirige directement ; plusieurs tests ouvrent une fenêtre pour choisir lesquels surveiller.
+- **Supprimer** : envoyer les tests sélectionnés à la corbeille. Désactivé si verrouillé.
+- **Ajouter à la file** : mettre les tests sélectionnés en file d'attente pour une exécution immédiate. Désactivé si un test est invalide.
 
 Appuyez sur ESC pour effacer votre sélection.
 
 ## Validité des tests et dépendances
 
-Une icône de cercle rouge à côté du nom d'un test signifie que le test lui-même présente un problème (step invalide, configuration manquante). Un triangle rouge signifie que le test dépend d'un autre test qui est invalide. Les tests avec des problèmes de validité ne peuvent pas être exécutés, le bouton Run est désactivé.
+Une icône de cercle rouge à côté du nom d'un test signifie que le test lui-même présente un problème (étape invalide, configuration manquante). Un triangle rouge signifie que le test dépend d'un autre test qui est invalide. Les tests avec des problèmes de validité ne peuvent pas être exécutés, le bouton Exécuter est désactivé.
 
 ## Statut de verrouillage
 
@@ -91,7 +91,7 @@ Regroupez plusieurs tests dans une campagne pour les exécuter ensemble avec des
 </Card>
   <Card title="Test builder" icon="vial" href="/fr/tests/builder">
 
-    Créez des steps, des vérifications et des variables dans l'éditeur visuel
+    Créez des étapes, des vérifications et des variables dans l'éditeur visuel
 
 </Card>
   <Card title="Exécuter un test" icon="play" href="/fr/executions/run">

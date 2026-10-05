@@ -1,21 +1,21 @@
 ---
-title: "Get mail dans un test smartphone"
+title: "Récupérer un mail dans un test smartphone"
 sidebarTitle: "Récupérer un mail"
-description: "Vérifiez que votre application envoie bien un email. Le step attend qu'il arrive dans une boîte de test et échoue si rien n'arrive à temps."
+description: "Vérifiez que votre application envoie bien un email. L'étape attend qu'il arrive dans une boîte de test et échoue si rien n'arrive à temps."
 ---
 
-Utilisez-le pour tout email que votre application doit envoyer : un message de bienvenue, une confirmation de commande, une facture.
+Utilisez-la pour tout email que votre application doit envoyer : un message de bienvenue, une confirmation de commande, une facture.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Boîte mail | Oui | L'adresse de la boîte de test qui doit recevoir l'email. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun email n'arrive. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si aucun email n'arrive. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Contenu de l'email** : l'email reçu est attaché au résultat du step, vous pouvez le consulter lors de la revue de l'exécution.
+- **Contenu de l'email** : l'email reçu est attaché au résultat de l'étape, vous pouvez le consulter lors de la revue de l'exécution.
 - **Timing** : début, fin et durée (en secondes). La durée indique le temps de livraison.
 - **Statut** : échec si aucun email n'arrive dans la boîte.
 
@@ -24,12 +24,12 @@ Consultez [Email et SMS dans les tests](/fr/tests/email-sms) pour comprendre le 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Get email code" icon="envelope" href="/fr/tests/actions/smartphone/getemailcode">
+  <Card title="Code par email" icon="envelope" href="/fr/tests/actions/smartphone/getemailcode">
 
     Extraire un code de vérification de l'email à la place
 
 </Card>
-  <Card title="Get email link" icon="link" href="/fr/tests/actions/smartphone/getemaillink">
+  <Card title="Lien par email" icon="link" href="/fr/tests/actions/smartphone/getemaillink">
 
     Extraire un lien de l'email
 

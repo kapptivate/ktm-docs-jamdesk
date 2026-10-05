@@ -20,7 +20,7 @@ Vous montez quand même un agent, et il se range dans la liste des Agents à cô
 
 <Steps>
   <Step>
-    **Connectez le compte.** Ouvrez **Agents**, cliquez sur **Create agent**, puis choisissez **BrowserStack** dans le groupe **From a provider**. Collez vos username et access key, puis **Connect**. Kapptivate vérifie les identifiants auprès de BrowserStack avant d'aller plus loin.
+    **Connectez le compte.** Ouvrez **Agents**, cliquez sur **Créer un agent**, puis choisissez **BrowserStack** dans le groupe **Chez un fournisseur**. Collez votre username et votre access key, puis **Connecter**. Kapptivate vérifie les identifiants auprès de BrowserStack avant d'aller plus loin.
   </Step>
   <Step>
     **Importez vos devices.** L'écran suivant liste tous les devices que le compte propose. Cherchez ou filtrez par marque, cochez ceux que vos utilisateurs ont vraiment, et enregistrez la sélection.
@@ -35,14 +35,14 @@ Vous montez quand même un agent, et il se range dans la liste des Agents à cô
 
 ## Connecter un compte BrowserStack
 
-Connecter un compte, c'est le même geste que créer un agent : **Agents** > **Create agent**. La ligne BrowserStack se trouve dans le groupe **From a provider**, sous les agents qui tournent sur votre propre infrastructure.
+Connecter un compte, c'est le même geste que créer un agent : **Agents** > **Créer un agent**. La ligne BrowserStack se trouve dans le groupe **Chez un fournisseur**, sous les agents qui tournent sur votre propre infrastructure.
 
 ![La modal Create agent, intitulée What do you want to connect, avec les lignes Web, Smartphone, SIM et Passive sous On your infrastructure, et une ligne BrowserStack sous From a provider](/images/browserstack-create-agent.webp)
 
 Le formulaire demande deux champs :
 
-- **Username** : votre username BrowserStack.
-- **Access key** : la clé qui figure sur la même page de profil. Elle est stockée chiffrée et n'est plus jamais affichée, gardez-en donc une copie du côté de BrowserStack.
+- **Identifiant** : votre username BrowserStack.
+- **Clé d'accès** : la clé qui figure sur la même page de profil. Elle est stockée chiffrée et n'est plus jamais affichée, gardez-en donc une copie du côté de BrowserStack.
 
 Kapptivate teste le couple à la validation. Trois réponses sont possibles :
 
@@ -69,7 +69,7 @@ Le sélecteur liste les devices du compte avec leur OS et sa version. Pour trouv
 
 ![Le sélecteur de devices, avec un champ de recherche, un filtre All brands, un bouton Unselect all, une ligne par device avec sa version d'OS, et un bouton Save qui compte la sélection](/images/browserstack-import-devices.webp)
 
-Enregistrez la sélection et les devices arrivent sur l'agent. Vous pouvez rouvrir le sélecteur à tout moment depuis l'onglet **Connected devices** de l'agent, avec **Edit the selection**, pour ajouter un device que vous supportez désormais ou retirer un device que vous ne testez plus.
+Enregistrez la sélection et les devices arrivent sur l'agent. Vous pouvez rouvrir le sélecteur à tout moment depuis l'onglet **Devices connectés** de l'agent, avec **Modifier la sélection**, pour ajouter un device que vous supportez désormais ou retirer un device que vous ne testez plus.
 
 <Note>
   Retirer un device ne supprime rien chez BrowserStack. Il retourne au catalogue et peut être réimporté plus tard. Les tests et les monitors qui tournaient dessus s'arrêtent en revanche : vérifiez ce qui utilise un device avant de le retirer.
@@ -81,7 +81,7 @@ Juste après un import, Kapptivate demande quels produits peuvent utiliser les d
 
 ![L'étape qui suit un import : une phrase indiquant combien de devices ont été importés, un multi-select Products, et les boutons Not now et Save](/images/browserstack-products.webp)
 
-Choisissez un ou plusieurs produits et enregistrez, ou passez avec **Not now**. Le choix n'est jamais définitif : vous pouvez le changer plus tard sur l'onglet **General** de chaque device, ou depuis les [devices du produit](/fr/administration/products/devices).
+Choisissez un ou plusieurs produits et enregistrez, ou passez avec **Plus tard**. Le choix n'est jamais définitif : vous pouvez le changer plus tard sur l'onglet **General** de chaque device, ou depuis les [devices du produit](/fr/administration/products/devices).
 
 ## La page de l'agent BrowserStack
 
@@ -89,19 +89,19 @@ Cliquez sur une carte BrowserStack dans la liste des agents pour ouvrir l'agent.
 
 ### General
 
-**About** montre le compte avec lequel il se connecte, le fournisseur, depuis quand il est connecté, et combien de devices il a importés parmi ceux que le compte propose. **Edit agent** mène à l'onglet Settings.
+**About** montre le compte avec lequel il se connecte, le fournisseur, depuis quand il est connecté, et combien de devices il a importés parmi ceux que le compte propose. **Modifier l'agent** mène à l'onglet Settings.
 
-**Plan and capacity** montre ce que le compte peut exécuter en simultané, la seule consommation que BrowserStack rapporte :
+**Offre et capacité** montre ce que le compte peut exécuter en simultané, la seule consommation que BrowserStack rapporte :
 
-- **Plan** : le plan Automate rattaché au compte.
-- **Parallel sessions** : combien tournent sur le maximum autorisé par le plan, avec une barre de progression.
-- **Queued sessions** : combien d'exécutions attendent une session libre.
+- **Offre** : le plan Automate rattaché au compte.
+- **Sessions parallèles** : combien tournent sur le maximum autorisé par le plan, avec une barre de progression.
+- **Sessions en file d'attente** : combien d'exécutions attendent une session libre.
 
 Quand toutes les sessions parallèles sont occupées, un avertissement le dit : un test lancé à ce moment-là attend dans la file plutôt que d'échouer. BrowserStack n'expose aucun décompte de minutes consommées via son API : lisez-les sur son propre tableau de bord d'usage, vers lequel le panneau renvoie.
 
-### Connected devices
+### Devices connectés
 
-Les devices importés depuis le compte, dans le même tableau que le reste de vos smartphones. **Edit the selection** rouvre le sélecteur. Avant le premier import, cet onglet vous invite à choisir des devices au lieu d'afficher un tableau vide.
+Les devices importés depuis le compte, dans le même tableau que le reste de vos smartphones. **Modifier la sélection** rouvre le sélecteur. Avant le premier import, cet onglet vous invite à choisir des devices au lieu d'afficher un tableau vide.
 
 ![L'onglet Connected devices d'un agent BrowserStack, qui liste les téléphones importés avec leur statut, leur source, leur usage, leurs accès, leurs monitors et leur host](/images/browserstack-connected-devices.webp)
 
@@ -112,7 +112,7 @@ Les monitors qui tournent sur les devices importés, groupés par suite, avec le
 ### Settings
 
 - **About** : renommez l'agent. Ce nom est celui qui apparaît sur la carte de l'agent, dans le Devices lab et dans les formulaires de test.
-- **Account** : le username et l'access key masquée. **Edit** remplace les identifiants, par exemple après une rotation de clé chez BrowserStack. Laissez le champ de la clé vide pour conserver l'actuelle. **Open BrowserStack** ouvre la page de profil où vivent les identifiants. **Disconnect** retire le compte et les devices qu'il a importés, et arrête les monitors qui les utilisent.
+- **Account** : le username et l'access key masquée. **Modifier** remplace les identifiants, par exemple après une rotation de clé chez BrowserStack. Laissez le champ de la clé vide pour conserver l'actuelle. **Ouvrir BrowserStack** ouvre la page de profil où vivent les identifiants. **Disconnect** retire le compte et les devices qu'il a importés, et arrête les monitors qui les utilisent.
 - **Danger zone** : supprimez l'agent. La suppression retire l'agent, les devices qu'il a importés, et arrête les monitors qui les utilisent. Elle est irréversible.
 
 ![L'onglet Settings d'un agent BrowserStack, avec un panneau About qui porte le nom de l'agent et un panneau Account qui montre le username, l'access key masquée, et les actions Edit et Disconnect](/images/browserstack-settings.webp)
@@ -123,7 +123,7 @@ L'historique des événements de l'agent, avec les mêmes filtres Type et User, 
 
 ### Maintenance et reboot
 
-L'en-tête porte les mêmes actions **Set in maintenance mode** et **Reboot agent** que les autres agents. La maintenance est ce qui met les monitors en pause quand c'est le compte lui-même qui pose problème : une clé changée, un quota épuisé, ou un incident chez le fournisseur.
+L'en-tête porte les mêmes actions **Activer le mode maintenance** et **Redémarrer l'agent** que les autres agents. La maintenance est ce qui met les monitors en pause quand c'est le compte lui-même qui pose problème : une clé changée, un quota épuisé, ou un incident chez le fournisseur.
 
 ## Les devices cloud dans votre lab
 
@@ -131,12 +131,12 @@ Les devices importés se rangent dans le [Devices lab](/fr/equipment/devices-lab
 
 - **Source** affiche **BrowserStack** avec le compte en dessous, là où un device du lab montre son UUID. Utilisez le filtre Source pour ne garder que les devices **Lab** ou que les devices **BrowserStack**.
 - **Host** renvoie vers l'agent BrowserStack qui a importé le device, comme un téléphone physique renvoie vers son robot.
-- **Status** ne dit jamais qu'une chose : **Available**. BrowserStack rapporte le modèle, l'OS et une limite de capacité, mais rien sur la santé d'un device : Kapptivate ne prétend donc pas à une vérification que personne ne fait. Un device cloud n'est pas occupé non plus : il est alloué le temps d'une session, et le plafond qui compte est celui des sessions parallèles du plan.
-- **Usage** affiche **Not used** plutôt qu'un pourcentage : pour un device cloud, ce qu'il faut surveiller est la capacité du compte, sur l'onglet General de l'agent. Sur la page du device, **Location** indique **BrowserStack cloud**.
+- **Statut** ne dit jamais qu'une chose : **Disponible**. BrowserStack rapporte le modèle, l'OS et une limite de capacité, mais rien sur la santé d'un device : Kapptivate ne prétend donc pas à une vérification que personne ne fait. Un device cloud n'est pas occupé non plus : il est alloué le temps d'une session, et le plafond qui compte est celui des sessions parallèles du plan.
+- **Usage** affiche **Not used** plutôt qu'un pourcentage : pour un device cloud, ce qu'il faut surveiller est la capacité du compte, sur l'onglet General de l'agent. Sur la page du device, **Emplacement** indique **Cloud BrowserStack**.
 
 ![Le Devices lab sur l'onglet Smartphones, avec la colonne Source qui affiche BrowserStack et le compte pour les devices importés, et son filtre qui propose Lab et BrowserStack](/images/browserstack-devices-lab.webp)
 
-**Remove from the selection**, dans le menu de la ligne d'un device, le retire de votre workspace. Il reste disponible chez BrowserStack et peut être réimporté.
+**Retirer de la sélection**, dans le menu de la ligne d'un device, le retire de votre workspace. Il reste disponible chez BrowserStack et peut être réimporté.
 
 ## Lancer des tests sur un device cloud
 

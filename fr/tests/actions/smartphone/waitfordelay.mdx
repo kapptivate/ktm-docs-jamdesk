@@ -1,13 +1,13 @@
 ---
 title: "Attendre un délai dans un test smartphone"
 sidebarTitle: "Attendre un délai"
-description: "Mettez un test smartphone en pause pendant une durée fixe avant le step suivant."
+description: "Mettez un test smartphone en pause pendant une durée fixe avant l'étape suivante."
 ---
 
-Utilisez-le quand rien à l'écran ne vous indique que l'application est prête : un job backend encore en cours, une limite de débit, une animation que vous ne pouvez pas vérifier.
+Utilisez-la quand rien à l'écran ne vous indique que l'application est prête : un job backend encore en cours, une limite de débit, une animation que vous ne pouvez pas vérifier.
 
 <Tip>
-  Si vous attendez qu'un élément apparaisse à l'écran, utilisez plutôt [Verify element](/fr/tests/actions/smartphone/verifyelement). Il continue dès que la condition est remplie au lieu de consommer systématiquement la totalité du délai.
+  Si vous attendez qu'un élément apparaisse à l'écran, utilisez plutôt [Vérifier l'élément](/fr/tests/actions/smartphone/verifyelement). Elle continue dès que la condition est remplie au lieu de consommer systématiquement la totalité du délai.
 </Tip>
 
 ## Paramètres
@@ -18,20 +18,20 @@ Utilisez-le quand rien à l'écran ne vous indique que l'application est prête 
 
 ## Résultats et métriques
 
-- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step. La durée correspond à la pause configurée.
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape. La durée correspond à la pause configurée.
 - **Statut** : succès, sauf si l'exécution est interrompue pendant la pause.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Verify element" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/smartphone/verifyelement">
 
     Attendre une vraie condition plutôt qu'un temps fixe
 
 </Card>
   <Card title="Test builder" icon="hammer" href="/fr/tests/builder">
 
-    Où les steps sont ajoutés et configurés
+    Où les étapes sont ajoutées et configurées
 
 </Card>
 </Columns>

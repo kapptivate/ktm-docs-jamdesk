@@ -1,32 +1,32 @@
 ---
 title: "Importer un fichier dans un test web"
 sidebarTitle: Importer un fichier
-description: "Téléversez un fichier dans un test web : donnez au step l'URL du fichier, et la plateforme le joint comme si un utilisateur l'avait choisi."
+description: "Téléversez un fichier dans un test web : donnez à l'étape l'URL du fichier, et la plateforme le joint comme si un utilisateur l'avait choisi."
 ---
 
-Utilisez-le pour tester tout formulaire qui demande un fichier : une photo de profil, une pièce d'identité, un import. Pointez le step sur le champ de téléversement, ou sur son bouton visible. Au lieu d'un fichier sur votre ordinateur, vous donnez l'URL du fichier : la plateforme le télécharge, puis le joint au champ.
+Utilisez-la pour tester tout formulaire qui demande un fichier : une photo de profil, une pièce d'identité, un import. Pointez l'étape sur le champ de téléversement, ou sur son bouton visible. Au lieu d'un fichier sur votre ordinateur, vous donnez l'URL du fichier : la plateforme le télécharge, puis le joint au champ.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Le champ de téléversement (ou son contrôle visible). L'IA utilise la description pour le trouver. |
-| URL du fichier | Oui | URL du fichier à téléverser. Le fichier doit être accessible depuis l'agent qui exécute le test. Supporte les variables. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé quand l'IA est désactivée ou comme selector enregistré. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Le champ de téléversement (ou son contrôle visible). L'IA utilise la description pour le trouver. |
+| URL vers le fichier | Oui | URL du fichier à téléverser. Le fichier doit être accessible depuis l'agent qui exécute le test. Supporte les variables. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé quand l'IA est désactivée ou comme sélecteur enregistré. |
 | Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart` ou `always`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
 - **Temps d'exécution** : début, fin et durée (en secondes), incluant le temps de téléchargement et d'envoi du fichier.
 - **Statut** : succès, avertissement ou échec, avec le message d'erreur en cas d'échec.
 - **Capture d'écran** : prise après le téléversement.
-- **Utilisation de l'IA** : si l'IA a localisé l'élément, le selector corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
+- **Utilisation de l'IA** : si l'IA a localisé l'élément, le sélecteur corrigé est enregistré sur le test et le coût IA est ajouté à l'exécution.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Verify element" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
     Confirmer que l'aperçu ou le message de succès du téléversement est apparu
 

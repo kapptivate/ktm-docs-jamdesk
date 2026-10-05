@@ -4,25 +4,25 @@ sidebarTitle: "Vérifier l'élément"
 description: Vérifier qu'un élément est (ou n'est pas) affiché, cliquable, activé ou présent.
 ---
 
-Utilisez-le pour confirmer ce que l'utilisateur doit voir : l'écran de confirmation est affiché, le bouton Continuer est activé, le spinner de chargement a disparu. Le step attend que la condition soit remplie et échoue si elle ne l'est jamais dans le temps imparti. C'est le step de vérification principal pour les tests smartphone, et une alternative robuste aux délais fixes.
+Utilisez-la pour confirmer ce que l'utilisateur doit voir : l'écran de confirmation est affiché, le bouton Continuer est activé, le spinner de chargement a disparu. L'étape attend que la condition soit remplie et échoue si elle ne l'est jamais dans le temps imparti. C'est l'étape de vérification principale pour les tests smartphone, et une alternative robuste aux délais fixes.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément à vérifier. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément à vérifier. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
 | Condition | Oui | `is` ou `is not`. `is not` vérifie le contraire de l'état choisi. |
-| État | Oui | L'état à vérifier. Par défaut : `displayed`. `exist` est libellé "present" dans le builder : l'élément est dans l'arbre UI, visible ou non. |
+| État | Oui | L'état à vérifier. Par défaut : `displayed` (libellé "affiché" dans le builder). `exist` est libellé "présent" dans le builder : l'élément est dans l'arbre UI, visible ou non. |
 | Temps d'attente max. | Non | Combien de temps attendre la condition avant l'échec, en secondes. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 Les quatre états :
 
-- **displayed** : l'élément est visible à l'écran.
-- **clickable** : l'élément est visible et peut recevoir un clic ou un tap.
-- **enabled** : l'élément est actif (pas désactivé).
-- **present** : l'élément existe dans l'arbre UI, même s'il est masqué.
+- **affiché** : l'élément est visible à l'écran.
+- **cliquable** : l'élément est visible et peut recevoir un clic ou un tap.
+- **activé** : l'élément est actif (pas désactivé).
+- **présent** : l'élément existe dans l'arbre UI, même s'il est masqué.
 
 ## Résultats et métriques
 
@@ -33,12 +33,12 @@ Les quatre états :
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Verify with AI" icon="sparkles" href="/fr/tests/actions/smartphone/aivisualassert">
+  <Card title="Vérifier avec l'IA" icon="sparkles" href="/fr/tests/actions/smartphone/aivisualassert">
 
     Vérifier l'état complet de l'écran en langage naturel plutôt qu'un seul élément
 
 </Card>
-  <Card title="Wait for delay" icon="clock" href="/fr/tests/actions/smartphone/waitfordelay">
+  <Card title="Attendre un délai" icon="clock" href="/fr/tests/actions/smartphone/waitfordelay">
 
     Mettre en pause pendant un temps fixe quand il n'y a rien à observer
 

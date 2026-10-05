@@ -8,15 +8,15 @@ Une live session vous donne le contrôle interactif d'un vrai device (une SIM, u
 
 ![Le sélecteur de device de la live session avec les onglets Remote control et History, les catégories SIMs, Smartphones et Web, et les cartes de devices disponibles](/images/live-session-picker.webp)
 
-La page comporte deux onglets : **Remote control**, où vous pilotez un device, et **History**, où chaque action manuelle est journalisée et peut devenir un test.
+La page comporte deux onglets : **Contrôle à distance**, où vous pilotez un device, et **Historique**, où chaque action manuelle est journalisée et peut devenir un test.
 
 ## Choisir un device
 
-Dans **Remote control**, basculez entre les catégories **SIMs**, **Smartphones** et **Web**. Le panneau de gauche liste les devices disponibles pour la catégorie sélectionnée, regroupés par emplacement :
+Dans **Contrôle à distance**, basculez entre les catégories **SIMs**, **Smartphones** et **Web**. Le panneau de gauche liste les devices disponibles pour la catégorie sélectionnée, regroupés par emplacement :
 
 - Chaque carte affiche le nom de le device, son statut de connexion et ses tags : l'agent hébergeur, la version de l'OS et les slots SIM pour les smartphones, l'opérateur et la technologie réseau pour les SIM.
 - Utilisez la barre de recherche pour filtrer par nom.
-- Sélectionnez un device pour ouvrir sa session. En attendant, la zone principale affiche **Pick a device to launch session**.
+- Sélectionnez un device pour ouvrir sa session. En attendant, la zone principale affiche **Choisissez un device pour démarrer une session**.
 
 ## Sessions SIM
 
@@ -27,7 +27,7 @@ Sélectionner une SIM ouvre une interface de commande. Le menu déroulant d'acti
 - **Data** : PDP Activation, Ping, TCP Ping, HTTP Ping, DNS Lookup, Download File, HTTP Upload, FTP Download, FTP Upload, Send Mail, API Call, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate, Youtube
 - **Call** : Wait Call, Place Call
 
-Chaque action manuelle correspond à un step scripté de la [bibliothèque de steps SIM](/fr/tests/actions/cellular/overview), donc ce que vous exécutez ici se traduit directement en test.
+Chaque action manuelle correspond à une étape scriptée de la [bibliothèque d'étapes SIM](/fr/tests/actions/cellular/overview), donc ce que vous exécutez ici se traduit directement en test.
 
 Chaque action affiche son propre formulaire. Pour un **USSD Command**, saisissez le code court et choisissez l'**Access technology** (Default, AUTO, 5G, 4G, 3G ou 2G). Pour un **Send SMS**, définissez le numéro de destination et le message, éventuellement un temps **Wait for delivery report** en secondes, et un remplacement **Change default SMSC**.
 
@@ -45,15 +45,15 @@ Le panneau de droite ajoute des outils pour le device :
 
 ### Inspecter l'interface
 
-**Get XML** ouvre la modale **Find an element** sur l'écran tel qu'il est à cet instant : une capture à gauche, l'arbre des éléments au milieu, et l'élément sélectionné à droite. Survolez la capture et le plus petit élément sous le pointeur s'allume, l'arbre suit, et le panneau classe les façons d'atteindre cet élément avec le nombre de matchs de chacune sur cet écran.
+**Get XML** ouvre la modale **Trouver un élément** sur l'écran tel qu'il est à cet instant : une capture à gauche, l'arbre des éléments au milieu, et l'élément sélectionné à droite. Survolez la capture et le plus petit élément sous le pointeur s'allume, l'arbre suit, et le panneau classe les façons d'atteindre cet élément avec le nombre de matchs de chacune sur cet écran.
 
-C'est la même modale que celle du [recorder d'application mobile](/fr/tests/mobile-recorder#find-an-element), la mécanique n'est donc décrite qu'une fois là-bas : le classement des selectors, ce que veut dire un selector partagé, et la lecture d'un point en mode **Coords**. Dans une live session aucun test n'est en cours d'édition : le selector est à copier vers le step que vous construisez ailleurs.
+C'est la même modale que celle du [recorder d'application mobile](/fr/tests/mobile-recorder#find-an-element), la mécanique n'est donc décrite qu'une fois là-bas : le classement des sélecteurs, ce que veut dire un sélecteur partagé, et la lecture d'un point en mode **Coordonnées**. Dans une live session aucun test n'est en cours d'édition : le sélecteur est à copier vers l'étape que vous construisez ailleurs.
 
 ## Sessions Web
 
 Sélectionner un agent web vous donne accès aux actions réseau et web exécutées depuis l'emplacement de cet agent : API Call, DNS Lookup, Send Mail, FTP Download, FTP Upload, Get webpage or file, HTTP Upload, HTTP Ping, Ping, TCP Ping, Ookla Speedtest, Traceroute, Check SSL/TLS Certificate et Youtube.
 
-Un **API Call** prend l'URL du endpoint avec les onglets **Headers** et **Body**, plus des options d'exécution : proxy personnalisé, remplacement DNS, ignorer le certificat SSL, conserver les cookies et suivre la redirection.
+Un **Appel API** prend l'URL du endpoint avec les onglets **Headers** et **Body**, plus des options d'exécution : proxy personnalisé, remplacement DNS, ignorer le certificat SSL, conserver les cookies et suivre la redirection.
 
 ## Macros et spectating
 
@@ -64,18 +64,18 @@ Deux contrôles se trouvent en haut des sessions SIM et web :
 
 ## History
 
-L'onglet **History** journalise chaque action manuelle avec son statut, son résultat et son horodatage. Filtrez par **Creator** et **Resource**, et ajustez la plage de dates (par défaut : dernières 24 heures).
+L'onglet **Historique** journalise chaque action manuelle avec son statut, son résultat et son horodatage. Filtrez par **Creator** et **Resource**, et ajustez la plage de dates (par défaut : dernières 24 heures).
 
 Cliquez sur **Add** sur les entrées que vous souhaitez conserver : elles arrivent dans le panneau **Action List**, où deux boutons transforment votre travail manuel en ressources :
 
-- **Create test** : convertissez les actions sélectionnées en un nouveau test, chaque action devenant un step.
+- **Create test** : convertissez les actions sélectionnées en un nouveau test, chaque action devenant une étape.
 - **Report** : générez un rapport formaté des actions sélectionnées à partager.
 
 ## Conseils pour les live sessions
 
 **Commencez simplement** : quelques commandes vous aident à comprendre le device avant d'automatiser des tests complets.
 
-**Capturez les parcours complexes** : pour les parcours utilisateur complexes, les exécuter en direct et convertir l'historique est plus rapide que de créer les steps manuellement.
+**Capturez les parcours complexes** : pour les parcours utilisateur complexes, les exécuter en direct et convertir l'historique est plus rapide que de créer les étapes manuellement.
 
 **Déboguez les échecs** : rejouez les actions d'un test en échec dans une live session pour voir exactement où il échoue et ce que le device retourne réellement.
 

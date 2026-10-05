@@ -1,12 +1,12 @@
 ---
-title: Browser presets
-description: "Un browser preset regroupe user agent, langue, headers, cookies, proxy, géolocalisation et fuseau horaire dans une configuration réutilisable."
-sidebarTitle: Browser presets
+title: Presets navigateur
+description: "Un preset navigateur regroupe user agent, langue, headers, cookies, proxy, géolocalisation et fuseau horaire dans une configuration réutilisable."
+sidebarTitle: Presets navigateur
 ---
 
-Un browser preset regroupe les paramètres du navigateur (user agent, langue, headers, cookies, proxy, géolocalisation, fuseau horaire) dans une configuration réutilisable. Au lieu de coder ces valeurs en dur dans chaque test, appliquez un preset pour exécuter le même test dans des conditions différentes sans le modifier.
+Un preset navigateur regroupe les paramètres du navigateur (user agent, langue, headers, cookies, proxy, géolocalisation, fuseau horaire) dans une configuration réutilisable. Au lieu de coder ces valeurs en dur dans chaque test, appliquez un preset pour exécuter le même test dans des conditions différentes sans le modifier.
 
-![La liste des Browser presets avec les colonnes type d'appareil, taille d'écran et langue du navigateur, les presets par défaut Chrome et Pixel 7, et l'action Create browser preset](/images/browser-presets-list.webp)
+![La liste des Browser presets avec les colonnes type de device, taille d'écran et langue du navigateur, les presets par défaut Chrome et Pixel 7, et l'action Create browser preset](/images/browser-presets-list.webp)
 
 ## Pourquoi les presets sont importants
 
@@ -20,18 +20,18 @@ Tester avec différentes configurations est courant : viewport desktop vs. mobil
 
 ## Créer un preset
 
-Cliquez sur Create Preset dans la liste des Presets. Remplissez l'onglet About, puis configurez les paramètres optionnels.
+Cliquez sur Create Preset dans la liste des Presets. Remplissez l'onglet À propos, puis configurez les paramètres optionnels.
 
-**Section About** : obligatoire :
+**Section À propos** : obligatoire :
 - **Preset name** : un nom clair (par ex. "Mobile Safari", "Authenticated User", "US Location")
-- **Device type** : Desktop, Mobile ou Tablet
-- **Browser** : Chrome, Firefox ou Edge
+- **Type d'appareil** : Ordinateur, Mobile ou Tablette
+- **Navigateur** : Chrome, Firefox ou Edge
 
 Optionnel :
 - **Version** : version du navigateur (si nécessaire)
-- **Use as the default browser preset** : présélectionne ce preset sur chaque nouveau test web (voir « Définir le preset par défaut » plus bas)
+- **Utiliser comme preset navigateur par défaut** : présélectionne ce preset sur chaque nouveau test web (voir « Définir le preset par défaut » plus bas)
 
-**Section Headers** : ajoutez des headers HTTP (non disponible sur Firefox).
+**Section En-têtes** : ajoutez des headers HTTP (non disponible sur Firefox).
 - Paires clé-valeur
 - Exemples : `X-Feature-Flag: new-feature`, `Authorization: Bearer token`
 
@@ -46,17 +46,17 @@ Optionnel :
 - URL du proxy (par ex. `http://proxy.company.com:8080`)
 
 **Paramètres supplémentaires** (disponibles dans toutes les sections) :
-- **Timezone** : définissez le fuseau horaire du navigateur (liste avec recherche)
-- **Language** : sélectionnez parmi les langues disponibles avec noms d'affichage (par ex. "en-US - English")
-- **Geolocation** : définissez la latitude et la longitude pour les tests basés sur la localisation
-- **User agent suffix** : ajoutez du texte au user agent du navigateur (non disponible sur Edge ou mobile/tablette)
-- **Screen size** : options prédéfinies (1920×1080, 768×1024, etc.) ou largeur × hauteur personnalisées
+- **Fuseau horaire** : définissez le fuseau horaire du navigateur (liste avec recherche)
+- **Langue** : sélectionnez parmi les langues disponibles avec noms d'affichage (par ex. "en-US - English")
+- **Localisation** : définissez la latitude et la longitude pour les tests basés sur la localisation
+- **Suffixe user agent** : ajoutez du texte au user agent du navigateur (non disponible sur Edge ou mobile/tablette)
+- **Taille d'écran** : options prédéfinies (1920×1080, 768×1024, etc.) ou largeur × hauteur personnalisées
 
 ## Consulter et modifier les presets
 
-La liste des Presets affiche tous les presets dans un tableau avec les colonnes : Nom, Browser, Appareil, Langue, Taille d'écran, Fuseau horaire et Actions.
+La liste des Presets affiche tous les presets dans un tableau avec les colonnes : Nom, Browser, Device, Langue, Taille d'écran, Fuseau horaire et Actions.
 
-**Les presets système** (fournis par Kapptivate) portent l'étiquette **System**. Vous pouvez les consulter et les dupliquer, mais pas les modifier ni les supprimer.
+**Les presets système** (fournis par Kapptivate) portent l'étiquette **Système**. Vous pouvez les consulter et les dupliquer, mais pas les modifier ni les supprimer.
 
 **Les presets personnalisés** peuvent être modifiés en cliquant sur le preset et en changeant n'importe quel champ. Les modifications sont enregistrées immédiatement.
 
@@ -66,12 +66,12 @@ Un nouveau test web démarre sur un preset système (Chrome, anglais). Si votre 
 
 Deux façons de le désigner :
 
-- **À la création** : cochez **Use as the default browser preset** dans la section About.
-- **Depuis la liste** : ouvrez le menu à trois points du preset et choisissez **Set as default**.
+- **À la création** : cochez **Utiliser comme preset navigateur par défaut** dans la section À propos.
+- **Depuis la liste** : ouvrez le menu à trois points du preset et choisissez **Définir par défaut**.
 
-Le preset désigné porte l'étiquette **Default**. Un seul preset est le défaut à la fois : en désigner un autre déplace l'étiquette. Pour revenir au preset système, ouvrez le menu à trois points et choisissez **Remove default**.
+Le preset désigné porte l'étiquette **Default**. Un seul preset est le défaut à la fois : en désigner un autre déplace l'étiquette. Pour revenir au preset système, ouvrez le menu à trois points et choisissez **Retirer le défaut**.
 
-Le défaut doit être l'un de vos presets. Sur un preset système, **Set as default** est grisé : dupliquez-le d'abord, puis désignez la copie.
+Le défaut doit être l'un de vos presets. Sur un preset système, **Définir par défaut** est grisé : dupliquez-le d'abord, puis désignez la copie.
 
 <Note>
 Le défaut s'applique aux tests web que vous créez dans l'interface. Les monitors, les overrides de campagne et les tests créés via l'API ou le MCP conservent le preset système.
@@ -79,7 +79,7 @@ Le défaut s'applique aux tests web que vous créez dans l'interface. Les monito
 
 ## Appliquer un preset à un test
 
-Lors de la création ou de la modification d'un test web, choisissez un browser preset dans la configuration du test. Un nouveau test s'ouvre sur le preset par défaut : une équipe qui teste toujours dans les mêmes conditions n'a rien à changer. Le test s'exécutera avec tous les paramètres définis dans le preset, sans avoir à les reconfigurer à chaque fois.
+Lors de la création ou de la modification d'un test web, choisissez un preset navigateur dans la configuration du test. Un nouveau test s'ouvre sur le preset par défaut : une équipe qui teste toujours dans les mêmes conditions n'a rien à changer. Le test s'exécutera avec tous les paramètres définis dans le preset, sans avoir à les reconfigurer à chaque fois.
 
 Le sélecteur ouvert depuis un test propose les mêmes actions que la liste (modifier, dupliquer, supprimer, définir ou retirer le défaut) et indique quel preset est le défaut.
 
@@ -87,7 +87,7 @@ Le sélecteur ouvert depuis un test propose les mêmes actions que la liste (mod
 
 - **Firefox** : les headers personnalisés ne sont pas pris en charge ; les paramètres de localisation et de langue sont effacés à la sauvegarde.
 - **Edge** : le suffixe user agent n'est pas pris en charge ; le user agent personnalisé est effacé à la sauvegarde.
-- **Mobile et Tablet** : le suffixe user agent n'est pas pris en charge.
+- **Mobile et Tablette** : le suffixe user agent n'est pas pris en charge.
 
 Ces limitations sont imposées par l'éditeur du navigateur. Les autres paramètres (cookies, proxy, géolocalisation, fuseau horaire) fonctionnent sur tous les navigateurs.
 

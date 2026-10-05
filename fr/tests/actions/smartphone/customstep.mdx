@@ -1,18 +1,18 @@
 ---
 title: "Exécuter son propre JavaScript dans un test smartphone"
 sidebarTitle: "Script"
-description: Exécutez votre propre JavaScript dans un test smartphone quand aucun step intégré ne fait ce dont vous avez besoin.
+description: Exécutez votre propre JavaScript dans un test smartphone quand aucune étape intégrée ne fait ce dont vous avez besoin.
 ---
 
-Utilisez-le pour gérer un parcours qu'aucun step intégré ne couvre, calculer une valeur, ou envoyer une métrique personnalisée vers les Analytiques. Le script s'exécute sur le device du test, dans la même session que les autres steps.
+Utilisez-la pour gérer un parcours qu'aucune étape intégrée ne couvre, calculer une valeur, ou envoyer une métrique personnalisée vers les Analytiques. Le script s'exécute sur le device du test, dans la même session que les autres étapes.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Titre du step | Non | Le nom affiché pour ce step dans le builder et dans les résultats. |
+| Nom de l'étape | Non | Le nom affiché pour cette étape dans le builder et dans les résultats. |
 | Script | Oui | Code JavaScript, édité dans une fenêtre modale dédiée. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si le script lève une erreur. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si le script lève une erreur. Par défaut : désactivé. |
 
 Pour piloter l'application depuis le script, utilisez l'objet `browser` : il donne accès à toute l'API WebdriverIO (une librairie JavaScript d'automatisation des devices et des navigateurs). Les helpers `test` couvrent le reste, par exemple :
 
@@ -23,15 +23,15 @@ test.metrics.create("checkout", { basket_total: 39.98 }, { currency: "EUR" });
 
 ## Résultats et métriques
 
-- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Timing** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : échec si le script lève une erreur, succès sinon.
-- **Sortie** : tout ce que le script journalise est disponible dans la sortie du step pour le débogage.
+- **Sortie** : tout ce que le script journalise est disponible dans la sortie de l'étape pour le débogage.
 - **Métriques personnalisées** : les métriques créées avec `test.metrics.create(measurement, fields, tags)` remontent vers les Analytiques comme toute métrique intégrée.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Set variable" icon="brackets-curly" href="/fr/tests/actions/smartphone/setvariable">
+  <Card title="Définir une variable locale" icon="brackets-curly" href="/fr/tests/actions/smartphone/setvariable">
 
     Stocker une valeur sans écrire de code
 

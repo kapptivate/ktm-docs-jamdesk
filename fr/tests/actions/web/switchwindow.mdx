@@ -1,33 +1,33 @@
 ---
 title: Changer de fenêtre
 sidebarTitle: Changer de fenêtre
-description: Basculez un test web vers un autre onglet ou une autre fenêtre, et exécutez-y tous les steps suivants.
+description: Basculez un test web vers un autre onglet ou une autre fenêtre, et exécutez-y toutes les étapes suivantes.
 ---
 
-Utilisez-le quand le parcours ouvre un nouvel onglet ou une popup : une page de paiement, une popup de connexion (OAuth), un aperçu de document. Le step bascule sur l'onglet ouvert dont le titre ou l'URL correspond au texte que vous lui donnez.
+Utilisez-la quand le parcours ouvre un nouvel onglet ou une popup : une page de paiement, une popup de connexion (OAuth), un aperçu de document. L'étape bascule sur l'onglet ouvert dont le titre ou l'URL correspond au texte que vous lui donnez.
 
 ## Paramètres
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
 | Nom de l'onglet ou URL | Oui | Texte comparé au titre et à l'URL des onglets ouverts. Le premier onglet correspondant devient l'onglet actif. Supporte les variables. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si aucun onglet ne correspond. Par défaut : désactivé. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si aucun onglet ne correspond. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : échec si aucun onglet ouvert ne correspond au nom ou à l'URL.
 - **Capture d'écran** : prise dans l'onglet nouvellement actif.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Vérifier un élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
+  <Card title="Vérifier l'élément" icon="eye" href="/fr/tests/actions/web/verifyelement">
 
     Confirmez que le nouvel onglet affiche ce que vous attendez
 
 </Card>
-  <Card title="Naviguer vers une URL" icon="globe" href="/fr/tests/actions/web/navigatetourl">
+  <Card title="Accéder à l'URL" icon="globe" href="/fr/tests/actions/web/navigatetourl">
 
     Chargez une page différente dans l'onglet courant
 

@@ -19,7 +19,7 @@ Lister les actions shell récentes (commandes déjà envoyées) pour un produit.
 | `detail` | boolean | Non | Renvoyer le JSON complet au lieu de résumés compacts (par défaut : false) |
 | `from_date` | string | Non | Afficher uniquement les shells créés après ce timestamp ISO 8601 (par ex. 2026-03-15T19:29:17Z). Par défaut, les dernières 24 heures si omis. Utilisez pour interroger les nouveaux événements asynchrones. |
 | `ordering` | string (-created \| created) | Non | Ordre de tri : '-created' (plus récent en premier, par défaut), 'created' (plus ancien en premier) |
-| `owner` | string | Non | Filtrer par identifiant d'appareil (MSISDN ou hostname) |
+| `owner` | string | Non | Filtrer par identifiant de device (MSISDN ou hostname) |
 | `product_id` | number | Non | Filtrer par identifiant de produit |
 | `status` | string (P \| D \| O \| B \| C \| T \| M) | Non | Filtrer par statut : P (Pending), D (Done), O (Ongoing), B (Blocked), C (Canceled), T (Timeout), M (Maintenance) |
 | `to_date` | string | Non | Afficher uniquement les shells créés avant ce timestamp ISO 8601. Combinez avec from_date pour une fenêtre fermée. |

@@ -6,7 +6,7 @@ description: Connectez Jira à Kapptivate pour transformer un incident en ticket
 
 ![Jira](/images/logo-jira.webp)
 
-Connecter Jira permet à Kapptivate de créer et de synchroniser des tickets entre ses incidents et vos projets Jira : un monitor en échec devient un ticket dans le backlog, au lieu d'un message que quelqu'un doit recopier. La connexion se fait une seule fois, depuis **Administration → Integrations**, et elle s'appuie sur une intégration OAuth que vous créez dans la console développeur Atlassian.
+Connecter Jira permet à Kapptivate de créer et de synchroniser des tickets entre ses incidents et vos projets Jira : un monitor en échec devient un ticket dans le backlog, au lieu d'un message que quelqu'un doit recopier. La connexion se fait une seule fois, depuis **Administration → Intégrations**, et elle s'appuie sur une intégration OAuth que vous créez dans la console développeur Atlassian.
 
 Il vous faut deux choses : le droit de créer une application dans votre organisation Atlassian, et un accès administrateur à votre workspace Kapptivate.
 
@@ -51,13 +51,13 @@ Enregistrez la callback URL (étape 3 ci-dessous) **avant** la première tentati
 
 ![Le panneau Jira ouvert sur la page Integrations, avec les champs Client ID et Client secret](/images/integrations-jira-connect.webp)
 
-Allez dans **Administration → Integrations** et ouvrez la carte **Jira**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connect**.
+Allez dans **Administration → Intégrations** et ouvrez la carte **Jira**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connecter**.
 
-Une fenêtre s'ouvre et vous demande d'autoriser l'intégration à accéder à votre site Atlassian. Une fois que vous validez, vous revenez dans Kapptivate et la carte Jira affiche **Connected**.
+Une fenêtre s'ouvre et vous demande d'autoriser l'intégration à accéder à votre site Atlassian. Une fois que vous validez, vous revenez dans Kapptivate et la carte Jira affiche **Connecté**.
 
 ## Choisissez le projet et le type de ticket par défaut
 
-Une intégration connectée doit encore savoir où déposer ses tickets. Dans le panneau **Integration details**, sous **Default settings**, choisissez un **Default project** et un **Issue type**, puis cliquez sur **Save**. Une alerte qui ne précise pas de projet crée son ticket ici.
+Une intégration connectée doit encore savoir où déposer ses tickets. Dans le panneau **Détails de l'intégration**, sous **Réglages par défaut**, choisissez un **Projet par défaut** et un **Type de ticket**, puis cliquez sur **Enregistrer**. Une alerte qui ne précise pas de projet crée son ticket ici.
 
 ![Le panneau Jira connecté, avec le projet par défaut, le type de ticket et le bouton Save](/images/integrations-jira-details.webp)
 
@@ -65,7 +65,7 @@ Les sélecteurs listent ce que l'intégration peut voir avec les scopes accordé
 
 ## Déconnectez
 
-Dans le panneau **Integration details**, cliquez sur **Disconnect**. Kapptivate arrête de créer des tickets, et la carte repasse en **Not connected**. Les tickets déjà créés dans Jira restent en place.
+Dans le panneau **Détails de l'intégration**, cliquez sur **Déconnecter**. Kapptivate arrête de créer des tickets, et la carte repasse en **Non connecté**. Les tickets déjà créés dans Jira restent en place.
 
 ## Autres intégrations
 

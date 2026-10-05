@@ -1,11 +1,11 @@
 ---
 title: "Choisir une option dans une liste déroulante"
 sidebarTitle: "Select"
-description: Step obsolète qui choisit une option dans une liste déroulante native. Utilisez Click dans un test web à la place.
+description: Étape obsolète qui choisit une option dans une liste déroulante native. Utilisez Clic dans un test web à la place.
 ---
 
 <Danger>
-  **Obsolète.** Ce step n'apparaît plus dans la palette de steps. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Click](/fr/tests/actions/web/click) pour ouvrir la liste déroulante et cliquer sur l'option, ce qui fonctionne aussi pour les listes déroulantes personnalisées (non natives).
+  **Obsolète.** Cette étape n'apparaît plus dans la palette d'étapes. Les tests existants qui l'utilisent continuent de fonctionner. Pour les nouveaux tests, utilisez [Clic](/fr/tests/actions/web/click) pour ouvrir la liste déroulante et cliquer sur l'option, ce qui fonctionne aussi pour les listes déroulantes personnalisées (non natives).
 </Danger>
 
 Choisissez une option dans une liste déroulante native, la liste intégrée au navigateur (un élément HTML `<select>`), par son texte visible, sa position ou l'un de ses attributs.
@@ -14,30 +14,30 @@ Choisissez une option dans une liste déroulante native, la liste intégrée au 
 
 | Paramètre | Requis | Description |
 | ----------- | -------- | ------------- |
-| Élément cible | Oui, sauf si un selector manuel est défini | Description en langage naturel de l'élément select. |
-| Selector manuel | Non | Selector XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme selector enregistré. |
-| Sélectionner l'option par | Oui | `visible_text` (par défaut), `index`, ou `attribute`. |
+| Élément ciblé | Oui, sauf si un sélecteur manuel est défini | Description en langage naturel de l'élément select. |
+| Sélecteur manuel | Non | Sélecteur XPath ou CSS, utilisé lorsque l'IA est désactivée ou comme sélecteur enregistré. |
+| Sélection de l'option par | Oui | `visible_text` (par défaut), `index`, ou `attribute`. |
 | Valeur | Quand by est `visible_text` | Le texte visible de l'option. |
 | Index | Quand by est `index` | La position de l'option, à partir de 0. |
 | Nom et valeur de l'attribut | Quand by est `attribute` | L'attribut HTML à faire correspondre, par exemple `value` = `FR`. |
-| Utilisation IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
-| Ignorer l'erreur sur ce step | Non | L'exécution continue avec le step suivant si celui-ci échoue. Par défaut : désactivé. |
+| Utilisation de l'IA | Non | `inherit` (par défaut, suit la stratégie du test), `smart`, ou `always`. |
+| Ignorer les erreurs sur cette étape | Non | L'exécution continue avec l'étape suivante si celle-ci échoue. Par défaut : désactivé. |
 
 ## Résultats et métriques
 
-- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat du step.
+- **Temps** : début, fin et durée (en secondes) enregistrés dans le résultat de l'étape.
 - **Statut** : échec si l'élément ou l'option demandée ne peut pas être trouvé.
 - **Capture d'écran** : prise après la sélection.
 
 ## Et ensuite ?
 
 <Columns cols={2}>
-  <Card title="Click" icon="arrow-pointer" href="/fr/tests/actions/web/click">
+  <Card title="Clic" icon="arrow-pointer" href="/fr/tests/actions/web/click">
 
     La méthode actuelle pour sélectionner des options dans les listes déroulantes
 
 </Card>
-  <Card title="Remplir un champ" icon="keyboard" href="/fr/tests/actions/web/input">
+  <Card title="Saisie de texte" icon="keyboard" href="/fr/tests/actions/web/input">
 
     Saisissez du texte dans les listes déroulantes avec recherche
 
