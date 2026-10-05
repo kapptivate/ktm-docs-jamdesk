@@ -5,15 +5,17 @@ description: Ce que signifie chaque message d'erreur d'un test SIM (USSD, SMS, a
 
 Une SIM peut sembler saine et faire quand même échouer un test. Dans ce cas, cherchez le message d'erreur sur cette page : chaque message a sa ligne, qui dit ce qu'il signifie et ce qu'il faut faire. Si c'est la SIM elle-même qui paraît en défaut dans la plateforme, commencez plutôt par [Dépanner une SIM](/fr/hardware/sim-troubleshooting).
 
-Les messages de cette page sont ceux qu'affiche la plateforme dans le résultat du test, cités mot pour mot. Tout autre texte est la réponse du réseau lui-même : un menu, un solde, ou une erreur de passerelle comme `USSDC: ESME fault.` ou `Service not available`. Le robot et la plateforme ont fonctionné : le problème vient de la ligne ou du service appelé. Transmettez le texte à l'équipe qui gère ce service.
+Les messages de cette page sont ceux qu'affiche la plateforme dans le résultat du test, cités mot pour mot.
 
-Commencez par [redémarrer le slot](/fr/hardware/sim-troubleshooting#commencer-par-le-slot).
+Un autre texte qui ressemble à une réponse du réseau vient du réseau lui-même : un menu, un solde, ou une erreur de passerelle comme `USSDC: ESME fault.` ou `Service not available`. Le robot et la plateforme ont fonctionné : le problème vient de la ligne ou du service appelé. Transmettez le texte à l'équipe qui gère ce service.
+
+Pour un texte qui ne ressemble pas à une réponse du réseau, voyez [Tout autre message](#tout-autre-message).
 
 ## USSD
 
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
-| `Connection problem or invalid MMI code (+CME ERROR: 100)`<br /><br />`Connection problem or invalid MMI code (+CME ERROR: 258)` | Le réseau a rejeté la requête. Le robot a déjà réessayé trois fois avant d'afficher ce message.<br /><br />Un code que le réseau ne connaît pas donne aussi ce message. | Si le souci est présent sur plusieurs SIM en même temps, la plateforme USSD est en cause : rejouez le shortcode sur une autre SIM du site via une [live session](/fr/tests/live-session) pour le confirmer.<br /><br />Si une seule SIM est touchée, redémarrez son slot. Si le problème persiste, composez le même code depuis un téléphone avec cette carte : s'il échoue aussi, vérifiez le code, puis faites vérifier le profil de la ligne par votre équipe réseau. |
+| `Connection problem or invalid MMI code (+CME ERROR: 100)`<br /><br />`Connection problem or invalid MMI code (+CME ERROR: 258)` | Le réseau a rejeté la requête. Le robot a déjà réessayé trois fois avant d'afficher ce message.<br /><br />Un shortcode que le réseau ne connaît pas donne aussi ce message. | Rejouez le shortcode sur une autre SIM du site via une [live session](/fr/tests/live-session). S'il échoue aussi, la plateforme USSD est en cause.<br /><br />S'il passe, redémarrez le slot de la SIM en échec. Si le problème persiste, testez la SIM dans un téléphone. |
 | `No network service (+CME ERROR: 30)` | Aucun service réseau n'était disponible pour la SIM au moment de la requête. | Regardez la colonne **Network** de la SIM.<br /><br />Si la SIM est enregistrée, la cause est côté réseau. Si elle ne l'est pas, suivez [Dépanner une SIM](/fr/hardware/sim-troubleshooting). |
 | `Call barred (+CME ERROR: 257)` | Le réseau indique que l'USSD est interdit sur la ligne. | Faites vérifier les restrictions de la ligne par votre équipe réseau. |
 | `Network Timeout (+CUSD 5)`<br /><br />`no ussd response received from network`<br /><br />`Ussd session closed by operator (+CUSD:2)` | Le réseau a signalé un délai dépassé, n'a rien répondu en 2 minutes, ou a fermé la session avant la fin. | Transmettez à l'équipe qui gère votre plateforme USSD le code, l'heure et le numéro de la SIM. |
@@ -23,7 +25,7 @@ Commencez par [redémarrer le slot](/fr/hardware/sim-troubleshooting#commencer-p
 
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
-| `SMS not received.` | Le SMS attendu n'est pas arrivé sur la SIM dans le délai prévu. | Le monitor attend le SMS pendant la durée réglée dans **SMS timeout**, dans la section **Options** du monitor. Si ce délai vous paraît trop court, vous pouvez le rallonger.<br /><br />Testez la carte dans un téléphone. Si elle ne reçoit rien non plus, vérifiez la ligne et le SMSC.<br /><br />Si tous les tests SMS d'un même robot échouent, l'horloge du robot est probablement décalée : écrivez à support@kapptivate.com avec le nom du robot tel qu'il apparaît sur la plateforme. |
+| `SMS not received.` | Le SMS attendu n'est pas arrivé sur la SIM dans le délai prévu. | Le monitor attend le SMS pendant la durée réglée dans **SMS timeout** (30 secondes par défaut), dans la section **Options** du monitor. Si ce délai vous paraît trop court, vous pouvez le rallonger.<br /><br />Testez la carte dans un téléphone. Si elle ne reçoit rien non plus, vérifiez la ligne et le SMSC.<br /><br />Si tous les tests SMS d'un même robot échouent, écrivez à support@kapptivate.com avec le nom du robot tel qu'il apparaît sur la plateforme. |
 | `failed to send sms` | La SIM n'a pas pu envoyer le SMS. | Vérifiez que la SIM est enregistrée dans la colonne **Network**, puis le crédit de la ligne et son SMSC. |
 
 ## Appels
@@ -37,10 +39,10 @@ Pour tout échec d'appel, écoutez d'abord l'enregistrement du côté appelant :
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
 | `cannot place call to <NUMBER>` | La SIM appelante n'a pas pu passer l'appel. | Vérifiez qu'elle est enregistrée et qu'elle a du crédit.<br /><br />Si le test force l'appel en VoLTE, vérifiez aussi que la VoLTE est provisionnée sur la ligne. |
-| `call quit unexpectedly` | L'appel a été décroché, puis coupé avant la durée prévue par l'étape. Avec un numéro court, la coupure arrive souvent moins d'une seconde après le décroché. | Comparez les heures des échecs aux horaires d'ouverture du service.<br /><br />Transmettez le numéro appelé et ces heures à l'équipe qui gère le service. |
+| `call quit unexpectedly` | L'appel a été décroché, puis coupé avant la durée prévue par l'étape. | Comparez les heures des échecs aux horaires d'ouverture du service : un service fermé peut décrocher puis raccrocher aussitôt.<br /><br />Transmettez le numéro appelé et ces heures à l'équipe qui gère le service. |
 | `call was correctly emitted but was suddenly stopped` | L'appel s'est arrêté avant d'être décroché : ligne appelée occupée ou injoignable, appel refusé, ou SIM appelante sans crédit ou sans droit d'appeler ce numéro (numéros courts, ou itinérance). | L'enregistrement donne souvent la raison.<br /><br />Vérifiez le crédit de la ligne et les numéros qu'elle a le droit d'appeler.<br /><br />Si plusieurs SIM échouent en même temps, la cause est côté réseau. |
 | `timeout call not pick up` | Ça a sonné du côté appelé, mais personne n'a décroché dans le délai de l'étape. | Si le numéro appelé est une SIM de la plateforme, ouvrez son résultat : son étape **Wait Call** doit être en cours au moment de l'appel.<br /><br />Sinon, vérifiez que le service appelé décroche à cette heure-là. |
-| `call not ended correctly` | Côté appelé, sur l'étape **Wait Call** : l'appelant n'a jamais raccroché, et l'étape a attendu 4 minutes. | Redémarrez le slot de la SIM appelante.<br /><br />Si l'erreur revient, ou si son étape **Place Call** a réussi, écrivez à support@kapptivate.com avec le lien de l'exécution. |
+| `call not ended correctly` | Côté appelé, sur l'étape **Wait Call** : l'appelant n'a jamais raccroché, et l'étape a attendu 4 minutes. | Redémarrez le slot de la SIM appelante.<br /><br />Si l'erreur revient, ou si l'étape **Place Call** de la SIM appelante a réussi, écrivez à support@kapptivate.com avec le lien de l'exécution. |
 | `timeout, an error occurred during call` | Côté appelant, sur l'étape **Place Call** : l'appel n'était toujours pas terminé au bout de 4 minutes. Ce message accompagne `call not ended correctly`. | Faites comme pour `call not ended correctly` : redémarrez le slot de la SIM appelante. |
 | `timeout no call received` | La SIM appelée n'a reçu aucun appel. | Lisez le résultat du côté appelant, et vérifiez le numéro qu'il compose. |
 
@@ -51,17 +53,17 @@ Pour tout échec d'appel, écoutez d'abord l'enregistrement du côté appelant :
 | `No internet after PDP activation` | La connexion data s'est ouverte, mais la SIM n'a pas pu joindre internet. | Vérifiez le forfait data de la ligne, puis l'APN.<br /><br />Si plusieurs SIM échouent en même temps, la cause est côté réseau. |
 | `Failed to activate PDP context (timeout while waiting cellular network attachment)` | La SIM n'est pas attachée au réseau. | Reprenez le [dépannage de la SIM](/fr/hardware/sim-troubleshooting). |
 | `Failed to activate PDP context (no 'APN' specified)` | Le test n'a aucun APN à utiliser. | Renseignez **APN Name** dans le test.<br /><br />Ou bien réactivez **Use default APN credentials**, après avoir rempli la section **Default APN** dans l'onglet **Settings** de la SIM et cliqué sur **Save changes** : une SIM n'a aucun APN par défaut tant que personne ne l'a saisi. |
-| `Failed to activate PDP context (Unspecified reason)` | La connexion data a échoué, sans raison précisée par le réseau. | Vérifiez l'APN et l'abonnement data de la ligne. |
+| `Failed to activate PDP context (Unspecified reason)` | La connexion data a échoué, sans raison précisée par le réseau. | Vérifiez l'APN et le forfait data de la ligne. |
 
 ## Technologie réseau
 
-Le robot change de technologie avant d'exécuter l'action.
+Avant d'exécuter l'action, le robot règle la SIM sur la technologie choisie dans **Access technology** de l'étape. Ces messages signalent l'échec de ce réglage.
 
 | Message | Ce que cela signifie | Ce qu'il faut faire |
 |---|---|---|
-| `failed to change network technology: sim not registered` | La SIM ne capte aucun réseau, quelle que soit la technologie. | Reprenez le [dépannage de la SIM](/fr/hardware/sim-troubleshooting).<br /><br />Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, pas seulement du test en échec, puis redémarrez le slot.<br /><br />Si un test vérifie volontairement la 3G ou la 2G, signalez plutôt l'absence de cette technologie à votre équipe réseau.<br /><br />Si l'erreur persiste, écrivez à support@kapptivate.com. |
-| `failed to change network technology: timeout while waiting network registration` | La SIM capte un réseau, mais pas sur la technologie demandée. | Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, pas seulement du test en échec, puis redémarrez le slot.<br /><br />Si un test vérifie volontairement la 3G ou la 2G, signalez plutôt l'absence de cette technologie à votre équipe réseau.<br /><br />Si l'erreur persiste, écrivez à support@kapptivate.com. |
-| `failed to change network technology: ERROR` | Le robot n'a pas pu changer de technologie. | Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, pas seulement du test en échec, puis redémarrez le slot.<br /><br />Si un test vérifie volontairement la 3G ou la 2G, signalez plutôt l'absence de cette technologie à votre équipe réseau.<br /><br />Si l'erreur persiste, écrivez à support@kapptivate.com. |
+| `failed to change network technology: timeout while waiting network registration` | La SIM capte un réseau, mais pas sur la technologie demandée. | Réglez **Access technology** sur **Default** à chaque étape de chaque test joué sur cette SIM, pas seulement à celles du test en échec, puis redémarrez le slot.<br /><br />Si un test vérifie volontairement la 3G ou la 2G, signalez plutôt l'absence de cette technologie à votre équipe réseau.<br /><br />Si l'erreur persiste, écrivez à support@kapptivate.com. |
+| `failed to change network technology: sim not registered` | La SIM ne capte aucun réseau, quelle que soit la technologie. | Reprenez d'abord le [dépannage de la SIM](/fr/hardware/sim-troubleshooting).<br /><br />Ensuite, faites comme pour `timeout while waiting network registration` : réglez **Access technology** sur **Default**, puis redémarrez le slot. |
+| `failed to change network technology: ERROR` | Le robot n'a pas pu changer de technologie. | Faites comme pour `timeout while waiting network registration` : réglez **Access technology** sur **Default**, puis redémarrez le slot. |
 
 ## Robot et test
 
