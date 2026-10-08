@@ -1,0 +1,91 @@
+---
+title: Intégrations
+sidebarTitle: Vue d'ensemble
+description: >-
+  Connectez Slack, Microsoft Teams, Jira ou ServiceNow une seule fois pour votre
+  workspace, puis envoyez chaque alerte dans le canal ou le projet que votre
+  équipe utilise déjà.
+---
+
+Les intégrations relient Kapptivate aux outils dans lesquels votre équipe travaille déjà : un incident arrive dans un canal Slack, un canal Teams, un projet Jira ou une instance ServiceNow plutôt que dans une boîte mail. Un administrateur connecte chaque outil une seule fois, pour tout le workspace, depuis **Administration → Intégrations**. Toutes les alertes peuvent ensuite l'utiliser.
+
+<Info>
+Seuls les administrateurs du workspace peuvent connecter ou déconnecter une intégration. Toute personne qui modifie des alertes peut ensuite la choisir dans une alerte.
+</Info>
+
+## Comment ça marche
+
+<Steps>
+  <Step title="Connecter l'outil">
+    Dans **Administration → Intégrations**, ouvrez la carte de l'outil et suivez son guide ci-dessous. Vous créez une application dans votre propre outil (une application Slack, un enregistrement Microsoft Entra, une intégration Atlassian ou un client OAuth ServiceNow), puis vous collez ses identifiants dans Kapptivate et vous validez la connexion. La carte affiche **Connecté**.
+  </Step>
+  <Step title="Choisir la destination par défaut">
+    Dans le panneau **Détails de l'intégration**, choisissez où partent les notifications par défaut : un canal pour Slack et Teams, un projet pour Jira, un groupe d'affectation pour ServiceNow.
+  </Step>
+  <Step title="L'utiliser dans vos alertes">
+    L'outil apparaît désormais comme option de notification dans la section **Notifications** de chaque alerte. Cochez-le, et choisissez un autre canal ou projet si cette alerte ne doit pas utiliser celui par défaut.
+  </Step>
+</Steps>
+
+<Note>
+Une intégration n'apparaît dans le formulaire d'alerte qu'une fois connectée. Si Slack, Teams ou Jira manque dans les options de notification d'une alerte, c'est qu'il n'a pas encore été connecté pour votre workspace.
+</Note>
+
+## Intégrations disponibles
+
+<Columns cols={2}>
+  <Card title="Slack" icon="hashtag" href="/fr/administration/integrations/slack">
+
+    Publier les alertes d'incident dans un canal que votre équipe lit déjà
+
+</Card>
+  <Card title="Microsoft Teams" icon="microsoft" href="/fr/administration/integrations/teams">
+
+    Envoyer les mêmes alertes dans un canal Teams
+
+</Card>
+  <Card title="Jira" icon="jira" href="/fr/administration/integrations/jira">
+
+    Transformer un incident en ticket dans votre projet
+
+</Card>
+  <Card title="ServiceNow" icon="ticket" href="/fr/administration/integrations/servicenow">
+
+    Ouvrir un incident dans votre instance, résolu quand le monitor revient à la normale
+
+</Card>
+</Columns>
+
+Les notifications par email, SMS et webhook personnalisé n'ont pas besoin d'intégration : vous les réglez directement dans chaque alerte.
+
+## Où les intégrations servent
+
+Une fois connectée, une intégration est disponible à deux endroits :
+
+- **[Alertes](/fr/alerting/alerts)** : chaque alerte choisit quelles intégrations elle notifie, et où.
+- **[Notifications de disponibilité des robots](/fr/administration/notifications)** : l'alerte globale au workspace envoyée quand un robot passe hors ligne.
+
+## Alertes configurées avec un webhook
+
+Avant l'Integrations Center, les notifications Slack et Teams prenaient un webhook entrant collé dans chaque alerte. Ces alertes continuent d'envoyer via leur webhook, et connecter une intégration ne les modifie pas.
+
+Le webhook n'apparaît plus dans le formulaire d'alerte, il n'y est donc plus modifiable. La page de l'alerte vous signale quand elle en utilise encore un.
+
+<Warning>
+Déconnecter une intégration désactive ce canal sur toutes les alertes qui l'utilisent, y compris celles qui passent encore par un webhook. Elles continuent de notifier leurs autres canaux.
+</Warning>
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Alertes" icon="bell" href="/fr/alerting/alerts">
+
+    Décider quand un monitor lève un incident, et qui en est prévenu
+
+</Card>
+  <Card title="Intégration Slack" icon="hashtag" href="/fr/administration/integrations/slack">
+
+    La première connexion la plus courante, pas à pas
+
+</Card>
+</Columns>

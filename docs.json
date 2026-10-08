@@ -316,6 +316,7 @@
                   {
                     "group": "Integrations",
                     "pages": [
+                      "administration/integrations",
                       "administration/integrations/slack",
                       "administration/integrations/teams",
                       "administration/integrations/jira",
@@ -1440,6 +1441,7 @@
                   {
                     "group": "Intégrations",
                     "pages": [
+                      "fr/administration/integrations",
                       "fr/administration/integrations/slack",
                       "fr/administration/integrations/teams",
                       "fr/administration/integrations/jira",
