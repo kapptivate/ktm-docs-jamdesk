@@ -1,0 +1,90 @@
+---
+title: Integrations
+sidebarTitle: Overview
+description: >-
+  Connect Slack, Microsoft Teams, Jira or ServiceNow once for your workspace,
+  then send any alert to the channel or project your team already uses.
+---
+
+Integrations connect Kapptivate to the tools your team already works in, so an incident lands in a Slack channel, a Teams channel, a Jira project or a ServiceNow instance instead of an inbox. An administrator connects each tool once, for the whole workspace, from **Administration → Integrations**. Every alert can then use it.
+
+<Info>
+Only workspace administrators can connect or disconnect an integration. Anyone who edits alerts can then pick it in an alert.
+</Info>
+
+## How it works
+
+<Steps>
+  <Step title="Connect the tool">
+    In **Administration → Integrations**, open the card of the tool and follow its guide below. You create an app in your own tool (a Slack app, a Microsoft Entra registration, an Atlassian integration or a ServiceNow OAuth client), then paste its credentials in Kapptivate and approve the connection. The card shows **Connected**.
+  </Step>
+  <Step title="Choose the default destination">
+    In the **Integration details** panel, pick where notifications go by default: a channel for Slack and Teams, a project for Jira, an assignment group for ServiceNow.
+  </Step>
+  <Step title="Use it in your alerts">
+    The tool now shows up as a notification option in the **Notifications** section of every alert. Check it, and pick another channel or project if this alert should not use the default.
+  </Step>
+</Steps>
+
+<Note>
+An integration only shows up in the alert form once it's connected. If Slack, Teams or Jira is missing from an alert's notification options, it hasn't been connected for your workspace yet.
+</Note>
+
+## Available integrations
+
+<Columns cols={2}>
+  <Card title="Slack" icon="hashtag" href="/administration/integrations/slack">
+
+    Post incident alerts in a channel your team already reads
+
+</Card>
+  <Card title="Microsoft Teams" icon="microsoft" href="/administration/integrations/teams">
+
+    Send the same alerts to a Teams channel
+
+</Card>
+  <Card title="Jira" icon="jira" href="/administration/integrations/jira">
+
+    Turn an incident into a ticket in your project
+
+</Card>
+  <Card title="ServiceNow" icon="ticket" href="/administration/integrations/servicenow">
+
+    Open an incident in your instance, resolved when the monitor recovers
+
+</Card>
+</Columns>
+
+Email, SMS and custom webhook notifications don't need an integration: you set them directly in each alert.
+
+## Where integrations are used
+
+Once connected, an integration is available in two places:
+
+- **[Alerts](/alerting/alerts)**: each alert picks which integrations it notifies, and where.
+- **[Robot availability notifications](/administration/notifications)**: the workspace-wide alert sent when a robot goes offline.
+
+## Alerts set up with a webhook
+
+Before the Integrations Center, Slack and Teams notifications took an incoming webhook pasted in each alert. Those alerts keep sending through their webhook, and connecting an integration doesn't change them.
+
+The webhook no longer appears in the alert form, so it can't be edited there. The alert page tells you when an alert still runs on one.
+
+<Warning>
+Disconnecting an integration turns that channel off on every alert that uses it, including the alerts still running on a webhook. They keep notifying their other channels.
+</Warning>
+
+## What's next?
+
+<Columns cols={2}>
+  <Card title="Alerts" icon="bell" href="/alerting/alerts">
+
+    Decide when a monitor raises an incident, and who hears about it
+
+</Card>
+  <Card title="Slack integration" icon="hashtag" href="/administration/integrations/slack">
+
+    The most common first connection, step by step
+
+</Card>
+</Columns>
