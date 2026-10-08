@@ -1,0 +1,126 @@
+---
+title: "ServiceNow integration"
+sidebarTitle: "ServiceNow"
+description: Connect ServiceNow to Kapptivate so an alert opens an incident in your instance, and resolves it when the monitor recovers.
+---
+
+![ServiceNow](/images/logo-servicenow.webp)
+
+Connecting ServiceNow lets a Kapptivate alert open an incident in your instance, with the error, the screenshot and a link to the execution. When the monitor recovers, Kapptivate adds a work note to that incident and moves it to **Resolved**, so your support team never has to close it by hand. The connection happens once, from **Administration → Integrations**, and it relies on an OAuth client you create in your ServiceNow instance.
+
+You need two things: the `admin` role on your ServiceNow instance, and admin access to your Kapptivate workspace.
+
+<Note>
+Kapptivate calls your instance directly, so it must be reachable over HTTPS from the internet. An instance only reachable from your internal network can't be connected.
+</Note>
+
+## Create the OAuth client in ServiceNow
+
+<Steps>
+  <Step title="Open the inbound integrations">
+    In your instance, go to **All → Machine Identity Console → Inbound integrations**.
+  </Step>
+  <Step title="Create the integration">
+    Click **New integration** and choose **OAuth - Authorization code grant**.
+  </Step>
+  <Step title="Fill in the form">
+    | Field | Value |
+    |---|---|
+    | **Name** | Any name your team will recognize, for example `Kapptivate` |
+    | **Redirect URL** | The callback URL below, with your own Kapptivate domain in place of `<your-domain>` |
+    | **Scope** | `useraccount`, the default scope, or a broader one |
+    | **Enforce token restrictions** | Unchecked |
+
+    ```text Redirect URL
+    https://<your-domain>/api/integrations/oauth/callback/servicenow
+    ```
+
+    Example: `https://app.kapptivate.com/api/integrations/oauth/callback/servicenow`
+  </Step>
+  <Step title="Copy the credentials">
+    Save, then open the new entry and copy the **Client ID** and the **Client Secret**.
+  </Step>
+</Steps>
+
+<Accordion title="On an older instance">
+  If your instance has no Machine Identity Console, go to **System OAuth → Application Registry**, click **New**, and choose **Create an OAuth API endpoint for external clients**. Fill in the same name and redirect URL. The client you get works the same way.
+</Accordion>
+
+<Warning>
+Don't pick **OAuth Provider - Outbound** or **OIDC provider**. Those options let ServiceNow sign in to another service, which is the reverse direction, and the connection will fail.
+</Warning>
+
+## Connect from Kapptivate
+
+Go to **Administration → Integrations** and open the **ServiceNow** card. Fill in:
+
+- **Instance URL**: the address of your instance, for example `https://your-instance.service-now.com`.
+- **Client ID** and **Client secret**: the credentials you copied from ServiceNow.
+
+Click **Connect**. Your instance's sign-in page opens and asks you to allow the connection. Once you approve, you land back in Kapptivate and the ServiceNow card shows **Connected**.
+
+The account you sign in with matters: Kapptivate creates and resolves every incident under that user. It needs:
+
+| Access | Why |
+|---|---|
+| Write on the `incident` table | Create the incidents, add work notes, resolve them |
+| Read on the `sys_user_group` table | List the assignment groups in the pickers |
+
+<Tip>
+A dedicated integration user, rather than someone's personal account, keeps the connection alive when people change roles, and makes Kapptivate's incidents easy to spot in ServiceNow.
+</Tip>
+
+## Choose the default assignment group
+
+In the **Integration details** panel, under **Default settings**, pick a **Default assignment group**, then click **Save**. An alert that doesn't name a group of its own assigns its incident here.
+
+If you leave it empty, Kapptivate sends no group, and your instance's own assignment rules decide who picks up the incident.
+
+The picker lists the active groups the connected user can read. If a group is missing, check that user's access to `sys_user_group`.
+
+## Send an alert to ServiceNow
+
+Once ServiceNow is connected, the alert form shows a **ServiceNow notification** option. Check it, and optionally pick a **ServiceNow assignment group** to override the default for this alert.
+
+The same choice exists for [robot availability](/administration/notifications), under **ServiceNow notifications**.
+
+## What the incident looks like
+
+Kapptivate opens one ServiceNow incident per Kapptivate incident, and only for the levels that call for action:
+
+| Kapptivate level | ServiceNow urgency and impact |
+|---|---|
+| Critical | 1 - High |
+| Warning | 3 - Low |
+| OK, Info | No incident created |
+
+ServiceNow derives the priority from these two values, following your instance's priority matrix.
+
+The incident carries the error, the screenshot as an attachment, and a link back to the execution in Kapptivate. In the **Incidents** list, an icon on the row opens the matching ServiceNow incident.
+
+When the Kapptivate incident resolves, Kapptivate adds a work note and moves the ServiceNow incident to **Resolved**, with the close code **Resolved by caller**.
+
+<Note>
+Some instances require extra fields before an incident can be resolved. In that case the work note is still added, the incident stays open for your team to close, and the notification shows as failed on the Kapptivate incident.
+</Note>
+
+## Disconnect
+
+In the **Integration details** panel, click **Disconnect**. If alerts still route to ServiceNow, Kapptivate tells you how many and disables them once you confirm.
+
+Kapptivate then stops opening incidents, and the card goes back to **Not connected**. Incidents already created in ServiceNow stay where they are.
+
+## Other integrations
+
+<Columns cols={2}>
+  <Card title="Jira" icon="ticket" href="/administration/integrations/jira">
+
+    Turn the same incidents into Jira tickets
+
+</Card>
+  <Card title="Slack" icon="hashtag" href="/administration/integrations/slack">
+
+    Send the same alerts to a Slack channel
+
+</Card>
+</Columns>

@@ -318,7 +318,8 @@
                     "pages": [
                       "administration/integrations/slack",
                       "administration/integrations/teams",
-                      "administration/integrations/jira"
+                      "administration/integrations/jira",
+                      "administration/integrations/servicenow"
                     ]
                   },
                   {
@@ -1441,7 +1442,8 @@
                     "pages": [
                       "fr/administration/integrations/slack",
                       "fr/administration/integrations/teams",
-                      "fr/administration/integrations/jira"
+                      "fr/administration/integrations/jira",
+                      "fr/administration/integrations/servicenow"
                     ]
                   },
                   {
