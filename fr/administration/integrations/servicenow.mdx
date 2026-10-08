@@ -1,0 +1,126 @@
+---
+title: "Intégration ServiceNow"
+sidebarTitle: "ServiceNow"
+description: Connectez ServiceNow à Kapptivate pour qu'une alerte ouvre un incident dans votre instance, et le résolve quand le monitor est rétabli.
+---
+
+![ServiceNow](/images/logo-servicenow.webp)
+
+Connecter ServiceNow permet à une alerte Kapptivate d'ouvrir un incident dans votre instance, avec l'erreur, la capture d'écran et un lien vers l'exécution. Quand le monitor est rétabli, Kapptivate ajoute une work note à cet incident et le passe en **Resolved** : votre équipe support n'a jamais à le fermer à la main. La connexion se fait une seule fois, depuis **Administration → Intégrations**, et elle s'appuie sur un client OAuth que vous créez dans votre instance ServiceNow.
+
+Il vous faut deux choses : le rôle `admin` sur votre instance ServiceNow, et un accès administrateur à votre workspace Kapptivate.
+
+<Note>
+Kapptivate appelle votre instance directement : elle doit donc être joignable en HTTPS depuis internet. Une instance accessible uniquement depuis votre réseau interne ne peut pas être connectée.
+</Note>
+
+## Créez le client OAuth dans ServiceNow
+
+<Steps>
+  <Step title="Ouvrez les intégrations entrantes">
+    Dans votre instance, allez dans **All → Machine Identity Console → Inbound integrations**.
+  </Step>
+  <Step title="Créez l'intégration">
+    Cliquez sur **New integration** et choisissez **OAuth - Authorization code grant**.
+  </Step>
+  <Step title="Remplissez le formulaire">
+    | Champ | Valeur |
+    |---|---|
+    | **Name** | Un nom que votre équipe reconnaîtra, par exemple `Kapptivate` |
+    | **Redirect URL** | La callback URL ci-dessous, avec votre propre domaine Kapptivate à la place de `<votre-domaine>` |
+    | **Scope** | `useraccount`, le scope par défaut, ou un scope plus large |
+    | **Enforce token restrictions** | Décoché |
+
+    ```text Redirect URL
+    https://<votre-domaine>/api/integrations/oauth/callback/servicenow
+    ```
+
+    Exemple : `https://app.kapptivate.com/api/integrations/oauth/callback/servicenow`
+  </Step>
+  <Step title="Copiez les identifiants">
+    Enregistrez, puis ouvrez la nouvelle entrée et copiez le **Client ID** et le **Client Secret**.
+  </Step>
+</Steps>
+
+<Accordion title="Sur une instance plus ancienne">
+  Si votre instance n'a pas de Machine Identity Console, allez dans **System OAuth → Application Registry**, cliquez sur **New**, et choisissez **Create an OAuth API endpoint for external clients**. Renseignez le même nom et la même redirect URL. Le client obtenu fonctionne de la même façon.
+</Accordion>
+
+<Warning>
+Ne choisissez pas **OAuth Provider - Outbound** ni **OIDC provider**. Ces options permettent à ServiceNow de se connecter à un autre service, c'est-à-dire le sens inverse, et la connexion échouera.
+</Warning>
+
+## Connectez depuis Kapptivate
+
+Allez dans **Administration → Intégrations** et ouvrez la carte **ServiceNow**. Renseignez :
+
+- **URL de l'instance** : l'adresse de votre instance, par exemple `https://votre-instance.service-now.com`.
+- **Client ID** et **Client secret** : les identifiants copiés depuis ServiceNow.
+
+Cliquez sur **Connecter**. La page de connexion de votre instance s'ouvre et vous demande d'autoriser la connexion. Une fois que vous validez, vous revenez dans Kapptivate et la carte ServiceNow affiche **Connecté**.
+
+Le compte avec lequel vous vous connectez compte : Kapptivate crée et résout chaque incident sous cet utilisateur. Il lui faut :
+
+| Accès | Pourquoi |
+|---|---|
+| Écriture sur la table `incident` | Créer les incidents, ajouter les work notes, les résoudre |
+| Lecture sur la table `sys_user_group` | Lister les groupes d'affectation dans les sélecteurs |
+
+<Tip>
+Un utilisateur dédié à l'intégration, plutôt que le compte personnel de quelqu'un, garde la connexion en vie quand les rôles changent, et rend les incidents de Kapptivate faciles à repérer dans ServiceNow.
+</Tip>
+
+## Choisissez le groupe d'affectation par défaut
+
+Dans le panneau **Détails de l'intégration**, sous **Réglages par défaut**, choisissez un **Groupe d'affectation par défaut**, puis cliquez sur **Enregistrer**. Une alerte qui ne précise pas de groupe affecte son incident ici.
+
+Si vous le laissez vide, Kapptivate n'envoie aucun groupe, et ce sont les règles d'affectation de votre instance qui décident qui prend l'incident.
+
+Le sélecteur liste les groupes actifs que l'utilisateur connecté peut lire. Si un groupe manque, vérifiez son accès à `sys_user_group`.
+
+## Envoyez une alerte vers ServiceNow
+
+Une fois ServiceNow connecté, le formulaire d'alerte affiche une option **ServiceNow notification**. Cochez-la, et choisissez si besoin un **ServiceNow assignment group** pour remplacer le groupe par défaut sur cette alerte.
+
+Le même choix existe pour la [disponibilité des robots](/fr/administration/notifications), sous **ServiceNow**, avec le champ **Groupe d'affectation ServiceNow**.
+
+## À quoi ressemble l'incident
+
+Kapptivate ouvre un incident ServiceNow par incident Kapptivate, et seulement pour les niveaux qui demandent une action :
+
+| Niveau Kapptivate | Urgency et impact ServiceNow |
+|---|---|
+| Critical | 1 - High |
+| Warning | 3 - Low |
+| OK, Info | Aucun incident créé |
+
+ServiceNow en déduit la priorité, selon la matrice de priorité de votre instance.
+
+L'incident contient l'erreur, la capture d'écran en pièce jointe, et un lien vers l'exécution dans Kapptivate. Dans la liste des **Incidents**, une icône sur la ligne ouvre l'incident ServiceNow correspondant.
+
+Quand l'incident Kapptivate est résolu, Kapptivate ajoute une work note et passe l'incident ServiceNow en **Resolved**, avec le close code **Resolved by caller**.
+
+<Note>
+Certaines instances exigent des champs supplémentaires avant de résoudre un incident. Dans ce cas, la work note est quand même ajoutée, l'incident reste ouvert pour que votre équipe le ferme, et la notification apparaît en échec sur l'incident Kapptivate.
+</Note>
+
+## Déconnectez
+
+Dans le panneau **Détails de l'intégration**, cliquez sur **Déconnecter**. Si des alertes routent encore vers ServiceNow, Kapptivate vous indique combien et les désactive une fois que vous confirmez.
+
+Kapptivate arrête alors d'ouvrir des incidents, et la carte repasse en **Non connecté**. Les incidents déjà créés dans ServiceNow restent en place.
+
+## Autres intégrations
+
+<Columns cols={2}>
+  <Card title="Jira" icon="ticket" href="/fr/administration/integrations/jira">
+
+    Transformez les mêmes incidents en tickets Jira
+
+</Card>
+  <Card title="Slack" icon="hashtag" href="/fr/administration/integrations/slack">
+
+    Envoyez les mêmes alertes dans un canal Slack
+
+</Card>
+</Columns>

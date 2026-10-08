@@ -497,7 +497,7 @@ img[src*="/images/logo-"] {
 }
 
 /* ------------------------------------------------------------------
- *  Integration pages (Slack, Jira, Microsoft Teams)
+ *  Integration pages (Slack, Jira, Microsoft Teams, ServiceNow)
  *  Scoped through the product logo these pages carry, so nothing here
  *  leaks onto the rest of the documentation.
  * ------------------------------------------------------------------ */
@@ -538,6 +538,9 @@ article:has(.prose img[src*="logo-jira.webp"]) header h1::before {
 }
 article:has(.prose img[src*="logo-teams.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-teams.webp");
+}
+article:has(.prose img[src*="logo-servicenow.webp"]) header h1::before {
+  background-image: url("/_jd/images/logo-servicenow.webp");
 }
 
 /* The "coming soon" callout announces a release date. The house style
