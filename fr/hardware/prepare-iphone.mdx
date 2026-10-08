@@ -5,8 +5,6 @@ description: Mettre en service un iPhone sur un robot smartphone, des réglages 
 
 La mise en service d'un iPhone se joue en trois temps : faire quelques réglages sur le téléphone, brancher le câble au robot, puis laisser le support Kapptivate enregistrer le device auprès d'Apple. Sans cet enregistrement, Apple n'autorise aucun test automatisé sur ce téléphone.
 
-Prévoyez le délai : l'enregistrement demande 24 à 72 heures, et un iPhone neuf n'est pas testable le jour même.
-
 ## Avant de commencer
 
 - Le robot est installé et son hub USB est sous tension : voir [installer un robot](/fr/hardware/install-robot).
@@ -66,7 +64,7 @@ Ces étapes viennent des exigences d'Apple et s'enchaînent dans cet ordre. Tout
     Dites-lui aussi si la popup de confiance ne s'est jamais affichée. Il la fait réapparaître pendant la session ci-dessous.
   </Step>
   <Step title="Apple enregistre le téléphone">
-    Le support fait enregistrer l'UDID auprès d'Apple, ce qui autorise les tests automatisés sur cet iPhone précis. Comptez 24 à 72 heures : le support vous prévient dès qu'Apple a validé, et vous enchaînez sur l'appairage.
+    Le support fait enregistrer l'UDID auprès d'Apple, ce qui autorise les tests automatisés sur cet iPhone précis. L'enregistrement est pris en compte immédiatement : vous enchaînez directement sur l'appairage.
 
     Cette étape ne concerne qu'un iPhone jamais utilisé avec Kapptivate. Un téléphone déjà enregistré passe directement à l'appairage.
   </Step>
@@ -98,7 +96,7 @@ Un téléphone enregistré, appairé, et pourtant absent ? Les deux causes habit
 <Columns cols={2}>
   <Card title="Préparer un smartphone Android" icon="mobile" href="/fr/hardware/prepare-android">
 
-    Le même travail sur Samsung, sans enregistrement à attendre
+    Le même travail sur Samsung, sans enregistrement auprès d'Apple
 
 </Card>
   <Card title="Devices et versions d'OS pris en charge" icon="mobile-screen" href="/fr/questions/devices-os-versions">
