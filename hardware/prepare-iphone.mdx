@@ -5,8 +5,6 @@ description: Set up an iPhone for a smartphone robot, from the iOS settings to t
 
 Getting an iPhone ready runs in three stages. A few settings on the phone, then the cable into the robot, then Kapptivate support registering the device with Apple. Apple only allows automated testing on a registered device, and that last stage is the one you can't do yourself.
 
-Plan for it. The registration takes 24 to 72 hours, so a new iPhone isn't testable the same day.
-
 ## Before you start
 
 - The robot is installed, with its USB hub powered on: see [install a robot](/hardware/install-robot).
@@ -66,7 +64,7 @@ These steps are Apple's requirements and they run in this order. All of them go 
     Tell support if the trust popup never appeared. They can make it appear again during the session below.
   </Step>
   <Step title="Apple registers the device">
-    Support registers the UDID with Apple, which is what allows automated testing on that specific iPhone. Count 24 to 72 hours. You have nothing to watch for: support tells you once Apple has cleared the device, and the pairing follows.
+    Support registers the UDID with Apple, which is what allows automated testing on that specific iPhone. Apple takes the registration into account right away, so the pairing can follow straight after.
 
     This stage only concerns an iPhone that has never been used with Kapptivate. A device already registered goes straight to the pairing.
   </Step>
@@ -98,7 +96,7 @@ If the phone is registered, paired, and still absent, the two usual causes are a
 <Columns cols={2}>
   <Card title="Prepare an Android smartphone" icon="mobile" href="/hardware/prepare-android">
 
-    The same job on Samsung, with no registration to wait for
+    The same job on Samsung, with no Apple registration
 
 </Card>
   <Card title="Supported devices and OS versions" icon="mobile-screen" href="/questions/devices-os-versions">
