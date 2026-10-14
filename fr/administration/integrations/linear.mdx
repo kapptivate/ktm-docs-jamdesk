@@ -1,0 +1,102 @@
+---
+title: "Intégration Linear"
+sidebarTitle: "Linear"
+description: Connectez Linear à Kapptivate pour qu'un incident ouvre une issue dans l'équipe qui va le corriger, et reçoive un commentaire quand le monitor est rétabli.
+---
+
+![Linear](/images/logo-linear.webp)
+
+<Info>
+**Bientôt disponible.** L'intégration Linear n'est pas encore disponible dans Kapptivate. Cette page montre comment elle fonctionnera à sa sortie.
+</Info>
+
+Connecter Linear permet à une alerte Kapptivate d'ouvrir une issue dans l'une de vos équipes Linear, avec l'erreur, la capture d'écran et un lien vers l'exécution. Quand le monitor est rétabli, Kapptivate commente cette issue, et votre équipe garde son propre workflow pour la fermer. La connexion se fait une seule fois, depuis **Administration → Intégrations**, et elle s'appuie sur une application OAuth que vous créez dans votre workspace Linear.
+
+Il vous faut deux choses : un accès administrateur à votre workspace Linear, et un accès administrateur à votre workspace Kapptivate. Pour savoir qui administre votre workspace Linear, ouvrez le menu de commandes (`Cmd K` ou `Ctrl K`) et tapez **View workspace admins**.
+
+## Créez l'application OAuth dans Linear
+
+<Steps>
+  <Step title="Ouvrez les applications OAuth">
+    Dans Linear, allez dans **Settings → Administration → API**, puis sous **OAuth Applications** cliquez sur **New OAuth application**.
+
+    <Warning>
+    N'utilisez pas **Account → Security & access**. Cette page crée des clés API personnelles, que Kapptivate ne peut pas utiliser.
+    </Warning>
+  </Step>
+  <Step title="Remplissez le formulaire">
+    | Champ | Valeur |
+    |---|---|
+    | **Name** | Un nom que votre équipe reconnaîtra, par exemple `Kapptivate`. Linear l'affiche comme auteur de chaque issue et de chaque commentaire créés par Kapptivate |
+    | **Developer name** et **Developer URL** | Votre entreprise, ou `Kapptivate` |
+    | **Callback URLs** | La callback URL ci-dessous, avec votre propre domaine Kapptivate à la place de `<votre-domaine>` |
+    | **Public** | Désactivé |
+    | **Webhooks** | Désactivé |
+
+    ```text Callback URL
+    https://<votre-domaine>/api/integrations/oauth/callback/linear
+    ```
+
+    Exemple : `https://app.kapptivate.com/api/integrations/oauth/callback/linear`
+  </Step>
+  <Step title="Copiez les identifiants">
+    Enregistrez. La page de l'application affiche le **Client ID** et le **Client secret** : copiez les deux. Si vous perdez le secret, régénérez-le depuis la même page, puis collez le nouveau dans Kapptivate.
+  </Step>
+</Steps>
+
+## Connectez depuis Kapptivate
+
+Allez dans **Administration → Intégrations** et ouvrez la carte **Linear**. Collez le **Client ID** et le **Client secret**, puis cliquez sur **Connecter**.
+
+Linear s'ouvre et vous demande d'autoriser l'application dans votre workspace. Une fois que vous validez, vous revenez dans Kapptivate et la carte Linear affiche **Connecté**.
+
+Les issues ne sont pas signées par la personne qui a connecté Linear : elles viennent de l'application, sous le nom que vous lui avez donné.
+
+## Choisissez l'équipe par défaut
+
+Dans le panneau **Détails de l'intégration**, sous **Réglages par défaut**, choisissez une **Équipe par défaut**, puis cliquez sur **Enregistrer**. Une alerte qui ne précise pas d'équipe ouvre son issue ici.
+
+Le sélecteur ne liste que les équipes actives. Linear refuse de créer des issues dans une équipe retirée, donc elles n'apparaissent pas.
+
+## Envoyez une alerte vers Linear
+
+Une fois Linear connecté, le formulaire d'alerte affiche une option **Linear notification**. Cochez-la, et choisissez si besoin une **Linear team** pour remplacer l'équipe par défaut sur cette alerte.
+
+Le même choix existe pour la [disponibilité des robots](/fr/administration/notifications), sous **Linear**, avec le champ **Équipe Linear**.
+
+## À quoi ressemble l'issue
+
+Kapptivate ouvre une issue Linear par incident Kapptivate, et seulement pour les niveaux qui demandent une action :
+
+| Niveau Kapptivate | Priorité Linear |
+|---|---|
+| Critical | High |
+| Warning | Low |
+| OK, Info | Aucune issue créée |
+
+L'issue contient l'erreur, la capture d'écran et un lien vers l'exécution dans Kapptivate. Dans la liste des **Incidents**, une icône sur la ligne ouvre l'issue Linear correspondante.
+
+Kapptivate ne fixe ni statut ni label : l'issue arrive dans l'état par défaut de l'équipe, c'est-à-dire **Triage** quand l'équipe l'a activé.
+
+Quand l'incident Kapptivate est résolu, Kapptivate ajoute un commentaire sur l'issue sans toucher à son statut. C'est votre équipe qui décide quand la fermer.
+
+## Déconnectez
+
+Dans le panneau **Détails de l'intégration**, cliquez sur **Déconnecter**. Si des alertes routent encore vers Linear, Kapptivate vous indique combien et les désactive une fois que vous confirmez.
+
+Kapptivate arrête alors d'ouvrir des issues, et la carte repasse en **Non connecté**. Les issues déjà créées dans Linear restent en place.
+
+## Autres intégrations
+
+<Columns cols={2}>
+  <Card title="Jira" icon="ticket" href="/fr/administration/integrations/jira">
+
+    Transformez les mêmes incidents en tickets Jira
+
+</Card>
+  <Card title="Slack" icon="hashtag" href="/fr/administration/integrations/slack">
+
+    Envoyez les mêmes alertes dans un canal Slack
+
+</Card>
+</Columns>

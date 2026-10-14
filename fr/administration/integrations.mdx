@@ -2,12 +2,12 @@
 title: Intégrations
 sidebarTitle: Vue d'ensemble
 description: >-
-  Connectez Slack, Microsoft Teams, Jira ou ServiceNow une seule fois pour votre
-  workspace, puis envoyez chaque alerte dans le canal ou le projet que votre
+  Connectez Slack, Microsoft Teams, Jira, ServiceNow ou Linear une seule fois
+  pour votre workspace, puis envoyez chaque alerte dans le canal ou le projet que votre
   équipe utilise déjà.
 ---
 
-Les intégrations relient Kapptivate aux outils dans lesquels votre équipe travaille déjà : un incident arrive dans un canal Slack, un canal Teams, un projet Jira ou une instance ServiceNow plutôt que dans une boîte mail. Un administrateur connecte chaque outil une seule fois, pour tout le workspace, depuis **Administration → Intégrations**. Toutes les alertes peuvent ensuite l'utiliser.
+Les intégrations relient Kapptivate aux outils dans lesquels votre équipe travaille déjà : un incident arrive dans un canal Slack, un canal Teams, un projet Jira, une instance ServiceNow ou une équipe Linear plutôt que dans une boîte mail. Un administrateur connecte chaque outil une seule fois, pour tout le workspace, depuis **Administration → Intégrations**. Toutes les alertes peuvent ensuite l'utiliser.
 
 <Info>
 Seuls les administrateurs du workspace peuvent connecter ou déconnecter une intégration. Toute personne qui modifie des alertes peut ensuite la choisir dans une alerte.
@@ -17,10 +17,10 @@ Seuls les administrateurs du workspace peuvent connecter ou déconnecter une int
 
 <Steps>
   <Step title="Connecter l'outil">
-    Dans **Administration → Intégrations**, ouvrez la carte de l'outil et suivez son guide ci-dessous. Vous créez une application dans votre propre outil (une application Slack, un enregistrement Microsoft Entra, une intégration Atlassian ou un client OAuth ServiceNow), puis vous collez ses identifiants dans Kapptivate et vous validez la connexion. La carte affiche **Connecté**.
+    Dans **Administration → Intégrations**, ouvrez la carte de l'outil et suivez son guide ci-dessous. Vous créez une application dans votre propre outil (une application Slack, un enregistrement Microsoft Entra, une intégration Atlassian, un client OAuth ServiceNow ou une application OAuth Linear), puis vous collez ses identifiants dans Kapptivate et vous validez la connexion. La carte affiche **Connecté**.
   </Step>
   <Step title="Choisir la destination par défaut">
-    Dans le panneau **Détails de l'intégration**, choisissez où partent les notifications par défaut : un canal pour Slack et Teams, un projet pour Jira, un groupe d'affectation pour ServiceNow.
+    Dans le panneau **Détails de l'intégration**, choisissez où partent les notifications par défaut : un canal pour Slack et Teams, un projet pour Jira, un groupe d'affectation pour ServiceNow, une équipe pour Linear.
   </Step>
   <Step title="L'utiliser dans vos alertes">
     L'outil apparaît désormais comme option de notification dans la section **Notifications** de chaque alerte. Cochez-le, et choisissez un autre canal ou projet si cette alerte ne doit pas utiliser celui par défaut.
@@ -52,6 +52,11 @@ Une intégration n'apparaît dans le formulaire d'alerte qu'une fois connectée.
   <Card title="ServiceNow" icon="ticket" href="/fr/administration/integrations/servicenow">
 
     Ouvrir un incident dans votre instance, résolu quand le monitor revient à la normale
+
+</Card>
+  <Card title="Linear" icon="list-check" href="/fr/administration/integrations/linear">
+
+    Bientôt disponible : ouvrir une issue dans l'équipe qui va corriger
 
 </Card>
 </Columns>
