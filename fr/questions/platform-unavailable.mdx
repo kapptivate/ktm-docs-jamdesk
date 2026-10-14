@@ -1,0 +1,78 @@
+---
+title: Savoir pourquoi la plateforme est indisponible
+description: Distinguer un incident Kapptivate d'un problème sur votre réseau ou sur un robot, savoir ce que deviennent vos résultats pendant l'incident et comment vous en êtes informé.
+---
+
+La plateforme ne s'affiche plus, ou plus aucun résultat n'arrive. Vu de votre poste, un problème sur votre réseau et un incident chez Kapptivate se ressemblent. Avant de conclure à un incident côté Kapptivate, vérifiez que le problème ne vient pas de votre réseau.
+
+Cette page traite de la plateforme elle-même. Si un seul robot est **Hors ligne** et que la plateforme s'affiche normalement, passez directement à [dépanner un robot hors ligne](/fr/hardware/network-troubleshooting).
+
+## Par où commencer
+
+| Ce que vous constatez | Ce qu'il faut vérifier | Où aller |
+|---|---|---|
+| Une bannière en haut de la plateforme annonce un incident | Rien de votre côté : Kapptivate s'en occupe | [Pendant un incident](#pendant-un-incident) |
+| La plateforme ne s'affiche pas, ou affiche un code d'erreur | Si elle s'affiche depuis un autre réseau, par exemple en 4G sur votre téléphone | [Si la plateforme ne s'affiche plus](#si-la-plateforme-ne-saffiche-plus) |
+| Personne dans votre équipe n'arrive à se connecter, avec des mots de passe corrects | Rien de votre côté | [Contacter Kapptivate](#contacter-kapptivate) |
+| La plateforme s'affiche, mais aucun nouveau résultat n'arrive | Le statut de vos robots | [Si les résultats n'arrivent plus](#si-les-résultats-narrivent-plus) |
+| Un robot est **Hors ligne**, ou tous les robots d'un même site sont tombés à la même heure | Le robot, ou le courant et le réseau du site | [Dépanner un robot hors ligne](/fr/hardware/network-troubleshooting) |
+| Des robots de plusieurs de vos sites sont passés **Hors ligne** au même moment | Rien de votre côté | [Contacter Kapptivate](#contacter-kapptivate) |
+
+## Si la plateforme ne s'affiche plus
+
+Ouvrez la plateforme depuis un autre réseau que celui de votre entreprise, par exemple en 4G sur votre téléphone.
+
+- Si elle s'affiche, la plateforme fonctionne. Le blocage se situe très probablement entre votre réseau et la plateforme : un proxy, un pare-feu ou un serveur DNS. Transmettez l'erreur constatée à votre service informatique, avec l'heure à laquelle elle est apparue. Demandez-lui aussi de vérifier que les flux sont bien ouverts entre votre réseau et Kapptivate. Si besoin, demandez à support@kapptivate.com le document des exigences IP : il liste notamment les flux à ouvrir pour accéder à Kapptivate.
+- Si elle ne s'affiche pas non plus, l'incident est très probablement côté Kapptivate. Patientez cinq minutes, puis réessayez : le problème peut être passager.
+
+Si la plateforme ne s'affiche toujours pas, vérifiez que votre interlocuteur Kapptivate n'avait pas annoncé de maintenance sur ce créneau. Les mises à jour de la plateforme ont aussi lieu le plus souvent le mardi matin. Sans maintenance annoncée, [contactez Kapptivate](#contacter-kapptivate).
+
+## Si les résultats n'arrivent plus
+
+La plateforme s'affiche, mais vos dashboards et vos monitors ne montrent rien de nouveau, ou affichent des messages d'erreur ou des erreurs techniques. Ouvrez [la liste de vos robots](/fr/equipment/agents) et regardez le statut des robots dont les tests ne remontent plus de résultats.
+
+- Si ces robots sont **Hors ligne**, vérifiez d'abord le robot et son site avec [dépanner un robot hors ligne](/fr/hardware/network-troubleshooting).
+- S'ils sont **En ligne** et que tous les tests ont cessé de remonter des résultats en même temps, le problème vient probablement de la plateforme : [contactez Kapptivate](#contacter-kapptivate).
+
+Si des robots de plusieurs de vos sites sont passés **Hors ligne** au même moment, l'incident est très probablement côté Kapptivate : [contactez Kapptivate](#contacter-kapptivate).
+
+Un test qui échoue pendant que les autres remontent leurs résultats n'est pas une panne de la plateforme. Ses [résultats d'exécution](/fr/executions/results) indiquent ce qui n'a pas fonctionné.
+
+## Pendant un incident
+
+Si la plateforme reste accessible, une bannière en haut de l'écran signale l'incident en cours. Votre interlocuteur Kapptivate habituel vous tient aussi informé.
+
+Une maintenance planifiée, elle, est annoncée à l'avance par votre interlocuteur Kapptivate. Une coupure pendant le créneau annoncé ne demande donc aucune action de votre part.
+
+Selon l'incident, vos tests s'arrêtent, ou continuent sans que leurs résultats s'affichent. Une fois l'incident terminé, deux cas sont possibles :
+
+- les résultats arrivent en retard, une fois la plateforme revenue ;
+- les résultats manquent pour toute la durée de l'incident.
+
+Le compte rendu d'incident indique lequel des deux cas s'applique. Demandez-le à support@kapptivate.com : il précise la durée de l'incident et les résultats concernés.
+
+Au retour de la plateforme, plusieurs alertes peuvent arriver d'un coup. Vérifiez leur horodatage avant d'agir.
+
+## Contacter Kapptivate
+
+Écrivez à support@kapptivate.com, ou à votre interlocuteur Kapptivate habituel, en indiquant :
+
+- l'heure à laquelle le problème a commencé, avec votre fuseau horaire ;
+- ce que vous voyez : le message ou le code d'erreur, si possible avec une capture d'écran ;
+- si la plateforme s'affiche depuis un autre réseau ;
+- si des robots sont tombés, leurs noms tels qu'ils apparaissent sur la plateforme.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Dépanner un robot hors ligne" icon="robot" href="/fr/hardware/network-troubleshooting">
+
+    Si la plateforme fonctionne mais qu'un robot, ou un site, est tombé
+
+</Card>
+  <Card title="Statuts" icon="signal" href="/fr/equipment/statuses">
+
+    Lire correctement le statut d'un robot avant de chercher d'où vient le problème
+
+</Card>
+</Columns>

@@ -1178,7 +1178,8 @@
                 "icon": "circle-question",
                 "expanded": true,
                 "pages": [
-                  "questions/devices-os-versions"
+                  "questions/devices-os-versions",
+                  "questions/platform-unavailable"
                 ]
               },
               {
@@ -2304,7 +2305,8 @@
                 "icon": "circle-question",
                 "expanded": true,
                 "pages": [
-                  "fr/questions/devices-os-versions"
+                  "fr/questions/devices-os-versions",
+                  "fr/questions/platform-unavailable"
                 ]
               },
               {
