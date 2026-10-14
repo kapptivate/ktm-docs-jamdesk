@@ -1,0 +1,78 @@
+---
+title: Find out why the platform is unavailable
+description: Tell a Kapptivate incident from a problem on your network or on a robot, learn what happens to your results during an incident, and know how you'll hear about it.
+---
+
+The platform won't load, or results have stopped coming in. From your desk, a problem on your network and an incident at Kapptivate look the same. Rule out your own network before you conclude the incident is on Kapptivate's side.
+
+This page covers the platform itself. If a single robot reads **Offline** and the platform loads normally, go straight to [troubleshoot an Offline robot](/hardware/network-troubleshooting).
+
+## Where to start
+
+| What you see | What to check | Where to go |
+|---|---|---|
+| A banner at the top of the platform announces an incident | Nothing on your side: Kapptivate is on it | [During an incident](#during-an-incident) |
+| The platform won't load, or shows an error code | Whether it loads from another network, over 4G on your phone for example | [If the platform won't load](#if-the-platform-wont-load) |
+| Nobody on your team can log in, with passwords you know are right | Nothing on your side | [Contact Kapptivate](#contact-kapptivate) |
+| The platform loads, but no new results come in | The status of your robots | [If results stop coming in](#if-results-stop-coming-in) |
+| One robot reads **Offline**, or every robot on one site dropped at the same hour | The robot, or the site's power and network | [Troubleshoot an Offline robot](/hardware/network-troubleshooting) |
+| Robots on several of your sites dropped to **Offline** at the same time | Nothing on your side | [Contact Kapptivate](#contact-kapptivate) |
+
+## If the platform won't load
+
+Open the platform from a network other than your company's, over 4G on your phone for example.
+
+- If it loads there, the platform is up. Something between your network and the platform is most likely blocking it: a proxy, a firewall, or a DNS server. Pass the error you saw to your IT team, with the time it started, and ask them to check that the flows between your network and Kapptivate are open. If they need it, support@kapptivate.com sends the IP requirements document, which lists the flows to open to reach Kapptivate.
+- If it fails there too, the incident is most likely on Kapptivate's side. Wait five minutes and try again: the problem can be short-lived.
+
+Still nothing? Check whether your Kapptivate contact announced maintenance for this time. Platform updates also go out most often on Tuesday mornings. With no maintenance announced, [contact Kapptivate](#contact-kapptivate).
+
+## If results stop coming in
+
+The platform loads, but your dashboards and monitors show nothing new, or show error messages and technical errors. Open [your robot list](/equipment/agents) and read the status of the robots whose tests stopped reporting.
+
+- If those robots read **Offline**, check the robot and its site first with [troubleshoot an Offline robot](/hardware/network-troubleshooting).
+- If they read **Online** and every test stopped reporting at once, the problem probably sits on the platform: [contact Kapptivate](#contact-kapptivate).
+
+If robots on several of your sites dropped to **Offline** at the same time, the incident is most likely on Kapptivate's side: [contact Kapptivate](#contact-kapptivate).
+
+A single test that fails while the others report is not a platform outage. Its [execution results](/executions/results) say what went wrong.
+
+## During an incident
+
+When the platform stays reachable, a banner at its top tells you an incident is under way. Your usual Kapptivate contact keeps you posted too.
+
+Planned maintenance is different. Your Kapptivate contact announces it ahead of time, so an outage inside the announced window needs no action from you.
+
+Depending on the incident, your tests stop, or keep running while their results don't show. Once it's over, you get one of two outcomes:
+
+- results that arrive late, once the platform is back;
+- results missing for the length of the incident.
+
+The incident report tells you which. Ask support@kapptivate.com for it: it gives the incident's duration and the results affected.
+
+Several alerts can arrive at once when the platform comes back. Check their timestamps before you act on them.
+
+## Contact Kapptivate
+
+Write to support@kapptivate.com, or to your usual Kapptivate contact. Include:
+
+- the time the problem started, with your time zone;
+- what you see: the error message or code, ideally a screenshot;
+- whether the platform loads from another network;
+- the names of the robots involved, as the platform shows them, if robots dropped.
+
+## What's next?
+
+<Columns cols={2}>
+  <Card title="Troubleshoot an Offline robot" icon="robot" href="/hardware/network-troubleshooting">
+
+    When the platform works but one robot, or one site, has dropped
+
+</Card>
+  <Card title="Statuses" icon="signal" href="/equipment/statuses">
+
+    Read a robot's status correctly before you decide where the problem is
+
+</Card>
+</Columns>
