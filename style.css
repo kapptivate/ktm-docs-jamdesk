@@ -649,3 +649,25 @@ p:has(> time[datetime]) {
 .prose table:has(td br) th {
   text-align: center;
 }
+
+/* Brand logo instead of a Font Awesome glyph: neutral tile, so the logo keeps its own colors */
+.group:has(.card-content) > div > div:first-child:has(img) {
+  background-color: #FFFFFF !important;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.08)) !important;
+}
+
+.dark .group:has(.card-content) > div > div:first-child:has(img) {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.group:has(.card-content) > div > div:first-child img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  object-fit: contain !important;
+}
