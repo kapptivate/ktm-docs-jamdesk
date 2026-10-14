@@ -2,11 +2,12 @@
 title: Integrations
 sidebarTitle: Overview
 description: >-
-  Connect Slack, Microsoft Teams, Jira or ServiceNow once for your workspace,
-  then send any alert to the channel or project your team already uses.
+  Connect Slack, Microsoft Teams, Jira, ServiceNow or Linear once for your
+  workspace, then send any alert to the channel or project your team already
+  uses.
 ---
 
-Integrations connect Kapptivate to the tools your team already works in, so an incident lands in a Slack channel, a Teams channel, a Jira project or a ServiceNow instance instead of an inbox. An administrator connects each tool once, for the whole workspace, from **Administration → Integrations**. Every alert can then use it.
+Integrations connect Kapptivate to the tools your team already works in, so an incident lands in a Slack channel, a Teams channel, a Jira project, a ServiceNow instance or a Linear team instead of an inbox. An administrator connects each tool once, for the whole workspace, from **Administration → Integrations**. Every alert can then use it.
 
 <Info>
 Only workspace administrators can connect or disconnect an integration. Anyone who edits alerts can then pick it in an alert.
@@ -16,10 +17,10 @@ Only workspace administrators can connect or disconnect an integration. Anyone w
 
 <Steps>
   <Step title="Connect the tool">
-    In **Administration → Integrations**, open the card of the tool and follow its guide below. You create an app in your own tool (a Slack app, a Microsoft Entra registration, an Atlassian integration or a ServiceNow OAuth client), then paste its credentials in Kapptivate and approve the connection. The card shows **Connected**.
+    In **Administration → Integrations**, open the card of the tool and follow its guide below. You create an app in your own tool (a Slack app, a Microsoft Entra registration, an Atlassian integration, a ServiceNow OAuth client or a Linear OAuth application), then paste its credentials in Kapptivate and approve the connection. The card shows **Connected**.
   </Step>
   <Step title="Choose the default destination">
-    In the **Integration details** panel, pick where notifications go by default: a channel for Slack and Teams, a project for Jira, an assignment group for ServiceNow.
+    In the **Integration details** panel, pick where notifications go by default: a channel for Slack and Teams, a project for Jira, an assignment group for ServiceNow, a team for Linear.
   </Step>
   <Step title="Use it in your alerts">
     The tool now shows up as a notification option in the **Notifications** section of every alert. Check it, and pick another channel or project if this alert should not use the default.
@@ -51,6 +52,11 @@ An integration only shows up in the alert form once it's connected. If Slack, Te
   <Card title="ServiceNow" icon="ticket" href="/administration/integrations/servicenow">
 
     Open an incident in your instance, resolved when the monitor recovers
+
+</Card>
+  <Card title="Linear" icon="list-check" href="/administration/integrations/linear">
+
+    Open an issue in the team that will fix it
 
 </Card>
 </Columns>

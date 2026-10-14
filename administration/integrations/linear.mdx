@@ -1,0 +1,98 @@
+---
+title: "Linear integration"
+sidebarTitle: "Linear"
+description: Connect Linear to Kapptivate so an incident opens an issue in the team that will fix it, and gets a comment when the monitor recovers.
+---
+
+![Linear](/images/logo-linear.webp)
+
+Connecting Linear lets a Kapptivate alert open an issue in one of your Linear teams, with the error, the screenshot and a link to the execution. When the monitor recovers, Kapptivate comments on that issue, and your team keeps its own workflow for closing it. The connection happens once, from **Administration → Integrations**, and it relies on an OAuth application you create in your Linear workspace.
+
+You need two things: admin access to your Linear workspace, and admin access to your Kapptivate workspace. To find out who administers your Linear workspace, open the command menu (`Cmd K` or `Ctrl K`) and type **View workspace admins**.
+
+## Create the OAuth application in Linear
+
+<Steps>
+  <Step title="Open the OAuth applications">
+    In Linear, go to **Settings → Administration → API**, then under **OAuth Applications** click **New OAuth application**.
+
+    <Warning>
+    Don't use **Account → Security & access**. That page creates personal API keys, which Kapptivate can't use.
+    </Warning>
+  </Step>
+  <Step title="Fill in the form">
+    | Field | Value |
+    |---|---|
+    | **Name** | Any name your team will recognize, for example `Kapptivate`. Linear shows it as the author of every issue and comment Kapptivate creates |
+    | **Developer name** and **Developer URL** | Your company, or `Kapptivate` |
+    | **Callback URLs** | The callback URL below, with your own Kapptivate domain in place of `<your-domain>` |
+    | **Public** | Off |
+    | **Webhooks** | Off |
+
+    ```text Callback URL
+    https://<your-domain>/api/integrations/oauth/callback/linear
+    ```
+
+    Example: `https://app.kapptivate.com/api/integrations/oauth/callback/linear`
+  </Step>
+  <Step title="Copy the credentials">
+    Save. The application page shows the **Client ID** and the **Client secret**: copy both. If you lose the secret, regenerate it from the same page, then paste the new one in Kapptivate.
+  </Step>
+</Steps>
+
+## Connect from Kapptivate
+
+Go to **Administration → Integrations** and open the **Linear** card. Paste the **Client ID** and the **Client secret**, then click **Connect**.
+
+Linear opens and asks you to authorize the application in your workspace. Once you approve, you land back in Kapptivate and the Linear card shows **Connected**.
+
+The issues are not signed by the person who connected Linear: they come from the application, under the name you gave it.
+
+## Choose the default team
+
+In the **Integration details** panel, under **Default settings**, pick a **Default team**, then click **Save**. An alert that doesn't name a team of its own opens its issue here.
+
+The picker only lists active teams. Linear refuses to create issues in a retired team, so those don't show up.
+
+## Send an alert to Linear
+
+Once Linear is connected, the alert form shows a **Linear notification** option. Check it, and optionally pick a **Linear team** to override the default for this alert.
+
+The same choice exists for [robot availability](/administration/notifications), under **Linear notifications**.
+
+## What the issue looks like
+
+Kapptivate opens one Linear issue per Kapptivate incident, and only for the levels that call for action:
+
+| Kapptivate level | Linear priority |
+|---|---|
+| Critical | High |
+| Warning | Low |
+| OK, Info | No issue created |
+
+The issue carries the error, the screenshot and a link back to the execution in Kapptivate. In the **Incidents** list, an icon on the row opens the matching Linear issue.
+
+Kapptivate sets no status and no label: the issue lands in the team's default state, which is **Triage** when the team has it turned on.
+
+When the Kapptivate incident resolves, Kapptivate adds a comment to the issue and leaves its status alone. Your team decides when to close it.
+
+## Disconnect
+
+In the **Integration details** panel, click **Disconnect**. If alerts still route to Linear, Kapptivate tells you how many and disables them once you confirm.
+
+Kapptivate then stops opening issues, and the card goes back to **Not connected**. Issues already created in Linear stay where they are.
+
+## Other integrations
+
+<Columns cols={2}>
+  <Card title="Jira" icon="ticket" href="/administration/integrations/jira">
+
+    Turn the same incidents into Jira tickets
+
+</Card>
+  <Card title="Slack" icon="hashtag" href="/administration/integrations/slack">
+
+    Send the same alerts to a Slack channel
+
+</Card>
+</Columns>

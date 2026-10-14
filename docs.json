@@ -320,7 +320,8 @@
                       "administration/integrations/slack",
                       "administration/integrations/teams",
                       "administration/integrations/jira",
-                      "administration/integrations/servicenow"
+                      "administration/integrations/servicenow",
+                      "administration/integrations/linear"
                     ]
                   },
                   {
@@ -1445,7 +1446,8 @@
                       "fr/administration/integrations/slack",
                       "fr/administration/integrations/teams",
                       "fr/administration/integrations/jira",
-                      "fr/administration/integrations/servicenow"
+                      "fr/administration/integrations/servicenow",
+                      "fr/administration/integrations/linear"
                     ]
                   },
                   {
