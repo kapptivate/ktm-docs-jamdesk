@@ -497,7 +497,7 @@ img[src*="/images/logo-"] {
 }
 
 /* ------------------------------------------------------------------
- *  Integration pages (Slack, Jira, Microsoft Teams, ServiceNow)
+ *  Integration pages (Slack, Jira, Microsoft Teams, ServiceNow, Linear)
  *  Scoped through the product logo these pages carry, so nothing here
  *  leaks onto the rest of the documentation.
  * ------------------------------------------------------------------ */
@@ -507,11 +507,11 @@ img[src*="/images/logo-"] {
    only write below it, so the image is taken out of the flow and drawn
    again as the leading icon of the h1. Sized in em: the title goes from
    24px on a phone to 36px on a wide screen, the logo follows. */
-article:has(.prose img[src*="/images/logo-"]) .prose > p:has(> img[src*="/images/logo-"]) {
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > p:has(> img[src*="/images/logo-"]) {
   display: none;
 }
 
-article:has(.prose img[src*="/images/logo-"]) header h1::before {
+article:has(.prose > p > img[src*="/images/logo-"]) header h1::before {
   content: "";
   display: inline-block;
   width: 1.6em;
@@ -530,17 +530,20 @@ article:has(.prose img[src*="/images/logo-"]) header h1::before {
 
 /* « contient » et non « se termine par » : en production les images
    portent un paramètre de cache (logo-slack.webp?v=...), en local non. */
-article:has(.prose img[src*="logo-slack.webp"]) header h1::before {
+article:has(.prose > p > img[src*="logo-slack.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-slack.webp");
 }
-article:has(.prose img[src*="logo-jira.webp"]) header h1::before {
+article:has(.prose > p > img[src*="logo-jira.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-jira.webp");
 }
-article:has(.prose img[src*="logo-teams.webp"]) header h1::before {
+article:has(.prose > p > img[src*="logo-teams.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-teams.webp");
 }
-article:has(.prose img[src*="logo-servicenow.webp"]) header h1::before {
+article:has(.prose > p > img[src*="logo-servicenow.webp"]) header h1::before {
   background-image: url("/_jd/images/logo-servicenow.webp");
+}
+article:has(.prose > p > img[src*="logo-linear.webp"]) header h1::before {
+  background-image: url("/_jd/images/logo-linear.webp");
 }
 
 /* The "coming soon" callout announces a release date. The house style
@@ -549,36 +552,36 @@ article:has(.prose img[src*="logo-servicenow.webp"]) header h1::before {
    one is not advice about the procedure, it says the procedure cannot
    be run yet. Violet takes it out of that family, text included, since
    the inherited orange on a violet ground reads as a rendering bug. */
-.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child,
-article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
+.light article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child,
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
   border-color: #d6d0f5 !important;
   background-color: #f3f1fd !important;
 }
 
-.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
-.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
-.light article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i,
-article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
-article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
-article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
+.light article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+.light article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+.light article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i,
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
   color: #4a3faf !important;
 }
 
 /* Inline code keeps the orange tint everywhere else in the docs, so it
    gets the violet treatment here too. */
-article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content code {
+article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content code {
   background-color: rgba(99, 91, 214, 0.12) !important;
   border-color: rgba(99, 91, 214, 0.28) !important;
 }
 
-.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
+.dark article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child {
   border-color: rgba(139, 130, 246, 0.42) !important;
   background-color: rgba(139, 130, 246, 0.14) !important;
 }
 
-.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
-.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
-.dark article:has(.prose img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
+.dark article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content,
+.dark article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child .callout-content *,
+.dark article:has(.prose > p > img[src*="/images/logo-"]) .prose > div[class*="info-bg"]:first-child i {
   color: #c3bcff !important;
 }
 
@@ -648,4 +651,26 @@ p:has(> time[datetime]) {
 
 .prose table:has(td br) th {
   text-align: center;
+}
+
+/* Brand logo instead of a Font Awesome glyph: neutral tile, so the logo keeps its own colors */
+.group:has(.card-content) > div > div:first-child:has(img) {
+  background-color: #FFFFFF !important;
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.08)) !important;
+}
+
+.dark .group:has(.card-content) > div > div:first-child:has(img) {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.group:has(.card-content) > div > div:first-child img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  object-fit: contain !important;
 }
