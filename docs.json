@@ -234,7 +234,8 @@
                           "analytics/tests-metrics",
                           "analytics/public-dashboards",
                           "analytics/mail-reports",
-                          "analytics/exports"
+                          "analytics/exports",
+                          "analytics/api"
                         ]
                       }
                     ]
@@ -1361,7 +1362,8 @@
                           "fr/analytics/tests-metrics",
                           "fr/analytics/public-dashboards",
                           "fr/analytics/mail-reports",
-                          "fr/analytics/exports"
+                          "fr/analytics/exports",
+                          "fr/analytics/api"
                         ]
                       }
                     ]

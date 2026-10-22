@@ -1,0 +1,282 @@
+---
+title: Pull your KPIs with the API
+description: Feed a BI tool, a spreadsheet, or your own monitoring with the success rates and durations of your Kapptivate monitors, using an API key.
+---
+
+Your monitors already compute success rates and durations. With an API key, your BI tool, a spreadsheet, or your own monitoring can read the same figures. Each pull takes two calls. The first swaps the key for an access token that lasts five minutes. The second runs your query.
+
+To run tests from a pipeline rather than read their results, see [CI/CD integration](/executions/ci-cd).
+
+## Before you start
+
+- An API key. A workspace administrator creates it and copies the token shown once at creation: see [create an API key](/administration/api-keys/create). That token is the value this page calls the API key.
+- A role on the key's teams that grants the **View** permission of the **Analytics** group. Without it, every query is refused. Your administrator sets it in [members and access](/administration/teams/access#assign-roles-to-a-team).
+- The address of your Kapptivate platform, with no path and no trailing `/`, for example `https://example.kapptivate.com`.
+- The name of your workspace: the second segment of the address once you're in the app. In `https://example.kapptivate.com/acme-group/acme/realtime/views`, the workspace is `acme`.
+- A Linux or macOS terminal with `curl` and Python 3.
+
+Store these three values as environment variables. Every command on this page reads them:
+
+```bash
+export KAPPTIVATE_URL="https://example.kapptivate.com"
+export KAPPTIVATE_WORKSPACE="acme"
+export KAPPTIVATE_API_KEY="9f2c4e7a1b3d5f6e8a0c2b4d6f8e1a3c5b7d9e0f"
+```
+
+Replace the example values with yours.
+
+## Get an access token
+
+The API doesn't accept the key itself. Exchange it for an access token, and keep that token in a variable:
+
+```bash
+TOKEN=$(curl -s -X POST "$KAPPTIVATE_URL/api/auth/refresh-token/" \
+  -H "Content-Type: application/json" \
+  -d "{\"refresh_token\": \"$KAPPTIVATE_API_KEY\"}" \
+  | python3 -c 'import json, sys; print(json.load(sys.stdin)["token"])')
+echo "$TOKEN"
+```
+
+The command prints a long string that starts with `eyJ`. That's the access token.
+
+It expires five minutes after the exchange, so don't store it: request a new one before each pull. The key itself doesn't change.
+
+The calls that follow send it in the `Authorization` header, as `JWT` followed by a space and the token.
+
+<Accordion title="If the command prints KeyError: 'token'">
+The exchange failed. Run it without the Python part to read the platform's answer:
+
+```bash
+curl -s -X POST "$KAPPTIVATE_URL/api/auth/refresh-token/" \
+  -H "Content-Type: application/json" \
+  -d "{\"refresh_token\": \"$KAPPTIVATE_API_KEY\"}"
+```
+
+A wrong key returns this message:
+
+```
+{"detail":"The token you provided is not valid."}
+```
+
+Check that you copied the whole key, with no space or line break. If its token was refreshed, or the key revoked, in **API Keys**, the old value no longer works. Ask your administrator for the current one.
+
+An empty or malformed request body returns this one:
+
+```
+{"detail":"You need to provide a valid REFRESH_TOKEN header."}
+```
+
+Despite the wording, the key goes in the body, in the `refresh_token` field, as in the command above.
+</Accordion>
+
+## Query your KPIs
+
+Each monitor run writes its results to a time series database. You query it in InfluxQL, a SQL-like language. The API accepts read queries only, `SELECT` and `SHOW`.
+
+This query returns three figures per monitor over the last 24 hours: success rate, number of runs, and average duration in seconds.
+
+```bash
+curl -s -G "$KAPPTIVATE_URL/metrics_proxy/api/query/custom/" \
+  -H "Authorization: JWT $TOKEN" \
+  --data-urlencode "db=$KAPPTIVATE_WORKSPACE" \
+  --data-urlencode "q=SELECT sum(\"number_success\") / sum(\"number_total\") * 100 AS \"success_rate\", count(\"number_total\") AS \"runs\", mean(\"duration_seconds\") AS \"avg_duration\" FROM \"test\" WHERE time > now() - 1d AND \"status\" != 'error' GROUP BY \"monitoring_name\""
+```
+
+The response holds one series per monitor:
+
+```
+{"results":[{"statement_id":0,"series":[{"name":"test","tags":{"monitoring_name":"Login journey"},"columns":["time","success_rate","runs","avg_duration"],"values":[["2026-10-21T15:47:23.054402997Z",98.6,288,4.12]]}]}]}
+```
+
+Here, the tests of the **Login journey** monitor passed 98.6% of the time over 288 runs, in 4.12 seconds on average. The `time` column gives the start of the period.
+
+<Accordion title="If the query returns nothing">
+Add `-w "\n%{http_code}\n"` to the command to see the HTTP code.
+
+- `401`: the access token has expired. Run the `TOKEN=` command again, then the query.
+- `403`: either the key's teams don't have the **View** permission of the **Analytics** group, or the workspace name in `db` is wrong, or the query isn't valid InfluxQL. Run `SHOW MEASUREMENTS`, below: if it answers, the problem is in your query.
+</Accordion>
+
+The `"status" != 'error'` condition drops the runs that ended in **Device issue**. That status points to a problem on the test device, not on your service, and the platform excludes these runs from its own success rate too.
+
+`test` is one of several measurements in the database. It gets one point per monitor run. These are the fields and tags you'll use most:
+
+| Name | Kind | Content |
+|---|---|---|
+| `number_success`, `number_failed`, `number_total` | Field | Successful, failed, and total tests in the run |
+| `duration_seconds` | Field | Run duration, in seconds |
+| `monitoring_name`, `monitoring_id` | Tag | Name and ID of the monitor |
+| `test_name`, `test_id` | Tag | Name and ID of the test it runs |
+| `product_name`, `product_id` | Tag | Name and ID of the product |
+| `status` | Tag | `success`, `failed`, or `error` (**Device issue**) |
+| `failure_reason` | Tag | Why the run failed |
+
+Other measurements break results down by action type. To list the ones that hold data in your workspace:
+
+```bash
+curl -s -G "$KAPPTIVATE_URL/metrics_proxy/api/query/custom/" \
+  -H "Authorization: JWT $TOKEN" \
+  --data-urlencode "db=$KAPPTIVATE_WORKSPACE" \
+  --data-urlencode "q=SHOW MEASUREMENTS"
+```
+
+```
+{"results":[{"statement_id":0,"series":[{"name":"measurements","columns":["name"],"values":[["action"],["ethernet_http_api"],["test"],["web_browsing"]]}]}]}
+```
+
+`SHOW TAG KEYS FROM "test"` lists the tags of a measurement in the same way.
+
+To get a trend over time rather than one total per monitor, group by time as well, for example `GROUP BY time(1h), "monitoring_name"`.
+
+The same endpoint followed by `csv/` returns CSV. Its timestamps are in nanoseconds and all tags share one column, so a spreadsheet can't use it as is. The script in [Automate the pull](#automate-the-pull) writes a file a spreadsheet opens directly.
+
+## List monitor runs
+
+To get each run rather than a total, list the runs of a product. This helps match a failure with an incident in your own tools:
+
+```bash
+curl -s -G "$KAPPTIVATE_URL/api/monitoring_results/" \
+  -H "Authorization: JWT $TOKEN" \
+  --data-urlencode "product=acme~web" \
+  --data-urlencode "start=2026-10-21T00:00:00Z" \
+  --data-urlencode "end=2026-10-22T00:00:00Z" \
+  --data-urlencode "fields=id,name,created,status,nb_tests,nb_success,nb_failed"
+```
+
+Replace `acme~web` and the dates with yours. `product` takes the product identifier: the workspace and product names joined by `~`. It appears in the address bar when you open the product under **Products**, in the workspace settings. Dates are in UTC.
+
+```
+{"meta":{"next_page":2,"next_link":"https://example.kapptivate.com/api/monitoring_results/?...&page=2","previous_page":null,"previous_link":null,"num_pages":12,"items_count":100,"current_page":1},"count":1152,"results":[{"id":162947034,"name":"Login journey","created":"2026-10-21T00:03:27.091060Z","status":"S","nb_tests":1,"nb_failed":0,"nb_success":1}]}
+```
+
+`count` gives the number of runs over the period, here 1,152, split into pages of 100. Follow `next_link` until it's `null`, or raise `page_size`, for example to 1000.
+
+<Accordion title="If the list is empty or returns an error">
+- `"count":0` with no error: no run matches. Check the product identifier and the dates. A wrong identifier doesn't raise an error.
+- `{"detail":"Signature has expired."}`: the access token has expired. Run the `TOKEN=` command again.
+</Accordion>
+
+The `status` field holds a code:
+
+| Code | Status |
+|---|---|
+| `S` | Success |
+| `W` | Warning |
+| `F` | Failed |
+| `DI` | Device issue |
+| `B` | Blocked |
+| `P` | Pending |
+| `O` | Ongoing |
+| `WA` | Waiting approval |
+
+## Automate the pull
+
+Since the access token expires after five minutes, the easiest way to feed a tool is a file, rewritten on a schedule by a script that makes both calls.
+
+This script writes `kapptivate-kpis.csv` with one row per monitor, over the last 24 hours. It only uses the Python standard library:
+
+```python
+import csv
+import json
+import os
+import urllib.parse
+import urllib.request
+
+PLATFORM = os.environ["KAPPTIVATE_URL"]
+WORKSPACE = os.environ["KAPPTIVATE_WORKSPACE"]
+API_KEY = os.environ["KAPPTIVATE_API_KEY"]
+
+QUERY = (
+    'SELECT sum("number_success") / sum("number_total") * 100 AS "success_rate", '
+    'count("number_total") AS "runs", mean("duration_seconds") AS "avg_duration" '
+    "FROM \"test\" WHERE time > now() - 1d AND \"status\" != 'error' "
+    'GROUP BY "monitoring_name"'
+)
+
+
+def get_token():
+    request = urllib.request.Request(
+        PLATFORM + "/api/auth/refresh-token/",
+        data=json.dumps({"refresh_token": API_KEY}).encode(),
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(request) as response:
+        return json.load(response)["token"]
+
+
+def run_query(token):
+    params = urllib.parse.urlencode({"db": WORKSPACE, "q": QUERY})
+    request = urllib.request.Request(
+        PLATFORM + "/metrics_proxy/api/query/custom/?" + params,
+        headers={"Authorization": "JWT " + token},
+    )
+    with urllib.request.urlopen(request) as response:
+        return json.load(response)["results"][0].get("series", [])
+
+
+with open("kapptivate-kpis.csv", "w", newline="") as output:
+    writer = csv.writer(output)
+    writer.writerow(["monitor", "success_rate", "runs", "avg_duration"])
+    for series in run_query(get_token()):
+        _, success_rate, runs, avg_duration = series["values"][0]
+        writer.writerow([
+            series["tags"]["monitoring_name"],
+            round(success_rate, 1),
+            runs,
+            round(avg_duration, 2),
+        ])
+```
+
+Create a `/opt/kapptivate-kpis` folder and save the script there as `kapptivate_kpis.py`. Then run it from the terminal where you set the variables in [Before you start](#before-you-start):
+
+```bash
+cd /opt/kapptivate-kpis && python3 kapptivate_kpis.py
+```
+
+The script prints nothing when it works. It writes this file next to itself:
+
+```
+monitor,success_rate,runs,avg_duration
+Login journey,98.6,288,4.12
+Payment journey,100,288,7.85
+```
+
+<Accordion title="If the script stops on an error">
+Its last line reads:
+
+```
+urllib.error.HTTPError: HTTP Error 403: Forbidden
+```
+
+The key, the workspace name, or the **Analytics** permission is wrong. The causes are the same as for the commands above: see [If the command prints KeyError: 'token'](#get-an-access-token) and [If the query returns nothing](#query-your-kpis).
+</Accordion>
+
+To change the period, edit `now() - 1d` in `QUERY`. To add a KPI, add it to the `SELECT`, then to the header row and to the loop. The script reads one value per monitor, so it doesn't handle a `GROUP BY time(...)`.
+
+To rewrite the file every morning at 6:00 on a Linux server, add these lines to the crontab of the account that runs the script (`crontab -e`):
+
+```
+KAPPTIVATE_URL=https://example.kapptivate.com
+KAPPTIVATE_WORKSPACE=acme
+KAPPTIVATE_API_KEY=9f2c4e7a1b3d5f6e8a0c2b4d6f8e1a3c5b7d9e0f
+0 6 * * * cd /opt/kapptivate-kpis && python3 kapptivate_kpis.py
+```
+
+The crontab holds the key in clear text: use an account dedicated to this script.
+
+After 6:00 the next day, `ls -l /opt/kapptivate-kpis/kapptivate-kpis.csv` should show that day's date. Then point your BI tool or spreadsheet at this file.
+
+## What's next?
+
+<Columns cols={2}>
+  <Card title="Excel and CSV exports" icon="file-export" href="/analytics/exports">
+
+    For a one-off export, without writing a query
+
+</Card>
+  <Card title="View and manage API keys" icon="key" href="/administration/api-keys/manage">
+
+    To refresh the token or revoke the key your tools use
+
+</Card>
+</Columns>
