@@ -1,0 +1,173 @@
+---
+title: Relier une exécution à la télémétrie de votre application
+description: "Faire apparaître dans l'onglet Observabilité, pour une exécution donnée, les traces et les logs de votre application, grâce au run id que Kapptivate envoie avec les requêtes du test."
+sidebarTitle: Relier la télémétrie
+---
+
+L'onglet **Observabilité** d'une exécution affiche la télémétrie de votre application. Sans repère, il ne peut montrer que tout ce qui a été émis de 30 secondes avant l'exécution à 60 secondes après, autres tests et trafic réel compris. Avec le run id, l'identifiant que Kapptivate donne à chaque exécution, il isole exactement ce que cette exécution a déclenché : vous remontez de l'échec du test jusqu'à l'appel lent ou à l'erreur dans vos services.
+
+Il y a deux temps. Le premier se fait dans le builder, une fois par test : activer l'envoi de l'id. Le second revient à la personne qui gère la configuration OpenTelemetry de votre application : [recopier l'id dans votre télémétrie](#recopier-lid-dans-votre-télémétrie).
+
+Tout cela concerne les tests web.
+
+## Avant de commencer
+
+- Un test web que vous pouvez modifier.
+- Une application instrumentée avec OpenTelemetry, la norme ouverte pour émettre traces, logs et métriques, dont la télémétrie arrive déjà dans Kapptivate. Un doute ? Écrivez à support@kapptivate.com.
+- L'accès à la configuration OpenTelemetry de votre application, ou un développeur qui l'a.
+
+## Activer l'id sur un test
+
+<Warning>
+  N'activez l'id que sur un test dont le navigateur est piloté avec WebDriver BiDi, le protocole par lequel Kapptivate ajoute l'id aux requêtes. Sans BiDi, l'exécution s'arrête sur une erreur au lieu de se dérouler sans l'id.
+</Warning>
+
+<Steps>
+  <Step title="Ouvrir les réglages avancés">
+    Dans le [builder](/fr/tests/builder), ouvrez le test, puis **Paramètres du test** > **Avancé**.
+  </Step>
+  <Step title="Ajouter la capacité personnalisée">
+    Cliquez sur **Ajouter des capacités personnalisées**, puis collez ce bloc. Une capacité (capability en anglais) est un réglage supplémentaire de la session de navigateur qui exécute le test. Celle de ce bloc a pour clé `enableObservability`.
+
+    ```json
+    {
+      "kapptivate:options": {
+        "enableObservability": true
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+C'est à faire une seule fois par test : ensuite, plus rien à refaire à chaque exécution. Dès la suivante, le navigateur du test porte l'id sur ses requêtes.
+
+## Ce que Kapptivate envoie
+
+Le navigateur du test ajoute alors un en-tête à chaque requête HTTP et HTTPS que la page émet : navigation, fetch, XHR, images, scripts, et aussi les requêtes vers d'autres domaines.
+
+```
+GET /login HTTP/1.1
+Host: app.exemple.com
+baggage: kapptivate_run_id=ID_DU_RUN
+```
+
+- **En-tête** : `baggage`, l'en-tête standard W3C Baggage. OpenTelemetry s'en sert pour transmettre des paires clé-valeur d'un service à l'autre.
+- **Entrée** : `kapptivate_run_id`, avec un tiret bas. `ID_DU_RUN` est l'identifiant de l'exécution, encodé en pourcentage (%XX) comme la norme l'exige.
+- **En-tête déjà présent** : si la page envoie déjà `baggage`, Kapptivate ajoute son entrée après une virgule. Chaque requête garde un seul en-tête `baggage`.
+
+<Note>
+  L'id atteint aussi les domaines tiers que votre page appelle, CDN et outils d'analyse par exemple. Ce n'est pas un secret, seulement un jeton de corrélation, mais il quitte bien vos propres domaines.
+</Note>
+
+## Recopier l'id dans votre télémétrie
+
+OpenTelemetry ne recopie pas l'id de lui-même dans vos données : il voyage avec la requête, puis disparaît. Tant que votre application ne le recopie pas, aucune trace ni aucun log ne le porte. L'attribut à créer s'appelle `kapptivate.run_id` (avec un point) et contient l'id sous forme de chaîne.
+
+Posez-le sur les spans de vos traces. Un span est une étape chronométrée d'une requête dans vos services, un appel d'API ou une requête en base, et une trace regroupe les spans d'une même requête. Il suffit d'un seul span porteur de l'id pour rattacher la trace entière à l'exécution.
+
+- **Logs** : ils rejoignent l'exécution par leur trace, car les SDK et les agents OpenTelemetry joignent par défaut l'identifiant de trace aux logs qu'ils émettent. Mettez aussi `kapptivate.run_id` sur le log : c'est recommandé.
+- **Appels entre services** : l'id les suit tant que le propagateur `baggage`, le composant qui transporte l'id d'un service au suivant, reste actif. C'est déjà le cas par défaut dans les SDK, avec `OTEL_PROPAGATORS=tracecontext,baggage`.
+
+Passez ensuite à la section qui correspond à votre pile technique.
+
+## Node.js : ajouter un processeur de spans
+
+Chaque span que crée votre application passe par les processeurs de spans. Celui-ci lit l'id dans le baggage de la requête et en fait l'attribut `kapptivate.run_id`.
+
+```js
+const { propagation } = require('@opentelemetry/api');
+
+const VALID_RUN_ID = /^[A-Za-z0-9_-]{1,64}$/;
+
+class KapptivateRunIdProcessor {
+  onStart(span, parentContext) {
+    const value = propagation.getBaggage(parentContext)?.getEntry('kapptivate_run_id')?.value;
+    if (value && VALID_RUN_ID.test(value)) span.setAttribute('kapptivate.run_id', value);
+  }
+  onEnd() {}
+  shutdown() { return Promise.resolve(); }
+  forceFlush() { return Promise.resolve(); }
+}
+// à ajouter aux spanProcessors de votre NodeSDK
+```
+
+Enregistrez-le dans les `spanProcessors` de votre `NodeSDK`, à côté du processeur qui exporte vos spans. Le test `VALID_RUN_ID` n'accepte que 1 à 64 caractères (lettres, chiffres, `_` et `-`) : un visiteur d'un site public ne peut donc pas injecter de texte libre dans vos données par cet en-tête.
+
+## Java : configurer l'agent et le collecteur
+
+L'agent Java d'OpenTelemetry sait copier le baggage dans des attributs, sans changer votre code. Il suffit de deux variables d'environnement sur le processus Java, une pour les spans et une pour les logs :
+
+```
+OTEL_JAVA_EXPERIMENTAL_SPAN_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE=kapptivate_run_id
+OTEL_JAVA_EXPERIMENTAL_LOG_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE=kapptivate_run_id
+```
+
+L'agent conserve le nom d'origine, `kapptivate_run_id` avec un tiret bas. Faites renommer l'attribut par votre collecteur OpenTelemetry, le service qui relaie votre télémétrie vers Kapptivate, pour obtenir `kapptivate.run_id` :
+
+```yaml
+processors:
+  transform/kapptivate_run_id:
+    error_mode: ignore
+    trace_statements:
+      - context: span
+        conditions:
+          - span.attributes["kapptivate_run_id"] != nil
+        statements:
+          - set(span.attributes["kapptivate.run_id"], span.attributes["kapptivate_run_id"]) where IsMatch(span.attributes["kapptivate_run_id"], "^[A-Za-z0-9_-]{1,64}$")
+          - delete_key(span.attributes, "kapptivate_run_id")
+    log_statements:
+      - context: log
+        conditions:
+          - log.attributes["kapptivate_run_id"] != nil
+        statements:
+          - set(log.attributes["kapptivate.run_id"], log.attributes["kapptivate_run_id"]) where IsMatch(log.attributes["kapptivate_run_id"], "^[A-Za-z0-9_-]{1,64}$")
+          - delete_key(log.attributes, "kapptivate_run_id")
+```
+
+Ajoutez ce processeur aux pipelines `traces` et `logs`, avant `batch`. Il faut un collecteur assez récent pour accepter les chemins `span.` et `log.`. Les noms des deux variables portent `OTEL_JAVA_EXPERIMENTAL` : confirmez-les pour votre version de l'agent.
+
+## Recopier l'id dans un autre langage
+
+Dans un autre langage, appliquez ces gestes à chaque requête reçue :
+
+- Lire l'en-tête `baggage`.
+- Extraire l'entrée `kapptivate_run_id` et décoder sa valeur.
+- Poser `kapptivate.run_id` sur le span de la requête et sur les logs qu'elle émet.
+
+Reprenez le contrôle de format de l'exemple Node.js : seul un id valide doit être écrit.
+
+## Vérifier que c'est bon
+
+Relancez le test, ouvrez l'exécution, puis l'onglet **Observabilité** : le badge passe de **Observé pendant le run** à **Corrélé par run id**, et les traces de l'exécution s'affichent.
+
+Pour vérifier côté application, journalisez uniquement l'en-tête `baggage` reçu pendant une exécution.
+
+<Accordion title="Si le badge reste sur Observé pendant le run">
+  Ce badge veut dire qu'aucune télémétrie ne porte l'id de cette exécution. Regardez l'en-tête `baggage` que reçoit votre application :
+
+  - Il est absent : la capacité n'est pas activée sur ce test, ou ce n'est pas un test web. Reprenez [activer l'id sur un test](#activer-lid-sur-un-test).
+  - Il est présent : la copie vers `kapptivate.run_id` manque. Reprenez [recopier l'id dans votre télémétrie](#recopier-lid-dans-votre-télémétrie).
+  - Il est présent et la copie est en place : le test n'atteint peut-être aucun service instrumenté, voir [limites](#limites).
+</Accordion>
+
+Le badge reste sur **Observé pendant le run** ? Écrivez à support@kapptivate.com avec le lien de l'exécution et la valeur de `baggage` reçue par votre application.
+
+## Limites
+
+- Un test qui n'appelle aucun service instrumenté n'a aucune télémétrie corrélée, même avec une configuration correcte.
+- Si vous posez aussi `kapptivate.run_id` sur des métriques, chaque exécution ajoute une série. Réservez-le aux compteurs en temporalité delta, où chaque export ne rapporte que ce qui a changé depuis le précédent, sinon le nombre de séries continue de croître.
+
+## Et ensuite ?
+
+<Columns cols={2}>
+  <Card title="Consulter les résultats" icon="book-open" href="/fr/executions/results">
+
+    Lire les étapes, les captures et la vidéo de l'exécution que vous venez de relier
+
+</Card>
+  <Card title="Test builder" icon="gear" href="/fr/tests/builder">
+
+    Retrouver les Paramètres du test et les autres options d'un test
+
+</Card>
+</Columns>

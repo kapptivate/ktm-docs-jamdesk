@@ -1,0 +1,173 @@
+---
+title: Link an execution to your application's telemetry
+description: "Find the traces and logs your application produced during one execution, using the run id Kapptivate adds to every web request of the test."
+sidebarTitle: Link telemetry
+---
+
+When a web test fails, the cause often sits in your own services: a slow API, an error deeper in the call chain. The **Observability** tab of an execution can show your traces and logs, but it only picks out the ones this execution triggered if they carry the run id, the identifier Kapptivate gives each execution. Without it, the tab shows everything emitted from 30 seconds before the execution to 60 seconds after: other tests and real traffic included.
+
+Turning the id on takes a few minutes in the builder, once per test. The rest is for whoever owns your OpenTelemetry configuration: send them [Copy the id into your telemetry](#copy-the-id-into-your-telemetry).
+
+This works for web tests only.
+
+## Before you start
+
+- A web test you can edit.
+- An application instrumented with OpenTelemetry, the open standard for traces and logs, and already sending that telemetry to Kapptivate. Not sure it is? Ask support@kapptivate.com.
+- Access to your application's OpenTelemetry configuration, or a developer who has it.
+
+## Turn on the id for a test
+
+<Warning>
+  Turn it on only for a test whose browser is driven with WebDriver BiDi, the protocol Kapptivate uses to add the id to requests. Without BiDi, the execution fails with an error instead of running without the id.
+</Warning>
+
+<Steps>
+  <Step title="Open the advanced settings">
+    Open the test in the [builder](/tests/builder), then go to **Test settings** > **Advanced**.
+  </Step>
+  <Step title="Add the capability">
+    Click **Add custom capabilities**, then paste this block. A capability is an extra setting for the browser session that runs the test. The one inside this block is `enableObservability`.
+
+    ```json
+    {
+      "kapptivate:options": {
+        "enableObservability": true
+      }
+    }
+    ```
+  </Step>
+</Steps>
+
+Do this once per test. Nothing to repeat for each execution: from the next one, Kapptivate adds the id to the requests of the test's browser.
+
+## What Kapptivate sends
+
+During the execution, the test's browser adds one header to every HTTP and HTTPS request the page sends: navigation, fetch, XHR, images, and scripts, including requests to other domains.
+
+```
+GET /login HTTP/1.1
+Host: app.example.com
+baggage: kapptivate_run_id=RUN_ID
+```
+
+- **Header**: `baggage`, the W3C Baggage standard header that OpenTelemetry uses to pass key-value pairs between services.
+- **Entry**: `kapptivate_run_id`, with an underscore. `RUN_ID` is the id of the execution, percent-encoded as the standard requires.
+- **Existing header**: if the page already sends a `baggage` header, Kapptivate appends its entry after a comma. A request never carries two `baggage` headers.
+
+<Note>
+  The id also reaches the third-party domains your page calls, such as CDNs and analytics tools. It's a correlation token, not a secret, but it does leave your own domains.
+</Note>
+
+## Copy the id into your telemetry
+
+The id reaches your application, but OpenTelemetry never copies it into your data automatically. Until your application does, it shows up in no trace and no log. Copy it once, as an attribute named `kapptivate.run_id`, with a dot, holding the id as a string.
+
+Attach it to the spans of your traces. A span is one timed step of a request inside your services, such as an API call or a database query, and a trace groups the spans of one request. A single span carrying the id links the whole trace to the execution.
+
+- **Logs** follow the execution through their trace: OpenTelemetry SDKs and agents add the trace id to the logs they emit by default. Also put `kapptivate.run_id` on the log record, which is recommended.
+- **Calls between your services** keep the id as long as the `baggage` propagator, the component that carries the id from one service to the next, stays active. Its default value in the SDKs is `OTEL_PROPAGATORS=tracecontext,baggage`.
+
+Pick the section that matches your stack.
+
+## Node.js: add a span processor
+
+A span processor runs on every span your application creates. This one reads the id from the baggage of the request and sets `kapptivate.run_id` on the span.
+
+```js
+const { propagation } = require('@opentelemetry/api');
+
+const VALID_RUN_ID = /^[A-Za-z0-9_-]{1,64}$/;
+
+class KapptivateRunIdProcessor {
+  onStart(span, parentContext) {
+    const value = propagation.getBaggage(parentContext)?.getEntry('kapptivate_run_id')?.value;
+    if (value && VALID_RUN_ID.test(value)) span.setAttribute('kapptivate.run_id', value);
+  }
+  onEnd() {}
+  shutdown() { return Promise.resolve(); }
+  forceFlush() { return Promise.resolve(); }
+}
+// add it to the spanProcessors of your NodeSDK
+```
+
+Add it to the `spanProcessors` of your `NodeSDK`, next to the processor that exports your spans. The regular expression rejects any other value, so a visitor to a public site can't write arbitrary text into your data through the header.
+
+## Java: configure the agent and your collector
+
+The OpenTelemetry Java agent copies baggage into attributes with no code change. Set these two environment variables on the Java process, one for spans and one for logs:
+
+```
+OTEL_JAVA_EXPERIMENTAL_SPAN_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE=kapptivate_run_id
+OTEL_JAVA_EXPERIMENTAL_LOG_ATTRIBUTES_COPY_FROM_BAGGAGE_INCLUDE=kapptivate_run_id
+```
+
+The agent keeps the name as is, `kapptivate_run_id` with an underscore. Rename it in your OpenTelemetry collector, the service that relays your telemetry to Kapptivate, so the attribute reads `kapptivate.run_id`:
+
+```yaml
+processors:
+  transform/kapptivate_run_id:
+    error_mode: ignore
+    trace_statements:
+      - context: span
+        conditions:
+          - span.attributes["kapptivate_run_id"] != nil
+        statements:
+          - set(span.attributes["kapptivate.run_id"], span.attributes["kapptivate_run_id"]) where IsMatch(span.attributes["kapptivate_run_id"], "^[A-Za-z0-9_-]{1,64}$")
+          - delete_key(span.attributes, "kapptivate_run_id")
+    log_statements:
+      - context: log
+        conditions:
+          - log.attributes["kapptivate_run_id"] != nil
+        statements:
+          - set(log.attributes["kapptivate.run_id"], log.attributes["kapptivate_run_id"]) where IsMatch(log.attributes["kapptivate_run_id"], "^[A-Za-z0-9_-]{1,64}$")
+          - delete_key(log.attributes, "kapptivate_run_id")
+```
+
+Place this processor in the `traces` and `logs` pipelines, before `batch`. The `span.` and `log.` path prefixes need a recent collector. Both variable names start with `OTEL_JAVA_EXPERIMENTAL`, so check them against the version of your agent.
+
+## Copy the id in another language
+
+In any other stack, handle each incoming request the same way:
+
+- Read the `baggage` header.
+- Take the `kapptivate_run_id` entry and decode its percent-encoding.
+- Set `kapptivate.run_id` on the request's span and on the logs it emits.
+
+Keep the format check from the Node.js example, so only a valid id gets in.
+
+## Check that it worked
+
+Run the test once, open the execution, then go to the **Observability** tab. The badge changes from **Observed during the run** to **Correlated by run id**, and the traces of the run are listed.
+
+To check from the application side, log only the `baggage` header your application receives during a run.
+
+<Accordion title="If the badge stays on Observed during the run">
+  That badge means no telemetry carries the id of this execution. Look at the `baggage` header your application receives:
+
+  - It's missing: the capability isn't on for this test, or the test isn't a web test. Go back to [turn on the id for a test](#turn-on-the-id-for-a-test).
+  - It's there: the copy into `kapptivate.run_id` is missing. Go back to [copy the id into your telemetry](#copy-the-id-into-your-telemetry).
+  - It's there and the copy is in place: the test may reach no instrumented service, see [limits](#limits).
+</Accordion>
+
+Still on **Observed during the run**? Write to support@kapptivate.com with the link to the execution and the `baggage` value your application received.
+
+## Limits
+
+- A test that calls no instrumented service has no correlated telemetry, even when the setup is right.
+- If you also put `kapptivate.run_id` on metrics, each execution adds a series. Keep it to counters with delta temporality, where each export reports only what changed since the previous one, or the number of series keeps growing.
+
+## What's next?
+
+<Columns cols={2}>
+  <Card title="Viewing results" icon="book-open" href="/executions/results">
+
+    To read the steps, screenshots, and video of the execution you linked
+
+</Card>
+  <Card title="Test builder" icon="gear" href="/tests/builder">
+
+    To find Test settings and the other options of a test
+
+</Card>
+</Columns>
