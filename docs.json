@@ -196,7 +196,8 @@
                       "executions/run",
                       "executions/run-campaign",
                       "executions/run-batch-csv",
-                      "executions/ci-cd"
+                      "executions/ci-cd",
+                      "executions/kapptivate-run-id"
                     ]
                   },
                   {
@@ -205,8 +206,7 @@
                     "pages": [
                       "executions/overview",
                       "executions/results",
-                      "executions/statuses",
-                      "executions/kapptivate-run-id"
+                      "executions/statuses"
                     ]
                   },
                   {
@@ -1325,7 +1325,8 @@
                       "fr/executions/run",
                       "fr/executions/run-campaign",
                       "fr/executions/run-batch-csv",
-                      "fr/executions/ci-cd"
+                      "fr/executions/ci-cd",
+                      "fr/executions/kapptivate-run-id"
                     ]
                   },
                   {
@@ -1334,8 +1335,7 @@
                     "pages": [
                       "fr/executions/overview",
                       "fr/executions/results",
-                      "fr/executions/statuses",
-                      "fr/executions/kapptivate-run-id"
+                      "fr/executions/statuses"
                     ]
                   },
                   {
