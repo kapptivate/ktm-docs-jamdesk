@@ -205,7 +205,8 @@
                     "pages": [
                       "executions/overview",
                       "executions/results",
-                      "executions/statuses"
+                      "executions/statuses",
+                      "executions/kapptivate-run-id"
                     ]
                   },
                   {
@@ -1333,7 +1334,8 @@
                     "pages": [
                       "fr/executions/overview",
                       "fr/executions/results",
-                      "fr/executions/statuses"
+                      "fr/executions/statuses",
+                      "fr/executions/kapptivate-run-id"
                     ]
                   },
                   {
